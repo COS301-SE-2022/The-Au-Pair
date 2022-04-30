@@ -20,16 +20,15 @@
 <h3 align="center">The Au Pair</h3>
 
   <p align="center">
-    The Au Pair is a platform used to give control to parents. The Au Pair will assist them in finding and interactng with suitable Au Pairs who will be looking after their children. It will allow parents to minimize efforts to find Au Pair’s, provide schedules for their children, and review their activities and behavior through feedback from the Au Pair.
     <br />
     <a href="https://github.com/COS301-SE-2022/The-Au-Pair/wiki"><strong>Explore the docs »</strong></a>
     <br />
     <br />
     <a href="https://github.com/COS301-SE-2022/The-Au-Pair/">View Demo</a>
     ·
-    <a href="https://github.com/COS301-SE-2022/The-Au-Pair/issues">Report Bug</a>
+    <a href="https://github.com/COS301-SE-2022/The-Au-Pair/issues/4">SRS Document</a>
     ·
-    <a href="https://github.com/COS301-SE-2022/The-Au-Pair/issues">Request Feature</a>
+    <a href="https://github.com/COS301-SE-2022/The-Au-Pair/projects/1">Project Board</a>
   </p>
 </div>
 
@@ -40,7 +39,7 @@
   <summary>Table of Contents</summary>
   <ol>
     <li>
-      <a href="#about-the-project">About The Project</a>
+      <a href="#about">About</a>
       <ul>
         <li><a href="#built-with">Built With</a></li>
       </ul>
@@ -56,7 +55,7 @@
     <li><a href="#roadmap">Roadmap</a></li>
     <li><a href="#license">License</a></li>
     <li>
-      <a href="#contributors">Contributors</a>
+      <a href="#about-contributors">About Contributors</a>
       <ul>
         <li><a href="#daniel-azmanov">Daniel Azmanov</a></li>
         <li><a href="#ruben-brits">Ruben Brits</a></li>
@@ -71,12 +70,16 @@
 
 
 
-<!-- ABOUT THE PROJECT -->
-## About The Project
+<!-- ABOUT -->
+## About
 
 <!-- TODO: Insert pics of our project here -->
 
-The Au Pair is a project created for the University of Pretoria's COS301 module. It was created by <a href="#daniel-azmanov">Daniel Azmanov</a>, <a href="#ruben-brits">Ruben Brits</a>, <a href="#kyle-pottinger">Kyle Pottinger</a>, <a href="#reece-stephenson">Reece Stephenson</a> and <a href="#seyuran-pillay">Seyuran Pillay</a>
+### Cheems Chaps - The Au Pair
+
+The Au Pair is a platform used to give control to parents. The Au Pair will assist them in finding and interactng with suitable Au Pairs who will be looking after their children. It will allow parents to minimize efforts to find Au Pair’s, provide schedules for their children, and review their activities and behavior through feedback from the Au Pair.
+
+The Au Pair is a project created for the University of Pretoria's COS301 module. It was created by the Cheems Chaps team with members <a href="#daniel-azmanov">Daniel Azmanov</a>, <a href="#ruben-brits">Ruben Brits</a>, <a href="#kyle-pottinger">Kyle Pottinger</a>, <a href="#reece-stephenson">Reece Stephenson</a> and <a href="#seyuran-pillay">Seyuran Pillay</a>
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
@@ -151,10 +154,10 @@ See the [open issues](https://github.com/COS301-SE-2022/The-Au-Pair/issues) for 
 
 
 <!-- Contributors -->
-## Contributors
+## About Contributors
 
 ### Daniel Azmanov
-[![LinkedIn][linkedin-shield]]()
+[![LinkedIn][linkedin-shield]](https://www.linkedin.com/in/daniel-azmanov-8b4235239)
 [![GitHub][github-shield]](https://github.com/d-azmanov)
 
 ### Ruben Brits
@@ -162,7 +165,7 @@ See the [open issues](https://github.com/COS301-SE-2022/The-Au-Pair/issues) for 
 [![GitHub][github-shield]](https://github.com/Ruben-Brits)
 
 ### Kyle Pottinger
-[![LinkedIn][linkedin-shield]]()
+[![LinkedIn][linkedin-shield]](http://www.linkedin.com/in/kyle-pottinger-4b3231239)
 [![GitHub][github-shield]](https://github.com/PxttytheThxtty)
 
 ### Reece Stephenson
