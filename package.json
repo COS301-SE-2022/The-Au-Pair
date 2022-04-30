@@ -20,7 +20,7 @@
     "@capacitor/android": "^3.2.5",
     "@capacitor/cli": "^3.2.5",
     "@capacitor/ios": "^3.2.5",
-    "@nrwl/angular": "^13.0.0",
+    "@nrwl/angular": "^13.10.3",
     "@nrwl/cli": "14.0.5",
     "@nrwl/cypress": "13.10.3",
     "@nrwl/eslint-plugin-nx": "13.10.3",
