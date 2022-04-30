@@ -1,0 +1,7 @@
+{
+  "name": "the-au-pair",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
