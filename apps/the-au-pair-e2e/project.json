@@ -1,0 +1,28 @@
+{
+  "root": "apps/the-au-pair-e2e",
+  "sourceRoot": "apps/the-au-pair-e2e/src",
+  "projectType": "application",
+  "targets": {
+    "e2e": {
+      "executor": "@nrwl/cypress:cypress",
+      "options": {
+        "cypressConfig": "apps/the-au-pair-e2e/cypress.json",
+        "devServerTarget": "the-au-pair:serve:development"
+      },
+      "configurations": {
+        "production": {
+          "devServerTarget": "the-au-pair:serve:production"
+        }
+      }
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": ["apps/the-au-pair-e2e/**/*.{js,ts}"]
+      }
+    }
+  },
+  "tags": [],
+  "implicitDependencies": ["the-au-pair"]
+}
