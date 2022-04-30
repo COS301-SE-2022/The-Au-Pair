@@ -157,7 +157,7 @@ See the [open issues](https://github.com/COS301-SE-2022/The-Au-Pair/issues) for 
 [![GitHub][github-shield]](https://github.com/d-azmanov)
 
 ### Ruben Brits
-[![LinkedIn][linkedin-shield]](www.linkedin.com/in/ruben-brits-3560401b1)
+[![LinkedIn][linkedin-shield]](https://www.linkedin.com/in/ruben-brits-3560401b1)
 [![GitHub][github-shield]](https://github.com/Ruben-Brits)
 
 ### Kyle Pottinger
@@ -186,8 +186,8 @@ See the [open issues](https://github.com/COS301-SE-2022/The-Au-Pair/issues) for 
 
 
 <!-- LINKS & IMAGES -->
-[contributors-shield]: https://img.shields.io/github/contributors/github_username/repo_name.svg?style=for-the-badge
-[issues-shield]: https://img.shields.io/github/issues/github_username/repo_name.svg?style=for-the-badge
+[contributors-shield]: https://img.shields.io/github/contributors/COS301-SE-2022/The-Au-Pair?color=green&style=for-the-badge
+[issues-shield]: https://img.shields.io/github/issues/COS301-SE-2022/The-Au-Pair?style=for-the-badge
 [license-shield]: https://img.shields.io/github/license/github_username/repo_name.svg?style=for-the-badge
 [linkedin-shield]: https://img.shields.io/badge/LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white
 [github-shield]: https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white
