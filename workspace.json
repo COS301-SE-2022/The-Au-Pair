@@ -1,6 +1,8 @@
 {
   "version": 2,
   "projects": {
+    "home-feature": "libs/home/feature",
+    "shell-feature": "libs/shell/feature",
     "the-au-pair": "apps/the-au-pair",
     "the-au-pair-e2e": "apps/the-au-pair-e2e"
   }

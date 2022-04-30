@@ -14,7 +14,10 @@
     "skipLibCheck": true,
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
-    "paths": {}
+    "paths": {
+      "@the-au-pair/home/feature": ["libs/home/feature/src/index.ts"],
+      "@the-au-pair/shell/feature": ["libs/shell/feature/src/index.ts"]
+    }
   },
   "exclude": ["node_modules", "tmp"]
 }

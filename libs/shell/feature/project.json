@@ -1,0 +1,26 @@
+{
+  "projectType": "library",
+  "root": "libs/shell/feature",
+  "sourceRoot": "libs/shell/feature/src",
+  "prefix": "the-au-pair",
+  "targets": {
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["coverage/libs/shell/feature"],
+      "options": {
+        "jestConfig": "libs/shell/feature/jest.config.js",
+        "passWithNoTests": true
+      }
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "options": {
+        "lintFilePatterns": [
+          "libs/shell/feature/src/**/*.ts",
+          "libs/shell/feature/src/**/*.html"
+        ]
+      }
+    }
+  },
+  "tags": []
+}
