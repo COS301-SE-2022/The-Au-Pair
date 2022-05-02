@@ -14,7 +14,9 @@
 <div align="center">
  
   <a href="https://github.com/COS301-SE-2022/The-Au-Pair/">
-    <img src="https://user-images.githubusercontent.com/100611949/166262777-d2e74e24-bb5b-4afa-92da-c6855b998799.png" alt="Logo" width="150" height="150">
+    <img src="https://user-images.githubusercontent.com/49924445/166265782-b09e3dad-6ea1-4a08-8ce7-dc9f9a01c78f.png" alt="Logo" height="220">
+    <br />
+    <img src="https://user-images.githubusercontent.com/49924445/166266279-a811fba4-4d24-47ad-8ba8-a9a6f60261e4.png" alt="Logo" height="30">
   </a> 
 
   <p align="center">
@@ -42,13 +44,13 @@
         <li><a href="#built-with">Built With</a></li>
       </ul>
     </li>
-    <li>
+<!--     <li>
       <a href="#getting-started">Getting Started</a>
       <ul>
         <li><a href="#prerequisites">Prerequisites</a></li>
         <li><a href="#installation">Installation</a></li>
       </ul>
-    </li>
+    </li> -->
     <li><a href="#usage">Usage</a></li>
     <li><a href="#roadmap">Roadmap</a></li>
     <li><a href="#license">License</a></li>
@@ -96,27 +98,27 @@ The Au Pair is a project created for the University of Pretoria's COS301 module.
 
 
 <!-- GETTING STARTED -->
-## Getting Started
+<!-- ## Getting Started -->
 
-### Prerequisites
+<!-- ### Prerequisites -->
 
 <!-- TODO: add the things that need to be installed and how to install them -->
-* npm
-  ```sh
-  npm install npm@latest -g
-  ```
+<!-- * npm -->
+<!--   ```sh -->
+<!--   npm install npm@latest -g -->
+<!--   ``` -->
 
-### Installation
+<!-- ### Installation -->
 
 <!-- TODO: add steps on how to get the repo running on machine -->
 
-1. Clone the repo
-   ```sh
-   git clone https://github.com/COS301-SE-2022/The-Au-Pair
-   ```
-<p align="right">(<a href="#top">back to top</a>)</p>
-
-
+<!-- 1. Clone the repo -->
+<!--    ```sh -->
+<!--    git clone https://github.com/COS301-SE-2022/The-Au-Pair -->
+<!--    ``` -->
+   
+   
+<!-- <p align="right">(<a href="#top">back to top</a>)</p> -->
 
 <!-- USAGE EXAMPLES -->
 ## Usage
