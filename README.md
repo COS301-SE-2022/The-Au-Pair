@@ -12,12 +12,10 @@
 <!-- PROJECT LOGO -->
 <br />
 <div align="center">
-<!-- TODO: create the logo and add it -->
-  <!-- <a href="https://github.com/COS301-SE-2022/The-Au-Pair/">
-    <img src="" alt="Logo" width="80" height="80">
-  </a> -->
-
-<h3 align="center">The Au Pair</h3>
+ 
+  <a href="https://github.com/COS301-SE-2022/The-Au-Pair/">
+    <img src="https://user-images.githubusercontent.com/100611949/166262777-d2e74e24-bb5b-4afa-92da-c6855b998799.png" alt="Logo" width="150" height="150">
+  </a> 
 
   <p align="center">
     <br />
