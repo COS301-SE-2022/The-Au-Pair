@@ -1,0 +1,10 @@
+---
+name: CI Tests
+
+on: 
+  pull_request:
+    branches: [ develop ]
+
+jobs:
+  test-affected-lint:
+    uses: ./.github/workflows/lint.yml
