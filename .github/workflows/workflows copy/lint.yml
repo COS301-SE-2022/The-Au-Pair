@@ -30,3 +30,4 @@ jobs:
 
       - name: Lint test affected
         run: npx nx affected:lint --base=${{ env.NX_BASE }} --head=${{ env.NX_HEAD }}
+        
