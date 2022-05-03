@@ -1,0 +1,33 @@
+---
+name: 'Lint'
+
+on:
+  workflow_call:
+
+jobs:
+  build:
+    name: lint
+    runs-on: ubuntu-latest
+    steps:
+       
+      - name: Checkout develop
+        uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+
+      - name: Derive appropriate SHAs for base and head for `nx affected` commands
+        uses: nrwl/nx-set-shas@v2
+        with:
+          main-branch-name: 'develop'
+
+      - name: Use Node.js 16
+        uses: actions/setup-node@v2
+        with:
+          node-version: '16'
+
+      - name: Install node
+        run: npm install 
+
+      - name: Lint test affected
+        run: npx nx affected:lint --base=${{ env.NX_BASE }} --head=${{ env.NX_HEAD }}
+        
