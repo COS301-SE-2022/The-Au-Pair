@@ -1,9 +1,6 @@
 <div id="top"></div>
 
-<!-- PROJECT SHIELDS -->
-[![Contributors][contributors-shield]](https://github.com/COS301-SE-2022/The-Au-Pair/graphs/contributors)
-[![Commits][commits-shield]](https://github.com/COS301-SE-2022/The-Au-Pair/issues)
-[![Issues][issues-shield]](https://github.com/COS301-SE-2022/The-Au-Pair/issues)
+
 
 <!-- TODO: When license is added, uncomment this -->
 <!-- [![MIT License][license-shield]][license-url] -->
@@ -30,6 +27,24 @@
     ·
     <a href="https://github.com/COS301-SE-2022/The-Au-Pair/projects/1">Project Board</a>
   </p>
+  
+  <br />
+  
+  <!-- PROJECT SHIELDS -->
+<div align="center">
+  
+[![Contributors][contributors-shield]](https://github.com/COS301-SE-2022/The-Au-Pair/graphs/contributors)
+[![Commits][commits-shield]](https://github.com/COS301-SE-2022/The-Au-Pair/issues)
+[![Issues][issues-shield]](https://github.com/COS301-SE-2022/The-Au-Pair/issues) <br />
+  
+[![Angular][angular-shield]](https://github.com/angular/angular)
+[![Ionic][ionic-shield]](https://github.com/ionic-team/ionic-framework)
+[![Springboot (Java)][spring-shield]](https://github.com/spring-projects/spring-boot)
+[![MongoDB (NoSQL)][mongo-shield]](https://github.com/mongodb/mongo)
+[![AWS][aws-shield]](https://aws.amazon.com/)
+  
+</div>
+  
 </div>
 
 
@@ -196,3 +211,8 @@ See the [open issues](https://github.com/COS301-SE-2022/The-Au-Pair/issues) for 
 [license-shield]: https://img.shields.io/github/license/github_username/repo_name.svg?style=for-the-badge
 [linkedin-shield]: https://img.shields.io/badge/LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white
 [github-shield]: https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white
+[mongo-shield]: https://img.shields.io/badge/MongoDB-4EA94B?style=for-the-badge&logo=mongodb&logoColor=white
+[angular-shield]: https://img.shields.io/badge/Angular-DD0031?style=for-the-badge&logo=angular&logoColor=white
+[ionic-shield]: https://img.shields.io/badge/Ionic-3880FF?style=for-the-badge&logo=ionic&logoColor=white
+[spring-shield]: https://img.shields.io/badge/Spring-6DB33F?style=for-the-badge&logo=spring&logoColor=white
+[aws-shield]: https://img.shields.io/badge/Amazon_AWS-232F3E?style=for-the-badge&logo=amazon-aws&logoColor=white
