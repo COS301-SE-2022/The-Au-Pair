@@ -16,11 +16,11 @@
   <a href="https://github.com/COS301-SE-2022/The-Au-Pair/">
     <img src="https://user-images.githubusercontent.com/49924445/166265782-b09e3dad-6ea1-4a08-8ce7-dc9f9a01c78f.png" alt="Logo" height="220">
     <br />
-    <img src="https://user-images.githubusercontent.com/49924445/166266279-a811fba4-4d24-47ad-8ba8-a9a6f60261e4.png" alt="Logo" height="30">
   </a> 
-
+  
+### The Au Pair
+  
   <p align="center">
-    <br />
     <a href="https://github.com/COS301-SE-2022/The-Au-Pair/wiki"><strong>Explore the docs »</strong></a>
     <br />
     <br />
