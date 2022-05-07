@@ -169,27 +169,38 @@ See the [open issues](https://github.com/COS301-SE-2022/The-Au-Pair/issues) for 
 
 
 <!-- Contributors -->
-## About Contributors
+### About Contributors
 
-### Daniel Azmanov
-[![LinkedIn][linkedin-shield]](https://www.linkedin.com/in/daniel-azmanov-8b4235239)
-[![GitHub][github-shield]](https://github.com/d-azmanov)
+## Daniel Azmanov   [![LinkedIn][linkedin-shield]](https://www.linkedin.com/in/daniel-azmanov-8b4235239)[![GitHub][github-shield]](https://github.com/d-azmanov)
+<img src="https://user-images.githubusercontent.com/100611949/167245024-d43da573-93e8-48ff-8e05-e2853301a464.png"  align="left" height="150px"/>
 
-### Ruben Brits
-[![LinkedIn][linkedin-shield]](https://www.linkedin.com/in/ruben-brits-3560401b1)
-[![GitHub][github-shield]](https://github.com/Ruben-Brits)
+As a third-year computer scientist, I have developed an expansive knowledge and skill set, perfect for project development and management.   Over the years, I have learnt, and worked with, Java, C++, HTML, PHP, JavaScript, CSS, and Angular, and other related technologies and frameworks.  I enjoy putting myself in many different work environments (technologies as well as team members) to broaden my knowledge, which has proved useful in my overall development as a software developer and project leader. 
 
-### Kyle Pottinger
-[![LinkedIn][linkedin-shield]](http://www.linkedin.com/in/kyle-pottinger-4b3231239)
-[![GitHub][github-shield]](https://github.com/PxttytheThxtty)
+<br clear="left"/>
 
-### Reece Stephenson
-[![LinkedIn][linkedin-shield]](https://www.linkedin.com/in/reece-stephenson-15b6381b3)
-[![GitHub][github-shield]](https://github.com/ricecakesreece)
+## Ruben Brits   [![LinkedIn][linkedin-shield]](https://www.linkedin.com/in/ruben-brits-3560401b1)[![GitHub][github-shield]](https://github.com/Ruben-Brits)
+<img src="https://user-images.githubusercontent.com/100611949/167244605-d14b671b-8a1d-49ae-8c51-1fc6a3ae59df.png" align="left" height="150px"/>
 
-### Seyuran Pillay
-[![LinkedIn][linkedin-shield]](https://www.linkedin.com/in/priyolan-pillay-a603971b3)
-[![GitHub][github-shield]](https://github.com/priyo5)
+For the last 1.5 years I have been working as a software developer for a big company while doing Computer Science. Here I have picked up valuable skills for production ready software. My skills include ASP.NET Core MVC, React and Flutter on production level. I also have a lot of project-based experience with Angular, Ionic, Java and university related languages. I love learning new things and expanding my knowledge and skillset. I work hard and get the job done, while having fun!
+<br clear="left"/>
+
+## Kyle Pottinger   [![LinkedIn][linkedin-shield]](http://www.linkedin.com/in/kyle-pottinger-4b3231239)[![GitHub][github-shield]](https://github.com/PxttytheThxtty)
+<img src="https://user-images.githubusercontent.com/100611949/167244611-6bce30d7-8450-4664-9530-856167844606.png" align="left" height="150px"/>
+
+Over the years of learning programming, I have become proficient in languages such as C++, C#, Java, and Python. I also have project experience with, and am knowledgeable about, Angular and SQL. I believe my experience with web development and front-end development will prove beneficial to the success of this project and that my skills will help towards creating a pleasant and effective user experience.  I am always looking to improve my skill set and am always more than willing to work towards a better understanding in all regards.
+<br clear="left"/>
+
+## Reece Stephenson   [![LinkedIn][linkedin-shield]](https://www.linkedin.com/in/reece-stephenson-15b6381b3)[![GitHub][github-shield]](https://github.com/ricecakesreece)
+<img src="https://user-images.githubusercontent.com/100611949/167244616-62310b93-7b70-4aff-9fb3-b3af5aa04c97.png" align="left" height="150px"/>
+
+I have learnt and used many programming languages and frameworks throughout my studies. My focus has mainly been on C++, Java, Python, PHP, SQL and JavaScript for backend programming languages, and HTML, CSS, for frontend languages. I have also worked with frameworks such as Angular, Ionic and Flutter, and know how to work with them proficiently. I have a creative outlook to programming. I enjoy learning new things as it gives me more opportunities to creatively solve problems.
+<br clear="left"/>
+
+## SEYURAN PILLAY   [![LinkedIn][linkedin-shield]](https://www.linkedin.com/in/priyolan-pillay-a603971b3)[![GitHub][github-shield]](https://github.com/priyo5)
+<img src="https://user-images.githubusercontent.com/100611949/167244623-60d184e0-29f2-49d7-86a1-d9b7cd0bce22.png" align="left" height="150px"/>
+
+During the 7 years of my coding experience, I have learned a large variety of languages and technologies. I am proficient in JAVA, Python, C++, and JavaScript. This has enabled me to pick up new languages quickly and has exposed me to Frameworks like Angular and React and alternates to a relational database such as MongoDB. I love creating hobby projects, which has introduced me to hosting with AWS and Bash scripting along with web development in HTML, CSS, and PHP. I also have worked as technical support for an ISP. I believe it also gave me a strong work ethic for everything I do.
+<br clear="left"/>
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
