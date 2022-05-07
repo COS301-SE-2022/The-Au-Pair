@@ -16,6 +16,9 @@
     "baseUrl": ".",
     "paths": {
       "@the-au-pair/home/feature": ["libs/home/feature/src/index.ts"],
+      "@the-au-pair/parent-add-activity/feature": [
+        "libs/parent-add-activity/feature/src/index.ts"
+      ],
       "@the-au-pair/shell/feature": ["libs/shell/feature/src/index.ts"]
     }
   },

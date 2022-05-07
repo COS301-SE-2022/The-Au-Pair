@@ -12,6 +12,11 @@ const routes: Routes = [
     redirectTo: 'home',
     pathMatch: 'full',
   },
+  {
+    path: 'add-activity',
+    loadChildren: () =>
+      import('@the-au-pair/parent-add-activity/feature').then((m) => m.ParentAddActivityFeatureModule),
+  }
 ];
 
 @NgModule({
