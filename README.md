@@ -29,7 +29,8 @@
   
 [![Contributors][contributors-shield]](https://github.com/COS301-SE-2022/The-Au-Pair/graphs/contributors)
 [![Commits][commits-shield]](https://github.com/COS301-SE-2022/The-Au-Pair/issues)
-[![Issues][issues-shield]](https://github.com/COS301-SE-2022/The-Au-Pair/issues) 
+[![Issues][issues-shield]](https://github.com/COS301-SE-2022/The-Au-Pair/issues)
+[![Closed][closedissues-shield]](https://github.com/COS301-SE-2022/The-Au-Pair/issues?q=is%3Aissue+is%3Aclosed)
 [![Last Commit][lastcommit-shield]](https://github.com/COS301-SE-2022/The-Au-Pair/pulls?q=is%3Apr+is%3Aclosed) <br />
   
 </div>
@@ -39,8 +40,8 @@
 
 
 <!-- TABLE OF CONTENTS -->
-<details>
-  <summary>Table of Contents</summary>
+<details open>
+  <summary><h2>Table of Contents</h2></summary>
   <ol>
     <li>
       <a href="#about">About</a>
@@ -172,6 +173,7 @@ The Au Pair is a project created for the University of Pretoria's COS301 module.
 As a third-year computer scientist, I have developed an expansive knowledge and skill set, perfect for project development and management.   Over the years, I have learnt, and worked with, Java, C++, HTML, PHP, JavaScript, CSS, and Angular, and other related technologies and frameworks.  I enjoy putting myself in many different work environments (technologies as well as team members) to broaden my knowledge, which has proved useful in my overall development as a software developer and project leader. 
 
 <br clear="left"/>
+<br />
 
 ## Ruben Brits  
 
@@ -182,6 +184,7 @@ As a third-year computer scientist, I have developed an expansive knowledge and 
 For the last 1.5 years I have been working as a software developer for a big company while doing Computer Science. Here I have picked up valuable skills for production ready software. My skills include ASP.NET Core MVC, React and Flutter on production level. I also have a lot of project-based experience with Angular, Ionic, Java and university related languages. I love learning new things and expanding my knowledge and skillset. I work hard and get the job done, while having fun!
 
 <br clear="left"/>
+<br />
 
 ## Kyle Pottinger  
 
@@ -192,6 +195,7 @@ For the last 1.5 years I have been working as a software developer for a big com
 Over the years of learning programming, I have become proficient in languages such as C++, C#, Java, and Python. I also have project experience with, and am knowledgeable about, Angular and SQL. I believe my experience with web development and front-end development will prove beneficial to the success of this project and that my skills will help towards creating a pleasant and effective user experience.  I am always looking to improve my skill set and am always more than willing to work towards a better understanding in all regards.
 
 <br clear="left"/>
+<br />
 
 ## Reece Stephenson  
 
@@ -202,7 +206,7 @@ Over the years of learning programming, I have become proficient in languages su
 I have learnt and used many programming languages and frameworks throughout my studies. My focus has mainly been on C++, Java, Python, PHP, SQL and JavaScript for backend programming languages, and HTML, CSS, for frontend languages. I have also worked with frameworks such as Angular, Ionic and Flutter, and know how to work with them proficiently. I have a creative outlook to programming. I enjoy learning new things as it gives me more opportunities to creatively solve problems.
 
 <br clear="left"/>
-
+<br />
 
 ## Seyuran Pillay 
 
@@ -240,6 +244,7 @@ During the 7 years of my coding experience, I have learned a large variety of la
 [ionic-shield]: https://img.shields.io/badge/Ionic-3880FF?style=for-the-badge&logo=ionic&logoColor=white
 [spring-shield]: https://img.shields.io/badge/Spring-6DB33F?style=for-the-badge&logo=spring&logoColor=white
 [aws-shield]: https://img.shields.io/badge/Amazon_AWS-232F3E?style=for-the-badge&logo=amazon-aws&logoColor=white
+[closedissues-shield]: https://img.shields.io/github/issues-closed/COS301-SE-2022/The-Au-Pair?color=purple&style=for-the-badge
 
 
 [angular-ver]: https://img.shields.io/github/package-json/dependency-version/COS301-SE-2022/The-Au-Pair/@angular/core?color=red
