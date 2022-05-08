@@ -5,4 +5,8 @@ import { Component } from '@angular/core';
   templateUrl: 'schedule.html',
   styleUrls: ['schedule.scss'],
 })
-export class ScheduleComponent {}
+export class ScheduleComponent {
+   days = [
+    "Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"
+  ]
+}

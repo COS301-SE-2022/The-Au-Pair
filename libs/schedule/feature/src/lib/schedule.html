@@ -8,51 +8,48 @@
   <div id="container">
     <h2 class="heading ion-text-center ion-padding-top">Your Schedule</h2>
   </div>
-  <div id="schedule">
-    <ion-row>
+  <div id="schedule-grid-desktop">
+    <div class="day ion-text-center">
+      <h2 class="heading">Monday</h2>
+      <ion-card class="day-card"></ion-card> 
+    </div>
+    <div class="day ion-text-center">
+      <h2 class="heading">Tuesday</h2>
+      <ion-card class="day-card"></ion-card> 
+    </div>
+    <div class="day ion-text-center">
+      <h2 class="heading">Wednesday</h2>
+      <ion-card class="day-card"></ion-card> 
+    </div>
+    <div class="day ion-text-center">
+      <h2 class="heading">Thursday</h2>
+      <ion-card class="day-card active"></ion-card> 
+    </div>
+    <div class="day ion-text-center">
+      <h2 class="heading">Friday</h2>
+      <ion-card class="day-card"></ion-card> 
+    </div>
+    <div class="day ion-text-center">
+      <h2 class="heading">Saturday</h2>
+      <ion-card class="day-card"></ion-card> 
+    </div>
+    <div class="day ion-text-center">
+      <h2 class="heading">Sunday</h2>
+      <ion-card class="day-card"></ion-card> 
+    </div>
+  </div>
+
+  <div class="mobile-container">
+    <ion-slides id="schedule-grid-mobile" [options]="{ slidesPerView: 'auto', zoom: false,loop: true, spaceBetween: 16 }">
+    <ion-slide *ngFor="let card of [0,1,2,3,4,5,6]" style="width: 90%; height: 81vh;">
       <ion-col>
         <div class="day ion-text-center">
-          <h2 class="heading">Monday</h2>
+          <h2 class="heading"> {{ days[card] }}</h2>
           <ion-card class="day-card"></ion-card> 
         </div>
       </ion-col>
-      <ion-col>
-        <div class="day ion-text-center">
-          <h2 class="heading">Tuesday</h2>
-          <ion-card class="day-card"></ion-card> 
-        </div>
-      </ion-col>
-      <ion-col>
-        <div class="day ion-text-center">
-          <h2 class="heading">Wednesday</h2>
-          <ion-card class="day-card"></ion-card> 
-        </div>
-      </ion-col>
-      <ion-col>
-        <div class="day ion-text-center">
-          <h2 class="heading">Thursday</h2>
-          <ion-card class="day-card day-card-active"></ion-card> 
-        </div>
-      </ion-col>
-      <ion-col>
-        <div class="day ion-text-center">
-          <h2 class="heading">Friday</h2>
-          <ion-card class="day-card"></ion-card> 
-        </div>
-      </ion-col>
-      <ion-col>
-        <div class="day ion-text-center">
-          <h2 class="heading">Saturday</h2>
-          <ion-card class="day-card"></ion-card> 
-        </div>
-      </ion-col>
-      <ion-col>
-        <div class="day ion-text-center">
-          <h2 class="heading">Sunday</h2>
-          <ion-card class="day-card"></ion-card> 
-        </div>
-      </ion-col>
-    </ion-row>
+    </ion-slide>
+  </ion-slides>
   </div>
   
 </ion-content>
