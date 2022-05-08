@@ -12,6 +12,11 @@ const routes: Routes = [
     redirectTo: 'home',
     pathMatch: 'full',
   },
+  {
+    path: 'parent-dashboard',
+    loadChildren: () =>
+      import('@the-au-pair/parent-dashboard/feature').then((m) => m.ParentDashboardFeatureModule),
+  },
 ];
 
 @NgModule({
