@@ -1,0 +1,29 @@
+.text-white{
+  font-size: 36px;
+  color: white;
+}
+
+.heading{
+  font-size: 28px;
+  color: #032927;
+  font-weight: bold;
+}
+
+.day-card{
+  background-color: #79BA9E;
+  height: 70vh;
+  width: calc(100vw/8);
+}
+
+.day-card-active{
+  opacity: 0.5;
+}
+
+.day{
+  width: calc(100vw/8);
+}
+
+#schedule{
+  background-color: orange;
+  padding: 15px;
+}
