@@ -1,0 +1,79 @@
+---
+name: CI Tests
+
+on: 
+  pull_request:
+    branches: [  main, develop, release/** ]
+
+  workflow_dispatch:
+    inputs:
+      testchoice:
+        type: choice
+        description: 'Test Type'
+        required: true
+        options:
+        - lint
+        - build
+        - unit
+        - e2e
+        - full
+
+jobs:
+  test-affected-lint:
+    if: ${{ github.event.inputs.testchoice == '' }}
+    uses: ./.github/workflows/CI.yml
+    with:
+      test: 'lint'
+      type: 'affected'
+
+  test-affected-build:
+    if: ${{ github.event.inputs.testchoice == '' }}
+    uses: ./.github/workflows/CI.yml
+    with:
+      test: 'build'
+      type: 'affected'
+  
+  test-affected-unit:
+    if: ${{ github.event.inputs.testchoice == '' }}
+    uses: ./.github/workflows/CI.yml
+    with:
+      test: 'unit'
+      type: 'affected'
+
+  test-affected-e2e:
+    if: ${{ github.event.inputs.testchoice == '' }}
+    uses: ./.github/workflows/CI.yml
+    with:
+     test: 'e2e'
+     type: 'affected'
+
+  test-lint:
+    if: ${{ github.event.inputs.testchoice == 'lint' }}
+    uses: ./.github/workflows/CI.yml
+    with:
+      test: 'lint'
+
+  test-build:
+    if: ${{ github.event.inputs.testchoice == 'build' }}
+    uses: ./.github/workflows/CI.yml
+    with:
+      test: 'build'
+  
+  test-unit:
+    if: ${{ github.event.inputs.testchoice == 'unit' }}
+    uses: ./.github/workflows/CI.yml
+    with:
+      test: 'unit'
+
+  test-e2e:
+    if: ${{ github.event.inputs.testchoice == 'e2e' }}
+    uses: ./.github/workflows/CI.yml
+    with:
+     test: 'e2e'
+
+  test-all:
+    if: ${{ github.event.inputs.testchoice == 'full' }}
+    uses: ./.github/workflows/CI.yml
+    with:
+      test: 'full'
+    
