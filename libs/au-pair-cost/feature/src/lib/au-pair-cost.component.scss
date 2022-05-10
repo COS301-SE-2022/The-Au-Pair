@@ -1,0 +1,47 @@
+ion-card {
+  box-shadow: none;
+}
+
+.ion-padding {
+    padding: 50px 90px 50px 90px;
+    width: 100%;
+    position: relative;
+    display: inline-block;
+}
+
+.section-summary {
+  border-radius: 16px;
+  height: 94px;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  align-items: center;
+  justify-items: center;
+  margin: auto;
+  font-size: var(--heading-size);
+  margin-bottom: 60px;
+  background-color: var(--ion-color-tertiary);
+}
+
+.section-bar-graph {
+  border-radius: 16px;
+  height: 517px;
+  width: 55%;
+  background-color: white;
+  font-size: var(--heading-size);
+  margin: 0;
+  float: left;
+}
+
+.section-pie-graph {
+  border-radius: 16px;
+  height: 517px;
+  width: 40%;
+  background-color: white;
+  font-size: var(--heading-size);
+  margin: 0;
+  float: right;
+}
+
+
+  
+  

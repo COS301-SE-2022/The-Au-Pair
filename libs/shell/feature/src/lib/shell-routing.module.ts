@@ -12,6 +12,11 @@ const routes: Routes = [
     redirectTo: 'home',
     pathMatch: 'full',
   },
+  {
+    path: 'au-pair-cost',
+    loadChildren: () =>
+      import('@the-au-pair/au-pair-cost/feature').then((m) => m.AuPairCostFeatureModule),
+  },
 ];
 
 @NgModule({
