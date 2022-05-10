@@ -1,6 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { DatePipe } from '@angular/common';
-import { pipe } from 'rxjs';
 
 @Component({
   selector: 'the-au-pair-schedule',
