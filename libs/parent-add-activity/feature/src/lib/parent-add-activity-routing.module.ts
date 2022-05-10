@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { ParentAddActivityComponent } from './parent-add-activity/parent-add-activity.component';
+import { ParentAddActivityComponent } from './parent-add-activity.component';
 
 const routes: Routes = [
   {

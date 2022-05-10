@@ -1,0 +1,113 @@
+ion-content{
+    --ion-background-color:#EFEFEF;
+}
+
+h1{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    top: 90px;
+    margin: 0;
+    font-style: normal;
+    font-weight: 700;
+    font-size: 48px;
+    line-height: 56px;
+    text-transform: capitalize;
+    position: relative;
+    text-align: center;
+    margin-bottom: -40px;
+}
+
+.activity-details{
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    top: 130px;
+}
+
+.form-details{
+    display:flex;
+    align-items: center;
+    flex-direction: column;
+    text-align: right;
+}
+
+// .input{
+//     width: 411px;
+//     height: 62px;
+//     background: #F9F9F9;
+//     box-shadow: 1px 2px 5px rgba(0, 0, 0, 0.13);
+//     border-style: none;
+//     border-radius: 10px;
+//     margin-bottom: 40px;
+//     padding-left: 20px;
+// }
+// ion-item{
+//     padding: 10px !important;
+// }
+
+// ion-input{
+//     width: 411px;
+//     background: #F9F9F9;
+//     box-shadow: 1px 2px 5px rgba(0, 0, 0, 0.13);
+//     border-style: none;
+//     border-radius: 10px;
+//     margin: 10px !important;
+//     padding-left: 20px;
+// }
+
+
+// ion-label{
+//     position: relative;
+//     font-style: normal;
+//     font-weight: 600;
+//     font-size: 16px;
+//     line-height: 20px;
+//     z-index: 3;
+//     left: 20px;
+//     top:17px;
+// }
+
+// Button styling
+.activity-details input{
+    width: 411px;
+    height: 62px;
+    background: #F9F9F9;
+    box-shadow: 1px 2px 5px rgba(0, 0, 0, 0.13);
+    border-style: none;
+    border-radius: 10px;
+    padding-left: 20px;
+}
+
+input[type=text]{
+    width: 411px;
+    height: 62px;
+    background: #F9F9F9;
+    box-shadow: 1px 2px 5px rgba(0, 0, 0, 0.13);
+    border-style: none;
+    border-radius: 10px;
+    margin-top: 40px;
+    padding-left: 20px;
+}
+
+input[type=text]::placeholder{
+    font-style: normal;
+    font-weight: 600;
+    font-size: 16px;
+    line-height: 20px;
+}
+
+input:focus{
+    outline:none;
+}
+
+.addActivity{
+    font-style: normal;
+    font-weight: 700;
+    font-size: 16px;
+    line-height: 19px;
+    color: white;
+    background-color: #69A88D !important;
+    margin-top: 20px;
+}
