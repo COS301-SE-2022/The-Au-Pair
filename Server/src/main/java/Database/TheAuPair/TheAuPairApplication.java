@@ -1,5 +1,7 @@
 package Database.TheAuPair;
 
+import Database.TheAuPair.Models.*;
+import Database.TheAuPair.Repositories.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
