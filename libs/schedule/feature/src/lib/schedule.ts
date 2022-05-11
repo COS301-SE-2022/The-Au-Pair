@@ -11,11 +11,12 @@ export class ScheduleComponent{
     "Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"
   ]
 
-   curDay = getCurDay(this.days);
+  curDay =  this.getCurDay(this.days);
+
+  getCurDay(days : string[]) : number {
+    const pipe = new DatePipe('en-US');
+    const dateStr = pipe.transform(Date.now(),'EEEE');
+    return days.findIndex(x => x === dateStr);
+  }
 }
 
-function getCurDay(days : string[]) : number {
-  const pipe = new DatePipe('en-US');
-  const dateStr = pipe.transform(Date.now(),'EEEE');
-  return days.findIndex(x => x === dateStr);
-  }
