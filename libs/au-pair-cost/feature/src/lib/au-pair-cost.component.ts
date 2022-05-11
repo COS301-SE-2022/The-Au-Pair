@@ -6,5 +6,7 @@ import { Component } from '@angular/core';
   styleUrls: ['./au-pair-cost.component.scss'],
 })
 export class AuPairCostComponent {
-
+  days = [
+    "Mon","Tue","Wed","Thu","Fri","Sat","Sun"
+  ]
 }

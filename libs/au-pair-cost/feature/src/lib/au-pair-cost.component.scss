@@ -2,8 +2,12 @@ ion-card {
   box-shadow: none;
 }
 
+ion-card-header{
+  padding-bottom: 0 !important;
+}
+
 .ion-padding {
-    padding: 50px 90px 50px 90px;
+    padding: 40px;
     width: 100%;
     position: relative;
     display: inline-block;
@@ -22,33 +26,56 @@ ion-card {
   background-color: var(--ion-color-tertiary);
 }
 
+.graphs-grid{
+  display: grid;
+  gap: 80px;
+  grid-template-columns: 0.6fr 0.4fr;
+}
+
 .card-bar-graph {
   border-radius: 16px;
   height: 517px;
-  width: 55%;
+  width: 100%;
   background-color: white;
   font-size: var(--heading-size);
   margin: 0;
-  float: left;
 }
 
 .card-pie-graph {
   border-radius: 16px;
   height: 517px;
-  width: 40%;
+  width: 100%;
   background-color: white;
   font-size: var(--heading-size);
   margin: 0;
-  float: right;
+}
+
+@media (max-width : 768px) {
+  .graphs-grid{
+    grid-template-columns: 1fr;
+  }
+
+  .ion-padding{
+    padding: 14px;
+  }
+}
+
+.au-pair-name{
+  background-color: var(--ion-color-primary);
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-right: 3px white;
 }
 
 .bar-graph {
-  padding: 0 50px 50px 50px;
   width: 100%;
   height: 450px;
   position: relative;
   display: grid;
-  grid-template-columns: repeat(8, 1fr);
+  grid-template-columns: 0.3fr repeat(7, 1fr);
   align-items: center;
   justify-items: center;
   font-size: var(--heading-size);
@@ -56,47 +83,68 @@ ion-card {
   // background-color: red;
 }
 
-.mon-wrapper, .tue-wrapper, .wed-wrapper, .thu-wrapper, .fri-wrapper, .sat-wrapper, .sun-wrapper, .vertical-label { 
+.day-wrapper { 
   height: 100%;
   width: 100%;
   vertical-align: bottom;
+  text-align: center;
+  display: flex;
+  justify-content: center;
 }
 
-.mon, .tue, .wed, .thu, .fri, .sat, .sun {
-  height: 150px;
-  width: 50px;
+.day {
+  width: 5%;
   background-color: var(--ion-color-secondary);
   position: absolute;
   bottom: 50px;
   border-radius: 10px;
 }
 
-.mon {
-  height: 200px;
-}
-
 .label {
   position: absolute;
   bottom: 0;
   height: 50px;
+  font-size: 24px;
+  font-weight: bold;
+}
+
+@media (max-width: 1024px) {
+  .label{
+    font-size: 16px;
+  }
 }
 
 .rule {
   padding-top: 55px;
-  width: 100%;
+  width: 50%;
 }
 
 .label-num {
   float: left;
+  font-size: 24px;
+  font-weight: bold;
 }
 
 .line {
-  width: 80%;
+  width: 90%;
   margin-left: 50px;
   margin-top: 20px;
   border-bottom: 1px solid lightgray;
   position: absolute;
   float: right;
+}
+
+.num{
+  margin-top: 50px;
+}
+
+.title{
+  font-weight: bold;
+  font-size: 24px;
+}
+
+.num:first-child{
+  margin-top: 0;
 }
 
 
