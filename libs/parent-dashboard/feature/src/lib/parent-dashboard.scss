@@ -1,163 +1,211 @@
 .welcome-heading {
-  font-size: 48px;
-  margin: 46px;
-  color: #3C3C3C;
-  text-align: center;
+    font-size: 48px;
+    margin: 46px;
+    color: #3C3C3C;
+    text-align: center;
 }
 
 .actions-heading {
-  font-size: 36px;
-  margin-top: 95px;
-  color: #3C3C3C;
-  text-align: center;
+    font-size: 36px;
+    margin-top: 95px;
+    color: #3C3C3C;
+    text-align: center;
 }
 
 .children-div-wrapper {
-  text-align: center;
-  width: 100%;
-  position: relative;
-  display: block;
+    text-align: center;
+    width: 100%;
+    position: relative;
+    display: block;
 }
 
 ion-card {
-  background-color: transparent;
-  box-shadow: none;
+    background-color: transparent;
+    box-shadow: none;
 }
 
 .children-div {
-  width: 90%;
-  height: 94px;
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  align-items: center;
-  justify-items: center;
-  margin: auto;
-  font-size: 24px;
-  margin-bottom: 60px;
+    width: 90%;
+    height: 94px;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    align-items: center;
+    justify-items: center;
+    margin: auto;
+    font-size: 24px;
+    margin-bottom: 60px;
 }
 
 .child-name {
-  background-color: #69A88D;
-  color: white;
-  margin: 0;
-  height: 100%;
-  display: flex;
-  text-align: center;
-  justify-content: center;
-  align-items: center;
-  width: 100%;
-  font-size: 24px;
-  border-radius: 16px 0px 0px 16px;
+    background-color: #69A88D;
+    color: white;
+    margin: 0;
+    height: 100%;
+    display: flex;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    font-size: 24px;
+    border-radius: 16px 0px 0px 16px;
 }
 
 .child-status {
-  background-color: #79BA9E;
-  color: white;
-  margin: 0;
-  height: 100%;
-  display: flex;
-  text-align: center;
-  justify-content: center;
-  align-items: center;
-  width: 100%;
-  font-size: 24px;
+    background-color: #79BA9E;
+    color: white;
+    margin: 0;
+    height: 100%;
+    display: flex;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    font-size: 24px;
 }
 
 .child-au-pair {
-  background-color: #79BA9E;
-  color: white;
-  margin: 0;
-  height: 100%;
-  display: flex;
-  text-align: center;
-  justify-content: center;
-  align-items: center;
-  width: 100%;
-  border-left: 1px;
-  border-style: solid;
-  border-right: none;
-  border-top: none;
-  border-bottom: none;
-  border-radius: 0px 16px 16px 0px;
+    background-color: #79BA9E;
+    color: white;
+    margin: 0;
+    height: 100%;
+    display: flex;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    border-left: 1px;
+    border-style: solid;
+    border-right: none;
+    border-top: none;
+    border-bottom: none;
+    border-radius: 0px 16px 16px 0px;
 }
 
 .actions-div-wrapper {
-  text-align: center;
-  width: 100%;
-  position: relative;
-  display: block;
+    text-align: center;
+    width: 100%;
+    position: relative;
+    height: 285px;
+    display: block;
 }
 
 .actions-div {
-  width: 90%;
-  height: 287px;
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 120px;
-  align-items: center;
-  justify-items: center;
-  margin: auto;
-  font-size: 36px;
-  margin-bottom: 60px;
-  text-align: center;
+    width: 90%;
+    height: 100%;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 5vw;
+    align-items: center;
+    justify-items: center;
+    margin: auto;
+    font-size: 36px;
+    margin-bottom: 60px;
+    text-align: center;
 }
 
 .action {
-  background-color: #032927;
-  color: white;
-  margin: 0;
-  height: 285px;
-  text-align: center;
-  justify-content: center;
-  align-items: center;
-  width: 314px;
-  font-size: 24px;
-  border-radius: 16px;
-  cursor: pointer;
+    background-color: #032927;
+    color: white;
+    margin: 0;
+    height: 285px;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+    // width: 314px;
+    width: 100%;
+    font-size: 24px;
+    border-radius: 16px;
+    cursor: pointer;
 }
 
 .action-tag {
-  height: 90px;
-  font-size: 36px;
-  bottom: 0;
-  position: relative;
-  align-items: center;
-  justify-content: center;
-  display: flex;
-  background-color: #69A88D;
-  border-radius: 0px 0px 16px 16px;
+    height: 31%;
+    font-size: 36px;
+    bottom: 0;
+    position: relative;
+    align-items: center;
+    justify-content: center;
+    display: flex;
+    background-color: #69A88D;
+    border-radius: 0px 0px 16px 16px;
 }
 
 .action-icon {
-  width: 150px;
-  height: 190px;
-  border-radius: 16px;
+    width: 40%;
+    height: 68%;
+    border-radius: 16px;
 }
 
 @media (max-width: 642px) {
-  .children-div {
-    grid-template-columns: repeat(1, 1fr);
-  }
+    .children-div {
+        grid-template-columns: repeat(1, 1fr);
+    }
+    .child-name {
+        border-radius: 16px 16px 0px 0px;
+    }
+    .child-au-pair {
+        border-radius: 0px 0px 16px 16px;
+        border-left: 0px;
+    }
+    .actions-div {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 10px;
+        height: 320px;
+    }
+    .welcome-heading {
+        font-size: 32px;
+    }
+    .actions-heading {
+        font-size: 24px;
+    }
+    .action {
+        height: 146px;
+        // width: 160px;
+        width: 100%;
+    }
+    .action-tag {
+        height: 45px;
+        font-size: 18px;
+    }
+    .action-icon {
+        height: 96px;
+        width: 96px;
+    }
+}
 
-  .actions-div  {
-    grid-template-columns: repeat(2, 1fr);
-    gap: 11px;
-  }
-
-  .add-activity-action {
-    width: 100%;
-  }
-  
-  .schedule-action {
-    width: 100%;
-  }
-  
-  .children-action {
-    width: 100%;
-  }
-  
-  .au-pair-cost-action {
-    width: 100%;
-  }
-
+@media (max-width: 810px) {
+    .children-div {
+        grid-template-columns: repeat(1, 1fr);
+    }
+    .child-name {
+        border-radius: 16px 16px 0px 0px;
+    }
+    .child-au-pair {
+        border-radius: 0px 0px 16px 16px;
+        border-left: 0px;
+    }
+    .actions-div {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 10px;
+        height: 320px;
+    }
+    .welcome-heading {
+        font-size: 32px;
+    }
+    .actions-heading {
+        font-size: 24px;
+    }
+    .action {
+        height: 146px;
+        // width: 160px;
+        width: 100%;
+    }
+    .action-tag {
+        height: 45px;
+        font-size: 18px;
+    }
+    .action-icon {
+        height: 96px;
+        width: 96px;
+    }
 }

@@ -1,50 +1,52 @@
 <ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title> The Au Pair </ion-title>
-  </ion-toolbar>
+    <ion-toolbar>
+        <ion-title class="ion-text-center">
+            <h1 class="text-white ion-text-center">The Au Pair</h1>
+        </ion-title>
+    </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
 
-  <div class = 'parent-dashboard-div'>
-    <p class = 'welcome-heading'>Welcome Michelle</p>
+    <div class='parent-dashboard-div'>
+        <p class='welcome-heading'>Welcome Michelle</p>
 
-    <div class = "children-div-wrapper">
-      <ion-card class = 'children-div'>
-          <div class = 'child-name'>Child: </div>
-          <div class = 'child-status'>Status: </div>
-          <div class = 'child-au-pair'>Au Pair: </div>
-      </ion-card>
+        <div class="children-div-wrapper">
+            <ion-card class='children-div'>
+                <div class='child-name'>Child: </div>
+                <div class='child-status'>Status: </div>
+                <div class='child-au-pair'>Au Pair: </div>
+            </ion-card>
 
-      <ion-card class = 'children-div'>
-        <div class = 'child-name'>Child: </div>
-        <div class = 'child-status'>Status: </div>
-        <div class = 'child-au-pair'>Au Pair: </div>
-      </ion-card>
+            <ion-card class='children-div'>
+                <div class='child-name'>Child: </div>
+                <div class='child-status'>Status: </div>
+                <div class='child-au-pair'>Au Pair: </div>
+            </ion-card>
+        </div>
+
+        <p class='actions-heading'>Actions</p>
+
+        <div class="actions-div-wrapper">
+            <div class='actions-div'>
+                <div class='action'>
+                    <ion-icon name="add-circle-outline" class='action-icon'></ion-icon>
+                    <div class='action-tag'>Add Activity</div>
+                </div>
+                <div class='action'>
+                    <ion-icon name="calendar-outline" class='action-icon'></ion-icon>
+                    <div class='action-tag'>Schedule</div>
+                </div>
+                <div class='action'>
+                    <ion-icon name="people-circle-outline" class='action-icon'></ion-icon>
+                    <div class='action-tag'>Children</div>
+                </div>
+                <div class='action'>
+                    <ion-icon name="cash-outline" class='action-icon'></ion-icon>
+                    <div class='action-tag'>Au Pair Cost</div>
+                </div>
+            </div>
+        </div>
     </div>
-
-    <p class = 'actions-heading'>Actions</p>
-
-    <div class = "actions-div-wrapper">
-      <ion-card class = 'actions-div'>
-          <div class = 'action'>
-            <ion-icon name="add-circle-outline" class = 'action-icon'></ion-icon>
-            <div class = 'action-tag'>Add Activity</div>
-          </div>
-          <div class = 'action'>
-            <ion-icon name="calendar-outline" class= 'action-icon'></ion-icon>
-            <div class = 'action-tag'>Schedule</div>
-          </div>
-          <div class = 'action'> 
-            <ion-icon name="people-circle-outline" class = 'action-icon'></ion-icon>
-            <div class = 'action-tag'>Children</div>
-          </div>
-          <div class = 'action'>
-            <ion-icon name="cash-outline" class = 'action-icon'></ion-icon>
-            <div class = 'action-tag'>Au Pair Cost</div>
-          </div>
-      </ion-card>
-    </div>
-  </div>
 
 </ion-content>
