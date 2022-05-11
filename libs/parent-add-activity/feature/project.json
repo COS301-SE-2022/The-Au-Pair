@@ -1,0 +1,26 @@
+{
+  "projectType": "library",
+  "root": "libs/parent-add-activity/feature",
+  "sourceRoot": "libs/parent-add-activity/feature/src",
+  "prefix": "the-au-pair",
+  "targets": {
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["coverage/libs/parent-add-activity/feature"],
+      "options": {
+        "jestConfig": "libs/parent-add-activity/feature/jest.config.js",
+        "passWithNoTests": true
+      }
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "options": {
+        "lintFilePatterns": [
+          "libs/parent-add-activity/feature/src/**/*.ts",
+          "libs/parent-add-activity/feature/src/**/*.html"
+        ]
+      }
+    }
+  },
+  "tags": []
+}
