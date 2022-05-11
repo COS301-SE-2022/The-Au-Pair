@@ -9,7 +9,7 @@ ion-content{
     background-color: #176560;
 }
 
-h1{
+h2{
     display: flex;
     justify-content: center;
     align-items: center;
@@ -23,6 +23,12 @@ h1{
     position: relative;
     text-align: center;
     margin-bottom: -40px;
+    color: #3C3C3C;
+    font-style: normal;
+    font-weight: 700;
+    font-size: 48px;
+    line-height: 56px;
+    text-transform: capitalize;
 }
 
 .activity-details{
@@ -96,6 +102,7 @@ input[type=text]{
     border-radius: 10px;
     margin-top: 40px;
     padding-left: 20px;
+    color: black;
 }
 
 input[type=text]::placeholder{
@@ -127,6 +134,7 @@ input:focus{
     left: 276px;
     top: 757px;
     opacity: 0.04;
+    z-index: -10;
 }
 
 #active{
@@ -136,6 +144,7 @@ input:focus{
     left: 1313px;
     top: 281px;
     opacity: 0.04;
+    z-index: -10;
 }
 
 #lifestyles{
@@ -145,6 +154,7 @@ input:focus{
     left: -79px;
     top: -5px;
     opacity: 0.04;
+    z-index: -10;
 }
 
 
