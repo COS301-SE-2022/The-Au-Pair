@@ -10,3 +10,4 @@ export interface Activity{
     behavior: string;
     day: string ;
   }
+  

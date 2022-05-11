@@ -4,7 +4,6 @@ import Database.TheAuPair.Models.Activity;
 import Database.TheAuPair.Repositories.ActivityRepository;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
-
 import java.util.List;
 
 @RestController
