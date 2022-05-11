@@ -32,6 +32,8 @@
 [![Issues][issues-shield]](https://github.com/COS301-SE-2022/The-Au-Pair/issues)
 [![Closed][closedissues-shield]](https://github.com/COS301-SE-2022/The-Au-Pair/issues?q=is%3Aissue+is%3Aclosed)
 [![Last Commit][lastcommit-shield]](https://github.com/COS301-SE-2022/The-Au-Pair/pulls?q=is%3Apr+is%3Aclosed) <br />
+[![CI Tests](https://github.com/COS301-SE-2022/The-Au-Pair/actions/workflows/index.yml/badge.svg)](https://github.com/COS301-SE-2022/The-Au-Pair/actions/workflows/index.yml)
+[![codecov](https://codecov.io/gh/COS301-SE-2022/The-Au-Pair/branch/develop/graph/badge.svg)](https://codecov.io/gh/COS301-SE-2022/The-Au-Pair)
   
 </div>
   
