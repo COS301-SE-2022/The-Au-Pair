@@ -14,7 +14,7 @@ const routes: Routes = [
   },
   {
     path: '',
-    redirectTo: 'home',
+    redirectTo: 'parent-dashboard',
     pathMatch: 'full',
   },
   {
@@ -22,8 +22,9 @@ const routes: Routes = [
     loadChildren: () =>
       import('@the-au-pair/parent-dashboard/feature').then((m) => m.ParentDashboardFeatureModule),
   },
-    path: 'add-activity',
-    loadChildren: () =>
+  {
+      path: 'add-activity',
+      loadChildren: () =>
       import('@the-au-pair/parent-add-activity/feature').then((m) => m.ParentAddActivityFeatureModule),
   }
 ];

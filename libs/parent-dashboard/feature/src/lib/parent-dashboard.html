@@ -9,7 +9,7 @@
 <ion-content [fullscreen]="true">
 
     <div class='parent-dashboard-div'>
-        <p class='welcome-heading'>Welcome Michelle</p>
+        <p class='welcome-heading'>Welcome EPI-USE</p>
 
         <div class="children-div-wrapper">
             <ion-card class='children-div'>
@@ -29,21 +29,21 @@
 
         <div class="actions-div-wrapper">
             <div class='actions-div'>
-                <div class='action'>
-                    <ion-icon name="add-circle-outline" class='action-icon'></ion-icon>
+                <div class='action' routerLink="/add-activity">
+                    <ion-icon name="add-circle-outline" class='action-icon '></ion-icon>
                     <div class='action-tag'>Add Activity</div>
                 </div>
-                <div class='action'>
-                    <ion-icon name="calendar-outline" class='action-icon'></ion-icon>
-                    <div class='action-tag'>Schedule</div>
+                <div class='action' routerLink="/schedule">
+                    <ion-icon name="calendar-outline" class='action-icon '></ion-icon>
+                    <div class='action-tag '>Schedule</div>
                 </div>
                 <div class='action'>
-                    <ion-icon name="people-circle-outline" class='action-icon'></ion-icon>
-                    <div class='action-tag'>Children</div>
+                    <ion-icon name="people-circle-outline" class='action-icon '></ion-icon>
+                    <div class='action-tag '>Children</div>
                 </div>
-                <div class='action'>
-                    <ion-icon name="cash-outline" class='action-icon'></ion-icon>
-                    <div class='action-tag'>Au Pair Cost</div>
+                <div class='action' routerLink="/au-pair-cost">
+                    <ion-icon name="cash-outline" class='action-icon '></ion-icon>
+                    <div class='action-tag '>Au Pair Cost</div>
                 </div>
             </div>
         </div>
