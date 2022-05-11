@@ -1,0 +1,162 @@
+package Database.TheAuPair.Models;
+
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
+import org.springframework.data.mongodb.core.mapping.Field;
+
+@Document("Activities")
+public class Activity
+{
+    @Id
+    private String id;
+
+    @Field ("name")
+    private String name;
+    @Field ("description")
+    private String description;
+    @Field ("location")
+    private String location;
+    @Field ("timeStart")
+    private String timeStart;
+    @Field ("timeEnd")
+    private String timeEnd;
+    @Field ("budget")
+    private double budget;
+    @Field ("comment")
+    private String comment;
+    @Field ("behavior")
+    private String behavior;
+    @Field ("day")
+    private String day;
+
+    public Activity(String id, String name, String description, String location, String timeStart, String timeEnd, double budget, String comment, String behavior, String day)
+    {
+        this.id = id;
+        this.name = name;
+        this.description = description;
+        this.location = location;
+        this.timeStart = timeStart;
+        this.timeEnd = timeEnd;
+        this.budget = budget;
+        this.comment = comment;
+        this.behavior = behavior;
+        this.day = day;
+    }
+
+    public String getId()
+    {
+        return id;
+    }
+
+    public void setId(String id)
+    {
+        this.id = id;
+    }
+
+    public String getName()
+    {
+        return name;
+    }
+
+    public void setName(String name)
+    {
+        this.name = name;
+    }
+
+    public String getDescription()
+    {
+        return description;
+    }
+
+    public void setDescription(String description)
+    {
+        this.description = description;
+    }
+
+    public String getLocation()
+    {
+        return location;
+    }
+
+    public void setLocation(String location)
+    {
+        this.location = location;
+    }
+
+    public String getTimeStart()
+    {
+        return timeStart;
+    }
+
+    public void setTimeStart(String timeStart)
+    {
+        this.timeStart = timeStart;
+    }
+
+    public String getTimeEnd()
+    {
+        return timeEnd;
+    }
+
+    public void setTimeEnd(String timeEnd)
+    {
+        this.timeEnd = timeEnd;
+    }
+
+    public double getBudget()
+    {
+        return budget;
+    }
+
+    public void setBudget(double budget)
+    {
+        this.budget = budget;
+    }
+
+    public String getComment()
+    {
+        return comment;
+    }
+
+    public void setComment(String comment)
+    {
+        this.comment = comment;
+    }
+
+    public String getBehavior()
+    {
+        return behavior;
+    }
+
+    public void setBehavior(String behavior)
+    {
+        this.behavior = behavior;
+    }
+
+    public String getDay()
+    {
+        return day;
+    }
+
+    public void setDay(String day)
+    {
+        this.day = day;
+    }
+
+    @Override
+    public String toString()
+    {
+        return "Activity{" +
+                "id='" + id + '\'' +
+                ", name='" + name + '\'' +
+                ", description='" + description + '\'' +
+                ", location='" + location + '\'' +
+                ", timeStart='" + timeStart + '\'' +
+                ", timeEnd='" + timeEnd + '\'' +
+                ", budget=" + budget +
+                ", comment='" + comment + '\'' +
+                ", behavior='" + behavior + '\'' +
+                ", day='" + day + '\'' +
+                '}';
+    }
+}

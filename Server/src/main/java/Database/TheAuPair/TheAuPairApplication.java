@@ -1,5 +1,7 @@
 package Database.TheAuPair;
 
+import Database.TheAuPair.Models.*;
+import Database.TheAuPair.Repositories.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -11,7 +13,6 @@ public class TheAuPairApplication implements CommandLineRunner
 	@Autowired
 	public TheAuPairApplication()
 	{
-
 	}
 
 	public static void main(String[] args)
@@ -22,6 +23,5 @@ public class TheAuPairApplication implements CommandLineRunner
 	@Override
 	public void run(String... args) throws Exception
 	{
-
 	}
 }
