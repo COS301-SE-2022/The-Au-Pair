@@ -70,7 +70,7 @@ jobs:
 
       - name: merge coverage reports
         if: inputs.test == 'full'
-        run: node ./tools/scripts/merge-reports.js
+        run: node ./tools/scripts/merge-report.js
 
       - uses: codecov/codecov-action@v2
         if: inputs.test == 'full' 
