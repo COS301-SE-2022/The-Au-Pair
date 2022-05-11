@@ -8,7 +8,6 @@
 
 <ion-content [fullscreen]="true">
   <div class="ion-padding">
-
     <div class="summary-div-wrapper">
       <ion-card class='summary-div'>
         <div class="au-pair-name">Au Pair :</div>
@@ -40,7 +39,6 @@
                 0
               </div>
             </div>
-
             <div class="day-wrapper" *ngFor="let day of [0, 1, 2, 3, 4, 5, 6]">
               <div class="day" [style.height.px]=" day * 47"></div>
               <div class="label">{{ days[day] }}</div>
@@ -54,7 +52,6 @@
         <ion-card-content> 
           <div class="pie-wrapper">
             <div class="pie-graph"></div>
-
             <div class="key">
 
               <div class="travel-key">
@@ -73,14 +70,10 @@
               </div>
 
             </div>
-
             <div class="total-label">Expenses Total: </div>
-            
           </div>
-
         </ion-card-content>
       </ion-card>
     </div>
-
   </div>
 </ion-content>

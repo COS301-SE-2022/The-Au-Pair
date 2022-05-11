@@ -96,15 +96,7 @@ ion-card-header{
   grid-template-columns: minmax(800px,0.6fr) minmax(500px,0.4fr);
 }
 
-.card-bar-graph {
-  border-radius: 16px;
-  height: 517px;
-  background-color: white;
-  font-size: var(--heading-size);
-  margin: 0;
-}
-
-.card-pie-graph {
+.card-bar-graph, .card-pie-graph {
   border-radius: 16px;
   height: 517px;
   background-color: white;

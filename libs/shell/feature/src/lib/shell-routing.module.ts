@@ -22,6 +22,7 @@ const routes: Routes = [
     loadChildren: () =>
       import('@the-au-pair/au-pair-cost/feature').then((m) => m.AuPairCostFeatureModule),
   },
+  {  
     path: 'parent-dashboard',
     loadChildren: () =>
       import('@the-au-pair/parent-dashboard/feature').then((m) => m.ParentDashboardFeatureModule),
