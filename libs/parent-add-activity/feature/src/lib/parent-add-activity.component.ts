@@ -16,15 +16,55 @@ export class ParentAddActivityComponent{
   }
 
   //Populate the activityDetails object from form input
-  getActivityValues(val : any)
-  { 
-    console.log(val);
+  async getActivityValues(val : any)
+  {         
+    //Check if any details are missing
+    let emptyInput = false;
+
+    if(val.activityName === "")
+    {
+      emptyInput = true;
+    }
+    if(val.description === "")
+    {
+      emptyInput = true;
+    }
+    if(val.location === "")
+    {
+      emptyInput = true;
+    }
+    if(val.dayOfWeek === "")
+    {
+      emptyInput = true;
+    }
+    if(val.timeSlot === "")
+    {
+      emptyInput = true;
+    }
+    if(val.budget === "")
+    {
+      emptyInput = true;
+    }
+    if(val.childId === "")
+    {
+      emptyInput = true;
+    }
     
-    this.activityDetails = new Activity(val.activityName, val.description, val.location, val.dayOfWeek, val.timeSlot, val.budget, val.childId);
+    if(emptyInput == true)
+    {
+      console.log("You cannot add an activity with empty fields.");
+    }
+    else
+    {
+      const budget = parseInt(val.budget);
+      this.activityDetails = new Activity(val.activityName, val.description, val.location, val.dayOfWeek, val.timeSlot, budget, val.childId);
+    }
   }
+  //Function to populate db with this info here
+
 }
 
-class Activity
+export class Activity
 {
   //Private variables
   private _activityName: string;
