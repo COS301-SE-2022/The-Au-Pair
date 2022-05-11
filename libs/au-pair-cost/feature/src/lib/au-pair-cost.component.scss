@@ -9,7 +9,7 @@ ion-card {
     display: inline-block;
 }
 
-.section-summary {
+.card-summary {
   border-radius: 16px;
   height: 94px;
   display: grid;
@@ -22,7 +22,7 @@ ion-card {
   background-color: var(--ion-color-tertiary);
 }
 
-.section-bar-graph {
+.card-bar-graph {
   border-radius: 16px;
   height: 517px;
   width: 55%;
@@ -32,7 +32,7 @@ ion-card {
   float: left;
 }
 
-.section-pie-graph {
+.card-pie-graph {
   border-radius: 16px;
   height: 517px;
   width: 40%;
@@ -41,6 +41,64 @@ ion-card {
   margin: 0;
   float: right;
 }
+
+.bar-graph {
+  padding: 0 50px 50px 50px;
+  width: 100%;
+  height: 450px;
+  position: relative;
+  display: grid;
+  grid-template-columns: repeat(8, 1fr);
+  align-items: center;
+  justify-items: center;
+  font-size: var(--heading-size);
+  bottom: 0px;
+  // background-color: red;
+}
+
+.mon-wrapper, .tue-wrapper, .wed-wrapper, .thu-wrapper, .fri-wrapper, .sat-wrapper, .sun-wrapper, .vertical-label { 
+  height: 100%;
+  width: 100%;
+  vertical-align: bottom;
+}
+
+.mon, .tue, .wed, .thu, .fri, .sat, .sun {
+  height: 150px;
+  width: 50px;
+  background-color: var(--ion-color-secondary);
+  position: absolute;
+  bottom: 50px;
+  border-radius: 10px;
+}
+
+.mon {
+  height: 200px;
+}
+
+.label {
+  position: absolute;
+  bottom: 0;
+  height: 50px;
+}
+
+.rule {
+  padding-top: 55px;
+  width: 100%;
+}
+
+.label-num {
+  float: left;
+}
+
+.line {
+  width: 80%;
+  margin-left: 50px;
+  margin-top: 20px;
+  border-bottom: 1px solid lightgray;
+  position: absolute;
+  float: right;
+}
+
 
 
   

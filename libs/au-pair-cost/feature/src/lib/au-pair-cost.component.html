@@ -1,6 +1,6 @@
 <ion-header [translucent]="true">
     <ion-toolbar color="secondary">
-      <ion-title> The Au Pair </ion-title>
+      <ion-title class="ion-text-center"> The Au Pair </ion-title>
     </ion-toolbar>
   </ion-header>
   
@@ -8,23 +8,115 @@
     
       <div class="ion-padding">
       
-        <ion-card color="primary" class='section-summary'>
-          <div class='au-pair-name' class="first">Au Pair : </div>
+        <ion-card color="primary" class='card-summary'>
+          <div class='au-pair-name'>Au Pair : </div>
           <div class='hourly-rate'>Hourly Rate: </div>
           <div class='total-hours'>Total Hours: </div>
           <div class='total-remuneration'>Total Remuneration: </div>
         </ion-card>
     
-        <ion-card color='light' class='section-bar-graph'>
+        <ion-card color='light' class='card-bar-graph'>
           <ion-card-header>
             Hours Worked
           </ion-card-header>
           <ion-card-content>
-            
+            <div class='bar-graph'>
+
+              <div class="vertical-label">
+
+                <div class="rule">
+                  <div class="label-num">12</div>
+                  <div class="line"></div>
+                </div> 
+
+                <div class="rule">
+                  <div class="label-num">10</div>
+                  <div class="line"></div>
+                </div> 
+
+                <div class="rule">
+                  <div class="label-num">8</div>
+                  <div class="line"></div>
+                </div> 
+
+                <div class="rule">
+                  <div class="label-num">6</div>
+                  <div class="line"></div>
+                </div> 
+
+                <div class="rule">
+                  <div class="label-num">4</div>
+                  <div class="line"></div>
+                </div> 
+
+                <div class="rule">
+                  <div class="label-num">2</div>
+                  <div class="line"></div>
+                </div> 
+
+              </div>
+
+              <div class='mon-wrapper'>
+
+                <div class='mon'></div>
+
+                <div class='label'>Mon</div>
+
+              </div>
+              
+              <div class='tue-wrapper'>
+
+                <div class='tue'></div>
+
+                <div class='label'>Tue</div>
+
+              </div>
+
+              <div class='wed-wrapper'>
+
+                <div class='wed'></div>
+
+                <div class='label'>Wed</div>
+
+              </div>
+
+              <div class='thu-wrapper'>
+
+                <div class='thu'></div>
+
+                <div class='label'>Thu</div>
+
+              </div>
+
+              <div class='fri-wrapper'>
+
+                <div class='fri'></div>
+
+                <div class='label'>Fri</div>
+
+              </div>
+
+              <div class='sat-wrapper'>
+
+                <div class='sat'></div>
+
+                <div class='label'>Sat</div>
+
+              </div>
+
+              <div class='sun-wrapper'>
+
+                <div class='sun'></div>
+
+                <div class='label'>Sun</div>
+
+              </div>              
+              
+            </div>
           </ion-card-content>
         </ion-card>
     
-        <ion-card color='light' class='section-pie-graph'>
+        <ion-card color='light' class='card-pie-graph'>
           <ion-card-header>
             Line Chart
           </ion-card-header>
