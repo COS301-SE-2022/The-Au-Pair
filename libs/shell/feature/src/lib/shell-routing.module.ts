@@ -14,12 +14,17 @@ const routes: Routes = [
   },
   {
     path: '',
-    redirectTo: 'home',
+    redirectTo: 'parent-dashboard',
     pathMatch: 'full',
   },
   {
-    path: 'add-activity',
+    path: 'parent-dashboard',
     loadChildren: () =>
+      import('@the-au-pair/parent-dashboard/feature').then((m) => m.ParentDashboardFeatureModule),
+  },
+  {
+      path: 'add-activity',
+      loadChildren: () =>
       import('@the-au-pair/parent-add-activity/feature').then((m) => m.ParentAddActivityFeatureModule),
   }
 ];
