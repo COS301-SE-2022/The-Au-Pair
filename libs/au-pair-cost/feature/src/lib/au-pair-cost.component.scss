@@ -29,13 +29,12 @@ ion-card-header{
 .graphs-grid{
   display: grid;
   gap: 80px;
-  grid-template-columns: 0.6fr 0.4fr;
+  grid-template-columns: minmax(800px,0.6fr) minmax(500px,0.4fr);
 }
 
 .card-bar-graph {
   border-radius: 16px;
   height: 517px;
-  width: 100%;
   background-color: white;
   font-size: var(--heading-size);
   margin: 0;
@@ -44,7 +43,6 @@ ion-card-header{
 .card-pie-graph {
   border-radius: 16px;
   height: 517px;
-  width: 100%;
   background-color: white;
   font-size: var(--heading-size);
   margin: 0;
@@ -142,8 +140,10 @@ ion-card-header{
   margin-top: 50px;
   margin-left: 5%;
   position: relative;
-  width: 15vw;
-  height: 15vw;
+  width: max(220px,15vw);
+  height: max(220px,15vw);
+  max-width: 290px !important;
+  max-height: 290px !important;
   border-radius: 50%;
   background-image: conic-gradient(
       var(--ion-color-primary) 70deg, 
@@ -156,11 +156,9 @@ ion-card-header{
 .key {
   position: relative;
   float: left;
-  margin-top: 10%;
-  margin-left: 20%
-
-  // height: 250px;
-  // width: 100px;
+  margin-top: 3vh;
+  margin-left: 4vw;
+  height: auto;
 }
 
 .block {
@@ -168,16 +166,19 @@ ion-card-header{
   width: 30px;
   float: left;
   border-radius: 16%;
+  margin-right: 10px;
 }
 
 .keyname {
   float: right;
   vertical-align: middle;
   font-size: 16px;
+  font-weight: bold;
 }
 
 .travel-key, .activity-key, .other-key {
-  // padding-top: 50px;
+  display: flex;
+  margin-top: 40px;
 }
 
 .travel-key > .block {
@@ -203,23 +204,26 @@ ion-card-header{
 @media (max-width : 768px) {
   .graphs-grid{
     grid-template-columns: 1fr;
+    overflow-x: auto !important;
   }
+
 
   .ion-padding{
     padding: 14px;
   }
 
+  .travel-key{
+    margin-top: 15px;
+  }
+
   .pie-graph {
-    width: 50vw;
-    height: 50vw;
-    margin-left: 2%;
+    height: 150px;
+    width: 150px;
+    margin-left: 0;
   }
 
   .key {
-    position: relative;
-    float: left;
-    margin-top: 10%;
-    margin-left: 8%
+    margin-top: 0;
   }
 }
   
@@ -227,4 +231,29 @@ ion-card-header{
   .label{
     font-size: 16px;
   }
+}
+
+@media (max-width: 1460px) {
+  .graphs-grid{
+    overflow-x: scroll;
+  }
+}
+
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: #176560;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #578672;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #578672;
 }
