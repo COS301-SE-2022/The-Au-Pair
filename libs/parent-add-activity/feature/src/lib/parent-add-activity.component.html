@@ -6,20 +6,14 @@
       </ion-header>
     <h2>Add Activity</h2>
     <div class="activity-details">
-        <form class = "form-details">
-
-            <!-- <ion-item >
-                <ion-label  position="floating">Activity Name</ion-label>
-                <ion-input class = "input"></ion-input>
-            </ion-item> -->
-
-            <input type="text" placeholder="Activity Name">
-            <input type="text" placeholder="Description"> 
-            <input type="text" placeholder="Location"> 
-            <input type="text" placeholder="Day Of The Week"> 
-            <input type="text" placeholder="Time Slot"> 
-            <input type="text" placeholder="budget"> 
-            <input type="text" placeholder="Child"> <br/>
+        <form #activityForm="ngForm" (ngSubmit)="getActivityValues(activityForm.value)" class = "form-details">
+            <input type="text" ngModel name="activityName"placeholder="Activity Name">
+            <input type="text" ngModel name="description" placeholder="Description"> 
+            <input type="text" ngModel name="location" placeholder="Location"> 
+            <input type="text" ngModel name="dayOfWeek" placeholder="Day Of The Week"> 
+            <input type="text" ngModel name="timeSlot" placeholder="Time Slot"> 
+            <input type="text" ngModel name="budget" placeholder="budget"> 
+            <input type="text" ngModel name="childId" placeholder="Child's ID"> <br/>
             <input class = "addActivity" type="submit" value="Add Activity">
         </form>
     </div>
