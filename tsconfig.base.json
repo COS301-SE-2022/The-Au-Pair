@@ -19,6 +19,10 @@
       "@the-au-pair/parent-dashboard/feature": [
         "libs/parent-dashboard/feature/src/index.ts"
       ],
+      "@the-au-pair/parent-add-activity/feature": [
+        "libs/parent-add-activity/feature/src/index.ts"
+      ],
+      "@the-au-pair/schedule/feature": ["libs/schedule/feature/src/index.ts"],
       "@the-au-pair/shell/feature": ["libs/shell/feature/src/index.ts"]
     }
   },

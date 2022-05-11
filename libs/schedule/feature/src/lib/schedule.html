@@ -1,0 +1,32 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title class="ion-text-center"> <h1 class="text-white ion-text-center">The Au Pair</h1> </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <div id="container">
+    <h2 class="heading ion-text-center ion-padding-top">Your schedule</h2>
+  </div>
+  <div id="schedule-grid-desktop">
+    <div *ngFor="let day of [0,1,2,3,4,5,6]" class="day ion-text-center">
+      <h2 class="heading">{{ days[day] }}</h2>
+      <ion-card class="day-card" id="{{ day }}" [class.active] = "day === curDay"><the-au-pair-activity-card></the-au-pair-activity-card><the-au-pair-activity-card></the-au-pair-activity-card></ion-card> 
+    </div>
+  </div>
+
+  <div class="mobile-container">
+    <ion-slides id="schedule-grid-mobile" [options]="{ slidesPerView: 'auto', zoom: false,loop: true, spaceBetween: 16 }">
+    <ion-slide *ngFor="let day of [0,1,2,3,4,5,6]" style="width: 90%; height: 81vh;">
+      <ion-col>
+        <div class="day ion-text-center">
+          <h2 class="heading"> {{ days[day] }}</h2>
+          <ion-card class="day-card" id="{{ day }}" [class.active] = "day === curDay">
+            <the-au-pair-activity-card></the-au-pair-activity-card>
+          </ion-card> 
+        </div>
+      </ion-col>
+    </ion-slide>
+  </ion-slides>
+  </div>
+</ion-content>

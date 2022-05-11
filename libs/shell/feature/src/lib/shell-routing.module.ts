@@ -8,6 +8,11 @@ const routes: Routes = [
       import('@the-au-pair/home/feature').then((m) => m.HomePageModule),
   },
   {
+    path: 'schedule',
+    loadChildren: () =>
+      import('@the-au-pair/schedule/feature').then((m) => m.ScheduleFeatureModule),
+  },
+  {
     path: '',
     redirectTo: 'home',
     pathMatch: 'full',
@@ -17,6 +22,10 @@ const routes: Routes = [
     loadChildren: () =>
       import('@the-au-pair/parent-dashboard/feature').then((m) => m.ParentDashboardFeatureModule),
   },
+    path: 'add-activity',
+    loadChildren: () =>
+      import('@the-au-pair/parent-add-activity/feature').then((m) => m.ParentAddActivityFeatureModule),
+  }
 ];
 
 @NgModule({
