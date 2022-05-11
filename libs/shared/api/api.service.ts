@@ -17,7 +17,7 @@ export class API{
     return this.http.get('http://localhost:8080/getAuPair');
   }
 
-  get(activity : Activity): Observable<any> {
+  addActivity(activity : Activity): Observable<any> {
     return this.http.post('http://localhost:8080/addActivity',activity);
   }
 }
