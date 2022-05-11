@@ -50,16 +50,6 @@ ion-card-header{
   margin: 0;
 }
 
-@media (max-width : 768px) {
-  .graphs-grid{
-    grid-template-columns: 1fr;
-  }
-
-  .ion-padding{
-    padding: 14px;
-  }
-}
-
 .au-pair-name{
   background-color: var(--ion-color-primary);
   width: 100%;
@@ -80,7 +70,6 @@ ion-card-header{
   justify-items: center;
   font-size: var(--heading-size);
   bottom: 0px;
-  // background-color: red;
 }
 
 .day-wrapper { 
@@ -106,12 +95,6 @@ ion-card-header{
   height: 50px;
   font-size: 24px;
   font-weight: bold;
-}
-
-@media (max-width: 1024px) {
-  .label{
-    font-size: 16px;
-  }
 }
 
 .rule {
@@ -147,7 +130,101 @@ ion-card-header{
   margin-top: 0;
 }
 
+.pie-wrapper {
+  width: 100%;
+  height: 450px;
+  position: relative;
+  display: inline-block;
+  bottom: 0px;
+}
+
+.pie-graph {
+  margin-top: 50px;
+  margin-left: 5%;
+  position: relative;
+  width: 15vw;
+  height: 15vw;
+  border-radius: 50%;
+  background-image: conic-gradient(
+      var(--ion-color-primary) 70deg, 
+      var(--ion-color-secondary) 0 235deg, 
+      var(--ion-color-champagne) 0);
+
+  float: left;
+}
+
+.key {
+  position: relative;
+  float: left;
+  margin-top: 10%;
+  margin-left: 20%
+
+  // height: 250px;
+  // width: 100px;
+}
+
+.block {
+  height: 30px;
+  width: 30px;
+  float: left;
+  border-radius: 16%;
+}
+
+.keyname {
+  float: right;
+  vertical-align: middle;
+  font-size: 16px;
+}
+
+.travel-key, .activity-key, .other-key {
+  // padding-top: 50px;
+}
+
+.travel-key > .block {
+  background-color: var(--ion-color-champagne);
+}
+
+.activity-key > .block {
+  background-color: var(--ion-color-primary);
+}
+
+.other-key > .block {
+  background-color: var(--ion-color-secondary);
+}
+
+.total-label {
+  position: absolute;
+  bottom: 0;
+  font-size: var(--heading-size);
+  margin: 0 0 30px 20px;
+}
 
 
+@media (max-width : 768px) {
+  .graphs-grid{
+    grid-template-columns: 1fr;
+  }
+
+  .ion-padding{
+    padding: 14px;
+  }
+
+  .pie-graph {
+    width: 50vw;
+    height: 50vw;
+    margin-left: 2%;
+  }
+
+  .key {
+    position: relative;
+    float: left;
+    margin-top: 10%;
+    margin-left: 8%
+  }
+}
   
-  
+@media (max-width: 1024px) {
+  .label{
+    font-size: 16px;
+  }
+}

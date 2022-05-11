@@ -1,6 +1,6 @@
 <ion-header [translucent]="true">
   <ion-toolbar color="secondary">
-    <ion-title class="ion-text-center"> The Au Pair </ion-title>
+    <ion-title class="ion-text-center"><h1>The Au Pair</h1></ion-title>
   </ion-toolbar>
 </ion-header>
 
@@ -45,8 +45,39 @@
       </ion-card>
 
       <ion-card color="light" class="card-pie-graph">
-        <ion-card-header> Line Chart </ion-card-header>
-        <ion-card-content> </ion-card-content>
+        <ion-card-header class="title"> Expenses </ion-card-header>
+        <ion-card-content> 
+          <div class="pie-wrapper">
+            <div class="pie-graph">
+              <!-- <div class="travel-stat"></div>
+              <div class="activity-stat"></div>
+              <div class="other-stat"></div> -->
+            </div>
+
+            <div class="key">
+
+              <div class="travel-key">
+                <div class="block"></div>
+                <div class="keyname">Travel: </div>
+              </div>
+
+              <div class="activity-key">
+                <div class="block"></div>
+                <div class="keyname">Activity: </div>
+              </div>
+
+              <div class="other-key">
+                <div class="block"></div>
+                <div class="keyname">Other: </div>
+              </div>
+
+            </div>
+
+            <div class="total-label">Expenses Total: </div>
+            
+          </div>
+
+        </ion-card-content>
       </ion-card>
     </div>
 
