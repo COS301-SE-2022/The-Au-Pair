@@ -1,17 +1,28 @@
 <ion-header [translucent]="true">
-  <ion-toolbar color="secondary">
-    <ion-title class="ion-text-center"><h1>The Au Pair</h1></ion-title>
+  <ion-toolbar>
+      <ion-title class="ion-text-center">
+          <h1 class="text-white ion-text-center">The Au Pair</h1>
+      </ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
   <div class="ion-padding">
-    <ion-card color="primary" class="card-summary">
+    <!-- <ion-card color="primary" class="card-summary">
       <div class="au-pair-name">Au Pair :</div>
       <div class="hourly-rate">Hourly Rate:</div>
       <div class="total-hours">Total Hours:</div>
       <div class="total-remuneration">Total Remuneration:</div>
-    </ion-card>
+    </ion-card> -->
+
+    <div class="summary-div-wrapper">
+      <ion-card class='summary-div'>
+        <div class="au-pair-name">Au Pair :</div>
+        <div class="hourly-rate">Hourly Rate:</div>
+        <div class="total-hours">Total Hours:</div>
+        <div class="total-remuneration">Total Remuneration:</div>
+      </ion-card>
+    </div>
 
     <div class="graphs-grid">
       <ion-card color="light" class="card-bar-graph">
@@ -48,11 +59,7 @@
         <ion-card-header class="title"> Expenses </ion-card-header>
         <ion-card-content> 
           <div class="pie-wrapper">
-            <div class="pie-graph">
-              <!-- <div class="travel-stat"></div>
-              <div class="activity-stat"></div>
-              <div class="other-stat"></div> -->
-            </div>
+            <div class="pie-graph"></div>
 
             <div class="key">
 

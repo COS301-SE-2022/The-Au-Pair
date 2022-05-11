@@ -1,4 +1,5 @@
 ion-card {
+  background-color: transparent;
   box-shadow: none;
 }
 
@@ -6,24 +7,87 @@ ion-card-header{
   padding-bottom: 0 !important;
 }
 
+.summary-div-wrapper {
+  text-align: center;
+  width: 100%;
+  position: relative;
+  display: block;
+}
+
+.summary-div {
+  width: 100%;
+  height: 94px;
+  display: grid;
+  border-radius: 16px;
+  grid-template-columns: repeat(4, 1fr);
+  align-items: center;
+  justify-items: center;
+  margin: auto;
+  font-size: 24px;
+  margin-bottom: 60px;
+  background-color: var(--ion-color-tertiary);
+}
+
+.au-pair-name {
+  background-color: var(--ion-color-primary);
+  color: white;
+  margin: 0;
+  height: 100%;
+  display: flex;
+  text-align: center;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  font-size: 24px;
+}
+
+.hourly-rate {
+  color: white;
+  margin: 0;
+  height: 100%;
+  display: flex;
+  border-left: 1px var(--ion-background-color) solid;
+  text-align: center;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  font-size: 24px;
+}
+
+.total-hours {
+  color: white;
+  margin: 0;
+  height: 100%;
+  display: flex;
+  border-left: 1px var(--ion-background-color) solid;
+  text-align: center;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  font-size: 24px;
+}
+
+.total-remuneration {
+  color: white;
+  margin: 0;
+  height: 100%;
+  display: flex;
+  border-left: 1px var(--ion-background-color) solid;
+  text-align: center;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  border-style: solid;
+  border-right: none;
+  border-top: none;
+  border-bottom: none;
+}
+
 .ion-padding {
     padding: 40px;
     width: 100%;
     position: relative;
     display: inline-block;
-}
-
-.card-summary {
-  border-radius: 16px;
-  height: 94px;
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  align-items: center;
-  justify-items: center;
-  margin: auto;
-  font-size: var(--heading-size);
-  margin-bottom: 60px;
-  background-color: var(--ion-color-tertiary);
 }
 
 .graphs-grid{
@@ -202,11 +266,43 @@ ion-card-header{
 
 
 @media (max-width : 768px) {
+  .summary-div {
+    grid-template-columns: repeat(1, 1fr);
+  }
+  .au-pair-name {
+    border-radius: 16px 16px 0px 0px;
+    font-size: 16px;
+  }
+  .hourly-rate {
+    border-left: 0px;
+    font-size: 16px;
+  }
+  .total-hours {
+    border-left: 0px;
+    font-size: 16px;
+  }
+
+  .total-remuneration {
+    border-radius: 0px 0px 16px 16px;
+    border-left: 0px;
+    font-size: 16px;
+  }
+  
   .graphs-grid{
     grid-template-columns: 1fr;
     overflow-x: auto !important;
   }
 
+  .card-pie-graph {
+    height: 350px;
+  }
+
+  .total-label {
+    position: absolute;
+    bottom: 150px;
+    font-size: var(--heading-size);
+    margin: 0 0 30px 20px;
+  }
 
   .ion-padding{
     padding: 14px;
