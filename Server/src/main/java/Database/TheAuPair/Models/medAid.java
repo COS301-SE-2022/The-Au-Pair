@@ -5,7 +5,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.Field;
 
 @Document("Medical_Aid")
-public class medID
+public class medAid
 {
     @Id
     private String id;
@@ -19,7 +19,7 @@ public class medID
     @Field ("mainID")
     private String mID;
 
-    public medID(String id, String plan, String name, String sname, String mID)
+    public medAid(String id, String plan, String name, String sname, String mID)
     {
         this.id = id;
         this.plan = plan;
