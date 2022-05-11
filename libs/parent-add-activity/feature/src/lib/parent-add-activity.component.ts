@@ -1,5 +1,4 @@
 import { Component} from '@angular/core';
-import { FormArray } from '@angular/forms';
 
 @Component({
   selector: 'the-au-pair-parent-add-activity',
@@ -20,34 +19,126 @@ export class ParentAddActivityComponent{
   {         
     //Check if any details are missing
     let emptyInput = false;
-
+    let dom = document.getElementById("actNameError");
     if(val.activityName === "")
     {
       emptyInput = true;
+      if(dom != null)
+      {
+        dom.innerHTML = "Activity name is empty";
+        dom.style.display = "block";
+      }
     }
-    if(val.description === "")
+    else
     {
-      emptyInput = true;
+      if(dom != null)
+      {
+        dom.style.display = "none";
+      }
     }
+    dom = document.getElementById("descripError");
+    if(val.description === "")
+    { 
+      emptyInput = true;
+      emptyInput = true;
+      if(dom != null)
+      {
+        dom.innerHTML = "Description is empty";
+        dom.style.display = "block";
+      }
+    }else
+    {
+      if(dom != null)
+      {
+        dom.style.display = "none";
+      }
+    }
+    dom = document.getElementById("locError");
     if(val.location === "")
     {
       emptyInput = true;
+      emptyInput = true;
+      if(dom != null)
+      {
+        dom.innerHTML = "Location is empty";
+        dom.style.display = "block";
+      }
+    }else
+    {
+      if(dom != null)
+      {
+        dom.style.display = "none";
+      }
     }
+    dom = document.getElementById("dayError");
     if(val.dayOfWeek === "")
     {
       emptyInput = true;
+      emptyInput = true;
+      if(dom != null)
+      {
+        dom.innerHTML = "Day of the week is empty";
+        dom.style.display = "block";
+      }
+    }else
+    {
+      if(dom != null)
+      {
+        dom.style.display = "none";
+      }
     }
+    dom = document.getElementById("timeError");
     if(val.timeSlot === "")
     {
       emptyInput = true;
+      emptyInput = true;
+      if(dom != null)
+      {
+        dom.innerHTML = "Time slot is empty";
+        dom.style.display = "block";
+      }
+    }else
+    {
+      if(dom != null)
+      {
+        dom.style.display = "none";
+      }
     }
+    dom = document.getElementById("budgetError");
     if(val.budget === "")
     {
       emptyInput = true;
+      emptyInput = true;
+      if(dom != null)
+      {
+        dom.innerHTML = "Budget is empty";
+        dom.style.display = "block";
+      }
+    }else
+    {
+      if(dom != null)
+      {
+        dom.style.display = "none";
+      }
     }
+    
+    dom = document.getElementById("childError");
     if(val.childId === "")
     {
       emptyInput = true;
+      emptyInput = true;
+      if(dom != null)
+      {
+        dom.innerHTML = "Child ID is empty";
+        dom.style.display = "block";
+      }
+    }
+    else
+    {
+      if(dom != null)
+      {
+        dom.style.display = "none";
+      }
     }
     
     if(emptyInput == true)
@@ -61,7 +152,6 @@ export class ParentAddActivityComponent{
     }
   }
   //Function to populate db with this info here
-
 }
 
 export class Activity

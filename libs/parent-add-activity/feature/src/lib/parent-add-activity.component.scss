@@ -90,6 +90,16 @@ input:focus{
     margin-top: 20px;
 }
 
+//Errors styling
+.error{
+    display: none;
+    position: relative;
+    display: block;
+    text-align: left;
+    margin: 0;
+    color: red;
+}
+
 //Images
 #active-2{
     position: absolute;

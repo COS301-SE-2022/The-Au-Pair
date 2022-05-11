@@ -8,12 +8,19 @@
     <div class="activity-details">
         <form #activityForm="ngForm" (ngSubmit)="getActivityValues(activityForm.value)" class = "form-details">
             <input type="text" ngModel name="activityName"placeholder="Activity Name">
+            <p id="actNameError" class="error" style="display: none;">Empty Field</p>
             <input type="text" ngModel name="description" placeholder="Description"> 
+            <p id="descripError" class="error" style="display: none;">Empty Field</p>
             <input type="text" ngModel name="location" placeholder="Location"> 
+            <p id="locError" class="error" style="display: none;">Empty Field</p>
             <input type="text" ngModel name="dayOfWeek" placeholder="Day Of The Week"> 
+            <p id="dayError" class="error" style="display: none;">Empty Field</p>
             <input type="text" ngModel name="timeSlot" placeholder="Time Slot"> 
-            <input type="text" ngModel name="budget" placeholder="budget"> 
+            <p id="timeError" class="error" style="display: none;">Empty Field</p>
+            <input type="text" ngModel name="budget" placeholder="Budget"> 
+            <p id="budgetError" class="error" style="display: none;">Empty Field</p>
             <input type="text" ngModel name="childId" placeholder="Child's ID"> <br/>
+            <p id="childError" class="error" style="display: none;">Empty Field</p>
             <input class = "addActivity" type="submit" value="Add Activity">
         </form>
     </div>
