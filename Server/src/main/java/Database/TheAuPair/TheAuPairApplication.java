@@ -13,7 +13,6 @@ public class TheAuPairApplication implements CommandLineRunner
 	@Autowired
 	public TheAuPairApplication()
 	{
-
 	}
 
 	public static void main(String[] args)
@@ -24,6 +23,5 @@ public class TheAuPairApplication implements CommandLineRunner
 	@Override
 	public void run(String... args) throws Exception
 	{
-
 	}
 }

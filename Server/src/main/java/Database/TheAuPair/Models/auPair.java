@@ -5,33 +5,36 @@ import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.Field;
 
 @Document("Au-Pair")
-public class Au_Pair
+public class auPair
 {
     @Id
     private String id;
 
     @Field("rating")
     private double rating;
-    @Field("pay_rate")
-    private double pay;
-    @Field("dist_traveled")
-    private double dist;
-    @Field("cost_incurred")
-    private double cost;
+    @Field("payRate")
+    private double payRate;
+    @Field("distTraveled")
+    private double distTraveled;
+    @Field("costIncurred")
+    private double costIncurred;
     @Field("onShift")
     private boolean onShift;
     @Field("employer")
     private String employer;
+    @Field("hoursWorked")
+    private String hoursWorked;
 
-    public Au_Pair(String id, double rating, double pay, double dist, double cost, boolean onShift, String employer)
+    public auPair(String id, double rating, double payRate, double distTraveled, double costIncurred, boolean onShift, String employer, String hoursWorked)
     {
         this.id = id;
         this.rating = rating;
-        this.pay = pay;
-        this.dist = dist;
-        this.cost = cost;
+        this.payRate = payRate;
+        this.distTraveled = distTraveled;
+        this.costIncurred = costIncurred;
         this.onShift = onShift;
         this.employer = employer;
+        this.hoursWorked = hoursWorked;
     }
 
     public String getId()
@@ -54,34 +57,34 @@ public class Au_Pair
         this.rating = rating;
     }
 
-    public double getPay()
+    public double getPayRate()
     {
-        return pay;
+        return payRate;
     }
 
-    public void setPay(double pay)
+    public void setPayRate(double payRate)
     {
-        this.pay = pay;
+        this.payRate = payRate;
     }
 
-    public double getDist()
+    public double getDistTraveled()
     {
-        return dist;
+        return distTraveled;
     }
 
-    public void setDist(double dist)
+    public void setDistTraveled(double distTraveled)
     {
-        this.dist = dist;
+        this.distTraveled = distTraveled;
     }
 
-    public double getCost()
+    public double getCostIncurred()
     {
-        return cost;
+        return costIncurred;
     }
 
-    public void setCost(double cost)
+    public void setCostIncurred(double costIncurred)
     {
-        this.cost = cost;
+        this.costIncurred = costIncurred;
     }
 
     public boolean isOnShift()
@@ -104,17 +107,28 @@ public class Au_Pair
         this.employer = employer;
     }
 
+    public String getHoursWorked()
+    {
+        return hoursWorked;
+    }
+
+    public void setHoursWorked(String hoursWorked)
+    {
+        this.hoursWorked = hoursWorked;
+    }
+
     @Override
     public String toString()
     {
-        return "Au_Pair{" +
+        return "auPair{" +
                 "id='" + id + '\'' +
                 ", rating=" + rating +
-                ", pay=" + pay +
-                ", dist=" + dist +
-                ", cost=" + cost +
+                ", payRate=" + payRate +
+                ", distTraveled=" + distTraveled +
+                ", costIncurred=" + costIncurred +
                 ", onShift=" + onShift +
                 ", employer='" + employer + '\'' +
+                ", hoursWorked='" + hoursWorked + '\'' +
                 '}';
     }
 }

@@ -5,27 +5,27 @@ import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.Field;
 
 @Document("Medical_Aid")
-public class Med_Aid
+public class medID
 {
     @Id
     private String id;
 
     @Field ("plan")
     private String plan;
-    @Field ("main_name")
+    @Field ("mainName")
     private String name;
-    @Field ("main_sname")
+    @Field ("mainSname")
     private String sname;
-    @Field ("main_id")
-    private String mid;
+    @Field ("mainID")
+    private String mID;
 
-    public Med_Aid(String id, String plan, String name, String sname, String mid)
+    public medID(String id, String plan, String name, String sname, String mID)
     {
         this.id = id;
         this.plan = plan;
         this.name = name;
         this.sname = sname;
-        this.mid = mid;
+        this.mID = mID;
     }
 
     public String getId()
@@ -70,12 +70,12 @@ public class Med_Aid
 
     public String getMid()
     {
-        return mid;
+        return mID;
     }
 
-    public void setMid(String mid)
+    public void setMid(String mID)
     {
-        this.mid = mid;
+        this.mID = mID;
     }
 
     @Override
@@ -86,7 +86,7 @@ public class Med_Aid
                 ", plan='" + plan + '\'' +
                 ", name='" + name + '\'' +
                 ", sname='" + sname + '\'' +
-                ", mid='" + mid + '\'' +
+                ", mid='" + mID + '\'' +
                 '}';
     }
 }

@@ -15,30 +15,30 @@ public class Activity
     @Field ("description")
     private String description;
     @Field ("location")
-    private String loc;
-    @Field ("time_start")
-    private String tstart;
-    @Field ("time_end")
-    private String tend;
+    private String location;
+    @Field ("timeStart")
+    private String timeStart;
+    @Field ("timeEnd")
+    private String timeEnd;
     @Field ("budget")
     private double budget;
     @Field ("comment")
-    private String com;
+    private String comment;
     @Field ("behavior")
     private String behavior;
     @Field ("day")
     private String day;
 
-    public Activity(String id, String name, String description, String loc, String tstart, String tend, double budget, String com, String behavior, String day)
+    public Activity(String id, String name, String description, String location, String timeStart, String timeEnd, double budget, String comment, String behavior, String day)
     {
         this.id = id;
         this.name = name;
         this.description = description;
-        this.loc = loc;
-        this.tstart = tstart;
-        this.tend = tend;
+        this.location = location;
+        this.timeStart = timeStart;
+        this.timeEnd = timeEnd;
         this.budget = budget;
-        this.com = com;
+        this.comment = comment;
         this.behavior = behavior;
         this.day = day;
     }
@@ -73,34 +73,34 @@ public class Activity
         this.description = description;
     }
 
-    public String getLoc()
+    public String getLocation()
     {
-        return loc;
+        return location;
     }
 
-    public void setLoc(String loc)
+    public void setLocation(String location)
     {
-        this.loc = loc;
+        this.location = location;
     }
 
-    public String getTstart()
+    public String getTimeStart()
     {
-        return tstart;
+        return timeStart;
     }
 
-    public void setTstart(String tstart)
+    public void setTimeStart(String timeStart)
     {
-        this.tstart = tstart;
+        this.timeStart = timeStart;
     }
 
-    public String getTend()
+    public String getTimeEnd()
     {
-        return tend;
+        return timeEnd;
     }
 
-    public void setTend(String tend)
+    public void setTimeEnd(String timeEnd)
     {
-        this.tend = tend;
+        this.timeEnd = timeEnd;
     }
 
     public double getBudget()
@@ -113,14 +113,14 @@ public class Activity
         this.budget = budget;
     }
 
-    public String getCom()
+    public String getComment()
     {
-        return com;
+        return comment;
     }
 
-    public void setCom(String com)
+    public void setComment(String comment)
     {
-        this.com = com;
+        this.comment = comment;
     }
 
     public String getBehavior()
@@ -150,11 +150,11 @@ public class Activity
                 "id='" + id + '\'' +
                 ", name='" + name + '\'' +
                 ", description='" + description + '\'' +
-                ", loc='" + loc + '\'' +
-                ", tstart='" + tstart + '\'' +
-                ", tend='" + tend + '\'' +
+                ", location='" + location + '\'' +
+                ", timeStart='" + timeStart + '\'' +
+                ", timeEnd='" + timeEnd + '\'' +
                 ", budget=" + budget +
-                ", com='" + com + '\'' +
+                ", comment='" + comment + '\'' +
                 ", behavior='" + behavior + '\'' +
                 ", day='" + day + '\'' +
                 '}';

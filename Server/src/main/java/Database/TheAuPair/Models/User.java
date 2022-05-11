@@ -19,23 +19,23 @@ public class User
     @Field ("address")
     private String address;
     @Field ("registered")
-    private boolean reg;
+    private boolean registered;
     @Field ("type")
-    private int t;
-    @Field ("psw")
+    private int type;
+    @Field ("password")
     private String password;
     @Field ("phone")
     private String number;
 
-    public User(String id, String fname, String sname, String email, String address, boolean reg, int t, String password, String number)
+    public User(String id, String fname, String sname, String email, String address, boolean registered, int type, String password, String number)
     {
         this.id = id;
         this.fname = fname;
         this.sname = sname;
         this.email = email;
         this.address = address;
-        this.reg = reg;
-        this.t = t;
+        this.registered = registered;
+        this.type = type;
         this.password = password;
         this.number = number;
     }
@@ -90,24 +90,24 @@ public class User
         this.address = address;
     }
 
-    public boolean isReg()
+    public boolean isRegistered()
     {
-        return reg;
+        return registered;
     }
 
-    public void setReg(boolean reg)
+    public void setRegistered(boolean registered)
     {
-        this.reg = reg;
+        this.registered = registered;
     }
 
-    public int getT()
+    public int getType()
     {
-        return t;
+        return type;
     }
 
-    public void setT(int t)
+    public void setT(int type)
     {
-        this.t = t;
+        this.type = type;
     }
 
     public String getPassword()
@@ -139,8 +139,8 @@ public class User
                 ", sname='" + sname + '\'' +
                 ", email='" + email + '\'' +
                 ", address='" + address + '\'' +
-                ", reg=" + reg +
-                ", t=" + t +
+                ", reg=" + registered +
+                ", t=" + type +
                 ", password='" + password + '\'' +
                 ", number='" + number + '\'' +
                 '}';

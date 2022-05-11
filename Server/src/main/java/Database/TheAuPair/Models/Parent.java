@@ -3,7 +3,6 @@ package Database.TheAuPair.Models;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.Field;
-
 import java.util.Arrays;
 
 @Document("Parents")
@@ -14,18 +13,17 @@ public class Parent
 
     @Field ("children")
     private String children[];
-    @Field ("med_id")
-    private String med_id;
-    @Field ("au_pair")
-    private String au_pair;
+    @Field ("medID")
+    private String medID;
+    @Field ("auPair")
+    private String auPair;
 
-    public Parent(String id, String[] children, String med_id, String au_pair)
+    public Parent(String id, String[] children, String medID, String auPair)
     {
         this.id = id;
-        this.children = new String[children.length];
         this.children = Arrays.copyOf(children, children.length);
-        this.med_id = med_id;
-        this.au_pair = au_pair;
+        this.medID = medID;
+        this.auPair = auPair;
     }
 
     public String getId()
@@ -48,24 +46,24 @@ public class Parent
         this.children = children;
     }
 
-    public String getMed_id()
+    public String getMedID()
     {
-        return med_id;
+        return medID;
     }
 
-    public void setMed_id(String med_id)
+    public void setMedID(String medID)
     {
-        this.med_id = med_id;
+        this.medID = medID;
     }
 
-    public String getAu_pair()
+    public String getAuPair()
     {
-        return au_pair;
+        return auPair;
     }
 
-    public void setAu_pair(String au_pair)
+    public void setAuPair(String auPair)
     {
-        this.au_pair = au_pair;
+        this.auPair = auPair;
     }
 
     @Override
@@ -74,8 +72,8 @@ public class Parent
         return "Parent{" +
                 "id='" + id + '\'' +
                 ", children=" + Arrays.toString(children) +
-                ", med_id='" + med_id + '\'' +
-                ", au_pair='" + au_pair + '\'' +
+                ", medID='" + medID + '\'' +
+                ", auPair='" + auPair + '\'' +
                 '}';
     }
 }

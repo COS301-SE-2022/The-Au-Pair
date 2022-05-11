@@ -3,7 +3,6 @@ package Database.TheAuPair.Models;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.Field;
-
 import java.util.Arrays;
 
 @Document("Children")
@@ -26,7 +25,6 @@ public class Child
         this.id = id;
         this.fname = fname;
         this.sname = sname;
-        this.allergies = new String[allergies.length];
         this.allergies = Arrays.copyOf(allergies, allergies.length);
         this.diet = diet;
     }
