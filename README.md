@@ -9,13 +9,16 @@
     <br />
   </a> 
   
-### The Au Pair
+<!-- The Au Pair -->
+  ![The Au Pair Light](https://user-images.githubusercontent.com/49924445/167938465-542ab362-ec9e-4361-8e98-6810df977a4e.png#gh-dark-mode-only)
+  ![The Au Pair Dark](https://user-images.githubusercontent.com/49924445/167938677-2701763b-9ec2-4b90-937f-11e1abdc79cf.png#gh-light-mode-only)
+
   
   <p align="center">
     <a href="https://github.com/COS301-SE-2022/The-Au-Pair/wiki"><strong>Explore the docs »</strong></a>
     <br />
     <br />
-    <a href="https://github.com/COS301-SE-2022/The-Au-Pair/">View Demo</a>
+    <a href="https://github.com/COS301-SE-2022/The-Au-Pair/">CheemsChaps-Demo1</a>
     ·
     <a href="https://docs.google.com/document/d/18CSPDD1SnMIpAknKGA97uaO6s_-WgM7UnW_6i9DhmC4/edit?usp=sharing">SRS Document</a>
     ·
@@ -26,14 +29,15 @@
   
   <!-- PROJECT SHIELDS -->
 <div align="center">
-  
-[![Contributors][contributors-shield]](https://github.com/COS301-SE-2022/The-Au-Pair/graphs/contributors)
+ 
+[![Code coverage][codecov-shield]](https://codecov.io/gh/COS301-SE-2022/The-Au-Pair)
+[![CI Tests][build-status-shield]](https://github.com/COS301-SE-2022/The-Au-Pair/actions/workflows/index.yml)
+[![Requirements Status](https://requires.io/github/COS301-SE-2022/The-Au-Pair/requirements.svg?branch=develop&style=for-the-badge)](https://requires.io/github/COS301-SE-2022/The-Au-Pair/requirements/?branch=develop)
+[![Issues closed][closedissues-shield]](https://github.com/COS301-SE-2022/The-Au-Pair/issues?q=is%3Aissue+is%3Aclosed) <br />
 [![Commits][commits-shield]](https://github.com/COS301-SE-2022/The-Au-Pair/issues)
-[![Issues][issues-shield]](https://github.com/COS301-SE-2022/The-Au-Pair/issues)
-[![Closed][closedissues-shield]](https://github.com/COS301-SE-2022/The-Au-Pair/issues?q=is%3Aissue+is%3Aclosed)
-[![Last Commit][lastcommit-shield]](https://github.com/COS301-SE-2022/The-Au-Pair/pulls?q=is%3Apr+is%3Aclosed) <br />
-[![CI Tests](https://github.com/COS301-SE-2022/The-Au-Pair/actions/workflows/index.yml/badge.svg)](https://github.com/COS301-SE-2022/The-Au-Pair/actions/workflows/index.yml)
-[![codecov](https://codecov.io/gh/COS301-SE-2022/The-Au-Pair/branch/develop/graph/badge.svg)](https://codecov.io/gh/COS301-SE-2022/The-Au-Pair)
+[![Last Commit][lastcommit-shield]](https://github.com/COS301-SE-2022/The-Au-Pair/pulls?q=is%3Apr+is%3Aclosed) 
+<br />
+
   
 </div>
   
@@ -51,18 +55,8 @@
         <li><a href="#built-with">Built With</a></li>
       </ul>
     </li>
-<!--     <li>
-      <a href="#getting-started">Getting Started</a>
-      <ul>
-        <li><a href="#prerequisites">Prerequisites</a></li>
-        <li><a href="#installation">Installation</a></li>
-      </ul>
-    </li> -->
-    <!-- <li><a href="#usage">Usage</a></li> -->
-    <!-- <li><a href="#roadmap">Roadmap</a></li> -->
-    <!-- <li><a href="#license">License</a></li> -->
     <li>
-      <a href="#about-contributors">About Contributors</a>
+      <a href="#the-team">The Team</a>
       <ul>
         <li><a href="#daniel-azmanov">Daniel Azmanov</a></li>
         <li><a href="#ruben-brits">Ruben Brits</a></li>
@@ -71,20 +65,19 @@
         <li><a href="#seyuran-pillay">Seyuran Pillay</a></li>
       </ul>
     </li>
-    <!-- <li><a href="#acknowledgments">Acknowledgments</a></li> -->
   </ol>
 </details>
 
 
 
 <!-- ABOUT -->
-## About
+# About
 
 <!-- TODO: Insert pics of our project here -->
 
 ### Cheems Chaps - The Au Pair
 
-The Au Pair is a platform used to give control to parents. The Au Pair will assist them in finding and interactng with suitable Au Pairs who will be looking after their children. It will allow parents to minimize efforts to find Au Pair’s, provide schedules for their children, and review their activities and behavior through feedback from the Au Pair.
+The Au Pair is a platform used to give control to parents. The Au Pair will assist them in finding and interactng with suitable Au Pairs who will be looking after their children. It will allow parents to minimize efforts to find Au Pair’s, provide schedules for their children, and review their activities and behavior through feedback.
 
 The Au Pair is a project created for the University of Pretoria's COS301 module. It was created by the Cheems Chaps team with members <a href="#daniel-azmanov">Daniel Azmanov</a>, <a href="#ruben-brits">Ruben Brits</a>, <a href="#kyle-pottinger">Kyle Pottinger</a>, <a href="#reece-stephenson">Reece Stephenson</a> and <a href="#seyuran-pillay">Seyuran Pillay</a>
 
@@ -106,65 +99,8 @@ The Au Pair is a project created for the University of Pretoria's COS301 module.
 <p align="right">(<a href="#top">back to top</a>)</p>
 
 
-
-<!-- GETTING STARTED -->
-<!-- ## Getting Started -->
-
-<!-- ### Prerequisites -->
-
-<!-- TODO: add the things that need to be installed and how to install them -->
-<!-- * npm -->
-<!--   ```sh -->
-<!--   npm install npm@latest -g -->
-<!--   ``` -->
-
-<!-- ### Installation -->
-
-<!-- TODO: add steps on how to get the repo running on machine -->
-
-<!-- 1. Clone the repo -->
-<!--    ```sh -->
-<!--    git clone https://github.com/COS301-SE-2022/The-Au-Pair -->
-<!--    ``` -->
-   
-   
-<!-- <p align="right">(<a href="#top">back to top</a>)</p> -->
-
-<!-- USAGE EXAMPLES -->
-<!-- ## Usage -->
-
-<!-- TODO: Add screenshots, usage cases etc. -->
-
-<!-- <p align="right">(<a href="#top">back to top</a>)</p> -->
-
-
-
-<!-- ROADMAP -->
-<!-- ## Roadmap -->
-
-<!-- TODO: Add what features we are implementing and when -->
-
-<!-- - [ ] Feature 1
-- [ ] Feature 2
-- [ ] Feature 3
-    - [ ] Nested Feature -->
-
-<!-- See the [open issues](https://github.com/COS301-SE-2022/The-Au-Pair/issues) for a full list of proposed features (and known issues). -->
-
-<!-- <p align="right">(<a href="#top">back to top</a>)</p> -->
-
-
-<!-- LICENSE -->
-<!-- ## License -->
-
-<!-- TODO: Sort out license and add it in here -->
-
-<!-- <p align="right">(<a href="#top">back to top</a>)</p> -->
-
-
-
 <!-- Contributors -->
-### About Contributors
+# The Team
 
 ## Daniel Azmanov 
 
@@ -234,11 +170,11 @@ During the 7 years of my coding experience, I have learned a large variety of la
 
 
 <!-- LINKS & IMAGES -->
-[contributors-shield]: https://img.shields.io/github/contributors/COS301-SE-2022/The-Au-Pair?color=green&style=for-the-badge
-[issues-shield]: https://img.shields.io/github/issues/COS301-SE-2022/The-Au-Pair?style=for-the-badge
-[commits-shield]: https://img.shields.io/github/commit-activity/w/COS301-SE-2022/The-Au-Pair?style=for-the-badge
-[lastcommit-shield]: https://img.shields.io/github/last-commit/COS301-SE-2022/The-Au-Pair?style=for-the-badge
-[license-shield]: https://img.shields.io/github/license/github_username/repo_name.svg?style=for-the-badge
+[contributors-shield]: https://img.shields.io/github/contributors/COS301-SE-2022/The-Au-Pair?color=green
+[issues-shield]: https://img.shields.io/github/issues/COS301-SE-2022/The-Au-Pair
+[commits-shield]: https://img.shields.io/github/commit-activity/w/COS301-SE-2022/The-Au-Pair
+[lastcommit-shield]: https://img.shields.io/github/last-commit/COS301-SE-2022/The-Au-Pair
+[license-shield]: https://img.shields.io/github/license/github_username/repo_name.svg
 [linkedin-shield]: https://img.shields.io/badge/LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white
 [github-shield]: https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white
 [mongo-shield]: https://img.shields.io/badge/MongoDB-4EA94B?style=for-the-badge&logo=mongodb&logoColor=white
@@ -246,7 +182,9 @@ During the 7 years of my coding experience, I have learned a large variety of la
 [ionic-shield]: https://img.shields.io/badge/Ionic-3880FF?style=for-the-badge&logo=ionic&logoColor=white
 [spring-shield]: https://img.shields.io/badge/Spring-6DB33F?style=for-the-badge&logo=spring&logoColor=white
 [aws-shield]: https://img.shields.io/badge/Amazon_AWS-232F3E?style=for-the-badge&logo=amazon-aws&logoColor=white
-[closedissues-shield]: https://img.shields.io/github/issues-closed/COS301-SE-2022/The-Au-Pair?color=purple&style=for-the-badge
+[closedissues-shield]: https://img.shields.io/github/issues-closed/COS301-SE-2022/The-Au-Pair?color=purple
+[codecov-shield]: https://img.shields.io/codecov/c/github/COS301-SE-2022/The-Au-Pair
+[build-status-shield]: https://github.com/COS301-SE-2022/The-Au-Pair/actions/workflows/index.yml/badge.svg
 
 
 [angular-ver]: https://img.shields.io/github/package-json/dependency-version/COS301-SE-2022/The-Au-Pair/@angular/core?color=red
