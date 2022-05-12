@@ -22,6 +22,7 @@ export class API{
   }
 
   addActivity(activity : Activity): Observable<any> {
+    console.log("API return", this.http.post('http://localhost:8080/addActivity',activity));
     return this.http.post('http://localhost:8080/addActivity',activity);
   }
 

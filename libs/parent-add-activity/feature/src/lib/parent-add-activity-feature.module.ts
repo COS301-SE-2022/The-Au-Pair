@@ -5,6 +5,7 @@ import { ParentAddActivityRoutingModule } from './parent-add-activity-routing.mo
 import { IonicModule } from '@ionic/angular';
 import { FormsModule } from '@angular/forms';
 import { NavbarModule } from '@the-au-pair/shared/components/navbar';
+import { API } from '../../../../shared/api/api.service';
 
 @NgModule({
   imports: [
@@ -15,6 +16,7 @@ import { NavbarModule } from '@the-au-pair/shared/components/navbar';
     NavbarModule,
   ],
   declarations: [ParentAddActivityComponent],
+  providers:[API]
 })
 export class ParentAddActivityFeatureModule 
 {

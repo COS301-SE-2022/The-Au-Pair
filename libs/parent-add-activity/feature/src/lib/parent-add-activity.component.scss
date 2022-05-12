@@ -57,7 +57,19 @@ h2{
     padding-left: 20px;
 }
 
-input[type=text]{
+label{
+    position:relative;
+    color: #797979;
+    display: block;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 16px;
+    line-height: 20px;
+    top:35px;
+    left:-132px !important;
+}
+
+input[type=text], select{
     width: 411px;
     height: 62px;
     background: #F9F9F9;
