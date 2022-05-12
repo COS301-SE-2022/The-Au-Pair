@@ -9,5 +9,6 @@ export interface Activity{
     comment: string;
     behavior: string;
     day: string ;
+    child: string;
   }
   
