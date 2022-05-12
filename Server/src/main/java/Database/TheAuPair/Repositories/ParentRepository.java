@@ -8,4 +8,6 @@ import org.springframework.data.mongodb.repository.Query;
 @Repository
 public interface ParentRepository extends MongoRepository<Parent, String>
 {
+  @Query("{ '_id': ?0 }")
+  Parent findUsingId(String id);
 }
