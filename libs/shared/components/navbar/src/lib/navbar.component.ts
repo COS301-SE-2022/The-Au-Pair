@@ -9,7 +9,7 @@ import { Router } from '@angular/router';
 export class NavbarComponent {
   isHome = this.router.url != "/parent-dashboard";
 
-  constructor(public router : Router){}
+  constructor(private router : Router){}
 
   RedirectTo(route : string){
     this.router.navigate(['/' + route]);
