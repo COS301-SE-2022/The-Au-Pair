@@ -15,6 +15,10 @@ export class AuPairCostComponent implements OnInit {
     "Mon","Tue","Wed","Thu","Fri","Sat","Sun"
   ];
 
+  dayHoursWorked = [
+    0, 0, 0, 0, 0, 0 ,0
+  ];
+
   auPairName = "";
   hourlyRate = 0;
   totalHours = 0;
@@ -31,14 +35,14 @@ export class AuPairCostComponent implements OnInit {
   pieSplit = "conic-gradient(var(--ion-color-primary)" + this.otherDeg + "deg, var(--ion-color-secondary) 0 "+ this.activityDeg +"deg, var(--ion-color-champagne) 0)";
 
   ngOnInit() { 
-    // this.api.getUser().subscribe( 
-    //   data => { 
-    //     this.auPairName = data.name
-    //   },
-    //   error => {
-    //     console.error();
-    //   }
-    // )
+    this.api.getUser().subscribe( 
+      data => { 
+        this.auPairName = data.name
+      },
+      error => {
+        console.error();
+      }
+    )
 
     this.api.getAuPair().subscribe( 
       data => { 
@@ -53,7 +57,9 @@ export class AuPairCostComponent implements OnInit {
         this.totalCost = Number(this.totalCost.toFixed(3))
 
         this.totalRemuneration = (this.hourlyRate*this.totalHours) + this.totalCost; 
+        this.totalRemuneration = Number(this.totalRemuneration.toFixed(3))
         this.calculatePie(this.travelCost, this.activityCost, this.otherCost, this.totalCost);
+        this.populateDaysCost(this.totalHours);
         this.pieSplit = "conic-gradient(var(--ion-color-primary)" + this.otherDeg + "deg, var(--ion-color-secondary) 0 "+ this.activityDeg +"deg, var(--ion-color-champagne) 0)";
       },
       error => {
@@ -66,6 +72,17 @@ export class AuPairCostComponent implements OnInit {
   calculatePie(dist:number, act:number, other:number, total:number) {
     this.otherDeg = (360/total)*other;
     this.activityDeg = this.otherDeg + (360/total)*act;
+  }
+
+  populateDaysCost(totalHours:number) {
+    //This is mock data for the moment
+    this.dayHoursWorked[0] = 8;
+    this.dayHoursWorked[1] = 4; 
+    this.dayHoursWorked[2] = 7; 
+    this.dayHoursWorked[3] = 4; 
+    this.dayHoursWorked[4] = 6; 
+    this.dayHoursWorked[5] = 3; 
+    this.dayHoursWorked[6] = 0; 
   }
 
 }
