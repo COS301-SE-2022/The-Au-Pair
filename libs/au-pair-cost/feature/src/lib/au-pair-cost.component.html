@@ -10,10 +10,10 @@
   <div class="ion-padding">
     <div class="summary-div-wrapper">
       <ion-card class='summary-div'>
-        <div class="au-pair-name">Au Pair :</div>
-        <div class="hourly-rate">Hourly Rate:</div>
-        <div class="total-hours">Total Hours:</div>
-        <div class="total-remuneration">Total Remuneration:</div>
+        <div class="au-pair-name">Au Pair: {{ auPairName }}</div>
+        <div class="hourly-rate">Hourly Rate: {{ hourlyRate }} Rands/Hour</div>
+        <div class="total-hours">Total Hours: {{ totalHours }}</div>
+        <div class="total-remuneration">Total Remuneration: R{{ totalRemuneration }}</div>
       </ion-card>
     </div>
 
@@ -48,29 +48,30 @@
       </ion-card>
 
       <ion-card color="light" class="card-pie-graph">
-        <ion-card-header class="title"> Expenses </ion-card-header>
+        <ion-card-header class="title"> Expenses</ion-card-header>
         <ion-card-content> 
           <div class="pie-wrapper">
-            <div class="pie-graph"></div>
+            <div class="pie-graph" 
+            [ngStyle]="{ 'background-image' : pieSplit }"></div>
             <div class="key">
 
               <div class="travel-key">
                 <div class="block"></div>
-                <div class="keyname">Travel: </div>
+                <div class="keyname">Travel: R{{ travelCost }}</div>
               </div>
 
               <div class="activity-key">
                 <div class="block"></div>
-                <div class="keyname">Activity: </div>
+                <div class="keyname">Activity: R{{ activityCost }}</div>
               </div>
 
               <div class="other-key">
                 <div class="block"></div>
-                <div class="keyname">Other: </div>
+                <div class="keyname">Other: R{{ otherCost }}</div>
               </div>
 
             </div>
-            <div class="total-label">Expenses Total: </div>
+            <div class="total-label">Expenses Total: R{{ totalCost }}</div>
           </div>
         </ion-card-content>
       </ion-card>
