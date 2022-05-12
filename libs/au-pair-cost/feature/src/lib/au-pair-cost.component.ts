@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { API } from '../../../../shared/api/api.service'
+import { DatePipe } from '@angular/common';
 
 @Component({
   selector: 'the-au-pair-au-pair-cost',
@@ -32,12 +33,12 @@ export class AuPairCostComponent implements OnInit {
   otherDeg = 0;
   activityDeg = 0;
 
-  pieSplit = "conic-gradient(var(--ion-color-primary)" + this.otherDeg + "deg, var(--ion-color-secondary) 0 "+ this.activityDeg +"deg, var(--ion-color-champagne) 0)";
+  pieSplit = "";
 
   ngOnInit() { 
     this.api.getUser().subscribe( 
       data => { 
-        this.auPairName = data.name
+        this.auPairName = data.fname
       },
       error => {
         console.error();
@@ -48,18 +49,16 @@ export class AuPairCostComponent implements OnInit {
       data => { 
         this.hourlyRate = data.payRate;
         this.totalHours = data.hoursWorked;
-
         this.travelCost = data.distTraveled;
         this.activityCost = data.costIncurred;
         this.otherCost = 180; 
-
         this.totalCost = this.travelCost+this.activityCost+this.otherCost;
         this.totalCost = Number(this.totalCost.toFixed(3))
-
         this.totalRemuneration = (this.hourlyRate*this.totalHours) + this.totalCost; 
         this.totalRemuneration = Number(this.totalRemuneration.toFixed(3))
-        this.calculatePie(this.travelCost, this.activityCost, this.otherCost, this.totalCost);
-        this.populateDaysCost(this.totalHours);
+
+        this.calculatePie(this.otherCost, this.activityCost, this.totalCost);
+        this.populateDaysCost();
         this.pieSplit = "conic-gradient(var(--ion-color-primary)" + this.otherDeg + "deg, var(--ion-color-secondary) 0 "+ this.activityDeg +"deg, var(--ion-color-champagne) 0)";
       },
       error => {
@@ -69,12 +68,12 @@ export class AuPairCostComponent implements OnInit {
     
   }
 
-  calculatePie(dist:number, act:number, other:number, total:number) {
+  calculatePie(other:number, act:number, total:number) {
     this.otherDeg = (360/total)*other;
     this.activityDeg = this.otherDeg + (360/total)*act;
   }
 
-  populateDaysCost(totalHours:number) {
+  populateDaysCost() {
     //This is mock data for the moment
     this.dayHoursWorked[0] = 8;
     this.dayHoursWorked[1] = 4; 
@@ -83,6 +82,12 @@ export class AuPairCostComponent implements OnInit {
     this.dayHoursWorked[4] = 6; 
     this.dayHoursWorked[5] = 3; 
     this.dayHoursWorked[6] = 0; 
+  }
+
+  getCurDay(days : string[]) : number {
+    const pipe = new DatePipe('en-US');
+    const dateStr = pipe.transform(Date.now(),'EEEE');
+    return days.findIndex(x => x === dateStr);
   }
 
 }
