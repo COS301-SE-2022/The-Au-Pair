@@ -208,7 +208,7 @@ ion-card-header{
   position: relative;
   float: left;
   margin-top: 3vh;
-  margin-left: 4vw;
+  margin-left: 3vw;
   height: auto;
 }
 
@@ -257,6 +257,17 @@ ion-card-header{
   .summary-div {
     grid-template-columns: repeat(1, 1fr);
   }
+
+  .card-bar-graph {
+    height: 550px;
+  }
+
+  .week {
+    float: left;
+    width: 100%;
+    font-size: 20px;
+  }
+  
   .au-pair-name {
     border-radius: 16px 16px 0px 0px;
     font-size: 16px;
@@ -307,7 +318,22 @@ ion-card-header{
   }
 
   .key {
-    margin-top: 0;
+    margin-top: 15px;
+  }
+
+  .keyname {
+    font-size: 14px;
+    line-height: 1.5;
+  }
+  
+  .travel-key, .activity-key, .other-key {
+    margin-top: 30px;
+  }
+
+  .block {
+    height: 20px;
+    width: 20px;
+    float: left;
   }
 }
   

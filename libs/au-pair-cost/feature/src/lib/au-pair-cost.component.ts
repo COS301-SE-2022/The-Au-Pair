@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { API } from '../../../../shared/api/api.service'
-import { DatePipe } from '@angular/common';
 
 @Component({
   selector: 'the-au-pair-au-pair-cost',
@@ -82,12 +81,6 @@ export class AuPairCostComponent implements OnInit {
     this.dayHoursWorked[4] = 6; 
     this.dayHoursWorked[5] = 3; 
     this.dayHoursWorked[6] = 0; 
-  }
-
-  getCurDay(days : string[]) : number {
-    const pipe = new DatePipe('en-US');
-    const dateStr = pipe.transform(Date.now(),'EEEE');
-    return days.findIndex(x => x === dateStr);
   }
 
 }
