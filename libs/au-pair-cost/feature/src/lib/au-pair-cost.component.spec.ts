@@ -3,6 +3,8 @@ import { AuPairCostComponent } from './au-pair-cost.component';
 import { API } from '../../../../shared/api/api.service';
 import {HttpClientTestingModule} from "@angular/common/http/testing";
 import { IonicModule } from '@ionic/angular';
+import { NavbarModule } from '@the-au-pair/shared/components/navbar';
+import { RouterTestingModule} from '@angular/router/testing';
 
 
 describe('AuPairCostComponent', () => {
@@ -13,7 +15,7 @@ describe('AuPairCostComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [AuPairCostComponent],
-      imports: [HttpClientTestingModule, IonicModule],
+      imports: [HttpClientTestingModule, IonicModule,NavbarModule, RouterTestingModule],
       providers: [API]
     }).compileComponents();
   });

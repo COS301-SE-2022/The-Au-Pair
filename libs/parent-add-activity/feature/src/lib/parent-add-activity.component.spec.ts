@@ -5,6 +5,9 @@ import { ParentAddActivityComponent } from './parent-add-activity.component';
 import { Activity } from '../../../../shared/interfaces/activity.interfaces';
 import { API } from '../../../../shared/api/api.service';
 import {HttpClientTestingModule} from "@angular/common/http/testing";
+import { NavbarModule } from '@the-au-pair/shared/components/navbar';
+import { RouterTestingModule} from '@angular/router/testing';
+
 
 describe('ParentAddActivityComponent', () => {
   let component: ParentAddActivityComponent;
@@ -17,7 +20,9 @@ describe('ParentAddActivityComponent', () => {
       declarations: [ParentAddActivityComponent],
       imports: [FormsModule,
          IonicModule,
-         HttpClientTestingModule
+         HttpClientTestingModule,
+         NavbarModule,
+         RouterTestingModule
         ],
         providers:[API]
     }).compileComponents();
