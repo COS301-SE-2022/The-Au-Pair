@@ -8,8 +8,8 @@ import { Activity } from '../../../../shared/interfaces/activity.interfaces';
   styleUrls: ['./parent-add-activity.component.scss'],
 })
 export class ParentAddActivityComponent implements OnInit{
-  //Activity object to hold the activity details
-  // tempActivityDetails = <tempActivity>{};
+  
+  //Activity Model
   activityDetails: Activity = {
     id: "",
     name: "",
@@ -24,6 +24,7 @@ export class ParentAddActivityComponent implements OnInit{
     child: "",
   };
 
+  //Children of logged in user
   allChildren: any;
 
   //Constructor
@@ -32,12 +33,12 @@ export class ParentAddActivityComponent implements OnInit{
   ngOnInit(): void 
   {
     //Call getChildren service
-    console.log();
+    this.getChildren();
   }
 
   //Populate the activityDetails object from form input
   async getActivityValues(val : any)
-  {         
+  {      console.log(val);     
     //FORM ERROR CHECKING
     let emptyInput = false;
     let dom = document.getElementById("actNameError");
@@ -179,6 +180,7 @@ export class ParentAddActivityComponent implements OnInit{
       console.log("Activity Details: ", this.activityDetails);
       
       this.addActivity(this.activityDetails);
+
     }
   }
 
@@ -190,5 +192,13 @@ export class ParentAddActivityComponent implements OnInit{
     )
   };
 
-
+  getChildren()
+  {
+    this.serv.getParent().subscribe(
+      res=>{
+          this.allChildren = res.children;
+      },
+      error=>{console.log("Error has occured with API");}
+    )
+  }
 }
