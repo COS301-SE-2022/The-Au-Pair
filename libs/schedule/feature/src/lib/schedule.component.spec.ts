@@ -1,9 +1,11 @@
 import { CommonModule } from '@angular/common';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { IonicModule } from '@ionic/angular';
-import { ActivityCardComponent } from './activity-card/activity-card.component';
-
 import { ScheduleComponent } from "./schedule";
+import { HttpClientTestingModule } from "@angular/common/http/testing";
+import { API } from '../../../../shared/api/api.service';
+import { NavbarModule } from '@the-au-pair/shared/components/navbar';
+import { RouterTestingModule} from '@angular/router/testing';
 
 describe('ScheduleComponent', () => {
   let component: ScheduleComponent;
@@ -11,8 +13,9 @@ describe('ScheduleComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ScheduleComponent,ActivityCardComponent],
-      imports: [IonicModule, CommonModule],
+      declarations: [ScheduleComponent],
+      imports: [IonicModule, CommonModule,HttpClientTestingModule,NavbarModule, RouterTestingModule],
+      providers:[API]
     }).compileComponents();
   });
 
