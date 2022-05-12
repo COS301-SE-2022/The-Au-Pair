@@ -11,7 +11,6 @@ describe('ParentAddActivityComponent', () => {
   let fixture: ComponentFixture<ParentAddActivityComponent>;
   const populatedForm = {activityName: "input", description: "input", location: "input", dayOfWeek: "input", timeSlot: "09:00-10:00", budget: "0", childId:"input"};
   const EmptyFieldsForm = {activityName: "", description: "input", location: "input", dayOfWeek: "input", timeSlot: "input", budget: "0", childId:"input"};
-  let service : API;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
