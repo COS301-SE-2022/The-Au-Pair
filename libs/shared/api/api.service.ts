@@ -24,4 +24,8 @@ export class API{
   addActivity(activity : Activity): Observable<any> {
     return this.http.post('http://localhost:8080/addActivity',activity);
   }
+
+  getParent(): Observable<any> {
+    return this.http.get('http://localhost:8080/getParent');
+  }
 }
