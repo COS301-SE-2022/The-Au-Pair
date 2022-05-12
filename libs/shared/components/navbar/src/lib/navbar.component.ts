@@ -7,13 +7,19 @@ import { Router } from '@angular/router';
   styleUrls: ['./navbar.component.scss'],
 })
 export class NavbarComponent {
-  constructor(public router : Router){
+  isHome = this.router.url != "/parent-dashboard";
 
-  }
-
-  isDesktop = true;
+  constructor(public router : Router){}
 
   RedirectTo(route : string){
     this.router.navigate(['/' + route]);
+  }
+
+  back(){
+    this.router.navigate(['/parent-dashboard']);
+  }
+
+  Repo(){
+    window.location.href = "https://github.com/COS301-SE-2022/The-Au-Pair";
   }
 }

@@ -3,8 +3,8 @@
   "projects": {
     "home-feature": "libs/home/feature",
     "parent-add-activity-feature": "libs/parent-add-activity/feature",
-    "schedule-feature": "libs/schedule/feature",
     "parent-dashboard-feature": "libs/parent-dashboard/feature",
+    "schedule-feature": "libs/schedule/feature",
     "shared-components-navbar": "libs/shared/components/navbar",
     "shell-feature": "libs/shell/feature",
     "the-au-pair": "apps/the-au-pair",
