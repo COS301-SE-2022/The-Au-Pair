@@ -38,7 +38,7 @@ export class ParentAddActivityComponent implements OnInit{
 
   //Populate the activityDetails object from form input
   async getActivityValues(val : any)
-  {      console.log(val);     
+  {  
     //FORM ERROR CHECKING
     let emptyInput = false;
     let dom = document.getElementById("actNameError");
@@ -177,7 +177,6 @@ export class ParentAddActivityComponent implements OnInit{
       this.activityDetails.timeEnd = val.timeSlot.substring(6,11);
       this.activityDetails.budget = budget;
       this.activityDetails.child = val.childId;
-      console.log("Activity Details: ", this.activityDetails);
       
       this.addActivity(this.activityDetails);
 
