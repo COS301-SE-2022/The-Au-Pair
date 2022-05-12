@@ -8,7 +8,7 @@ import { HttpClientModule } from '@angular/common/http';
 @NgModule({
   declarations: [AppComponent],
   entryComponents: [],
-  imports: [IonicModule.forRoot(), ShellModule, HttpClientModule,NavbarModule],
+  imports: [IonicModule.forRoot(), ShellModule, HttpClientModule, NavbarModule],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

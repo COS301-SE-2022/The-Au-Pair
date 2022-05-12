@@ -7,7 +7,7 @@ import { NavbarModule } from '@the-au-pair/shared/components/navbar';
 import { API } from '../../../../shared/api/api.service';
 
 @NgModule({
-  imports: [CommonModule ,AuPairCostRoutingModule, IonicModule,NavbarModule],
+  imports: [CommonModule ,AuPairCostRoutingModule, IonicModule, NavbarModule],
   declarations: [AuPairCostComponent],
   providers: [API]
 })
