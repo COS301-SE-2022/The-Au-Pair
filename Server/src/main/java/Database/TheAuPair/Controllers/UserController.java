@@ -15,4 +15,12 @@ public class UserController
   {
     this.ur = ur;
   }
+
+  @GetMapping("/getUser")
+  @CrossOrigin(origins = "http://localhost:4200")
+  public User getUser()
+  {
+    User u =  ur.findUsingId("7542108615984");
+    return u;
+  }
 }

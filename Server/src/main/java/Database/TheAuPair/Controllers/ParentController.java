@@ -15,4 +15,12 @@ public class ParentController
   {
     this.pr = pr;
   }
+
+  @GetMapping("/getParent")
+  @CrossOrigin(origins = "http://localhost:4200")
+  public Parent getParent()
+  {
+    Parent p = pr.findUsingId("4561237814867");
+    return p;
+  }
 }

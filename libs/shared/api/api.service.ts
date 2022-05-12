@@ -17,7 +17,15 @@ export class API{
     return this.http.get('http://localhost:8080/getAuPair');
   }
 
+  getUser(): Observable<any> {
+    return this.http.get('http://localhost:8080/getUser');
+  }
+
   addActivity(activity : Activity): Observable<any> {
     return this.http.post('http://localhost:8080/addActivity',activity);
+  }
+
+  getParent(): Observable<any> {
+    return this.http.get('http://localhost:8080/getParent');
   }
 }
