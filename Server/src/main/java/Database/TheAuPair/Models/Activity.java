@@ -28,8 +28,10 @@ public class Activity
     private String behavior;
     @Field ("day")
     private String day;
+    @Field ("child")
+    private String child;
 
-    public Activity(String id, String name, String description, String location, String timeStart, String timeEnd, double budget, String comment, String behavior, String day)
+    public Activity(String id, String name, String description, String location, String timeStart, String timeEnd, double budget, String comment, String behavior, String day, String child)
     {
         this.id = id;
         this.name = name;
@@ -41,6 +43,7 @@ public class Activity
         this.comment = comment;
         this.behavior = behavior;
         this.day = day;
+        this.child = child;
     }
 
     public String getId()
@@ -141,6 +144,16 @@ public class Activity
     public void setDay(String day)
     {
         this.day = day;
+    }
+
+    public String getChild()
+    {
+        return child;
+    }
+
+    public void setChild(String child)
+    {
+        this.child = child;
     }
 
     @Override

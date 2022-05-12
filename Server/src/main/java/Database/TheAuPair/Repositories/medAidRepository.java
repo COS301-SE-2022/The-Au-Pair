@@ -1,9 +1,10 @@
 package Database.TheAuPair.Repositories;
 
-import Database.TheAuPair.Models.medID;
+import Database.TheAuPair.Models.medAid;
 import org.springframework.data.mongodb.repository.MongoRepository;
-import org.springframework.data.mongodb.repository.Query;
+import org.springframework.stereotype.Repository;
 
-public interface medAidRepository extends MongoRepository<medID, String>
+@Repository
+public interface medAidRepository extends MongoRepository<medAid, String>
 {
 }
