@@ -1,9 +1,5 @@
 <ion-content>
-    <ion-header [translucent]="true">
-        <ion-toolbar>
-          <ion-title class="ion-text-center"> <h1 class="text-white ion-text-center">The Au Pair</h1> </ion-title>
-        </ion-toolbar>
-      </ion-header>
+    <the-au-pair-navbar></the-au-pair-navbar>
     <h2>Add Activity</h2>
     <div class="activity-details">
         <form #activityForm="ngForm" (ngSubmit)="getActivityValues(activityForm.value)" class = "form-details">

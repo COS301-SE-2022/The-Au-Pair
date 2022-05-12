@@ -1,12 +1,13 @@
 {
   "version": 2,
   "projects": {
-      "home-feature": "libs/home/feature",
-      "parent-dashboard-feature": "libs/parent-dashboard/feature",
-      "parent-add-activity-feature": "libs/parent-add-activity/feature",
-      "schedule-feature": "libs/schedule/feature",
-      "shell-feature": "libs/shell/feature",
-      "the-au-pair": "apps/the-au-pair",
-      "the-au-pair-e2e": "apps/the-au-pair-e2e"
+    "home-feature": "libs/home/feature",
+    "parent-add-activity-feature": "libs/parent-add-activity/feature",
+    "parent-dashboard-feature": "libs/parent-dashboard/feature",
+    "schedule-feature": "libs/schedule/feature",
+    "shared-components-navbar": "libs/shared/components/navbar",
+    "shell-feature": "libs/shell/feature",
+    "the-au-pair": "apps/the-au-pair",
+    "the-au-pair-e2e": "apps/the-au-pair-e2e"
   }
 }

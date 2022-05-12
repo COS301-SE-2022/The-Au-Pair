@@ -40,5 +40,13 @@ h1{
 }
 
 body{
-    font-family: Robot;
+    font-family: Roboto;
+}
+
+ion-button{
+    font-family: Roboto;
+    font-weight: 500 !important;
+    font-size: 18px !important;
+    line-height: 23px !important;
+    --color: white !important;
 }

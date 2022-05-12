@@ -62,7 +62,6 @@ export class ParentAddActivityComponent implements OnInit{
     if(val.description === "")
     { 
       emptyInput = true;
-      emptyInput = true;
       if(dom != null)
       {
         dom.innerHTML = "Description is empty";
@@ -78,7 +77,6 @@ export class ParentAddActivityComponent implements OnInit{
     dom = document.getElementById("locError");
     if(val.location === "")
     {
-      emptyInput = true;
       emptyInput = true;
       if(dom != null)
       {
@@ -96,7 +94,6 @@ export class ParentAddActivityComponent implements OnInit{
     if(val.dayOfWeek === "")
     {
       emptyInput = true;
-      emptyInput = true;
       if(dom != null)
       {
         dom.innerHTML = "Day of the week is empty";
@@ -112,7 +109,6 @@ export class ParentAddActivityComponent implements OnInit{
     dom = document.getElementById("timeError");
     if(val.timeSlot === "" || val.timeSlot.length < 11)
     {
-      emptyInput = true;
       emptyInput = true;
       if(dom != null)
       {
@@ -130,7 +126,6 @@ export class ParentAddActivityComponent implements OnInit{
     if(val.budget === "")
     {
       emptyInput = true;
-      emptyInput = true;
       if(dom != null)
       {
         dom.innerHTML = "Budget is empty";
@@ -146,7 +141,6 @@ export class ParentAddActivityComponent implements OnInit{
     dom = document.getElementById("childError");
     if(val.childId === "")
     {
-      emptyInput = true;
       emptyInput = true;
       if(dom != null)
       {
@@ -177,9 +171,7 @@ export class ParentAddActivityComponent implements OnInit{
       this.activityDetails.timeEnd = val.timeSlot.substring(6,11);
       this.activityDetails.budget = budget;
       this.activityDetails.child = val.childId;
-      
       this.addActivity(this.activityDetails);
-
     }
   }
 

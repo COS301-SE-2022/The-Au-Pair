@@ -209,3 +209,9 @@ ion-card {
         width: 96px;
     }
 }
+
+@media (max-width: 1240px) {
+   .action-tag{
+       font-size: 20px;
+   } 
+}
