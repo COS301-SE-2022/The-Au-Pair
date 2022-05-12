@@ -6,5 +6,6 @@ import { IonicModule } from '@ionic/angular';
 @NgModule({
   imports: [CommonModule,IonicModule],
   declarations: [NavbarComponent],
+  exports: [NavbarComponent]
 })
 export class NavbarModule {}

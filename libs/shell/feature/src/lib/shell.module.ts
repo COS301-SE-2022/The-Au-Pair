@@ -7,6 +7,7 @@ import { IonicRouteStrategy } from '@ionic/angular';
 
 @NgModule({
   imports: [BrowserModule, ShellRoutingModule],
-  providers: [{provide: RouteReuseStrategy, useClass: IonicRouteStrategy}]
+  providers: [{provide: RouteReuseStrategy, useClass: IonicRouteStrategy}],
+  exports: [ShellRoutingModule]
 })
 export class ShellModule {}

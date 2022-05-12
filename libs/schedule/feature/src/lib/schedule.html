@@ -1,9 +1,14 @@
-<ion-header [translucent]="true">
+<the-au-pair-navbar></the-au-pair-navbar>
+<ion-header>
   <ion-toolbar>
-    <ion-title class="ion-text-center"> <h1 class="text-white ion-text-center">The Au Pair</h1> </ion-title>
+    <ion-title>Header</ion-title>
+    
+      <ion-buttons slot="start">
+        <ion-menu-button menu="main-menu"></ion-menu-button>
+      </ion-buttons>
+  
   </ion-toolbar>
 </ion-header>
-
 <ion-content [fullscreen]="true">
   <div id="container">
     <h2 class="heading ion-text-center ion-padding-top">Your schedule</h2>

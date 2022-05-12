@@ -1,1 +1,36 @@
 
+
+
+<!-- <ion-header [translucent]="true">
+    <ion-toolbar mode="ios" class="navbar">
+      <ion-buttons *ngIf="isDesktop" slot="start" class="start-buttons">
+        <ion-button (click)="RedirectTo('parent-dashboard')">Dashboard</ion-button>
+        <ion-button>Manage Contract</ion-button>
+        <ion-button (click)="RedirectTo('au-pair-cost')"routerLink="/au-pair-cost">Au Pair</ion-button>
+        <ion-button href="https://github.com/COS301-SE-2022/The-Au-Pair">About</ion-button>
+      </ion-buttons>
+      <ion-buttons slot="end" class="end-buttons" *ngIf="isDesktop">
+        <ion-button class="logout-button">Logout</ion-button>
+        <ion-button><ion-icon name="person-circle-outline"></ion-icon></ion-button>
+        <ion-button><ion-icon name="notifications-circle-outline"></ion-icon></ion-button>
+      </ion-buttons>
+      <ion-title><h1 class="text-white ion-text-center">The Au Pair</h1> </ion-title>
+    </ion-toolbar>
+</ion-header> -->
+
+<ion-menu contentId="main" menuId="main-menu" side="start" type="overlay">
+  <ion-header>
+    <ion-toolbar>
+      <ion-title>Menu</ion-title>
+    </ion-toolbar>
+  </ion-header>
+  <ion-content>
+      <ion-list>
+        <ion-item>
+          <ion-icon slot="start" name="mail"></ion-icon>
+          <ion-label>Mail</ion-label>
+        </ion-item>
+      </ion-list>
+  </ion-content>
+</ion-menu>
+<ion-router-outlet id="main"></ion-router-outlet>

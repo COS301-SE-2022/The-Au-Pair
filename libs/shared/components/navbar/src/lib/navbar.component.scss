@@ -1,0 +1,28 @@
+ion-icon{
+    height: 30px;
+    width: 30px;
+}
+
+
+.logout-button{
+    border: 2px solid white;
+    background-color: transparent;
+    color: var(--ion-color-primary);
+    border-radius: 8px ;
+    padding: 8px 22px;
+    height: 40px;
+    font-size: 16px;
+    cursor: pointer;
+    margin-right: 15px;
+    margin-left: 30px;
+    margin-top: 5px;
+    margin-bottom: 7px;
+}
+
+.end-buttons{
+    margin-right: 0.3vw;
+}
+
+.start-buttons{
+    margin-left: 0.3vw;
+}
