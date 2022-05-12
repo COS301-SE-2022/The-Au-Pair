@@ -1,0 +1,79 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+      <ion-title class="ion-text-center">
+          <h1 class="text-white ion-text-center">The Au Pair</h1>
+      </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <div class="ion-padding">
+    <div class="summary-div-wrapper">
+      <ion-card class='summary-div'>
+        <div class="au-pair-name">Au Pair :</div>
+        <div class="hourly-rate">Hourly Rate:</div>
+        <div class="total-hours">Total Hours:</div>
+        <div class="total-remuneration">Total Remuneration:</div>
+      </ion-card>
+    </div>
+
+    <div class="graphs-grid">
+      <ion-card color="light" class="card-bar-graph">
+        <ion-card-header class="title"> Hours Worked </ion-card-header>
+        <ion-card-content>
+          <div class="bar-graph">
+            <div class="vertical-label">
+              <div class="num">
+                8
+              </div>
+              <div class="num">
+                6
+              </div>
+              <div class="num">
+                4
+              </div>
+              <div class="num">
+                2
+              </div>
+              <div class="num">
+                0
+              </div>
+            </div>
+            <div class="day-wrapper" *ngFor="let day of [0, 1, 2, 3, 4, 5, 6]">
+              <div class="day" [style.height.px]=" day * 47"></div>
+              <div class="label">{{ days[day] }}</div>
+            </div>
+          </div>
+        </ion-card-content>
+      </ion-card>
+
+      <ion-card color="light" class="card-pie-graph">
+        <ion-card-header class="title"> Expenses </ion-card-header>
+        <ion-card-content> 
+          <div class="pie-wrapper">
+            <div class="pie-graph"></div>
+            <div class="key">
+
+              <div class="travel-key">
+                <div class="block"></div>
+                <div class="keyname">Travel: </div>
+              </div>
+
+              <div class="activity-key">
+                <div class="block"></div>
+                <div class="keyname">Activity: </div>
+              </div>
+
+              <div class="other-key">
+                <div class="block"></div>
+                <div class="keyname">Other: </div>
+              </div>
+
+            </div>
+            <div class="total-label">Expenses Total: </div>
+          </div>
+        </ion-card-content>
+      </ion-card>
+    </div>
+  </div>
+</ion-content>
