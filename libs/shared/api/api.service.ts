@@ -25,7 +25,7 @@ export class API{
     return this.http.post('http://localhost:8080/addActivity',activity);
   }
 
-  getChildren(): Observable<any> {
-    return this.http.get('http://localhost:8080/getChildren');
+  getParent(): Observable<any> {
+    return this.http.get('http://localhost:8080/getParent');
   }
 }
