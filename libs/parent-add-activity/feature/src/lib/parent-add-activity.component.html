@@ -13,13 +13,46 @@
             <p id="descripError" class="error" style="display: none;">Empty Field</p>
             <input type="text" ngModel name="location" placeholder="Location"> 
             <p id="locError" class="error" style="display: none;">Empty Field</p>
-            <input type="text" ngModel name="dayOfWeek" placeholder="Day Of The Week"> 
+            <!-- <input type="text" ngModel name="dayOfWeek" placeholder="Day Of The Week">  -->
+            <label for="day">Choose a day</label>
+            <select name="selectedDay" id="selectedDay">
+              <option value="Monday">Monday</option>
+              <option value="Tuesday">Tuesday</option>
+              <option value="Wednesday">Wednesday</option>
+              <option value="Thursday">Thursday</option>
+              <option value="Friday">Friday</option>
+              <option value="Saturday">Saturday</option>
+              <option value="Sunday">Sunday</option>
+            </select>
             <p id="dayError" class="error" style="display: none;">Empty Field</p>
-            <input type="text" ngModel name="timeSlot" placeholder="Time Slot"> 
+            <!-- <input type="text" ngModel name="timeSlot" placeholder="Time Slot">  -->
+            <label for="times">Choose a timeslot</label>
+              <select name="selectedTime" id="selectedTime">
+                <option value="05:00-6:00">05:00-6:00</option>
+                <option value="06:00-7:00">06:00-7:00</option>
+                <option value="07:00-8:00">07:00-8:00</option>
+                <option value="08:00-9:00">08:00-9:00</option>
+                <option value="09:00-10:00">09:00-10:00</option>
+                <option value="10:00-11:00">10:00-11:00</option>
+                <option value="11:00-12:00">11:00-12:00</option>
+                <option value="12:00-13:00">12:00-13:00</option>
+                <option value="13:00-14:00">13:00-14:00</option>
+                <option value="14:00-15:00">14:00-15:00</option>
+                <option value="15:00-16:00">15:00-16:00</option>
+                <option value="16:00-17:00">16:00-17:00</option>
+                <option value="17:00-18:00">17:00-18:00</option>
+                <option value="18:00-19:00">18:00-19:00</option>
+                <option value="19:00-20:00">19:00-20:00</option>
+                <option value="20:00-21:00">20:00-21:00</option>
+              </select>
             <p id="timeError" class="error" style="display: none;">Empty Field</p>
             <input type="text" ngModel name="budget" placeholder="Budget"> 
             <p id="budgetError" class="error" style="display: none;">Empty Field</p>
             <input type="text" ngModel name="childId" placeholder="Child's ID"> <br/>
+            <label for="times">Choose a timeslot</label>
+            <select name="selectedTime" id="selectedTime">
+              <option value="05:00-6:00">05:00-6:00</option>
+            </select>
             <p id="childError" class="error" style="display: none;">Empty Field</p>
             <input class = "addActivity" type="submit" value="Add Activity">
         </form>
