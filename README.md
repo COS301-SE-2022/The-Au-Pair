@@ -53,6 +53,7 @@
       <a href="#about">About</a>
       <ul>
         <li><a href="#built-with">Built With</a></li>
+        <li><a href="#usage">Usage</a></li>
       </ul>
     </li>
     <li>
@@ -98,6 +99,18 @@ The Au Pair is a project created for the University of Pretoria's COS301 module.
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
+
+### Usage
+
+```bash
+
+npm run start:api
+
+npm run start:client
+
+```
+
+<p align="right">(<a href="#top">back to top</a>)</p>
 
 <!-- Contributors -->
 # The Team
