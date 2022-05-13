@@ -18,7 +18,7 @@
     <a href="https://github.com/COS301-SE-2022/The-Au-Pair/wiki"><strong>Explore the docs »</strong></a>
     <br />
     <br />
-    <a href="https://github.com/COS301-SE-2022/The-Au-Pair/">CheemsChaps-Demo1</a>
+    <a href="https://drive.google.com/file/d/1iBMNdAej-kbDxPGT9k8_Q5t6aJUk0UNE/view?usp=sharing">CheemsChaps-Demo1</a>
     ·
     <a href="https://docs.google.com/document/d/18CSPDD1SnMIpAknKGA97uaO6s_-WgM7UnW_6i9DhmC4/edit?usp=sharing">SRS Document</a>
     ·
@@ -53,6 +53,7 @@
       <a href="#about">About</a>
       <ul>
         <li><a href="#built-with">Built With</a></li>
+        <li><a href="#usage">Usage</a></li>
       </ul>
     </li>
     <li>
@@ -98,6 +99,18 @@ The Au Pair is a project created for the University of Pretoria's COS301 module.
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
+
+### Usage
+
+```bash
+
+npm run start:api
+
+npm run start:client
+
+```
+
+<p align="right">(<a href="#top">back to top</a>)</p>
 
 <!-- Contributors -->
 # The Team
