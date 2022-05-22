@@ -25,6 +25,9 @@
       "@the-au-pair/parent-dashboard/feature": [
         "libs/parent-dashboard/feature/src/index.ts"
       ],
+      "@the-au-pair/parent-profile/feature": [
+        "libs/parent-profile/feature/src/index.ts"
+      ],
       "@the-au-pair/schedule/feature": ["libs/schedule/feature/src/index.ts"],
       "@the-au-pair/shared/components/navbar": [
         "libs/shared/components/navbar/src/index.ts"

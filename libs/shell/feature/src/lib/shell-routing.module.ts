@@ -31,6 +31,11 @@ const routes: Routes = [
       path: 'add-activity',
       loadChildren: () =>
       import('@the-au-pair/parent-add-activity/feature').then((m) => m.ParentAddActivityFeatureModule),
+  },
+  {
+    path: 'parent-profile',
+    loadChildren: () =>
+    import('@the-au-pair/parent-profile/feature').then((m) => m.ParentProfileFeatureModule),
   }
 ];
 

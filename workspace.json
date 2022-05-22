@@ -1,11 +1,12 @@
 {
   "version": 2,
   "projects": {
+    "au-pair-cost-feature": "libs/au-pair-cost/feature",
     "home-feature": "libs/home/feature",
     "parent-add-activity-feature": "libs/parent-add-activity/feature",
     "parent-dashboard-feature": "libs/parent-dashboard/feature",
+    "parent-profile-feature": "libs/parent-profile/feature",
     "schedule-feature": "libs/schedule/feature",
-    "au-pair-cost-feature": "libs/au-pair-cost/feature",
     "shared-components-navbar": "libs/shared/components/navbar",
     "shell-feature": "libs/shell/feature",
     "the-au-pair": "apps/the-au-pair",
