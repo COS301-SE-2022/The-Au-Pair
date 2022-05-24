@@ -56,6 +56,18 @@ h2{
     border-radius: 10px;
     padding-left: 20px;
 }
+.activity-details textarea{
+    margin-top: 40px;
+    resize: none;
+    width: 411px;
+    height: 169px;
+    background: #F9F9F9;
+    box-shadow: 1px 2px 5px rgba(0, 0, 0, 0.13);
+    border-style: none;
+    border-radius: 10px;
+    padding-left: 20px;
+    color: black;
+}
 
 label{
     position:relative;
@@ -81,6 +93,7 @@ input[type=text], select{
     color: black;
 }
 
+
 input[type=text]::placeholder{
     color:transparent;
 }
@@ -89,13 +102,49 @@ input:focus{
     outline:none;
 }
 
-.addActivity{
+textarea:focus{
+    outline:none;
+}
+
+.buttons{
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 15px;
+    width: 411px;
+    height: auto;
+    text-align: center;
+    margin-bottom: 100px;
+}
+
+.updateActivity{
+    width: 195px !important;
     font-style: normal;
     font-weight: 700;
     font-size: 16px;
     line-height: 19px;
     color: white;
     background-color: #69A88D !important;
+    margin-top: 20px;
+}
+
+.cancel{
+    flex-direction: row;
+    justify-content: center;
+    padding: 10px 22px;
+    margin-left: 3px;
+
+    width: 195px !important;
+    height: 60px;
+    left: 973px;
+    top: 980px;
+    font-style: normal;
+    font-weight: 700;
+    font-size: 16px;
+    line-height: 19px;
+    color: #69A88D;
+    background-color: transparent !important;
+    border: 2px solid #69A88D !important;
+    border-radius: 10px;
     margin-top: 20px;
 }
 
