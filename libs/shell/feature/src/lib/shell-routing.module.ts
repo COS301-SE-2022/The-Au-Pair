@@ -31,6 +31,11 @@ const routes: Routes = [
       path: 'add-activity',
       loadChildren: () =>
       import('@the-au-pair/parent-add-activity/feature').then((m) => m.ParentAddActivityFeatureModule),
+  },
+  {
+    path: 'au-pair-schedule',
+    loadChildren: () =>
+    import('@the-au-pair/au-pair-schedule/feature').then((m) => m.AuPairScheduleModule),
   }
 ];
 
