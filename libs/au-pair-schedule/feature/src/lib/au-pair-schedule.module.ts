@@ -5,12 +5,17 @@ import { AuPairScheduleRoutingModule } from './au-pair-schedule-routing.module';
 import { NavbarModule } from '@the-au-pair/shared/components/navbar';
 import { IonicModule } from '@ionic/angular';
 import { API } from '../../../../shared/api/api.service';
+import { ScheduleModalComponent } from './schedule-modal/schedule-modal.component';
 
 @NgModule({
-  imports: [CommonModule,AuPairScheduleRoutingModule, NavbarModule, IonicModule],
-  declarations: [AuPairScheduleComponent],
-  providers: [API]
+  imports: [
+    CommonModule,
+    AuPairScheduleRoutingModule,
+    NavbarModule,
+    IonicModule,
+  ],
+  declarations: [AuPairScheduleComponent, ScheduleModalComponent],
+  providers: [API],
+  entryComponents: [ScheduleModalComponent],
 })
-export class AuPairScheduleModule {
-  
-}
+export class AuPairScheduleModule {}

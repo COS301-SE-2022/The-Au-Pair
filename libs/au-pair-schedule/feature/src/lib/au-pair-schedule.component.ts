@@ -1,6 +1,8 @@
 import { DatePipe } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
+import { ModalController } from '@ionic/angular';
 import { API } from '../../../../shared/api/api.service';
+import { ScheduleModalComponent } from './schedule-modal/schedule-modal.component';
 
 @Component({
   selector: 'the-au-pair-au-pair-schedule',
@@ -15,7 +17,15 @@ export class AuPairScheduleComponent implements OnInit {
   curDay =  this.getCurDay(this.days);
   activities: any;
 
-  constructor(private serv: API) {}
+  constructor(private serv: API, private modalCtrl : ModalController) {}
+
+  async openModal() {
+    const modal = await this.modalCtrl.create({
+      component: ScheduleModalComponent,
+    });
+     
+    await modal.present();
+  }
 
   ngOnInit(): void {
       this.getActivities();
