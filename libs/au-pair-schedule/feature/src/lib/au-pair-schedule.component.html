@@ -1,7 +1,7 @@
 <the-au-pair-navbar></the-au-pair-navbar>
 <ion-content [fullscreen]="true">
   <div id="container">
-    <h2 class="heading ion-text-center ion-padding-top">Your schedule</h2>
+    <h2 class="heading ion-text-center ion-padding-top">Your weekly schedule</h2>
   </div>
   <div id="schedule-grid-desktop">
     <div *ngFor="let day of [0,1,2,3,4,5,6]" class="day ion-text-center">
@@ -10,10 +10,11 @@
         <div *ngFor="let item of activities; let l = count">
           <div class="card" *ngIf="item.day === days[day]" >
             <ion-row  class="ion-align-items-center .ion-justify-content-between">
-              <ion-col><ion-icon class="icon" name="book-outline"></ion-icon></ion-col>
+              <ion-col class="content">Sarah:</ion-col>
               <ion-col class="content">{{item.name}}</ion-col>
               <ion-col class="content">{{item.timeStart}}</ion-col>
-              <ion-col><ion-icon class="icon edit" name="pencil-outline"></ion-icon></ion-col>
+              <ion-col><ion-icon class="icon edit" name="location-outline"></ion-icon></ion-col>
+              <ion-col><ion-icon class="icon edit" name="chatbox-outline"></ion-icon></ion-col>
             </ion-row>
           </div>
         </div>
@@ -31,10 +32,11 @@
             <div *ngFor="let item of activities; let l = count">
               <div class="card" *ngIf="item.day === days[day]" >
                 <ion-row  class="ion-align-items-center .ion-justify-content-between">
-                  <ion-col><ion-icon class="icon" name="book-outline"></ion-icon></ion-col>
+                  <ion-col class="content">Sarah:</ion-col>
                   <ion-col class="content">{{item.name}}</ion-col>
                   <ion-col class="content">{{item.timeStart}}</ion-col>
-                  <ion-col><ion-icon class="icon edit" name="pencil-outline"></ion-icon></ion-col>
+                  <ion-col><ion-icon class="icon edit" name="location-outline"></ion-icon></ion-col>
+                  <ion-col><ion-icon class="icon edit" name="chatbox-outline"></ion-icon></ion-col>
                 </ion-row>
               </div>
             </div>
