@@ -36,7 +36,12 @@ const routes: Routes = [
     path: 'edit-activity',
     loadChildren: () =>
     import('@the-au-pair/parent-edit-activity/feature').then((m) => m.ParentEditActivityFeatureModule),
-}
+  },
+  {
+    path: 'children-dashboard',
+    loadChildren: () =>
+    import('@the-au-pair/children-dashboard/feature').then((m) => m.ChildrenDashboardFeatureModule),
+  }
 ];
 
 @NgModule({
