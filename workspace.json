@@ -1,6 +1,7 @@
 {
   "version": 2,
   "projects": {
+    "add-child-feature": "libs/add-child/feature",
     "au-pair-cost-feature": "libs/au-pair-cost/feature",
     "children-dashboard-feature": "libs/children-dashboard/feature",
     "home-feature": "libs/home/feature",

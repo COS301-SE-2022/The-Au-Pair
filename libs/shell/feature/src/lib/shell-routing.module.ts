@@ -41,6 +41,11 @@ const routes: Routes = [
     path: 'children-dashboard',
     loadChildren: () =>
     import('@the-au-pair/children-dashboard/feature').then((m) => m.ChildrenDashboardFeatureModule),
+  },
+  {
+    path: 'add-child',
+    loadChildren: () =>
+    import('@the-au-pair/add-child/feature').then((m) => m.AddChildFeatureModule),
   }
 ];
 
