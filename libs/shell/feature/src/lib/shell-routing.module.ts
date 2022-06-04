@@ -46,6 +46,11 @@ const routes: Routes = [
     path: 'add-child',
     loadChildren: () =>
     import('@the-au-pair/add-child/feature').then((m) => m.AddChildFeatureModule),
+  },
+  {
+    path: 'au-pair-schedule',
+    loadChildren: () =>
+    import('@the-au-pair/au-pair-schedule/feature').then((m) => m.AuPairScheduleModule),
   }
 ];
 

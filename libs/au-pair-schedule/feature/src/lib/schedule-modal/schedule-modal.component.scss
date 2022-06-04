@@ -1,0 +1,83 @@
+.modal-body{
+    background-color: var(--ion-color-champagne);
+    height: 100%;
+    width: 100%;
+}
+
+.heading{
+    font-size: 26px;
+    font-family: Roboto;
+    padding: 15px 0px;
+    background-color: #b1928c;
+}
+
+.close{
+    cursor: pointer;
+}
+
+.form-details{
+    display:flex;
+    align-items: center;
+    flex-direction: column;
+    text-align: right;
+}
+
+// Button styling
+.activity-details input{
+    width: 411px;
+    height: 62px;
+    background: #F9F9F9;
+    box-shadow: 1px 2px 5px rgba(0, 0, 0, 0.13);
+    border-style: none;
+    border-radius: 10px;
+    padding-left: 20px;
+}
+.activity-details textarea{
+    margin-top: 40px;
+    resize: none;
+    width: 411px;
+    height: 169px;
+    background: #F9F9F9;
+    box-shadow: 1px 2px 5px rgba(0, 0, 0, 0.13);
+    border-style: none;
+    border-radius: 10px;
+    padding-left: 20px;
+    color: black;
+}
+
+label{
+    position:relative;
+    color: #797979;
+    display: block;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 16px;
+    line-height: 20px;
+    top:35px;
+    left:-132px !important;
+}
+
+input[type=text], select{
+    width: 411px;
+    height: 62px;
+    background: #F9F9F9;
+    box-shadow: 1px 2px 5px rgba(0, 0, 0, 0.13);
+    border-style: none;
+    border-radius: 10px;
+    margin-top: 40px;
+    padding-left: 20px;
+    color: black;
+}
+
+
+input[type=text]::placeholder{
+    color:transparent;
+}
+
+input:focus{
+    outline:none;
+}
+
+textarea:focus{
+    outline:none;
+}
