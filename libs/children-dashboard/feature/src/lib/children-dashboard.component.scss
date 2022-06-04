@@ -1,14 +1,14 @@
 .welcome-heading {
     font-size: 48px;
     margin: 46px;
-    color: #3C3C3C;
+    color: var(--ion-color-dark);
     text-align: center;
 }
 
 .actions-heading {
     font-size: 36px;
     margin-top: 95px;
-    color: #3C3C3C;
+    color: var(--ion-color-dark);
     text-align: center;
 }
 
@@ -37,7 +37,7 @@ ion-card {
 }
 
 .child-name {
-    background-color: #69A88D;
+    background-color: var(--ion-color-primary);
     color: white;
     margin: 0;
     height: 100%;
@@ -51,7 +51,7 @@ ion-card {
 }
 
 .child-status {
-    background-color: #79BA9E;
+    background-color: var(--ion-color-tertiary);
     color: white;
     margin: 0;
     height: 100%;
