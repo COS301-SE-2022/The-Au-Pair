@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { API } from '../../../../shared/api/api.service';
-import { Activity } from '../../../../shared/interfaces/activity.interfaces';
 
 
 @Component({
@@ -22,6 +21,8 @@ ngOnInit(): void
 async getChildValues(val: any)
 {
   //Error check the fields for invalid input
+  console.log(val);
+  
 }
 
 
