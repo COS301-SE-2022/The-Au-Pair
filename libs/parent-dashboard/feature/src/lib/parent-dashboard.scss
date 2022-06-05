@@ -3,6 +3,8 @@
     margin: 46px;
     color: #3C3C3C;
     text-align: center;
+    font-family: TitanOne;
+    margin-bottom: 44px;
 }
 
 .actions-heading {
@@ -10,6 +12,15 @@
     margin-top: 95px;
     color: #3C3C3C;
     text-align: center;
+}
+
+.au-pair-div-wrapper{
+    width: 56%;
+    height: 94px;
+    margin: auto;
+    font-size: 24px;
+    margin-bottom: 59px;
+    margin-top: 59px;
 }
 
 .children-div-wrapper {
@@ -28,12 +39,28 @@ ion-card {
     width: 90%;
     height: 94px;
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(2, 1fr);
     align-items: center;
     justify-items: center;
     margin: auto;
     font-size: 24px;
-    margin-bottom: 60px;
+    margin-bottom: 49px;
+}
+
+.au-pair-name {
+    background-color: #176560;
+    color: white;
+    margin: 0;
+    height: 100%;
+    display: flex;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    font-size: 24px;
+    border-radius: 16px;
+    padding-left: 10px;
+    padding-right: 10px;
 }
 
 .child-name {
@@ -61,24 +88,12 @@ ion-card {
     align-items: center;
     width: 100%;
     font-size: 24px;
-}
-
-.child-au-pair {
-    background-color: #79BA9E;
-    color: white;
-    margin: 0;
-    height: 100%;
-    display: flex;
-    text-align: center;
-    justify-content: center;
-    align-items: center;
-    width: 100%;
+    border-radius: 0px 16px 16px 0px;
     border-left: 1px;
     border-style: solid;
     border-right: none;
     border-top: none;
     border-bottom: none;
-    border-radius: 0px 16px 16px 0px;
 }
 
 .actions-div-wrapper {
@@ -136,6 +151,23 @@ ion-card {
     border-radius: 16px;
 }
 
+.call-icon{
+    padding-right: 10px;
+    width: 35px;
+    height: 35px;
+    -webkit-transform: scaleX(-1);
+    transform: scaleX(-1);
+    cursor: pointer;
+}
+
+.message-icon{
+    padding-left: 10px;
+    float: right;
+    width: 35px;
+    height: 35px;
+    cursor: pointer;    
+}
+
 @media (max-width: 642px) {
     .children-div {
         grid-template-columns: repeat(1, 1fr);
@@ -143,7 +175,7 @@ ion-card {
     .child-name {
         border-radius: 16px 16px 0px 0px;
     }
-    .child-au-pair {
+    .child-status {
         border-radius: 0px 0px 16px 16px;
         border-left: 0px;
     }
@@ -171,6 +203,11 @@ ion-card {
         height: 96px;
         width: 96px;
     }
+
+    .au-pair-div-wrapper{
+        width: 90%;
+    }
+
 }
 
 @media (max-width: 810px) {
@@ -180,7 +217,7 @@ ion-card {
     .child-name {
         border-radius: 16px 16px 0px 0px;
     }
-    .child-au-pair {
+    .child-status {
         border-radius: 0px 0px 16px 16px;
         border-left: 0px;
     }
@@ -208,10 +245,18 @@ ion-card {
         height: 96px;
         width: 96px;
     }
+
+    .au-pair-div-wrapper{
+        width: 90%;
+    }
 }
 
 @media (max-width: 1240px) {
    .action-tag{
        font-size: 20px;
    } 
+
+   .au-pair-div-wrapper{
+    width: 90%;
+}
 }
