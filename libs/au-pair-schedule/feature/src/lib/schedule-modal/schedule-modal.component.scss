@@ -25,6 +25,46 @@
     margin-top: 20px;
 }
 
+.behaviour{
+    display: flex;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+}
+
+.slider{
+    display: flex;
+    text-align: center;
+    justify-content: center;
+    align-items: center; 
+}
+
+.submit{
+    background-color: #b1928c;
+    height: 50px;
+    width: 85%;
+    margin:auto;
+    border-radius: 16px;
+}
+
+.submit-row{
+    margin-top: 18vh;
+}
+
+@media (max-width: 768px){
+    .submit-row{
+        margin-top: 55vh;
+    }
+}
+
+.slider-row{
+    margin-top: 15px;
+}
+
+ion-range{
+    padding-top: 8px !important;
+}
+
 input:focus{
     outline:none;
 }
