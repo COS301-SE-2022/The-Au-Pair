@@ -15,63 +15,14 @@
     cursor: pointer;
 }
 
-.form-details{
-    display:flex;
-    align-items: center;
-    flex-direction: column;
-    text-align: right;
+.descInp{
+    width: 80%;
+    height: 15vh;
+    right:-50px !important;
 }
 
-// Button styling
-.activity-details input{
-    width: 411px;
-    height: 62px;
-    background: #F9F9F9;
-    box-shadow: 1px 2px 5px rgba(0, 0, 0, 0.13);
-    border-style: none;
-    border-radius: 10px;
-    padding-left: 20px;
-}
-.activity-details textarea{
-    margin-top: 40px;
-    resize: none;
-    width: 411px;
-    height: 169px;
-    background: #F9F9F9;
-    box-shadow: 1px 2px 5px rgba(0, 0, 0, 0.13);
-    border-style: none;
-    border-radius: 10px;
-    padding-left: 20px;
-    color: black;
-}
-
-label{
-    position:relative;
-    color: #797979;
-    display: block;
-    font-style: normal;
-    font-weight: 600;
-    font-size: 16px;
-    line-height: 20px;
-    top:35px;
-    left:-132px !important;
-}
-
-input[type=text], select{
-    width: 411px;
-    height: 62px;
-    background: #F9F9F9;
-    box-shadow: 1px 2px 5px rgba(0, 0, 0, 0.13);
-    border-style: none;
-    border-radius: 10px;
-    margin-top: 40px;
-    padding-left: 20px;
-    color: black;
-}
-
-
-input[type=text]::placeholder{
-    color:transparent;
+.content{
+    margin-top: 20px;
 }
 
 input:focus{
@@ -80,4 +31,13 @@ input:focus{
 
 textarea:focus{
     outline:none;
+}
+
+textarea{
+    background-color: white;
+    border-radius: 16px;
+    color:black;
+    resize: none;
+    border: none;
+    padding: 15px;
 }
