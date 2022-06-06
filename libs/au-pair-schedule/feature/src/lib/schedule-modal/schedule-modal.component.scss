@@ -1,14 +1,16 @@
 .modal-body{
-    background-color: var(--ion-color-champagne);
+    background-color: var(--ion-color-primary-contrast);
     height: 100%;
     width: 100%;
+    color: black
 }
 
 .heading{
     font-size: 26px;
     font-family: Roboto;
     padding: 15px 0px;
-    background-color: #b1928c;
+    background-color: var(--ion-color-primary);
+    color: var(--ion-color-primary-contrast);
 }
 
 .close{
@@ -23,6 +25,7 @@
 
 .content{
     margin-top: 20px;
+    font-size: 18px;
 }
 
 .behaviour{
@@ -40,7 +43,7 @@
 }
 
 .submit{
-    background-color: #b1928c;
+    background-color: var(--ion-color-primary);
     height: 50px;
     width: 85%;
     margin:auto;
