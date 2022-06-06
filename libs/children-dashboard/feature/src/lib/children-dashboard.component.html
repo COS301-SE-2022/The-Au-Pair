@@ -1,0 +1,30 @@
+<the-au-pair-navbar></the-au-pair-navbar>
+<ion-content [fullscreen]="true">
+
+    <div class='parent-dashboard-div'>
+        <p class='welcome-heading'>Your Children</p>
+
+        <div class="children-div-wrapper">
+            <ion-card class='children-div'>
+                <div class='child-name'>Child Name: </div>
+                <div class='child-status'>Child ID: </div>
+                <div class="edit-details">
+                    <p class='edit'>Edit details</p>
+                    <ion-col><ion-icon class="icon-edit" name="pencil-outline"></ion-icon></ion-col>
+                </div>
+            </ion-card>
+        </div>
+
+        <p class='actions-heading'>Actions</p>
+
+        <div class="actions-div-wrapper">
+            <div class='actions-div'>
+                <div class='action' routerLink="/add-child">
+                    <ion-icon name="people-circle-outline" class='action-icon '></ion-icon>
+                    <div class='action-tag '>Add A Child</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</ion-content>

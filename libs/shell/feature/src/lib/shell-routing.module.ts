@@ -33,6 +33,21 @@ const routes: Routes = [
       import('@the-au-pair/parent-add-activity/feature').then((m) => m.ParentAddActivityFeatureModule),
   },
   {
+    path: 'edit-activity',
+    loadChildren: () =>
+    import('@the-au-pair/parent-edit-activity/feature').then((m) => m.ParentEditActivityFeatureModule),
+  },
+  {
+    path: 'children-dashboard',
+    loadChildren: () =>
+    import('@the-au-pair/children-dashboard/feature').then((m) => m.ChildrenDashboardFeatureModule),
+  },
+  {
+    path: 'add-child',
+    loadChildren: () =>
+    import('@the-au-pair/add-child/feature').then((m) => m.AddChildFeatureModule),
+  },
+  {
     path: 'au-pair-schedule',
     loadChildren: () =>
     import('@the-au-pair/au-pair-schedule/feature').then((m) => m.AuPairScheduleModule),

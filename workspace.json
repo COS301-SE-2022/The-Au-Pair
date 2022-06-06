@@ -1,11 +1,15 @@
 {
   "version": 2,
   "projects": {
+    "add-child-feature": "libs/add-child/feature",
+    "au-pair-cost-feature": "libs/au-pair-cost/feature",
+    "children-dashboard-feature": "libs/children-dashboard/feature",
     "au-pair-cost-feature": "libs/au-pair-cost/feature",
     "au-pair-schedule-feature": "libs/au-pair-schedule/feature",
     "home-feature": "libs/home/feature",
     "parent-add-activity-feature": "libs/parent-add-activity/feature",
     "parent-dashboard-feature": "libs/parent-dashboard/feature",
+    "parent-edit-activity-feature": "libs/parent-edit-activity/feature",
     "schedule-feature": "libs/schedule/feature",
     "shared-components-navbar": "libs/shared/components/navbar",
     "shell-feature": "libs/shell/feature",
