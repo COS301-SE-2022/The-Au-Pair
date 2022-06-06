@@ -1,16 +1,15 @@
-import { Component, OnInit} from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { API } from '../../../../shared/api/api.service';
 import { Activity } from '../../../../shared/interfaces/activity.interfaces';
 
 @Component({
-  selector: 'the-au-pair-parent-add-activity',
-  templateUrl: './parent-add-activity.component.html',
-  styleUrls: ['./parent-add-activity.component.scss'],
+  selector: 'the-au-pair-parent-edit-activity',
+  templateUrl: './parent-edit-activity.component.html',
+  styleUrls: ['./parent-edit-activity.component.scss'],
 })
-export class ParentAddActivityComponent implements OnInit{
-  
-  //Activity Model
-  activityDetails: Activity = {
+export class ParentEditActivityComponent implements OnInit {
+   //Activity Model
+   activityDetails: Activity = {
     id: "",
     name: "",
     description: "",
@@ -179,11 +178,10 @@ export class ParentAddActivityComponent implements OnInit{
   addActivity(act:Activity){
     this.serv.addActivity(act).subscribe(
       res=>{
+        location.reload();
         console.log("The response is:" + res); 
-        location.reload()},
-      error=>{
-        console.log("Error has occured with API: " + error);
-      }
+      },
+      error=>{console.log("Error has occured with API: " + error);}
     )
   };
 
@@ -191,12 +189,10 @@ export class ParentAddActivityComponent implements OnInit{
   {
     this.serv.getParent().subscribe(
       res=>{
-          console.log("The response is:" + res); 
+        console.log("The response is:" + res); 
           this.allChildren = res.children;
       },
-      error=>{
-        console.log("Error has occured with API: " + error);
-      }
+      error=>{console.log("Error has occured with API: " + error);}
     )
   }
 }
