@@ -178,8 +178,12 @@ export class ParentAddActivityComponent implements OnInit{
   //Service calls
   addActivity(act:Activity){
     this.serv.addActivity(act).subscribe(
-      res=>{location.reload()},
-      error=>{console.log("Error has occured with API");}
+      res=>{
+        console.log("The response is:" + res); 
+        location.reload()},
+      error=>{
+        console.log("Error has occured with API: " + error);
+      }
     )
   };
 
@@ -187,9 +191,12 @@ export class ParentAddActivityComponent implements OnInit{
   {
     this.serv.getParent().subscribe(
       res=>{
+          console.log("The response is:" + res); 
           this.allChildren = res.children;
       },
-      error=>{console.log("Error has occured with API");}
+      error=>{
+        console.log("Error has occured with API: " + error);
+      }
     )
   }
 }
