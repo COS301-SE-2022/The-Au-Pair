@@ -6,11 +6,32 @@
         </ion-row>
     </div>
     <div class="content">
-        <form action="" class="form-details">
-         <label for="description" style="left: -155px !important;">Description</label>
-        <textarea></textarea>
-        <p id="descripError" class="error" style="display: none;">Error in field</p>   
-        </form>
-        
+        <ion-row>
+            <ion-col size="4" class="ion-text-center">
+                Description:
+            </ion-col>
+            <ion-col size="8" class="ion-text-start">
+                <textarea class="descInp"></textarea>
+            </ion-col>  
+        </ion-row> 
+        <ion-row class="slider-row">
+            <ion-col size="4" class="ion-text-center behaviour">
+                Behaviour:
+            </ion-col>
+            <ion-col size="7" class="ion-text-end slider">
+                <ion-range min="0" max="100" pin color="secondary">
+                    <ion-icon slot="start" name="sad-outline"></ion-icon>
+                    <ion-icon slot="end" name="happy-outline"></ion-icon>
+                </ion-range>
+            </ion-col>
+            <ion-col size="1"></ion-col>
+        </ion-row>
+        <ion-row class="submit-row">
+            <ion-col size="12" class="ion-text-center">
+                <ion-button expand="block" fill="clear"  class="submit">
+                    Submit Feedback
+                </ion-button>
+            </ion-col>
+        </ion-row>     
     </div>
 </div>
