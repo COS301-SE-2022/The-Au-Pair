@@ -40,7 +40,7 @@ export class AuPairCostComponent implements OnInit {
         this.auPairName = data.fname
       },
       error => {
-        console.error();
+        console.log("Error has occured with API: " + error);
       }
     )
 
@@ -61,7 +61,7 @@ export class AuPairCostComponent implements OnInit {
         this.pieSplit = "conic-gradient(var(--ion-color-primary)" + this.otherDeg + "deg, var(--ion-color-secondary) 0 "+ this.activityDeg +"deg, var(--ion-color-champagne) 0)";
       },
       error => {
-        console.error();
+        console.log("Error has occured with API: " + error);
       }
     )
     
