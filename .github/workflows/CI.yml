@@ -34,7 +34,7 @@ jobs:
           node-version: '16'
 
       - name: Install node
-        run: npm install 
+        run: npm install --legacy-peer-deps
 
       - name: Lint test affected
         if: inputs.type == 'affected'
