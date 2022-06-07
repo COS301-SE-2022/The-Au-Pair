@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 import { API } from '../../../../shared/api/api.service';
 import { Activity } from '../../../../shared/interfaces/activity.interfaces';
 
@@ -22,15 +23,22 @@ export class ParentEditActivityComponent implements OnInit {
     day: "",
     child: "",
   };
+  actId = "";
 
   //Children of logged in user
   allChildren: any;
 
   //Constructor
-  constructor(private serv: API) {}
+  constructor(private serv: API, private router: Router) 
+  {
+    const navigation = this.router.getCurrentNavigation();
+    if(navigation != null)
+      if(navigation.extras !== null)
+        this.actId = navigation.extras.state?.['id'];
+  }
 
   ngOnInit(): void 
-  {
+  {    
     //Call getChildren service
     this.getChildren();
   }
