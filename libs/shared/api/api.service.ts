@@ -36,4 +36,8 @@ export class API{
   getAuPair(): Observable<any> {
     return this.http.get('http://localhost:8080/getAuPair');
   }
+
+  getChildren(id : String): Observable<any> {
+    return this.http.post('http://localhost:8080/getChildren',id);
+  }
 }
