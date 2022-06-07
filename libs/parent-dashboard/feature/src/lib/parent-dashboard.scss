@@ -1,7 +1,7 @@
 .welcome-heading {
     font-size: 48px;
     margin: 46px;
-    color: #3C3C3C;
+    color: var(--ion-color-dark);
     text-align: center;
     font-family: 'TitanOne';
 }
@@ -9,7 +9,7 @@
 .actions-heading {
     font-size: 36px;
     margin-top: 95px;
-    color: #3C3C3C;
+    color: var(--ion-color-dark);
     text-align: center;
     font-family: 'TitanOne';
 }
