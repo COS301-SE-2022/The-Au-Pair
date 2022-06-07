@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 import { API } from '../../../../shared/api/api.service';
 import { Activity } from '../../../../shared/interfaces/activity.interfaces';
+import { ToastController } from '@ionic/angular';
 
 @Component({
   selector: 'the-au-pair-parent-edit-activity',
@@ -9,6 +10,9 @@ import { Activity } from '../../../../shared/interfaces/activity.interfaces';
   styleUrls: ['./parent-edit-activity.component.scss'],
 })
 export class ParentEditActivityComponent implements OnInit {
+  //------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+  /**Variables**/
+
    //Activity Model
    activityDetails: Activity = {
     id: "deault",
@@ -24,13 +28,14 @@ export class ParentEditActivityComponent implements OnInit {
     child: "",
   };
   timeslot = "";
-
-
   //Children of logged in user
   allChildren: any;
 
+  //------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+  /**Functions*/
+
   //Constructor
-  constructor(private serv: API, private router: Router) 
+  constructor(private serv: API, private router: Router, public toastCtrl: ToastController) 
   {
     const navigation = this.router.getCurrentNavigation();
     if(navigation !== null)
@@ -42,14 +47,11 @@ export class ParentEditActivityComponent implements OnInit {
 
   ngOnInit(): void 
   {    
-    //Call getChildren service
     this.getChildren();
-
-    //Call API for all of the selected activity's info
     this.getActivityDetails();
   }
 
-  //Populate the activityDetails object from the form's input
+  //From HTML Form
   getActivityValues(val : any)
   {  
     console.log(val);
@@ -190,7 +192,28 @@ export class ParentEditActivityComponent implements OnInit {
     }
   }
 
-  //Service calls
+  returnToSchedule()
+  {
+    this.router.navigate(['/schedule']).then(()=>{
+      window.location.reload();
+    });
+  }
+
+  //Pop-up if activity is successfully updates
+  async openToast()
+  {
+    const toast = await this.toastCtrl.create({
+      message: 'Activity successfully updated!',
+      duration: 4000,
+      position: 'top',
+      color: 'primary',
+      cssClass: 'toastPopUp'
+    });
+    await toast.present();
+  }
+
+  //------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+  /**Service calls**/
   getActivityDetails()
   { 
     this.serv.getActivity(this.activityDetails.id).subscribe(
@@ -216,6 +239,7 @@ export class ParentEditActivityComponent implements OnInit {
       res=>{
         // location.reload();
         console.log("The response is:" + res); 
+        this.openToast();
       },
       error=>{console.log("Error has occured with API: " + error);}
     )
@@ -231,4 +255,5 @@ export class ParentEditActivityComponent implements OnInit {
       error=>{console.log("Error has occured with API: " + error);}
     )
   }
+  //------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 }
