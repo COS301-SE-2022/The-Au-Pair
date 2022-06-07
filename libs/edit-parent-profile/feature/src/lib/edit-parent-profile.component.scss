@@ -1,0 +1,141 @@
+.profile-name {
+    font-size: 3.6vw;
+    margin-top: 5%;
+    margin-bottom: 5%;
+    color: #3C3C3C;
+    text-align: center;
+    font-family: TitanOne;
+}
+
+.parent-profile-div{
+    width: 90%;
+    height: 90%;
+    margin-top: 60px;
+    margin-left: 95px;
+    margin-right: 95px;
+    background-color: #69A88DB2;
+    border-radius: 16px;
+    margin-bottom: 60px;
+}
+
+.profile-picture-div{
+    width: 33.3%;
+    height: 100%;
+    float: left;
+}
+
+.profile-details-div{
+    width: 33.3%;
+    height: 100%;
+    float: left;
+}
+
+.empty-div{
+    width: 33.3%;
+    height: 100%;
+    float: right;
+}
+
+.profile-picture-wrapper{
+    width: 62%;
+    height: 40%;
+    background-color: rgba($color: #032927BF, $alpha: 0.75);
+    border-radius: 16px;
+    align-items: center;
+    justify-items: center;
+    text-align: center;
+    left: 9%;
+    margin: auto;
+    display: block;
+    margin-top: 25%;
+    margin-bottom: 40px;
+}
+
+.profile-picture {
+    width: 80%;
+    height: 100%;
+}
+
+.parent-info-small{
+    height: 6%;
+    background-color: #F9F9F9;
+    display:flex;
+    font-family: Roboto;
+    align-items: center;
+    color: #79BA9E;
+    margin-bottom: 12px;
+    box-shadow: 1px 2px 5px rgba(0, 0, 0, 0.13);
+    border-radius: 6px;
+}
+
+.parent-info-large{
+    height: 150px;
+    background-color: #F9F9F9;
+    display:flex;
+    margin-top: 10px;
+    font-family: Roboto;
+    color: #79BA9E;
+    margin-bottom: 12px;
+    box-shadow: 1px 2px 5px rgba(0, 0, 0, 0.13);
+    border-radius: 6px;
+}
+
+.parent-text{
+    margin-left: 12px;
+    font-size: 100%;
+    width: 30%;
+    margin: 10px;
+}
+
+.parent-text-info{
+    background-color: #F9F9F9;
+    color: #3C3C3C;
+    font-size: 100%;
+    margin-right: auto;
+    line-height: 170%;
+    margin-top: auto;
+    margin-bottom: auto;
+    height: 95%;
+    border: none;
+    border-radius: 16px;
+}
+
+.change-button{
+    padding: 10px 22px;
+    gap: 10px;
+    border: 2px solid #176560;
+    border-radius: 10px;
+    background-color: #69A88DB2;
+    margin: auto;
+    display: block;
+}
+
+#active-2{
+    position: absolute;
+    width: 15%;
+    height: 25%;
+    left: 100px;
+    bottom: 0px;
+    opacity: 0.14;
+    z-index: -10;
+}
+
+#active{
+    position: absolute;
+    width: 13%;
+    height: 25%;
+    right: 100px;
+    bottom: 150px;
+    opacity: 0.14;
+    z-index: -10;
+}
+
+#lifestyles{
+    position: absolute;
+    width: 18%;
+    height: 33%;
+    right: 400px;
+    top: 110px;
+    opacity: 0.14;
+    z-index: -10;
+}

@@ -1,1 +1,41 @@
-<p>edit-parent-profile works!</p>
+<the-au-pair-navbar></the-au-pair-navbar>
+<ion-content [fullscreen]="true">
+    <div class = "parent-profile-div">
+        <div class = "profile-picture-div">
+            <div class='profile-picture-wrapper'>
+                <ion-icon name="people-circle-outline" class='profile-picture'></ion-icon>
+                <form>
+                    <input type = "file" id = "img" name = "img" accept="image/*">
+                    <input type = "submit" class = "change-button" value = "Change Picture">
+                  </form>
+            </div>
+        </div>
+        <form>
+            <div class = "profile-details-div">
+                <p class='profile-name'>EPI-USE</p>
+                <div class="parent-info-small">
+                    <div class="parent-text">Email: </div>
+                    <input type = 'text' name = "email-address-info" class="parent-text-info" placeholder = 'Email Address'>
+                </div>
+                <div class="parent-info-small">
+                    <div class="parent-text">Phone: </div>
+                    <input type = 'text' name = "phone-number-info" class="parent-text-info" placeholder = 'Phone Number (10 Digits)'>
+                </div>
+                <div class="parent-info-large">
+                    <div class="parent-text">Address: </div>
+                    <textarea name = "parent-address-info" class="parent-text-info" placeholder = 'Street Name&#10;Neighbourhood&#10;Town/City&#10;Province&#10;Postal Code' rows = "5"></textarea>
+                </div>
+                <div class="parent-info-large">
+                    <div class="parent-text">Medical Aid: </div>
+                    <textarea name = "medical-aid-info" class="parent-text-info" placeholder = 'Main Member Name&#10;Main Member Surname&#10;Medical Aid No.&#10;Medical Aid Provider&#10;Medical Aid Plan' rows = "5"></textarea>
+                </div>
+                <input type = 'submit' class="change-button" value = 'Update Details'>
+            </div>
+        </form>
+        <div class = "empty-div"></div>
+        <img id="active-2" src="assets/images/active.png">
+            <img id="active" src="assets/images/active-2.png">
+            <img id="lifestyles" src="assets/images/lifestyles.png">
+    </div>
+
+</ion-content>
