@@ -25,6 +25,10 @@ export class API{
     return this.http.get('http://localhost:8080/getSchedule');
   }
 
+  getAuPairSchedule(children : string []): Observable<any> {
+    return this.http.post('http://localhost:8080/getAuPairSchedule',children);
+  }
+
   getUser(): Observable<any> {
     return this.http.get('http://localhost:8080/getUser');
   }
