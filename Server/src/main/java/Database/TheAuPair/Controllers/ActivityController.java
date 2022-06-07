@@ -32,6 +32,13 @@ public class ActivityController
     this.as.addActivity(a);
   }
 
+  @PostMapping("/editActivity")
+  @CrossOrigin(origins = "http://localhost:4200")
+  public void editActivity(@RequestBody Activity a)
+  {
+    this.as.updateActivity(a);
+  }
+
   @GetMapping("/getSchedule")
   @CrossOrigin(origins = "http://localhost:4200")
   public List<Activity> getSchedule()

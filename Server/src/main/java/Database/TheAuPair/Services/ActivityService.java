@@ -21,6 +21,11 @@ public class ActivityService
     return a;
   }
 
+  public void updateActivity(Activity a)
+  {
+    ar.save(a);
+  }
+
   public void addActivity(Activity a)
   {
     String id = "";

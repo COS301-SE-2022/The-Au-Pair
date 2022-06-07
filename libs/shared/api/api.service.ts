@@ -13,6 +13,10 @@ export class API{
     return this.http.post('http://localhost:8080/getActivity',id);
   }
 
+  editActivity(activity : Activity): Observable<any> {
+    return this.http.post('http://localhost:8080/editActivity',activity);
+  }
+  
   addActivity(activity : Activity): Observable<any> {
     return this.http.post('http://localhost:8080/addActivity',activity);
   }
