@@ -29,3 +29,9 @@ export interface Activity{
     mID: string;
   }
   
+  export interface Parent{
+    id: string;
+    cildren: string [];
+    medID: string;
+    auPair: string;
+  }
