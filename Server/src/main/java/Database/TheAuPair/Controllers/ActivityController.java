@@ -46,4 +46,12 @@ public class ActivityController
     List<Activity> a =  as.getSchedule();
     return a;
   }
+
+  @PostMapping("/getAuPairSchedule")
+  @CrossOrigin(origins = "http://localhost:4200")
+  public List<Activity> getAuPairSchedule(@RequestBody String [] children)
+  {
+    List<Activity> a =  as.getAuPairSchedule(children);
+    return a;
+  }
 }
