@@ -2,6 +2,7 @@
   "version": 2,
   "projects": {
     "au-pair-cost-feature": "libs/au-pair-cost/feature",
+    "edit-parent-profile-feature": "libs/edit-parent-profile/feature",
     "home-feature": "libs/home/feature",
     "parent-add-activity-feature": "libs/parent-add-activity/feature",
     "parent-dashboard-feature": "libs/parent-dashboard/feature",

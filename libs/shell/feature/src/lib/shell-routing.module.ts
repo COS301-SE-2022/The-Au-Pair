@@ -36,6 +36,11 @@ const routes: Routes = [
     path: 'parent-profile',
     loadChildren: () =>
     import('@the-au-pair/parent-profile/feature').then((m) => m.ParentProfileFeatureModule),
+  },
+  {
+    path: 'edit-parent-profile',
+    loadChildren: () =>
+    import('@the-au-pair/edit-parent-profile/feature').then((m) => m.EditParentProfileFeatureModule),
   }
 ];
 
