@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { Activity , Child } from '../interfaces/interfaces';
+import { Activity , Child , medAid } from '../interfaces/interfaces';
 
 
 @Injectable()
@@ -39,6 +39,10 @@ export class API{
 
   getMedAid(id : string): Observable<any> {
     return this.http.post('http://localhost:8080/getMedAid',id);
+  }
+
+  editMedAid(medAid : medAid): Observable<any> {
+    return this.http.post('http://localhost:8080/editMedAid',medAid);
   }
 
   getAuPair(): Observable<any> {

@@ -20,4 +20,12 @@ export interface Activity{
     diet: string;
     parent: string;
   }
+
+  export interface medAid{
+    id: string;
+    plan: string;
+    name: string;
+    sname: string;
+    mID: string;
+  }
   

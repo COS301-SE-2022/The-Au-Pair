@@ -1,5 +1,6 @@
 package Database.TheAuPair.Services;
 
+import Database.TheAuPair.Models.Activity;
 import Database.TheAuPair.Models.medAid;
 import Database.TheAuPair.Repositories.medAidRepository;
 
@@ -16,5 +17,10 @@ public class medAidService
   {
     medAid m = mr.findUsingId(id);
     return m;
+  }
+
+  public void updateMedAid(medAid m)
+  {
+    mr.save(m);
   }
 }
