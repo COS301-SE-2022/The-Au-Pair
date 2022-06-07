@@ -37,6 +37,10 @@ export class API{
     return this.http.get('http://localhost:8080/getParent');
   }
 
+  getMedAid(id : string): Observable<any> {
+    return this.http.post('http://localhost:8080/getMedAid',id);
+  }
+
   getAuPair(): Observable<any> {
     return this.http.get('http://localhost:8080/getAuPair');
   }
