@@ -10,6 +10,9 @@ import java.util.List;
 @Repository
 public interface ActivityRepository extends MongoRepository<Activity, String>
 {
+    @Query("{ '_id': ?0 }")
+    Activity findUsingId(String id);
+
     @Query("{ 'child': ?0 }")
     List<Activity> findAllByChild(String id, Sort sort);
 }
