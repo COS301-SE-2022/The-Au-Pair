@@ -17,11 +17,26 @@ public class ActivityController
     this.as = new ActivityService(ar);
   }
 
+  @PostMapping("/getActivity")
+  @CrossOrigin(origins = "http://localhost:4200")
+  public Activity getActivity(@RequestBody String id)
+  {
+    Activity a =  as.getActivity(id);
+    return a;
+  }
+
   @PostMapping("/addActivity")
   @CrossOrigin(origins = "http://localhost:4200")
   public void addActivity(@RequestBody Activity a, BindingResult bindingResult)
   {
     this.as.addActivity(a);
+  }
+
+  @PostMapping("/editActivity")
+  @CrossOrigin(origins = "http://localhost:4200")
+  public void editActivity(@RequestBody Activity a)
+  {
+    this.as.updateActivity(a);
   }
 
   @GetMapping("/getSchedule")

@@ -15,6 +15,17 @@ public class ActivityService
     this.ar = ar;
   }
 
+  public Activity getActivity(String id)
+  {
+    Activity a =  ar.findUsingId(id);
+    return a;
+  }
+
+  public void updateActivity(Activity a)
+  {
+    ar.save(a);
+  }
+
   public void addActivity(Activity a)
   {
     String id = "";
@@ -35,6 +46,12 @@ public class ActivityService
     ar.save(a);
   }
 
+  public List<Activity> getSchedule()
+  {
+    List<Activity> a =  ar.findAllByChild("8675945310542", Sort.by(Sort.Direction.ASC, "timeStart"));
+    return a;
+  }
+
   public String generateID()
   {
     String AlphaNumericString = "0123456789"+"abcdefghijklmnopqrstuvxyz";
@@ -47,11 +64,5 @@ public class ActivityService
     }
 
     return sb.toString();
-  }
-
-  public List<Activity> getSchedule()
-  {
-    List<Activity> a =  ar.findAllByChild("8675945310542", Sort.by(Sort.Direction.ASC, "timeStart"));
-    return a;
   }
 }

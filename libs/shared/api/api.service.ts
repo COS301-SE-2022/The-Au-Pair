@@ -9,24 +9,31 @@ export class API{
 
   constructor(private http: HttpClient) {}
 
-  getSchedule(): Observable<any> {
-    return this.http.get('http://localhost:8080/getSchedule');
+  getActivity(id : String): Observable<any> {
+    return this.http.post('http://localhost:8080/getActivity',id);
   }
 
-  getAuPair(): Observable<any> {
-    return this.http.get('http://localhost:8080/getAuPair');
+  editActivity(activity : Activity): Observable<any> {
+    return this.http.post('http://localhost:8080/editActivity',activity);
+  }
+  
+  addActivity(activity : Activity): Observable<any> {
+    return this.http.post('http://localhost:8080/addActivity',activity);
+  }
+
+  getSchedule(): Observable<any> {
+    return this.http.get('http://localhost:8080/getSchedule');
   }
 
   getUser(): Observable<any> {
     return this.http.get('http://localhost:8080/getUser');
   }
 
-  addActivity(activity : Activity): Observable<any> {
-    console.log("API return", this.http.post('http://localhost:8080/addActivity',activity));
-    return this.http.post('http://localhost:8080/addActivity',activity);
-  }
-
   getParent(): Observable<any> {
     return this.http.get('http://localhost:8080/getParent');
+  }
+
+  getAuPair(): Observable<any> {
+    return this.http.get('http://localhost:8080/getAuPair');
   }
 }
