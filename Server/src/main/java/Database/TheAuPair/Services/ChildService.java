@@ -19,4 +19,9 @@ public class ChildService
     List<Child> c = cr.findAllByParent(id);
     return c;
   }
+
+  public void addChild(Child c)
+  {
+    cr.save(c);
+  }
 }

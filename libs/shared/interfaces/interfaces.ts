@@ -12,3 +12,11 @@ export interface Activity{
     child: string;
   }
   
+  export interface Child{
+    id: string;
+    fname: string;
+    sname: string;
+    allergies: string;
+    diet: string;
+    parent: string;
+  }

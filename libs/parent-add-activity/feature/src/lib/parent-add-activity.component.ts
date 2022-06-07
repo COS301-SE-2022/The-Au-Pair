@@ -1,6 +1,6 @@
 import { Component, OnInit} from '@angular/core';
 import { API } from '../../../../shared/api/api.service';
-import { Activity } from '../../../../shared/interfaces/activity.interfaces';
+import { Activity } from '../../../../shared/interfaces/interfaces';
 
 @Component({
   selector: 'the-au-pair-parent-add-activity',
