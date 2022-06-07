@@ -23,6 +23,8 @@ export class ParentEditActivityComponent implements OnInit {
     day: "",
     child: "",
   };
+  timeslot = "";
+
 
   //Children of logged in user
   allChildren: any;
@@ -188,65 +190,22 @@ export class ParentEditActivityComponent implements OnInit {
     }
   }
 
-  //Pre-populate the fields with activities details
-  prePopulateFields(response: Activity)
-  {
-    console.log("The description is: ", response.description);
-    
-    //Name
-    let dom = (<HTMLInputElement>document.getElementById("actNameText"));
-    if(dom != null)
-      dom.value = response.name;
-
-    //Description
-    const dom2 = (<HTMLInputElement>document.getElementById("descriptionText"));
-    //  = document.getElementById("descriptionText");
-    if(dom2 != null)
-      dom2.value = response.description;
-
-    //Location
-    dom = (<HTMLInputElement>document.getElementById("locationText"));
-    if(dom != null)
-      dom.value = response.location;
-
-    //Selected Day
-    dom = (<HTMLInputElement>document.getElementById("selectedDay"));
-    if(dom != null)
-      dom.value = response.day;
-
-    //Timeslot
-    dom = (<HTMLInputElement>document.getElementById("selectedTime"));
-    if(dom != null)
-    {
-      const timeslot = response.timeStart + "-" + response.timeEnd;
-      dom.value = timeslot;
-    }
-      
-    //Budget
-    dom = (<HTMLInputElement>document.getElementById("budgetText"));
-    if(dom != null)
-    {
-      const budg = "" + response.budget;
-      dom.value = budg;
-    }
-      
-    //Selected Child
-    dom = (<HTMLInputElement>document.getElementById("childId"));
-    if(dom != null)
-    {
-      const child = "" + response.child;
-      dom.value = child;
-      console.log("the child is: ", response.child);
-    } 
-  }
-
   //Service calls
   getActivityDetails()
   { 
     this.serv.getActivity(this.activityDetails.id).subscribe(
       res=>{
         console.log("The response is:" + res); 
-        this.prePopulateFields(res);
+        this.activityDetails.id = res.id;
+        this.activityDetails.name = res.name;
+        this.activityDetails.description = res.description;
+        this.activityDetails.location = res.location;
+        this.activityDetails.day = res.day;
+        this.activityDetails.timeStart = res.timeStart;
+        this.activityDetails.timeEnd = res.timeEnd;
+        this.activityDetails.budget = res.budget;
+        this.activityDetails.child = res.child;
+        this.timeslot = res.timeStart + "-" + res.timeEnd
       },
       error=>{console.log("Error has occured with API: " + error);}
     )
@@ -255,7 +214,7 @@ export class ParentEditActivityComponent implements OnInit {
   editActivity(act:Activity){
     this.serv.editActivity(act).subscribe(
       res=>{
-        location.reload();
+        // location.reload();
         console.log("The response is:" + res); 
       },
       error=>{console.log("Error has occured with API: " + error);}
