@@ -40,7 +40,7 @@ export class ScheduleComponent implements OnInit{
   }
 
   navigate(id : string)
-  {
+  { 
     //Route to the edit-activity page and parse the ActivityID of the selected Activity 
     this.router.navigate(['/edit-activity'],{
       state: {id: id}
