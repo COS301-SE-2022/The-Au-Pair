@@ -1,7 +1,7 @@
 package Database.TheAuPair.Controllers;
 
-import Database.TheAuPair.Models.Child;
 import Database.TheAuPair.Repositories.ChildRepository;
+import Database.TheAuPair.Services.ChildService;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -9,10 +9,10 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class ChildController
 {
-    private ChildRepository cr;
+  private ChildService cs;
 
-    public ChildController(ChildRepository cr)
-    {
-        this.cr = cr;
-    }
+  public ChildController(ChildRepository cr)
+  {
+    this.cs = new ChildService(cr);
+  }
 }

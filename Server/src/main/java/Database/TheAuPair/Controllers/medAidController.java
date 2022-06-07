@@ -1,7 +1,7 @@
 package Database.TheAuPair.Controllers;
 
-import Database.TheAuPair.Models.medAid;
 import Database.TheAuPair.Repositories.medAidRepository;
+import Database.TheAuPair.Services.medAidService;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -9,10 +9,10 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class medAidController
 {
-  private medAidRepository medAid;
+  private medAidService ms;
 
-  public medAidController(medAidRepository medAid)
+  public medAidController(medAidRepository mr)
   {
-    this.medAid = medAid;
+    this.ms = new medAidService(mr);
   }
 }
