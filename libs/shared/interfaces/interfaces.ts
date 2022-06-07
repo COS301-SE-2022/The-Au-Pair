@@ -35,3 +35,15 @@ export interface Activity{
     medID: string;
     auPair: string;
   }
+
+  export interface User{
+    id: string;
+    fname: string;
+    sname: string;
+    email: string;
+    address: string;
+    registered: boolean;
+    type: number;
+    password: string;
+    number: string;
+  }
