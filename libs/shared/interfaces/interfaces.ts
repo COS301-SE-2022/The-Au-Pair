@@ -20,4 +20,12 @@ export interface Activity{
     diet: string;
     parent: string;
   }
+
+  export interface HoursLogged{
+    id: string;
+    user_id: string;
+    date: String
+    timeStart: string;
+    timeEnd: string;
+  }
   
