@@ -1,6 +1,6 @@
 module.exports = {
-  displayName: 'au-pair-dashboard',
-  preset: '../../jest.preset.js',
+  displayName: 'au-pair-dashboard-feature',
+  preset: '../../../jest.preset.js',
   setupFilesAfterEnv: ['<rootDir>/src/test-setup.ts'],
   globals: {
     'ts-jest': {
@@ -8,7 +8,7 @@ module.exports = {
       stringifyContentPathRegex: '\\.(html|svg)$',
     },
   },
-  coverageDirectory: '../../coverage/libs/au-pair-dashboard',
+  coverageDirectory: '../../../coverage/libs/au-pair-dashboard/feature',
   transform: {
     '^.+\\.(ts|mjs|js|html)$': 'jest-preset-angular',
   },

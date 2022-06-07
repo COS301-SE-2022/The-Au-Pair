@@ -3,6 +3,7 @@
     margin: 46px;
     color: #3C3C3C;
     text-align: center;
+    font-family: 'TitanOne';
 }
 
 .actions-heading {
@@ -10,6 +11,7 @@
     margin-top: 95px;
     color: #3C3C3C;
     text-align: center;
+    font-family: 'TitanOne';
 }
 
 .children-div-wrapper {
@@ -28,7 +30,7 @@ ion-card {
     width: 90%;
     height: 94px;
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(2, 1fr);
     align-items: center;
     justify-items: center;
     margin: auto;
@@ -36,7 +38,7 @@ ion-card {
     margin-bottom: 60px;
 }
 
-.child-name {
+.employer-name {
     background-color: #69A88D;
     color: white;
     margin: 0;
@@ -61,6 +63,7 @@ ion-card {
     align-items: center;
     width: 100%;
     font-size: 24px;
+    border-radius: 0px 16px 16px 0px;
 }
 
 .child-au-pair {
@@ -93,10 +96,9 @@ ion-card {
     width: 90%;
     height: 100%;
     display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 5vw;
-    align-items: center;
+    grid-template-columns: repeat(2, 1fr);
     justify-items: center;
+    align-items: center;
     margin: auto;
     font-size: 36px;
     margin-bottom: 60px;
@@ -111,11 +113,12 @@ ion-card {
     text-align: center;
     justify-content: center;
     align-items: center;
-    // width: 314px;
-    width: 100%;
+    width: 50%;
     font-size: 24px;
     border-radius: 16px;
     cursor: pointer;
+    font-family: 'Roboto';
+    font-weight: bold;
 }
 
 .action-tag {
@@ -140,8 +143,12 @@ ion-card {
     .children-div {
         grid-template-columns: repeat(1, 1fr);
     }
-    .child-name {
+    .employer-name {
         border-radius: 16px 16px 0px 0px;
+    }
+
+    .child- {
+        border-radius: 0px 0px 16px 16px;
     }
     .child-au-pair {
         border-radius: 0px 0px 16px 16px;
@@ -177,8 +184,12 @@ ion-card {
     .children-div {
         grid-template-columns: repeat(1, 1fr);
     }
-    .child-name {
+
+    .employer-name {
         border-radius: 16px 16px 0px 0px;
+    }
+    .child-status {
+        border-radius: 0px 0px 16px 16px;
     }
     .child-au-pair {
         border-radius: 0px 0px 16px 16px;

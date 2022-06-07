@@ -5,4 +5,4 @@ import { Component, OnInit } from '@angular/core';
   templateUrl: './au-pair-dashboard.component.html',
   styleUrls: ['./au-pair-dashboard.component.scss'],
 })
-export class AuPairDashboardComponent {}
+export class AuPairDashboardComponent  {}

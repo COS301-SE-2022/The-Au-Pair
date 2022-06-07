@@ -1,14 +1,14 @@
 {
   "projectType": "library",
-  "root": "libs/au-pair-dashboard",
-  "sourceRoot": "libs/au-pair-dashboard/src",
+  "root": "libs/au-pair-dashboard/feature",
+  "sourceRoot": "libs/au-pair-dashboard/feature/src",
   "prefix": "the-au-pair",
   "targets": {
     "test": {
       "executor": "@nrwl/jest:jest",
-      "outputs": ["coverage/libs/au-pair-dashboard"],
+      "outputs": ["coverage/libs/au-pair-dashboard/feature"],
       "options": {
-        "jestConfig": "libs/au-pair-dashboard/jest.config.js",
+        "jestConfig": "libs/au-pair-dashboard/feature/jest.config.js",
         "passWithNoTests": true
       }
     },
@@ -16,8 +16,8 @@
       "executor": "@nrwl/linter:eslint",
       "options": {
         "lintFilePatterns": [
-          "libs/au-pair-dashboard/src/**/*.ts",
-          "libs/au-pair-dashboard/src/**/*.html"
+          "libs/au-pair-dashboard/feature/src/**/*.ts",
+          "libs/au-pair-dashboard/feature/src/**/*.html"
         ]
       }
     }
