@@ -1,30 +1,14 @@
 {
   "projectType": "library",
-  "root": "libs/au-pair-dashboard/feature",
-  "sourceRoot": "libs/au-pair-dashboard/feature/src",
+  "root": "libs/au-pair-dashboard",
+  "sourceRoot": "libs/au-pair-dashboard/src",
   "prefix": "the-au-pair",
   "targets": {
-    "build": {
-      "executor": "@nrwl/angular:ng-packagr-lite",
-      "outputs": ["dist/libs/au-pair-dashboard/feature"],
-      "options": {
-        "project": "libs/au-pair-dashboard/feature/ng-package.json"
-      },
-      "configurations": {
-        "production": {
-          "tsConfig": "libs/au-pair-dashboard/feature/tsconfig.lib.prod.json"
-        },
-        "development": {
-          "tsConfig": "libs/au-pair-dashboard/feature/tsconfig.lib.json"
-        }
-      },
-      "defaultConfiguration": "production"
-    },
     "test": {
       "executor": "@nrwl/jest:jest",
-      "outputs": ["coverage/libs/au-pair-dashboard/feature"],
+      "outputs": ["coverage/libs/au-pair-dashboard"],
       "options": {
-        "jestConfig": "libs/au-pair-dashboard/feature/jest.config.js",
+        "jestConfig": "libs/au-pair-dashboard/jest.config.js",
         "passWithNoTests": true
       }
     },
@@ -32,8 +16,8 @@
       "executor": "@nrwl/linter:eslint",
       "options": {
         "lintFilePatterns": [
-          "libs/au-pair-dashboard/feature/src/**/*.ts",
-          "libs/au-pair-dashboard/feature/src/**/*.html"
+          "libs/au-pair-dashboard/src/**/*.ts",
+          "libs/au-pair-dashboard/src/**/*.html"
         ]
       }
     }
