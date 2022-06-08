@@ -11,23 +11,25 @@ import { API } from '../../../../shared/api/api.service'
 export class AuPairDashboardComponent  {
   constructor(private api:API) { }
 
-  // ngOnInit() {
-  //   const today = this.getToday();
+  ngOnInit() {
+    const today = this.getToday();
+    this.getCurrentTime();
+
     
-  //   this.api.get("7542108615984", today).subscribe( 
-  //     data => {
-  //       if(data.equals("")) {
-  //         this.alreadyLogging = false;
-  //       }
-  //       else{
-  //         this.alreadyLogging = true;
-  //       }
-  //     },
-  //     error => {
-  //       console.log("Error has occured with API: " + error);
-  //     }
-  //   )
-  // }
+    // this.api.getStartedLog("7542108615984", today).subscribe( 
+    //   data => {
+    //     if(data.equals("")) {
+    //       this.alreadyLogging = false;
+    //     }
+    //     else{
+    //       this.alreadyLogging = true;
+    //     }
+    //   },
+    //   error => {
+    //     console.log("Error has occured with API: " + error);
+    //   }
+    // )
+  }
 
   alreadyLogging = true;
 
@@ -44,5 +46,16 @@ export class AuPairDashboardComponent  {
     "/" + now.getFullYear();
 
     return strDate;
+  }
+
+  getCurrentTime() {
+    const now = new Date();
+
+    // const strDate = ('0' + now.getDate()).slice(-2) + "/" + ('0' + now.getMonth()).slice(-2) +
+    // "/" + now.getFullYear();
+
+    console.log(now.getTime())
+
+    // return strDate;
   }
 }
