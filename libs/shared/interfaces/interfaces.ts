@@ -21,6 +21,14 @@ export interface Activity{
     parent: string;
   }
 
+  export interface HoursLogged{
+    id: string;
+    user_id: string;
+    date: String
+    timeStart: string;
+    timeEnd: string;
+  }
+
   export interface medAid{
     id: string;
     plan: string;
