@@ -101,6 +101,14 @@ export class API{
     return this.http.post("http://localhost:8080/addHoursLog", hl);
   }
 
+  addTimeEnd(id : string, endTime : string): Observable<any> {
+    var out = {
+      "id" : id,
+      "endTime" : endTime
+    }
+    return this.http.post("http://localhost:8080/addTimeEnd", out);
+  }
+
   updateHoursLog(hl : HoursLogged): Observable<any> {
     return this.http.post("http://localhost:8080/updateHoursLog", hl);
   }

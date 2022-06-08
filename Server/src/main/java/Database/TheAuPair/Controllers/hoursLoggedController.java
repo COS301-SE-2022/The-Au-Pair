@@ -64,6 +64,13 @@ public class hoursLoggedController
     hls.addHoursLog(hl);
   }
 
+  @PostMapping("/addTimeEnd")
+  @CrossOrigin(origins = "http://localhost:4200")
+  public void addTimeEnd(@RequestBody Map<String, String> idAndEnd)
+  {
+    hls.addTimeEnd(idAndEnd.get("id"), idAndEnd.get("endTime"));
+  }
+
   @PostMapping("/updateHoursLog")
   @CrossOrigin(origins = "http://localhost:4200")
   public void updateHoursLog(@RequestBody hoursLogged hl)

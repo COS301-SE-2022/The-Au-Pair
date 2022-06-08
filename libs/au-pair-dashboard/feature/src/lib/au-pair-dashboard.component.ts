@@ -1,6 +1,6 @@
-import { ThisReceiver } from '@angular/compiler';
 import { Component, OnInit } from '@angular/core';
 import { API } from '../../../../shared/api/api.service'
+import { HoursLogged } from '../../../../shared/interfaces/interfaces';
 
 @Component({
   selector: 'the-au-pair-au-pair-dashboard',
@@ -11,30 +11,67 @@ import { API } from '../../../../shared/api/api.service'
 export class AuPairDashboardComponent  {
   constructor(private api:API) { }
 
-  ngOnInit() {
-    const today = this.getToday();
-    this.getCurrentTime();
+  alreadyLogging = true;
+  logID = "";
 
-    
-    // this.api.getStartedLog("7542108615984", today).subscribe( 
-    //   data => {
-    //     if(data.equals("")) {
-    //       this.alreadyLogging = false;
-    //     }
-    //     else{
-    //       this.alreadyLogging = true;
-    //     }
-    //   },
-    //   error => {
-    //     console.log("Error has occured with API: " + error);
-    //   }
-    // )
+  hoursLogDetail: HoursLogged = {
+    id: "",
+    user: "",
+    date: "",
+    timeStart: "",
+    timeEnd: ""
+  };
+
+  ngOnInit() {    
+    this.api.getStartedLog("7542108615984", this.getToday()).subscribe( 
+      data => {
+        if(data == null || data.equals("")) {
+          this.alreadyLogging = false;
+        }
+        else{
+          this.logID = data;
+          this.alreadyLogging = true;
+        }
+      },
+      error => {
+        console.log("Error has occured with API: " + error);
+      }
+    )
   }
 
-  alreadyLogging = true;
-
-
   logSwitch() {
+    if(this.alreadyLogging) {
+      if(this.logID == null || this.logID == "") {
+        this.api.getStartedLog("7542108615984", this.getToday()).subscribe( 
+          data => {
+            this.logID = data;
+          },
+          error => {
+            console.log("Error has occured with API: " + error);
+          }
+        )
+      }
+
+      this.api.addTimeEnd(this.logID, this.getCurrentTime()).subscribe( 
+        error => {
+          console.log("Error has occured with API: " + error);
+        }
+      )
+    }
+    else {
+      this.hoursLogDetail.user = "7542108615984";
+      this.hoursLogDetail.date = this.getToday();
+      this.hoursLogDetail.timeStart = this.getCurrentTime();
+      this.api.addHoursLog(this.hoursLogDetail).subscribe( 
+        res=>{
+          console.log("The response is:" + res); 
+        },
+        error => {
+          console.log("Error has occured with API: " + error);
+        }
+      )
+    }
+
     this.alreadyLogging = !this.alreadyLogging;
   }
 
@@ -51,11 +88,8 @@ export class AuPairDashboardComponent  {
   getCurrentTime() {
     const now = new Date();
 
-    // const strDate = ('0' + now.getDate()).slice(-2) + "/" + ('0' + now.getMonth()).slice(-2) +
-    // "/" + now.getFullYear();
+    const strTime = ('0' + now.getHours()).slice(-2) + ":" + ('0' + now.getMinutes()).slice(-2);
 
-    console.log(now.getTime())
-
-    // return strDate;
+    return strTime;
   }
 }

@@ -23,7 +23,7 @@ export interface Activity{
 
   export interface HoursLogged{
     id: string;
-    user_id: string;
+    user: string;
     date: String
     timeStart: string;
     timeEnd: string;
