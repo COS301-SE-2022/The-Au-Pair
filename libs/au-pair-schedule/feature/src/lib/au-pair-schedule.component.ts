@@ -19,6 +19,15 @@ export class AuPairScheduleComponent implements OnInit {
   auPairChildren: string[] = [];
   activities: any;
   children : any;
+  childActivity : any = {
+    childName : "",
+    childId : "",
+    activityName : "",
+    activityId : "",
+    time : "",
+    dayofweek : "",
+  }
+  childActivities : any[] = [];
 
   constructor(private serv: API, private modalCtrl : ModalController) {}
 
@@ -40,8 +49,7 @@ export class AuPairScheduleComponent implements OnInit {
     return days.findIndex(x => x === dateStr);
   }
 
-  async getActivities()
-  {
+  async getActivities(){
     this.serv.getChildren("7542108615984").subscribe(
       res => {
         this.children = res;
@@ -50,12 +58,30 @@ export class AuPairScheduleComponent implements OnInit {
         });
         this.serv.getAuPairSchedule(this.auPairChildren).subscribe(
           res=>{
-            console.log(res);
             this.activities = res;
+            this.setChildActivity();
           }
         );
       },
       error => { console.log("Error has occured with API: " + error); }
     );
+  }
+
+  setChildActivity(){
+    this.children.forEach((child: { id: any; fname: any; }) => {
+      this.activities.forEach((act: { childId: any; child: any; name: any; id: any; timeStart: any; day: any; }) => {
+        if(child.id === act.child){
+          const childActivity = {
+            childName : child.fname,
+            childId : act.child,
+            activityName : act.name,
+            activityId : act.id,
+            time : act.timeStart,
+            dayofweek : act.day,
+          }
+          this.childActivities.push(childActivity);
+        }
+      });
+    });
   }
 }
