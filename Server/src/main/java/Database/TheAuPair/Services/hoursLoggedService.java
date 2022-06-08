@@ -87,6 +87,30 @@ public class hoursLoggedService
     return minuteSum;
   }
 
+  public int getMonthMinutes(String id, String date)
+  {
+    List<hoursLogged> hl = hlr.findAllByUserId(id, Sort.by(Sort.Direction.DESC, "date"));
+
+    String monthIn = date.split("/")[1];
+
+    int minuteSum = 0;
+    for (hoursLogged hourLog : hl)
+    {
+      String [] dateString = hourLog.getDate().split("/");
+
+      if (dateString[1].equals(monthIn)) {
+        String [] ts = hourLog.getTimeStart().split(":");
+        String [] te = hourLog.getTimeEnd().split(":");
+        minuteSum += (Integer.parseInt(te[0]) - Integer.parseInt(ts[0]))*60;
+        minuteSum += Integer.parseInt(te[1]) - Integer.parseInt(ts[1]);
+      }
+      else {
+        break;
+      }
+    }
+    return minuteSum;
+  }
+
   public List<hoursLogged> getDateTimes(String id, String date)
   {
     List<hoursLogged> hl = hlr.findAllByUserIdAndDate(id, date, Sort.by(Sort.Direction.ASC, "timeStart"));

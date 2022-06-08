@@ -50,6 +50,15 @@ export class AuPairCostComponent implements OnInit {
       }
     )
 
+    this.api.getMonthMinutes("7542108615984", this.getStartDateOfWeek(0)).subscribe( 
+      data => {
+        this.totalHours = Number((data/60).toFixed(3));
+      },
+      error => {
+        console.log("Error has occured with API: " + error);
+      }
+    )
+
     this.api.getAuPair("7542108615984").subscribe( 
       data => { 
         this.hourlyRate = data.payRate;
@@ -79,7 +88,6 @@ export class AuPairCostComponent implements OnInit {
   }
 
   populateDaysCost() {
-    //This is mock data for the moment
     for (let i = 0; i < 7; i++) {
       
       const weekDay = this.getStartDateOfWeek(i);
