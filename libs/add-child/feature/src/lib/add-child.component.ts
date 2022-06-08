@@ -21,6 +21,9 @@ export class AddChildComponent implements OnInit
     parent: ""
   }  
 
+  //Regex for south african ID number
+  SA_ID = new RegExp(/(\d{2}((0[13578]|1[02])(0[1-9]|[12]\d|3[01])|(0[13456789]|1[012])(0[1-9]|[12]\d|30)|02(0[1-9]|1\d|2[0-8])))/);
+
   //Constructor
   constructor(private serv: API, public router: Router, public toastCtrl: ToastController) {}
 
@@ -43,6 +46,14 @@ export class AddChildComponent implements OnInit
       if(dom != null)
       {
         dom.innerHTML = "Child ID field is empty.";
+        dom.style.display = "block";
+      }
+    }
+    else if(!this.SA_ID.test(val.childID))
+    {
+      if(dom != null)
+      {
+        dom.innerHTML = "Invalid South African ID number.";
         dom.style.display = "block";
       }
     }
