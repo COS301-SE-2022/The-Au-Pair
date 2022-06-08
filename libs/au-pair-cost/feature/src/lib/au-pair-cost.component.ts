@@ -35,7 +35,7 @@ export class AuPairCostComponent implements OnInit {
   pieSplit = "";
 
   ngOnInit() { 
-    this.api.getUser().subscribe( 
+    this.api.getUser("7542108615984").subscribe( 
       data => { 
         this.auPairName = data.fname
       },
@@ -44,7 +44,7 @@ export class AuPairCostComponent implements OnInit {
       }
     )
 
-    this.api.getAuPair().subscribe( 
+    this.api.getAuPair("7542108615984").subscribe( 
       data => { 
         this.hourlyRate = data.payRate;
         this.totalHours = data.hoursWorked;
