@@ -20,8 +20,10 @@ public class Child
   private String diet;
   @Field ("parent")
   private String parent;
+  @Field ("aupairID")
+  private String aupairID;
 
-  public Child(String id, String fname, String sname, String allergies, String diet, String parent)
+  public Child(String id, String fname, String sname, String allergies, String diet, String parent, String aupairID)
   {
     this.id = id;
     this.fname = fname;
@@ -29,6 +31,7 @@ public class Child
     this.allergies = allergies;
     this.diet = diet;
     this.parent = parent;
+    this.aupairID = aupairID;
   }
 
   public String getId()
@@ -91,6 +94,16 @@ public class Child
     this.parent = parent;
   }
 
+  public String getAupairID()
+  {
+    return aupairID;
+  }
+
+  public void setAupairID(String aupairID)
+  {
+    this.aupairID = aupairID;
+  }
+
   @Override
   public String toString()
   {
@@ -101,6 +114,7 @@ public class Child
       ", allergies=" + allergies + '\'' +
       ", diet='" + diet + '\'' +
       ", parent='" + parent + '\'' +
+      ", aupairID='" + aupairID + '\'' +
       '}';
   }
 }
