@@ -15,7 +15,7 @@ export class ParentEditActivityComponent implements OnInit {
 
    //Activity Model
    activityDetails: Activity = {
-    id: "deault",
+    id: "",
     name: "",
     description: "",
     location: "",
@@ -240,8 +240,12 @@ export class ParentEditActivityComponent implements OnInit {
         // location.reload();
         console.log("The response is:" + res); 
         this.openToast();
+        return res;
       },
-      error=>{console.log("Error has occured with API: " + error);}
+      error=>{
+        console.log("Error has occured with API: " + error);
+        return error;
+      }
     )
   };
 
