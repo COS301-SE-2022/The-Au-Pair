@@ -50,6 +50,7 @@ export class AuPairScheduleComponent implements OnInit {
   }
 
   async getActivities(){
+    console.log("getActivities");
     this.serv.getChildren("7542108615984").subscribe(
       res => {
         this.children = res;
@@ -63,7 +64,7 @@ export class AuPairScheduleComponent implements OnInit {
           }
         );
       },
-      error => { console.log("Error has occured with API: " + error); }
+      error => { console.log("Error has occured with API: " + error); },
     );
   }
 
