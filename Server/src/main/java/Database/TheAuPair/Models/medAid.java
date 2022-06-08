@@ -91,11 +91,6 @@ public class medAid
       this.provider = provider;
     }
 
-  public void setMid(String mID)
-    {
-        this.mID = mID;
-    }
-
     @Override
     public String toString()
     {
