@@ -12,7 +12,7 @@ h2{
     position: relative;
     text-align: center;
     margin-bottom: -40px;
-    color: #3C3C3C;
+    color: var(--ion-color-dark);
     font-style: normal;
     font-weight: 700;
     font-size: 48px;
@@ -124,7 +124,7 @@ textarea:focus{
     font-size: 16px;
     line-height: 19px;
     color: white;
-    background-color: #69A88D !important;
+    background-color: var(--ion-color-primary) !important;
     margin-top: 20px;
 }
 
@@ -144,12 +144,31 @@ textarea:focus{
     font-weight: 700;
     font-size: 16px;
     line-height: 19px;
-    color: #69A88D;
+    color: var(--ion-color-primary);
     background-color: transparent !important;
-    border: 2px solid #69A88D !important;
+    border: 2px solid var(--ion-color-primary) !important;
     border-radius: 10px;
     margin-top: 20px;
 }
+
+//Labels for input
+#labelID{
+    left: -169px !important;
+}
+#firstName{
+    left: -156px !important;
+}
+#surname{
+    left: -165px !important;
+}
+#allergies{
+    left: -165px !important;
+}
+#diet{
+    left: -120px !important;
+}
+
+
 
 //Errors styling
 .error{
