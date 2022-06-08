@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component} from '@angular/core';
 import { Router } from '@angular/router';
 import { ToastController } from '@ionic/angular';
 import { API } from '../../../../shared/api/api.service';
@@ -9,7 +9,7 @@ import { Child } from '../../../../shared/interfaces/interfaces';
   templateUrl: './add-child.component.html',
   styleUrls: ['./add-child.component.scss'],
 })
-export class AddChildComponent implements OnInit 
+export class AddChildComponent
 {
   //Child model
   childDetails: Child = {
@@ -22,23 +22,20 @@ export class AddChildComponent implements OnInit
   }  
 
   //Regex for south african ID number
-  SA_ID = new RegExp(/(\d{2}((0[13578]|1[02])(0[1-9]|[12]\d|3[01])|(0[13456789]|1[012])(0[1-9]|[12]\d|30)|02(0[1-9]|1\d|2[0-8])))/);
+  SA_ID = new RegExp(/(((\d{2}((0[13578]|1[02])(0[1-9]|[12]\d|3[01])|(0[13456789]|1[012])(0[1-9]|[12]\d|30)|02(0[1-9]|1\d|2[0-8])))|([02468][048]|[13579][26])0229))(( |-)(\d{4})( |-)(\d{3})|(\d{7}))/);
 
   //Constructor
   constructor(private serv: API, public router: Router, public toastCtrl: ToastController) {}
 
-  ngOnInit(): void 
-  {
-    console.log();
-  }
-
   //Function to retrieve the child's details
   async getChildValues(val: any)
   {
+
     //Error check the fields for invalid input
 
     //Child ID Field
     let emptyInput = false;
+    let invalidInput = false;
     let dom = document.getElementById("childIDError");
     if(val.childID === "")
     {
@@ -55,6 +52,7 @@ export class AddChildComponent implements OnInit
       {
         dom.innerHTML = "Invalid South African ID number.";
         dom.style.display = "block";
+        invalidInput = true;
       }
     }
     else
@@ -66,7 +64,6 @@ export class AddChildComponent implements OnInit
     }
 
     //Child name field
-    emptyInput = false;
     dom = document.getElementById("childNameError");
     if(val.childName === "")
     {
@@ -144,9 +141,16 @@ export class AddChildComponent implements OnInit
     {
       console.log("You cannot add an child with empty fields.");
     }
+    else if(invalidInput == true)
+    {
+      console.log("Entered South African is invalidID");
+    }
     else
     {
-      this.childDetails.id = val.childID;
+      let idNum = val.childID.replaceAll(' ', '');
+      idNum = val.childID.replaceAll('-', '');
+      
+      this.childDetails.id = idNum;
       this.childDetails.fname = val.childName;
       this.childDetails.sname= val.surname;
       this.childDetails.allergies= val.Allergies;
@@ -157,7 +161,7 @@ export class AddChildComponent implements OnInit
   }
 
   //Pop-up if child is successfully updates
-  async openToast()
+  async openToast() : Promise<boolean>
   {
     const toast = await this.toastCtrl.create({
       message: 'Child added successfully!',
@@ -167,6 +171,7 @@ export class AddChildComponent implements OnInit
       cssClass: 'toastPopUp'
     });
     await toast.present();
+    return true;
   }
 
   returnToChildrenDashboard()
