@@ -18,14 +18,17 @@ public class medAid
     private String sname;
     @Field ("mainID")
     private String mID;
+    @Field ("provider")
+    private String provider;
 
-    public medAid(String id, String plan, String name, String sname, String mID)
+    public medAid(String id, String plan, String name, String sname, String mID, String provider)
     {
         this.id = id;
         this.plan = plan;
         this.name = name;
         this.sname = sname;
         this.mID = mID;
+        this.provider = provider;
     }
 
     public String getId()
@@ -68,12 +71,27 @@ public class medAid
         this.sname = sname;
     }
 
-    public String getMid()
+    public String getmID()
     {
-        return mID;
+      return mID;
     }
 
-    public void setMid(String mID)
+    public void setmID(String mID)
+    {
+      this.mID = mID;
+    }
+
+    public String getProvider()
+    {
+      return provider;
+    }
+
+    public void setProvider(String provider)
+    {
+      this.provider = provider;
+    }
+
+  public void setMid(String mID)
     {
         this.mID = mID;
     }
@@ -87,6 +105,7 @@ public class medAid
                 ", name='" + name + '\'' +
                 ", sname='" + sname + '\'' +
                 ", mid='" + mID + '\'' +
+                ", provider='" + provider + '\'' +
                 '}';
     }
 }
