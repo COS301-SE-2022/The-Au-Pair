@@ -48,7 +48,7 @@ public class hoursLoggedService
     List<hoursLogged> hl = hlr.findAllByUserIdAndDate(id, date, Sort.by(Sort.Direction.ASC, "timeStart"));
     for (hoursLogged hourLog : hl)
     {
-      if(!hourLog.getTimeEnd().equals(""))
+      if(hourLog.getTimeEnd() == null || hourLog.getTimeEnd().equals(""))
       {
         return hourLog.getId();
       }
@@ -64,6 +64,9 @@ public class hoursLoggedService
     for (hoursLogged hourLog : hl)
     {
       String [] ts = hourLog.getTimeStart().split(":");
+      if (hourLog.getTimeEnd() == null || hourLog.getTimeEnd().equals(""))
+        continue;
+
       String [] te = hourLog.getTimeEnd().split(":");
       minuteSum += (Integer.parseInt(te[0]) - Integer.parseInt(ts[0]))*60;
       minuteSum += Integer.parseInt(te[1]) - Integer.parseInt(ts[1]);
@@ -79,6 +82,9 @@ public class hoursLoggedService
     for (hoursLogged hourLog : hl)
     {
       String [] ts = hourLog.getTimeStart().split(":");
+      if (hourLog.getTimeEnd() == null || hourLog.getTimeEnd().equals(""))
+        continue;
+
       String [] te = hourLog.getTimeEnd().split(":");
       minuteSum += (Integer.parseInt(te[0]) - Integer.parseInt(ts[0]))*60;
       minuteSum += Integer.parseInt(te[1]) - Integer.parseInt(ts[1]);
@@ -100,6 +106,9 @@ public class hoursLoggedService
 
       if (dateString[1].equals(monthIn)) {
         String [] ts = hourLog.getTimeStart().split(":");
+        if (hourLog.getTimeEnd() == null || hourLog.getTimeEnd().equals(""))
+          continue;
+
         String [] te = hourLog.getTimeEnd().split(":");
         minuteSum += (Integer.parseInt(te[0]) - Integer.parseInt(ts[0]))*60;
         minuteSum += Integer.parseInt(te[1]) - Integer.parseInt(ts[1]);
