@@ -54,8 +54,6 @@ export class ParentEditActivityComponent implements OnInit {
   //From HTML Form
   getActivityValues(val : any)
   {  
-    console.log(val);
-    
     //FORM ERROR CHECKING
     let emptyInput = false;
     let dom = document.getElementById("actNameError");
