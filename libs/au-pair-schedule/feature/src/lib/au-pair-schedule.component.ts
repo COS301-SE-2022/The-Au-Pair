@@ -39,7 +39,7 @@ export class AuPairScheduleComponent implements OnInit {
 
   async getActivities()
   {
-    this.serv.getSchedule().subscribe(
+    this.serv.getSchedule("8675945310542").subscribe(
       res=>{
           this.activities = res;
       },

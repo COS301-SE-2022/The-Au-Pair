@@ -12,9 +12,14 @@ public class ParentService
     this.pr = pr;
   }
 
-  public Parent getParent()
+  public Parent getParent(String id)
   {
-    Parent p = pr.findUsingId("4561237814867");
+    Parent p = pr.findUsingId(id);
     return p;
+  }
+
+  public void updateParent(Parent p)
+  {
+    pr.save(p);
   }
 }

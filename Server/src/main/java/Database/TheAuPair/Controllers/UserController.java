@@ -3,9 +3,7 @@ package Database.TheAuPair.Controllers;
 import Database.TheAuPair.Models.User;
 import Database.TheAuPair.Repositories.UserRepository;
 import Database.TheAuPair.Services.UserService;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 public class UserController
@@ -17,11 +15,18 @@ public class UserController
     this.us = new UserService(ur);
   }
 
-  @GetMapping("/getUser")
+  @PostMapping("/getUser")
   @CrossOrigin(origins = "http://localhost:4200")
-  public User getUser()
+  public User getUser(@RequestBody String id)
   {
-    User u =  us.getUser();
+    User u =  us.getUser(id);
     return u;
+  }
+
+  @PostMapping("/editUser")
+  @CrossOrigin(origins = "http://localhost:4200")
+  public void editUser(@RequestBody User u)
+  {
+    this.us.updateUser(u);
   }
 }

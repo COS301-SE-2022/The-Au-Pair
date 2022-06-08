@@ -3,7 +3,6 @@ package Database.TheAuPair.Models;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.Field;
-import java.util.Arrays;
 
 @Document("Au-Pair")
 public class auPair
@@ -23,12 +22,8 @@ public class auPair
   private boolean onShift;
   @Field("employer")
   private String employer;
-  @Field("hoursWorked")
-  private String hoursWorked;
-  @Field ("currentWeek")
-  private double currWeek[];
 
-  public auPair(String id, double rating, double payRate, double distTraveled, double costIncurred, boolean onShift, String employer, String hoursWorked, double[] currWeek)
+  public auPair(String id, double rating, double payRate, double distTraveled, double costIncurred, boolean onShift, String employer)
   {
     this.id = id;
     this.rating = rating;
@@ -37,8 +32,6 @@ public class auPair
     this.costIncurred = costIncurred;
     this.onShift = onShift;
     this.employer = employer;
-    this.hoursWorked = hoursWorked;
-    this.currWeek = Arrays.copyOf(currWeek, currWeek.length);
   }
 
   public String getId()
@@ -111,26 +104,6 @@ public class auPair
     this.employer = employer;
   }
 
-  public String getHoursWorked()
-  {
-    return hoursWorked;
-  }
-
-  public void setHoursWorked(String hoursWorked)
-  {
-    this.hoursWorked = hoursWorked;
-  }
-
-  public double[] getCurrWeek()
-  {
-    return currWeek;
-  }
-
-  public void setCurrWeek(double[] currWeek)
-  {
-    this.currWeek = currWeek;
-  }
-
   @Override
   public String toString()
   {
@@ -142,8 +115,6 @@ public class auPair
       ", costIncurred=" + costIncurred +
       ", onShift=" + onShift +
       ", employer='" + employer + '\'' +
-      ", hoursWorked='" + hoursWorked + '\'' +
-      ", currWeek=" + Arrays.toString(currWeek) +
       '}';
   }
 }

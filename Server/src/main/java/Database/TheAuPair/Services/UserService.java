@@ -12,9 +12,14 @@ public class UserService
     this.ur = ur;
   }
 
-  public User getUser()
+  public User getUser(String id)
   {
-    User u =  ur.findUsingId("7542108615984");
+    User u =  ur.findUsingId(id);
     return u;
+  }
+
+  public void updateUser(User u)
+  {
+    ur.save(u);
   }
 }

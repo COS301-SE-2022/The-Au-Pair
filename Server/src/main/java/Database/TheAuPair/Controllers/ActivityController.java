@@ -3,7 +3,6 @@ package Database.TheAuPair.Controllers;
 import Database.TheAuPair.Models.Activity;
 import Database.TheAuPair.Repositories.ActivityRepository;
 import Database.TheAuPair.Services.ActivityService;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
@@ -27,7 +26,7 @@ public class ActivityController
 
   @PostMapping("/addActivity")
   @CrossOrigin(origins = "http://localhost:4200")
-  public void addActivity(@RequestBody Activity a, BindingResult bindingResult)
+  public void addActivity(@RequestBody Activity a)
   {
     this.as.addActivity(a);
   }
@@ -39,11 +38,11 @@ public class ActivityController
     this.as.updateActivity(a);
   }
 
-  @GetMapping("/getSchedule")
+  @PostMapping("/getSchedule")
   @CrossOrigin(origins = "http://localhost:4200")
-  public List<Activity> getSchedule()
+  public List<Activity> getSchedule(@RequestBody String id)
   {
-    List<Activity> a =  as.getSchedule();
+    List<Activity> a =  as.getSchedule(id);
     return a;
   }
 

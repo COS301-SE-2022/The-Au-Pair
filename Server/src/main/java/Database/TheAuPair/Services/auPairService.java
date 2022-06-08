@@ -12,9 +12,9 @@ public class auPairService
     this.apr = apr;
   }
 
-  public auPair getAuPair()
+  public auPair getAuPair(String id)
   {
-    auPair ap =  apr.findUsingId("7542108615984");
+    auPair ap =  apr.findUsingId(id);
     return ap;
   }
 }
