@@ -4,12 +4,12 @@
         <div class = 'title-div'>
             <p class='profile-name'>{{this.userDetails.fname}}</p>
         </div>
-        <div class = "profile-picture-div">
+        <!-- <div class = "profile-picture-div">
             <div class='profile-picture-wrapper'>
                 <ion-icon name="people-circle-outline" class='profile-picture'></ion-icon>
             </div>
             <button class="change-button" routerLink="/edit-parent-profile">CHANGE</button>
-        </div>
+        </div> -->
         <div class = 'details-div'>
             <div class = "small-profile-details-div">
                 <div class="parent-info-small">
@@ -32,11 +32,12 @@
                 </div>
                 <div class="parent-info-large">
                     <div class="parent-text">Medical Aid: </div>
-                    <p class="parent-text-info">{{this.medAidDetails.name}}<br>{{this.medAidDetails.sname}}<br>{{this.medAidDetails.id}}<br>{{this.medAidDetails.provider}}<br>{{this.medAidDetails.plan}}</p>
+                    <p class="parent-text-info2">{{this.medAidDetails.name}}<br>{{this.medAidDetails.sname}}<br>{{this.medAidDetails.id}}<br>{{this.medAidDetails.provider}}<br>{{this.medAidDetails.plan}}</p>
                 </div>
             </div>
+            <button class="change-button" routerLink="/edit-parent-profile">CHANGE</button>
         </div>
-        <div class = "empty-div"></div>
+        <!-- <div class = "empty-div"></div> -->
         <img id="active-2" src="assets/images/active.png">
         <img id="active" src="assets/images/active-2.png">
         <img id="lifestyles" src="assets/images/lifestyles.png">

@@ -10,7 +10,7 @@
 
 .parent-profile-div{
     width: 90%;
-    height: 90%;
+    // height: 90%;
     margin-top: 60px;
     margin-left: auto;
     margin-right: auto;
@@ -26,9 +26,13 @@
 }
 
 .details-div{
-    width: 33.3%;
+    width: 40%;
     height: 100%;
-    float: left;
+    // float: left;
+
+    margin-left: auto;
+    margin-right: auto;
+    padding-bottom: 25px;
 }
 
 .empty-div{
@@ -83,11 +87,20 @@
 .parent-text{
     margin-left: 12px;
     font-size: 100%;
-    width: 30%;
+    width: 35%;
     margin: 10px;
 }
 
 .parent-text-info{
+    color: #3C3C3C;
+    font-size: 100%;
+    margin-right: auto;
+    line-height: 170%;
+    margin-top: auto;
+    margin-bottom: auto;
+}
+
+.parent-text-info2{
     color: #3C3C3C;
     font-size: 100%;
     margin-right: auto;
@@ -104,6 +117,7 @@
     background-color: #69A88DB2;
     margin: auto;
     display: block;
+    margin-top: 25px;
 }
 
 #active-2{
@@ -137,11 +151,6 @@
 }
 
 @media (max-width: 642px) {
-    .parent-profile-div{
-        margin-top: 13px;
-        margin-bottom: 13px;
-    }
-
     #active-2{
         display: none;
     }
@@ -155,58 +164,76 @@
         display: none;
     }
 
-    .profile-picture-wrapper{
-        width: 130px;
-        height: 130px;
-        margin-bottom: 8px;
-    }
-
-    .profile-picture-div{
-        width: 50%;
-    }
-
-    .details-div{
-        width: 50%;
+    .parent-profile-div{
+        margin-top: 13px;
+        // height: 95%;
     }
 
     .profile-name{
         font-size: 36px;
-        padding-top: 29px;
-        margin-bottom: 15px;
-    }
-
-    .empty-div{
-        display: none;
-    }
-
-    .small-profile-details-div{
-        margin-top: 21px;
-    }
-
-    .large-profile-details-div{
-        position:absolute;
-        margin-right: 100000px;
-    }
-
-    .parent-info-small{
-        height: 25px;
-        margin-bottom: 6px;
-        margin-top: 0px;
+        padding-top: 15px;
+        padding-bottom: 15px;
     }
 
     .parent-text{
-        font-size: 5px;
+        width: 30%;
+        font-size: 15px;
     }
 
     .parent-text-info{
-        font-size: 10px;
+        font-size: 15px;
     }
 
+    .parent-text-info2{
+        padding-top: 5px;
+    }
 
+    .details-div{
+        width: 75%;
+    }
 }
 
 @media (max-width: 810px) {
+    #active-2{
+        display: none;
+    }
+    
+    #active{
+        display: none;
 
+    }
+    
+    #lifestyles{
+        display: none;
+    }
+
+    .parent-profile-div{
+        margin-top: 13px;
+        // height: 95%;
+    }
+
+    .profile-name{
+        font-size: 36px;
+        padding-top: 15px;
+        padding-bottom: 15px;
+    }
+
+    .parent-text{
+        width: 30%;
+        font-size: 15px;
+    }
+
+    .parent-text-info{
+        font-size: 15px;
+    }
+
+    .parent-text-info2{
+        padding-top: 5px;
+    }
+
+    .details-div{
+        width: 75%;
+    }
 }
 
 @media (max-width: 1240px) {
