@@ -2,25 +2,31 @@ package Database.TheAuPair.Controllers;
 
 import Database.TheAuPair.Models.Parent;
 import Database.TheAuPair.Repositories.ParentRepository;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RestController;
+import Database.TheAuPair.Services.ParentService;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 public class ParentController
 {
-  private ParentRepository pr;
+  private ParentService ps;
 
   public ParentController(ParentRepository pr)
   {
-    this.pr = pr;
+    this.ps = new ParentService(pr);
   }
 
-  @GetMapping("/getParent")
+  @PostMapping("/getParent")
   @CrossOrigin(origins = "http://localhost:4200")
-  public Parent getParent()
+  public Parent getParent(@RequestBody String id)
   {
-    Parent p = pr.findUsingId("4561237814867");
+    Parent p = ps.getParent(id);
     return p;
+  }
+
+  @PostMapping("/editParent")
+  @CrossOrigin(origins = "http://localhost:4200")
+  public void editParent(@RequestBody Parent p)
+  {
+    this.ps.updateParent(p);
   }
 }

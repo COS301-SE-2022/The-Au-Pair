@@ -2,25 +2,24 @@ package Database.TheAuPair.Controllers;
 
 import Database.TheAuPair.Models.auPair;
 import Database.TheAuPair.Repositories.auPairRepository;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RestController;
+import Database.TheAuPair.Services.auPairService;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 public class auPairController
 {
-  private auPairRepository apr;
+  private auPairService aps;
 
   public auPairController(auPairRepository apr)
   {
-    this.apr = apr;
+    this.aps = new auPairService(apr);
   }
 
-  @GetMapping("/getAuPair")
+  @PostMapping("/getAuPair")
   @CrossOrigin(origins = "http://localhost:4200")
-  public auPair getAuPair()
+  public auPair getAuPair(@RequestBody String id)
   {
-    auPair ap =  apr.findUsingId("7542108615984");
+    auPair ap =  aps.getAuPair(id);
     return ap;
   }
 }

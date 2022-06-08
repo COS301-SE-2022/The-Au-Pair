@@ -10,7 +10,6 @@ import { RouterTestingModule} from '@angular/router/testing';
 describe('AuPairCostComponent', () => {
   let component: AuPairCostComponent;
   let fixture: ComponentFixture<AuPairCostComponent>;
-  let service: API;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({

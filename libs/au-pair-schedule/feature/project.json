@@ -1,0 +1,26 @@
+{
+  "projectType": "library",
+  "root": "libs/au-pair-schedule/feature",
+  "sourceRoot": "libs/au-pair-schedule/feature/src",
+  "prefix": "the-au-pair",
+  "targets": {
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["coverage/libs/au-pair-schedule/feature"],
+      "options": {
+        "jestConfig": "libs/au-pair-schedule/feature/jest.config.js",
+        "passWithNoTests": true
+      }
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "options": {
+        "lintFilePatterns": [
+          "libs/au-pair-schedule/feature/src/**/*.ts",
+          "libs/au-pair-schedule/feature/src/**/*.html"
+        ]
+      }
+    }
+  },
+  "tags": []
+}

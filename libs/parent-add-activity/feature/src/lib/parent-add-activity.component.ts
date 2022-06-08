@@ -1,6 +1,6 @@
 import { Component, OnInit} from '@angular/core';
 import { API } from '../../../../shared/api/api.service';
-import { Activity } from '../../../../shared/interfaces/activity.interfaces';
+import { Activity } from '../../../../shared/interfaces/interfaces';
 
 @Component({
   selector: 'the-au-pair-parent-add-activity',
@@ -178,18 +178,25 @@ export class ParentAddActivityComponent implements OnInit{
   //Service calls
   addActivity(act:Activity){
     this.serv.addActivity(act).subscribe(
-      res=>{location.reload()},
-      error=>{console.log("Error has occured with API");}
+      res=>{
+        console.log("The response is:" + res); 
+        location.reload()},
+      error=>{
+        console.log("Error has occured with API: " + error);
+      }
     )
   };
 
   getChildren()
   {
-    this.serv.getParent().subscribe(
+    this.serv.getParent("4561237814867").subscribe(
       res=>{
+          console.log("The response is:" + res); 
           this.allChildren = res.children;
       },
-      error=>{console.log("Error has occured with API");}
+      error=>{
+        console.log("Error has occured with API: " + error);
+      }
     )
   }
 }

@@ -2,62 +2,55 @@ package Database.TheAuPair.Controllers;
 
 import Database.TheAuPair.Models.Activity;
 import Database.TheAuPair.Repositories.ActivityRepository;
-import org.springframework.data.domain.Sort;
-import org.springframework.validation.BindingResult;
+import Database.TheAuPair.Services.ActivityService;
 import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
 public class ActivityController
 {
-  private ActivityRepository ar;
+  private ActivityService as;
 
   public ActivityController(ActivityRepository ar)
   {
-    this.ar = ar;
+    this.as = new ActivityService(ar);
+  }
+
+  @PostMapping("/getActivity")
+  @CrossOrigin(origins = "http://localhost:4200")
+  public Activity getActivity(@RequestBody String id)
+  {
+    Activity a =  as.getActivity(id);
+    return a;
   }
 
   @PostMapping("/addActivity")
   @CrossOrigin(origins = "http://localhost:4200")
-  public void addActivity(@RequestBody Activity a, BindingResult bindingResult)
+  public void addActivity(@RequestBody Activity a)
   {
-    String id = "";
-    boolean valid = false;
-    while (!valid)
-    {
-      id = generateID();
-      valid = true;
-      for (Activity activity : ar.findAll())
-      {
-        if (activity.getId().equals(id))
-        {
-          valid = false;
-        }
-      }
-    }
-    a.setId(id);
-    ar.save(a);
+    this.as.addActivity(a);
   }
 
-  @GetMapping("/getSchedule")
+  @PostMapping("/editActivity")
   @CrossOrigin(origins = "http://localhost:4200")
-  public List<Activity> getSchedule()
+  public void editActivity(@RequestBody Activity a)
   {
-    List<Activity> a =  ar.findAllByChild("8675945310542", Sort.by(Sort.Direction.ASC, "timeStart"));
+    this.as.updateActivity(a);
+  }
+
+  @PostMapping("/getSchedule")
+  @CrossOrigin(origins = "http://localhost:4200")
+  public List<Activity> getSchedule(@RequestBody String id)
+  {
+    List<Activity> a =  as.getSchedule(id);
     return a;
   }
 
-  public String generateID()
+  @PostMapping("/getAuPairSchedule")
+  @CrossOrigin(origins = "http://localhost:4200")
+  public List<Activity> getAuPairSchedule(@RequestBody String [] children)
   {
-    String AlphaNumericString = "0123456789"+"abcdefghijklmnopqrstuvxyz";
-    StringBuilder sb = new StringBuilder(24);
-
-    for (int i = 0; i < 24; i++)
-    {
-      int index = (int)(AlphaNumericString.length() * Math.random());
-      sb.append(AlphaNumericString.charAt(index));
-    }
-
-    return sb.toString();
+    List<Activity> a =  as.getAuPairSchedule(children);
+    return a;
   }
 }

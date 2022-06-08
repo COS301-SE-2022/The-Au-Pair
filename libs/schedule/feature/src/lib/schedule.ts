@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { DatePipe } from '@angular/common';
 import { API } from '../../../../shared/api/api.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'the-au-pair-schedule',
@@ -11,11 +12,12 @@ export class ScheduleComponent implements OnInit{
   days = [
     "Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"
   ]
+  actid = -1;
 
   curDay =  this.getCurDay(this.days);
   activities: any;
 
-  constructor(private serv: API) {}
+  constructor(private serv: API, private router: Router) {}
 
   ngOnInit(): void {
       this.getActivities();
@@ -29,12 +31,20 @@ export class ScheduleComponent implements OnInit{
 
   async getActivities()
   {
-    this.serv.getSchedule().subscribe(
+    this.serv.getSchedule("8675945310542").subscribe(
       res=>{
           this.activities = res;
       },
       error=>{console.log("Error has occured with API: " + error);}
     )
+  }
+
+  navigate(id : string)
+  { 
+    //Route to the edit-activity page and parse the ActivityID of the selected Activity 
+    this.router.navigate(['/edit-activity'],{
+      state: {id: id}
+    });
   }
 }
 

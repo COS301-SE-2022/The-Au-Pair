@@ -35,16 +35,16 @@ export class AuPairCostComponent implements OnInit {
   pieSplit = "";
 
   ngOnInit() { 
-    this.api.getUser().subscribe( 
+    this.api.getUser("7542108615984").subscribe( 
       data => { 
         this.auPairName = data.fname
       },
       error => {
-        console.error();
+        console.log("Error has occured with API: " + error);
       }
     )
 
-    this.api.getAuPair().subscribe( 
+    this.api.getAuPair("7542108615984").subscribe( 
       data => { 
         this.hourlyRate = data.payRate;
         this.totalHours = data.hoursWorked;
@@ -61,7 +61,7 @@ export class AuPairCostComponent implements OnInit {
         this.pieSplit = "conic-gradient(var(--ion-color-primary)" + this.otherDeg + "deg, var(--ion-color-secondary) 0 "+ this.activityDeg +"deg, var(--ion-color-champagne) 0)";
       },
       error => {
-        console.error();
+        console.log("Error has occured with API: " + error);
       }
     )
     

@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { Activity } from '../interfaces/activity.interfaces';
+import { Activity , Child , medAid , Parent  , User, HoursLogged } from '../interfaces/interfaces';
 
 
 @Injectable()
@@ -9,24 +9,99 @@ export class API{
 
   constructor(private http: HttpClient) {}
 
-  getSchedule(): Observable<any> {
-    return this.http.get('http://localhost:8080/getSchedule');
+  getActivity(id : String): Observable<any> {
+    return this.http.post('http://localhost:8080/getActivity',id);
   }
 
-  getAuPair(): Observable<any> {
-    return this.http.get('http://localhost:8080/getAuPair');
+  editActivity(activity : Activity): Observable<any> {
+    return this.http.post('http://localhost:8080/editActivity',activity);
   }
-
-  getUser(): Observable<any> {
-    return this.http.get('http://localhost:8080/getUser');
-  }
-
+  
   addActivity(activity : Activity): Observable<any> {
-    console.log("API return", this.http.post('http://localhost:8080/addActivity',activity));
     return this.http.post('http://localhost:8080/addActivity',activity);
   }
 
-  getParent(): Observable<any> {
-    return this.http.get('http://localhost:8080/getParent');
+  getSchedule(id : string): Observable<any> {
+    return this.http.post('http://localhost:8080/getSchedule',id);
+  }
+
+  getAuPairSchedule(children : string []): Observable<any> {
+    return this.http.post('http://localhost:8080/getAuPairSchedule',children);
+  }
+
+  getUser(id : string): Observable<any> {
+    return this.http.post('http://localhost:8080/getUser',id);
+  }
+
+  editUser(user : User): Observable<any> {
+    return this.http.post('http://localhost:8080/editUser',user);
+  }
+
+  getParent(id : string): Observable<any> {
+    return this.http.post('http://localhost:8080/getParent',id);
+  }
+
+  editParent(parent : Parent): Observable<any> {
+    return this.http.post('http://localhost:8080/editParent',parent);
+  }
+
+  getMedAid(id : string): Observable<any> {
+    return this.http.post('http://localhost:8080/getMedAid',id);
+  }
+
+  editMedAid(medAid : medAid): Observable<any> {
+    return this.http.post('http://localhost:8080/editMedAid',medAid);
+  }
+
+  getAuPair(id : string): Observable<any> {
+    return this.http.post('http://localhost:8080/getAuPair',id);
+  }
+
+  getChildren(id : String): Observable<any> {
+    return this.http.post('http://localhost:8080/getChildren',id);
+  }
+
+  addChild(child : Child): Observable<any> {
+    return this.http.post('http://localhost:8080/addChild',child);
+  }
+
+  getDateMinutes(id : string, date : string): Observable<any> {
+    var out = {
+      "id" : id,
+      "date" : date
+    }
+    return this.http.post("http://localhost:8080/getDateMinutes", out);
+  }
+
+  getAllMinutes(id : string): Observable<any> {
+    return this.http.post("http://localhost:8080/getAllMinutes", id);
+  }
+
+  getDateTimes(id : string, date : string): Observable<any> {
+    var out = {
+      "id" : id,
+      "date" : date
+    }
+    return this.http.post("http://localhost:8080/getDateTimes", out);
+  }
+
+  getAllTimes(id : string): Observable<any> {
+    return this.http.post("http://localhost:8080/getAllTimes", id);
+  }
+
+  getStartedLog(id : string, date : string): Observable<any> {
+    var out = {
+      "id" : id,
+      "date" : date
+    }
+    return this.http.post("http://localhost:8080/getStartedLog", out);
+  }
+
+  addHoursLog(hl : HoursLogged): Observable<any> {
+    return this.http.post("http://localhost:8080/addHoursLog", hl);
+  }
+
+  updateHoursLog(hl : HoursLogged): Observable<any> {
+    return this.http.post("http://localhost:8080/updateHoursLog", hl);
   }
 }

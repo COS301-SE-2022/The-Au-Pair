@@ -1,0 +1,86 @@
+.modal-body{
+    background-color: var(--ion-color-primary-contrast);
+    height: 100%;
+    width: 100%;
+    color: black;
+}
+
+.heading{
+    font-size: 26px;
+    font-family: Roboto;
+    padding: 15px 0px;
+    background-color: var(--ion-color-primary);
+    color: var(--ion-color-primary-contrast);
+}
+
+.close{
+    cursor: pointer;
+}
+
+.descInp{
+    width: 80%;
+    height: 15vh;
+    right:-50px !important;
+}
+
+.content{
+    margin-top: 20px;
+    font-size: 18px;
+}
+
+.behaviour{
+    display: flex;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+}
+
+.slider{
+    display: flex;
+    text-align: center;
+    justify-content: center;
+    align-items: center; 
+}
+
+.submit{
+    background-color: var(--ion-color-primary);
+    height: 50px;
+    width: 85%;
+    margin:auto;
+    border-radius: 16px;
+}
+
+.submit-row{
+    margin-top: 18vh;
+}
+
+@media (max-width: 768px){
+    .submit-row{
+        margin-top: 55vh;
+    }
+}
+
+.slider-row{
+    margin-top: 15px;
+}
+
+ion-range{
+    padding-top: 8px !important;
+}
+
+input:focus{
+    outline:none;
+}
+
+textarea:focus{
+    outline:none;
+}
+
+textarea{
+    background-color: white;
+    border-radius: 16px;
+    color:black;
+    resize: none;
+    border: none;
+    padding: 15px;
+}
