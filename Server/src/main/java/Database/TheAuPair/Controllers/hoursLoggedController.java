@@ -6,6 +6,7 @@ import Database.TheAuPair.Repositories.hoursLoggedRepository;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
 
 @RestController
 public class hoursLoggedController
@@ -19,9 +20,9 @@ public class hoursLoggedController
 
   @PostMapping("/getDateMinutes")
   @CrossOrigin(origins = "http://localhost:4200")
-  public int getDateMinutes(@RequestBody String id, String date)
+  public int getDateMinutes(@RequestBody Map<String, String> idAndDate)
   {
-    int minutes = hls.getDateMinutes(id, date);
+    int minutes = hls.getDateMinutes(idAndDate.get("id"), idAndDate.get("date"));
     return minutes;
   }
 
@@ -35,9 +36,9 @@ public class hoursLoggedController
 
   @PostMapping("/getDateTimes")
   @CrossOrigin(origins = "http://localhost:4200")
-  public List<hoursLogged> getDateTimes(@RequestBody String id, String date)
+  public List<hoursLogged> getDateTimes(@RequestBody Map<String, String> idAndDate)
   {
-    List<hoursLogged> times = hls.getDateTimes(id, date);
+    List<hoursLogged> times = hls.getDateTimes(idAndDate.get("id"), idAndDate.get("date"));
     return times;
   }
 

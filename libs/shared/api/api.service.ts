@@ -50,26 +50,34 @@ export class API{
   }
 
   getDateMinutes(id : string, date : string) {
-    return this.http.post("http://localhost:4200/getDateMinutes", id, date);
+    var out = {
+      "id" : id,
+      "date" : date
+    }
+    return this.http.post("http://localhost:8080/getDateMinutes", out);
   }
 
   getAllMinutes(id : string) {
-    return this.http.post("http://localhost:4200/getAllMinutes", id);
+    return this.http.post("http://localhost:8080/getAllMinutes", id);
   }
 
   getDateTimes(id : string, date : string) {
-    return this.http.post("http://localhost:4200/getDateTimes", id, date);
+    var out = {
+      "id" : id,
+      "date" : date
+    }
+    return this.http.post("http://localhost:8080/getDateTimes", out);
   }
 
   getAllTimes(id : string) {
-    return this.http.post("http://localhost:4200/getAllTimes", id);
+    return this.http.post("http://localhost:8080/getAllTimes", id);
   }
 
   addHoursLog(hl : HoursLogged) {
-    return this.http.post("http://localhost:4200/addHoursLog", hl);
+    return this.http.post("http://localhost:8080/addHoursLog", hl);
   }
 
   updateHoursLog(hl : HoursLogged) {
-    return this.http.post("http://localhost:4200/updateHoursLog", hl);
+    return this.http.post("http://localhost:8080/updateHoursLog", hl);
   }
 }
