@@ -1,7 +1,10 @@
 <the-au-pair-navbar></the-au-pair-navbar>
 <ion-content [fullscreen]="true">
     <div class = "parent-profile-div">
-        <div class = "profile-picture-div">
+        <div class = 'title-div'>
+            <p class='profile-name'>{{this.userDetails.fname}}</p>
+        </div>
+        <!-- <div class = "profile-picture-div">
             <div class='profile-picture-wrapper'>
                 <ion-icon name="people-circle-outline" class='profile-picture'></ion-icon>
                 <form>
@@ -9,10 +12,9 @@
                     <input type = "submit" class = "change-button" value = "Change Picture">
                   </form>
             </div>
-        </div>
+        </div> -->
         <form id = "profForm" #profileForm = "ngForm" (ngSubmit) = "getUserFormDetails(profileForm.value)">
             <div class = "profile-details-div">
-                <p class='profile-name'>{{this.userDetails.fname}}</p>
                 <div class="parent-info-small">
                     <div class="parent-text">Email: </div>
                     <input type = 'text' name = "email" class="parent-text-info" ngModel = '{{this.userDetails.email}}'>
@@ -44,10 +46,10 @@
                 <input type = 'submit' class="change-button" value = 'Update Details'>
             </div>
         </form>
-        <div class = "empty-div"></div>
+        <!-- <div class = "empty-div"></div> -->
         <img id="active-2" src="assets/images/active.png">
-            <img id="active" src="assets/images/active-2.png">
-            <img id="lifestyles" src="assets/images/lifestyles.png">
+        <img id="active" src="assets/images/active-2.png">
+        <img id="lifestyles" src="assets/images/lifestyles.png">
     </div>
 
 </ion-content>
