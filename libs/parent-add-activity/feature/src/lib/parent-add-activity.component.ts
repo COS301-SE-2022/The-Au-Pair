@@ -189,7 +189,7 @@ export class ParentAddActivityComponent implements OnInit{
 
   getChildren()
   {
-    this.serv.getParent().subscribe(
+    this.serv.getParent("4561237814867").subscribe(
       res=>{
           console.log("The response is:" + res); 
           this.allChildren = res.children;
