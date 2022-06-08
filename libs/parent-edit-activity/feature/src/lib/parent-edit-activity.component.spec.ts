@@ -3,7 +3,7 @@ import { ParentEditActivityComponent } from './parent-edit-activity.component';
 import { FormsModule } from '@angular/forms';
 import { IonicModule } from '@ionic/angular';
 import { API } from '../../../../shared/api/api.service';
-import { Activity } from '../../../../shared/interfaces/activity.interfaces';
+import { Activity } from '../../../../shared/interfaces/interfaces';
 import { HttpClientTestingModule } from "@angular/common/http/testing";
 import { NavbarModule } from '@the-au-pair/shared/components/navbar';
 import {RouterTestingModule} from "@angular/router/testing";
@@ -52,7 +52,7 @@ describe('ParentEditActivityComponent', () => {
 
   //------------------------------------------------------------------------------------------------------------------------------------------------------------------------
   /**Testing the services**/
-  it('should, when editActivity() is called with an invalid activity ID, return an error', async ()=>{
+  it('should, when editActivity() is called with an invalid activity ID, return an error from the API', async ()=>{
     const expectedValue = undefined;
     jest.spyOn(component,"editActivity");
     expect(await component.editActivity(invalidActivity)).toEqual(expectedValue);
