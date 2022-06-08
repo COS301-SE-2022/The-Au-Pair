@@ -1,6 +1,5 @@
 package Database.TheAuPair.Services;
 
-import Database.TheAuPair.Models.Activity;
 import Database.TheAuPair.Models.medAid;
 import Database.TheAuPair.Repositories.medAidRepository;
 
