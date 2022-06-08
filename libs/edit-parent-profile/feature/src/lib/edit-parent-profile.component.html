@@ -12,22 +12,22 @@
         </div>
         <form>
             <div class = "profile-details-div">
-                <p class='profile-name'>EPI-USE</p>
+                <p class='profile-name'>{{this.userDetails.fname}}</p>
                 <div class="parent-info-small">
                     <div class="parent-text">Email: </div>
-                    <input type = 'text' name = "email-address-info" class="parent-text-info" placeholder = 'Email Address'>
+                    <input type = 'text' name = "email-address-info" class="parent-text-info" placeholder = '{{this.userDetails.email}}'>
                 </div>
                 <div class="parent-info-small">
                     <div class="parent-text">Phone: </div>
-                    <input type = 'text' name = "phone-number-info" class="parent-text-info" placeholder = 'Phone Number (10 Digits)'>
+                    <input type = 'text' name = "phone-number-info" class="parent-text-info" placeholder = '{{this.userDetails.number}}'>
                 </div>
-                <div class="parent-info-large">
+                <div class="parent-info-small">
                     <div class="parent-text">Address: </div>
-                    <textarea name = "parent-address-info" class="parent-text-info" placeholder = 'Street Name&#10;Neighbourhood&#10;Town/City&#10;Province&#10;Postal Code' rows = "5"></textarea>
+                    <input type = 'text' name = "parent-address-info" class="parent-text-info" placeholder = '{{this.userDetails.address}}'>
                 </div>
                 <div class="parent-info-large">
                     <div class="parent-text">Medical Aid: </div>
-                    <textarea name = "medical-aid-info" class="parent-text-info" placeholder = 'Main Member Name&#10;Main Member Surname&#10;Medical Aid No.&#10;Medical Aid Provider&#10;Medical Aid Plan' rows = "5"></textarea>
+                    <textarea name = "medical-aid-info" class="parent-text-info" placeholder = '{{this.medAidDetails.name}}&#10;{{this.medAidDetails.sname}}&#10;{{this.medAidDetails.id}}&#10;[PROVIDER]&#10;{{this.medAidDetails.plan}}' rows = "5"></textarea>
                 </div>
                 <input type = 'submit' class="change-button" value = 'Update Details'>
             </div>

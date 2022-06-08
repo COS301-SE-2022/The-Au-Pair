@@ -2,7 +2,7 @@
 <ion-content [fullscreen]="true">
     <div class = "parent-profile-div">
         <div class = 'title-div'>
-            <p class='profile-name'>EPI-USE</p>
+            <p class='profile-name'>{{this.userDetails.fname}}</p>
         </div>
         <div class = "profile-picture-div">
             <div class='profile-picture-wrapper'>
@@ -14,25 +14,25 @@
             <div class = "small-profile-details-div">
                 <div class="parent-info-small">
                     <div class="parent-text">Email: </div>
-                    <p class="parent-text-info">testemail@cheems.com</p>
+                    <p class="parent-text-info">{{this.userDetails.email}}</p>
                 </div>
                 <div class="parent-info-small">
                     <div class="parent-text">Phone: </div>
-                    <p class="parent-text-info">08712341212</p>
+                    <p class="parent-text-info">{{this.userDetails.number}}</p>
                 </div>
                 <div class="parent-info-small">
                     <div class="parent-text">ID Number: </div>
-                    <p class="parent-text-info">1234567890123</p>
+                    <p class="parent-text-info">{{this.userDetails.id}}</p>
                 </div>
             </div>
             <div class = 'large-profile-details-div'>
                 <div class="parent-info-large">
                     <div class="parent-text">Address: </div>
-                    <p class="parent-text-info">123 Street Name<br>Neighbourhood Name<br>Town/City (Midrand)<br>Province<br>Postal Code</p>
+                    <p class="parent-text-info">{{this.userDetails.address}}</p>
                 </div>
                 <div class="parent-info-large">
                     <div class="parent-text">Medical Aid: </div>
-                    <p class="parent-text-info">Main Name<br>Main Surname<br>Medical Aid No.<br>Provider<br>Plan</p>
+                    <p class="parent-text-info">{{this.medAidDetails.name}}<br>{{this.medAidDetails.sname}}<br>{{this.medAidDetails.id}}<br>{{this.medAidDetails.id}}<br>{{this.medAidDetails.plan}}</p>
                 </div>
             </div>
         </div>
