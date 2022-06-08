@@ -34,9 +34,27 @@ public class hoursLoggedService
     hlr.save(hl);
   }
 
+  public void addTimeEnd(String id,String endTime) {
+    hoursLogged hl = hlr.findUsingId(id);
+    hl.setTimeEnd(endTime);
+    hlr.save(hl);
+  }
+
   public void updateHoursLog(hoursLogged hl)
   {
     hlr.save(hl);
+  }
+
+  public String getStartedLog(String id, String date) {
+    List<hoursLogged> hl = hlr.findAllByUserIdAndDate(id, date, Sort.by(Sort.Direction.ASC, "timeStart"));
+    for (hoursLogged hourLog : hl)
+    {
+      if(!hourLog.getTimeEnd().equals(""))
+      {
+        return hourLog.getId();
+      }
+    }
+    return "";
   }
 
   public int getDateMinutes(String id, String date)
