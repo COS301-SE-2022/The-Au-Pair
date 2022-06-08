@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { API } from '../../../../shared/api/api.service';
 import { User, Parent, medAid } from '../../../../shared/interfaces/interfaces';
 import { ToastController } from '@ionic/angular';
+import { elementAt } from 'rxjs';
 
 @Component({
   selector: 'the-au-pair-edit-parent-profile',
@@ -10,6 +11,8 @@ import { ToastController } from '@ionic/angular';
 })
 export class EditParentProfileComponent implements OnInit{
   
+  hasErr = false;
+
   userDetails: User = {
     id: "",
     fname: "",
@@ -236,25 +239,38 @@ export class EditParentProfileComponent implements OnInit{
       // this.medAidDetails.provider = val.medicalAidProvider;
       this.medAidDetails.id = val.medicalAidNo;
       this.medAidDetails.sname = val.medicalAidMS;
-      this.editUser(this.userDetails);
-      this.editMedAid(this.medAidDetails);
+      // this.editUser(this.userDetails);
+      // this.editMedAid(this.medAidDetails);
+      this.editDetails(this.userDetails, this.medAidDetails);
     }
   }
 
-  // verifyDetails(){
-    
-  // }
+  async editDetails(user:User, medAid:medAid)
+  {
+    await this.editUser(user);
+    await this.editMedAid(medAid);    
 
-  editUser(user:User){
+    if(this.hasErr)
+    {
+      this.errToast();
+    }
+    else
+    {
+      this.openToast();
+    }
+    
+  }
+
+  editUser(user:User){    
     this.serv.editUser(user).subscribe(
       res=>{
         // location.reload();
         console.log("The response is:" + res); 
-        this.openToast();
         return res;
       },
       error=>{
         console.log("Error has occured with API: " + error);
+        this.hasErr = true;
         return error;
       }
     )
@@ -265,11 +281,11 @@ export class EditParentProfileComponent implements OnInit{
       res=>{
         // location.reload();
         console.log("The response is:" + res); 
-        this.openToast();
         return res;
       },
       error=>{
         console.log("Error has occured with API: " + error);
+        this.hasErr = true;
         return error;
       }
     )
@@ -282,6 +298,17 @@ export class EditParentProfileComponent implements OnInit{
       duration: 4000,
       position: 'top',
       color: 'primary',
+      cssClass: 'toastPopUp'
+    });
+    await toast.present();
+  }
+
+  async errToast()
+  {
+    const toast = await this.toastCtrl.create({
+      message: 'Unable to update profile!',
+      duration: 4000,
+      position: 'top',
       cssClass: 'toastPopUp'
     });
     await toast.present();
