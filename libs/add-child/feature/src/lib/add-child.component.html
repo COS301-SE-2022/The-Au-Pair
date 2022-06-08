@@ -4,6 +4,11 @@
     <div class="childrenDetails">
         <form #childDetailsForm="ngForm" (ngSubmit)="getChildValues(childDetailsForm.value)" class = "form-details">
 
+          <!-- Child ID -->
+          <label for="childID" style="left: -169px !important;">Child ID</label>
+          <input type="text" ngModel name="childID"placeholder="Child ID">
+          <p id="childIDError" class="error" style="display: none;">Error in field</p>
+
           <!-- Child First Name -->
           <label for="childName" style="left: -156px !important;">Child Name</label>
           <input type="text" ngModel name="childName"placeholder="Child Name">
@@ -16,18 +21,18 @@
 
           <!-- Allergies -->
           <label for="Allergies" style="left: -165px !important;">Allergies</label>
-          <textarea></textarea>
-          <p id="AllergiesError" class="error" style="display: none;">Error in field</p>
+          <textarea name="Allergies" ngModel></textarea>
+          <p id="allergiesError" class="error" style="display: none;">Error in field</p>
 
           <!-- Dietery requirements -->
           <label for="diet" style="left: -120px !important;">Dietery requirements</label>
-          <textarea></textarea>
+          <textarea name="diet" ngModel></textarea>
           <p id="dietError" class="error" style="display: none;">Error in field</p>
 
           <!-- Submit -->
           <div class="buttons">
             <input class = "addChild" type="submit" value="Add child">
-            <input class = "cancel" type="submit" value="Cancel" routerLink="/children-dashboard">
+            <input class = "cancel" value="Cancel" (click)="returnToChildrenDashboard()">
           </div>
           
         </form>
