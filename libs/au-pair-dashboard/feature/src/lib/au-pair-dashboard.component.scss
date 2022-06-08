@@ -84,6 +84,41 @@ ion-card {
     border-radius: 0px 16px 16px 0px;
 }
 
+.log-div {
+    width: 90%;
+    height: 94px;
+    display: grid;
+    grid-template-columns: repeat(1, 1fr);
+    align-items: center;
+    justify-items: center;
+    margin: auto;
+    font-size: 24px;
+    margin-bottom: 60px;
+}
+
+.logging-button {
+    color: white;
+    margin: 0;
+    height: 100%;
+    display: flex;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    font-size: 24px;
+    border-radius: 16px;
+    cursor: pointer;
+}
+
+.logging-start {
+    background-color: var(--ion-color-secondary);
+}
+
+
+.logging-stop {
+    background-color: var(--ion-color-danger);
+}
+
 .actions-div-wrapper {
     text-align: center;
     width: 100%;
