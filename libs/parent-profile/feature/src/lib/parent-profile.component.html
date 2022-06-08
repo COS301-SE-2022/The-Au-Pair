@@ -1,39 +1,45 @@
 <the-au-pair-navbar></the-au-pair-navbar>
 <ion-content [fullscreen]="true">
     <div class = "parent-profile-div">
+        <div class = 'title-div'>
+            <p class='profile-name'>EPI-USE</p>
+        </div>
         <div class = "profile-picture-div">
             <div class='profile-picture-wrapper'>
                 <ion-icon name="people-circle-outline" class='profile-picture'></ion-icon>
             </div>
             <button class="change-button" routerLink="/edit-parent-profile">CHANGE</button>
         </div>
-        <div class = "profile-details-div">
-            <p class='profile-name'>EPI-USE</p>
-            <div class="parent-info-small">
-                <div class="parent-text">Email: </div>
-                <p class="parent-text-info">testemail@cheems.com</p>
+        <div class = 'details-div'>
+            <div class = "small-profile-details-div">
+                <div class="parent-info-small">
+                    <div class="parent-text">Email: </div>
+                    <p class="parent-text-info">testemail@cheems.com</p>
+                </div>
+                <div class="parent-info-small">
+                    <div class="parent-text">Phone: </div>
+                    <p class="parent-text-info">08712341212</p>
+                </div>
+                <div class="parent-info-small">
+                    <div class="parent-text">ID Number: </div>
+                    <p class="parent-text-info">1234567890123</p>
+                </div>
             </div>
-            <div class="parent-info-small">
-                <div class="parent-text">Phone: </div>
-                <p class="parent-text-info">08712341212</p>
-            </div>
-            <div class="parent-info-small">
-                <div class="parent-text">ID Number: </div>
-                <p class="parent-text-info">1234567890123</p>
-            </div>
-            <div class="parent-info-large">
-                <div class="parent-text">Address: </div>
-                <p class="parent-text-info">123 Street Name<br>Neighbourhood Name<br>Town/City (Midrand)<br>Province<br>Postal Code</p>
-            </div>
-            <div class="parent-info-large">
-                <div class="parent-text">Medical Aid: </div>
-                <p class="parent-text-info">Main Name<br>Main Surname<br>Medical Aid No.<br>Provider<br>Plan</p>
+            <div class = 'large-profile-details-div'>
+                <div class="parent-info-large">
+                    <div class="parent-text">Address: </div>
+                    <p class="parent-text-info">123 Street Name<br>Neighbourhood Name<br>Town/City (Midrand)<br>Province<br>Postal Code</p>
+                </div>
+                <div class="parent-info-large">
+                    <div class="parent-text">Medical Aid: </div>
+                    <p class="parent-text-info">Main Name<br>Main Surname<br>Medical Aid No.<br>Provider<br>Plan</p>
+                </div>
             </div>
         </div>
         <div class = "empty-div"></div>
         <img id="active-2" src="assets/images/active.png">
-            <img id="active" src="assets/images/active-2.png">
-            <img id="lifestyles" src="assets/images/lifestyles.png">
+        <img id="active" src="assets/images/active-2.png">
+        <img id="lifestyles" src="assets/images/lifestyles.png">
     </div>
 
 </ion-content>
