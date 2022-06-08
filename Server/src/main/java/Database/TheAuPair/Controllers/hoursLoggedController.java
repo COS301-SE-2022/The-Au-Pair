@@ -50,6 +50,14 @@ public class hoursLoggedController
     return times;
   }
 
+  @PostMapping("/getStartedLog")
+  @CrossOrigin(origins = "http://localhost:4200")
+  public String getStartedLog(@RequestBody Map<String, String> idAndDate)
+  {
+    String id = hls.getStartedLog(idAndDate.get("id"), idAndDate.get("date"));
+    return id;
+  }
+
   @PostMapping("/addHoursLog")
   @CrossOrigin(origins = "http://localhost:4200")
   public void addHoursLog(@RequestBody hoursLogged hl)

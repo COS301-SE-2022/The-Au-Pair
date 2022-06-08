@@ -73,6 +73,14 @@ export class API{
     return this.http.post("http://localhost:8080/getAllTimes", id);
   }
 
+  getStartedLog(id : string, date : string): Observable<any> {
+    var out = {
+      "id" : id,
+      "date" : date
+    }
+    return this.http.post("http://localhost:8080/getStartedLog", out);
+  }
+
   addHoursLog(hl : HoursLogged): Observable<any> {
     return this.http.post("http://localhost:8080/addHoursLog", hl);
   }
