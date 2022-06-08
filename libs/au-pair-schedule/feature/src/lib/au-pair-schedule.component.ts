@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { DatePipe } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { ModalController } from '@ionic/angular';
@@ -15,7 +16,9 @@ export class AuPairScheduleComponent implements OnInit {
   ]
 
   curDay =  this.getCurDay(this.days);
+  auPairChildren: string[] = [];
   activities: any;
+  children : any;
 
   constructor(private serv: API, private modalCtrl : ModalController) {}
 
@@ -39,11 +42,20 @@ export class AuPairScheduleComponent implements OnInit {
 
   async getActivities()
   {
-    this.serv.getSchedule("8675945310542").subscribe(
-      res=>{
-          this.activities = res;
+    this.serv.getChildren("7542108615984").subscribe(
+      res => {
+        this.children = res;
+        this.children.forEach((element: { id: string; }) => {
+          this.auPairChildren.push(element.id);
+        });
+        this.serv.getAuPairSchedule(this.auPairChildren).subscribe(
+          res=>{
+            console.log(res);
+            this.activities = res;
+          }
+        );
       },
-      error=>{console.log("Error has occured with API: " + error);}
-    )
+      error => { console.log("Error has occured with API: " + error); }
+    );
   }
 }

@@ -65,9 +65,6 @@ export class API{
     return this.http.post('http://localhost:8080/addChild',child);
   }
 
-  getUserByUserId(userId : String): Observable<any> {
-    return this.http.post('http://localhost:8080/getUserByUserId',userId);
-  }
   getDateMinutes(id : string, date : string): Observable<any> {
     var out = {
       "id" : id,

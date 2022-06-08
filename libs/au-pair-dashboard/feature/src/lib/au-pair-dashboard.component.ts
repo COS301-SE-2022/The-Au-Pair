@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { API } from 'libs/shared/api/api.service';
+import { API } from '../../../../shared/api/api.service';
 
 @Component({
   selector: 'the-au-pair-au-pair-dashboard',
@@ -8,6 +8,7 @@ import { API } from 'libs/shared/api/api.service';
 })
 export class AuPairDashboardComponent implements OnInit {
   
+  employer : any;
   employerName!: string;
   employerSurname! : string;
   employerId! : string;
@@ -20,25 +21,19 @@ export class AuPairDashboardComponent implements OnInit {
   }
 
   async getEmployer(){
-    this.serv.getUserByUserId("4561237814867").subscribe(
+    this.serv.getUser("4561237814867").subscribe(
       res=>{
-          this.employerName = res.fname;
-          this.employerSurname = res.sname;
-          this.employerId = res.id;
-          this.getChildren().then(()=>{
-            this.populateChildren()
-          });
+          this.employer = res;
+          this.employerName = this.employer.fname;
+          this.employerSurname = this.employer.sname;
+          this.employerId = this.employer.id;
+          this.getChildren();
       },
       error=>{console.log("Error has occured with API: " + error);}
     )
   }
 
-  populateChildren(){
-    console.log("populate children");
-  }
-
-   async getChildren(){
-    console.log(this.employerId);
+  async getChildren(){
     this.serv.getChildren(this.employerId).subscribe(
       res=>{
         let i = 0;
@@ -46,7 +41,6 @@ export class AuPairDashboardComponent implements OnInit {
           this.children[i++] = element;
           
         });
-        console.log(this.children);
       },
       error =>{console.log("Error has occured with API: " + error);}
       

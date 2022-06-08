@@ -18,12 +18,6 @@ public class UserService
     return u;
   }
 
-  public User getUserByUserId(String userId)
-  {
-    User u = ur.findUsingId(userId);
-    return u;
-  }
-
   public void updateUser(User u)
   {
     ur.save(u);
