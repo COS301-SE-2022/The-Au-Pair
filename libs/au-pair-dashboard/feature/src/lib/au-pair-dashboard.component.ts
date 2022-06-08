@@ -1,3 +1,4 @@
+import { ThisReceiver } from '@angular/compiler';
 import { Component, OnInit } from '@angular/core';
 import { API } from '../../../../shared/api/api.service'
 
@@ -10,10 +11,38 @@ import { API } from '../../../../shared/api/api.service'
 export class AuPairDashboardComponent  {
   constructor(private api:API) { }
 
-  buttonVisible = false;
+  // ngOnInit() {
+  //   const today = this.getToday();
+    
+  //   this.api.get("7542108615984", today).subscribe( 
+  //     data => {
+  //       if(data.equals("")) {
+  //         this.alreadyLogging = false;
+  //       }
+  //       else{
+  //         this.alreadyLogging = true;
+  //       }
+  //     },
+  //     error => {
+  //       console.log("Error has occured with API: " + error);
+  //     }
+  //   )
+  // }
+
+  alreadyLogging = true;
 
 
   logSwitch() {
-    this.buttonVisible = !this.buttonVisible;
+    this.alreadyLogging = !this.alreadyLogging;
+  }
+
+  getToday() {
+    const now = new Date();
+    now.setMonth(now.getMonth()+1);
+
+    const strDate = ('0' + now.getDate()).slice(-2) + "/" + ('0' + now.getMonth()).slice(-2) +
+    "/" + now.getFullYear();
+
+    return strDate;
   }
 }
