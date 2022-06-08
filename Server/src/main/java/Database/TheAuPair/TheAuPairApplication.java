@@ -16,6 +16,7 @@ public class TheAuPairApplication implements CommandLineRunner
   private final ChildRepository cr;
   private final ActivityRepository ar;
   private final auPairRepository apr;
+  private final hoursLoggedRepository hlr;
 
   private final UserController uc;
   private final ParentController pc;
@@ -23,9 +24,10 @@ public class TheAuPairApplication implements CommandLineRunner
   private final ChildController cc;
   private final ActivityController ac;
   private final auPairController apc;
+  private final hoursLoggedController hlc;
 
   @Autowired
-  public TheAuPairApplication(UserRepository ur, ParentRepository pr, medAidRepository mr, ChildRepository cr, ActivityRepository ar, auPairRepository apr)
+  public TheAuPairApplication(UserRepository ur, ParentRepository pr, medAidRepository mr, ChildRepository cr, ActivityRepository ar, auPairRepository apr, hoursLoggedRepository hlr)
   {
     this.ur = ur;
     this.pr = pr;
@@ -33,12 +35,14 @@ public class TheAuPairApplication implements CommandLineRunner
     this.cr = cr;
     this.ar = ar;
     this.apr = apr;
+    this.hlr = hlr;
     uc = new UserController(this.ur);
     pc = new ParentController(this.pr);
     mc = new medAidController(this.mr);
     cc = new ChildController(this.cr);
     ac = new ActivityController(this.ar);
     apc = new auPairController(this.apr);
+    hlc = new hoursLoggedController(this.hlr);
   }
 
   public static void main(String[] args)

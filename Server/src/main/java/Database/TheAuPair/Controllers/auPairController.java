@@ -3,9 +3,7 @@ package Database.TheAuPair.Controllers;
 import Database.TheAuPair.Models.auPair;
 import Database.TheAuPair.Repositories.auPairRepository;
 import Database.TheAuPair.Services.auPairService;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 public class auPairController
@@ -17,11 +15,11 @@ public class auPairController
     this.aps = new auPairService(apr);
   }
 
-  @GetMapping("/getAuPair")
+  @PostMapping("/getAuPair")
   @CrossOrigin(origins = "http://localhost:4200")
-  public auPair getAuPair()
+  public auPair getAuPair(@RequestBody String id)
   {
-    auPair ap =  aps.getAuPair();
+    auPair ap =  aps.getAuPair(id);
     return ap;
   }
 }

@@ -3,7 +3,6 @@ package Database.TheAuPair.Services;
 import Database.TheAuPair.Models.Activity;
 import Database.TheAuPair.Repositories.ActivityRepository;
 import org.springframework.data.domain.Sort;
-
 import java.util.Comparator;
 import java.util.List;
 
@@ -47,9 +46,9 @@ public class ActivityService
     ar.save(a);
   }
 
-  public List<Activity> getSchedule()
+  public List<Activity> getSchedule(String id)
   {
-    List<Activity> a =  ar.findAllByChild("8675945310542", Sort.by(Sort.Direction.ASC, "timeStart"));
+    List<Activity> a =  ar.findAllByChild(id, Sort.by(Sort.Direction.ASC, "timeStart"));
     return a;
   }
 

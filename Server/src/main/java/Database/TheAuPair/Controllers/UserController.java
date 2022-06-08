@@ -1,6 +1,5 @@
 package Database.TheAuPair.Controllers;
 
-import Database.TheAuPair.Models.Parent;
 import Database.TheAuPair.Models.User;
 import Database.TheAuPair.Repositories.UserRepository;
 import Database.TheAuPair.Services.UserService;
@@ -16,11 +15,11 @@ public class UserController
     this.us = new UserService(ur);
   }
 
-  @GetMapping("/getUser")
+  @PostMapping("/getUser")
   @CrossOrigin(origins = "http://localhost:4200")
-  public User getUser()
+  public User getUser(@RequestBody String id)
   {
-    User u =  us.getUser();
+    User u =  us.getUser(id);
     return u;
   }
 

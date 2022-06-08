@@ -3,9 +3,7 @@ package Database.TheAuPair.Controllers;
 import Database.TheAuPair.Models.Child;
 import Database.TheAuPair.Repositories.ChildRepository;
 import Database.TheAuPair.Services.ChildService;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
-
 import java.util.List;
 
 @RestController
@@ -28,7 +26,7 @@ public class ChildController
 
   @PostMapping("/addChild")
   @CrossOrigin(origins = "http://localhost:4200")
-  public void addChild(@RequestBody Child c, BindingResult bindingResult)
+  public void addChild(@RequestBody Child c)
   {
     this.cs.addChild(c);
   }

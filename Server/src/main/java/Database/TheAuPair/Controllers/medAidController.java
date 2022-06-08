@@ -1,13 +1,9 @@
 package Database.TheAuPair.Controllers;
 
-import Database.TheAuPair.Models.Activity;
 import Database.TheAuPair.Models.medAid;
 import Database.TheAuPair.Repositories.medAidRepository;
 import Database.TheAuPair.Services.medAidService;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 public class medAidController
@@ -21,7 +17,7 @@ public class medAidController
 
   @PostMapping("/getMedAid")
   @CrossOrigin(origins = "http://localhost:4200")
-  public medAid getMedAid(String id)
+  public medAid getMedAid(@RequestBody String id)
   {
     medAid m = ms.getMedAid(id);
     return m;

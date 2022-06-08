@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { API } from '../../../../shared/api/api.service';
+import { ToastController } from '@ionic/angular';
 import { Activity } from '../../../../shared/interfaces/interfaces';
 
 @Component({
@@ -8,6 +10,9 @@ import { Activity } from '../../../../shared/interfaces/interfaces';
   styleUrls: ['./parent-edit-activity.component.scss'],
 })
 export class ParentEditActivityComponent implements OnInit {
+  //------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+  /**Variables**/
+
    //Activity Model
    activityDetails: Activity = {
     id: "",
@@ -22,21 +27,32 @@ export class ParentEditActivityComponent implements OnInit {
     day: "",
     child: "",
   };
-
+  timeslot = "";
   //Children of logged in user
   allChildren: any;
 
-  //Constructor
-  constructor(private serv: API) {}
+  //------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+  /**Functions*/
 
-  ngOnInit(): void 
+  //Constructor
+  constructor(private serv: API, private router: Router, public toastCtrl: ToastController) 
   {
-    //Call getChildren service
-    this.getChildren();
+    const navigation = this.router.getCurrentNavigation();
+    if(navigation !== null)
+      if(navigation.extras !== null)
+      { 
+        this.activityDetails.id = navigation.extras.state?.['id'];
+      }
   }
 
-  //Populate the activityDetails object from form input
-  async getActivityValues(val : any)
+  ngOnInit(): void 
+  {    
+    this.getChildren();
+    this.getActivityDetails();
+  }
+
+  //From HTML Form
+  getActivityValues(val : any)
   {  
     //FORM ERROR CHECKING
     let emptyInput = false;
@@ -170,24 +186,70 @@ export class ParentEditActivityComponent implements OnInit {
       this.activityDetails.timeEnd = val.timeSlot.substring(6,11);
       this.activityDetails.budget = budget;
       this.activityDetails.child = val.childId;
-      this.addActivity(this.activityDetails);
+      this.editActivity(this.activityDetails);
     }
   }
 
-  //Service calls
-  addActivity(act:Activity){
-    this.serv.addActivity(act).subscribe(
+  returnToSchedule()
+  {
+    this.router.navigate(['/schedule']).then(()=>{
+      window.location.reload();
+    });
+  }
+
+  //Pop-up if activity is successfully updates
+  async openToast()
+  {
+    const toast = await this.toastCtrl.create({
+      message: 'Activity successfully updated!',
+      duration: 4000,
+      position: 'top',
+      color: 'primary',
+      cssClass: 'toastPopUp'
+    });
+    await toast.present();
+  }
+
+  //------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+  /**Service calls**/
+  getActivityDetails()
+  { 
+    this.serv.getActivity(this.activityDetails.id).subscribe(
       res=>{
-        location.reload();
         console.log("The response is:" + res); 
+        this.activityDetails.id = res.id;
+        this.activityDetails.name = res.name;
+        this.activityDetails.description = res.description;
+        this.activityDetails.location = res.location;
+        this.activityDetails.day = res.day;
+        this.activityDetails.timeStart = res.timeStart;
+        this.activityDetails.timeEnd = res.timeEnd;
+        this.activityDetails.budget = res.budget;
+        this.activityDetails.child = res.child;
+        this.timeslot = res.timeStart + "-" + res.timeEnd
       },
       error=>{console.log("Error has occured with API: " + error);}
     )
   };
 
+  editActivity(act:Activity){
+    this.serv.editActivity(act).subscribe(
+      res=>{
+        // location.reload();
+        console.log("The response is:" + res); 
+        this.openToast();
+        return res;
+      },
+      error=>{
+        console.log("Error has occured with API: " + error);
+        return error;
+      }
+    )
+  };
+
   getChildren()
   {
-    this.serv.getParent().subscribe(
+    this.serv.getParent("4561237814867").subscribe(
       res=>{
         console.log("The response is:" + res); 
           this.allChildren = res.children;
@@ -195,4 +257,5 @@ export class ParentEditActivityComponent implements OnInit {
       error=>{console.log("Error has occured with API: " + error);}
     )
   }
+  //------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 }
