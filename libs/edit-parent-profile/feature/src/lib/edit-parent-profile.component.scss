@@ -71,7 +71,7 @@
 .parent-info-large{
     height: 150px;
     background-color: #F9F9F9;
-    display:flex;
+    display: block;
     margin-top: 10px;
     font-family: Roboto;
     color: #79BA9E;
@@ -81,10 +81,16 @@
 }
 
 .parent-text{
-    margin-left: 12px;
+    margin-left: 14px;
     font-size: 100%;
     width: 30%;
-    margin: 10px;
+}
+
+.parent-text2{
+    margin-left: 14px;
+    font-size: 100%;
+    width: 30%;
+    padding-top: 10px;
 }
 
 .parent-text-info{
@@ -97,7 +103,21 @@
     margin-bottom: auto;
     height: 95%;
     border: none;
-    border-radius: 16px;
+    border-radius: 5px;
+}
+
+.parent-text-info2{
+    background-color: #F9F9F9;
+    color: #3C3C3C;
+    font-size: 100%;
+    line-height: 170%;
+    height: 20%;
+    margin-top: 5px;
+    border-radius: 5px;
+    width: 45%;
+    padding-left: 3px;
+    margin-left: 14px;
+    border-color: #3C3C3C;
 }
 
 .change-button{
@@ -143,4 +163,17 @@
     top: 110px;
     opacity: 0.14;
     z-index: -10;
+}
+
+.error{
+    display: none;
+    position: relative;
+    display: block;
+    text-align: left;
+    margin: 0;
+    color: red;
+}
+
+input:focus{
+    outline:none;
 }
