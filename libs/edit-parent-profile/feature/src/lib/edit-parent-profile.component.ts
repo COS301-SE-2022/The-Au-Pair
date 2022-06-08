@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { API } from '../../../../shared/api/api.service';
 import { User, Parent, medAid } from '../../../../shared/interfaces/interfaces';
 import { ToastController } from '@ionic/angular';
-import { elementAt } from 'rxjs';
 
 @Component({
   selector: 'the-au-pair-edit-parent-profile',
@@ -38,6 +37,7 @@ export class EditParentProfileComponent implements OnInit{
     name: "",
     sname: "",
     mID: "",
+    provider: "",
   }
 
 
@@ -83,9 +83,10 @@ export class EditParentProfileComponent implements OnInit{
           this.medAidDetails.plan = res.plan;
           this.medAidDetails.name = res.name;
           this.medAidDetails.sname = res.sname;          
-          this.medAidDetails.mID = res.mid;
+          this.medAidDetails.mID = res.mID;
           console.log(res);
           console.log(this.medAidDetails);
+          this.medAidDetails.provider = res.provider;
         },
         error=>{console.log("Error has occured with API: " + error);}
       )
@@ -192,22 +193,22 @@ export class EditParentProfileComponent implements OnInit{
         dom.style.display = "none";
       }
     }
-    // dom = document.getElementById("medAidProviderError");
-    // if(val.medicalAidProvider === "")
-    // {
-    //   emptyInput = true;
-    //   if(dom != null)
-    //   {
-    //     dom.innerHTML = "Medical Aid Provider is empty";
-    //     dom.style.display = "block";
-    //   }
-    // }else
-    // {
-    //   if(dom != null)
-    //   {
-    //     dom.style.display = "none";
-    //   }
-    // }
+    dom = document.getElementById("medAidProviderError");
+    if(val.medicalAidProvider === "")
+    {
+      emptyInput = true;
+      if(dom != null)
+      {
+        dom.innerHTML = "Medical Aid Provider is empty";
+        dom.style.display = "block";
+      }
+    }else
+    {
+      if(dom != null)
+      {
+        dom.style.display = "none";
+      }
+    }
     dom = document.getElementById("medAidPlanError");
     if(val.medicalAidPlan === "")
     {
@@ -236,11 +237,9 @@ export class EditParentProfileComponent implements OnInit{
       this.userDetails.address = val.address;
       this.medAidDetails.name = val.medicalAidMM;
       this.medAidDetails.plan = val.medicalAidPlan;
-      // this.medAidDetails.provider = val.medicalAidProvider;
+      this.medAidDetails.provider = val.medicalAidProvider;
       this.medAidDetails.id = val.medicalAidNo;
       this.medAidDetails.sname = val.medicalAidMS;
-      // this.editUser(this.userDetails);
-      // this.editMedAid(this.medAidDetails);
       this.editDetails(this.userDetails, this.medAidDetails);
     }
   }

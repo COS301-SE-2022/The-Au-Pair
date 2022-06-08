@@ -35,6 +35,7 @@ export interface Activity{
     name: string;
     sname: string;
     mID: string;
+    provider: string;
   }
   
   export interface Parent{
