@@ -49,7 +49,7 @@ export class API{
     return this.http.post('http://localhost:8080/addChild',child);
   }
 
-  getDateMinutes(id : string, date : string) {
+  getDateMinutes(id : string, date : string): Observable<any> {
     var out = {
       "id" : id,
       "date" : date
@@ -57,11 +57,11 @@ export class API{
     return this.http.post("http://localhost:8080/getDateMinutes", out);
   }
 
-  getAllMinutes(id : string) {
+  getAllMinutes(id : string): Observable<any> {
     return this.http.post("http://localhost:8080/getAllMinutes", id);
   }
 
-  getDateTimes(id : string, date : string) {
+  getDateTimes(id : string, date : string): Observable<any> {
     var out = {
       "id" : id,
       "date" : date
@@ -69,15 +69,15 @@ export class API{
     return this.http.post("http://localhost:8080/getDateTimes", out);
   }
 
-  getAllTimes(id : string) {
+  getAllTimes(id : string): Observable<any> {
     return this.http.post("http://localhost:8080/getAllTimes", id);
   }
 
-  addHoursLog(hl : HoursLogged) {
+  addHoursLog(hl : HoursLogged): Observable<any> {
     return this.http.post("http://localhost:8080/addHoursLog", hl);
   }
 
-  updateHoursLog(hl : HoursLogged) {
+  updateHoursLog(hl : HoursLogged): Observable<any> {
     return this.http.post("http://localhost:8080/updateHoursLog", hl);
   }
 }

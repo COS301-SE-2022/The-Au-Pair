@@ -17,6 +17,6 @@ public interface hoursLoggedRepository extends MongoRepository<hoursLogged, Stri
   @Query("{ 'user_id': ?0 }")
   List<hoursLogged> findAllByUserId(String userId, Sort sort);
 
-  @Query("$and:[{ 'user_id': ?0 },{ 'date': ?1 }]")
+  @Query("{ $and:[{ 'user_id': ?0 },{ 'date': ?1 }] }")
   List<hoursLogged> findAllByUserIdAndDate(String userId, String date, Sort sort);
 }

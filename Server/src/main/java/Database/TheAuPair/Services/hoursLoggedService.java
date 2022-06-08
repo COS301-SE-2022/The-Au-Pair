@@ -69,7 +69,6 @@ public class hoursLoggedService
       minuteSum += (Integer.parseInt(te[0]) - Integer.parseInt(ts[0]))*60;
       minuteSum += Integer.parseInt(te[1]) - Integer.parseInt(ts[1]);
     };
-
     return minuteSum;
   }
 
