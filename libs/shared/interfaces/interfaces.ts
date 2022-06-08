@@ -20,4 +20,30 @@ export interface Activity{
     diet: string;
     parent: string;
   }
+
+  export interface medAid{
+    id: string;
+    plan: string;
+    name: string;
+    sname: string;
+    mID: string;
+  }
   
+  export interface Parent{
+    id: string;
+    cildren: string [];
+    medID: string;
+    auPair: string;
+  }
+
+  export interface User{
+    id: string;
+    fname: string;
+    sname: string;
+    email: string;
+    address: string;
+    registered: boolean;
+    type: number;
+    password: string;
+    number: string;
+  }
