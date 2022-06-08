@@ -30,4 +30,12 @@ public class UserController
   {
     this.us.updateUser(u);
   }
+
+  @PostMapping("/getUserByUserId")
+  @CrossOrigin(origins = "http://localhost:4200")
+  public User getUserByUserId(@RequestBody String userId)
+  {
+    User u = us.getUserByUserId(userId);
+    return u;
+  }
 }

@@ -64,4 +64,8 @@ export class API{
   addChild(child : Child): Observable<any> {
     return this.http.post('http://localhost:8080/addChild',child);
   }
+
+  getUserByUserId(userId : String): Observable<any> {
+    return this.http.post('http://localhost:8080/getUserByUserId',userId);
+  }
 }
