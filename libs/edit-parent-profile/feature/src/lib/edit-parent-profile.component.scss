@@ -143,30 +143,30 @@
 
 #active-2{
     position: absolute;
-    width: 15%;
-    height: 25%;
-    left: 100px;
-    bottom: 0px;
+    width: 160px;
+    height: 160px;
+    margin-top: -160px;
     opacity: 0.14;
     z-index: -10;
 }
 
 #active{
     position: absolute;
-    width: 13%;
-    height: 25%;
-    right: 100px;
-    bottom: 150px;
+    width: 130px;
+    height: 130px;
+    right: 150px;
+    margin-top: -200px;
     opacity: 0.14;
     z-index: -10;
 }
 
 #lifestyles{
     position: absolute;
-    width: 18%;
-    height: 33%;
+    width: 280px;
+    height: 280px;
     right: 400px;
-    top: 110px;
+    top: 0px;
+    margin-top: 120px;
     opacity: 0.14;
     z-index: -10;
 }
@@ -185,13 +185,9 @@ input:focus{
 }
 
 @media (max-width: 642px) {
-    #active-2{
-        display: none;
-    }
     
     #active{
-        display: none;
-
+        right: 15px;
     }
     
     #lifestyles{
@@ -238,13 +234,9 @@ input:focus{
 }
 
 @media (max-width: 810px) {
-    #active-2{
-        display: none;
-    }
     
     #active{
-        display: none;
-
+        right: 35px;
     }
     
     #lifestyles{
