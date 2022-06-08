@@ -1,5 +1,6 @@
 package Database.TheAuPair.Services;
 
+import Database.TheAuPair.Models.Parent;
 import Database.TheAuPair.Models.User;
 import Database.TheAuPair.Repositories.UserRepository;
 
@@ -16,5 +17,10 @@ public class UserService
   {
     User u =  ur.findUsingId("7542108615984");
     return u;
+  }
+
+  public void updateUser(User u)
+  {
+    ur.save(u);
   }
 }

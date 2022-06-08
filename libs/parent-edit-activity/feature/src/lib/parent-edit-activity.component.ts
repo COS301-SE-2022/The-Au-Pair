@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { Router, ActivatedRoute, ParamMap } from '@angular/router';
+import { Router } from '@angular/router';
 import { API } from '../../../../shared/api/api.service';
-import { Activity } from '../../../../shared/interfaces/activity.interfaces';
 import { ToastController } from '@ionic/angular';
+import { Activity } from '../../../../shared/interfaces/interfaces';
 
 @Component({
   selector: 'the-au-pair-parent-edit-activity',

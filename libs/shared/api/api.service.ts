@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { Activity } from '../interfaces/activity.interfaces';
+import { Activity , Child , medAid , Parent  , User} from '../interfaces/interfaces';
 
 
 @Injectable()
@@ -25,15 +25,43 @@ export class API{
     return this.http.get('http://localhost:8080/getSchedule');
   }
 
+  getAuPairSchedule(children : string []): Observable<any> {
+    return this.http.post('http://localhost:8080/getAuPairSchedule',children);
+  }
+
   getUser(): Observable<any> {
     return this.http.get('http://localhost:8080/getUser');
+  }
+
+  editUser(user : User): Observable<any> {
+    return this.http.post('http://localhost:8080/editUser',user);
   }
 
   getParent(): Observable<any> {
     return this.http.get('http://localhost:8080/getParent');
   }
 
+  editParent(parent : Parent): Observable<any> {
+    return this.http.post('http://localhost:8080/editParent',parent);
+  }
+
+  getMedAid(id : string): Observable<any> {
+    return this.http.post('http://localhost:8080/getMedAid',id);
+  }
+
+  editMedAid(medAid : medAid): Observable<any> {
+    return this.http.post('http://localhost:8080/editMedAid',medAid);
+  }
+
   getAuPair(): Observable<any> {
     return this.http.get('http://localhost:8080/getAuPair');
+  }
+
+  getChildren(id : String): Observable<any> {
+    return this.http.post('http://localhost:8080/getChildren',id);
+  }
+
+  addChild(child : Child): Observable<any> {
+    return this.http.post('http://localhost:8080/addChild',child);
   }
 }

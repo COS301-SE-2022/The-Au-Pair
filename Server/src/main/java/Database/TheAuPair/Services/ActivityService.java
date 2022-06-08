@@ -4,6 +4,7 @@ import Database.TheAuPair.Models.Activity;
 import Database.TheAuPair.Repositories.ActivityRepository;
 import org.springframework.data.domain.Sort;
 
+import java.util.Comparator;
 import java.util.List;
 
 public class ActivityService
@@ -49,6 +50,17 @@ public class ActivityService
   public List<Activity> getSchedule()
   {
     List<Activity> a =  ar.findAllByChild("8675945310542", Sort.by(Sort.Direction.ASC, "timeStart"));
+    return a;
+  }
+
+  public List<Activity> getAuPairSchedule(String [] children)
+  {
+    List<Activity> a = ar.findAllByChild(children[0], Sort.by(Sort.Direction.ASC, "timeStart"));
+    for (int i = 1; i < children.length; i++)
+    {
+      a.addAll(ar.findAllByChild(children[i], Sort.by(Sort.Direction.ASC, "timeStart")));
+    }
+    a.sort(Comparator.comparing(Activity::getTimeStart));
     return a;
   }
 
