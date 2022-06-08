@@ -3,7 +3,6 @@ package Database.TheAuPair.Services;
 import Database.TheAuPair.Models.hoursLogged;
 import Database.TheAuPair.Repositories.hoursLoggedRepository;
 import org.springframework.data.domain.Sort;
-
 import java.util.List;
 
 public class hoursLoggedService

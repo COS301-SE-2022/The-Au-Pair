@@ -12,10 +12,13 @@ public class hoursLogged
 
   @Field ("user_id")
   private String user;
+
   @Field ("date")
   private String date;
+
   @Field ("timeStart")
   private String timeStart;
+
   @Field ("timeEnd")
   private String timeEnd;
 

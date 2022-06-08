@@ -4,7 +4,6 @@ import Database.TheAuPair.Models.hoursLogged;
 import Database.TheAuPair.Services.hoursLoggedService;
 import Database.TheAuPair.Repositories.hoursLoggedRepository;
 import org.springframework.web.bind.annotation.*;
-
 import java.util.List;
 import java.util.Map;
 
