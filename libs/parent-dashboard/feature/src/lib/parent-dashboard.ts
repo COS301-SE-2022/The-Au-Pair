@@ -14,7 +14,7 @@ export class ParentDashboardComponent implements OnInit{
 
   parentDetails: Parent = {
     id: "",
-    cildren: [],
+    children: [],
     medID: "",
     auPair: "",
   }
@@ -53,7 +53,7 @@ export class ParentDashboardComponent implements OnInit{
       res=>{
         this.parentDetails.id = res.id;       
         this.parentID = res.id;
-        this.parentDetails.cildren = res.cildren;
+        this.parentDetails.children = res.cildren;
         this.parentDetails.medID = res.medID;
         this.parentDetails.auPair = res.auPair;
       },

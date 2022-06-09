@@ -23,7 +23,7 @@ export class ParentProfileComponent implements OnInit {
 
   parentDetails: Parent = {
     id: "",
-    cildren: [],
+    children: [],
     medID: "",
     auPair: "",
   }
@@ -65,7 +65,7 @@ export class ParentProfileComponent implements OnInit {
       await this.serv.getParent("4561237814867").subscribe(
         res=>{
           this.parentDetails.id = res.id;
-          this.parentDetails.cildren = res.cildren;
+          this.parentDetails.children = res.children;
           this.parentDetails.medID = res.medID;
           this.parentDetails.auPair = res.auPair;
         },

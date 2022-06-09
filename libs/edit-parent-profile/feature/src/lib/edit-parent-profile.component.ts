@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { API } from '../../../../shared/api/api.service';
-import { User, medAid } from '../../../../shared/interfaces/interfaces';
+import { User, medAid, Parent } from '../../../../shared/interfaces/interfaces';
 import { ToastController } from '@ionic/angular';
 
 @Component({
@@ -31,6 +31,13 @@ export class EditParentProfileComponent implements OnInit{
     sname: "",
     mID: "",
     provider: "",
+  }
+
+  parent: Parent = {
+    id: "",
+    children: [],
+    medID: "",
+    auPair: "",
   }
 
   constructor(private serv: API, public toastCtrl: ToastController){}
@@ -64,8 +71,6 @@ export class EditParentProfileComponent implements OnInit{
         this.medAidDetails.name = res.name;
         this.medAidDetails.sname = res.sname;          
         this.medAidDetails.mID = res.mID;
-        console.log(res);
-        console.log(this.medAidDetails);
         this.medAidDetails.provider = res.provider;
       },
       error=>{console.log("Error has occured with API: " + error);}
@@ -243,7 +248,6 @@ export class EditParentProfileComponent implements OnInit{
   editUser(user:User){    
     this.serv.editUser(user).subscribe(
       res=>{
-        // location.reload();
         console.log("The response is:" + res); 
         return res;
       },
@@ -256,9 +260,29 @@ export class EditParentProfileComponent implements OnInit{
   };
 
   editMedAid(medAid:medAid){
+    this.serv.getParent("4561237814867").subscribe(
+      res=>{
+        this.parent.id = res.id;
+        this.parent.children = res.children;
+        this.parent.medID = medAid.mID;
+        this.parent.auPair = res.auPair;
+        
+        //Update the parent object to contain the new child ID
+        this.serv.editParent(this.parent).subscribe(
+          res=>{
+            console.log("The response is:" + res); 
+          },
+          error=>{
+            console.log("Error has occured with API: " + error);
+          }
+        );
+      },
+      error=>{
+        console.log("Error has occured with API: " + error);
+      }
+    )
     this.serv.editMedAid(medAid).subscribe(
       res=>{
-        // location.reload();
         console.log("The response is:" + res); 
         return res;
       },
