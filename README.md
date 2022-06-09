@@ -127,8 +127,10 @@ npm run start:client
 <p align="right">(<a href="#top">back to top</a>)</p>
 
 ### Sprint 2 Burn-Down
-<img style="height: 350px; width:350px" src="https://user-images.githubusercontent.com/100611949/172818063-3853f47c-14e1-4428-83fa-a25077dd88c4.png">
-
+<div>
+  <img style="height: 350px; width:350px" src="https://user-images.githubusercontent.com/100611949/172818063-3853f47c-14e1-4428-83fa-a25077dd88c4.png">
+  <img style="height: 350px; width:650px" src="https://user-images.githubusercontent.com/93247114/172879622-a8313404-8996-4cfa-898c-754ea174b4cb.png">
+</div>
 <!-- Contributors -->
 # The Team
 
