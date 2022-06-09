@@ -2,7 +2,7 @@
     font-size: 3.6vw;
     margin-top: 2%;
     margin-bottom: 2%;
-    color: #3C3C3C;
+    color: var(--ion-color-dark);
     text-align: center;
     font-family: TitanOne;
     margin-top: 0px;
@@ -10,7 +10,6 @@
 
 .parent-profile-div{
     width: 90%;
-    // height: 90%;
     margin-top: 60px;
     margin-left: auto;
     margin-right: auto;
@@ -28,7 +27,6 @@
 .profile-details-div{
     width: 40%;
     height: 100%;
-    // float: left;
 
     margin-left: auto;
     margin-right: auto;
@@ -63,7 +61,7 @@
 
 .parent-info-small{
     height: 6%;
-    background-color: #F9F9F9;
+    background-color: var(--ion-background-color);
     display:flex;
     font-family: Roboto;
     align-items: center;
@@ -75,7 +73,7 @@
 
 .parent-info-large{
     height: 150px;
-    background-color: #F9F9F9;
+    background-color: var(--ion-background-color);
     display: block;
     margin-top: 10px;
     font-family: Roboto;
@@ -100,8 +98,8 @@
 }
 
 .parent-text-info{
-    background-color: #F9F9F9;
-    color: #3C3C3C;
+    background-color: var(--ion-background-color);
+    color: var(--ion-color-dark);
     font-size: 100%;
     margin-right: auto;
     line-height: 170%;
@@ -113,8 +111,8 @@
 }
 
 .parent-text-info2{
-    background-color: #F9F9F9;
-    color: #3C3C3C;
+    background-color: var(--ion-background-color);
+    color: var(--ion-color-dark);
     font-size: 100%;
     line-height: 170%;
     height: 20%;
@@ -123,15 +121,15 @@
     width: 45%;
     padding-left: 3px;
     margin-left: 14px;
-    border-color: #3C3C3C;
+    border-color: var(--ion-color-dark);
 }
 
 .change-button{
     padding: 10px 22px;
     gap: 10px;
-    border: 2px solid #176560;
+    border: 2px solid var(--ion-color-secondary);
     border-radius: 10px;
-    background-color: #69A88DB2;
+    background-color: var(--ion-color-primary);
     margin: auto;
     display: block;
 }
@@ -146,7 +144,7 @@
     width: 160px;
     height: 160px;
     margin-top: -160px;
-    opacity: 0.14;
+    opacity: 0.24;
     z-index: -10;
 }
 
@@ -196,7 +194,6 @@ input:focus{
 
     .parent-profile-div{
         margin-top: 13px;
-        // height: 95%;
     }
 
     .profile-name{
@@ -245,7 +242,6 @@ input:focus{
 
     .parent-profile-div{
         margin-top: 13px;
-        // height: 95%;
     }
 
     .profile-name{
@@ -270,7 +266,6 @@ input:focus{
 
     .parent-text-info2{
         width: 40%;
-        // padding-left: 6px;
         padding-right: 18px;
     }
 
