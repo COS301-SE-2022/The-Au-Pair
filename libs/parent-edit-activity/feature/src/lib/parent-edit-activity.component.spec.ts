@@ -70,7 +70,7 @@ describe('ParentEditActivityComponent', () => {
       timeEnd: "14:00",
       budget: 0.0,
       comment: "",
-      behavior: "",
+      behavior: 0,
       day: "Wednesday",
       child: "8675945310542",
     };
@@ -94,7 +94,7 @@ describe('ParentEditActivityComponent', () => {
       timeEnd: "",
       budget: 0.0,
       comment: "",
-      behavior: "",
+      behavior: 0,
       day: "",
       child: "",
     };
@@ -116,7 +116,7 @@ describe('ParentEditActivityComponent', () => {
       timeEnd: "",
       budget: 0.0,
       comment: "",
-      behavior: "",
+      behavior: 0,
       day: "",
       child: "",
     };
@@ -138,7 +138,7 @@ describe('ParentEditActivityComponent', () => {
       timeEnd: "",
       budget: 0.0,
       comment: "",
-      behavior: "",
+      behavior: 0,
       day: "",
       child: "",
     };
@@ -160,7 +160,7 @@ describe('ParentEditActivityComponent', () => {
       timeEnd: "",
       budget: 0.0,
       comment: "",
-      behavior: "",
+      behavior: 0,
       day: "",
       child: "",
     };
@@ -182,7 +182,7 @@ describe('ParentEditActivityComponent', () => {
       timeEnd: "",
       budget: 0.0,
       comment: "",
-      behavior: "",
+      behavior: 0,
       day: "",
       child: "",
     };
@@ -204,7 +204,7 @@ describe('ParentEditActivityComponent', () => {
       timeEnd: "",
       budget: 0.0,
       comment: "",
-      behavior: "",
+      behavior: 0,
       day: "",
       child: "",
     };
@@ -226,7 +226,7 @@ describe('ParentEditActivityComponent', () => {
       timeEnd: "",
       budget: 0.0,
       comment: "",
-      behavior: "",
+      behavior: 0,
       day: "",
       child: "",
     };
