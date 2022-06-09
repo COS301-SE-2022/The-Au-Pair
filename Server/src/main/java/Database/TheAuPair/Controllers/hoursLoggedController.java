@@ -40,7 +40,7 @@ public class hoursLoggedController
     int minutes = hls.getMonthMinutes(idAndDate.get("id"), idAndDate.get("date"));
     return minutes;
   }
-  
+
   @PostMapping("/getDateTimes")
   @CrossOrigin(origins = "http://localhost:4200")
   public List<hoursLogged> getDateTimes(@RequestBody Map<String, String> idAndDate)
@@ -70,6 +70,13 @@ public class hoursLoggedController
   public void addHoursLog(@RequestBody hoursLogged hl)
   {
     hls.addHoursLog(hl);
+  }
+
+  @PostMapping("/addTimeEnd")
+  @CrossOrigin(origins = "http://localhost:4200")
+  public void addTimeEnd(@RequestBody Map<String, String> idAndEnd)
+  {
+    hls.addTimeEnd(idAndEnd.get("id"), idAndEnd.get("endTime"));
   }
 
   @PostMapping("/updateHoursLog")

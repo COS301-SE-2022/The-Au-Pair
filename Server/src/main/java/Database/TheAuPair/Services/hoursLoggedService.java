@@ -50,7 +50,7 @@ public class hoursLoggedService
     {
       if(hourLog.getTimeEnd() == null || hourLog.getTimeEnd().equals(""))
       {
-        return hourLog.getId();
+        return hourLog.getId().toString();
       }
     }
     return "";
