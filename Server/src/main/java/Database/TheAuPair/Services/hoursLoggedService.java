@@ -15,8 +15,6 @@ public class hoursLoggedService
 
   public void addHoursLog(hoursLogged hl)
   {
-    System.out.println(hl.getUser() + ", " + hl.getDate() + ", " + hl.getTimeStart());
-
     String id = "";
     boolean valid = false;
     while (!valid)
@@ -35,17 +33,10 @@ public class hoursLoggedService
     hlr.save(hl);
   }
 
-  public void addTimeEnd(String id, String endTime) {
-    List<hoursLogged> hl = hlr.findAllByUserId(id, Sort.by(Sort.Direction.ASC, "timeStart"));
-    System.out.println(id + ", " + endTime);
-    for (hoursLogged hourLog : hl)
-    {
-      if(hourLog.getTimeEnd() == null || hourLog.getTimeEnd().equals(""))
-      {
-        hourLog.setTimeEnd(endTime);
-        hlr.save(hourLog);
-      }
-    }
+  public void addTimeEnd(String id,String endTime) {
+    hoursLogged hl = hlr.findUsingId(id);
+    hl.setTimeEnd(endTime);
+    hlr.save(hl);
   }
 
   public void updateHoursLog(hoursLogged hl)

@@ -35,8 +35,7 @@ export class AuPairDashboardComponent implements OnInit {
     const todaysDate = this.getToday();
     this.serv.getStartedLog("7542108615984", todaysDate).subscribe( 
       data => {
-        console.log("doesn't get here")
-        if(data == null || data.equals("")) {
+        if(data == null || data == "") {
           this.alreadyLogging = false;
         }
         else{
@@ -45,7 +44,6 @@ export class AuPairDashboardComponent implements OnInit {
         }
       },
       error => {
-        this.alreadyLogging = true;
         console.log("Error has occured with API: " + error);
       }
     )
@@ -53,25 +51,23 @@ export class AuPairDashboardComponent implements OnInit {
 
   logSwitch() {
     if(this.alreadyLogging) {
-      // if(this.logID == null || this.logID == "") {
-      //   this.serv.getStartedLog("7542108615984", this.getToday()).subscribe( 
-      //     data => {
-      //       this.logID = data;
-      //       // console.log(data);
-      //     },
-      //     error => {
-      //       // location.reload()
-      //       console.log("Error has occured with API: " + error);
-      //     }
-      //   )
-      // }
+      if(this.logID == null || this.logID == "") {
+        this.serv.getStartedLog("7542108615984", this.getToday()).subscribe( 
+          data => {
+            this.logID = data;
+          },
+          error => {
+            console.log("Error has occured with API: " + error);
+          }
+        )
+      }
 
-      this.serv.addTimeEnd("7542108615984", this.getCurrentTime()).subscribe( 
+      this.serv.addTimeEnd(this.logID, this.getCurrentTime()).subscribe( 
         data => {
           console.log("The response is:" + data); 
         },
         error => {
-          // location.reload()
+          location.reload()
           console.log("Error has occured with API: " + error);
         }
       )

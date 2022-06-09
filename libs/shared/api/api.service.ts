@@ -102,7 +102,7 @@ export class API{
       "id" : id,
       "date" : date
     }
-    return this.http.post("http://localhost:8080/getStartedLog", out);
+    return this.http.post("http://localhost:8080/getStartedLog", out, {responseType: 'text'});
   }
 
   addHoursLog(hl : HoursLogged): Observable<any> {
