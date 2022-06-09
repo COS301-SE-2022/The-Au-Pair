@@ -15,6 +15,10 @@ export class AuPairCostComponent implements OnInit {
     "Mon","Tue","Wed","Thu","Fri","Sat","Sun"
   ];
 
+  months = [
+    "January","February","March","April","May","June","July","August","September","October","November","December"
+  ];
+
   dayHoursWorked = [
     0, 0, 0, 0, 0, 0 ,0
   ];
@@ -32,6 +36,8 @@ export class AuPairCostComponent implements OnInit {
   otherDeg = 0;
   activityDeg = 0;
 
+  dateRange = "";
+
   pieSplit = "";
 
   ngOnInit() { 
@@ -44,10 +50,18 @@ export class AuPairCostComponent implements OnInit {
       }
     )
 
+    this.api.getMonthMinutes("7542108615984", this.getStartDateOfWeek(0)).subscribe( 
+      data => {
+        this.totalHours = Number((data/60).toFixed(3));
+      },
+      error => {
+        console.log("Error has occured with API: " + error);
+      }
+    )
+
     this.api.getAuPair("7542108615984").subscribe( 
       data => { 
         this.hourlyRate = data.payRate;
-        this.totalHours = data.hoursWorked;
         this.travelCost = data.distTraveled;
         this.activityCost = data.costIncurred;
         this.otherCost = 180; 
@@ -58,6 +72,7 @@ export class AuPairCostComponent implements OnInit {
 
         this.calculatePie(this.otherCost, this.activityCost, this.totalCost);
         this.populateDaysCost();
+        this.dateRange = this.dateRangeToString(7);
         this.pieSplit = "conic-gradient(var(--ion-color-primary)" + this.otherDeg + "deg, var(--ion-color-secondary) 0 "+ this.activityDeg +"deg, var(--ion-color-champagne) 0)";
       },
       error => {
@@ -73,14 +88,43 @@ export class AuPairCostComponent implements OnInit {
   }
 
   populateDaysCost() {
-    //This is mock data for the moment
-    this.dayHoursWorked[0] = 8;
-    this.dayHoursWorked[1] = 4; 
-    this.dayHoursWorked[2] = 7; 
-    this.dayHoursWorked[3] = 4; 
-    this.dayHoursWorked[4] = 6; 
-    this.dayHoursWorked[5] = 3; 
-    this.dayHoursWorked[6] = 0; 
+    for (let i = 0; i < 7; i++) {
+      
+      const weekDay = this.getStartDateOfWeek(i);
+      this.api.getDateMinutes("7542108615984", weekDay).subscribe( 
+        data => {
+          this.dayHoursWorked[i] = data/60;
+        },
+        error => {
+          console.log("Error has occured with API: " + error);
+        }
+      )
+    }
+  }
+
+  getStartDateOfWeek(dow : number) {
+    const now = new Date();
+    const day = now.getDay();
+    now.setMonth(now.getMonth()+1);
+    
+    const diff =  new Date(now.setDate(now.getDate() - day + dow + (day == 0 ? 6:1)));
+
+    const strDate = ('0' + diff.getDate()).slice(-2) + "/" + ('0' + diff.getMonth()).slice(-2) +
+    "/" + diff.getFullYear();
+
+    return strDate;
+  }
+
+  dateRangeToString(range : number) {
+    const now = new Date();
+    const day = now.getDay();
+    
+    const diff =  new Date(now.setDate(now.getDate() - day + (day == 0 ? 6:1)));
+
+    const strDate = ('0' + diff.getDate()).slice(-2) + " " + (this.months[diff.getMonth()]) +
+    " - " + ('0' + (diff.getDate()+range)).slice(-2) + " " + (this.months[diff.getMonth()])
+
+    return strDate;
   }
 
 }

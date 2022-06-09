@@ -15,13 +15,9 @@
 
   
   <p align="center">
-    <a href="https://github.com/COS301-SE-2022/The-Au-Pair/wiki"><strong>Explore the docs »</strong></a>
+    <a href="https://github.com/COS301-SE-2022/The-Au-Pair/wiki"><strong>Quick Links»</strong></a>
     <br />
     <br />
-    <a href="https://drive.google.com/file/d/1iBMNdAej-kbDxPGT9k8_Q5t6aJUk0UNE/view?usp=sharing">CheemsChaps-Demo1</a>
-    ·
-    <a href="https://docs.google.com/document/d/18CSPDD1SnMIpAknKGA97uaO6s_-WgM7UnW_6i9DhmC4/edit?usp=sharing">SRS Document</a>
-    ·
     <a href="https://github.com/COS301-SE-2022/The-Au-Pair/projects/1">Project Board</a>
   </p>
   
@@ -57,6 +53,12 @@
       </ul>
     </li>
     <li>
+      <a href="#demolinks">Demo Links</a>
+      <ul>
+        <li><a href="#demo1">Demo 1</a></li>
+        <li><a href="#demo2">Demo 2</a></li>
+      </ul>
+    <li>
       <a href="#the-team">The Team</a>
       <ul>
         <li><a href="#daniel-azmanov">Daniel Azmanov</a></li>
@@ -68,9 +70,24 @@
     </li>
   </ol>
 </details>
+                            
+# Demolinks
 
+<!-- All demo information -->
+### Demo1
 
+<a href="https://drive.google.com/file/d/1iBMNdAej-kbDxPGT9k8_Q5t6aJUk0UNE/view?usp=sharing">CheemsChaps-Demo1</a>
+    <br>
+    <a href="https://docs.google.com/document/d/18CSPDD1SnMIpAknKGA97uaO6s_-WgM7UnW_6i9DhmC4/edit?usp=sharing">SRS Document - Demo 1</a>
 
+### Demo2
+
+<a href="">CheemsChaps-Demo2</a>
+    <br>
+    <a href="https://docs.google.com/document/d/18vKESVoNjol4EZzjzmbdzlKqipAGSXseNxcDelAnqaQ/edit?usp=sharing">SRS Document - Demo 2</a>
+    <br>
+    <br>
+                                     
 <!-- ABOUT -->
 # About
 
@@ -81,10 +98,7 @@
 The Au Pair is a platform used to give control to parents. The Au Pair will assist them in finding and interactng with suitable Au Pairs who will be looking after their children. It will allow parents to minimize efforts to find Au Pair’s, provide schedules for their children, and review their activities and behavior through feedback.
 
 The Au Pair is a project created for the University of Pretoria's COS301 module. It was created by the Cheems Chaps team with members <a href="#daniel-azmanov">Daniel Azmanov</a>, <a href="#ruben-brits">Ruben Brits</a>, <a href="#kyle-pottinger">Kyle Pottinger</a>, <a href="#reece-stephenson">Reece Stephenson</a> and <a href="#seyuran-pillay">Seyuran Pillay</a>
-
 <p align="right">(<a href="#top">back to top</a>)</p>
-
-
 
 ### Built With
 
@@ -112,6 +126,9 @@ npm run start:client
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
+### Sprint 2 Burn-Down
+<img style="height: 350px; width:350px" src="https://user-images.githubusercontent.com/100611949/172818063-3853f47c-14e1-4428-83fa-a25077dd88c4.png">
+
 <!-- Contributors -->
 # The Team
 
@@ -119,7 +136,7 @@ npm run start:client
 
 [![LinkedIn][linkedin-shield]](https://www.linkedin.com/in/daniel-azmanov-8b4235239)[![GitHub][github-shield]](https://github.com/d-azmanov)
 
-<img src="https://user-images.githubusercontent.com/100611949/167245024-d43da573-93e8-48ff-8e05-e2853301a464.png"  align="left" height="150px"/>
+<img style="height: 100px; width:100px" src="https://user-images.githubusercontent.com/100611949/167245024-d43da573-93e8-48ff-8e05-e2853301a464.png"  align="left" height="150px"/>
 
 As a third-year computer scientist, I have developed an expansive knowledge and skill set, perfect for project development and management.   Over the years, I have learnt, and worked with, Java, C++, HTML, PHP, JavaScript, CSS, and Angular, and other related technologies and frameworks.  I enjoy putting myself in many different work environments (technologies as well as team members) to broaden my knowledge, which has proved useful in my overall development as a software developer and project leader. 
 

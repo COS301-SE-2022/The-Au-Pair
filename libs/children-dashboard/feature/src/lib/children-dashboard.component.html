@@ -5,9 +5,9 @@
         <p class='welcome-heading'>Your Children</p>
 
         <div class="children-div-wrapper">
-            <ion-card class='children-div'>
-                <div class='child-name'>Child Name: </div>
-                <div class='child-status'>Child ID: </div>
+            <ion-card *ngFor="let child of children" class='children-div'>
+                <div class='child-name'>Child Name: {{child.fname}} {{child.sname}}</div>
+                <div class='child-status'>Child ID: {{child.id}}</div>
                 <div class="edit-details">
                     <p class='edit'>Edit details</p>
                     <ion-col><ion-icon class="icon-edit" name="pencil-outline"></ion-icon></ion-col>

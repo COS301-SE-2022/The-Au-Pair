@@ -4,6 +4,7 @@ import { ChildrenDashboardComponent } from './children-dashboard.component';
 import { ChildrenDashboardRoutingModule } from './children-dashboard-routing.module';
 import { IonicModule } from '@ionic/angular';
 import { NavbarModule } from '@the-au-pair/shared/components/navbar';
+import { API } from '../../../../shared/api/api.service';
 
 @NgModule({
   imports: [
@@ -13,5 +14,6 @@ import { NavbarModule } from '@the-au-pair/shared/components/navbar';
     NavbarModule
   ],
   declarations: [ChildrenDashboardComponent],
+  providers: [API]
 })
 export class ChildrenDashboardFeatureModule {}
