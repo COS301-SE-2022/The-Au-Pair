@@ -63,13 +63,13 @@ public class hoursLoggedService
     int minuteSum = 0;
     for (hoursLogged hourLog : hl)
     {
-      String [] ts = hourLog.getTimeStart().split(":");
+      String [] timeStart = hourLog.getTimeStart().split(":");
       if (hourLog.getTimeEnd() == null || hourLog.getTimeEnd().equals(""))
         continue;
 
-      String [] te = hourLog.getTimeEnd().split(":");
-      minuteSum += (Integer.parseInt(te[0]) - Integer.parseInt(ts[0]))*60;
-      minuteSum += Integer.parseInt(te[1]) - Integer.parseInt(ts[1]);
+      String [] timeEnd = hourLog.getTimeEnd().split(":");
+      minuteSum += (Integer.parseInt(timeEnd[0]) - Integer.parseInt(timeStart[0]))*60;
+      minuteSum += Integer.parseInt(timeEnd[1]) - Integer.parseInt(timeStart[1]);
     };
     return minuteSum;
   }
@@ -81,15 +81,14 @@ public class hoursLoggedService
     int minuteSum = 0;
     for (hoursLogged hourLog : hl)
     {
-      String [] ts = hourLog.getTimeStart().split(":");
+      String [] timeStart = hourLog.getTimeStart().split(":");
       if (hourLog.getTimeEnd() == null || hourLog.getTimeEnd().equals(""))
         continue;
 
-      String [] te = hourLog.getTimeEnd().split(":");
-      minuteSum += (Integer.parseInt(te[0]) - Integer.parseInt(ts[0]))*60;
-      minuteSum += Integer.parseInt(te[1]) - Integer.parseInt(ts[1]);
+      String [] timeEnd = hourLog.getTimeEnd().split(":");
+      minuteSum += (Integer.parseInt(timeEnd[0]) - Integer.parseInt(timeStart[0]))*60;
+      minuteSum += Integer.parseInt(timeEnd[1]) - Integer.parseInt(timeStart[1]);
     };
-
     return minuteSum;
   }
 
@@ -105,13 +104,13 @@ public class hoursLoggedService
       String [] dateString = hourLog.getDate().split("/");
 
       if (dateString[1].equals(monthIn)) {
-        String [] ts = hourLog.getTimeStart().split(":");
+        String [] timeStart = hourLog.getTimeStart().split(":");
         if (hourLog.getTimeEnd() == null || hourLog.getTimeEnd().equals(""))
           continue;
 
-        String [] te = hourLog.getTimeEnd().split(":");
-        minuteSum += (Integer.parseInt(te[0]) - Integer.parseInt(ts[0]))*60;
-        minuteSum += Integer.parseInt(te[1]) - Integer.parseInt(ts[1]);
+        String [] timeEnd = hourLog.getTimeEnd().split(":");
+        minuteSum += (Integer.parseInt(timeEnd[0]) - Integer.parseInt(timeStart[0]))*60;
+        minuteSum += Integer.parseInt(timeEnd[1]) - Integer.parseInt(timeStart[1]);
       }
       else {
         break;
@@ -142,7 +141,6 @@ public class hoursLoggedService
       int index = (int)(AlphaNumericString.length() * Math.random());
       sb.append(AlphaNumericString.charAt(index));
     }
-
     return sb.toString();
   }
 }
