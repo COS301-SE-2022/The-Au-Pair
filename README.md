@@ -130,8 +130,8 @@ npm run start:client
 
 ### Sprint 2 Burn-Down
 <div align="center">
-  <img style="height: 350px; width:35%" src="https://user-images.githubusercontent.com/100611949/172818063-3853f47c-14e1-4428-83fa-a25077dd88c4.png">
-  <img style="height: 350px; width:64%" src="https://user-images.githubusercontent.com/93247114/172879622-a8313404-8996-4cfa-898c-754ea174b4cb.png">
+  <img style="height: 350px; width:39%" src="https://user-images.githubusercontent.com/100611949/172818063-3853f47c-14e1-4428-83fa-a25077dd88c4.png">
+  <img style="height: 350px; width:60%" src="https://user-images.githubusercontent.com/93247114/172879622-a8313404-8996-4cfa-898c-754ea174b4cb.png">
 </div>
 <!-- Contributors -->
 
@@ -141,7 +141,7 @@ npm run start:client
 
 [![LinkedIn][linkedin-shield]](https://www.linkedin.com/in/daniel-azmanov-8b4235239)[![GitHub][github-shield]](https://github.com/d-azmanov)
 
-<img style="height: 100px; width:100px" src="https://user-images.githubusercontent.com/100611949/167245024-d43da573-93e8-48ff-8e05-e2853301a464.png"  align="left" height="150px"/>
+<img src="https://user-images.githubusercontent.com/100611949/167245024-d43da573-93e8-48ff-8e05-e2853301a464.png"  align="left" height="150px"/>
 
 As a third-year computer scientist, I have developed an expansive knowledge and skill set, perfect for project development and management.   Over the years, I have learnt, and worked with, Java, C++, HTML, PHP, JavaScript, CSS, and Angular, and other related technologies and frameworks.  I enjoy putting myself in many different work environments (technologies as well as team members) to broaden my knowledge, which has proved useful in my overall development as a software developer and project leader. 
 
