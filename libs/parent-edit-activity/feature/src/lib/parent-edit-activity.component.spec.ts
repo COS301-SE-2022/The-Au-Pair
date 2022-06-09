@@ -25,7 +25,7 @@ describe('ParentEditActivityComponent', () => {
   const emptyChild = {activityName: "AI", description: "AI Lesson", location: "UP", dayOfWeek: "Wednesday", timeSlot: "13:00-14:00", budget: "0", childId:""};
 
   //Invalid activity to be updates
-  const invalidActivity = {id: "invalidId", name: "AI", description: "AI Lesson", location: "UP", timeStart:"13:00", timeEnd: "14:00",  budget: 0.0 ,comment: "", behavior: "", day: "Wednesday", child:"8675945310542"};
+  const invalidActivity = {id: "invalidId", name: "AI", description: "AI Lesson", location: "UP", timeStart:"13:00", timeEnd: "14:00",  budget: 0.0 ,comment: "", behavior: 0, day: "Wednesday", child:"8675945310542"};
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
