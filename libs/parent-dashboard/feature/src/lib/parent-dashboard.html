@@ -4,18 +4,20 @@
     <div class='parent-dashboard-div'>
         <p class='welcome-heading'>Welcome EPI-USE</p>
 
+        <div class="au-pair-div-wrapper">
+            <div class='au-pair-name'>Au Pair: {{this.userDetails.fname}} {{this.userDetails.sname}}
+                <a href = 'tel:{{this.userDetails.number}}'><ion-icon name="call" class = 'call-icon'></ion-icon></a>
+                <a href = 'sms:{{this.userDetails.number}}'><ion-icon name="chatbubble-ellipses" class = 'message-icon'></ion-icon></a>
+            </div>
+        </div>
+
         <div class="children-div-wrapper">
-            <ion-card class='children-div'>
-                <div class='child-name'>Child: </div>
-                <div class='child-status'>Status: </div>
-                <div class='child-au-pair'>Au Pair: </div>
+
+            <ion-card class='children-div' *ngFor="let child of children; let last = last">
+                <div class='child-name'>Child: {{ child.fname }}</div>
+                <div class='child-status'>Allergies: {{ child.allergies }}</div>
             </ion-card>
 
-            <ion-card class='children-div'>
-                <div class='child-name'>Child: </div>
-                <div class='child-status'>Status: </div>
-                <div class='child-au-pair'>Au Pair: </div>
-            </ion-card>
         </div>
 
         <p class='actions-heading'>Actions</p>
