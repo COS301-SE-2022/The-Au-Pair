@@ -52,7 +52,7 @@ export class AuPairCostComponent implements OnInit {
 
     this.api.getMonthMinutes("7542108615984", this.getStartDateOfWeek(0)).subscribe( 
       data => {
-        this.totalHours = Number((data/60).toFixed(3));
+        this.totalHours = Number((data/60).toFixed(2));
       },
       error => {
         console.log("Error has occured with API: " + error);
@@ -64,7 +64,7 @@ export class AuPairCostComponent implements OnInit {
         this.hourlyRate = data.payRate;
         this.travelCost = data.distTraveled;
         this.activityCost = data.costIncurred;
-        this.otherCost = 180; 
+        this.otherCost = 0; 
         this.totalCost = this.travelCost+this.activityCost+this.otherCost;
         this.totalCost = Number(this.totalCost.toFixed(3))
         this.totalRemuneration = (this.hourlyRate*this.totalHours) + this.totalCost; 
