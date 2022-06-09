@@ -64,10 +64,10 @@ export class AuPairDashboardComponent implements OnInit {
 
       this.serv.addTimeEnd(this.logID, this.getCurrentTime()).subscribe( 
         data => {
+          this.alreadyLogging = !this.alreadyLogging;
           console.log("The response is:" + data); 
         },
         error => {
-          location.reload()
           console.log("Error has occured with API: " + error);
         }
       )
@@ -78,6 +78,7 @@ export class AuPairDashboardComponent implements OnInit {
       this.hoursLogDetail.timeStart = this.getCurrentTime();
       this.serv.addHoursLog(this.hoursLogDetail).subscribe( 
         res=>{
+          this.alreadyLogging = !this.alreadyLogging;
           console.log("The response is:" + res); 
         },
         error => {
@@ -85,7 +86,6 @@ export class AuPairDashboardComponent implements OnInit {
         }
       )
     }
-    this.alreadyLogging = !this.alreadyLogging;
   }
 
   getToday() {
