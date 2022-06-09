@@ -39,7 +39,7 @@ export interface Activity{
   
   export interface Parent{
     id: string;
-    cildren: string [];
+    children: string [];
     medID: string;
     auPair: string;
   }
