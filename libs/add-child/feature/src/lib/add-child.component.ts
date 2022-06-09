@@ -1,8 +1,8 @@
 import { Component} from '@angular/core';
-import { Router } from '@angular/router';
+import { ChildActivationStart, Router } from '@angular/router';
 import { ToastController } from '@ionic/angular';
 import { API } from '../../../../shared/api/api.service';
-import { Child } from '../../../../shared/interfaces/interfaces';
+import { Child, Parent } from '../../../../shared/interfaces/interfaces';
 
 @Component({
   selector: 'the-au-pair-add-child',
@@ -20,6 +20,13 @@ export class AddChildComponent
     diet: "",
     parent: ""
   }  
+
+  parent: Parent ={
+    id: "",
+    children: [],
+    medID: "",
+    auPair: ""
+  }
 
   //Regex for south african ID number
   SA_ID = new RegExp(/(((\d{2}((0[13578]|1[02])(0[1-9]|[12]\d|3[01])|(0[13456789]|1[012])(0[1-9]|[12]\d|30)|02(0[1-9]|1\d|2[0-8])))|([02468][048]|[13579][26])0229))(( |-)(\d{4})( |-)(\d{3})|(\d{7}))/);
@@ -184,6 +191,28 @@ export class AddChildComponent
   //Service calls
   addChild(child: Child)
   {
+    this.serv.getParent("4561237814867").subscribe(
+      res=>{
+        this.parent.id = res.id;
+        this.parent.children = res.children;
+        this.parent.medID = res.medID;
+        this.parent.auPair = res.auPair;
+        this.parent.children.push(child.id);
+        //Update the parent object to contain the new child ID
+        this.serv.editParent(this.parent).subscribe(
+          res=>{
+            console.log("The response is:" + res); 
+          },
+          error=>{
+            console.log("Error has occured with API: " + error);
+          }
+        );
+      },
+      error=>{
+        console.log("Error has occured with API: " + error);
+      }
+    )
+
     this.serv.addChild(child).subscribe(
       res=>{
         console.log("The response is:" + res); 
