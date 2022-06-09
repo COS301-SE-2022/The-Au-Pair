@@ -40,10 +40,7 @@ export class ParentDashboardComponent implements OnInit{
     number: "",
   }
 
-  constructor(private serv: API)
-  {
-
-  }
+  constructor(private serv: API){}
 
   ngOnInit(): void
   {

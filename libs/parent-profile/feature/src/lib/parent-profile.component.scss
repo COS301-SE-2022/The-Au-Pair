@@ -2,7 +2,7 @@
     font-size: 3.6vw;
     padding-top: 2%;
     margin-bottom: 2%;
-    color: #3C3C3C;
+    color: var(--ion-color-dark);
     text-align: center;
     font-family: TitanOne;
     margin-top: 0px;
@@ -10,7 +10,6 @@
 
 .parent-profile-div{
     width: 90%;
-    // height: 90%;
     margin-top: 60px;
     margin-left: auto;
     margin-right: auto;
@@ -28,8 +27,6 @@
 .details-div{
     width: 40%;
     height: 100%;
-    // float: left;
-
     margin-left: auto;
     margin-right: auto;
     padding-bottom: 25px;
@@ -62,11 +59,11 @@
 
 .parent-info-small{
     height: 6%;
-    background-color: #F9F9F9;
+    background-color: var(--ion-background-color);
     display:flex;
     font-family: Roboto;
     align-items: center;
-    color: #79BA9E;
+    color: var(--ion-color-tertiary);
     margin-bottom: 12px;
     box-shadow: 1px 2px 5px rgba(0, 0, 0, 0.13);
     border-radius: 6px;
@@ -74,7 +71,7 @@
 
 .parent-info-large{
     height: 26%;
-    background-color: #F9F9F9;
+    background-color: var(--ion-background-color);
     display:flex;
     margin-top: 10px;
     font-family: Roboto;
@@ -92,7 +89,7 @@
 }
 
 .parent-text-info{
-    color: #3C3C3C;
+    color: var(--ion-color-dark);
     font-size: 100%;
     margin-right: auto;
     line-height: 170%;
@@ -101,7 +98,7 @@
 }
 
 .parent-text-info2{
-    color: #3C3C3C;
+    color: var(--ion-color-dark);
     font-size: 100%;
     margin-right: auto;
     line-height: 170%;
@@ -112,7 +109,7 @@
 .change-button{
     padding: 10px 22px;
     gap: 10px;
-    border: 2px solid #176560;
+    border: 2px solid var(--ion-color-secondary);
     border-radius: 10px;
     background-color: #69A88DB2;
     margin: auto;
@@ -161,7 +158,6 @@
 
     .parent-profile-div{
         margin-top: 13px;
-        // height: 95%;
     }
 
     .profile-name{
@@ -204,7 +200,6 @@
 
     .parent-profile-div{
         margin-top: 13px;
-        // height: 95%;
     }
 
     .profile-name{

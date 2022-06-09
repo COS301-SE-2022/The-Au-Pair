@@ -38,10 +38,7 @@ export class ParentProfileComponent implements OnInit {
   }
 
 
-  constructor(private serv: API)
-  {
-
-  }
+  constructor(private serv: API){}
 
   ngOnInit(): void
   {
@@ -86,6 +83,4 @@ export class ParentProfileComponent implements OnInit {
         error=>{console.log("Error has occured with API: " + error);}
       )
   };
-
-
 }

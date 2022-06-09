@@ -33,10 +33,7 @@ export class EditParentProfileComponent implements OnInit{
     provider: "",
   }
 
-  constructor(private serv: API, public toastCtrl: ToastController)
-  {
-
-  }
+  constructor(private serv: API, public toastCtrl: ToastController){}
 
   ngOnInit(): void
   {
