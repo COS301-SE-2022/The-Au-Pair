@@ -13,7 +13,6 @@ describe('ScheduleModalComponent', () => {
   let fixture: ComponentFixture<ScheduleModalComponent>;
 
   const invalidActivity = {id: "invalidId", name: "AI", description: "AI Lesson", location: "UP", timeStart:"13:00", timeEnd: "14:00",  budget: 0.0 ,comment: "", behavior: 0, day: "Wednesday", child:"8675945310542"};
-  const validFromData = {desc: "all good", behaviour : 80};
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
