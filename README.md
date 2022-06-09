@@ -15,7 +15,7 @@
 
   
   <p align="center">
-    <a href="https://github.com/COS301-SE-2022/The-Au-Pair/wiki"><strong>Quick Links»</strong></a>
+    <a href="#demolinks"><strong>Quick Links»</strong></a>
     <br />
     <br />
     <a href="https://github.com/COS301-SE-2022/The-Au-Pair/projects/1">Project Board</a>
