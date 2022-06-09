@@ -4,9 +4,9 @@
         <button (click)="back()" class="back-button"><ion-icon name="arrow-back-circle-outline"></ion-icon></button>
       </ion-buttons>
       <ion-buttons slot="start" class="start-buttons">
-        <ion-button (click)="RedirectTo('parent-dashboard')">Dashboard</ion-button>
+        <ion-button (click)="RedirectTo('au-pair-dashboard')">Dashboard</ion-button>
         <ion-button>Manage Contract</ion-button>
-        <ion-button (click)="RedirectTo('au-pair-cost')"routerLink="/au-pair-cost">Au Pair</ion-button>
+        <ion-button (click)="RedirectTo('au-pair-cost')"routerLink="/au-pair-cost">Children</ion-button>
         <ion-button href="https://github.com/COS301-SE-2022/The-Au-Pair">About</ion-button>
       </ion-buttons>
       <ion-buttons slot="end" class="end-buttons">
@@ -17,47 +17,3 @@
       <ion-title><h1 class="text-white ion-text-center">The Au Pair</h1> </ion-title>
     </ion-toolbar>
 </ion-header>
-
-<!-- <ion-header>
-  <ion-toolbar>
-    <ion-title>Header</ion-title>
-    <ion-buttons slot="start">
-      <ion-menu-button autoHide="false"  menu="main-menu"></ion-menu-button>
-    </ion-buttons>
-  </ion-toolbar>
-</ion-header>
-
-<ion-menu contentId="main" menuId="main-menu" side="start" type="overlay">
-  <ion-content>
-      <ion-list lines="none">
-        <ion-item>
-          <ion-card class="nav-item" (click)="RedirectTo('parent-dashboard')">
-            <ion-icon name="home-outline" class="nav-icon"></ion-icon>
-            <ion-label class="nav-label">Dashboard</ion-label>
-          </ion-card>
-        </ion-item>
-        
-        <ion-item>
-          <ion-card class="nav-item">
-            <ion-icon name="create-outline" class="nav-icon"></ion-icon>
-            <ion-label class="nav-label">Manage Contract</ion-label>
-          </ion-card>
-        </ion-item>
-        <ion-item>
-          <ion-card class="nav-item"  (click)="RedirectTo('au-pair-cost')">
-            <ion-icon name="people-outline" class="nav-icon"></ion-icon>
-            <ion-label class="nav-label">Au Pair</ion-label>
-          </ion-card>
-        </ion-item>
-        
-        <ion-item>
-          <ion-card class="nav-item" (click)="Repo()">
-            <ion-icon name="information-circle-outline" class="nav-icon"></ion-icon>
-            <ion-label class="nav-label">About</ion-label>
-          </ion-card>
-        </ion-item>
-      </ion-list>
-  </ion-content>
-</ion-menu>
-<ion-router-outlet id="main"></ion-router-outlet>
- -->
