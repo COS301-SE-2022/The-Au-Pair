@@ -7,7 +7,7 @@ export interface Activity{
     timeEnd: string;
     budget: number;
     comment: string;
-    behavior: string;
+    behavior: number;
     day: string ;
     child: string;
   }
@@ -40,7 +40,7 @@ export interface Activity{
   
   export interface Parent{
     id: string;
-    cildren: string [];
+    children: string [];
     medID: string;
     auPair: string;
   }

@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 import { ModalController } from '@ionic/angular';
+import { API } from '../../../../../shared/api/api.service';
+
 
 @Component({
   selector: 'the-au-pair-schedule-modal',
@@ -7,7 +9,7 @@ import { ModalController } from '@ionic/angular';
   styleUrls: ['./schedule-modal.component.scss'],
 })
 export class ScheduleModalComponent {
-  constructor(private modalCtrl : ModalController) {}
+  constructor(private serv: API,private modalCtrl : ModalController) {}
 
   closeModal(){
     this.modalCtrl.dismiss();
