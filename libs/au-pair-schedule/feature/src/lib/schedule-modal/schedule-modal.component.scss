@@ -48,10 +48,12 @@
     width: 85%;
     margin:auto;
     border-radius: 16px;
+    border : none !important;
+    color : white;
 }
 
 .submit-row{
-    margin-top: 18vh;
+    margin-top: 10vh;
 }
 
 @media (max-width: 768px){
