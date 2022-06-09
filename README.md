@@ -15,10 +15,12 @@
 
   
   <p align="center">
-    <a href="#demolinks"><strong>Quick Links»</strong></a>
+    <a href="#demolinks"><strong>Demo Links»</strong></a>
     <br />
     <br />
-    <a href="https://github.com/COS301-SE-2022/The-Au-Pair/projects/1">Project Board</a>
+    <a href="https://drive.google.com/file/d/1bbkz5DlxMrSKnEIY9LDXKkoflCZH3Lga/view?usp=sharing"><strong>CheemsChaps-Demo2</strong></a> | 
+    <a href="https://docs.google.com/document/d/18vKESVoNjol4EZzjzmbdzlKqipAGSXseNxcDelAnqaQ/edit?usp=sharing"><strong>SRS Document 2</strong></a> |
+    <a href="https://github.com/COS301-SE-2022/The-Au-Pair/projects/1"><strong>Projet Board</strong></a> 
   </p>
   
   <br />
@@ -82,7 +84,7 @@
 
 ### Demo2
 
-<a href="">CheemsChaps-Demo Video 2</a>
+<a href="https://drive.google.com/file/d/1bbkz5DlxMrSKnEIY9LDXKkoflCZH3Lga/view?usp=sharing">CheemsChaps-Demo Video 2</a>
     <br>
     <a href="https://docs.google.com/document/d/18vKESVoNjol4EZzjzmbdzlKqipAGSXseNxcDelAnqaQ/edit?usp=sharing">SRS Document - Demo 2</a>
     <br>
@@ -127,9 +129,9 @@ npm run start:client
 <p align="right">(<a href="#top">back to top</a>)</p>
 
 ### Sprint 2 Burn-Down
-<div>
-  <img style="height: 350px; width:350px" src="https://user-images.githubusercontent.com/100611949/172818063-3853f47c-14e1-4428-83fa-a25077dd88c4.png">
-  <img style="height: 350px; width:520px" src="https://user-images.githubusercontent.com/93247114/172879622-a8313404-8996-4cfa-898c-754ea174b4cb.png">
+<div align="center">
+  <img style="height: 350px; width:35%" src="https://user-images.githubusercontent.com/100611949/172818063-3853f47c-14e1-4428-83fa-a25077dd88c4.png">
+  <img style="height: 350px; width:64%" src="https://user-images.githubusercontent.com/93247114/172879622-a8313404-8996-4cfa-898c-754ea174b4cb.png">
 </div>
 <!-- Contributors -->
 
