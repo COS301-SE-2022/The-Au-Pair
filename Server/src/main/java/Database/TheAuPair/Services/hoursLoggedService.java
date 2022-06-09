@@ -35,10 +35,17 @@ public class hoursLoggedService
     hlr.save(hl);
   }
 
-  public void addTimeEnd(String id,String endTime) {
-    hoursLogged hl = hlr.findUsingId(id);
-    hl.setTimeEnd(endTime);
-    hlr.save(hl);
+  public void addTimeEnd(String id, String endTime) {
+    List<hoursLogged> hl = hlr.findAllByUserId(id, Sort.by(Sort.Direction.ASC, "timeStart"));
+    System.out.println(id + ", " + endTime);
+    for (hoursLogged hourLog : hl)
+    {
+      if(hourLog.getTimeEnd() == null || hourLog.getTimeEnd().equals(""))
+      {
+        hourLog.setTimeEnd(endTime);
+        hlr.save(hourLog);
+      }
+    }
   }
 
   public void updateHoursLog(hoursLogged hl)
@@ -48,12 +55,11 @@ public class hoursLoggedService
 
   public String getStartedLog(String id, String date) {
     List<hoursLogged> hl = hlr.findAllByUserIdAndDate(id, date, Sort.by(Sort.Direction.ASC, "timeStart"));
-    System.out.println(id + ", " + date);
     for (hoursLogged hourLog : hl)
     {
       if(hourLog.getTimeEnd() == null || hourLog.getTimeEnd().equals(""))
       {
-        return hourLog.getId();
+        return hourLog.getId().toString();
       }
     }
     return "";

@@ -28,4 +28,25 @@ describe('AuPairDashboardComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
+  it('should change the value of alreadyLogging to the opposite of what it was', () => {
+    jest.spyOn(component, "logSwitch");
+
+    component.logSwitch();
+    expect(component.alreadyLogging).not.toEqual(component.alreadyLogging);
+  });
+
+  it('should create a string of todays date', () => {
+    jest.spyOn(component, "getToday");
+
+    const str = component.getToday();
+    expect(str).toMatch(/^((0[1-9])|([1|2][0-9])|(3[0-1]))\/((0[1-9])|(1[0-2]))\/(\d{4})$/);
+  });
+
+  it('should create a string of the current time of the client', () => {
+    jest.spyOn(component, "getCurrentTime");
+    
+    const str = component.getCurrentTime();
+    expect(str).toMatch(/^((0[1-9])|(1[0-9])|(2[0-4])):((0[1-9])|([1-6]\d))$/);
+  });
 });

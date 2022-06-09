@@ -9,7 +9,6 @@ import { HoursLogged } from '../../../../shared/interfaces/interfaces';
   providers: [API]
 })
 export class AuPairDashboardComponent implements OnInit {
-  constructor(private api:API) { }
   
   employer : any;
   employerName!: string;
@@ -17,7 +16,7 @@ export class AuPairDashboardComponent implements OnInit {
   employerId! : string;
   children: any[] = [];
 
-  alreadyLogging = true;
+  alreadyLogging = false;
   logID = "";
 
   hoursLogDetail: HoursLogged = {
@@ -27,10 +26,16 @@ export class AuPairDashboardComponent implements OnInit {
     timeStart: "",
     timeEnd: ""
   };
+  
+  constructor(private serv: API) {}
 
-  ngOnInit() {    
-    this.api.getStartedLog("7542108615984", this.getToday()).subscribe( 
+  async ngOnInit(): Promise<void> {
+    await this.getEmployer();
+
+    const todaysDate = this.getToday();
+    this.serv.getStartedLog("7542108615984", todaysDate).subscribe( 
       data => {
+        console.log("doesn't get here")
         if(data == null || data.equals("")) {
           this.alreadyLogging = false;
         }
@@ -40,6 +45,7 @@ export class AuPairDashboardComponent implements OnInit {
         }
       },
       error => {
+        this.alreadyLogging = true;
         console.log("Error has occured with API: " + error);
       }
     )
@@ -47,19 +53,25 @@ export class AuPairDashboardComponent implements OnInit {
 
   logSwitch() {
     if(this.alreadyLogging) {
-      if(this.logID == null || this.logID == "") {
-        this.api.getStartedLog("7542108615984", this.getToday()).subscribe( 
-          data => {
-            this.logID = data;
-          },
-          error => {
-            console.log("Error has occured with API: " + error);
-          }
-        )
-      }
+      // if(this.logID == null || this.logID == "") {
+      //   this.serv.getStartedLog("7542108615984", this.getToday()).subscribe( 
+      //     data => {
+      //       this.logID = data;
+      //       // console.log(data);
+      //     },
+      //     error => {
+      //       // location.reload()
+      //       console.log("Error has occured with API: " + error);
+      //     }
+      //   )
+      // }
 
-      this.api.addTimeEnd(this.logID, this.getCurrentTime()).subscribe( 
+      this.serv.addTimeEnd("7542108615984", this.getCurrentTime()).subscribe( 
+        data => {
+          console.log("The response is:" + data); 
+        },
         error => {
+          // location.reload()
           console.log("Error has occured with API: " + error);
         }
       )
@@ -68,7 +80,7 @@ export class AuPairDashboardComponent implements OnInit {
       this.hoursLogDetail.user = "7542108615984";
       this.hoursLogDetail.date = this.getToday();
       this.hoursLogDetail.timeStart = this.getCurrentTime();
-      this.api.addHoursLog(this.hoursLogDetail).subscribe( 
+      this.serv.addHoursLog(this.hoursLogDetail).subscribe( 
         res=>{
           console.log("The response is:" + res); 
         },
@@ -77,7 +89,6 @@ export class AuPairDashboardComponent implements OnInit {
         }
       )
     }
-
     this.alreadyLogging = !this.alreadyLogging;
   }
 
@@ -97,13 +108,6 @@ export class AuPairDashboardComponent implements OnInit {
     const strTime = ('0' + now.getHours()).slice(-2) + ":" + ('0' + now.getMinutes()).slice(-2);
 
     return strTime;
-  }
-}
-
-  constructor(private serv: API) {}
-
-  async ngOnInit(): Promise<void> {
-    await this.getEmployer();
   }
 
   async getEmployer(){
