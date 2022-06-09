@@ -25,13 +25,13 @@ public class Activity
   @Field ("comment")
   private String comment;
   @Field ("behavior")
-  private String behavior;
+  private int behavior;
   @Field ("day")
   private String day;
   @Field ("child")
   private String child;
 
-  public Activity(String id, String name, String description, String location, String timeStart, String timeEnd, double budget, String comment, String behavior, String day, String child)
+  public Activity(String id, String name, String description, String location, String timeStart, String timeEnd, double budget, String comment, int behavior, String day, String child)
   {
     this.id = id;
     this.name = name;
@@ -126,12 +126,12 @@ public class Activity
     this.comment = comment;
   }
 
-  public String getBehavior()
+  public int getBehavior()
   {
     return behavior;
   }
 
-  public void setBehavior(String behavior)
+  public void setBehavior(int behavior)
   {
     this.behavior = behavior;
   }
