@@ -31,9 +31,10 @@ describe('AuPairDashboardComponent', () => {
 
   it('should change the value of alreadyLogging to the opposite of what it was', () => {
     jest.spyOn(component, "logSwitch");
+    const tempLogSwitch = component.alreadyLogging 
 
     component.logSwitch();
-    expect(component.alreadyLogging).not.toEqual(component.alreadyLogging);
+    expect(component.alreadyLogging).not.toEqual(tempLogSwitch);
   });
 
   it('should create a string of todays date', () => {
