@@ -38,16 +38,31 @@ describe('AuPairCostComponent', () => {
 
     expect(component.otherDeg).toEqual(expectedOtherDeg);
     expect(component.activityDeg).toEqual(expectedActivityDeg);
-  })
+  });
 
-  it('should populate hours worked per day when populateDaysCost is called', () => {
-    const expectedArray = [
-      8, 4, 7, 4, 6, 3 ,0
-    ];
-    
+  it('should populate hours worked per day when populateDaysCost is called', () => {    
     jest.spyOn(component, "populateDaysCost");
     component.populateDaysCost();
 
-    expect(component.dayHoursWorked).toEqual(expectedArray);
+    for (let i = 0; i < 7; i++) {
+      expect(component.dayHoursWorked[i]).toBeGreaterThanOrEqual(0);
+      expect(component.dayHoursWorked[i]).toBeLessThanOrEqual(24);
+    }
+  });
+
+  it('should get the days of the current week the client is in', () => {
+    jest.spyOn(component, "getStartDateOfWeek");
+
+    for (let i = 0; i < 7; i++) {
+      const str = component.getStartDateOfWeek(i);
+      expect(str).toMatch(/^((0[1-9])|([1|2][0-9])|(3[0-1]))\/((0[1-9])|(1[0-2]))\/(\d{4})$/);
+    }
+  });
+
+  it('should create a string of the week range the client is in', () => {
+    jest.spyOn(component, "dateRangeToString");
+    
+    const str = component.dateRangeToString(7);
+    expect(str).toMatch(/^((0[1-9])|([1|2][0-9])|(3[0-1]))\s([A-z][a-z]*)\s-\s((0[1-9])|([1|2][0-9])|(3[0-1]))\s([A-z][a-z]*)/);
   });
 });
