@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { API } from '../../../../shared/api/api.service';
-import { User, Parent, medAid } from '../../../../shared/interfaces/interfaces';
+import { User, medAid } from '../../../../shared/interfaces/interfaces';
 import { ToastController } from '@ionic/angular';
 
 @Component({
@@ -22,13 +22,6 @@ export class EditParentProfileComponent implements OnInit{
     type: 0,
     password: "",
     number: "",
-  }
-
-  parentDetails: Parent = {
-    id: "",
-    cildren: [],
-    medID: "",
-    auPair: "",
   }
 
   medAidDetails: medAid = {
@@ -67,28 +60,19 @@ export class EditParentProfileComponent implements OnInit{
       },
       error=>{console.log("Error has occured with API: " + error);}
     )
-      await this.serv.getParent("4561237814867").subscribe(
-        res=>{
-          this.parentDetails.id = res.id;
-          this.parentDetails.cildren = res.cildren;
-          this.parentDetails.medID = res.medID;
-          this.parentDetails.auPair = res.auPair;
-        },
-        error=>{console.log("Error has occured with API: " + error);}
-      )
-      await this.serv.getMedAid("7534286951").subscribe(
-        res=>{
-          this.medAidDetails.id = res.id;
-          this.medAidDetails.plan = res.plan;
-          this.medAidDetails.name = res.name;
-          this.medAidDetails.sname = res.sname;          
-          this.medAidDetails.mID = res.mID;
-          console.log(res);
-          console.log(this.medAidDetails);
-          this.medAidDetails.provider = res.provider;
-        },
-        error=>{console.log("Error has occured with API: " + error);}
-      )
+    await this.serv.getMedAid("7534286951").subscribe(
+      res=>{
+        this.medAidDetails.id = res.id;
+        this.medAidDetails.plan = res.plan;
+        this.medAidDetails.name = res.name;
+        this.medAidDetails.sname = res.sname;          
+        this.medAidDetails.mID = res.mID;
+        console.log(res);
+        console.log(this.medAidDetails);
+        this.medAidDetails.provider = res.provider;
+      },
+      error=>{console.log("Error has occured with API: " + error);}
+    )
   };
 
   getUserFormDetails(val : any)
@@ -237,7 +221,7 @@ export class EditParentProfileComponent implements OnInit{
       this.medAidDetails.name = val.medicalAidMM;
       this.medAidDetails.plan = val.medicalAidPlan;
       this.medAidDetails.provider = val.medicalAidProvider;
-      this.medAidDetails.id = val.medicalAidNo;
+      this.medAidDetails.mID = val.medicalAidNo;
       this.medAidDetails.sname = val.medicalAidMS;
       this.editDetails(this.userDetails, this.medAidDetails);
     }
