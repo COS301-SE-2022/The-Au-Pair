@@ -76,13 +76,13 @@
 <!-- All demo information -->
 ### Demo1
 
-<a href="https://drive.google.com/file/d/1iBMNdAej-kbDxPGT9k8_Q5t6aJUk0UNE/view?usp=sharing">CheemsChaps-Demo1</a>
+<a href="https://drive.google.com/file/d/1iBMNdAej-kbDxPGT9k8_Q5t6aJUk0UNE/view?usp=sharing">CheemsChaps-Demo Video 1</a>
     <br>
     <a href="https://docs.google.com/document/d/18CSPDD1SnMIpAknKGA97uaO6s_-WgM7UnW_6i9DhmC4/edit?usp=sharing">SRS Document - Demo 1</a>
 
 ### Demo2
 
-<a href="">CheemsChaps-Demo2</a>
+<a href="">CheemsChaps-Demo Video 2</a>
     <br>
     <a href="https://docs.google.com/document/d/18vKESVoNjol4EZzjzmbdzlKqipAGSXseNxcDelAnqaQ/edit?usp=sharing">SRS Document - Demo 2</a>
     <br>
