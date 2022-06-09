@@ -19,7 +19,7 @@ export class ParentAddActivityComponent implements OnInit{
     timeEnd: "",
     budget: 0.0,
     comment: "",
-    behavior: "",
+    behavior: 0,
     day: "",
     child: "",
   };

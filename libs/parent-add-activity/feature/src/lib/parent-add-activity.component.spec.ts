@@ -48,7 +48,7 @@ describe('ParentAddActivityComponent', () => {
       timeEnd: "10:00",
       budget: 0.0,
       comment: "",
-      behavior: "",
+      behavior: 0,
       day: "input",
       child: "input",
     };
@@ -70,7 +70,7 @@ describe('ParentAddActivityComponent', () => {
       timeEnd: "",
       budget: 0.0,
       comment: "",
-      behavior: "",
+      behavior: 0,
       day: "",
       child: "",
     };
