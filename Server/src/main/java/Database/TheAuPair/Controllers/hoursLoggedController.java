@@ -33,6 +33,14 @@ public class hoursLoggedController
     return minutes;
   }
 
+  @PostMapping("/getMonthMinutes")
+  @CrossOrigin(origins = "http://localhost:4200")
+  public int getMonthMinutes(@RequestBody Map<String, String> idAndDate)
+  {
+    int minutes = hls.getMonthMinutes(idAndDate.get("id"), idAndDate.get("date"));
+    return minutes;
+  }
+  
   @PostMapping("/getDateTimes")
   @CrossOrigin(origins = "http://localhost:4200")
   public List<hoursLogged> getDateTimes(@RequestBody Map<String, String> idAndDate)

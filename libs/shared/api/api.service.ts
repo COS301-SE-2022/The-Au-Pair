@@ -77,6 +77,14 @@ export class API{
     return this.http.post("http://localhost:8080/getAllMinutes", id);
   }
 
+  getMonthMinutes(id : string, date : string): Observable<any> {
+    var out = {
+      "id" : id,
+      "date" : date
+    }
+    return this.http.post("http://localhost:8080/getMonthMinutes", out);
+  }
+
   getDateTimes(id : string, date : string): Observable<any> {
     var out = {
       "id" : id,

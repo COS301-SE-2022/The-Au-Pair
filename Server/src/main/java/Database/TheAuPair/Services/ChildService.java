@@ -17,6 +17,10 @@ public class ChildService
   public List<Child> getChildren(String id)
   {
     List<Child> c = cr.findAllByParent(id);
+    if (c == null || c.size() == 0)
+    {
+      c = cr.findAllByAuPair(id);
+    }
     return c;
   }
 

@@ -11,4 +11,7 @@ public interface ChildRepository extends MongoRepository<Child, String>
 {
   @Query("{ 'parent': ?0 }")
   List<Child> findAllByParent(String id);
+
+  @Query("{ 'aupairID': ?0 }")
+  List<Child> findAllByAuPair(String id);
 }

@@ -64,16 +64,18 @@ ion-card {
 }
 
 .edit-details{
+    cursor: pointer;
     position: relative;
     display: block;
     justify-content: center;
     border-radius: 0px 16px 16px 0px;
     width: 100%;
     height: 100%;
-    background-color: #69A88D;
+    background-color: var(--ion-color-primary);
 }
 
 .edit{
+    cursor: pointer;
     height: 100%;
     top: 8px;
     align-items: center;
@@ -112,7 +114,7 @@ ion-card {
 }
 
 .action {
-    background-color: #032927;
+    background-color: var(--ion-color-forest);
     color: white;
     margin: 0;
     height: 285px;
@@ -134,7 +136,7 @@ ion-card {
     align-items: center;
     justify-content: center;
     display: flex;
-    background-color: #69A88D;
+    background-color: var(--ion-color-primary);
     border-radius: 0px 0px 16px 16px;
 }
 
@@ -151,10 +153,6 @@ ion-card {
     .child-name {
         border-radius: 16px 16px 0px 0px;
     }
-    .child-au-pair {
-        border-radius: 0px 0px 16px 16px;
-        border-left: 0px;
-    }
     .actions-div {
         grid-template-columns: repeat(2, 1fr);
         gap: 10px;
@@ -166,10 +164,20 @@ ion-card {
     .actions-heading {
         font-size: 24px;
     }
+    .edit{
+        cursor: pointer;
+        font-size: 32px;
+        margin-bottom: 0;
+        margin-top:0;
+        top: 1px;
+    }
     .action {
         height: 146px;
         // width: 160px;
         width: 100%;
+    }
+    .icon-edit{
+        top: 6px;
     }
     .action-tag {
         height: 45px;
@@ -188,8 +196,8 @@ ion-card {
     .child-name {
         border-radius: 16px 16px 0px 0px;
     }
-    .child-au-pair {
-        border-radius: 0px 0px 16px 16px;
+    .edit-details{
+        border-radius: 0px 0px 16px 16px !important;
         border-left: 0px;
     }
     .actions-div {
@@ -202,6 +210,9 @@ ion-card {
     }
     .actions-heading {
         font-size: 24px;
+    }
+    .edit{
+        font-size: 20px;
     }
     .action {
         height: 146px;

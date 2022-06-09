@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { DatePipe } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { ModalController } from '@ionic/angular';
@@ -15,7 +16,18 @@ export class AuPairScheduleComponent implements OnInit {
   ]
 
   curDay =  this.getCurDay(this.days);
+  auPairChildren: string[] = [];
   activities: any;
+  children : any;
+  childActivity : any = {
+    childName : "",
+    childId : "",
+    activityName : "",
+    activityId : "",
+    time : "",
+    dayofweek : "",
+  }
+  childActivities : any[] = [];
 
   constructor(private serv: API, private modalCtrl : ModalController) {}
 
@@ -37,13 +49,40 @@ export class AuPairScheduleComponent implements OnInit {
     return days.findIndex(x => x === dateStr);
   }
 
-  async getActivities()
-  {
-    this.serv.getSchedule("8675945310542").subscribe(
-      res=>{
-          this.activities = res;
+  async getActivities(){
+    console.log("getActivities");
+    this.serv.getChildren("7542108615984").subscribe(
+      res => {
+        this.children = res;
+        this.children.forEach((element: { id: string; }) => {
+          this.auPairChildren.push(element.id);
+        });
+        this.serv.getAuPairSchedule(this.auPairChildren).subscribe(
+          res=>{
+            this.activities = res;
+            this.setChildActivity();
+          }
+        );
       },
-      error=>{console.log("Error has occured with API: " + error);}
-    )
+      error => { console.log("Error has occured with API: " + error); },
+    );
+  }
+
+  setChildActivity(){
+    this.children.forEach((child: { id: any; fname: any; }) => {
+      this.activities.forEach((act: { childId: any; child: any; name: any; id: any; timeStart: any; day: any; }) => {
+        if(child.id === act.child){
+          const childActivity = {
+            childName : child.fname,
+            childId : act.child,
+            activityName : act.name,
+            activityId : act.id,
+            time : act.timeStart,
+            dayofweek : act.day,
+          }
+          this.childActivities.push(childActivity);
+        }
+      });
+    });
   }
 }
