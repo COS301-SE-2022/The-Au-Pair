@@ -2,9 +2,7 @@ package Database.TheAuPair;
 
 import Database.TheAuPair.Models.auPair;
 import Database.TheAuPair.Repositories.auPairRepository;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -27,7 +25,7 @@ public class auPairRepositoryTests
   }
 
   @Test
-  @DisplayName("Test if auPair object is returned")
+  @DisplayName("Test if an auPair object is returned")
   public void testGetAuPairById()
   {
     assertEquals(apr.findUsingId(id).getClass(),expectedAuPair.getClass());
