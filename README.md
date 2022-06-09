@@ -132,6 +132,7 @@ npm run start:client
   <img style="height: 350px; width:520px" src="https://user-images.githubusercontent.com/93247114/172879622-a8313404-8996-4cfa-898c-754ea174b4cb.png">
 </div>
 <!-- Contributors -->
+
 # The Team
 
 ## Daniel Azmanov 
