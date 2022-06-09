@@ -33,6 +33,16 @@ const routes: Routes = [
       import('@the-au-pair/parent-add-activity/feature').then((m) => m.ParentAddActivityFeatureModule),
   },
   {
+    path: 'parent-profile',
+    loadChildren: () =>
+    import('@the-au-pair/parent-profile/feature').then((m) => m.ParentProfileFeatureModule),
+  },
+  {
+    path: 'edit-parent-profile',
+    loadChildren: () =>
+    import('@the-au-pair/edit-parent-profile/feature').then((m) => m.EditParentProfileFeatureModule),
+  },
+  {
     path: 'edit-activity',
     loadChildren: () =>
     import('@the-au-pair/parent-edit-activity/feature').then((m) => m.ParentEditActivityFeatureModule),

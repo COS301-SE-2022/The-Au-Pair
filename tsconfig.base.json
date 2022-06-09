@@ -19,6 +19,9 @@
       "@the-au-pair/au-pair-cost/feature": [
         "libs/au-pair-cost/feature/src/index.ts"
       ],
+      "@the-au-pair/edit-parent-profile/feature": [
+        "libs/edit-parent-profile/feature/src/index.ts"
+      ],
       "@the-au-pair/au-pair-dashboard/feature": [
         "libs/au-pair-dashboard/feature/src/index.ts"
       ],
@@ -34,6 +37,9 @@
       ],
       "@the-au-pair/parent-dashboard/feature": [
         "libs/parent-dashboard/feature/src/index.ts"
+      ],
+      "@the-au-pair/parent-profile/feature": [
+        "libs/parent-profile/feature/src/index.ts"
       ],
       "@the-au-pair/parent-edit-activity/feature": [
         "libs/parent-edit-activity/feature/src/index.ts"
