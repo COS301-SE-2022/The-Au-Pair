@@ -48,6 +48,9 @@
       "@the-au-pair/shared/components/navbar": [
         "libs/shared/components/navbar/src/index.ts"
       ],
+      "@the-au-pair/shared/components/aupair-navbar": [
+        "libs/shared/components/aupair-navbar/src/index.ts"
+      ],
       "@the-au-pair/shell/feature": ["libs/shell/feature/src/index.ts"]
     }
   },
