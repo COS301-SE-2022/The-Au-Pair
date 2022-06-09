@@ -7,7 +7,7 @@ export interface Activity{
     timeEnd: string;
     budget: number;
     comment: string;
-    behavior: string;
+    behavior: number;
     day: string ;
     child: string;
   }
