@@ -79,6 +79,7 @@ h2{
     padding-top: 10px;
     padding-left: 20px;
     color: black;
+    cursor: default;
 }
 
 label{
@@ -103,6 +104,7 @@ input[type=text], select{
     margin-top: 40px;
     padding-left: 20px;
     color: black;
+    cursor: default;
 }
 
 
@@ -128,17 +130,6 @@ textarea:focus{
     margin-bottom: 100px;
 }
 
-.updateActivity{
-    width: 195px !important;
-    font-style: normal;
-    font-weight: 700;
-    font-size: 16px;
-    line-height: 19px;
-    color: white;
-    background-color: #69A88D !important;
-    margin-top: 20px;
-}
-
 .cancel{
     cursor: pointer;
     text-align: center;
@@ -146,7 +137,7 @@ textarea:focus{
     justify-content: center;
     margin-top: 50px !important;
     padding: 10px 22px;
-    margin-left: 3px;
+   
 
     width: 411px !important;
     height: 60px;
@@ -161,16 +152,6 @@ textarea:focus{
     border: 2px solid var(--ion-color-secondary) !important;
     border-radius: 10px;
     margin-top: 20px;
-}
-
-//Errors styling
-.error{
-    display: none;
-    position: relative;
-    display: block;
-    text-align: left;
-    margin: 0;
-    color: red;
 }
 
 //Images

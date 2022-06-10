@@ -73,8 +73,6 @@ export class ParentViewActivityComponent implements OnInit
 
   returnToSchedule()
   {
-    this.router.navigate(['/schedule']).then(()=>{
-      window.location.reload();
-    });
+    this.router.navigate(['/schedule']);
   }
 }
