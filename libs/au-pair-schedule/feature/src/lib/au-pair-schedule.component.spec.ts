@@ -92,6 +92,4 @@ it('should,return an integer representation of Sunday',async () => {
   expect(dayInt).toEqual(expected);
 })
 
-
-
 });
