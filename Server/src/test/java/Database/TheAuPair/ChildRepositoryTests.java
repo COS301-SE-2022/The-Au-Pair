@@ -1,7 +1,7 @@
 package Database.TheAuPair;
 
 import Database.TheAuPair.Models.Child;
-import Database.TheAuPair.Repositories.ChildRepository;;
+import Database.TheAuPair.Repositories.ChildRepository;
 import org.junit.jupiter.api.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
