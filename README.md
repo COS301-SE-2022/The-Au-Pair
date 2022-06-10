@@ -88,6 +88,10 @@
     <br>
     <a href="https://docs.google.com/document/d/18vKESVoNjol4EZzjzmbdzlKqipAGSXseNxcDelAnqaQ/edit?usp=sharing">SRS Document - Demo 2</a>
     <br>
+    <a href="https://docs.google.com/document/d/1ihLufRX8ceP3pRIZUOesw-P-wXx4HSN_RTviKj5u1_o/edit?usp=sharing">User Manual Document - Demo 2</a>
+    <br>
+    <a href="https://docs.google.com/document/d/1exfQzlmPJN50VN70wiKA6kkd6IgsQrhrz8IkSIx71jA/edit?usp=sharing">Coding Standards - Demo 2</a>
+    <br>
     <br>
                                      
 <!-- ABOUT -->
