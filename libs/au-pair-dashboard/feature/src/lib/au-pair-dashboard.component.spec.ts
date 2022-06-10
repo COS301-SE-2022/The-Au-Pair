@@ -3,7 +3,7 @@ import { HttpClientTestingModule } from "@angular/common/http/testing";
 import { RouterTestingModule} from '@angular/router/testing';
 import { AuPairDashboardComponent } from './au-pair-dashboard.component';
 import { API } from '../../../../shared/api/api.service';
-import { NavbarModule } from '@the-au-pair/shared/components/navbar';
+import { AuPairNavbarModule } from '@the-au-pair/shared/components/aupair-navbar';
 import { IonicModule } from '@ionic/angular';
 import { CommonModule } from '@angular/common';
 import { By } from '@angular/platform-browser';
@@ -14,7 +14,7 @@ describe('AuPairDashboardComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [HttpClientTestingModule, RouterTestingModule,NavbarModule,IonicModule, CommonModule],
+      imports: [HttpClientTestingModule, RouterTestingModule,AuPairNavbarModule,IonicModule, CommonModule],
       declarations: [AuPairDashboardComponent],
       providers: [API]
     }).compileComponents();
