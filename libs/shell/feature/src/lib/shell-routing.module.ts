@@ -48,6 +48,11 @@ const routes: Routes = [
     import('@the-au-pair/parent-edit-activity/feature').then((m) => m.ParentEditActivityFeatureModule),
   },
   {
+    path: 'view-activity',
+    loadChildren: () =>
+    import('@the-au-pair/parent-view-activity/feature').then((m) => m.ParentViewActivityFeatureModule),
+  },
+  {
     path: 'children-dashboard',
     loadChildren: () =>
     import('@the-au-pair/children-dashboard/feature').then((m) => m.ChildrenDashboardFeatureModule),
