@@ -30,7 +30,7 @@ describe('AuPairScheduleComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  it('should,close the open when closeModal is called', async ()=>{
+  it('should,open the modal when called', async ()=>{
     jest.spyOn(component,"openModal");
     component.openModal("dxzv6chgn5zp19ezfiqn7fxf");
     expect(await component.openModal).toReturn();

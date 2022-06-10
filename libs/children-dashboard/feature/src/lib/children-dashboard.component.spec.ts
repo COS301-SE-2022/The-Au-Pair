@@ -6,6 +6,7 @@ import { API } from '../../../../shared/api/api.service';
 import {HttpClientTestingModule} from "@angular/common/http/testing";
 import { NavbarModule } from '@the-au-pair/shared/components/navbar';
 import { RouterTestingModule} from '@angular/router/testing';
+import { By } from '@angular/platform-browser';
 
 describe('ChildrenDashboardComponent', () => {
   let component: ChildrenDashboardComponent;
@@ -32,5 +33,11 @@ describe('ChildrenDashboardComponent', () => {
 
   it('should create', () => {
     expect(component).toBeTruthy();
+  });
+
+  it('should, have a redirect to the add-child', () => {
+    const href = fixture.debugElement.query(By.css('#addChild')).nativeElement
+    .getAttribute('routerLink');
+    expect(href).toEqual('/add-child'); 
   });
 });

@@ -1,4 +1,4 @@
-<the-au-pair-navbar></the-au-pair-navbar>
+<the-au-pair-aupair-navbar></the-au-pair-aupair-navbar>
 <ion-content [fullscreen]="true">
   <div class="parent-dashboard-div">
     <p class="welcome-heading">Welcome Jone</p>
@@ -22,11 +22,11 @@
     <p class="actions-heading">Actions</p>
     <div class="actions-div-wrapper">
       <div class="actions-div">
-        <div class="action" routerLink="/au-pair-schedule">
+        <div id="cal" class="action" routerLink="/au-pair-schedule">
           <ion-icon name="calendar-outline" class="action-icon"></ion-icon>
           <div class="action-tag">Your Calendar</div>
         </div>
-        <div class="action" routerLink="/au-pair-cost">
+        <div id="cost" class="action" routerLink="/au-pair-cost">
           <ion-icon name="cash-outline" class="action-icon"></ion-icon>
           <div class="action-tag">Au Pair Cost</div>
         </div>

@@ -6,6 +6,7 @@ import { HttpClientTestingModule } from "@angular/common/http/testing";
 import { NavbarModule } from '@the-au-pair/shared/components/navbar';
 import { RouterTestingModule} from '@angular/router/testing';
 import { API } from '../../../../shared/api/api.service';
+import { By } from '@angular/platform-browser';
 
 describe('ParentProfileComponent', () => {
   let component: ParentProfileComponent;
@@ -39,4 +40,11 @@ describe('ParentProfileComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
+  it('should, have a redirect to the edit parent profile page', () => {
+    const href = fixture.debugElement.query(By.css('#change')).nativeElement
+    .getAttribute('routerLink');
+    expect(href).toEqual('/edit-parent-profile'); 
+  });
+  
 });

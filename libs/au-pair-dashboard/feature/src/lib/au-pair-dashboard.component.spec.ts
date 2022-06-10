@@ -3,9 +3,10 @@ import { HttpClientTestingModule } from "@angular/common/http/testing";
 import { RouterTestingModule} from '@angular/router/testing';
 import { AuPairDashboardComponent } from './au-pair-dashboard.component';
 import { API } from '../../../../shared/api/api.service';
-import { NavbarModule } from '@the-au-pair/shared/components/navbar';
+import { AuPairNavbarModule } from '@the-au-pair/shared/components/aupair-navbar';
 import { IonicModule } from '@ionic/angular';
 import { CommonModule } from '@angular/common';
+import { By } from '@angular/platform-browser';
 
 describe('AuPairDashboardComponent', () => {
   let component: AuPairDashboardComponent;
@@ -13,7 +14,7 @@ describe('AuPairDashboardComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [HttpClientTestingModule, RouterTestingModule,NavbarModule,IonicModule, CommonModule],
+      imports: [HttpClientTestingModule, RouterTestingModule,AuPairNavbarModule,IonicModule, CommonModule],
       declarations: [AuPairDashboardComponent],
       providers: [API]
     }).compileComponents();
@@ -41,5 +42,17 @@ describe('AuPairDashboardComponent', () => {
     
     const str = component.getCurrentTime();
     expect(str).toMatch(/^((0[1-9])|(1[0-9])|(2[0-4])):((0[1-9])|([1-6]\d))$/);
+  });
+
+  it('should, have a redirect to the au-pair schedule', () => {
+      const href = fixture.debugElement.query(By.css('#cal')).nativeElement
+    .getAttribute('routerLink');
+    expect(href).toEqual('/au-pair-schedule'); 
+  });
+
+  it('should, have a redirect to the au-pair cost', () => {
+    const href = fixture.debugElement.query(By.css('#cost')).nativeElement
+    .getAttribute('routerLink');
+    expect(href).toEqual('/au-pair-cost'); 
   });
 });
