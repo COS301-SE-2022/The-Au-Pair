@@ -184,3 +184,23 @@ textarea:focus{
     opacity: 0.04;
     z-index: -10;
 }
+
+@media (max-width: 642px) {
+    .activity-wrapper{
+        height: 100%;
+        width: 100%;
+        margin-top: 60px;
+        margin-left: auto;
+        margin-right: auto;
+        background-color: transparent !important;
+        border-radius: 16px;
+    }
+
+    h2{
+        color:#3C3C3C;
+    }
+
+    label{
+        color:#3C3C3C
+    }
+}
