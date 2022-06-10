@@ -5,74 +5,40 @@
         <form class = "form-details">
           <!-- Activity Name -->
           <label for="actNameText" style="left: -145px !important;">Activity Name</label>
-          <input id="actNameText" type="text" ngModel="" name="activityName">
-          <p id="actNameError" class="error" style="display: none;">Error in field</p>
+          <input id="actNameText" type="text" value="Temp" readonly name="activityName">
 
           <!-- Description -->
           <label for="description" style="left: -155px !important;">Description</label>
-          <textarea id="descriptionText" type="text"  ngModel="" name="description"></textarea>
-          <!-- <input type="text" ngModel name="description" placeholder="Description">  -->
-          <p id="descripError" class="error" style="display: none;">Error in field</p>
+          <textarea id="descriptionText" type="text"  value="temp" readonly name="description"></textarea>
+
+          <!-- Comment -->
+          <label for="comment" style="left: -161px !important;">Comment</label>
+          <textarea id="commentText" type="text" value="comment" readonly name="comment"></textarea>
+
+          <!-- Behaviour -->
+          <label for="behavoiurText" style="left: -160px !important;">Behaviour</label>
+          <input id="behaviourText" type="text" value="Behavve" readonly name="behaviour">
 
           <!-- Location -->
           <label for="location" style="left: -165px !important;">Location</label>
-          <input id="locationText" type="text" ngModel="" name="location" placeholder="Location"> 
-          <p id="locError" class="error" style="display: none;">Error in field</p>
+          <input id="locationText" type="text" value="temp" name="location" readonly placeholder="Location"> 
 
           <!-- Day -->
           <label for="day" style="left: -149px !important;">Choose a day</label>
-          <select ngModel="" name="dayOfWeek" id="selectedDay">
-            <option value="Monday">Monday</option>
-            <option value="Tuesday">Tuesday</option>
-            <option value="Wednesday">Wednesday</option>
-            <option value="Thursday">Thursday</option>
-            <option value="Friday">Friday</option>
-            <option value="Saturday">Saturday</option>
-            <option value="Sunday">Sunday</option>
-          </select>
-          <p id="dayError" class="error" style="display: none;">Error in field</p>
+          <input id="dayText" type="text" value="temp" name="day" readonly placeholder="Day"> 
 
           <!-- Time-slot -->
           <label for="times">Choose a timeslot</label>
-            <select ngModel="" name="timeSlot" id="selectedTime">
-                <option value="00:00-01:00">00:00-01:00</option>
-                <option value="01:00-02:00">01:00-02:00</option>
-                <option value="02:00-03:00">02:00-03:00</option>
-                <option value="03:00-04:00">03:00-04:00</option>
-                <option value="04:00-05:00">04:00-05:00</option>
-                <option value="05:00-06:00">05:00-06:00</option>
-                <option value="06:00-07:00">06:00-07:00</option>
-                <option value="07:00-08:00">07:00-08:00</option>
-                <option value="08:00-09:00">08:00-09:00</option>
-                <option value="09:00-10:00">09:00-10:00</option>
-                <option value="10:00-11:00">10:00-11:00</option>
-                <option value="11:00-12:00">11:00-12:00</option>
-                <option value="12:00-13:00">12:00-13:00</option>
-                <option value="13:00-14:00">13:00-14:00</option>
-                <option value="14:00-15:00">14:00-15:00</option>
-                <option value="15:00-16:00">15:00-16:00</option>
-                <option value="16:00-17:00">16:00-17:00</option>
-                <option value="17:00-18:00">17:00-18:00</option>
-                <option value="18:00-19:00">18:00-19:00</option>
-                <option value="19:00-20:00">19:00-20:00</option>
-                <option value="20:00-21:00">20:00-21:00</option>
-                <option value="21:00-22:00">21:00-22:00</option>
-                <option value="22:00-23:00">22:00-23:00</option>
-                <option value="23:00-24:00">23:00-24:00</option>
-            </select>
-          <p id="timeError" class="error" style="display: none;">Error in field</p>
+          <input id="timeText" type="text" value="time" name="times" readonly placeholder="Times"> 
 
           <!-- Budget -->
           <label for="budget" style="left: -169px !important;">Budget</label>
-          <input id="budgetText" type="text" ngModel="" name="budget" placeholder="Budget"> 
-          <p id="budgetError" class="error" style="display: none;">Error in field</p>
+          <input id="budgetText" type="text" value="temp" name="budget" readonly placeholder="Budget"> 
+
 
           <!-- Selected a child -->
           <label for="Child" style="left: -149px !important;">Select a child</label>
-          <select ngModel="" name="childId" id="childId">
-            <option value=""></option>
-          </select>
-          <p id="childError" class="error" style="display: none;">Error in field</p>
+          <input id="childText" type="text" value="child" name="child" readonly placeholder="Child"> 
 
           <!-- Submit -->
           <div class="buttons">
