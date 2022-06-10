@@ -1,5 +1,5 @@
 ion-content{
-    --ion-background-color:#EFEFEF;
+    --ion-background-color:var(--ion-color-medium);
 }
 
 #nav{
@@ -61,7 +61,7 @@ h2{
 .activity-details input{
     width: 411px;
     height: 62px;
-    background: #F9F9F9;
+    background: var(--ion-background-color);
     box-shadow: 1px 2px 5px rgba(0, 0, 0, 0.13);
     border-style: none;
     border-radius: 10px;
@@ -72,7 +72,7 @@ h2{
     resize: none;
     width: 411px;
     height: 169px;
-    background: #F9F9F9;
+    background: var(--ion-background-color);
     box-shadow: 1px 2px 5px rgba(0, 0, 0, 0.13);
     border-style: none;
     border-radius: 10px;
@@ -97,7 +97,7 @@ label{
 input[type=text], select{
     width: 411px;
     height: 62px;
-    background: #F9F9F9;
+    background: var(--ion-background-color);
     box-shadow: 1px 2px 5px rgba(0, 0, 0, 0.13);
     border-style: none;
     border-radius: 10px;
@@ -197,10 +197,10 @@ textarea:focus{
     }
 
     h2{
-        color:#3C3C3C;
+        color:var(--ion-color-dark);
     }
 
     label{
-        color:#3C3C3C
+        color:var(--ion-color-dark);
     }
 }
