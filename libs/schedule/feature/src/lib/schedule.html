@@ -10,10 +10,10 @@
         <div *ngFor="let item of activities; let l = count">
           <div class="card" *ngIf="item.day === days[day]" >
             <ion-row  class="ion-align-items-center .ion-justify-content-between">
-              <ion-col><ion-icon class="icon" name="book-outline"></ion-icon></ion-col>
+              <ion-col><ion-icon class="icon edit" name="book-outline" (click)="navigateViewActivity(item.id)"></ion-icon></ion-col>
               <ion-col class="content">{{item.name}}</ion-col>
               <ion-col class="content">{{item.timeStart}}</ion-col>
-              <ion-col><ion-icon class="icon edit" name="pencil-outline" (click)="navigate(item.id)"></ion-icon></ion-col>
+              <ion-col><ion-icon class="icon edit" name="pencil-outline" (click)="navigateEdit(item.id)"></ion-icon></ion-col>
             </ion-row>
           </div>
         </div>
@@ -31,10 +31,10 @@
             <div *ngFor="let item of activities; let l = count">
               <div class="card" *ngIf="item.day === days[day]" >
                 <ion-row  class="ion-align-items-center .ion-justify-content-between">
-                  <ion-col><ion-icon class="icon" name="book-outline"></ion-icon></ion-col>
+                  <ion-col><ion-icon class="icon edit" name="book-outline" (click)="navigateViewActivity(item.id)"></ion-icon></ion-col>
                   <ion-col class="content">{{item.name}}</ion-col>
                   <ion-col class="content">{{item.timeStart}}</ion-col>
-                  <ion-col><ion-icon class="icon edit" name="pencil-outline" (click)="navigate(item.id)"></ion-icon></ion-col>
+                  <ion-col><ion-icon class="icon edit" name="pencil-outline" (click)="navigateEdit(item.id)"></ion-icon></ion-col>
                 </ion-row>
               </div>
             </div>
