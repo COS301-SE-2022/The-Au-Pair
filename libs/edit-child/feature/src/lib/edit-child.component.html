@@ -1,6 +1,6 @@
 <ion-content>
     <the-au-pair-navbar></the-au-pair-navbar>
-    <h2>Edit Activity</h2>
+    <h2>Edit Child Details</h2>
     <div class="childrenDetails">
         <form id="childForm" #activityForm="ngForm" (ngSubmit)="getChildValues(activityForm.value)" class = "form-details">
             <!-- Child ID -->
@@ -30,7 +30,7 @@
 
             <!-- Submit -->
             <div class="buttons">
-            <input class = "addChild" type="submit" value="Add child">
+            <input class = "updateChild" type="submit" value="Update child">
             <input class = "cancel" value="Cancel" (click)="returnToChildrenDashboard()">
             </div>
           
