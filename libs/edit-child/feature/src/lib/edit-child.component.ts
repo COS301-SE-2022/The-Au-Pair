@@ -37,11 +37,12 @@ export class EditChildComponent implements OnInit {
     if(navigation !== null)
       if(navigation.extras !== null)
       { 
-        this.childDetails.id = navigation.extras.state?.['id'];
+        this.childDetails = navigation.extras.state?.['child'];
       }
   }
 
-  ngOnInit(): void {
+  ngOnInit(): void 
+  {
     console.log();
     
   }

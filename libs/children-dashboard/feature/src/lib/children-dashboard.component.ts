@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Child } from '../../../../shared/interfaces/interfaces';
 import { API } from '../../../../shared/api/api.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'the-au-pair-children-dashboard',
@@ -13,7 +14,7 @@ export class ChildrenDashboardComponent implements OnInit
   employerId = "4561237814867";
   children: Child[] = []
 
-  constructor(private serv: API) {}
+  constructor(private serv: API, public router: Router) {}
 
   ngOnInit(): void
   {
@@ -32,5 +33,13 @@ export class ChildrenDashboardComponent implements OnInit
       },
       error =>{console.log("Error has occured with API: " + error);}
     )
+  }
+
+  navigateEdit(child : Child)
+  { 
+    //Route to the edit-activity page and parse the ActivityID of the selected Activity 
+    this.router.navigate(['/edit-child'],{
+      state: {child: child}
+    });
   }
 }
