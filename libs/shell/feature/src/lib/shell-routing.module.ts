@@ -63,6 +63,11 @@ const routes: Routes = [
     import('@the-au-pair/add-child/feature').then((m) => m.AddChildFeatureModule),
   },
   {
+    path: 'edit-child',
+    loadChildren: () =>
+    import('@the-au-pair/edit-child/feature').then((m) => m.EditChildFeatureModule),
+  },
+  {
     path: 'au-pair-schedule',
     loadChildren: () =>
     import('@the-au-pair/au-pair-schedule/feature').then((m) => m.AuPairScheduleModule),

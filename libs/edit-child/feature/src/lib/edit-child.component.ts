@@ -1,16 +1,16 @@
-import { Component} from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { ToastController } from '@ionic/angular';
 import { API } from '../../../../shared/api/api.service';
+import { ToastController } from '@ionic/angular';
 import { Child, Parent } from '../../../../shared/interfaces/interfaces';
 
 @Component({
-  selector: 'the-au-pair-add-child',
-  templateUrl: './add-child.component.html',
-  styleUrls: ['./add-child.component.scss'],
+  selector: 'the-au-pair-edit-child',
+  templateUrl: './edit-child.component.html',
+  styleUrls: ['./edit-child.component.scss'],
 })
-export class AddChildComponent
-{
+export class EditChildComponent implements OnInit {
+
   //Child model
   childDetails: Child = {
     id: "",
@@ -31,10 +31,13 @@ export class AddChildComponent
   //Regex for south african ID number
   SA_ID = new RegExp(/(((\d{2}((0[13578]|1[02])(0[1-9]|[12]\d|3[01])|(0[13456789]|1[012])(0[1-9]|[12]\d|30)|02(0[1-9]|1\d|2[0-8])))|([02468][048]|[13579][26])0229))(( |-)(\d{4})( |-)(\d{3})|(\d{7}))/);
 
-  //Constructor
   constructor(private serv: API, public router: Router, public toastCtrl: ToastController) {}
 
-  //Function to retrieve the child's details
+  ngOnInit(): void {
+    console.log();
+    
+  }
+
   async getChildValues(val: any)
   {
 
@@ -163,22 +166,8 @@ export class AddChildComponent
       this.childDetails.allergies= val.Allergies;
       this.childDetails.diet= val.diet;
       this.childDetails.parent= "4561237814867"; //Assumed logged in user for now
-      this.addChild(this.childDetails);
+      // this.updateChild(this.childDetails);
     }
-  }
-
-  //Pop-up if child is successfully updates
-  async openToast() : Promise<boolean>
-  {
-    const toast = await this.toastCtrl.create({
-      message: 'Child added successfully!',
-      duration: 4000,
-      position: 'top',
-      color: 'primary',
-      cssClass: 'toastPopUp'
-    });
-    await toast.present();
-    return true;
   }
 
   returnToChildrenDashboard()
@@ -186,41 +175,5 @@ export class AddChildComponent
     this.router.navigate(['/children-dashboard']).then(()=>{
       window.location.reload();
     });
-  }
-
-  //Service calls
-  addChild(child: Child)
-  {
-    this.serv.getParent("4561237814867").subscribe(
-      res=>{
-        this.parent.id = res.id;
-        this.parent.children = res.children;
-        this.parent.medID = res.medID;
-        this.parent.auPair = res.auPair;
-        this.parent.children.push(child.id);
-        //Update the parent object to contain the new child ID
-        this.serv.editParent(this.parent).subscribe(
-          res=>{
-            console.log("The response is:" + res); 
-          },
-          error=>{
-            console.log("Error has occured with API: " + error);
-          }
-        );
-      },
-      error=>{
-        console.log("Error has occured with API: " + error);
-      }
-    )
-
-    this.serv.addChild(child).subscribe(
-      res=>{
-        console.log("The response is:" + res); 
-        this.openToast();
-      },
-      error=>{
-        console.log("Error has occured with API: " + error);
-      }
-    )
   }
 }
