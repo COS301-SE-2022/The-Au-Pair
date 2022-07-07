@@ -5,7 +5,7 @@
         <form id="childForm" #activityForm="ngForm" (ngSubmit)="getChildValues(activityForm.value)" class = "form-details">
             <!-- Child ID -->
             <label id="labelID" for="childID">Child ID</label>
-            <input type="text" ngModel="{{this.childDetails.id}}" name="childID"placeholder="Child ID">
+            <input style="background-color: rgb(182, 182, 182);" type="text" ngModel="{{this.childDetails.id}}" name="childID"placeholder="Child ID" readonly>
             <p id="childIDError" class="error" style="display: none;">Error in field</p>
 
             <!-- Child First Name -->
@@ -31,7 +31,7 @@
             <!-- Submit -->
             <div class="buttons">
             <input class = "updateChild" type="submit" value="Update child">
-            <input class = "cancel" value="Cancel" (click)="returnToChildrenDashboard()">
+            <input class = "cancel" value="Return" (click)="returnToChildrenDashboard()">
             </div>
           
         </form>

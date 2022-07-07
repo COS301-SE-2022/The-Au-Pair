@@ -175,8 +175,21 @@ export class EditChildComponent implements OnInit {
       this.childDetails.allergies= val.Allergies;
       this.childDetails.diet= val.diet;
       this.childDetails.parent= "4561237814867"; //Assumed logged in user for now
-      // this.updateChild(this.childDetails);
+      this.updateChild(this.childDetails);
     }
+  }
+
+  //Pop-up if activity is successfully updates
+  async openToast()
+  {
+    const toast = await this.toastCtrl.create({
+      message: 'Child details successfully updated!',
+      duration: 4000,
+      position: 'top',
+      color: 'primary',
+      cssClass: 'toastPopUp'
+    });
+    await toast.present();
   }
 
   returnToChildrenDashboard()
@@ -185,4 +198,19 @@ export class EditChildComponent implements OnInit {
       window.location.reload();
     });
   }
+
+  updateChild(child : Child){
+    this.serv.updateChild(child).subscribe(
+      res=>{
+        // location.reload();
+        console.log("The response is:" + res); 
+        this.openToast();
+        return res;
+      },
+      error=>{
+        console.log("Error has occured with API: " + error);
+        return error;
+      }
+    )
+  };
 }

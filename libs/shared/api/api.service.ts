@@ -65,6 +65,10 @@ export class API{
     return this.http.post('http://localhost:8080/addChild',child);
   }
 
+  updateChild(child : Child) :Observable<any> {
+    return this.http.post('http://localhost:8080/updateChild',child);
+  }
+
   getDateMinutes(id : string, date : string): Observable<any> {
     var out = {
       "id" : id,
