@@ -8,6 +8,7 @@
     "children-dashboard-feature": "libs/children-dashboard/feature",
     "edit-parent-profile-feature": "libs/edit-parent-profile/feature",
     "home-feature": "libs/home/feature",
+    "login": "libs/login",
     "parent-add-activity-feature": "libs/parent-add-activity/feature",
     "parent-dashboard-feature": "libs/parent-dashboard/feature",
     "parent-edit-activity-feature": "libs/parent-edit-activity/feature",
