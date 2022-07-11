@@ -82,6 +82,15 @@ ion-content {
     opacity: 0.7;
 }
 
+.type-toggle {
+    position: absolute;
+    right: 1rem;
+    top: 5.05rem;
+    padding: 0 0.5rem;  
+    font-size: 20px;
+    color: var(--ion-color-primary);
+}
+
 input:focus{
     outline:none;
 }

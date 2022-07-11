@@ -9,12 +9,16 @@
             <label id="email" for="emailInp" class="form-label">Email</label>
             <p id="emailError" class="error" style="display: none;">Error in field</p>
         </div>
-
         
         <div class="fld">
-            <input type="password" ngModel name="passInp" autocomplete="off" class="form-input" placeholder=" ">
+            <input [type]="(this.showPassword===true) ? 'text' : 'password'" ngModel name="passInp" autocomplete="off" class="form-input" placeholder=" ">
             <label id="password" for="passInp" class="form-label">Password</label>
             <p id="passwordError" class="error" style="display: none;">Error in field</p>
+
+            <a class="type-toggle" (click)="toggleShow()">
+                <ion-icon class="show-option" [hidden]="showPassword" name="eye-off-outline"></ion-icon>
+                <ion-icon class="hide-option" [hidden]="!showPassword" name="eye-outline"></ion-icon>
+            </a>
         </div>
         
         <!-- Submit -->

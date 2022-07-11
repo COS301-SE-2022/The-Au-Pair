@@ -77,6 +77,11 @@ const routes: Routes = [
     loadChildren: () =>
     import('@the-au-pair/login').then((m) => m.LoginPageModule ),
   },
+  {
+    path: 'register',
+    loadChildren: () =>
+    import('@the-au-pair/register').then((m) => m.RegisterModule ),
+  },
 ];
 
 @NgModule({

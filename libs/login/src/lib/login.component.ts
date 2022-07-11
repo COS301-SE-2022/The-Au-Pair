@@ -6,6 +6,12 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./login.component.scss'],
 })
 export class LoginComponent {
+
+  showPassword = false;
+
+  toggleShow() {
+    this.showPassword = !this.showPassword;
+  }
   
   loginUser() {
     return 0;
