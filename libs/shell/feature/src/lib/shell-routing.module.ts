@@ -73,7 +73,7 @@ const routes: Routes = [
     import('@the-au-pair/au-pair-dashboard/feature').then((m) => m.AuPairDashboardFeatureModule),
   },
   {
-    path: 'login',
+    path: 'login-page',
     loadChildren: () =>
     import('@the-au-pair/login').then((m) => m.LoginPageModule ),
   },
