@@ -45,6 +45,16 @@ export interface Activity{
     auPair: string;
   }
 
+  export interface AuPair{
+    id: string;
+    rating: number;
+    onShift: boolean;
+    employer: string;
+    costIncurred: number;
+    distTravelled: number;
+    payRate: number;
+  }
+
   export interface User{
     id: string;
     fname: string;

@@ -22,6 +22,9 @@
       "@the-au-pair/au-pair-dashboard/feature": [
         "libs/au-pair-dashboard/feature/src/index.ts"
       ],
+      "@the-au-pair/au-pair-profile/feature": [
+        "libs/au-pair-profile/feature/src/index.ts"
+      ],
       "@the-au-pair/au-pair-schedule/feature": [
         "libs/au-pair-schedule/feature/src/index.ts"
       ],

@@ -71,6 +71,11 @@ const routes: Routes = [
     path: 'au-pair-dashboard',
     loadChildren: () =>
     import('@the-au-pair/au-pair-dashboard/feature').then((m) => m.AuPairDashboardFeatureModule),
+  },
+  {
+    path: 'au-pair-profile',
+    loadChildren: () =>
+    import('@the-au-pair/au-pair-profile/feature').then((m) => m.AuPairProfileFeatureModule),
   }
 ];
 

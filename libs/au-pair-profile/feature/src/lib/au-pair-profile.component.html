@@ -1,0 +1,43 @@
+<the-au-pair-navbar></the-au-pair-navbar>
+<ion-content [fullscreen]="true">
+    <div class = "parent-profile-div">
+        <div class = 'title-div'>
+            <p class='profile-name'>{{this.userDetails.fname}}</p>
+        </div>
+        <!-- <div class = "profile-picture-div">
+            <div class='profile-picture-wrapper'>
+                <ion-icon name="people-circle-outline" class='profile-picture'></ion-icon>
+            </div>
+            <button class="change-button" routerLink="/edit-parent-profile">CHANGE</button>
+        </div> -->
+        <div class = 'details-div'>
+            <div class = "small-profile-details-div">
+                <div class="parent-info-small">
+                    <div class="parent-text">Email: </div>
+                    <p class="parent-text-info">{{this.userDetails.email}}</p>
+                </div>
+                <div class="parent-info-small">
+                    <div class="parent-text">Phone: </div>
+                    <p class="parent-text-info">{{this.userDetails.number}}</p>
+                </div>
+                <div class="parent-info-small">
+                    <div class="parent-text">ID Number: </div>
+                    <p class="parent-text-info">{{this.userDetails.id}}</p>
+                </div>
+                <div class="parent-info-small">
+                    <div class="parent-text">Address: </div>
+                    <p class="parent-text-info">{{this.userDetails.address}}</p>
+                </div>
+                <div class="parent-info-small">
+                  <div class="parent-text">Pay rate: </div>
+                  <p class="parent-text-info">R{{this.auPairDetails.payRate}} per hour</p>
+              </div>
+            </div>
+            <button class="change-button" id="change" routerLink="/edit-parent-profile">CHANGE</button>
+        </div>
+        <img id="active-2" src="assets/images/active.png">
+        <img id="active" src="assets/images/active-2.png">
+        <img id="lifestyles" src="assets/images/lifestyles.png">
+    </div>
+
+</ion-content>

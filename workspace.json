@@ -4,6 +4,7 @@
     "add-child-feature": "libs/add-child/feature",
     "au-pair-cost-feature": "libs/au-pair-cost/feature",
     "au-pair-dashboard-feature": "libs/au-pair-dashboard/feature",
+    "au-pair-profile-feature": "libs/au-pair-profile/feature",
     "au-pair-schedule-feature": "libs/au-pair-schedule/feature",
     "children-dashboard-feature": "libs/children-dashboard/feature",
     "edit-parent-profile-feature": "libs/edit-parent-profile/feature",
