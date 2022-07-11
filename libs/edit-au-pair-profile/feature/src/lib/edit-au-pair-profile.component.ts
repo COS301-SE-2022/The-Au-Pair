@@ -190,30 +190,6 @@ export class EditAuPairProfileComponent implements OnInit {
   };
 
   editAuPair(aupair:AuPair){
-    // this.serv.getAuPair("7542108615984").subscribe(
-    //   res=>{
-    //     this.auPairDetails.id = res.id;
-    //     this.auPairDetails.rating = res.rating;
-    //     this.auPairDetails.onShift = res.onShift;
-    //     this.auPairDetails.employer = res.employer;
-    //     this.auPairDetails.costIncurred = res.costIncurred;
-    //     this.auPairDetails.distTraveled = res.distTraveled;
-    //     this.auPairDetails.payRate = res.payRate;
-        
-    //     //Update the parent object to contain the new child ID
-    //     this.serv.editAuPair(this.auPairDetails).subscribe(
-    //       res=>{
-    //         console.log("The response is:" + res); 
-    //       },
-    //       error=>{
-    //         console.log("Error has occured with API: " + error);
-    //       }
-    //     );
-    //   },
-    //   error=>{
-    //     console.log("Error has occured with API: " + error);
-    //   }
-    // )
     this.serv.editAuPair(aupair).subscribe(
       res=>{
         console.log("The response is:" + res); 
