@@ -31,6 +31,9 @@
       "@the-au-pair/children-dashboard/feature": [
         "libs/children-dashboard/feature/src/index.ts"
       ],
+      "@the-au-pair/edit-au-pair-profile/feature": [
+        "libs/edit-au-pair-profile/feature/src/index.ts"
+      ],
       "@the-au-pair/edit-parent-profile/feature": [
         "libs/edit-parent-profile/feature/src/index.ts"
       ],

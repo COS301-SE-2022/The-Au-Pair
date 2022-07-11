@@ -51,7 +51,7 @@ export interface Activity{
     onShift: boolean;
     employer: string;
     costIncurred: number;
-    distTravelled: number;
+    distTraveled: number;
     payRate: number;
   }
 

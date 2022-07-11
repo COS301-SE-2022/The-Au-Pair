@@ -76,6 +76,11 @@ const routes: Routes = [
     path: 'au-pair-profile',
     loadChildren: () =>
     import('@the-au-pair/au-pair-profile/feature').then((m) => m.AuPairProfileFeatureModule),
+  },
+  {
+    path: 'edit-au-pair-profile',
+    loadChildren: () =>
+    import('@the-au-pair/edit-au-pair-profile/feature').then((m) => m.EditAuPairProfileFeatureModule),
   }
 ];
 

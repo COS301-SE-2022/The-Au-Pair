@@ -7,6 +7,7 @@
     "au-pair-profile-feature": "libs/au-pair-profile/feature",
     "au-pair-schedule-feature": "libs/au-pair-schedule/feature",
     "children-dashboard-feature": "libs/children-dashboard/feature",
+    "edit-au-pair-profile-feature": "libs/edit-au-pair-profile/feature",
     "edit-parent-profile-feature": "libs/edit-parent-profile/feature",
     "home-feature": "libs/home/feature",
     "parent-add-activity-feature": "libs/parent-add-activity/feature",

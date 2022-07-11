@@ -27,7 +27,7 @@ export class AuPairProfileComponent implements OnInit {
     onShift: false,
     employer: "",
     costIncurred: 0,
-    distTravelled: 0,
+    distTraveled: 0,
     payRate: 0,
   }
 
@@ -72,7 +72,7 @@ export class AuPairProfileComponent implements OnInit {
           this.auPairDetails.onShift = res.onShift;
           this.auPairDetails.employer = res.employer;
           this.auPairDetails.costIncurred = res.costIncurred;
-          this.auPairDetails.distTravelled = res.distTravelled;
+          this.auPairDetails.distTraveled = res.distTraveled;
           this.auPairDetails.payRate = res.payRate;
         },
         error=>{console.log("Error has occured with API: " + error);}
