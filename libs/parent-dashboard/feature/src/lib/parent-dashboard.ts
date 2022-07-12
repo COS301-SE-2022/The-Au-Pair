@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { API } from '../../../../shared/api/api.service';
 import { AuPair, Child, Parent, User } from '../../../../shared/interfaces/interfaces';
+import { AuPairRatingModalComponent } from './au-pair-rating-modal/au-pair-rating-modal.component';
+import { ModalController } from '@ionic/angular';
 
 @Component({
   selector: 'the-au-pair-parent-dashboard',
@@ -50,7 +52,17 @@ export class ParentDashboardComponent implements OnInit{
     payRate: 0,
   }
 
-  constructor(private serv: API){}
+  constructor(private serv: API, private modalCtrl : ModalController){}
+
+  async openModal(actId : string) {
+    const modal = await this.modalCtrl.create({
+      component: AuPairRatingModalComponent,
+      componentProps :{
+        activityId : actId
+      }
+    });
+    await modal.present();
+  }
 
   ngOnInit(): void
   {

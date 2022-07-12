@@ -8,6 +8,7 @@
             <div class='au-pair-name'>Au Pair: {{this.userDetails.fname}} {{this.userDetails.sname}}
                 <a href = 'tel:{{this.userDetails.number}}'><ion-icon name="call" class = 'call-icon'></ion-icon></a>
                 <a href = 'sms:{{this.userDetails.number}}'><ion-icon name="chatbubble-ellipses" class = 'message-icon'></ion-icon></a>
+                <ion-icon class="rating-icon" name="star" (click)="openModal(this.userDetails.id)"></ion-icon>
             </div>
         </div>
 
