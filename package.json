@@ -33,6 +33,7 @@
     "@nxtend/capacitor": "^13.0.0",
     "@nxtend/ionic-angular": "^13.1.0",
     "@types/jest": "27.0.2",
+    "@types/leaflet": "^1.7.11",
     "@typescript-eslint/eslint-plugin": "~5.18.0",
     "@typescript-eslint/parser": "~5.18.0",
     "cypress": "^9.1.0",
@@ -62,6 +63,7 @@
     "@angular/router": "~13.3.0",
     "@capacitor/core": "^3.2.5",
     "@ionic/angular": "^5.8.3",
+    "leaflet": "^1.8.0",
     "rxjs": "~7.4.0",
     "tslib": "^2.0.0",
     "zone.js": "~0.11.4"

@@ -1,9 +1,15 @@
 <the-au-pair-navbar></the-au-pair-navbar>
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.8.0/dist/leaflet.css" />
 <ion-content [fullscreen]="true">
 
     <div class='parent-dashboard-div'>
-        <p class='welcome-heading'>Welcome EPI-USE</p>
-
+        
+            <div id="leafletMap" style="height:800px; width: 1920px; color:rebeccapurple;" > </div>
+          
+        <!-- <p class='welcome-heading'>Welcome EPI-USE</p>
+        <ion-content>
+            <div id="map" style="height:100%;"> RUben</div>
+          </ion-content>
         <div class="au-pair-div-wrapper">
             <div class='au-pair-name'>Au Pair: {{this.userDetails.fname}} {{this.userDetails.sname}}
                 <a href = 'tel:{{this.userDetails.number}}'><ion-icon name="call" class = 'call-icon'></ion-icon></a>
@@ -41,7 +47,7 @@
                     <div class='action-tag '>Au Pair Cost</div>
                 </div>
             </div>
-        </div>
+        </div> -->
     </div>
 
 </ion-content>

@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { API } from '../../../../shared/api/api.service';
+import  * as L  from 'leaflet';
 import { Child, Parent, User } from '../../../../shared/interfaces/interfaces';
+import { Platform } from '@ionic/angular';
 
 @Component({
   selector: 'the-au-pair-parent-dashboard',
@@ -8,6 +10,14 @@ import { Child, Parent, User } from '../../../../shared/interfaces/interfaces';
   styleUrls: ['parent-dashboard.scss'],
 })
 export class ParentDashboardComponent implements OnInit{
+
+  leafletMap: any;
+
+  lat = 41.1533;
+
+  lng = 20.1683;
+
+  zoom = 8;
 
   children: any[] = [];
   parentID = "";
@@ -40,12 +50,32 @@ export class ParentDashboardComponent implements OnInit{
     number: "",
   }
 
-  constructor(private serv: API){}
+  constructor(private serv: API,
+              public plt: Platform){}
 
   ngOnInit(): void
   {
-    this.getParentDetails()
+    this.getParentDetails();
+    this.loadLeafletMap();
   }
+
+  loadLeafletMap() {
+
+    this.leafletMap = new L.Map('leafletMap');
+
+    const self = this;
+
+    this.leafletMap.on("load", function () {
+
+    setTimeout(() => {
+      self.leafletMap.invalidateSize();
+    }, 1000);
+});
+    this.leafletMap.setView([this.lat, this.lng], this.zoom);
+
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {attribution: '&copy; <a href="https://www.openstreetmap.org/copyright%22%3EOpenStreetMap</a> contributors'}).addTo(this.leafletMap);
+    
+    }
 
   async getParentDetails()
   {
