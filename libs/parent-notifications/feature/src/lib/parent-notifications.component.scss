@@ -1,0 +1,22 @@
+.header{
+    font-family: Roboto ;
+    font-style: normal;
+    font-weight: 700;
+    font-size: 42px;
+    line-height: 56px;
+    text-transform: capitalize;
+    color: var(--ion-color-dark);
+}
+
+.notifications-wrapper{
+    padding: 2em;
+}
+
+.notification-item{
+    height: 62px;
+    width: 100%;
+    margin-inline: 0px  !important;
+    margin-bottom: 2em;
+    border-radius: 10px;
+    background-color: #F9F9F9
+}
