@@ -78,10 +78,10 @@ const routes: Routes = [
     import('@the-au-pair/login').then((m) => m.LoginPageModule ),
   },
   {
-    path: 'register',
+    path: 'register-page',
     loadChildren: () =>
-    import('@the-au-pair/register').then((m) => m.RegisterModule ),
-  },
+    import('@the-au-pair/register').then((m) => m.RegisterPageModule )
+  }
 ];
 
 @NgModule({
