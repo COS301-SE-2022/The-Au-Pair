@@ -1,0 +1,40 @@
+<ion-content>
+    <h2>Login</h2>
+    <div class="loginDetails">
+        <form #loginDetailsForm="ngForm" (ngSubmit)="loginUser()" class = "form-details">
+
+        
+        <div class="fld">
+            <input type="text" ngModel name="emailInp" autocomplete="off" class="form-input" placeholder=" ">
+            <label id="email" for="emailInp" class="form-label">Email</label>
+            <p id="emailError" class="error" style="display: none;">Error in field</p>
+        </div>
+        
+        <div class="fld">
+            <input [type]="(this.showPassword===true) ? 'text' : 'password'" ngModel name="passInp" autocomplete="off" class="form-input" placeholder=" ">
+            <label id="password" for="passInp" class="form-label">Password</label>
+            <p id="passwordError" class="error" style="display: none;">Error in field</p>
+
+            <a class="type-toggle" (click)="toggleShow()">
+                <ion-icon class="show-option" [hidden]="showPassword" name="eye-off-outline"></ion-icon>
+                <ion-icon class="hide-option" [hidden]="!showPassword" name="eye-outline"></ion-icon>
+            </a>
+        </div>
+        
+        <!-- Submit -->
+        <div class="buttons">
+            <input class = "loginUser" type="submit" value="Login">
+        </div>
+
+        <div class="clickables">
+            <p class="forgot-pass" routerLink="/forgot-password">Forgot password?</p>
+            <p class="account" routerLink="/register-page">Don't have an account?</p>
+        </div>
+          
+        </form>
+    </div>
+    <img id="active-2" src="assets/images/active.png">
+    <img id="active" src="assets/images/active-2.png">
+    <img id="lifestyles" src="assets/images/lifestyles.png">
+</ion-content>
+

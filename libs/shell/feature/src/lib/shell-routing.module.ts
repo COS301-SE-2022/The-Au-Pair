@@ -75,13 +75,18 @@ const routes: Routes = [
   {
     path: 'login-page',
     loadChildren: () =>
-    import('@the-au-pair/login').then((m) => m.LoginPageModule ),
+    import('@the-au-pair/login/feature').then((m) => m.LoginFeatureModule ),
+  },
+  {
+    path: 'forgot-password',
+    loadChildren: () =>
+    import('@the-au-pair/forgot-password/feature').then((m) => m.ForgotPasswordFeatureModule )
   },
   {
     path: 'register-page',
     loadChildren: () =>
-    import('@the-au-pair/register').then((m) => m.RegisterPageModule )
-  }
+    import('@the-au-pair/register/feature').then((m) => m.RegisterFeatureModule )
+  },
 ];
 
 @NgModule({
