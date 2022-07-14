@@ -63,6 +63,7 @@
     "@angular/router": "~13.3.0",
     "@capacitor/core": "^3.2.5",
     "@ionic/angular": "^5.8.3",
+    "@ngxs/store": "^3.7.4",
     "rxjs": "~7.4.0",
     "tslib": "^2.0.0",
     "zone.js": "~0.11.4"
