@@ -20,8 +20,17 @@ export class AppState{
         patchState({id: payload});
     }
     
+    @Selector()
+    static getID(state : AppStateModel) {
+        return state.id;
+    }
     @Action(SetType)
     setType({ patchState }: StateContext<AppStateModel>, { payload }: SetType) {
         patchState({type: payload});
+    }
+
+    @Selector()
+    static getType(state : AppStateModel) {
+        return state.id;
     }
 }
