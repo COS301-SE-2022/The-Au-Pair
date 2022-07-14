@@ -8,7 +8,8 @@
     "test": "nx test",
     "test-front-end": "npx nx run-many --target=test --all",
     "postinstall": "ngcc --properties es2015 browser module main",
-    "start:api": "cd Server && mvn spring-boot:run"
+    "start:api": "cd Server && mvn spring-boot:run",
+    "open:android": "nx run the-au-pair:open:android"
   },
   "private": true,
   "devDependencies": {
