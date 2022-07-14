@@ -71,6 +71,11 @@ const routes: Routes = [
     path: 'au-pair-dashboard',
     loadChildren: () =>
     import('@the-au-pair/au-pair-dashboard/feature').then((m) => m.AuPairDashboardFeatureModule),
+  },
+  {
+    path: 'parent-notifications',
+    loadChildren: () =>
+    import('@the-au-pair/parent-notifications/feature').then((m) => m.ParentNotificationsFeatureModule),
   }
 ];
 
