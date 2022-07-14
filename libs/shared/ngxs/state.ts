@@ -7,9 +7,9 @@ export interface AppStateModel{
 }
 
 @State<AppStateModel>({
-    name: 'state',
+    name: 'User',
     defaults: {
-        id: 'working',
+        id: '',
         type: 0
     }
 })
