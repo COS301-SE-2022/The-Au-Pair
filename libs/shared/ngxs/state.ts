@@ -15,5 +15,13 @@ export interface AppStateModel{
 })
 
 export class AppState{
-
+    @Action(SetId)
+    setID({ patchState }: StateContext<AppStateModel>, { payload }: SetId) {
+        patchState({id: payload});
+    }
+    
+    @Action(SetType)
+    setType({ patchState }: StateContext<AppStateModel>, { payload }: SetType) {
+        patchState({type: payload});
+    }
 }
