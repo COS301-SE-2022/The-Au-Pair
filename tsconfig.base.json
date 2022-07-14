@@ -59,6 +59,12 @@
       "@the-au-pair/shared/components/navbar": [
         "libs/shared/components/navbar/src/index.ts"
       ],
+      "@the-au-pair/shared/components/input-field": [
+        "libs/shared/components/input-field/src/index.ts"
+      ],
+      "@the-au-pair/shared/components/password-field": [
+        "libs/shared/components/password-field/src/index.ts"
+      ],
       "@the-au-pair/shell/feature": ["libs/shell/feature/src/index.ts"]
     }
   },
