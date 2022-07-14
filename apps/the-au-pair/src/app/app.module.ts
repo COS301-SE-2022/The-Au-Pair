@@ -5,6 +5,7 @@ import { ShellModule } from '@the-au-pair/shell/feature';
 import { AppComponent } from './app.component';
 import { HttpClientModule } from '@angular/common/http';
 import { NgxsModule } from '@ngxs/store';
+import { AppState } from '../../../../libs/shared/ngxs/state';
 
 @NgModule({
   declarations: [AppComponent],
@@ -15,7 +16,7 @@ import { NgxsModule } from '@ngxs/store';
     HttpClientModule, 
     NavbarModule,
     NgxsModule.forRoot([
-      
+      AppState
     ]),
   ],
   bootstrap: [AppComponent],
