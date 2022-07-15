@@ -3,7 +3,6 @@
     <h2>Add Activity</h2>
     <div class="activity-details">
         <form #activityForm="ngForm" (ngSubmit)="getActivityValues(activityForm.value)" class = "form-details">
-
           <!-- Activity Name -->
           <input type="text" ngModel name="activityName"placeholder="Activity Name">
           <p id="actNameError" class="error" style="display: none;">Error in field</p>
@@ -13,8 +12,21 @@
           <p id="descripError" class="error" style="display: none;">Error in field</p>
 
           <!-- Location -->
-          <input type="text" ngModel name="location" placeholder="Location"> 
+          <input [(ngModel)]="location" (input)="getLocations()" list="locations" type="text" name="location" placeholder="Location"/>
+          <datalist id="locations">
+            <option *ngFor="let location of potentialLocations" value="{{location}}">
+          </datalist>
           <p id="locError" class="error" style="display: none;">Error in field</p>
+          <!-- <label>Choose a browser from this list:
+            <input list="browsers" name="myBrowser" /></label>
+            <datalist id="browsers">
+              <option value="Chrome">
+              <option value="Firefox">
+              <option value="Internet Explorer">
+              <option value="Opera">
+              <option value="Safari">
+              <option value="Microsoft Edge">
+            </datalist> -->
 
           <!-- Day -->
           <label for="day" style="left: -149px !important;">Choose a day</label>
@@ -66,6 +78,12 @@
           <input class = "addActivity" type="submit" value="Add Activity">
         </form>
     </div>
+
+    <!-- <ejs-maps id='rn-container' [layers]='layers'>
+      <e-layers id="mapLayers">
+        <e-layer [urlTemplate]= 'urlTemplate'></e-layer>
+      </e-layers>
+    </ejs-maps> -->
     <img id="active-2" src="assets/images/active.png">
     <img id="active" src="assets/images/active-2.png">
     <img id="lifestyles" src="assets/images/lifestyles.png">

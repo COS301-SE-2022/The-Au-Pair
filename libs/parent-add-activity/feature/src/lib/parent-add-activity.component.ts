@@ -1,6 +1,7 @@
 import { Component, OnInit} from '@angular/core';
 import { API } from '../../../../shared/api/api.service';
 import { Activity } from '../../../../shared/interfaces/interfaces';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'the-au-pair-parent-add-activity',
@@ -8,7 +9,6 @@ import { Activity } from '../../../../shared/interfaces/interfaces';
   styleUrls: ['./parent-add-activity.component.scss'],
 })
 export class ParentAddActivityComponent implements OnInit{
-  
   //Activity Model
   activityDetails: Activity = {
     id: "",
@@ -24,11 +24,15 @@ export class ParentAddActivityComponent implements OnInit{
     child: "",
   };
 
+  //Possible locations searched for
+  location = "";
+  potentialLocations : string[] = [];
+
   //Children of logged in user
   allChildren: any;
 
   //Constructor
-  constructor(private serv: API) {}
+  constructor(private serv: API, private http: HttpClient) {}
 
   ngOnInit(): void 
   {
@@ -83,11 +87,22 @@ export class ParentAddActivityComponent implements OnInit{
         dom.innerHTML = "Location is empty";
         dom.style.display = "block";
       }
-    }else
+      //Check that the selected location is from the API
+ 
+    }
+    else
     {
       if(dom != null)
       {
-        dom.style.display = "none";
+        this.getLocations()
+        if (this.potentialLocations.indexOf(this.location) == -1)
+        {
+          dom.innerHTML = "Please select a valid location from the suggested below.";
+          dom.style.display = "block";
+          return;
+        }
+        else
+          dom.style.display = "none";
       }
     }
     dom = document.getElementById("dayError");
@@ -166,13 +181,44 @@ export class ParentAddActivityComponent implements OnInit{
       this.activityDetails.name = val.activityName;
       this.activityDetails.description = val.description;
       this.activityDetails.location = val.location;
+
+
+
       this.activityDetails.day = val.dayOfWeek;
       this.activityDetails.timeStart = val.timeSlot.substring(0,5);
       this.activityDetails.timeEnd = val.timeSlot.substring(6,11);
       this.activityDetails.budget = budget;
       this.activityDetails.child = val.childId;
-      this.addActivity(this.activityDetails);
+      // this.addActivity(this.activityDetails);
     }
+  }
+
+  async getLocations()
+  {
+    const loc = this.location;
+    
+    
+    const locationParam = loc.replace(' ', '+');
+    const params = locationParam + '&limit=4&format=json&polygon_geojson=1&addressdetails=1';
+    await this.http.get('https://nominatim.openstreetmap.org/search?q='+params)
+    .toPromise()
+    .then(data=>{ // Success
+      //Populate potential Locations
+      const json_data = JSON.stringify(data);
+      const res = JSON.parse(json_data);
+      if(json_data === "{}"){
+        return;
+      }
+  
+      const len = res.length;
+      for (let j = 0; j < len; j++) 
+      { 
+        this.potentialLocations.push(res[j].display_name);
+      }
+    })
+    .catch(error=>{ // Failure
+      console.log(error);
+    });
   }
 
   //Service calls
