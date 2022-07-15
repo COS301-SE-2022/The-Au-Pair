@@ -124,8 +124,16 @@ export class API{
   registerParent(user : User, parent : Parent):  Observable<any>  {
     return this.http.post('http://localhost:8080/register',user, {responseType: 'text'})
   }
-  
+
   registerAuPair(user : User, aupair : auPair): Observable<any> {
     return this.http.post('http://localhost:8080/register',user, {responseType: 'text'})
+  }
+
+  login(email : string, password : string): Observable<any> {
+    var details = {
+      "email" : email,
+      "password" : password
+    } 
+    return this.http.post('http://localhost:8080/login',details, {responseType: 'text'});
   }
 }
