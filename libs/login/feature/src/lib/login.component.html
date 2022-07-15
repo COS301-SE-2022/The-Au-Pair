@@ -1,16 +1,16 @@
 <ion-content>
     <h2>Login</h2>
     <div class="loginDetails">
-        <form [formGroup]="loginDetailsForm" class = "form-details">
+        <form [formGroup]="loginDetailsForm" (ngSubmit)="loginUser()" class="form-details">
 
         
-        <the-au-pair-input-field labelContent="Email" formControlName="email"></the-au-pair-input-field>
+        <the-au-pair-input-field labelContent="Email" [showError]="errState" formControlName="email"></the-au-pair-input-field>
 
-        <the-au-pair-password-field labelContent="Password" formControlName="pass"></the-au-pair-password-field>
+        <the-au-pair-password-field labelContent="Password" [showError]="errState" formControlName="pass"></the-au-pair-password-field>
         
         <!-- Submit -->
         <div class="buttons">
-            <input class = "loginUser" value="Login" (click)="loginUser()">
+            <input class = "loginUser" disable value="Login" type="submit">
         </div>
 
         <div class="clickables">

@@ -20,6 +20,8 @@ export class InputFieldComponent implements ControlValueAccessor {
   @Input()
   labelContent!: string;
 
+  @Input() showError = false;
+
   // eslint-disable-next-line @typescript-eslint/no-empty-function
   onChange: any = () => {};
   // eslint-disable-next-line @typescript-eslint/no-empty-function
@@ -46,6 +48,6 @@ export class InputFieldComponent implements ControlValueAccessor {
   }
 
   setDisabledState(disabled: boolean) {
-    this.disabled = disabled;
+    this.showError = disabled;
   }
 }

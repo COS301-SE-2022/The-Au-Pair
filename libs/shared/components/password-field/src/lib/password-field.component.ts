@@ -14,12 +14,15 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
   ],
 })
 export class PasswordFieldComponent implements ControlValueAccessor {
-  disabled = false;
+  // showError = false;
   val = "";
+  disabled = false;
   showPassword = false;
 
   @Input()
   labelContent!: string;
+
+  @Input() showError = false;
 
   // eslint-disable-next-line @typescript-eslint/no-empty-function
   onChange: any = () => {};

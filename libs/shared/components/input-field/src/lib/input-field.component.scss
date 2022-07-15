@@ -20,6 +20,10 @@
     color: black;
 }
 
+.fld .form-input-error {
+    border: 1px solid red;
+}
+
 .fld .form-label {
     position: absolute;
     left: 0.8rem;
@@ -46,10 +50,10 @@
 }
 
 .error{
-    display: none;
-    position: relative;
-    display: block;
-    text-align: left;
-    margin: 0;
+    position: absolute;
+    right: 1rem;
+    top: 4.95rem;
+    padding: 0 0.5rem;  
+    font-size: 25px;
     color: red;
 }

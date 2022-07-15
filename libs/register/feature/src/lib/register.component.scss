@@ -41,15 +41,7 @@ ion-content {
     top: 170px;
 }
 
-.fld {
-    display: flex;
-    flex-direction: column;
-    margin-bottom: -0.8rem;
-    position: relative;
-}
-
-
-.fld input, .buttons input, .selector input{
+.buttons input, .selector input{
     top: 0;
     left: 0;
     
@@ -106,40 +98,6 @@ ion-content {
     color: white;
 }
 
-.fld label {
-    position: absolute;
-    left: 0.8rem;
-    top: 5.1rem;
-    padding: 0 0.5rem;  
-    pointer-events: none; 
-    transition: top 200ms ease-in, left 200ms ease-in;
-    font-style: normal;
-    font-weight: 600;
-    font-size: 16px;
-    color: #797979;
-    opacity: 0.7;
-}
-
-.type-toggle {
-    position: absolute;
-    right: 1rem;
-    top: 5.05rem;
-    padding: 0 0.5rem;  
-    font-size: 20px;
-    color: var(--ion-color-primary);
-}
-
-input:focus{
-    outline:none;
-}
-
-.form-input:focus ~ .form-label,
-.form-input:not(:placeholder-shown).form-input:not(:focus) ~ .form-label {
-  top: 2rem;
-  left: 0rem;
-  opacity: 1;
-}
-
 .buttons{   
     height: auto;
     text-align: center;
@@ -162,16 +120,6 @@ input:focus{
     text-align: center;
     text-decoration: underline;
     cursor: pointer;
-}
-
-//Errors styling
-.error{
-    display: none;
-    position: relative;
-    display: block;
-    text-align: left;
-    margin: 0;
-    color: red;
 }
 
 //Images

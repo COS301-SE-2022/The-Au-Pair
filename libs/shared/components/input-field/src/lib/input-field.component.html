@@ -1,5 +1,5 @@
 <div class="fld">
-        <input [name]="labelContent"  [(ngModel)]="value" type="text" autocomplete="off" class="form-input" placeholder=" ">
+        <input [name]="labelContent"  [(ngModel)]="value" type="text" autocomplete="off" [ngClass]="(this.showError===false) ? 'form-input' : 'form-input form-input-error' " placeholder=" ">
         <label [for]="labelContent" class="form-label">{{ labelContent }}</label>
-    <p id="emailError" class="error" style="display: none;">Error in field</p>
+        <ion-icon class="error" [hidden]="!showError" name="close"></ion-icon>
 </div>

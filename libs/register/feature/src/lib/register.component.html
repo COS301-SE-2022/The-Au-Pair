@@ -2,77 +2,31 @@
     <h2>Register</h2>
     <div class="registerDetails">
 
-        
-        <form #registerDetailsForm="ngForm" (ngSubmit)="registerUser()" class = "form-details">
+        <form [formGroup]="parentRegisterDetailsForm" (ngSubmit)="registerUser()" class = "form-details">
        
         <div class="selector">
             <input class = "parent" [class]="(this.parentChosen===true) ? 'chosen' : 'notchosen'" type="button" (click)="this.parentChosen = true" value="I am a Parent">
             <input class = "aupair" [class]="(this.parentChosen===true) ? 'notchosen' : 'chosen'" type="button" (click)="this.parentChosen = false" type="button" value="I am an Au Pair">
         </div>
             
-        <div class="fld">
-            <input type="text" ngModel name="nameInp" autocomplete="off" class="form-input" placeholder=" ">
-            <label id="name" for="nameInp" class="form-label">Name</label>
-            <p id="nameError" class="error" style="display: none;">Error in field</p>
-        </div>
+        <the-au-pair-input-field labelContent="Name" [showError]="(!parentRegisterDetailsForm.controls['name'].valid && parentRegisterDetailsForm.controls['name'].dirty)" formControlName="name"></the-au-pair-input-field>
         
-        <div class="fld">
-            <input type="text" ngModel name="surnameInp" autocomplete="off" class="form-input" placeholder=" ">
-            <label id="surname" for="surnameInp" class="form-label">Surname</label>
-            <p id="surnameError" class="error" style="display: none;">Error in field</p>
-        </div>
+        <the-au-pair-input-field labelContent="Surname" [showError]="(!parentRegisterDetailsForm.controls['surname'].valid && parentRegisterDetailsForm.controls['surname'].dirty)" formControlName="surname"></the-au-pair-input-field>
     
-        <div class="fld">
-            <input type="text" ngModel name="emailInp" autocomplete="off" class="form-input" placeholder=" ">
-            <label id="email" for="emailInp" class="form-label">Email</label>
-            <p id="emailError" class="error" style="display: none;">Error in field</p>
-        </div>
+        <the-au-pair-input-field labelContent="Email" [showError]="(!parentRegisterDetailsForm.controls['email'].valid && parentRegisterDetailsForm.controls['email'].dirty)" formControlName="email"></the-au-pair-input-field>
 
-        <div class="fld">
-            <input type="text" ngModel name="phoneInp" autocomplete="off" class="form-input" placeholder=" ">
-            <label id="phone" for="phoneInp" class="form-label">Phone</label>
-            <p id="phoneError" class="error" style="display: none;">Error in field</p>
-        </div>
+        <the-au-pair-input-field labelContent="Phone Number" [showError]="(!parentRegisterDetailsForm.controls['phone'].valid && parentRegisterDetailsForm.controls['phone'].dirty)" formControlName="phone"></the-au-pair-input-field>
 
-        <div class="fld">
-            <input type="text" ngModel name="idInp" autocomplete="off" class="form-input" placeholder=" ">
-            <label id="ID" for="idInp" class="form-label">ID</label>
-            <p id="idError" class="error" style="display: none;">Error in field</p>
-        </div>
+        <the-au-pair-input-field labelContent="ID" [showError]="(!parentRegisterDetailsForm.controls['id'].valid && parentRegisterDetailsForm.controls['id'].dirty)" formControlName="id"></the-au-pair-input-field>
 
-        <div class="fld" [hidden]="!parentChosen">
-            <input type="text" ngModel name="medInp" autocomplete="off" class="form-input" placeholder=" ">
-            <label id="med" for="medInp" class="form-label">Medical Aid Number</label>
-            <p id="medError" class="error" style="display: none;">Error in field</p>
-        </div>
+        <the-au-pair-input-field [hidden]="!parentChosen" labelContent="Medical Aid Number" [showError]="(!parentRegisterDetailsForm.controls['medAid'].valid && parentRegisterDetailsForm.controls['medAid'].dirty)" formControlName="medAid"></the-au-pair-input-field>
 
-        <div class="fld">
-            <input type="text" ngModel name="addressInp" autocomplete="off" class="form-input" placeholder=" ">
-            <label id="address" for="addressInp" class="form-label">Address</label>
-            <p id="addressError" class="error" style="display: none;">Error in field</p>
-        </div>
+        <the-au-pair-input-field labelContent="Address" [showError]="(!parentRegisterDetailsForm.controls['address'].valid && parentRegisterDetailsForm.controls['address'].dirty)" formControlName="address"></the-au-pair-input-field>
         
-        <div class="fld">
-            <input [type]="(this.showPassword===true) ? 'text' : 'password'" ngModel name="passInp" autocomplete="off" class="form-input" placeholder=" ">
-            <label id="password" for="passInp" class="form-label">Password</label>
-            <p id="passwordError" class="error" style="display: none;">Error in field</p>
+        <the-au-pair-password-field labelContent="Password" [showError]="(!parentRegisterDetailsForm.controls['pass'].valid && parentRegisterDetailsForm.controls['pass'].dirty)" formControlName="pass"></the-au-pair-password-field>
 
-            <a class="type-toggle" (click)="toggleShow()">
-                <ion-icon class="show-option" [hidden]="showPassword" name="eye-off-outline"></ion-icon>
-                <ion-icon class="hide-option" [hidden]="!showPassword" name="eye-outline"></ion-icon>
-            </a>
-        </div>
+        <the-au-pair-password-field labelContent="Confirm Password" [showError]="(!parentRegisterDetailsForm.controls['confPass'].valid && parentRegisterDetailsForm.controls['confPass'].dirty)" formControlName="confPass"></the-au-pair-password-field>
 
-        <div class="fld">
-            <input [type]="(this.showPassword===true) ? 'text' : 'password'" ngModel name="confPassInp" autocomplete="off" class="form-input" placeholder=" ">
-            <label id="confPassword" for="confPassInp" class="form-label">Confirm Password</label>
-            <p id="confPasswordError" class="error" style="display: none;">Error in field</p>
-
-            <a class="type-toggle" (click)="toggleShow()">
-                <ion-icon class="show-option" [hidden]="showPassword" name="eye-off-outline"></ion-icon>
-                <ion-icon class="hide-option" [hidden]="!showPassword" name="eye-outline"></ion-icon>
-            </a>
-        </div>
         
         <!-- Submit -->
         <div class="buttons">
