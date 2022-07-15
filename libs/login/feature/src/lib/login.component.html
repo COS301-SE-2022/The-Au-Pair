@@ -2,11 +2,10 @@
     <h2>Login</h2>
     <div class="loginDetails">
         <form [formGroup]="loginDetailsForm" (ngSubmit)="loginUser()" class="form-details">
-
         
-        <the-au-pair-input-field labelContent="Email" [showError]="errState" formControlName="email"></the-au-pair-input-field>
+        <the-au-pair-input-field labelContent="Email" [showError]="errState && (!loginDetailsForm.controls['email'].valid)" formControlName="email"></the-au-pair-input-field>
 
-        <the-au-pair-password-field labelContent="Password" [showError]="errState" formControlName="pass"></the-au-pair-password-field>
+        <the-au-pair-password-field labelContent="Password" [showError]="errState && (!loginDetailsForm.controls['pass'].valid)" formControlName="pass"></the-au-pair-password-field>
         
         <!-- Submit -->
         <div class="buttons">

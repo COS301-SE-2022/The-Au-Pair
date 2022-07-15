@@ -9,23 +9,23 @@
             <input class = "aupair" [class]="(this.parentChosen===true) ? 'notchosen' : 'chosen'" type="button" (click)="this.parentChosen = false" type="button" value="I am an Au Pair">
         </div>
             
-        <the-au-pair-input-field labelContent="Name" [showError]="(!parentRegisterDetailsForm.controls['name'].valid && parentRegisterDetailsForm.controls['name'].dirty)" formControlName="name"></the-au-pair-input-field>
+        <the-au-pair-input-field labelContent="Name" [showError]="submitAttempt && (!parentRegisterDetailsForm.controls['name'].valid)" formControlName="name"></the-au-pair-input-field>
         
-        <the-au-pair-input-field labelContent="Surname" [showError]="(!parentRegisterDetailsForm.controls['surname'].valid && parentRegisterDetailsForm.controls['surname'].dirty)" formControlName="surname"></the-au-pair-input-field>
+        <the-au-pair-input-field labelContent="Surname" [showError]="submitAttempt && (!parentRegisterDetailsForm.controls['surname'].valid)" formControlName="surname"></the-au-pair-input-field>
     
-        <the-au-pair-input-field labelContent="Email" [showError]="(!parentRegisterDetailsForm.controls['email'].valid && parentRegisterDetailsForm.controls['email'].dirty)" formControlName="email"></the-au-pair-input-field>
+        <the-au-pair-input-field labelContent="Email" [showError]="submitAttempt && (!parentRegisterDetailsForm.controls['email'].valid)" formControlName="email"></the-au-pair-input-field>
 
-        <the-au-pair-input-field labelContent="Phone Number" [showError]="(!parentRegisterDetailsForm.controls['phone'].valid && parentRegisterDetailsForm.controls['phone'].dirty)" formControlName="phone"></the-au-pair-input-field>
+        <the-au-pair-input-field labelContent="Phone Number" [showError]="submitAttempt && (!parentRegisterDetailsForm.controls['phone'].valid)" formControlName="phone"></the-au-pair-input-field>
 
-        <the-au-pair-input-field labelContent="ID" [showError]="(!parentRegisterDetailsForm.controls['id'].valid && parentRegisterDetailsForm.controls['id'].dirty)" formControlName="id"></the-au-pair-input-field>
+        <the-au-pair-input-field labelContent="ID" [showError]="submitAttempt && (!parentRegisterDetailsForm.controls['id'].valid)" formControlName="id"></the-au-pair-input-field>
 
-        <the-au-pair-input-field [hidden]="!parentChosen" labelContent="Medical Aid Number" [showError]="(!parentRegisterDetailsForm.controls['medAid'].valid && parentRegisterDetailsForm.controls['medAid'].dirty)" formControlName="medAid"></the-au-pair-input-field>
+        <the-au-pair-input-field [hidden]="!parentChosen" labelContent="Medical Aid Number" [showError]="submitAttempt && (!parentRegisterDetailsForm.controls['medAid'].valid)" formControlName="medAid"></the-au-pair-input-field>
 
-        <the-au-pair-input-field labelContent="Address" [showError]="(!parentRegisterDetailsForm.controls['address'].valid && parentRegisterDetailsForm.controls['address'].dirty)" formControlName="address"></the-au-pair-input-field>
+        <the-au-pair-input-field labelContent="Address" [showError]="submitAttempt && (!parentRegisterDetailsForm.controls['address'].valid)" formControlName="address"></the-au-pair-input-field>
         
-        <the-au-pair-password-field labelContent="Password" [showError]="(!parentRegisterDetailsForm.controls['pass'].valid && parentRegisterDetailsForm.controls['pass'].dirty)" formControlName="pass"></the-au-pair-password-field>
+        <the-au-pair-password-field labelContent="Password" [showError]="submitAttempt && (!parentRegisterDetailsForm.controls['pass'].valid)" formControlName="pass"></the-au-pair-password-field>
 
-        <the-au-pair-password-field labelContent="Confirm Password" [showError]="(!parentRegisterDetailsForm.controls['confPass'].valid && parentRegisterDetailsForm.controls['confPass'].dirty)" formControlName="confPass"></the-au-pair-password-field>
+        <the-au-pair-password-field labelContent="Confirm Password" [showError]="submitAttempt && (!parentRegisterDetailsForm.controls['confPass'].valid)" formControlName="confPass"></the-au-pair-password-field>
 
         
         <!-- Submit -->

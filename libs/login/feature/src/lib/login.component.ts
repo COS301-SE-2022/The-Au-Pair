@@ -29,6 +29,8 @@ export class LoginComponent {
   }
   
   loginUser() {
+    this.submitAttempt = true;
+
     if(this.loginDetailsForm.controls['email'].valid && this.loginDetailsForm.controls['pass'].valid) {
       this.errState = false;
       console.log(this.loginDetailsForm.value);
