@@ -55,4 +55,5 @@ export interface Activity{
     type: number;
     password: string;
     number: string;
+    salt: string;
   }
