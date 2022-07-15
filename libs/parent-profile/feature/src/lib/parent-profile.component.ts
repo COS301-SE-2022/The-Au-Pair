@@ -19,6 +19,7 @@ export class ParentProfileComponent implements OnInit {
     type: 0,
     password: "",
     number: "",
+    salt: "",
   }
 
   parentDetails: Parent = {
