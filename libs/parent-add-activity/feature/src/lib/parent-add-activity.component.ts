@@ -87,13 +87,12 @@ export class ParentAddActivityComponent implements OnInit{
         dom.innerHTML = "Location is empty";
         dom.style.display = "block";
       }
-      //Check that the selected location is from the API
- 
     }
     else
     {
       if(dom != null)
       {
+        //Check that the selected location is from the API
         this.getLocations()
         if (this.potentialLocations.indexOf(this.location) == -1)
         {
@@ -197,21 +196,27 @@ export class ParentAddActivityComponent implements OnInit{
   {
     const loc = this.location;
     
-    
+    //Building the API query according to what is in the location input field
     const locationParam = loc.replace(' ', '+');
     const params = locationParam + '&limit=4&format=json&polygon_geojson=1&addressdetails=1';
+
+    //Make the API call
     await this.http.get('https://nominatim.openstreetmap.org/search?q='+params)
     .toPromise()
     .then(data=>{ // Success
-      //Populate potential Locations
+      //Populate potential Locations Array
       const json_data = JSON.stringify(data);
       const res = JSON.parse(json_data);
-      if(json_data === "{}"){
+
+      //Jump out if no results returned
+      if(json_data === "{}")
+      {
         return;
       }
   
+      //Add returned data to the array
       const len = res.length;
-      for (let j = 0; j < len; j++) 
+      for (let j = 0; j < len && j<4; j++) 
       { 
         this.potentialLocations.push(res[j].display_name);
       }
