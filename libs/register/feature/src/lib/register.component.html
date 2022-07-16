@@ -3,39 +3,37 @@
     <div class="registerDetails">
 
         <form [formGroup]="parentRegisterDetailsForm" (ngSubmit)="registerUser()" class = "form-details">
-       
-        <div class="selector">
-            <input class = "parent" [class]="(this.parentChosen===true) ? 'chosen' : 'notchosen'" type="button" (click)="this.parentChosen = true" value="I am a Parent">
-            <input class = "aupair" [class]="(this.parentChosen===true) ? 'notchosen' : 'chosen'" type="button" (click)="this.parentChosen = false" type="button" value="I am an Au Pair">
-        </div>
+        
+            <div class="selector">
+                <input class = "parent" [class]="(this.parentChosen===true) ? 'chosen' : 'notchosen'" type="button" (click)="this.parentChosen = true" value="I am a Parent">
+                <input class = "aupair" [class]="(this.parentChosen===true) ? 'notchosen' : 'chosen'" type="button" (click)="this.parentChosen = false" type="button" value="I am an Au Pair">
+            </div>
+                
+            <the-au-pair-input-field labelContent="Name" [showError]="submitAttempt && (!parentRegisterDetailsForm.controls['name'].valid)" formControlName="name"></the-au-pair-input-field>
             
-        <the-au-pair-input-field labelContent="Name" [showError]="submitAttempt && (!parentRegisterDetailsForm.controls['name'].valid)" formControlName="name"></the-au-pair-input-field>
+            <the-au-pair-input-field labelContent="Surname" [showError]="submitAttempt && (!parentRegisterDetailsForm.controls['surname'].valid)" formControlName="surname"></the-au-pair-input-field>
         
-        <the-au-pair-input-field labelContent="Surname" [showError]="submitAttempt && (!parentRegisterDetailsForm.controls['surname'].valid)" formControlName="surname"></the-au-pair-input-field>
-    
-        <the-au-pair-input-field labelContent="Email" [showError]="submitAttempt && (!parentRegisterDetailsForm.controls['email'].valid)" formControlName="email"></the-au-pair-input-field>
+            <the-au-pair-input-field labelContent="Email" [showError]="submitAttempt && (!parentRegisterDetailsForm.controls['email'].valid)" formControlName="email"></the-au-pair-input-field>
 
-        <the-au-pair-input-field labelContent="Phone Number" [showError]="submitAttempt && (!parentRegisterDetailsForm.controls['phone'].valid)" formControlName="phone"></the-au-pair-input-field>
+            <the-au-pair-input-field labelContent="Phone Number" [showError]="submitAttempt && (!parentRegisterDetailsForm.controls['phone'].valid)" formControlName="phone"></the-au-pair-input-field>
 
-        <the-au-pair-input-field labelContent="ID" [showError]="submitAttempt && (!parentRegisterDetailsForm.controls['id'].valid)" formControlName="id"></the-au-pair-input-field>
+            <the-au-pair-input-field labelContent="ID" [showError]="submitAttempt && (!parentRegisterDetailsForm.controls['id'].valid)" formControlName="id"></the-au-pair-input-field>
 
-        <the-au-pair-input-field [hidden]="!parentChosen" labelContent="Medical Aid Number" [showError]="submitAttempt && (!parentRegisterDetailsForm.controls['medAid'].valid)" formControlName="medAid"></the-au-pair-input-field>
+            <the-au-pair-input-field [hidden]="!parentChosen" labelContent="Medical Aid Number" [showError]="submitAttempt && (!parentRegisterDetailsForm.controls['medAid'].valid)" formControlName="medAid"></the-au-pair-input-field>
 
-        <the-au-pair-input-field labelContent="Address" [showError]="submitAttempt && (!parentRegisterDetailsForm.controls['address'].valid)" formControlName="address"></the-au-pair-input-field>
-        
-        <the-au-pair-password-field labelContent="Password" [showError]="submitAttempt && (!parentRegisterDetailsForm.controls['pass'].valid)" formControlName="pass"></the-au-pair-password-field>
+            <the-au-pair-input-field labelContent="Address" [showError]="submitAttempt && (!parentRegisterDetailsForm.controls['address'].valid)" formControlName="address"></the-au-pair-input-field>
+            
+            <the-au-pair-password-field labelContent="Password" [showError]="submitAttempt && (!parentRegisterDetailsForm.controls['pass'].valid)" formControlName="pass"></the-au-pair-password-field>
 
-        <the-au-pair-password-field labelContent="Confirm Password" [showError]="submitAttempt && (!parentRegisterDetailsForm.controls['confPass'].valid)" formControlName="confPass"></the-au-pair-password-field>
+            <the-au-pair-password-field labelContent="Confirm Password" [showError]="submitAttempt && (!parentRegisterDetailsForm.controls['confPass'].valid)" formControlName="confPass"></the-au-pair-password-field>
 
-        
-        <!-- Submit -->
-        <div class="buttons">
-            <input class = "registerUser" type="submit" value="Register">
-        </div>
+            <div class="buttons">
+                <input class = "registerUser" type="submit" value="Register">
+            </div>
 
-        <div class="clickables">
-            <p class="account" routerLink="/login-page">Already have an account?</p>
-        </div>
+            <div class="clickables">
+                <p class="account" routerLink="/login-page">Already have an account?</p>
+            </div>
           
         </form>
     </div>

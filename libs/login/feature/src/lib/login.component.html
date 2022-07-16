@@ -2,21 +2,18 @@
     <h2>Login</h2>
     <div class="loginDetails">
         <form [formGroup]="loginDetailsForm" (ngSubmit)="loginUser()" class="form-details">
-        
-        <the-au-pair-input-field labelContent="Email" [showError]="errState && (!loginDetailsForm.controls['email'].valid)" formControlName="email"></the-au-pair-input-field>
+            <the-au-pair-input-field labelContent="Email" [showError]="errState && (!loginDetailsForm.controls['email'].valid)" formControlName="email"></the-au-pair-input-field>
+            
+            <the-au-pair-password-field labelContent="Password" [showError]="errState && (!loginDetailsForm.controls['pass'].valid)" formControlName="pass"></the-au-pair-password-field>
+            
+            <div class="buttons">
+                <input class = "loginUser" disable value="Login" type="submit">
+            </div>
 
-        <the-au-pair-password-field labelContent="Password" [showError]="errState && (!loginDetailsForm.controls['pass'].valid)" formControlName="pass"></the-au-pair-password-field>
-        
-        <!-- Submit -->
-        <div class="buttons">
-            <input class = "loginUser" disable value="Login" type="submit">
-        </div>
-
-        <div class="clickables">
-            <p class="forgot-pass" routerLink="/forgot-password">Forgot password?</p>
-            <p class="account" routerLink="/register-page">Don't have an account?</p>
-        </div>
-          
+            <div class="clickables">
+                <p class="forgot-pass" routerLink="/forgot-password">Forgot password?</p>
+                <p class="account" routerLink="/register-page">Don't have an account?</p>
+            </div>
         </form>
     </div>
     <img id="active-2" src="assets/images/active.png">
