@@ -180,15 +180,12 @@ export class ParentAddActivityComponent implements OnInit{
       this.activityDetails.name = val.activityName;
       this.activityDetails.description = val.description;
       this.activityDetails.location = val.location;
-
-
-
       this.activityDetails.day = val.dayOfWeek;
       this.activityDetails.timeStart = val.timeSlot.substring(0,5);
       this.activityDetails.timeEnd = val.timeSlot.substring(6,11);
       this.activityDetails.budget = budget;
       this.activityDetails.child = val.childId;
-      // this.addActivity(this.activityDetails);
+      this.addActivity(this.activityDetails);
     }
   }
 
