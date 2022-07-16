@@ -87,6 +87,12 @@ const routes: Routes = [
     loadChildren: () =>
     import('@the-au-pair/register/feature').then((m) => m.RegisterFeatureModule )
   },
+  },
+  {
+    path: 'parent-notifications',
+    loadChildren: () =>
+    import('@the-au-pair/parent-notifications/feature').then((m) => m.ParentNotificationsFeatureModule),
+  }
 ];
 
 @NgModule({
