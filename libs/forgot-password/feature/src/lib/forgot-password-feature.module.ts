@@ -5,10 +5,10 @@ import { ForgotPasswordComponentRoutingModule } from './forgot-password-routing.
 import { IonicModule } from '@ionic/angular';
 import { InputFieldModule } from '@the-au-pair/shared/components/input-field';
 import { API } from '../../../../shared/api/api.service';
-import { FormsModule } from '@angular/forms';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
-  imports: [CommonModule, FormsModule, IonicModule, ForgotPasswordComponentRoutingModule, InputFieldModule],
+  imports: [CommonModule, ReactiveFormsModule, IonicModule, ForgotPasswordComponentRoutingModule, InputFieldModule],
   declarations: [ForgotPasswordComponent],
   providers:[API]
 })
