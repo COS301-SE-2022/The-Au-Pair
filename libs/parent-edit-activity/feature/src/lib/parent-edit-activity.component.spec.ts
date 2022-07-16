@@ -59,30 +59,6 @@ describe('ParentEditActivityComponent', () => {
   })
 
   //------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-  /**Populated form fields form testing**/
-  it('should, given valid input from the form, update the activityDetails variable', async ()=>{
-    const expectedValue: Activity = {
-      id: "",
-      name: "AI",
-      description: "AI Lesson",
-      location:"UP",
-      timeStart: "13:00",
-      timeEnd: "14:00",
-      budget: 0.0,
-      comment: "",
-      behavior: 0,
-      day: "Wednesday",
-      child: "8675945310542",
-    };
-
-    jest.spyOn(component,"getActivityValues");
-
-    await component.getActivityValues(populatedForm);
-
-    expect(component.activityDetails).toEqual(expectedValue);
-  })
-
-  //------------------------------------------------------------------------------------------------------------------------------------------------------------------------
   /**Empty fields form testing**/
   it('should, given a form with no activity name, NOT poplate the activityDetails variable', async ()=>{
     const expectedValue: Activity = {
