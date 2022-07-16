@@ -87,7 +87,6 @@ const routes: Routes = [
     loadChildren: () =>
     import('@the-au-pair/register/feature').then((m) => m.RegisterFeatureModule )
   },
-  },
   {
     path: 'parent-notifications',
     loadChildren: () =>
