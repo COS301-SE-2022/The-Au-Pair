@@ -12,6 +12,7 @@
     "parent-add-activity-feature": "libs/parent-add-activity/feature",
     "parent-dashboard-feature": "libs/parent-dashboard/feature",
     "parent-edit-activity-feature": "libs/parent-edit-activity/feature",
+    "parent-notifications-feature": "libs/parent-notifications/feature",
     "parent-profile-feature": "libs/parent-profile/feature",
     "parent-view-activity-feature": "libs/parent-view-activity/feature",
     "schedule-feature": "libs/schedule/feature",

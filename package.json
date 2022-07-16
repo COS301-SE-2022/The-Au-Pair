@@ -8,7 +8,8 @@
     "test": "nx test",
     "test-front-end": "npx nx run-many --target=test --all",
     "postinstall": "ngcc --properties es2015 browser module main",
-    "start:api": "cd Server && mvn spring-boot:run"
+    "start:api": "cd Server && mvn spring-boot:run",
+    "open:android": "nx run the-au-pair:open:android"
   },
   "private": true,
   "devDependencies": {
@@ -67,6 +68,7 @@
     "@syncfusion/ej2-angular-grids": "^20.2.38",
     "@syncfusion/ej2-angular-maps": "^20.2.38",
     "jquery": "^3.6.0",
+    "@ngxs/store": "^3.7.4",
     "rxjs": "~7.4.0",
     "tslib": "^2.0.0",
     "zone.js": "~0.11.4"
