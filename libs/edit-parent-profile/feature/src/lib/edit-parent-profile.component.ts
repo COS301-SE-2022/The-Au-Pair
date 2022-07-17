@@ -22,6 +22,7 @@ export class EditParentProfileComponent implements OnInit{
     type: 0,
     password: "",
     number: "",
+    salt: "",
   }
 
   medAidDetails: medAid = {

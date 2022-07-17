@@ -83,6 +83,21 @@ const routes: Routes = [
     import('@the-au-pair/edit-au-pair-profile/feature').then((m) => m.EditAuPairProfileFeatureModule),
   },
   {
+    path: 'login-page',
+    loadChildren: () =>
+    import('@the-au-pair/login/feature').then((m) => m.LoginFeatureModule ),
+  },
+  {
+    path: 'forgot-password',
+    loadChildren: () =>
+    import('@the-au-pair/forgot-password/feature').then((m) => m.ForgotPasswordFeatureModule )
+  },
+  {
+    path: 'register-page',
+    loadChildren: () =>
+    import('@the-au-pair/register/feature').then((m) => m.RegisterFeatureModule )
+  },
+  {
     path: 'parent-notifications',
     loadChildren: () =>
     import('@the-au-pair/parent-notifications/feature').then((m) => m.ParentNotificationsFeatureModule),

@@ -1,0 +1,26 @@
+{
+  "projectType": "library",
+  "root": "libs/shared/components/password-field",
+  "sourceRoot": "libs/shared/components/password-field/src",
+  "prefix": "the-au-pair",
+  "targets": {
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["coverage/libs/shared/components/password-field"],
+      "options": {
+        "jestConfig": "libs/shared/components/password-field/jest.config.js",
+        "passWithNoTests": true
+      }
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "options": {
+        "lintFilePatterns": [
+          "libs/shared/components/password-field/src/**/*.ts",
+          "libs/shared/components/password-field/src/**/*.html"
+        ]
+      }
+    }
+  },
+  "tags": []
+}

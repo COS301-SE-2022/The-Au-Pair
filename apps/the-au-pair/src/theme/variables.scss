@@ -89,6 +89,21 @@
     --ion-color-light-shade: #e0e0e0;
     --ion-color-light-tint: #ffffff;
     --ion-background-color: #EFEFEF;
+    /** light white **/
+    --ion-color-light-white: #F9F9F9;
+	--ion-color-light-white-rgb: 249,249,249;
+	--ion-color-light-white-contrast: #000000;
+	--ion-color-light-white-contrast-rgb: 0,0,0;
+	--ion-color-light-white-shade: #dbdbdb;
+	--ion-color-light-white-tint: #fafafa;
+    /** grey **/
+    --ion-color-grey: #797979;
+    --ion-color-grey-rgb: 121,121,121;
+    --ion-color-grey-contrast: #ffffff;
+    --ion-color-grey-contrast-rgb: 255,255,255;
+    --ion-color-grey-shade: #6a6a6a;
+    --ion-color-grey-tint: #868686;
+
     /** font sizes **/
     --logo-size: 36px;
     --normal-size: 20px;
@@ -171,6 +186,18 @@
         --ion-color-light-contrast-rgb: 0, 0, 0;
         --ion-color-light-shade: #e0e0e0;
         --ion-color-light-tint: #ffffff;
+        --ion-color-light-white: #F9F9F9;
+        --ion-color-light-white-rgb: 249,249,249;
+        --ion-color-light-white-contrast: #000000;
+        --ion-color-light-white-contrast-rgb: 0,0,0;
+        --ion-color-light-white-shade: #dbdbdb;
+        --ion-color-light-white-tint: #fafafa;
+        --ion-color-grey: #797979;
+        --ion-color-grey-rgb: 121,121,121;
+        --ion-color-grey-contrast: #ffffff;
+        --ion-color-grey-contrast-rgb: 255,255,255;
+        --ion-color-grey-shade: #6a6a6a;
+        --ion-color-grey-tint: #868686;
     }
     /*
    * iOS Dark Theme
@@ -327,6 +354,18 @@
         --ion-color-light-contrast-rgb: 0, 0, 0;
         --ion-color-light-shade: #e0e0e0;
         --ion-color-light-tint: #ffffff;
+        --ion-color-light-white: #F9F9F9;
+        --ion-color-light-white-rgb: 249,249,249;
+        --ion-color-light-white-contrast: #000000;
+        --ion-color-light-white-contrast-rgb: 0,0,0;
+        --ion-color-light-white-shade: #dbdbdb;
+        --ion-color-light-white-tint: #fafafa;
+        --ion-color-grey: #797979;
+        --ion-color-grey-rgb: 121,121,121;
+        --ion-color-grey-contrast: #ffffff;
+        --ion-color-grey-contrast-rgb: 255,255,255;
+        --ion-color-grey-shade: #6a6a6a;
+        --ion-color-grey-tint: #868686;
     }
     /*
    * iOS Dark Theme

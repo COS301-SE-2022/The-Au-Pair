@@ -26,7 +26,7 @@ describe('EditParentProfileComponent', () => {
   const emptyMedAidPlan = {email: "testemail@gmail.com", phone: "0832422323", address: "123 Valid Street", medicalAidMM: "Kyle", medicalAidMS: "Pottinger", medicalAidNo: "7534286951", medicalAidProvider: "Discovery", medicalAidPlan: ""}
 
   // Invalid User
-  const invalidUser = {id: "invalidId", fname: "Kyle", sname: "Pottinger", email: "testemail@gmail.com", address: "123 Valid Street", registered: false, type: 0, password: "test", number: "0832422323"}
+  const invalidUser = {id: "invalidId", fname: "Kyle", sname: "Pottinger", email: "testemail@gmail.com", address: "123 Valid Street", registered: false, type: 0, password: "test", number: "0832422323", salt: ""}
 
   // Invalid Med Aid
   const invalidMedAid = {id: "invalidId", plan: "Full", name: "Kyle", sname: "Pottinger", mID: "7534286951", provider: "Discovery"}
@@ -91,6 +91,7 @@ describe('EditParentProfileComponent', () => {
       type: 0,
       password: "",
       number: "0832422323",
+      salt: "",
     };
 
     const expectedMedAidValue: medAid = {
@@ -124,6 +125,7 @@ describe('EditParentProfileComponent', () => {
       type: 0,
       password: "",
       number: "",
+      salt: "",
     };
 
     const expectedMedAidValue: medAid = {
@@ -155,6 +157,7 @@ describe('EditParentProfileComponent', () => {
       type: 0,
       password: "",
       number: "",
+      salt: "",
     };
 
     const expectedMedAidValue: medAid = {
@@ -186,6 +189,7 @@ describe('EditParentProfileComponent', () => {
       type: 0,
       password: "",
       number: "",
+      salt: "",
     };
 
     const expectedMedAidValue: medAid = {
@@ -217,6 +221,7 @@ describe('EditParentProfileComponent', () => {
       type: 0,
       password: "",
       number: "",
+      salt: "",
     };
 
     const expectedMedAidValue: medAid = {
@@ -248,6 +253,7 @@ describe('EditParentProfileComponent', () => {
       type: 0,
       password: "",
       number: "",
+      salt: "",
     };
 
     const expectedMedAidValue: medAid = {
@@ -279,6 +285,7 @@ describe('EditParentProfileComponent', () => {
       type: 0,
       password: "",
       number: "",
+      salt: "",
     };
 
     const expectedMedAidValue: medAid = {
@@ -310,6 +317,7 @@ describe('EditParentProfileComponent', () => {
       type: 0,
       password: "",
       number: "",
+      salt: "",
     };
 
     const expectedMedAidValue: medAid = {
@@ -341,6 +349,7 @@ describe('EditParentProfileComponent', () => {
       type: 0,
       password: "",
       number: "",
+      salt: "",
     };
 
     const expectedMedAidValue: medAid = {
