@@ -8,11 +8,12 @@ import { IonicModule } from '@ionic/angular';
 import { API } from '../../../../shared/api/api.service';
 
 @NgModule({
-  imports: [CommonModule,
-  EditChildRoutingModule,
-  IonicModule,
-  FormsModule,
-  NavbarModule
+  imports: [
+    CommonModule,
+    EditChildRoutingModule,
+    IonicModule,
+    FormsModule,
+    NavbarModule
   ],
   declarations: [EditChildComponent],
   providers: [API]
