@@ -19,6 +19,7 @@ export class AuPairProfileComponent implements OnInit {
     type: 0,
     password: "",
     number: "",
+    salt: "",
   }
 
   auPairDetails: auPair = {
@@ -64,6 +65,7 @@ export class AuPairProfileComponent implements OnInit {
         this.userDetails.type = res.type;
         this.userDetails.password = res.password;
         this.userDetails.number = res.number;
+        this.userDetails.salt = res.salt;
       },
       error=>{console.log("Error has occured with API: " + error);}
     )
