@@ -81,6 +81,11 @@ const routes: Routes = [
     path: 'edit-au-pair-profile',
     loadChildren: () =>
     import('@the-au-pair/edit-au-pair-profile/feature').then((m) => m.EditAuPairProfileFeatureModule),
+  },
+  {
+    path: 'parent-notifications',
+    loadChildren: () =>
+    import('@the-au-pair/parent-notifications/feature').then((m) => m.ParentNotificationsFeatureModule),
   }
 ];
 

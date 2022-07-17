@@ -47,6 +47,9 @@
       "@the-au-pair/parent-edit-activity/feature": [
         "libs/parent-edit-activity/feature/src/index.ts"
       ],
+      "@the-au-pair/parent-notifications/feature": [
+        "libs/parent-notifications/feature/src/index.ts"
+      ],
       "@the-au-pair/parent-profile/feature": [
         "libs/parent-profile/feature/src/index.ts"
       ],
