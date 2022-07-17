@@ -37,7 +37,11 @@
       "@the-au-pair/edit-parent-profile/feature": [
         "libs/edit-parent-profile/feature/src/index.ts"
       ],
+      "@the-au-pair/forgot-password/feature": [
+        "libs/forgot-password/feature/src/index.ts"
+      ],
       "@the-au-pair/home/feature": ["libs/home/feature/src/index.ts"],
+      "@the-au-pair/login/feature": ["libs/login/feature/src/index.ts"],
       "@the-au-pair/parent-add-activity/feature": [
         "libs/parent-add-activity/feature/src/index.ts"
       ],
@@ -56,12 +60,19 @@
       "@the-au-pair/parent-view-activity/feature": [
         "libs/parent-view-activity/feature/src/index.ts"
       ],
+      "@the-au-pair/register/feature": ["libs/register/feature/src/index.ts"],
       "@the-au-pair/schedule/feature": ["libs/schedule/feature/src/index.ts"],
       "@the-au-pair/shared/components/aupair-navbar": [
         "libs/shared/components/aupair-navbar/src/index.ts"
       ],
       "@the-au-pair/shared/components/navbar": [
         "libs/shared/components/navbar/src/index.ts"
+      ],
+      "@the-au-pair/shared/components/input-field": [
+        "libs/shared/components/input-field/src/index.ts"
+      ],
+      "@the-au-pair/shared/components/password-field": [
+        "libs/shared/components/password-field/src/index.ts"
       ],
       "@the-au-pair/shell/feature": ["libs/shell/feature/src/index.ts"]
     }

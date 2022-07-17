@@ -67,4 +67,16 @@ export interface Activity{
     type: number;
     password: string;
     number: string;
+    salt: string;
   }
+
+  export interface auPair{
+    id: string;
+    rating: number;
+    payRate: number;
+    distTraveled: number;
+    costIncurred: number;
+    onShift: boolean;
+    employer: string;
+  }
+  

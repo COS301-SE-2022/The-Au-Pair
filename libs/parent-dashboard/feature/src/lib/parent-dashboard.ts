@@ -40,6 +40,7 @@ export class ParentDashboardComponent implements OnInit{
     type: 0,
     password: "",
     number: "",
+    salt: "",
   }
 
   auPairDetails: AuPair = {
