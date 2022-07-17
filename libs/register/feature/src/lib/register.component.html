@@ -23,9 +23,9 @@
 
             <the-au-pair-input-field labelContent="Address" [showError]="submitAttempt && (!parentRegisterDetailsForm.controls['address'].valid)" formControlName="address"></the-au-pair-input-field>
             
-            <the-au-pair-password-field labelContent="Password" [showError]="submitAttempt && (!parentRegisterDetailsForm.controls['pass'].valid)" formControlName="pass"></the-au-pair-password-field>
+            <the-au-pair-password-field labelContent="Password" [showError]="(submitAttempt && (!parentRegisterDetailsForm.controls['pass'].valid)) || notSamePasswords" formControlName="pass"></the-au-pair-password-field>
 
-            <the-au-pair-password-field labelContent="Confirm Password" [showError]="submitAttempt && (!parentRegisterDetailsForm.controls['confPass'].valid)" formControlName="confPass"></the-au-pair-password-field>
+            <the-au-pair-password-field labelContent="Confirm Password" [showError]="(submitAttempt && (!parentRegisterDetailsForm.controls['confPass'].valid)) || notSamePasswords" formControlName="confPass"></the-au-pair-password-field>
 
             <div class="buttons">
                 <input class = "registerUser" type="submit" value="Register">

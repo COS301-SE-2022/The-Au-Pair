@@ -9,6 +9,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 export class RegisterComponent {
   public parentRegisterDetailsForm: FormGroup;
   public submitAttempt: boolean;
+  public notSamePasswords: boolean;
   
   parentChosen = true;
 
@@ -26,10 +27,16 @@ export class RegisterComponent {
     });
 
     this.submitAttempt = false;
+    this.notSamePasswords = false;
   }
 
   registerUser() {
     this.submitAttempt = true;
+    this.notSamePasswords = true;
+
+    if(this.parentRegisterDetailsForm.get('pass')?.value === this.parentRegisterDetailsForm.get('confPass')?.value) {
+      this.notSamePasswords = false;
+    }
 
     return 0;
   }
