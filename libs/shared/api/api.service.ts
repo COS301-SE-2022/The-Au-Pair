@@ -142,6 +142,6 @@ export class API{
       "email" : email,
       "password" : password
     } 
-    return this.http.post('http://localhost:8080/login',details, {responseType: 'text'});
+    return this.http.post('http://localhost:8080/login',details);
   }
 }

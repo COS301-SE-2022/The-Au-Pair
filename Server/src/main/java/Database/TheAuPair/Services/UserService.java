@@ -43,8 +43,9 @@ public class UserService
     return "pending";
   }
 
-  public String login(String email, String password)
+  public User login(String email, String password)
   {
+    User nr = new User("","","","","",false,1,"","","");
     for (User registered : ur.findAll())
     {
       if (registered.getEmail().equals(email))
@@ -56,15 +57,16 @@ public class UserService
 
           if (hash.equals(registered.getPassword()))
           {
-            return registered.getId();
+            return registered;
           }
         }
         else
         {
-          return "pending";
+          nr.setId("pending");
+          return nr;
         }
       }
     }
-    return "";
+    return nr;
   }
 }
