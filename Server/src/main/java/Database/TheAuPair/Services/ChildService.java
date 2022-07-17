@@ -28,4 +28,9 @@ public class ChildService
   {
     cr.save(c);
   }
+
+  public void updateChild(Child c)
+  {
+    cr.save(c);
+  }
 }

@@ -16,7 +16,10 @@
 
           <!-- Location -->
           <label for="location" style="left: -165px !important;">Location</label>
-          <input id="locationText" type="text" ngModel="{{this.activityDetails.location}}" name="location" placeholder="Location"> 
+          <input [(ngModel)]="location" (input)="getLocations()" list="locations" type="text" name="location" placeholder="Location"/>
+          <datalist id="locations">
+            <option *ngFor="let location of potentialLocations" value="{{location}}">
+          </datalist>
           <p id="locError" class="error" style="display: none;">Error in field</p>
 
           <!-- Day -->
