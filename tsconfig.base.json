@@ -28,6 +28,9 @@
       "@the-au-pair/children-dashboard/feature": [
         "libs/children-dashboard/feature/src/index.ts"
       ],
+      "@the-au-pair/edit-child/feature": [
+        "libs/edit-child/feature/src/index.ts"
+      ],
       "@the-au-pair/edit-parent-profile/feature": [
         "libs/edit-parent-profile/feature/src/index.ts"
       ],

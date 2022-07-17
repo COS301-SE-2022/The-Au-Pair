@@ -6,6 +6,10 @@ import { IonicModule } from '@ionic/angular';
 import { FormsModule } from '@angular/forms';
 import { NavbarModule } from '@the-au-pair/shared/components/navbar';
 import { API } from '../../../../shared/api/api.service';
+import { Maps } from '@syncfusion/ej2-angular-maps';
+import { MapsModule } from '@syncfusion/ej2-angular-maps';
+import { LegendService, MarkerService, MapsTooltipService, DataLabelService, BubbleService, NavigationLineService, SelectionService, AnnotationsService, ZoomService } from '@syncfusion/ej2-angular-maps';
+
 
 @NgModule({
   imports: [
@@ -14,9 +18,10 @@ import { API } from '../../../../shared/api/api.service';
     IonicModule, 
     FormsModule,
     NavbarModule,
+    MapsModule
   ],
   declarations: [ParentAddActivityComponent],
-  providers:[API]
+  providers:[API,LegendService, MarkerService, MapsTooltipService, DataLabelService, BubbleService, NavigationLineService , SelectionService, AnnotationsService, ZoomService]
 })
 export class ParentAddActivityFeatureModule 
 {

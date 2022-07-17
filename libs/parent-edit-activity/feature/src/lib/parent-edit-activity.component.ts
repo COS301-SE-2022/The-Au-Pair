@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { API } from '../../../../shared/api/api.service';
 import { ToastController } from '@ionic/angular';
 import { Activity } from '../../../../shared/interfaces/interfaces';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'the-au-pair-parent-edit-activity',
@@ -12,20 +13,23 @@ import { Activity } from '../../../../shared/interfaces/interfaces';
 export class ParentEditActivityComponent implements OnInit {
   //------------------------------------------------------------------------------------------------------------------------------------------------------------------------
   /**Variables**/
+  //Possible locations searched for
+  location = "";
+  potentialLocations : string[] = [];
 
-   //Activity Model
-   activityDetails: Activity = {
-    id: "",
-    name: "",
-    description: "",
-    location: "",
-    timeStart: "",
-    timeEnd: "",
-    budget: 0.0,
-    comment: "",
-    behavior: 0,
-    day: "",
-    child: "",
+  //Activity Model
+  activityDetails: Activity = {
+  id: "",
+  name: "",
+  description: "",
+  location: "",
+  timeStart: "",
+  timeEnd: "",
+  budget: 0.0,
+  comment: "",
+  behavior: 0,
+  day: "",
+  child: "",
   };
   timeslot = "";
   //Children of logged in user
@@ -35,7 +39,7 @@ export class ParentEditActivityComponent implements OnInit {
   /**Functions*/
 
   //Constructor
-  constructor(private serv: API, private router: Router, public toastCtrl: ToastController) 
+  constructor(private serv: API, private router: Router, public toastCtrl: ToastController, private http : HttpClient) 
   {
     const navigation = this.router.getCurrentNavigation();
     if(navigation !== null)
@@ -102,7 +106,16 @@ export class ParentEditActivityComponent implements OnInit {
     {
       if(dom != null)
       {
-        dom.style.display = "none";
+        //Check that the selected location is from the API
+        this.getLocations()
+        if (this.potentialLocations.indexOf(this.location) == -1)
+        {
+          dom.innerHTML = "Please select a valid location from the suggested below.";
+          dom.style.display = "block";
+          return;
+        }
+        else
+          dom.style.display = "none";
       }
     }
     dom = document.getElementById("dayError");
@@ -190,6 +203,41 @@ export class ParentEditActivityComponent implements OnInit {
     }
   }
 
+
+  async getLocations()
+  {
+    const loc = this.location;
+    
+    //Building the API query according to what is in the location input field
+    const locationParam = loc.replace(' ', '+');
+    const params = locationParam + '&limit=4&format=json&polygon_geojson=1&addressdetails=1';
+
+    //Make the API call
+    await this.http.get('https://nominatim.openstreetmap.org/search?q='+params)
+    .toPromise()
+    .then(data=>{ // Success
+      //Populate potential Locations Array
+      const json_data = JSON.stringify(data);
+      const res = JSON.parse(json_data);
+
+      //Jump out if no results returned
+      if(json_data === "{}")
+      {
+        return;
+      }
+  
+      //Add returned data to the array
+      const len = res.length;
+      for (let j = 0; j < len && j<4; j++) 
+      { 
+        this.potentialLocations.push(res[j].display_name);
+      }
+    })
+    .catch(error=>{ // Failure
+      console.log(error);
+    });
+  }
+
   returnToSchedule()
   {
     this.router.navigate(['/schedule']).then(()=>{
@@ -221,6 +269,7 @@ export class ParentEditActivityComponent implements OnInit {
         this.activityDetails.name = res.name;
         this.activityDetails.description = res.description;
         this.activityDetails.location = res.location;
+        this.location = res.location;
         this.activityDetails.day = res.day;
         this.activityDetails.timeStart = res.timeStart;
         this.activityDetails.timeEnd = res.timeEnd;
