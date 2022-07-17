@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { Activity , Child , medAid , Parent  , User, HoursLogged } from '../interfaces/interfaces';
+import { Activity , Child , medAid , Parent  , User, HoursLogged, auPair } from '../interfaces/interfaces';
 
 
 @Injectable()
@@ -119,5 +119,29 @@ export class API{
 
   updateHoursLog(hl : HoursLogged): Observable<any> {
     return this.http.post("http://localhost:8080/updateHoursLog", hl);
+  }
+
+  registerParent(user : User, parent : Parent):  Observable<any>  {
+    return this.http.post('http://localhost:8080/register',user, {responseType: 'text'})
+  }
+
+  addParent(parent : Parent): Observable<any> {
+    return this.http.post('http://localhost:8080/addParent',parent);
+  }
+
+  registerAuPair(user : User, aupair : auPair): Observable<any> {
+    return this.http.post('http://localhost:8080/register',user, {responseType: 'text'})
+  }
+
+  addAuPair(aupair : auPair): Observable<any> {
+    return this.http.post('http://localhost:8080/addAuPair',aupair);
+  }
+
+  login(email : string, password : string): Observable<any> {
+    var details = {
+      "email" : email,
+      "password" : password
+    } 
+    return this.http.post('http://localhost:8080/login',details);
   }
 }

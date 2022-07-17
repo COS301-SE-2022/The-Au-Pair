@@ -22,4 +22,51 @@ public class UserService
   {
     ur.save(u);
   }
+
+  public String register(User u)
+  {
+    for (User registered : ur.findAll())
+    {
+      if (registered.getId().equals(u.getId()) || registered.getEmail().equals(u.getEmail()))
+      {
+        return registered.getEmail();
+      }
+    }
+
+    SecurityService SS = new  SecurityService();
+    String salt = SS.genSalt().toString();
+    String hash = SS.genPassword(u.getPassword(), salt.getBytes());
+
+    u.setPassword(hash);
+    u.setSalt(salt);
+    ur.save(u);
+    return "pending";
+  }
+
+  public User login(String email, String password)
+  {
+    User nr = new User("","","","","",false,1,"","","");
+    for (User registered : ur.findAll())
+    {
+      if (registered.getEmail().equals(email))
+      {
+        if (registered.isRegistered())
+        {
+          SecurityService SS = new SecurityService();
+          String hash = SS.genPassword(password, registered.getSalt().getBytes());
+
+          if (hash.equals(registered.getPassword()))
+          {
+            return registered;
+          }
+        }
+        else
+        {
+          nr.setId("pending");
+          return nr;
+        }
+      }
+    }
+    return nr;
+  }
 }
