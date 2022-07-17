@@ -99,8 +99,8 @@ describe('EditAuPairProfileComponent', () => {
       costIncurred: 0,
       distTraveled: 0,
       payRate: 50,
-      bio: "",
-      experience: "",
+      bio: "test bio",
+      experience: "test experience",
     };
 
     jest.spyOn(component,"getUserDetails");
