@@ -13,19 +13,21 @@ describe('EditAuPairProfileComponent', () => {
   let fixture: ComponentFixture<EditAuPairProfileComponent>;
 
   // A valid form of correct values
-  const validForm = {email: "testemail@gmail.com", phone: "0832422323", address: "123 Valid Street", payRate: 50}
+  const validForm = {email: "testemail@gmail.com", phone: "0832422323", address: "123 Valid Street", payRate: 50, bio: "test bio", experience: "test experience"}
 
   // Forms that have at least one missing field
-  const emptyEmail = {email: "", phone: "0832422323", address: "123 Valid Street", payRate: 50}
-  const emptyPhone = {email: "testemail@gmail.com", phone: "", address: "123 Valid Street", payRate: 50}
-  const emptyAddress = {email: "testemail@gmail.com", phone: "0832422323", address: "", payRate: 50}
-  const emptyPayRate = {email: "testemail@gmail.com", phone: "0832422323", address: "123 Valid Street", payRate: ""}
+  const emptyEmail = {email: "", phone: "0832422323", address: "123 Valid Street", payRate: 50, bio: "test bio", experience: "test experience"}
+  const emptyPhone = {email: "testemail@gmail.com", phone: "", address: "123 Valid Street", payRate: 50, bio: "test bio", experience: "test experience"}
+  const emptyAddress = {email: "testemail@gmail.com", phone: "0832422323", address: "", payRate: 50, bio: "test bio", experience: "test experience"}
+  const emptyPayRate = {email: "testemail@gmail.com", phone: "0832422323", address: "123 Valid Street", payRate: "", bio: "test bio", experience: "test experience"}
+  const emptyBio = {email: "testemail@gmail.com", phone: "0832422323", address: "123 Valid Street", payRate: "", bio: "", experience: "test experience"}
+  const emptyExperience = {email: "testemail@gmail.com", phone: "0832422323", address: "123 Valid Street", payRate: "", bio: "test bio", experience: ""}
 
   // Invalid User
   const invalidUser = {id: "invalidId", fname: "Kyle", sname: "Pottinger", email: "testemail@gmail.com", address: "123 Valid Street", registered: false, type: 0, password: "test", number: "0832422323"}
 
   // Invalid Au Pair
-  const invalidAuPair = {id: "invalidId", rating: 5, onShift: false, employer: "David", costIncurred: 100, distTraveled: 300, payRate: 50}
+  const invalidAuPair = {id: "invalidId", rating: 5, onShift: false, employer: "David", costIncurred: 100, distTraveled: 300, payRate: 50, bio: "test bio", experience: "test experience"}
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
@@ -97,6 +99,8 @@ describe('EditAuPairProfileComponent', () => {
       costIncurred: 0,
       distTraveled: 0,
       payRate: 50,
+      bio: "",
+      experience: "",
     };
 
     jest.spyOn(component,"getUserDetails");
@@ -131,6 +135,8 @@ describe('EditAuPairProfileComponent', () => {
       costIncurred: 0,
       distTraveled: 0,
       payRate: 0,
+      bio: "",
+      experience: "",
     };
 
     jest.spyOn(component,"getUserDetails");
@@ -163,6 +169,8 @@ describe('EditAuPairProfileComponent', () => {
       costIncurred: 0,
       distTraveled: 0,
       payRate: 0,
+      bio: "",
+      experience: "",
     };
 
     jest.spyOn(component,"getUserDetails");
@@ -195,6 +203,8 @@ describe('EditAuPairProfileComponent', () => {
       costIncurred: 0,
       distTraveled: 0,
       payRate: 0,
+      bio: "",
+      experience: "",
     };
 
     jest.spyOn(component,"getUserDetails");
@@ -227,6 +237,8 @@ describe('EditAuPairProfileComponent', () => {
       costIncurred: 0,
       distTraveled: 0,
       payRate: 0,
+      bio: "",
+      experience: "",
     };
 
     jest.spyOn(component,"getUserDetails");
@@ -235,6 +247,74 @@ describe('EditAuPairProfileComponent', () => {
 
     jest.spyOn(component,"getUserDetails");
     await component.getUserFormDetails(emptyPayRate);
+    expect(component.auPairDetails).toEqual(expectedAuPairValue);
+  })
+
+  it('should, given a form with no bio, NOT poplate the userDetails or auPairDetails variable', async ()=>{
+    const expectedUserValue: User = {
+      id: "",
+      fname: "",
+      sname: "",
+      email: "",
+      address: "",
+      registered: false,
+      type: 0,
+      password: "",
+      number: "",
+    };
+
+    const expectedAuPairValue: AuPair = {
+      id: "",
+      rating: 0,
+      onShift: false,
+      employer: "",
+      costIncurred: 0,
+      distTraveled: 0,
+      payRate: 0,
+      bio: "",
+      experience: "",
+    };
+
+    jest.spyOn(component,"getUserDetails");
+    await component.getUserFormDetails(emptyBio);
+    expect(component.userDetails).toEqual(expectedUserValue);
+
+    jest.spyOn(component,"getUserDetails");
+    await component.getUserFormDetails(emptyBio);
+    expect(component.auPairDetails).toEqual(expectedAuPairValue);
+  })
+
+  it('should, given a form with no experience, NOT poplate the userDetails or auPairDetails variable', async ()=>{
+    const expectedUserValue: User = {
+      id: "",
+      fname: "",
+      sname: "",
+      email: "",
+      address: "",
+      registered: false,
+      type: 0,
+      password: "",
+      number: "",
+    };
+
+    const expectedAuPairValue: AuPair = {
+      id: "",
+      rating: 0,
+      onShift: false,
+      employer: "",
+      costIncurred: 0,
+      distTraveled: 0,
+      payRate: 0,
+      bio: "",
+      experience: "",
+    };
+
+    jest.spyOn(component,"getUserDetails");
+    await component.getUserFormDetails(emptyExperience);
+    expect(component.userDetails).toEqual(expectedUserValue);
+
+    jest.spyOn(component,"getUserDetails");
+    await component.getUserFormDetails(emptyExperience);
     expect(component.auPairDetails).toEqual(expectedAuPairValue);
   })
   //------------------------------------------------------------------------------------------------------------------------------------------------------------------------

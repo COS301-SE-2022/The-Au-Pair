@@ -32,6 +32,8 @@ export class EditAuPairProfileComponent implements OnInit {
     costIncurred: 0,
     distTraveled: 0,
     payRate: 0,
+    bio: "",
+    experience: "",
   }
 
   constructor(private serv: API, public toastCtrl: ToastController){}
@@ -67,6 +69,8 @@ export class EditAuPairProfileComponent implements OnInit {
         this.auPairDetails.costIncurred = res.costIncurred;
         this.auPairDetails.distTraveled = res.distTraveled;
         this.auPairDetails.payRate = res.payRate;
+        this.auPairDetails.bio = res.bio;
+        this.auPairDetails.experience = res.experience;
       },
       error=>{console.log("Error has occured with API: " + error);}
     )
@@ -141,6 +145,38 @@ export class EditAuPairProfileComponent implements OnInit {
         dom.style.display = "none";
       }
     }
+    dom = document.getElementById("bioError");
+    if(val.bio === "")
+    {
+      emptyInput = true;
+      if(dom != null)
+      {
+        dom.innerHTML = "Bio is empty";
+        dom.style.display = "block";
+      }
+    }else
+    {
+      if(dom != null)
+      {
+        dom.style.display = "none";
+      }
+    }
+    dom = document.getElementById("experienceError");
+    if(val.experience === "")
+    {
+      emptyInput = true;
+      if(dom != null)
+      {
+        dom.innerHTML = "Experience is empty";
+        dom.style.display = "block";
+      }
+    }else
+    {
+      if(dom != null)
+      {
+        dom.style.display = "none";
+      }
+    }
     
     if(emptyInput == true)
     {
@@ -152,16 +188,15 @@ export class EditAuPairProfileComponent implements OnInit {
       this.userDetails.number = val.phone;
       this.userDetails.address = val.address;
       this.auPairDetails.payRate = val.payRate;
+      this.auPairDetails.bio = val.bio;
+      this.auPairDetails.experience = val.experience;
       this.editDetails(this.userDetails, this.auPairDetails);
     }
   }
 
   async editDetails(user:User, aupair:AuPair)
   {
-    console.log("HERE:", user)
-    console.log("HERE:", aupair)
-    await this.editUser(user);
-    
+    await this.editUser(user); 
     await this.editAuPair(aupair);    
 
     if(this.hasErr)

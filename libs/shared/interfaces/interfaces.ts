@@ -53,6 +53,8 @@ export interface Activity{
     costIncurred: number;
     distTraveled: number;
     payRate: number;
+    bio: string;
+    experience: string;
   }
 
   export interface User{

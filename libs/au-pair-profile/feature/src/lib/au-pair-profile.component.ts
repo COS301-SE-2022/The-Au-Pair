@@ -29,6 +29,8 @@ export class AuPairProfileComponent implements OnInit {
     costIncurred: 0,
     distTraveled: 0,
     payRate: 0,
+    bio: "",
+    experience: "",
   }
 
   medAidDetails: medAid = {
@@ -74,6 +76,8 @@ export class AuPairProfileComponent implements OnInit {
           this.auPairDetails.costIncurred = res.costIncurred;
           this.auPairDetails.distTraveled = res.distTraveled;
           this.auPairDetails.payRate = res.payRate;
+          this.auPairDetails.bio = res.bio;
+          this.auPairDetails.experience = res.experience;
         },
         error=>{console.log("Error has occured with API: " + error);}
       )

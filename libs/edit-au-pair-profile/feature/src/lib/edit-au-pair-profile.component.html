@@ -35,6 +35,16 @@
                     <input type = 'text' name = "payRate" class="parent-text-info" ngModel = '{{this.auPairDetails.payRate}}' placeholder="Pay rate">
                     <p id="payRateError" class="error" style="display: none;">Error in field</p>
                 </div>
+                <div class="parent-info-large">
+                    <div class="parent-text">Bio: </div>
+                    <textarea name = "bio" class="parent-text-info" ngModel = '{{this.auPairDetails.bio}}' placeholder="Bio"></textarea>
+                    <p id="bioError" class="error" style="display: none;">Error in field</p>
+                </div>
+                <div class="parent-info-large">
+                    <div class="parent-text">Experience: </div>
+                    <textarea name = "experience" class="parent-text-info" ngModel = '{{this.auPairDetails.experience}}' placeholder="Experience"></textarea>
+                    <p id="experienceError" class="error" style="display: none;">Error in field</p>
+                </div>
                 <input type = 'submit' class="change-button" value = 'Update Details'>
             </div>
         </form>
