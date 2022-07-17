@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { API } from '../../../../shared/api/api.service';
-import { User, AuPair } from '../../../../shared/interfaces/interfaces';
+import { User, auPair } from '../../../../shared/interfaces/interfaces';
 import { ToastController } from '@ionic/angular';
 
 @Component({
@@ -24,7 +24,7 @@ export class EditAuPairProfileComponent implements OnInit {
     number: "",
   }
 
-  auPairDetails: AuPair = {
+  auPairDetails: auPair = {
     id: "",
     rating: 0,
     onShift: false,
@@ -194,7 +194,7 @@ export class EditAuPairProfileComponent implements OnInit {
     }
   }
 
-  async editDetails(user:User, aupair:AuPair)
+  async editDetails(user:User, aupair:auPair)
   {
     await this.editUser(user); 
     await this.editAuPair(aupair);    
@@ -224,7 +224,7 @@ export class EditAuPairProfileComponent implements OnInit {
     )
   };
 
-  editAuPair(aupair:AuPair){
+  editAuPair(aupair:auPair){
     this.serv.editAuPair(aupair).subscribe(
       res=>{
         console.log("The response is:" + res); 

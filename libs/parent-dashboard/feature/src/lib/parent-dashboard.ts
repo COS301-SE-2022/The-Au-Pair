@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { API } from '../../../../shared/api/api.service';
-import { AuPair, Child, Parent, User } from '../../../../shared/interfaces/interfaces';
+import { auPair, Child, Parent, User } from '../../../../shared/interfaces/interfaces';
 import { AuPairRatingModalComponent } from './au-pair-rating-modal/au-pair-rating-modal.component';
 import { ModalController } from '@ionic/angular';
 
@@ -42,7 +42,7 @@ export class ParentDashboardComponent implements OnInit{
     number: "",
   }
 
-  auPairDetails: AuPair = {
+  auPairDetails: auPair = {
     id: "",
     rating: 0,
     onShift: false,

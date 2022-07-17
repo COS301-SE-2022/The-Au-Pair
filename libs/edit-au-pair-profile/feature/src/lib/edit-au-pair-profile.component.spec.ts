@@ -2,7 +2,7 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { FormsModule } from '@angular/forms';
 import { IonicModule } from '@ionic/angular';
 import { API } from '../../../../shared/api/api.service';
-import { User, AuPair } from '../../../../shared/interfaces/interfaces';
+import { User, auPair } from '../../../../shared/interfaces/interfaces';
 import { HttpClientTestingModule } from "@angular/common/http/testing";
 import { NavbarModule } from '@the-au-pair/shared/components/navbar';
 import { RouterTestingModule } from "@angular/router/testing";
@@ -91,7 +91,7 @@ describe('EditAuPairProfileComponent', () => {
       number: "0832422323",
     };
 
-    const expectedAuPairValue: AuPair = {
+    const expectedAuPairValue: auPair = {
       id: "",
       rating: 0,
       onShift: false,
@@ -127,7 +127,7 @@ describe('EditAuPairProfileComponent', () => {
       number: "",
     };
 
-    const expectedAuPairValue: AuPair = {
+    const expectedAuPairValue: auPair = {
       id: "",
       rating: 0,
       onShift: false,
@@ -161,7 +161,7 @@ describe('EditAuPairProfileComponent', () => {
       number: "",
     };
 
-    const expectedAuPairValue: AuPair = {
+    const expectedAuPairValue: auPair = {
       id: "",
       rating: 0,
       onShift: false,
@@ -195,7 +195,7 @@ describe('EditAuPairProfileComponent', () => {
       number: "",
     };
 
-    const expectedAuPairValue: AuPair = {
+    const expectedAuPairValue: auPair = {
       id: "",
       rating: 0,
       onShift: false,
@@ -229,7 +229,7 @@ describe('EditAuPairProfileComponent', () => {
       number: "",
     };
 
-    const expectedAuPairValue: AuPair = {
+    const expectedAuPairValue: auPair = {
       id: "",
       rating: 0,
       onShift: false,
@@ -263,7 +263,7 @@ describe('EditAuPairProfileComponent', () => {
       number: "",
     };
 
-    const expectedAuPairValue: AuPair = {
+    const expectedAuPairValue: auPair = {
       id: "",
       rating: 0,
       onShift: false,
@@ -297,7 +297,7 @@ describe('EditAuPairProfileComponent', () => {
       number: "",
     };
 
-    const expectedAuPairValue: AuPair = {
+    const expectedAuPairValue: auPair = {
       id: "",
       rating: 0,
       onShift: false,

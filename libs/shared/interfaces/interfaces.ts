@@ -45,7 +45,7 @@ export interface Activity{
     auPair: string;
   }
 
-  export interface AuPair{
+  export interface auPair{
     id: string;
     rating: number;
     onShift: boolean;

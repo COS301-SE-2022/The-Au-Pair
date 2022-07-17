@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ModalController, NavParams, ToastController } from '@ionic/angular';
-import { AuPair } from '../../../../../shared/interfaces/interfaces';
+import { auPair } from '../../../../../shared/interfaces/interfaces';
 import { API } from '../../../../../shared/api/api.service';
 
 @Component({
@@ -14,7 +14,7 @@ export class AuPairRatingModalComponent implements OnInit {
   auPairId: string = this.navParams.get('auPairId');
   auPairRating! : number;
 
-  currentAuPair: AuPair = {
+  currentAuPair: auPair = {
     id: "",
     rating: 0,
     onShift: false,
