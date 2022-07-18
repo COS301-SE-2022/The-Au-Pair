@@ -12,12 +12,36 @@
     height: 50px;
     width: 100%;
     display: flex;
+    position: relative;
 }
 
 .explore-heading{
-    margin: auto;
     font-family: 'TitanOne';
     font-size: 30px;
+    // position: absolute;
+    margin: auto;
+}
+
+.change-button{
+    padding: 10px 22px;
+    border: 2px solid var(--ion-color-secondary);
+    border-radius: 10px;
+    background-color: #69A88DB2;
+    margin-top: 8px;
+    margin-bottom: 8px;
+    position: absolute;
+    right: 130px;
+}
+
+.change-button2{
+    padding: 10px 22px;
+    border: 2px solid var(--ion-color-secondary);
+    border-radius: 10px;
+    background-color: #69A88DB2;
+    margin-top: 8px;
+    margin-bottom: 8px;
+    position: absolute;
+    right: 20px;
 }
 
 a{
@@ -169,17 +193,18 @@ ion-card {
     width: 431px;
     font-size: 24px;
     border-radius: 16px;
-    cursor: pointer;
 }
 
 .action-tag {
     height: 5%;
-    // top: 48%;
+    bottom: -16px;
     position: relative;
     align-items: center;
     justify-content: center;
+    display: flex;
     background-color: #69A88D;
     border-radius: 0px 0px 16px 16px;
+    cursor: pointer;
 }
 
 .action-icon {
