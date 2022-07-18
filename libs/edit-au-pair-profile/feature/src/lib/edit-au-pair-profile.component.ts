@@ -1,14 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import { API } from '../../../../shared/api/api.service';
-import { User, medAid, Parent } from '../../../../shared/interfaces/interfaces';
+import { User, auPair } from '../../../../shared/interfaces/interfaces';
 import { ToastController } from '@ionic/angular';
 
 @Component({
-  selector: 'the-au-pair-edit-parent-profile',
-  templateUrl: './edit-parent-profile.component.html',
-  styleUrls: ['./edit-parent-profile.component.scss'],
+  selector: 'the-au-pair-edit-au-pair-profile',
+  templateUrl: './edit-au-pair-profile.component.html',
+  styleUrls: ['./edit-au-pair-profile.component.scss'],
 })
-export class EditParentProfileComponent implements OnInit{
+export class EditAuPairProfileComponent implements OnInit {
   
   hasErr = false;
 
@@ -25,20 +25,16 @@ export class EditParentProfileComponent implements OnInit{
     salt: "",
   }
 
-  medAidDetails: medAid = {
+  auPairDetails: auPair = {
     id: "",
-    plan: "",
-    name: "",
-    sname: "",
-    mID: "",
-    provider: "",
-  }
-
-  parent: Parent = {
-    id: "",
-    children: [],
-    medID: "",
-    auPair: "",
+    rating: 0,
+    onShift: false,
+    employer: "",
+    costIncurred: 0,
+    distTraveled: 0,
+    payRate: 0,
+    bio: "",
+    experience: "",
   }
 
   constructor(private serv: API, public toastCtrl: ToastController){}
@@ -51,7 +47,7 @@ export class EditParentProfileComponent implements OnInit{
   async getUserDetails()
   {
     /* User Details */
-    await this.serv.getUser("4561237814867").subscribe(
+    await this.serv.getUser("7542108615984").subscribe(
       res=>{
         this.userDetails.id = res.id;
         this.userDetails.fname = res.fname;
@@ -66,14 +62,17 @@ export class EditParentProfileComponent implements OnInit{
       },
       error=>{console.log("Error has occured with API: " + error);}
     )
-    await this.serv.getMedAid("7534286951").subscribe(
+    await this.serv.getAuPair("7542108615984").subscribe(
       res=>{
-        this.medAidDetails.id = res.id;
-        this.medAidDetails.plan = res.plan;
-        this.medAidDetails.name = res.name;
-        this.medAidDetails.sname = res.sname;          
-        this.medAidDetails.mID = res.mID;
-        this.medAidDetails.provider = res.provider;
+        this.auPairDetails.id = res.id;
+        this.auPairDetails.rating = res.rating;
+        this.auPairDetails.onShift = res.onShift;
+        this.auPairDetails.employer = res.employer;
+        this.auPairDetails.costIncurred = res.costIncurred;
+        this.auPairDetails.distTraveled = res.distTraveled;
+        this.auPairDetails.payRate = res.payRate;
+        this.auPairDetails.bio = res.bio;
+        this.auPairDetails.experience = res.experience;
       },
       error=>{console.log("Error has occured with API: " + error);}
     )
@@ -132,13 +131,13 @@ export class EditParentProfileComponent implements OnInit{
         dom.style.display = "none";
       }
     }
-    dom = document.getElementById("medAidMMError");
-    if(val.medicalAidMM === "")
+    dom = document.getElementById("payRateError");
+    if(val.payRate === "")
     {
       emptyInput = true;
       if(dom != null)
       {
-        dom.innerHTML = "Main Member Name is empty";
+        dom.innerHTML = "Pay Rate is empty";
         dom.style.display = "block";
       }
     }else
@@ -148,13 +147,13 @@ export class EditParentProfileComponent implements OnInit{
         dom.style.display = "none";
       }
     }
-    dom = document.getElementById("medAidMSError");
-    if(val.medicalAidMS === "")
+    dom = document.getElementById("bioError");
+    if(val.bio === "")
     {
       emptyInput = true;
       if(dom != null)
       {
-        dom.innerHTML = "Main Member Surname is empty";
+        dom.innerHTML = "Bio is empty";
         dom.style.display = "block";
       }
     }else
@@ -164,45 +163,13 @@ export class EditParentProfileComponent implements OnInit{
         dom.style.display = "none";
       }
     }
-    dom = document.getElementById("medAidNoError");
-    if(val.medicalAidNo === "")
+    dom = document.getElementById("experienceError");
+    if(val.experience === "")
     {
       emptyInput = true;
       if(dom != null)
       {
-        dom.innerHTML = "Medical Aid Number is empty";
-        dom.style.display = "block";
-      }
-    }else
-    {
-      if(dom != null)
-      {
-        dom.style.display = "none";
-      }
-    }
-    dom = document.getElementById("medAidProviderError");
-    if(val.medicalAidProvider === "")
-    {
-      emptyInput = true;
-      if(dom != null)
-      {
-        dom.innerHTML = "Medical Aid Provider is empty";
-        dom.style.display = "block";
-      }
-    }else
-    {
-      if(dom != null)
-      {
-        dom.style.display = "none";
-      }
-    }
-    dom = document.getElementById("medAidPlanError");
-    if(val.medicalAidPlan === "")
-    {
-      emptyInput = true;
-      if(dom != null)
-      {
-        dom.innerHTML = "Medical Aid Plan is empty";
+        dom.innerHTML = "Experience is empty";
         dom.style.display = "block";
       }
     }else
@@ -222,19 +189,17 @@ export class EditParentProfileComponent implements OnInit{
       this.userDetails.email = val.email;
       this.userDetails.number = val.phone;
       this.userDetails.address = val.address;
-      this.medAidDetails.name = val.medicalAidMM;
-      this.medAidDetails.plan = val.medicalAidPlan;
-      this.medAidDetails.provider = val.medicalAidProvider;
-      this.medAidDetails.mID = val.medicalAidNo;
-      this.medAidDetails.sname = val.medicalAidMS;
-      this.editDetails(this.userDetails, this.medAidDetails);
+      this.auPairDetails.payRate = val.payRate;
+      this.auPairDetails.bio = val.bio;
+      this.auPairDetails.experience = val.experience;
+      this.editDetails(this.userDetails, this.auPairDetails);
     }
   }
 
-  async editDetails(user:User, medAid:medAid)
+  async editDetails(user:User, aupair:auPair)
   {
-    await this.editUser(user);
-    await this.editMedAid(medAid);    
+    await this.editUser(user); 
+    await this.editAuPair(aupair);    
 
     if(this.hasErr)
     {
@@ -261,29 +226,8 @@ export class EditParentProfileComponent implements OnInit{
     )
   };
 
-  editMedAid(medAid:medAid){
-    this.serv.getParent("4561237814867").subscribe(
-      res=>{
-        this.parent.id = res.id;
-        this.parent.children = res.children;
-        this.parent.medID = medAid.mID;
-        this.parent.auPair = res.auPair;
-        
-        //Update the parent object to contain the new child ID
-        this.serv.editParent(this.parent).subscribe(
-          res=>{
-            console.log("The response is:" + res); 
-          },
-          error=>{
-            console.log("Error has occured with API: " + error);
-          }
-        );
-      },
-      error=>{
-        console.log("Error has occured with API: " + error);
-      }
-    )
-    this.serv.editMedAid(medAid).subscribe(
+  editAuPair(aupair:auPair){
+    this.serv.editAuPair(aupair).subscribe(
       res=>{
         console.log("The response is:" + res); 
         return res;

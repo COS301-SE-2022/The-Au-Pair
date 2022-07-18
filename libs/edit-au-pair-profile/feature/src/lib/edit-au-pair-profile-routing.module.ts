@@ -1,11 +1,11 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { ParentDashboardComponent } from "./parent-dashboard";
+import { EditAuPairProfileComponent } from './edit-au-pair-profile.component';
 
 const routes: Routes = [
   {
     path: '',
-    component: ParentDashboardComponent,
+    component: EditAuPairProfileComponent,
   },
 ];
 
@@ -13,4 +13,4 @@ const routes: Routes = [
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule],
 })
-export class ParentDashboardRoutingModule {}
+export class EditAuPairProfileRoutingModule {}

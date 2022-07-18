@@ -175,6 +175,14 @@ ion-card {
     cursor: pointer;    
 }
 
+.rating-icon{
+    padding-left: 10px;
+    float: right;
+    width: 35px;
+    height: 35px;
+    cursor: pointer;    
+}
+
 @media (max-width: 642px) {
     .children-div {
         grid-template-columns: repeat(1, 1fr);
