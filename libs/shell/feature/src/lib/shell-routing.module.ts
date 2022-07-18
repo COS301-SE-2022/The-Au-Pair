@@ -106,6 +106,11 @@ const routes: Routes = [
     path: 'parent-notifications',
     loadChildren: () =>
     import('@the-au-pair/parent-notifications/feature').then((m) => m.ParentNotificationsFeatureModule),
+  },
+  {
+    path: 'explore',
+    loadChildren: () =>
+    import('@the-au-pair/explore/feature').then((m) => m.ExploreFeatureModule),
   }
 ];
 
