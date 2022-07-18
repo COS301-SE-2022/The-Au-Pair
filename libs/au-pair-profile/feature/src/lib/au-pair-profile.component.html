@@ -31,18 +31,22 @@
                 <div class="parent-info-small">
                   <div class="parent-text">Pay rate: </div>
                   <p class="parent-text-info">R{{this.auPairDetails.payRate}} per hour</p>
-              </div>
-            </div>
-            <div class = 'large-profile-details-div'>
-                <div class="parent-info-large">
-                    <div class="parent-text">Bio: </div>
-                    <p class="parent-text-info">{{this.auPairDetails.bio}}</p>
                 </div>
-                <div class="parent-info-large">
-                    <div class="parent-text">Experience: </div>
-                    <p class="parent-text-info">{{this.auPairDetails.experience}}</p>
+                <div class="parent-info-small">
+                    <div class="parent-text">Rating: </div>
+                    <p class="parent-text-info">{{this.auPairDetails.rating}} / 5</p>
+                  </div>
                 </div>
-            </div>
+                <div class = 'large-profile-details-div'>
+                    <div class="parent-info-large">
+                        <div class="parent-text">Bio: </div>
+                        <p class="parent-text-info">{{this.auPairDetails.bio}}</p>
+                    </div>
+                    <div class="parent-info-large">
+                        <div class="parent-text">Experience: </div>
+                        <p class="parent-text-info">{{this.auPairDetails.experience}}</p>
+                    </div>
+                </div>
             <button class="change-button" id="change" routerLink="/edit-au-pair-profile">CHANGE</button>
         </div>
         <img id="active-2" src="assets/images/active.png">
