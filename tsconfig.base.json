@@ -22,11 +22,20 @@
       "@the-au-pair/au-pair-dashboard/feature": [
         "libs/au-pair-dashboard/feature/src/index.ts"
       ],
+      "@the-au-pair/au-pair-profile/feature": [
+        "libs/au-pair-profile/feature/src/index.ts"
+      ],
       "@the-au-pair/au-pair-schedule/feature": [
         "libs/au-pair-schedule/feature/src/index.ts"
       ],
       "@the-au-pair/children-dashboard/feature": [
         "libs/children-dashboard/feature/src/index.ts"
+      ],
+      "@the-au-pair/edit-au-pair-profile/feature": [
+        "libs/edit-au-pair-profile/feature/src/index.ts"
+      ],
+      "@the-au-pair/edit-child/feature": [
+        "libs/edit-child/feature/src/index.ts"
       ],
       "@the-au-pair/edit-parent-profile/feature": [
         "libs/edit-parent-profile/feature/src/index.ts"

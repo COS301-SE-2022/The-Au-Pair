@@ -63,6 +63,11 @@ const routes: Routes = [
     import('@the-au-pair/add-child/feature').then((m) => m.AddChildFeatureModule),
   },
   {
+    path: 'edit-child',
+    loadChildren: () =>
+    import('@the-au-pair/edit-child/feature').then((m) => m.EditChildFeatureModule),
+  },
+  {
     path: 'au-pair-schedule',
     loadChildren: () =>
     import('@the-au-pair/au-pair-schedule/feature').then((m) => m.AuPairScheduleModule),
@@ -71,6 +76,16 @@ const routes: Routes = [
     path: 'au-pair-dashboard',
     loadChildren: () =>
     import('@the-au-pair/au-pair-dashboard/feature').then((m) => m.AuPairDashboardFeatureModule),
+  },
+  {
+    path: 'au-pair-profile',
+    loadChildren: () =>
+    import('@the-au-pair/au-pair-profile/feature').then((m) => m.AuPairProfileFeatureModule),
+  },
+  {
+    path: 'edit-au-pair-profile',
+    loadChildren: () =>
+    import('@the-au-pair/edit-au-pair-profile/feature').then((m) => m.EditAuPairProfileFeatureModule),
   },
   {
     path: 'login-page',
