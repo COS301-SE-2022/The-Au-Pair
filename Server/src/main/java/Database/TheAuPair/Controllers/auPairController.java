@@ -22,4 +22,11 @@ public class auPairController
     auPair ap =  aps.getAuPair(id);
     return ap;
   }
+
+  @PostMapping("/editAuPair")
+  @CrossOrigin(origins = "http://localhost:4200")
+  public void editAuPair(@RequestBody auPair p)
+  {
+    this.aps.updateAuPair(p);
+  }
 }

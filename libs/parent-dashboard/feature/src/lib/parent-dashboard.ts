@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { API } from '../../../../shared/api/api.service';
-import { Child, Parent, User } from '../../../../shared/interfaces/interfaces';
+import { auPair, Child, Parent, User } from '../../../../shared/interfaces/interfaces';
+import { AuPairRatingModalComponent } from './au-pair-rating-modal/au-pair-rating-modal.component';
+import { ModalController } from '@ionic/angular';
 
 @Component({
   selector: 'the-au-pair-parent-dashboard',
@@ -41,7 +43,29 @@ export class ParentDashboardComponent implements OnInit{
     salt: "",
   }
 
-  constructor(private serv: API){}
+  auPairDetails: auPair = {
+    id: "",
+    rating: 0,
+    onShift: false,
+    employer: "",
+    costIncurred: 0,
+    distTraveled: 0,
+    payRate: 0,
+    bio: "",
+    experience: "",
+  }
+
+  constructor(private serv: API, private modalCtrl : ModalController){}
+
+  async openModal(actId : string) {
+    const modal = await this.modalCtrl.create({
+      component: AuPairRatingModalComponent,
+      componentProps :{
+        activityId : actId
+      }
+    });
+    await modal.present();
+  }
 
   ngOnInit(): void
   {
@@ -71,6 +95,21 @@ export class ParentDashboardComponent implements OnInit{
         this.userDetails.type = res.type;
         this.userDetails.password = res.password;
         this.userDetails.number = res.number;
+        this.userDetails.salt = res.salt;
+      },
+      error=>{console.log("Error has occured with API: " + error);}
+    )
+    await this.serv.getAuPair("7542108615984").subscribe(
+      res=>{
+        this.auPairDetails.id = res.id;
+        this.auPairDetails.rating = res.rating;
+        this.auPairDetails.onShift = res.onShift;
+        this.auPairDetails.employer = res.employer;
+        this.auPairDetails.costIncurred = res.costIncurred;
+        this.auPairDetails.distTraveled = res.distTraveled;
+        this.auPairDetails.payRate = res.payRate;
+        this.auPairDetails.bio = res.bio;
+        this.auPairDetails.experience = res.experience;
       },
       error=>{console.log("Error has occured with API: " + error);}
     )

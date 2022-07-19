@@ -5,10 +5,19 @@ import { ParentDashboardRoutingModule } from './parent-dashboard-routing.module'
 import { IonicModule } from '@ionic/angular';
 import { NavbarModule } from '@the-au-pair/shared/components/navbar';
 import { API } from '../../../../shared/api/api.service';
+import { AuPairRatingModalComponent } from './au-pair-rating-modal/au-pair-rating-modal.component';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
-  imports: [CommonModule, ParentDashboardRoutingModule, IonicModule, NavbarModule],
-  declarations: [ParentDashboardComponent],
-  providers:[API]
+  imports: [
+    CommonModule,
+    ParentDashboardRoutingModule,
+    IonicModule,
+    NavbarModule,
+    FormsModule,
+  ],
+  declarations: [ParentDashboardComponent, AuPairRatingModalComponent],
+  providers: [API],
+  entryComponents: [AuPairRatingModalComponent],
 })
 export class ParentDashboardFeatureModule {}

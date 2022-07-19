@@ -4,7 +4,10 @@
     <p class="welcome-heading">Welcome Jone</p>
     <div class="children-div-wrapper">
       <ion-card class="children-div">
-        <div class="employer-name"><span class="bold-text">Employer:</span> {{ employerName }} {{ employerSurname }}</div>
+        <div class="employer-name"><span class="bold-text">Employer:</span> {{ employerName }} {{ employerSurname }}
+          <a href = 'tel:{{ employerPhone }}'><ion-icon name="call" class = 'call-icon'></ion-icon></a>
+          <a href = 'sms:{{ employerPhone }}'><ion-icon name="chatbubble-ellipses" class = 'message-icon'></ion-icon></a>
+        </div>
         <div class="child-status">
           <span class="bold-text">Children: </span>
           <div *ngFor="let child of children; let last = last" class="day ion-text-center">

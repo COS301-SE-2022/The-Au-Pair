@@ -6,6 +6,26 @@
     font-family: 'TitanOne';
 }
 
+.call-icon{
+    padding-right: 10px;
+    padding-top: 11px;
+    width: 35px;
+    height: 35px;
+    -webkit-transform: scaleX(-1);
+    transform: scaleX(-1);
+    cursor: pointer;
+    color: white;
+}
+
+.message-icon{
+    padding-left: 10px;
+    float: right;
+    width: 35px;
+    height: 35px;
+    cursor: pointer; 
+    color: white;   
+}
+
 .actions-heading {
     font-size: 36px;
     margin-top: 95px;

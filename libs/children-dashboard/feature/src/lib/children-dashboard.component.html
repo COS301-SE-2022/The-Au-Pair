@@ -9,8 +9,8 @@
                 <div class='child-name'>Child Name: {{child.fname}} {{child.sname}}</div>
                 <div class='child-status'>Child ID: {{child.id}}</div>
                 <div class="edit-details">
-                    <p class='edit'>Edit details</p>
-                    <ion-col><ion-icon class="icon-edit" name="pencil-outline"></ion-icon></ion-col>
+                    <p class='edit' (click)="navigateEdit(child)">Edit details</p>
+                    <ion-col><ion-icon class="icon-edit" name="pencil-outline" (click)="navigateEdit(child)"></ion-icon></ion-col>
                 </div>
             </ion-card>
         </div>
