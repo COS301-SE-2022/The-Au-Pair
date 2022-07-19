@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { NotificationsService } from "./notifications.service";
 
 @Component({
   selector: 'the-au-pair-root',
@@ -6,5 +7,14 @@ import { Component } from '@angular/core';
   styleUrls: ['app.component.scss'],
 })
 export class AppComponent {
-  constructor() {}
+  constructor(
+    private notificationsService : NotificationsService
+  ) {
+    this.initializeApp();
+  }
+
+  initializeApp(){
+    console.log("starting here");
+    this.notificationsService.initPush();
+  }
 }

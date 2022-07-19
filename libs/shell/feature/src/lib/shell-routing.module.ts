@@ -8,6 +8,11 @@ const routes: Routes = [
       import('@the-au-pair/home/feature').then((m) => m.HomePageModule),
   },
   {
+    path: 'home/:id',
+    loadChildren: () =>
+    import('@the-au-pair/parent-add-activity/feature').then((m) => m.ParentAddActivityFeatureModule),
+  },
+  {
     path: 'schedule',
     loadChildren: () =>
       import('@the-au-pair/schedule/feature').then((m) => m.ScheduleFeatureModule),
