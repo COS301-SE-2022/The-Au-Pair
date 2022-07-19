@@ -90,22 +90,27 @@ const routes: Routes = [
   {
     path: 'login-page',
     loadChildren: () =>
-    import('@the-au-pair/login/feature').then((m) => m.LoginFeatureModule ),
+    import('@the-au-pair/login/feature').then((m) => m.LoginFeatureModule),
   },
   {
     path: 'forgot-password',
     loadChildren: () =>
-    import('@the-au-pair/forgot-password/feature').then((m) => m.ForgotPasswordFeatureModule )
+    import('@the-au-pair/forgot-password/feature').then((m) => m.ForgotPasswordFeatureModule)
   },
   {
     path: 'register-page',
     loadChildren: () =>
-    import('@the-au-pair/register/feature').then((m) => m.RegisterFeatureModule )
+    import('@the-au-pair/register/feature').then((m) => m.RegisterFeatureModule)
   },
   {
     path: 'parent-notifications',
     loadChildren: () =>
     import('@the-au-pair/parent-notifications/feature').then((m) => m.ParentNotificationsFeatureModule),
+  },
+  {
+    path: 'admin-console',
+    loadChildren: () =>
+    import('@the-au-pair/admin-console/feature').then((m) => m.AdminConsoleFeatureModule),
   }
 ];
 

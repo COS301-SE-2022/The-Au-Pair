@@ -16,6 +16,9 @@
     "baseUrl": ".",
     "paths": {
       "@the-au-pair/add-child/feature": ["libs/add-child/feature/src/index.ts"],
+      "@the-au-pair/admin-console/feature": [
+        "libs/admin-console/feature/src/index.ts"
+      ],
       "@the-au-pair/au-pair-cost/feature": [
         "libs/au-pair-cost/feature/src/index.ts"
       ],
@@ -68,11 +71,11 @@
       "@the-au-pair/shared/components/aupair-navbar": [
         "libs/shared/components/aupair-navbar/src/index.ts"
       ],
-      "@the-au-pair/shared/components/navbar": [
-        "libs/shared/components/navbar/src/index.ts"
-      ],
       "@the-au-pair/shared/components/input-field": [
         "libs/shared/components/input-field/src/index.ts"
+      ],
+      "@the-au-pair/shared/components/navbar": [
+        "libs/shared/components/navbar/src/index.ts"
       ],
       "@the-au-pair/shared/components/password-field": [
         "libs/shared/components/password-field/src/index.ts"

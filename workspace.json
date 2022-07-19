@@ -2,6 +2,7 @@
   "version": 2,
   "projects": {
     "add-child-feature": "libs/add-child/feature",
+    "admin-console-feature": "libs/admin-console/feature",
     "au-pair-cost-feature": "libs/au-pair-cost/feature",
     "au-pair-dashboard-feature": "libs/au-pair-dashboard/feature",
     "au-pair-profile-feature": "libs/au-pair-profile/feature",
@@ -22,8 +23,8 @@
     "register-feature": "libs/register/feature",
     "schedule-feature": "libs/schedule/feature",
     "shared-components-aupair-navbar": "libs/shared/components/aupair-navbar",
-    "shared-components-navbar": "libs/shared/components/navbar",
     "shared-components-input-field": "libs/shared/components/input-field",
+    "shared-components-navbar": "libs/shared/components/navbar",
     "shared-components-password-field": "libs/shared/components/password-field",
     "shell-feature": "libs/shell/feature",
     "the-au-pair": "apps/the-au-pair",
