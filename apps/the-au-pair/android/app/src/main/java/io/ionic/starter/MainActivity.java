@@ -1,4 +1,4 @@
-package io.ionic.starter;
+package com.theaupair.devpush;
 
 import com.getcapacitor.BridgeActivity;
 

@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "644705034708",
+    "project_id": "the-au-pair-84e31",
+    "storage_bucket": "the-au-pair-84e31.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:644705034708:android:6effbc4a1d45eb16163641",
+        "android_client_info": {
+          "package_name": "com.theaupair.devpush"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "644705034708-2r9g36m8m1u7s8mgnhaurg80obbo3od1.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAvnsQH24kuMrwhk2QOW6lAnJIlDpNQf-E"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "644705034708-2r9g36m8m1u7s8mgnhaurg80obbo3od1.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
