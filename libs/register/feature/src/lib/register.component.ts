@@ -40,4 +40,21 @@ export class RegisterComponent {
 
     return 0;
   }
+
+  switchSelection(){
+    const regDiv = document.getElementById("registerDetails");
+    const loadDiv = document.getElementById("loader");
+    const heading = document.getElementsByTagName("h2");
+
+    heading[0].setAttribute("style","margin-bottom : 6em");
+    regDiv?.setAttribute("style","display:none;");
+    loadDiv?.setAttribute("style","display:flex;");
+
+    setTimeout(() => {
+      regDiv?.setAttribute("style","display:box;");
+      loadDiv?.setAttribute("style","display:none;");
+      heading[0].setAttribute("style","margin-bottom : 0");
+      this.parentChosen = !this.parentChosen;
+    }, 1000); 
+  }
 }

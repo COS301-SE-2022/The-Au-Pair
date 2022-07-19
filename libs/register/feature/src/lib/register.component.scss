@@ -20,6 +20,28 @@ h2{
     text-transform: capitalize;
 }
 
+#loader{
+    display: none;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+}
+
+#loaderImg{
+    height: 200px;
+    width: 200px;
+    position: relative;
+    animation: loadAnimation 1s;
+    animation-iteration-count: infinite;
+}
+
+@keyframes loadAnimation {
+    from {width: 200px;
+          height: 200px;}
+    to {width: 250px;
+        height: 250px;}
+  }
+
 ion-content {
     height: 100vh;
     display: grid;
@@ -33,7 +55,7 @@ ion-content {
     height: 20rem;
 }
 
-.registerDetails{
+#registerDetails{
     position: relative; 
     display: flex;
     justify-content: center;
