@@ -1,12 +1,12 @@
 <ion-content>
     <h2>Register</h2>
-    <div id="registerDetails">
+    <div class="registerDetails">
 
         <form [formGroup]="parentRegisterDetailsForm" (ngSubmit)="registerUser()" class = "form-details">
         
             <div class="selector">
-                <input class = "parent" [class]="(this.parentChosen===true) ? 'chosen' : 'notchosen'" type="button" (click)="switchSelection()" value="I am a Parent">
-                <input class = "aupair" [class]="(this.parentChosen===true) ? 'notchosen' : 'chosen'" type="button" (click)="switchSelection()" type="button" value="I am an Au Pair">
+                <input class = "parent" [class]="(this.parentChosen===true) ? 'chosen' : 'notchosen'" type="button" (click)="this.parentChosen = true" value="I am a Parent">
+                <input class = "aupair" [class]="(this.parentChosen===true) ? 'notchosen' : 'chosen'" type="button" (click)="this.parentChosen = false" type="button" value="I am an Au Pair">
             </div>
                 
             <the-au-pair-input-field labelContent="Name" [showError]="submitAttempt && (!parentRegisterDetailsForm.controls['name'].valid)" formControlName="name"></the-au-pair-input-field>
@@ -37,10 +37,6 @@
           
         </form>
     </div>
-    <div id="loader">
-        <img id="loaderImg" src="assets/images/loader.svg">
-    </div>
-    
     <img id="active-2" src="assets/images/active.png">
     <img id="active" src="assets/images/active-2.png">
     <img id="lifestyles" src="assets/images/lifestyles.png">
