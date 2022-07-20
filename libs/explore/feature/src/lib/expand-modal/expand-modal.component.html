@@ -1,11 +1,13 @@
-<!-- <ion-col size="1" class="ion-text-center"><ion-icon class="icon close" name="close-circle-outline" (click)="closeModal()"></ion-icon></ion-col> -->
-
-<ion-content class="modal" [fullscreen]="true">
+<ion-content class="modal">
     <div class = "parent-profile-div">
+        <ion-icon class="icon-close" name="close-circle-outline" (click)="closeModal()"></ion-icon>
         <div class = 'title-div'>
             <p class='profile-name'>{{this.userDetails.fname}} {{this.userDetails.sname}}</p>
         </div>
         <div class = 'details-div'>
+            <div class='profile-picture-wrapper'>
+                <ion-icon name="people-circle-outline" class='profile-picture'></ion-icon>
+            </div>
             <div class = "small-profile-details-div">
                 <div class="parent-info-small">
                     <div class="parent-text">Email: </div>
@@ -14,14 +16,6 @@
                 <div class="parent-info-small">
                     <div class="parent-text">Phone: </div>
                     <p class="parent-text-info">{{this.userDetails.number}}</p>
-                </div>
-                <div class="parent-info-small">
-                    <div class="parent-text">ID Number: </div>
-                    <p class="parent-text-info">{{this.userDetails.id}}</p>
-                </div>
-                <div class="parent-info-small">
-                    <div class="parent-text">Address: </div>
-                    <p class="parent-text-info">{{this.userDetails.address}}</p>
                 </div>
                 <div class="parent-info-small">
                   <div class="parent-text">Pay rate: </div>
@@ -42,6 +36,7 @@
                         <p class="parent-text-info">{{this.auPairDetails.experience}}</p>
                     </div>
                 </div>
+                <button class="change-button" id="change">HIRE</button>
         </div>
     </div>
 

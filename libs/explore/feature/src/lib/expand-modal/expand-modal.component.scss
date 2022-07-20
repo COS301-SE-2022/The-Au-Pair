@@ -8,18 +8,21 @@
     margin-top: 0px;
 }
 
-.modal{
-    width: 100%;
+.icon-close{
+    height: 32px;
+    width: 28px;
+    color: white;
+    cursor: pointer;
+    float: right;
 }
 
 .parent-profile-div{
-    width: 90%;
-    margin-top: 60px;
+    width: 100%;
+    // margin-top: 60px;
     margin-left: auto;
     margin-right: auto;
     background-color: #69A88DB2;
-    border-radius: 16px;
-    margin-bottom: 60px;
+    // margin-bottom: 60px;
 }
 
 .profile-picture-div{
@@ -29,7 +32,7 @@
 }
 
 .details-div{
-    width: 40%;
+    width: 80%;
     height: 100%;
     margin-left: auto;
     margin-right: auto;
@@ -44,22 +47,22 @@
 }
 
 .profile-picture-wrapper{
-    width: 62%;
-    height: 40%;
+    width: 181px;
+    height: 166px;
     background-color: rgba($color: #032927BF, $alpha: 0.75);
     border-radius: 16px;
-    align-items: center;
-    justify-items: center;
-    text-align: center;
-    left: 9%;
     margin: auto;
-    display: block;
-    margin-bottom: 40px;
+    display: flex;
+    align-items: center;
+    text-align: center;
+    justify-content: center;
+    margin-top: 20px;
+    margin-bottom: 20px;
 }
 
 .profile-picture {
-    width: 80%;
-    height: 100%;
+    width: 140px;
+    height: 126px;
 }
 
 .parent-info-small{

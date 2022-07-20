@@ -15,6 +15,10 @@ export class ExploreComponent implements OnInit {
     id: "",
     rating: 0,
     payRate: 0,
+    fname: "",
+    sname: "",
+    address: "",
+
   }
   AuPairArray : any[] = [];
 
@@ -38,7 +42,7 @@ export class ExploreComponent implements OnInit {
 
   async setAuPairArray()
   {
-    this.auPairs.forEach((ap: { id: any; rating: any; payRate: any;}) => {
+    this.auPairs.forEach((ap: { id: any; rating: any; payRate: any; fname: any; sname: any, address: any;}) => {
       this.serv.getUser(ap.id).subscribe(
         res=>{
           const auPairDetails = {
