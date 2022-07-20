@@ -1,5 +1,7 @@
 package Database.TheAuPair.Services;
 
+import java.util.List;
+
 import Database.TheAuPair.Models.auPair;
 import Database.TheAuPair.Repositories.auPairRepository;
 
@@ -21,5 +23,11 @@ public class auPairService
   public void updateAuPair(auPair p)
   {
     apr.save(p);
+  }
+
+  public List<auPair> getAllAuPairs()
+  {
+    List<auPair> auPairs = apr.findAll();
+    return auPairs;
   }
 }

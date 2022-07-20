@@ -21,4 +21,10 @@ describe('ExploreComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
+  it('should,open the modal when called', async ()=>{
+    jest.spyOn(component,"openModal");
+    component.openModal("dxzv6chgn5zp19ezfiqn7fxf");
+    expect(await component.openModal).toReturn();
+  });
 });

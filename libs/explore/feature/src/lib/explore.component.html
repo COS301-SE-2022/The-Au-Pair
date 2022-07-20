@@ -9,19 +9,18 @@
 
     <div class="actions-div-wrapper">
         <div class='actions-div'>
-            <div class='action' id="addAct">
+            <ion-card class='action' *ngFor="let ap of AuPairArray; let last = last">
                     <div class='profile-picture-wrapper'>
                         <ion-icon name="people-circle-outline" class='profile-picture'></ion-icon>
                     </div>
                 <div class="au-pair-details">
-                    <div class="detail">Name: Kyle Pottinger</div>
-                    <div class="detail">Area: Centurion</div>
-                    <div class="detail">Rate: R50ph</div>
-                    <div class="detail">Rating: 5</div>
+                    <div class="detail">Name: {{this.ap.fname}} {{this.ap.sname}}</div>
+                    <div class="detail">Area: {{this.ap.address}}</div>
+                    <div class="detail">Rate: R{{this.ap.payRate}} per hour</div>
+                    <div class="detail">Rating: {{this.ap.rating}} / 5</div>
                 </div>
-                <div class='action-tag'><ion-icon name="arrow-down-circle-outline" class="expand-arrow"></ion-icon></div>
-            </div>
+                <div class='action-tag'><ion-icon class="expand-arrow" name="arrow-down-circle-outline" (click)="openModal(this.ap.id)"></ion-icon></div>
+            </ion-card>
         </div>
     </div>
-
 </ion-content>
