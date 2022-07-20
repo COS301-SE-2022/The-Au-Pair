@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import * as L from 'leaflet'
+import { API } from '../../../../shared/api/api.service';
 
 @Component({
   selector: 'the-au-pair-track-au-pair',
@@ -8,19 +9,12 @@ import * as L from 'leaflet'
 })
 export class TrackAuPairComponent implements OnInit {
   leafletMap : any;
-  // private map : L.Map = new  L.Map('leafletMap');
-  private centroid : L.LatLngExpression = [42.3601, -71.0589]; //Boston
-  lat = 42.3601;
-  long = -71.0589;
+  lat = -26;
+  long = 28;
   zoom = 8;
 
 
-  constructor() {
-    // this.map = L.map('map',{
-    //   center : this.centroid,
-    //   zoom : 12
-    // })
-  }
+  constructor(private serv : API) {}
 
   ngOnInit(): void {
     this.loadLeafletMap();
@@ -46,14 +40,18 @@ export class TrackAuPairComponent implements OnInit {
       }).addTo(this.leafletMap);
 
       //Create 5 random jitteries and add them to the map
-      const jittery = Array(5).fill(this.centroid).map(
-        x => [x[0] + (Math.random() - 0.5)/10, x[1] + (Math.random() - 0.5)/10]
-      ).map(
-        x =>L.marker(x as L.LatLngExpression, {icon:
-          new L.Icon({iconUrl: 'https://unpkg.com/leaflet@1.6.0/dist/images/marker-icon.png'})})
-      ).forEach(
-          x => x.addTo(this.leafletMap)
-      );
+
+      L.marker([-26, 28], {icon:
+        new L.Icon({iconUrl: 'https://unpkg.com/leaflet@1.6.0/dist/images/marker-icon.png'})}).addTo(this.leafletMap);
+
+      // const jittery = Array(5).fill(this.centroid).map(
+      //   x => [x[0] + (Math.random() - 0.5)/10, x[1] + (Math.random() - 0.5)/10]
+      // ).map(
+      //   x =>L.marker(x as L.LatLngExpression, {icon:
+      //     new L.Icon({iconUrl: 'https://unpkg.com/leaflet@1.6.0/dist/images/marker-icon.png'})})
+      // ).forEach(
+      //     x => x.addTo(this.leafletMap)
+      // );
     }
 
 }
