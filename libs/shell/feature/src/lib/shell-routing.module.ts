@@ -3,23 +3,13 @@ import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 
 const routes: Routes = [
   {
-    path: 'home',
-    loadChildren: () =>
-      import('@the-au-pair/home/feature').then((m) => m.HomePageModule),
-  },
-  {
-    path: 'home/:id',
-    loadChildren: () =>
-    import('@the-au-pair/parent-add-activity/feature').then((m) => m.ParentAddActivityFeatureModule),
-  },
-  {
     path: 'schedule',
     loadChildren: () =>
       import('@the-au-pair/schedule/feature').then((m) => m.ScheduleFeatureModule),
   },
   {
     path: '',
-    redirectTo: 'parent-dashboard',
+    redirectTo: 'login-page',
     pathMatch: 'full',
   },
   {
@@ -111,6 +101,10 @@ const routes: Routes = [
     path: 'parent-notifications',
     loadChildren: () =>
     import('@the-au-pair/parent-notifications/feature').then((m) => m.ParentNotificationsFeatureModule),
+  },
+  {
+    path: '**',
+    redirectTo: 'login-page',
   }
 ];
 

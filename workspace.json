@@ -11,7 +11,6 @@
     "edit-child-feature": "libs/edit-child/feature",
     "edit-parent-profile-feature": "libs/edit-parent-profile/feature",
     "forgot-password-feature": "libs/forgot-password/feature",
-    "home-feature": "libs/home/feature",
     "login-feature": "libs/login/feature",
     "parent-add-activity-feature": "libs/parent-add-activity/feature",
     "parent-dashboard-feature": "libs/parent-dashboard/feature",
