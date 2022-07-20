@@ -1,4 +1,4 @@
-package com.theaupair.devpush;
+package com.tuks.theaupair;
 
 import com.getcapacitor.BridgeActivity;
 

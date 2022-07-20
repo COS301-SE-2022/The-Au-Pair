@@ -10,11 +10,6 @@ export class AppComponent {
   constructor(
     private notificationsService : NotificationsService
   ) {
-    this.initializeApp();
-  }
-
-  initializeApp(){
-    alert("App is starting");
     this.notificationsService.initPush();
   }
 }

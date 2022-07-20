@@ -12,46 +12,43 @@ export class NotificationsService {
  
   initPush() {
     if (Capacitor.getPlatform() !== 'web') {
-      alert('initPush bro')
       this.registerPush();
     }
   }
  
   private registerPush() {
-    alert('Initializing HomePage');
+    alert('registering')
+    PushNotifications.register();
 
-    // Request permission to use push notifications
-    // iOS will prompt user and return if they granted permission or not
-    // Android will just grant without prompting
-    PushNotifications.requestPermissions().then(result => {
-      if (result.receive === 'granted') {
-        // Register with Apple / Google to receive push via APNS/FCM
-        PushNotifications.register();
-      } else {
-        // Show some error
+    PushNotifications.addListener(
+      'registration',
+      (token: Token) => {
+        console.log('My token: ' + JSON.stringify(token));
+        alert(token)
       }
-    });
-
-    PushNotifications.addListener('registration', (token: Token) => {
-      alert('Push registration success, token: ' + token.value);
-    });
-
+    );
+ 
     PushNotifications.addListener('registrationError', (error: any) => {
-      alert('Error on registration: ' + JSON.stringify(error));
+      console.log('Error: ' + JSON.stringify(error));
     });
-
+ 
     PushNotifications.addListener(
       'pushNotificationReceived',
-      (notification: PushNotificationSchema) => {
+      async (notification: PushNotificationSchema) => {
+        console.log('Push received: ' + JSON.stringify(notification));
         alert('Push received: ' + JSON.stringify(notification));
-      },
+      }
     );
-
+ 
     PushNotifications.addListener(
       'pushNotificationActionPerformed',
-      (notification: ActionPerformed) => {
-        alert('Push action performed: ' + JSON.stringify(notification));
-      },
+      async (notification: ActionPerformed) => {
+        const data = notification.notification.data;
+        console.log('Action performed: ' + JSON.stringify(notification.notification));
+        if (data.detailsId) {
+          this.router.navigateByUrl(`/home/${data.detailsId}`);
+        }
+      }
     );
   }
 }
