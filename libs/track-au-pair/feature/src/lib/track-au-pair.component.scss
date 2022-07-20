@@ -20,6 +20,26 @@ h2{
     text-transform: capitalize;
 }
 
+//Maps
+
+.map-container{
+    justify-content: center !important;
+    text-align: center !important;
+    margin-top: 150px;
+    margin-left: auto;
+    margin-right: auto;
+    position: relative !important;
+    border: 2px solid black;
+    width: 70%;
+    height: 70%;
+}
+
+#leafletMap{
+    justify-content: center;
+    height: 100%;
+    width: 100%;
+}
+
 //Images
 #active-2{
     position: absolute;
