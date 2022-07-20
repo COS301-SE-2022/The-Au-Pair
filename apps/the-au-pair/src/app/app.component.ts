@@ -10,6 +10,6 @@ export class AppComponent {
   constructor(
     private notificationsService : NotificationsService
   ) {
-    this.notificationsService.initPush();
+    
   }
 }
