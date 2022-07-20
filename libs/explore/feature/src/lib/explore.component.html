@@ -3,23 +3,23 @@
 
     <div class="explore-header">
         <div class="explore-heading">Explore</div>
-        <button class="change-button" id="change">Location</button>
-        <button class="change-button2" id="change">Pay Rate</button>
+        <button class="location-filter-button" id="change">Location</button>
+        <button class="payrate-filter-button" id="change">Pay Rate</button>
     </div>
 
-    <div class="actions-div-wrapper">
-        <div class='actions-div'>
-            <ion-card class='action' *ngFor="let ap of AuPairArray; let last = last">
+    <div class="au-pair-card-div-wrapper">
+        <div class='au-pair-card-div'>
+            <ion-card class='au-pair-card' *ngFor="let ap of AuPairArray; let last = last">
                     <div class='profile-picture-wrapper'>
                         <ion-icon name="people-circle-outline" class='profile-picture'></ion-icon>
                     </div>
-                <div class="au-pair-details">
-                    <div class="detail">Name: {{this.ap.fname}} {{this.ap.sname}}</div>
-                    <div class="detail">Area: {{this.ap.address}}</div>
-                    <div class="detail">Rate: R{{this.ap.payRate}} per hour</div>
-                    <div class="detail">Rating: {{this.ap.rating}} / 5</div>
+                <div class="au-pair-details-wrapper">
+                    <div class="au-pair-details">Name: {{this.ap.fname}} {{this.ap.sname}}</div>
+                    <div class="au-pair-details">Area: {{this.ap.address}}</div>
+                    <div class="au-pair-details">Rate: R{{this.ap.payRate}} per hour</div>
+                    <div class="au-pair-details">Rating: {{this.ap.rating}} / 5</div>
                 </div>
-                <div class='action-tag'><ion-icon class="expand-arrow" name="arrow-down-circle-outline" (click)="openModal(this.ap.id)"></ion-icon></div>
+                <div class='expand-tag'><ion-icon class="expand-arrow" name="arrow-down-circle-outline" (click)="openModal(this.ap.id)"></ion-icon></div>
             </ion-card>
         </div>
     </div>

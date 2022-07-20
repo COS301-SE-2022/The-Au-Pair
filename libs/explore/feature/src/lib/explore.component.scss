@@ -1,12 +1,3 @@
-.welcome-heading {
-    font-size: 48px;
-    margin: 46px;
-    color: var(--ion-color-dark);
-    text-align: center;
-    font-family: TitanOne;
-    margin-bottom: 44px;
-}
-
 .explore-header{
     background-color: #69A88D;
     height: 50px;
@@ -18,11 +9,10 @@
 .explore-heading{
     font-family: 'TitanOne';
     font-size: 30px;
-    // position: absolute;
     margin: auto;
 }
 
-.change-button{
+.location-filter-button{
     padding: 10px 22px;
     border: 2px solid var(--ion-color-secondary);
     border-radius: 10px;
@@ -33,7 +23,7 @@
     right: 130px;
 }
 
-.change-button2{
+.payrate-filter-button{
     padding: 10px 22px;
     border: 2px solid var(--ion-color-secondary);
     border-radius: 10px;
@@ -44,102 +34,7 @@
     right: 20px;
 }
 
-a{
-    text-decoration: none;
-    color: white;
-}
-
-.actions-heading {
-    font-size: 36px;
-    margin-top: 95px;
-    color: var(--ion-color-dark);
-    text-align: center;
-    font-family: 'TitanOne';
-}
-
-.au-pair-div-wrapper{
-    width: 56%;
-    height: 94px;
-    margin: auto;
-    font-size: 24px;
-    margin-bottom: 59px;
-    margin-top: 59px;
-}
-
-.children-div-wrapper {
-    text-align: center;
-    width: 100%;
-    position: relative;
-    display: block;
-}
-
-ion-card {
-    background-color: transparent;
-    box-shadow: none;
-}
-
-.children-div {
-    width: 90%;
-    height: 94px;
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    align-items: center;
-    justify-items: center;
-    margin: auto;
-    font-size: 24px;
-    margin-bottom: 49px;
-}
-
-.au-pair-name {
-    background-color: #176560;
-    color: white;
-    margin: 0;
-    height: 100%;
-    display: flex;
-    text-align: center;
-    justify-content: center;
-    align-items: center;
-    width: 100%;
-    font-size: 24px;
-    border-radius: 16px;
-    padding-left: 10px;
-    padding-right: 10px;
-}
-
-.child-name {
-    background-color: #69A88D;
-    color: white;
-    margin: 0;
-    height: 100%;
-    display: flex;
-    text-align: center;
-    justify-content: center;
-    align-items: center;
-    width: 100%;
-    font-size: 24px;
-    border-radius: 16px 0px 0px 16px;
-}
-
-.child-status {
-    background-color: #79BA9E;
-    color: white;
-    margin: 0;
-    height: 100%;
-    display: flex;
-    text-align: center;
-    justify-content: center;
-    align-items: center;
-    width: 100%;
-    font-size: 24px;
-    border-radius: 0px 16px 16px 0px;
-    border-left: 1px;
-    border-style: solid;
-    border-right: none;
-    border-top: none;
-    border-bottom: none;
-}
-
-.actions-div-wrapper {
+.au-pair-card-div-wrapper {
     text-align: center;
     width: 100%;
     position: relative;
@@ -150,7 +45,7 @@ ion-card {
     margin-right: auto;
 }
 
-.actions-div {
+.au-pair-card-div {
     width: 90%;
     height: 100%;
     display: grid;
@@ -162,6 +57,24 @@ ion-card {
     font-size: 36px;
     margin-bottom: 60px;
     text-align: center;
+}
+
+.au-pair-card {
+    background-color: white;
+    color: white;
+    margin: 0;
+    height: 401px;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+    width: 431px;
+    font-size: 24px;
+    border-radius: 16px;
+}
+
+ion-card {
+    background-color: transparent;
+    box-shadow: none;
 }
 
 .profile-picture-wrapper{
@@ -182,20 +95,15 @@ ion-card {
     height: 126px;
 }
 
-.action {
-    background-color: white;
-    color: white;
-    margin: 0;
-    height: 401px;
-    text-align: center;
-    justify-content: center;
-    align-items: center;
-    width: 431px;
-    font-size: 24px;
-    border-radius: 16px;
+.au-pair-details-wrapper{
+    color: #176560;
 }
 
-.action-tag {
+.au-pair-details{
+    margin-top: 15px;
+}
+
+.expand-tag {
     height: 5%;
     bottom: -16px;
     position: relative;
@@ -207,125 +115,14 @@ ion-card {
     cursor: pointer;
 }
 
-.action-icon {
-    width: 40%;
-    height: 68%;
-    border-radius: 16px;
-}
-
-.au-pair-details{
-    color: #176560;
-}
-
-.detail{
-    margin-top: 15px;
-}
-
-.call-icon{
-    padding-right: 10px;
-    padding-top: 11px;
-    width: 35px;
-    height: 35px;
-    -webkit-transform: scaleX(-1);
-    transform: scaleX(-1);
-    cursor: pointer;
-}
-
-.message-icon{
-    padding-left: 10px;
-    float: right;
-    width: 35px;
-    height: 35px;
-    cursor: pointer;    
-}
-
 @media (max-width: 642px) {
-    .children-div {
-        grid-template-columns: repeat(1, 1fr);
-    }
-    .child-name {
-        border-radius: 16px 16px 0px 0px;
-    }
-    .child-status {
-        border-radius: 0px 0px 16px 16px;
-        border-left: 0px;
-    }
-    .actions-div {
-        grid-template-columns: repeat(2, 1fr);
-        gap: 10px;
-        height: 320px;
-    }
-    .welcome-heading {
-        font-size: 32px;
-    }
-    .actions-heading {
-        font-size: 24px;
-    }
-    .action {
-        height: 146px;
-        width: 100%;
-    }
-    .action-tag {
-        height: 45px;
-        font-size: 18px;
-    }
-    .action-icon {
-        height: 96px;
-        width: 96px;
-    }
-
-    .au-pair-div-wrapper{
-        width: 90%;
-    }
 
 }
 
 @media (max-width: 810px) {
-    .children-div {
-        grid-template-columns: repeat(1, 1fr);
-    }
-    .child-name {
-        border-radius: 16px 16px 0px 0px;
-    }
-    .child-status {
-        border-radius: 0px 0px 16px 16px;
-        border-left: 0px;
-    }
-    .actions-div {
-        grid-template-columns: repeat(2, 1fr);
-        gap: 10px;
-        height: 320px;
-    }
-    .welcome-heading {
-        font-size: 32px;
-    }
-    .actions-heading {
-        font-size: 24px;
-    }
-    .action {
-        height: 146px;
-        width: 100%;
-    }
-    .action-tag {
-        height: 45px;
-        font-size: 18px;
-    }
-    .action-icon {
-        height: 96px;
-        width: 96px;
-    }
-
-    .au-pair-div-wrapper{
-        width: 90%;
-    }
+    
 }
 
 @media (max-width: 1240px) {
-   .action-tag{
-       font-size: 20px;
-   } 
-
-   .au-pair-div-wrapper{
-    width: 90%;
-}
+   
 }
