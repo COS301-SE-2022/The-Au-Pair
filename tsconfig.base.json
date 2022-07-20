@@ -95,7 +95,7 @@
       ],
       "@the-au-pair/shell/feature": [
         "libs/shell/feature/src/index.ts"
-      ],
+      ]
     }
   },
   "exclude": ["node_modules", "tmp"]
