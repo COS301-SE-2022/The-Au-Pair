@@ -11,40 +11,47 @@ export class NotificationsService {
   constructor(private router: Router) { }
  
   initPush() {
-    console.log("Lekke bro");
     if (Capacitor.getPlatform() !== 'web') {
+      alert('initPush bro')
       this.registerPush();
     }
   }
  
   private registerPush() {
-    PushNotifications.addListener(
-      'registration',
-      (token: Token) => {
-        console.log('My token: ' + JSON.stringify(token));
+    alert('Initializing HomePage');
+
+    // Request permission to use push notifications
+    // iOS will prompt user and return if they granted permission or not
+    // Android will just grant without prompting
+    PushNotifications.requestPermissions().then(result => {
+      if (result.receive === 'granted') {
+        // Register with Apple / Google to receive push via APNS/FCM
+        PushNotifications.register();
+      } else {
+        // Show some error
       }
-    );
- 
-    PushNotifications.addListener('registrationError', (error: any) => {
-      console.log('Error: ' + JSON.stringify(error));
     });
- 
+
+    PushNotifications.addListener('registration', (token: Token) => {
+      alert('Push registration success, token: ' + token.value);
+    });
+
+    PushNotifications.addListener('registrationError', (error: any) => {
+      alert('Error on registration: ' + JSON.stringify(error));
+    });
+
     PushNotifications.addListener(
       'pushNotificationReceived',
-      async (notification: PushNotificationSchema) => {
-        console.log('Push received: ' + JSON.stringify(notification));
-      }
+      (notification: PushNotificationSchema) => {
+        alert('Push received: ' + JSON.stringify(notification));
+      },
     );
- 
+
     PushNotifications.addListener(
       'pushNotificationActionPerformed',
-      async (notification: ActionPerformed) => {
-        const data = notification.notification.data;
-        console.log('Action performed: ' + JSON.stringify(notification.notification));
-        if (data.detailsId) {
-          this.router.navigateByUrl(`/home/${data.detailsId}`);
-        }
-      }
+      (notification: ActionPerformed) => {
+        alert('Push action performed: ' + JSON.stringify(notification));
+      },
     );
   }
 }

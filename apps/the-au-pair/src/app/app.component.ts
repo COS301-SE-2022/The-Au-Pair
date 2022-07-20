@@ -14,7 +14,7 @@ export class AppComponent {
   }
 
   initializeApp(){
-    console.log("starting here");
+    alert("App is starting");
     this.notificationsService.initPush();
   }
 }
