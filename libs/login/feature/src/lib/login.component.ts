@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ToastController } from '@ionic/angular';
 import { API } from '../../../../shared/api/api.service';
+import { Store } from '@ngxs/store';
+import { SetId , SetType } from '../../../../shared/ngxs/actions';
 import {
   ActionPerformed,
   PushNotificationSchema,
@@ -22,7 +24,7 @@ export class LoginComponent implements OnInit {
   
   showPassword = false;
 
-  constructor(public formBuilder: FormBuilder, public toastCtrl: ToastController, private serv: API) {
+  constructor(public formBuilder: FormBuilder, public toastCtrl: ToastController, private serv: API, private store: Store) {
     this.loginDetailsForm = formBuilder.group({
       email : ['', Validators.compose([Validators.maxLength(30), Validators.required])],
       pass : ['', Validators.compose([Validators.maxLength(20), Validators.required])],
@@ -129,6 +131,33 @@ export class LoginComponent implements OnInit {
           console.log("Error has occured with API: " + error);
         }
       )
+
+      if(id == "")
+      {
+        this.openToast("Inccorect email or password");
+      }
+      else if(id == "pending")
+      (
+        this.openToast("Your account is pending approval")
+      )
+      else  
+      {
+        this.store.dispatch(new SetId(id));
+        this.store.dispatch(new SetType(type));
+
+        if(type == 0)
+        {
+          // window.location.href = "/admin-console";
+        }
+        if(type == 1)
+        {
+          window.location.href = "/parent-dashboard";
+        }
+        else if(type == 2)
+        {
+          window.location.href = "/au-pair-dashboard";
+        }
+      }
     }
   }
 
