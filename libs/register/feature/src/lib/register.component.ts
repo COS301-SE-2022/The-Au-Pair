@@ -73,7 +73,7 @@ export class RegisterComponent {
     this.locationError = false;
   }
 
-  registerUser() 
+  async registerUser() 
   {
     this.submitAttempt = true;
     this.notSamePasswords = true;
@@ -268,6 +268,57 @@ export class RegisterComponent {
       else
       {
         this.userDetails.type = 2;
+      }
+
+      await this.serv.register(this.userDetails)
+      .toPromise()
+      .then(
+        res => {
+          application = res;
+        },
+        error => {
+          console.log("Error has occured with API: " + error);
+        }
+      )
+
+      if(application == "pending")
+      {
+        if(this.parentChosen)
+        {
+          this.openToast("Registration succesfull");
+          this.parentDetails.id = this.userDetails.id;
+          this.parentDetails.medID = this.parentRegisterDetailsForm.value.medAid;
+
+          await this.serv.addParent(this.parentDetails)
+          .toPromise()
+          .then(
+            res => {
+              console.log("The response is:" + res);
+            },
+            error => {
+              console.log("Error has occured with API: " + error);
+            }
+          )
+        }
+        else
+        {
+          this.openToast("Registration succesfull pending approval");
+          this.aupairDetails.id = this.userDetails.id;
+          this.serv.addAuPair(this.aupairDetails)
+          .toPromise()
+          .then(
+            res => {
+              console.log("The response is:" + res);
+            },
+            error => {
+              console.log("Error has occured with API: " + error);
+            }
+          )
+        }
+      }
+      else
+      {
+        this.openToast("Account already exists with email : "+application);
       }
     }
   }
