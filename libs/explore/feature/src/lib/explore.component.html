@@ -2,11 +2,19 @@
 <ion-content [fullscreen]="true">
 
     <div class="explore-header">
-        <div class="explore-heading">Explore</div>
-        <div class="filter-button-wrapper">
-            <button class="location-filter-button" id="change">Location</button>
-            <button class="payrate-filter-button" id="change">Pay Rate</button>
-        </div>
+        <ion-row>
+            <ion-col size="4">
+                <div class="filter-icon-wrapper">
+                    <ion-icon class="filter-icon" name="location-outline"></ion-icon>
+                    <ion-icon class="filter-icon" name="cash-outline"></ion-icon>
+                </div>
+            </ion-col>
+            <ion-col size="4" class="explore-heading ion-text-center">Explore</ion-col>
+            <ion-col size="4" class="ion-text-end filter-buttons-wrapper">
+                <button class="location-filter-button" id="change">Location</button>
+                <button class="payrate-filter-button" id="change">Pay Rate</button>
+            </ion-col>
+        </ion-row>
     </div>
 
     <div class="au-pair-card-div-wrapper">
