@@ -1,14 +1,4 @@
-.profile-name {
-    font-size: 3.6vw;
-    margin-top: 2%;
-    margin-bottom: 2%;
-    color: var(--ion-color-dark);
-    text-align: center;
-    font-family: TitanOne;
-    margin-top: 0px;
-}
-
-.parent-profile-div{
+.edit-profile-div{
     width: 90%;
     margin-top: 60px;
     margin-left: auto;
@@ -18,25 +8,14 @@
     margin-bottom: 60px;
 }
 
-.profile-picture-div{
-    width: 33.3%;
-    height: 100%;
-    float: left;
-}
-
-.profile-details-div{
-    width: 40%;
-    height: 100%;
-
-    margin-left: auto;
-    margin-right: auto;
-    padding-bottom: 25px;
-}
-
-.empty-div{
-    width: 33.3%;
-    height: 100%;
-    float: right;
+.profile-name {
+    font-size: 3.6vw;
+    margin-top: 2%;
+    margin-bottom: 2%;
+    color: var(--ion-color-dark);
+    text-align: center;
+    font-family: TitanOne;
+    margin-top: 0px;
 }
 
 .profile-picture-wrapper{
@@ -59,7 +38,16 @@
     border-radius: 50%;
 }
 
-.parent-info-small{
+.profile-details-div{
+    width: 40%;
+    height: 100%;
+
+    margin-left: auto;
+    margin-right: auto;
+    padding-bottom: 25px;
+}
+
+.details-div{
     height: 6%;
     background-color: var(--ion-background-color);
     display:flex;
@@ -69,35 +57,17 @@
     margin-bottom: 12px;
     box-shadow: 1px 2px 5px rgba(0, 0, 0, 0.13);
     border-radius: 6px;
+    // width: 500px;
 }
 
-.parent-info-large{
-    height: 150px;
-    background-color: var(--ion-background-color);
-    display: flex;
-    margin-top: 10px;
-    font-family: Roboto;
-    color: black;
-    margin-bottom: 12px;
-    box-shadow: 1px 2px 5px rgba(0, 0, 0, 0.13);
-    border-radius: 6px;
-}
-
-.parent-text{
+.details-title{
     margin-left: 14px;
     font-size: 100%;
     width: 35%;
     margin: 10px;
 }
 
-.parent-text2{
-    margin-left: 14px;
-    font-size: 100%;
-    width: 35%;
-    padding-top: 10px;
-}
-
-.parent-text-info{
+.user-details{
     background-color: var(--ion-background-color);
     color: var(--ion-color-dark);
     font-size: 100%;
@@ -110,21 +80,19 @@
     border-color: var(--ion-color-dark);
 }
 
-.parent-text-info2{
+.details-div-large{
+    height: 150px;
     background-color: var(--ion-background-color);
-    color: var(--ion-color-dark);
-    font-size: 100%;
-    line-height: 170%;
-    height: 20%;
-    margin-top: 5px;
-    border-radius: 5px;
-    width: 45%;
-    padding-left: 3px;
-    margin-left: 14px;
-    border-color: var(--ion-color-dark);
+    display: flex;
+    margin-top: 10px;
+    font-family: Roboto;
+    color: black;
+    margin-bottom: 12px;
+    box-shadow: 1px 2px 5px rgba(0, 0, 0, 0.13);
+    border-radius: 6px;
 }
 
-.change-button{
+.submit-button{
     padding: 10px 22px;
     gap: 10px;
     border: 2px solid var(--ion-color-secondary);
@@ -134,12 +102,7 @@
     display: block;
 }
 
-.browse-button{
-    margin-top: 15px;
-    margin-bottom: 15px;
-}
-
-#active-2{
+#background-image-1{
     position: absolute;
     width: 160px;
     height: 160px;
@@ -148,7 +111,7 @@
     z-index: -10;
 }
 
-#active{
+#background-image-2{
     position: absolute;
     width: 130px;
     height: 130px;
@@ -158,7 +121,7 @@
     z-index: -10;
 }
 
-#lifestyles{
+#background-image-3{
     position: absolute;
     width: 280px;
     height: 280px;
@@ -184,15 +147,15 @@ input:focus{
 
 @media (max-width: 642px) {
     
-    #active{
+    #background-image-2{
         right: 15px;
     }
     
-    #lifestyles{
+    #background-image-3{
         display: none;
     }
 
-    .parent-profile-div{
+    .edit-profile-div{
         margin-top: 13px;
     }
 
@@ -202,45 +165,32 @@ input:focus{
         padding-bottom: 15px;
     }
 
-    .parent-text{
+    .details-title{
         width: 30%;
         font-size: 15px;
     }
 
-    .parent-text-info{
+    .user-details{
         font-size: 15px;
         width: 100%;
     }
 
     .profile-details-div{
-        width: 75%;
-    }
-
-    .parent-text-info2{
-        width: 40%;
-        padding-left: 8px;
-    }
-
-    .parent-text-info2{
-        padding-top: 5px;
-    }
-
-    .details-div{
         width: 75%;
     }
 }
 
 @media (max-width: 810px) {
     
-    #active{
+    #background-image-2{
         right: 35px;
     }
     
-    #lifestyles{
+    #background-image-3{
         display: none;
     }
 
-    .parent-profile-div{
+    .edit-profile-div{
         margin-top: 13px;
     }
 
@@ -250,36 +200,17 @@ input:focus{
         padding-bottom: 15px;
     }
 
-    .parent-text{
+    .details-title{
         width: 30%;
         font-size: 15px;
     }
 
-    .parent-text-info{
+    .user-details{
         font-size: 15px;
         width: 100%;
     }
 
     .profile-details-div{
         width: 75%;
-    }
-
-    .parent-text-info2{
-        width: 40%;
-        padding-right: 18px;
-    }
-
-    .parent-text-info2{
-        padding-top: 5px;
-    }
-
-    .details-div{
-        width: 75%;
-    }
-}
-
-@media (max-width: 1240px) {
-    .empty-div{
-        width: 0%;
     }
 }
