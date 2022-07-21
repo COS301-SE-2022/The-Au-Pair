@@ -5,6 +5,7 @@ import Database.TheAuPair.Repositories.UserRepository;
 import Database.TheAuPair.Services.UserService;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.Map;
 
 @RestController
@@ -44,5 +45,12 @@ public class UserController
   public User login(@RequestBody Map<String, String> details)
   {
     return this.us.login(details.get("email"), details.get("password"));
+  }
+
+  @GetMapping("/getApplicants")
+  @CrossOrigin(origins = "http://localhost:4200")
+  public List<User> getApplicants()
+  {
+    return this.us.getApplicants();
   }
 }
