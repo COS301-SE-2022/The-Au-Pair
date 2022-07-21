@@ -1,0 +1,99 @@
+h2{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    top: 90px;
+    margin: 0;
+    font-style: normal;
+    font-weight: 700;
+    font-size: 48px;
+    line-height: 56px;
+    text-transform: capitalize;
+    position: relative;
+    text-align: center;
+    padding-bottom: 80px;
+    color: var(--ion-color-dark);
+    font-style: normal;
+    font-weight: 700;
+    font-size: 48px;
+    line-height: 56px;
+    text-transform: capitalize;
+    padding-bottom: 110px;
+}
+
+.info {
+    padding-top: 40px;
+}
+
+.label {
+    font-weight: bold;
+}
+
+p {
+    display: inline;
+    font-size: 20px;
+}
+
+.auPairCard {
+    background: var(--ion-color-primary);
+    border-radius: 10px;
+}
+
+.leftInfo {
+    width: 60%;
+    height: 100%;
+    padding: 20px;
+    float: left;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+ 
+}
+
+.rightInfo {
+    display: flex;
+    flex-direction: column;
+    width: 40%;
+    height: 100%;
+    padding: 20px;
+    background: var(--ion-color-tertiary);
+    border-radius: 0 10px 10px 0;
+}
+
+.userImg {
+    display: flex;
+    flex-direction: column;
+    align-self: center; 
+    width: 250px;
+    height: 250px;
+    overflow: hidden;
+    border-radius: 10px;
+}
+
+.userImg img{
+    border-radius: 0;
+}
+
+.button {
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 62px;
+    background: var(--ion-color-secondary);
+    box-shadow: 1px 2px 5px rgba(0, 0, 0, 0.13);
+    border-style: none;
+    border-radius: 10px;
+    margin-top: 10px;
+    color: white;
+}
+
+.reject {
+    background: var(--ion-color-danger);
+}
+
+.buttons{   
+    height: auto;
+    text-align: center;
+    margin-top: 2rem;
+    margin-bottom: 1rem;
+}

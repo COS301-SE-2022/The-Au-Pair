@@ -1,1 +1,43 @@
 <the-au-pair-admin-navbar></the-au-pair-admin-navbar>
+
+<ion-content [fullscreen]="true">
+    <h2>Register</h2>
+
+    <ion-grid>
+        <ion-row>
+
+            <!-- @Ruben-Brits default is 12 grid spaces, so 6 is half the page and 12 is full page 
+            I did not tell it what to do vertically with the image and buttons when it goes to mobile mode-->
+            <ion-col sizeLg="6" sizeMd="12" sizeXs="12">
+
+                <div class="auPairCard">
+                    <div class="leftInfo">
+                        <div class="info"><p class="label">Full Name: </p><p>Changename</p></div>
+                        <div class="info"><p class="label">Identification Number: </p><p>Changename</p></div>
+                        <div class="info"><p class="label">Address: </p><p>ChangeAddress</p></div>
+                        <div class="info"><p class="label">Email: </p><p>ChangeEmail</p></div>
+                        <div class="info"><p class="label">Documentation: </p><p>ChangeDocumentation</p></div>
+                    </div>
+    
+                    <div class="rightInfo">
+                        <div class="userImg">
+                            <img src="assets/images/profile.jpg" alt="ruben">  
+                        </div>
+    
+                        <div>
+                            <button class = "button reject" (click)="reject()">
+                                Reject
+                            </button>
+                            <button class = "button accept" (click)="accept()">
+                                Accept
+                            </button>
+                        </div>
+                    </div>
+                </div>
+    
+            </ion-col>
+           
+
+        </ion-row>
+    </ion-grid>
+</ion-content>

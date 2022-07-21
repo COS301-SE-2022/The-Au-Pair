@@ -7,4 +7,12 @@ import { Component } from '@angular/core';
 })
 export class AdminConsoleComponent {
   constructor() {}
+
+  reject() {
+    return 0;
+  }
+
+  accept() {
+    return 1;
+  }
 }
