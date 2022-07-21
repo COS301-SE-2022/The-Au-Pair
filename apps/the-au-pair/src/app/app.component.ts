@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import { NotificationsService } from "./notifications.service";
 
 @Component({
   selector: 'the-au-pair-root',
@@ -7,9 +6,5 @@ import { NotificationsService } from "./notifications.service";
   styleUrls: ['app.component.scss'],
 })
 export class AppComponent {
-  constructor(
-    private notificationsService : NotificationsService
-  ) {
-    
-  }
+  constructor() {}
 }
