@@ -1,12 +1,18 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import {
+  ActionPerformed,
+  PushNotificationSchema,
+  PushNotifications,
+  Token,
+} from '@capacitor/push-notifications';
 
 @Component({
   selector: 'the-au-pair-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss'],
 })
-export class LoginComponent {
+export class LoginComponent implements OnInit {
   
   public loginDetailsForm: FormGroup;
   public submitAttempt: boolean;
@@ -23,6 +29,44 @@ export class LoginComponent {
     this.submitAttempt = false;
     this.errState = false;
   }
+
+  ngOnInit(): void {
+    console.log('Initializing HomePage');
+
+    // Request permission to use push notifications
+    // iOS will prompt user and return if they granted permission or not
+    // Android will just grant without prompting
+    PushNotifications.requestPermissions().then(result => {
+      if (result.receive === 'granted') {
+        // Register with Apple / Google to receive push via APNS/FCM
+        PushNotifications.register();
+      } else {
+        // Show some error
+      }
+    });
+
+    PushNotifications.addListener('registration', (token: Token) => {
+      alert('Push registration success, token: ' + token.value);
+    });
+
+    PushNotifications.addListener('registrationError', (error: any) => {
+      alert('Error on registration: ' + JSON.stringify(error));
+    });
+
+    PushNotifications.addListener(
+      'pushNotificationReceived',
+      (notification: PushNotificationSchema) => {
+        alert('Push received: ' + JSON.stringify(notification));
+      },
+    );
+
+    PushNotifications.addListener(
+      'pushNotificationActionPerformed',
+      (notification: ActionPerformed) => {
+        alert('Push action performed: ' + JSON.stringify(notification));
+      },
+    );
+  } 
 
   toggleShow() {
     this.showPassword = !this.showPassword;
