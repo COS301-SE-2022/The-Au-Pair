@@ -251,7 +251,7 @@ export class RegisterComponent {
 
     if(!formError)
     {
-      var application = "";
+      let application = "";
       this.userDetails.id = this.parentRegisterDetailsForm.value.id;
       this.userDetails.fname = this.parentRegisterDetailsForm.value.name;
       this.userDetails.sname = this.parentRegisterDetailsForm.value.surname;

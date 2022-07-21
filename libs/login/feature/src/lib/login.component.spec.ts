@@ -11,11 +11,11 @@ describe('LoginComponent', () => {
   let fixture: ComponentFixture<LoginComponent>;
   
   //Valid form
-  const populatedForm = { email: "test@test.com", pass: "TesterPass321!" };
+  // const populatedForm = { email: "test@test.com", pass: "TesterPass321!" };
 
   //Inalid form
-  const invalidEmail = { email: "test@@test.com", pass: "TesterPass321!" };
-  const invalidPass = { email: "test@test.com", pass: "TesterPass"  };
+  // const invalidEmail = { email: "test@@test.com", pass: "TesterPass321!" };
+  // const invalidPass = { email: "test@test.com", pass: "TesterPass"  };
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
