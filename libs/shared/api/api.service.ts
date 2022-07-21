@@ -154,4 +154,8 @@ export class API{
   getApplicants(): Observable<any> {
     return this.http.get('http://localhost:8080/getApplicants');
   }
+
+  removeAuPair(id : string): Observable<any> {
+    return this.http.post('http://localhost:8080/removeAuPair',id);
+  }
 }
