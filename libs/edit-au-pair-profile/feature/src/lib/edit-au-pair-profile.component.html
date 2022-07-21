@@ -2,7 +2,7 @@
 <ion-content [fullscreen]="true">
     <div class = "parent-profile-div">
         <div class = 'title-div'>
-            <p class='profile-name'>{{this.userDetails.fname}}</p>
+            <p class='profile-name'>{{this.userDetails.fname}} {{this.userDetails.sname}}</p>
         </div>
         <!-- <div class = "profile-picture-div">
             <div class='profile-picture-wrapper'>
@@ -13,6 +13,9 @@
                   </form>
             </div>
         </div> -->
+        <div class='profile-picture-wrapper'>
+            <img class="profile-picture" src="assets/images/profile.jpg" alt="">
+        </div>
         <form id = "profForm" #profileForm = "ngForm" (ngSubmit) = "getUserFormDetails(profileForm.value)">
             <div class = "profile-details-div">
                 <div class="parent-info-small">

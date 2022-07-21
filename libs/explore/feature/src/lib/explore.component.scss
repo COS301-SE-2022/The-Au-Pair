@@ -52,9 +52,6 @@
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: 3vw;
-    // align-items: center;
-    // justify-items: center;
-    // text-align: center;
     margin: auto;
     font-size: 36px;
     margin-bottom: 60px;
@@ -82,7 +79,7 @@ ion-card {
     width: 181px;
     height: 166px;
     background-color: rgba($color: #032927BF, $alpha: 0.75);
-    border-radius: 16px;
+    border-radius: 50%;
     margin: auto;
     display: flex;
     align-items: center;
@@ -94,6 +91,7 @@ ion-card {
 .profile-picture {
     width: 140px;
     height: 126px;
+    border-radius: 50%;
 }
 
 .au-pair-details-wrapper{

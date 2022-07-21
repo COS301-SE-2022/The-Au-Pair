@@ -39,22 +39,23 @@
 }
 
 .profile-picture-wrapper{
-    width: 62%;
-    height: 40%;
+    width: 180px;
+    height: 180px;
     background-color: rgba($color: #032927BF, $alpha: 0.75);
-    border-radius: 16px;
-    align-items: center;
-    justify-items: center;
-    text-align: center;
-    left: 9%;
+    border-radius: 50%;
     margin: auto;
-    display: block;
-    margin-bottom: 40px;
+    display: flex;
+    align-items: center;
+    text-align: center;
+    justify-content: center;
+    margin-top: 20px;
+    margin-bottom: 25px;
 }
 
 .profile-picture {
-    width: 80%;
-    height: 100%;
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
 }
 
 .parent-info-small{
