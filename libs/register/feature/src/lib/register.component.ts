@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ToastController } from '@ionic/angular';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'the-au-pair-register',
@@ -11,10 +12,14 @@ export class RegisterComponent {
   public parentRegisterDetailsForm: FormGroup;
   public submitAttempt: boolean;
   public notSamePasswords: boolean;
+  public locationError: boolean;
+
+  location = "";
+  potentialLocations : string[] = [];
   
   parentChosen = true;
 
-  constructor(public formBuilder: FormBuilder, public toastCtrl: ToastController) 
+  constructor(public formBuilder: FormBuilder, public toastCtrl: ToastController, private http: HttpClient) 
   {
     this.parentRegisterDetailsForm = formBuilder.group({
       name: ['', Validators.compose([Validators.maxLength(30), Validators.pattern('^[a-zA-Z ,\'-]+$'), Validators.required])],
@@ -30,6 +35,7 @@ export class RegisterComponent {
 
     this.submitAttempt = false;
     this.notSamePasswords = false;
+    this.locationError = false;
   }
 
   registerUser() 
@@ -54,5 +60,37 @@ export class RegisterComponent {
       cssClass: 'toastPopUp'
     });
     await toast.present();
+  }
+
+  async getLocations()
+  {
+    const loc = this.parentRegisterDetailsForm.value.address;
+    
+    const locationParam = loc.replace(' ', '+');
+    const params = locationParam + '&limit=4&format=json&polygon_geojson=1&addressdetails=1';
+
+    await this.http.get('https://nominatim.openstreetmap.org/search?q='+params)
+    .toPromise()
+    .then(
+      data => {
+        const json_data = JSON.stringify(data);
+        const res = JSON.parse(json_data);
+
+        if(json_data === "{}")
+        {
+          return;
+        }
+
+        const len = res.length;
+        for (let j = 0; j < len && j<4; j++) 
+        { 
+          this.potentialLocations.push(res[j].display_name);
+        }
+        console.log(this.potentialLocations);
+      },
+      error => { 
+        console.log(error);
+      }
+    )
   }
 }
