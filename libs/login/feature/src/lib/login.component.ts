@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ToastController } from '@ionic/angular';
+import { API } from '../../../../shared/api/api.service';
 import {
   ActionPerformed,
   PushNotificationSchema,
@@ -21,7 +22,7 @@ export class LoginComponent implements OnInit {
   
   showPassword = false;
 
-  constructor(public formBuilder: FormBuilder,  public toastCtrl: ToastController) {
+  constructor(public formBuilder: FormBuilder, public toastCtrl: ToastController, private serv: API) {
     this.loginDetailsForm = formBuilder.group({
       email : ['', Validators.compose([Validators.maxLength(30), Validators.pattern('^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$'), Validators.required])],
       pass : ['', Validators.compose([Validators.maxLength(20), Validators.pattern('^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$'), Validators.required])],
@@ -112,10 +113,26 @@ export class LoginComponent implements OnInit {
         dom.style.display = "none";
       }
     }
-  }
-}
 
-async openToast(message: string)
+    if(!this.errState)
+    {
+      var id = "";
+      var type = 0
+      await this.serv.login(this.loginDetailsForm.value.email,this.loginDetailsForm.value.pass)
+      .toPromise()
+      .then(
+        res => {
+          id = res.id;
+          type = res.type;
+        },
+        error => {
+          console.log("Error has occured with API: " + error);
+        }
+      )
+    }
+  }
+
+  async openToast(message: string)
   {
     const toast = await this.toastCtrl.create({
       message: message,
@@ -126,3 +143,4 @@ async openToast(message: string)
     });
     await toast.present();
   }
+}
