@@ -150,4 +150,36 @@ export class API{
     } 
     return this.http.post('http://localhost:8080/login',details);
   }
+
+  getApplicants(): Observable<any> {
+    return this.http.get('http://localhost:8080/getApplicants');
+  }
+
+  removeAuPair(id : string): Observable<any> {
+    return this.http.post('http://localhost:8080/removeAuPair',id);
+  }
+
+  resolveApplication(id : string, resolution : boolean): Observable<any> {
+    var decision = {
+      "id" : id,
+      "resolution" : ""
+    }
+    if(resolution)
+    {
+      decision.resolution = "approve";
+    }
+    else
+    {
+      decision.resolution = "decline";
+      this.removeAuPair(id).subscribe(
+        res => {
+          console.log("The response is:" + res); 
+        },
+        error => {
+          console.log("Error has occured with API: " + error);
+        }
+      );
+    }
+    return this.http.post('http://localhost:8080/resolveApplication',decision);
+  }
 }

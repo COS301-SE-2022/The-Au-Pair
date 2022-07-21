@@ -22,4 +22,9 @@ public class auPairService
   {
     apr.save(p);
   }
+
+  public void deleteAuPair(String id)
+  {
+    apr.deleteById(id);
+  }
 }
