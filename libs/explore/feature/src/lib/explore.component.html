@@ -19,7 +19,8 @@
                     <div class="au-pair-details">Name: {{this.ap.fname}} {{this.ap.sname}}</div>
                     <div class="au-pair-details">Area: {{this.ap.address}}</div>
                     <div class="au-pair-details">Rate: R{{this.ap.payRate}} per hour</div>
-                    <div class="au-pair-details">Rating: {{this.ap.rating}} / 5</div>
+                    <div *ngIf="this.ap.rating !== 0" class="au-pair-details">Rating: {{this.ap.rating}} / 5</div>
+                    <div *ngIf="this.ap.rating === 0" class="au-pair-details">Rating: Not yet rated</div>
                 </div>
                 <div class='expand-tag'><ion-icon class="expand-arrow" name="arrow-down-circle-outline" (click)="openModal(this.ap.id)"></ion-icon></div>
             </ion-card>
