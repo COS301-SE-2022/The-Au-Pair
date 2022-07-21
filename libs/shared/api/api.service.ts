@@ -150,4 +150,8 @@ export class API{
     } 
     return this.http.post('http://localhost:8080/login',details);
   }
+
+  getApplicants(): Observable<any> {
+    return this.http.get('http://localhost:8080/getApplicants');
+  }
 }
