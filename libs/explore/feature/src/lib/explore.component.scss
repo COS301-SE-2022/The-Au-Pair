@@ -3,7 +3,6 @@
     height: 50px;
     width: 100%;
     display: flex;
-    position: relative;
 }
 
 .explore-heading{
@@ -12,33 +11,35 @@
     margin: auto;
 }
 
+.filter-button-wrapper{
+    display: flex;
+    float: right;
+}
+
 .location-filter-button{
-    padding: 10px 22px;
+    padding: 10px;
     border: 2px solid var(--ion-color-secondary);
     border-radius: 10px;
     background-color: #69A88DB2;
     margin-top: 8px;
     margin-bottom: 8px;
-    position: absolute;
-    right: 130px;
+    margin-right: 8px;
 }
 
 .payrate-filter-button{
-    padding: 10px 22px;
+    padding: 10px;
     border: 2px solid var(--ion-color-secondary);
     border-radius: 10px;
     background-color: #69A88DB2;
     margin-top: 8px;
     margin-bottom: 8px;
-    position: absolute;
-    right: 20px;
 }
 
 .au-pair-card-div-wrapper {
     text-align: center;
     width: 100%;
     position: relative;
-    height: 285px;
+    height: 100%;
     display: block;
     margin-top: 47px;
     margin-left: auto;
@@ -46,17 +47,17 @@
 }
 
 .au-pair-card-div {
-    width: 90%;
+    width: 95%;
     height: 100%;
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: 3vw;
-    align-items: center;
-    justify-items: center;
+    // align-items: center;
+    // justify-items: center;
+    // text-align: center;
     margin: auto;
     font-size: 36px;
     margin-bottom: 60px;
-    text-align: center;
 }
 
 .au-pair-card {
@@ -67,7 +68,7 @@
     text-align: center;
     justify-content: center;
     align-items: center;
-    width: 431px;
+    width: 100%;
     font-size: 24px;
     border-radius: 16px;
 }
@@ -115,14 +116,19 @@ ion-card {
     cursor: pointer;
 }
 
-@media (max-width: 642px) {
+@media (max-width: 580px) {
+    .au-pair-card-div {
+        grid-template-columns: repeat(1, 1fr)!important;
+    }
 
+    .au-pair-card-div-wrapper {
+        margin-top: 20px;
+    }
 }
 
-@media (max-width: 810px) {
-    
-}
-
-@media (max-width: 1240px) {
-   
+@media (max-width: 1000px) {
+    .au-pair-card-div {
+        grid-template-columns: repeat(2, 1fr);
+        height: 0%;
+    }
 }

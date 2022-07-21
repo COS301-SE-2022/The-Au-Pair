@@ -1,3 +1,9 @@
+.modal{
+    width: 100%;
+    height: 100%;
+    color: #69A88DB2;
+}
+
 .profile-name {
     font-size: 3.6vw;
     padding-top: 2%;
@@ -13,16 +19,15 @@
     width: 28px;
     color: white;
     cursor: pointer;
-    float: right;
+    position: absolute;
+    right: 0px;
 }
 
 .parent-profile-div{
     width: 100%;
-    // margin-top: 60px;
     margin-left: auto;
     margin-right: auto;
     background-color: #69A88DB2;
-    // margin-bottom: 60px;
 }
 
 .profile-picture-div{

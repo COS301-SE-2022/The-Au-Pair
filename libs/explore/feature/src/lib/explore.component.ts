@@ -18,7 +18,7 @@ export class ExploreComponent implements OnInit {
     fname: "",
     sname: "",
     address: "",
-
+    employer: "",
   }
   AuPairArray : any[] = [];
 
@@ -42,7 +42,7 @@ export class ExploreComponent implements OnInit {
 
   async setAuPairArray()
   {
-    this.auPairs.forEach((ap: { id: any; rating: any; payRate: any; fname: any; sname: any, address: any;}) => {
+    this.auPairs.forEach((ap: { id: any; rating: any; payRate: any; fname: any; sname: any, address: any; employer: any;}) => {
       this.serv.getUser(ap.id).subscribe(
         res=>{
           const auPairDetails = {
@@ -52,7 +52,16 @@ export class ExploreComponent implements OnInit {
             fname: res.fname,
             sname: res.sname,
             address: res.address,
+            employer: ap.employer,
           }
+          // Logic for explore that will only show Au Pairs whom are not yet employed
+          // This will be added after hiring and terminating is complete
+          /* if(ap.employer == "")
+          {
+            this.AuPairArray.push(auPairDetails);
+          } */
+
+          // This will be removed after hiring and terminating is added
           this.AuPairArray.push(auPairDetails);
         },
         error=>{console.log("Error has occured with API: " + error);}
