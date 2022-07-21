@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { ToastController } from '@ionic/angular';
 
 @Component({
   selector: 'the-au-pair-register',
@@ -13,7 +14,8 @@ export class RegisterComponent {
   
   parentChosen = true;
 
-  constructor(public formBuilder: FormBuilder) {
+  constructor(public formBuilder: FormBuilder, public toastCtrl: ToastController) 
+  {
     this.parentRegisterDetailsForm = formBuilder.group({
       name: ['', Validators.compose([Validators.maxLength(30), Validators.pattern('^[a-zA-Z ,\'-]+$'), Validators.required])],
       surname : ['', Validators.compose([Validators.maxLength(30), Validators.pattern('^[a-zA-Z ,\'-]+$'), Validators.required])],
@@ -30,7 +32,8 @@ export class RegisterComponent {
     this.notSamePasswords = false;
   }
 
-  registerUser() {
+  registerUser() 
+  {
     this.submitAttempt = true;
     this.notSamePasswords = true;
 
@@ -39,5 +42,17 @@ export class RegisterComponent {
     }
 
     return 0;
+  }
+
+  async openToast(message: string)
+  {
+    const toast = await this.toastCtrl.create({
+      message: message,
+      duration: 4000,
+      position: 'top',
+      color: 'primary',
+      cssClass: 'toastPopUp'
+    });
+    await toast.present();
   }
 }
