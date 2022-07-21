@@ -77,4 +77,18 @@ public class UserService
     List<User> u =  ur.findAllByType(1);
     return u;
   }
+
+  public void resolveApplication(String id, String resolution)
+  {
+    if (resolution.equals("approve"))
+    {
+      User u =  ur.findUsingId(id);
+      u.setRegistered(true);
+      ur.save(u);
+    }
+    else if (resolution.equals("decline"))
+    {
+      ur.deleteById(id);
+    }
+  }
 }
