@@ -72,15 +72,44 @@ export class LoginComponent implements OnInit {
     this.showPassword = !this.showPassword;
   }
   
-  loginUser() {
+  async loginUser() 
+  {
     this.submitAttempt = true;
 
-    if(this.loginDetailsForm.controls['email'].valid && this.loginDetailsForm.controls['pass'].valid) {
-      this.errState = false;
-      console.log(this.loginDetailsForm.value);
+    let dom = document.getElementById("emailError");
+    if(!this.loginDetailsForm.controls['email'].valid)
+    {
+      this.errState = true
+      if(dom != null)
+      {
+        dom.innerHTML = "Invalid email";
+        dom.style.display = "block";
+      }
     }
-    else {
-      this.errState = true;
+    else
+    {
+      if(dom != null)
+      {
+        dom.style.display = "none";
+      }
+    }
+
+    dom = document.getElementById("pswError");
+    if(!this.loginDetailsForm.controls['pass'].valid)
+    {
+      this.errState = true
+      if(dom != null)
+      {
+        dom.innerHTML = "Password empty";
+        dom.style.display = "block";
+      }
+    }
+    else
+    {
+      if(dom != null)
+      {
+        dom.style.display = "none";
+      }
     }
   }
 }

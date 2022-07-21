@@ -3,8 +3,10 @@
     <div class="loginDetails">
         <form [formGroup]="loginDetailsForm" (ngSubmit)="loginUser()" class="form-details">
             <the-au-pair-input-field labelContent="Email" [showError]="errState && (!loginDetailsForm.controls['email'].valid)" formControlName="email"></the-au-pair-input-field>
-            
+            <p id="emailError" class="error" style="display: none;">Error in field</p>
+
             <the-au-pair-password-field labelContent="Password" [showError]="errState && (!loginDetailsForm.controls['pass'].valid)" formControlName="pass"></the-au-pair-password-field>
+            <p id="pswError" class="error" style="display: none;">Error in field</p>
             
             <div class="buttons">
                 <input class = "loginUser" disable value="Login" type="submit">
