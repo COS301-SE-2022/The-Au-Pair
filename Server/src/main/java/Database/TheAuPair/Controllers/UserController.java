@@ -53,4 +53,11 @@ public class UserController
   {
     return this.us.getApplicants();
   }
+
+  @PostMapping("/resolveApplication")
+  @CrossOrigin(origins = "http://localhost:4200")
+  public void resolveApplication(@RequestBody Map<String, String> decision)
+  {
+    this.us.resolveApplication(decision.get("id"), decision.get("resolution"));
+  }
 }
