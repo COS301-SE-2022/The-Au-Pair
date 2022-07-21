@@ -76,7 +76,7 @@ ion-card {
 }
 
 .profile-picture-wrapper{
-    width: 181px;
+    width: 166px;
     height: 166px;
     background-color: rgba($color: #032927BF, $alpha: 0.75);
     border-radius: 50%;
@@ -90,8 +90,14 @@ ion-card {
 
 .profile-picture {
     width: 140px;
-    height: 126px;
+    height: 140px;
     border-radius: 50%;
+}
+
+.au-pair-name{
+    font-family: 'TitanOne';
+    margin-top: 18px;
+    color: var(--ion-color-dark);
 }
 
 .au-pair-details-wrapper{

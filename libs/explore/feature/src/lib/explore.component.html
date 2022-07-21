@@ -12,11 +12,11 @@
     <div class="au-pair-card-div-wrapper">
         <div class='au-pair-card-div'>
             <ion-card class='au-pair-card' *ngFor="let ap of AuPairArray; let last = last">
+                <div class="au-pair-details-wrapper">
+                    <div class="au-pair-name">{{this.ap.fname}} {{this.ap.sname}}</div>
                     <div class='profile-picture-wrapper'>
                         <img class="profile-picture" src="assets/images/profile.jpg" alt="">
                     </div>
-                <div class="au-pair-details-wrapper">
-                    <div class="au-pair-details">Name: {{this.ap.fname}} {{this.ap.sname}}</div>
                     <div class="au-pair-details">Area: {{this.ap.address}}</div>
                     <div class="au-pair-details">Rate: R{{this.ap.payRate}} per hour</div>
                     <div *ngIf="this.ap.rating !== 0" class="au-pair-details">Rating: {{this.ap.rating}} / 5</div>
