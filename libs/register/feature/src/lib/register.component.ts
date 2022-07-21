@@ -2,6 +2,8 @@ import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ToastController } from '@ionic/angular';
 import { HttpClient } from '@angular/common/http';
+import { User, auPair, Parent } from '../../../../shared/interfaces/interfaces';
+import { API } from '../../../../shared/api/api.service';
 
 @Component({
   selector: 'the-au-pair-register',
@@ -19,7 +21,40 @@ export class RegisterComponent {
   
   parentChosen = true;
 
-  constructor(public formBuilder: FormBuilder, public toastCtrl: ToastController, private http: HttpClient) 
+  userDetails: User ={
+    id: '',
+    fname: '',
+    sname: '',
+    email: '',
+    address: '',
+    registered: false,
+    type: 3,
+    password: '',
+    number: '',
+    salt: ''
+  }
+
+  parentDetails: Parent ={
+    id: '',
+    children: [],
+    medID: '',
+    auPair: ''
+  }
+
+  aupairDetails: auPair ={
+    id: '',
+    rating: 0,
+    onShift: false,
+    employer: '',
+    costIncurred: 0,
+    distTraveled: 0,
+    payRate: 0,
+    bio: '',
+    experience: ''
+  }
+
+
+  constructor(public formBuilder: FormBuilder, public toastCtrl: ToastController, private http: HttpClient, private serv: API) 
   {
     this.parentRegisterDetailsForm = formBuilder.group({
       name: ['', Validators.compose([Validators.maxLength(30), Validators.pattern('^[a-zA-Z ,\'-]+$'), Validators.required])],
@@ -42,12 +77,199 @@ export class RegisterComponent {
   {
     this.submitAttempt = true;
     this.notSamePasswords = true;
+    let formError = false;
 
-    if(this.parentRegisterDetailsForm.get('pass')?.value === this.parentRegisterDetailsForm.get('confPass')?.value) {
-      this.notSamePasswords = false;
+    let dom = document.getElementById("nameError");
+    if(!this.parentRegisterDetailsForm.controls['name'].valid)
+    {
+      formError = true
+      if(dom != null)
+      {
+        dom.innerHTML = "Name is empty";
+        dom.style.display = "block";
+      }
+    }
+    else
+    {
+      if(dom != null)
+      {
+        dom.style.display = "none";
+      }
     }
 
-    return 0;
+    dom = document.getElementById("snameError");
+    if(!this.parentRegisterDetailsForm.controls['surname'].valid)
+    {
+      formError = true
+      if(dom != null)
+      {
+        dom.innerHTML = "Surname is empty";
+        dom.style.display = "block";
+      }
+    }
+    else
+    {
+      if(dom != null)
+      {
+        dom.style.display = "none";
+      }
+    }
+
+    dom = document.getElementById("emailError");
+    if(!this.parentRegisterDetailsForm.controls['email'].valid)
+    {
+      formError = true
+      if(dom != null)
+      {
+        dom.innerHTML = "Invalid email";
+        dom.style.display = "block";
+      }
+    }
+    else
+    {
+      if(dom != null)
+      {
+        dom.style.display = "none";
+      }
+    }
+
+    dom = document.getElementById("numberError");
+    if(!this.parentRegisterDetailsForm.controls['phone'].valid)
+    {
+      formError = true
+      if(dom != null)
+      {
+        dom.innerHTML = "Invalid phone number";
+        dom.style.display = "block";
+      }
+    }
+    else
+    {
+      if(dom != null)
+      {
+        dom.style.display = "none";
+      }
+    }
+
+    dom = document.getElementById("idError");
+    if(!this.parentRegisterDetailsForm.controls['id'].valid)
+    {
+      formError = true
+      if(dom != null)
+      {
+        dom.innerHTML = "Invalid ID";
+        dom.style.display = "block";
+      }
+    }
+    else
+    {
+      if(dom != null)
+      {
+        dom.style.display = "none";
+      }
+    }
+
+    if(this.parentChosen)
+    {
+      dom = document.getElementById("medError");
+      if(!this.parentRegisterDetailsForm.controls['medAid'].valid)
+      {
+        formError = true
+        if(dom != null)
+        {
+          dom.innerHTML = "Invalid medical aid number";
+          dom.style.display = "block";
+        }
+      }
+      else
+      {
+        if(dom != null)
+        {
+          dom.style.display = "none";
+        }
+      }
+    }
+
+    dom = document.getElementById("addrError");
+    if(dom != null)
+    {
+      this.getLocations();
+      if (this.potentialLocations.indexOf(this.parentRegisterDetailsForm.value.address) == -1)
+      {
+        formError = true
+        this.locationError = true;
+        dom.innerHTML = "Please select a valid location from the suggested below.";
+        dom.style.display = "block";
+      }
+      else
+      {
+        this.locationError = false;
+        if(dom != null)
+        {
+          dom.style.display = "none";
+        }
+      }
+    }
+
+    dom = document.getElementById("pswError");
+    if(!this.parentRegisterDetailsForm.controls['pass'].valid)
+    {
+      formError = true
+      if(dom != null)
+      {
+        dom.innerHTML = "Invalid password : should contain upper and lowercase characters aswell as special characters and numbers";
+        dom.style.display = "block";
+      }
+    }
+    else
+    {
+      if(dom != null)
+      {
+        dom.style.display = "none";
+      }
+    }
+
+    dom = document.getElementById("cpswError");
+    if(this.parentRegisterDetailsForm.get('pass')?.value !== this.parentRegisterDetailsForm.get('confPass')?.value)
+    {
+      formError = true
+      this.notSamePasswords = true;
+      if(dom != null)
+      {
+        dom.innerHTML = "Passwords do not match";
+        dom.style.display = "block";
+      }
+    }
+    else
+    {
+      this.notSamePasswords = false;
+      if(dom != null)
+      {
+        dom.style.display = "none";
+      }
+    }
+
+    if(!formError)
+    {
+      var application = "";
+      this.userDetails.id = this.parentRegisterDetailsForm.value.id;
+      this.userDetails.fname = this.parentRegisterDetailsForm.value.name;
+      this.userDetails.sname = this.parentRegisterDetailsForm.value.surname;
+      this.userDetails.email = (this.parentRegisterDetailsForm.value.email).toLowerCase();
+      this.userDetails.address = this.parentRegisterDetailsForm.value.address;
+      this.userDetails.number = this.parentRegisterDetailsForm.value.phone;
+      this.userDetails.password = this.parentRegisterDetailsForm.value.pass;
+
+      if(this.parentChosen) 
+      {
+        this.userDetails.type = 1;
+        this.userDetails.registered = true;
+      }
+      else
+      {
+        this.userDetails.type = 2;
+      }
+    }
   }
 
   async openToast(message: string)
