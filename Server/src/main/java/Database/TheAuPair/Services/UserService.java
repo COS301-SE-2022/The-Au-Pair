@@ -3,6 +3,8 @@ package Database.TheAuPair.Services;
 import Database.TheAuPair.Models.User;
 import Database.TheAuPair.Repositories.UserRepository;
 
+import java.util.List;
+
 public class UserService
 {
   private UserRepository ur;
@@ -68,5 +70,11 @@ public class UserService
       }
     }
     return nr;
+  }
+
+  public List<User> getApplicants()
+  {
+    List<User> u =  ur.findAllByType(1);
+    return u;
   }
 }
