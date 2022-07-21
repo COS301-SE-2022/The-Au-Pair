@@ -120,7 +120,7 @@ export class LoginComponent implements OnInit {
     {
       var id = "";
       var type = 0
-      await this.serv.login(this.loginDetailsForm.value.email,this.loginDetailsForm.value.pass)
+      await this.serv.login((this.loginDetailsForm.value.email).toLowerCase(),this.loginDetailsForm.value.pass)
       .toPromise()
       .then(
         res => {
