@@ -13,8 +13,8 @@ public class SecurityService
   {
     Argon2Parameters.Builder builder = new Argon2Parameters.Builder(Argon2Parameters.ARGON2_id)
       .withVersion(Argon2Parameters.ARGON2_VERSION_13)
-      .withIterations(4)
-      .withMemoryAsKB(1048576)
+      .withIterations(2)
+      .withMemoryAsKB(40000)
       .withParallelism(1)
       .withSalt(salt);
 

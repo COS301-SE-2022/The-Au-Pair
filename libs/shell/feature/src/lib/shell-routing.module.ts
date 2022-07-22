@@ -3,18 +3,13 @@ import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 
 const routes: Routes = [
   {
-    path: 'home',
-    loadChildren: () =>
-      import('@the-au-pair/home/feature').then((m) => m.HomePageModule),
-  },
-  {
     path: 'schedule',
     loadChildren: () =>
       import('@the-au-pair/schedule/feature').then((m) => m.ScheduleFeatureModule),
   },
   {
     path: '',
-    redirectTo: 'parent-dashboard',
+    redirectTo: 'login-page',
     pathMatch: 'full',
   },
   {
@@ -111,6 +106,10 @@ const routes: Routes = [
     path: 'admin-console',
     loadChildren: () =>
     import('@the-au-pair/admin-console/feature').then((m) => m.AdminConsoleFeatureModule),
+  },
+  {
+    path: '**',
+    redirectTo: 'login-page',
   }
 ];
 

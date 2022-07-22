@@ -48,9 +48,6 @@
       "@the-au-pair/forgot-password/feature": [
         "libs/forgot-password/feature/src/index.ts"
       ],
-      "@the-au-pair/home/feature": [
-        "libs/home/feature/src/index.ts"
-      ],
       "@the-au-pair/login/feature": [
         "libs/login/feature/src/index.ts"
       ],
