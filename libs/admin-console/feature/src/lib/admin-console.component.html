@@ -4,24 +4,24 @@
     <h2>Verify Au Pairs</h2>
     <ion-grid class="verify-cards-container">
         <ion-row class="ion-justify-content-around">
-            <ion-col sizeLg="5" sizeMd="12" sizeXs="12">
+            <ion-col *ngFor="let auPair of auPairs" sizeLg="5" sizeMd="12" sizeXs="12">
                 <div class="auPairCard">
                     <div class="leftInfo">
                         <div class="info">
                             <div class="desc label">Full Name:</div>
-                            <div class="cont">John Buster</div>
+                            <div class="cont">{{auPair.fname}}  {{auPair.sname}}</div>
                         </div>
                         <div class="info">
                             <div class="desc label">ID Number:</div>
-                            <div class="cont">9457485062059</div>
+                            <div class="cont">{{auPair.id}}</div>
                         </div>
                         <div class="info">
                             <div class="desc label">Address:</div>
-                            <div class="cont">33 HeavenStress Streer</div>
+                            <div class="cont">{{auPair.address}}</div>
                         </div>
                         <div class="info">
                             <div class="desc label">Email:</div>
-                            <div class="cont">JohnnyB@yahoo.com</div>
+                            <div class="cont">{{auPair.email}}</div>
                         </div>
                         <div class="info">
                             <div class="desc label">Document:</div>
@@ -34,50 +34,10 @@
                             <img src="assets/images/profile.jpg" alt="ruben">  
                         </div>
                         <div>
-                            <button class = "button reject" (click)="reject()">
+                            <button class = "button reject" (click)="reject(auPair.id)">
                                 Reject
                             </button>
-                            <button class = "button accept" (click)="accept()">
-                                Accept
-                            </button>
-                        </div>
-                    </div>
-                </div>
-            </ion-col>
-            <ion-col sizeLg="5" sizeMd="12" sizeXs="12">
-                <div class="auPairCard">
-                    <div class="leftInfo">
-                        <div class="info">
-                            <div class="desc label">Full Name:</div>
-                            <div class="cont">John Buster</div>
-                        </div>
-                        <div class="info">
-                            <div class="desc label">ID Number:</div>
-                            <div class="cont">9457485062059</div>
-                        </div>
-                        <div class="info">
-                            <div class="desc label">Address:</div>
-                            <div class="cont">33 Heavenstress Street</div>
-                        </div>
-                        <div class="info">
-                            <div class="desc label">Email:</div>
-                            <div class="cont">JohnnyB@yahoo.com</div>
-                        </div>
-                        <div class="info">
-                            <div class="desc label">Document:</div>
-                            <div class="cont">Documents</div>
-                        </div>
-                    </div>
-    
-                    <div class="rightInfo">
-                        <div class="userImg">
-                            <img src="assets/images/profile.jpg" alt="ruben">  
-                        </div>
-                        <div>
-                            <button class = "button reject" (click)="reject()">
-                                Reject
-                            </button>
-                            <button class = "button accept" (click)="accept()">
+                            <button class = "button accept" (click)="accept(auPair.id)">
                                 Accept
                             </button>
                         </div>
