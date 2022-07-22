@@ -7,11 +7,10 @@ import { PasswordFieldModule } from '@the-au-pair/shared/components/password-fie
 import { IonicModule } from '@ionic/angular';
 import { API } from '../../../../shared/api/api.service';
 import { ReactiveFormsModule } from '@angular/forms';
-import { InternalStateOperations } from '@ngxs/store/src/internal/state-operations';
 
 @NgModule({
   imports: [CommonModule, ReactiveFormsModule, IonicModule, LoginComponentRoutingModule, InputFieldModule, PasswordFieldModule],
   declarations: [LoginComponent],
-  providers:[API, InternalStateOperations]
+  providers:[API]
 })
 export class LoginFeatureModule {}
