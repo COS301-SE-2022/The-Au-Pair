@@ -10,34 +10,34 @@
             </div>
             
             <the-au-pair-input-field labelContent="Name" [showError]="submitAttempt && (!parentRegisterDetailsForm.controls['name'].valid)" formControlName="name"></the-au-pair-input-field>
-            <p id="nameError" class="error" style="display: none;">Error in field</p>
+            <p id="nameError" class="error">Error in field</p>
 
             <the-au-pair-input-field labelContent="Surname" [showError]="submitAttempt && (!parentRegisterDetailsForm.controls['surname'].valid)" formControlName="surname"></the-au-pair-input-field>
-            <p id="snameError" class="error" style="display: none;">Error in field</p>
+            <p id="snameError" class="error">Error in field</p>
 
             <the-au-pair-input-field labelContent="Email" [showError]="submitAttempt && (!parentRegisterDetailsForm.controls['email'].valid)" formControlName="email"></the-au-pair-input-field>
-            <p id="emailError" class="error" style="display: none;">Error in field</p>
+            <p id="emailError" class="error">Error in field</p>
 
             <the-au-pair-input-field labelContent="Phone Number" [showError]="submitAttempt && (!parentRegisterDetailsForm.controls['phone'].valid)" formControlName="phone"></the-au-pair-input-field>
-            <p id="numberError" class="error" style="display: none;">Error in field</p>
+            <p id="numberError" class="error">Error in field</p>
 
             <the-au-pair-input-field labelContent="ID" [showError]="submitAttempt && (!parentRegisterDetailsForm.controls['id'].valid)" formControlName="id"></the-au-pair-input-field>
-            <p id="idError" class="error" style="display: none;">Error in field</p>
+            <p id="idError" class="error">Error in field</p>
 
             <the-au-pair-input-field [hidden]="!parentChosen" labelContent="Medical Aid Number" [showError]="submitAttempt && (!parentRegisterDetailsForm.controls['medAid'].valid)" formControlName="medAid"></the-au-pair-input-field>
-            <p id="medError" class="error" style="display: none;">Error in field</p>
+            <p id="medError" class="error">Error in field</p>
 
             <the-au-pair-input-field (input)="getLocations()" list="locations" labelContent="Address" [showError]="submitAttempt && (locationError)" formControlName="address"></the-au-pair-input-field>
             <datalist id="locations">
                 <option *ngFor="let location of potentialLocations" value="{{location}}">
             </datalist>
-            <p id="addrError" class="error" style="display: none;">Error in field</p>
+            <p id="addrError" class="error">Error in field</p>
 
             <the-au-pair-password-field labelContent="Password" [showError]="(submitAttempt && (!parentRegisterDetailsForm.controls['pass'].valid))" formControlName="pass"></the-au-pair-password-field>
-            <p id="pswError" class="error" style="display: none;">Error in field</p>
+            <p id="pswError" class="error">Error in field</p>
 
             <the-au-pair-password-field labelContent="Confirm Password" [showError]="(submitAttempt && (!parentRegisterDetailsForm.controls['confPass'].valid)) || notSamePasswords" formControlName="confPass"></the-au-pair-password-field>
-            <p id="cpswError" class="error" style="display: none;">Error in field</p>
+            <p id="cpswError" class="error">Error in field</p>
 
             <div class="buttons">
                 <input class = "registerUser" type="submit" value="Register">

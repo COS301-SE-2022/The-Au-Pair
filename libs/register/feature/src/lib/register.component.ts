@@ -217,7 +217,7 @@ export class RegisterComponent {
       formError = true
       if(dom != null)
       {
-        dom.innerHTML = "Invalid password : should contain upper and lowercase characters aswell as special characters and numbers";
+        dom.innerHTML = "Invalid password : should be of minimum length 8 and contain upper and lowercase characters as well as special characters and numbers";
         dom.style.display = "block";
       }
     }

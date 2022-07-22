@@ -5,6 +5,9 @@ import { PasswordFieldModule } from '@the-au-pair/shared/components/password-fie
 import { ReactiveFormsModule } from '@angular/forms';
 import { IonicModule } from '@ionic/angular';
 import { RegisterComponent } from './register.component';
+import { API } from '../../../../shared/api/api.service';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { ToastController } from '@ionic/angular';
 
 describe('RegisterComponent', () => {
   let component: RegisterComponent;
@@ -26,14 +29,16 @@ describe('RegisterComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
+      declarations: [RegisterComponent],
       imports: [
         IonicModule,
         InputFieldModule,
         PasswordFieldModule,
         ReactiveFormsModule,
-        RouterTestingModule
+        RouterTestingModule,
+        HttpClientTestingModule,
       ],
-      declarations: [RegisterComponent],
+      providers:[API, ToastController],
     }).compileComponents();
   });
 
