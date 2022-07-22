@@ -4,14 +4,11 @@
     color: #69A88DB2;
 }
 
-.profile-name {
-    font-size: 3.6vw;
-    padding-top: 2%;
-    margin-bottom: 2%;
-    color: var(--ion-color-dark);
-    text-align: center;
-    font-family: TitanOne;
-    margin-top: 0px;
+.expand-details-div{
+    width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+    background-color: #69A88DB2;
 }
 
 .icon-close{
@@ -23,32 +20,34 @@
     right: 0px;
 }
 
-.parent-profile-div{
-    width: 100%;
-    margin-left: auto;
-    margin-right: auto;
-    background-color: #69A88DB2;
-}
-
-.profile-picture-div{
-    width: 33.3%;
-    height: 100%;
-    float: left;
-}
-
-.details-div{
+.expand-div{
     width: 80%;
     height: 100%;
     margin-left: auto;
     margin-right: auto;
     padding-bottom: 25px;
-    // margin-top: 100px;
 }
 
-.empty-div{
-    width: 33.3%;
-    height: 100%;
-    float: right;
+.profile-name {
+    font-size: 3.6vw;
+    padding-top: 2%;
+    margin-bottom: 2%;
+    color: var(--ion-color-dark);
+    text-align: center;
+    font-family: TitanOne;
+    margin-top: 0px;
+}
+
+.details-div{
+    height: 6%;
+    background-color: var(--ion-background-color);
+    display:flex;
+    font-family: Roboto;
+    align-items: center;
+    color: black;
+    margin-bottom: 12px;
+    box-shadow: 1px 2px 5px rgba(0, 0, 0, 0.13);
+    border-radius: 6px;
 }
 
 .profile-picture-wrapper{
@@ -71,19 +70,23 @@
     border-radius: 50%;
 }
 
-.parent-info-small{
-    height: 6%;
-    background-color: var(--ion-background-color);
-    display:flex;
-    font-family: Roboto;
-    align-items: center;
-    color: black;
-    margin-bottom: 12px;
-    box-shadow: 1px 2px 5px rgba(0, 0, 0, 0.13);
-    border-radius: 6px;
+.details-title{
+    margin-left: 12px;
+    font-size: 100%;
+    width: 35%;
+    margin: 10px;
 }
 
-.parent-info-large{
+.user-details{
+    color: var(--ion-color-dark);
+    font-size: 100%;
+    margin-right: auto;
+    line-height: 170%;
+    margin-top: auto;
+    margin-bottom: auto;
+}
+
+.user-details-large{
     height: 26%;
     background-color: var(--ion-background-color);
     display:flex;
@@ -95,32 +98,7 @@
     border-radius: 6px;
 }
 
-.parent-text{
-    margin-left: 12px;
-    font-size: 100%;
-    width: 35%;
-    margin: 10px;
-}
-
-.parent-text-info{
-    color: var(--ion-color-dark);
-    font-size: 100%;
-    margin-right: auto;
-    line-height: 170%;
-    margin-top: auto;
-    margin-bottom: auto;
-}
-
-.parent-text-info2{
-    color: var(--ion-color-dark);
-    font-size: 100%;
-    margin-right: auto;
-    line-height: 170%;
-    margin-top: auto;
-    margin-bottom: auto;
-}
-
-.change-button{
+.hire-button{
     padding: 10px 22px;
     gap: 10px;
     border: 2px solid var(--ion-color-secondary);
@@ -129,119 +107,4 @@
     margin: auto;
     display: block;
     margin-top: 25px;
-}
-
-#active-2{
-    position: absolute;
-    width: 160px;
-    height: 160px;
-    margin-top: -160px;
-    opacity: 0.14;
-    z-index: -10;
-}
-
-#active{
-    position: absolute;
-    width: 130px;
-    height: 130px;
-    right: 150px;
-    margin-top: -200px;
-    opacity: 0.14;
-    z-index: -10;
-}
-
-#lifestyles{
-    position: absolute;
-    width: 280px;
-    height: 280px;
-    right: 400px;
-    top: 0px;
-    margin-top: 120px;
-    opacity: 0.14;
-    z-index: -10;
-}
-
-@media (max-width: 642px) {
-    #active{
-        right: 15px;
-    }
-    
-    #lifestyles{
-        display: none;
-    }
-
-    .parent-profile-div{
-        margin-top: 13px;
-    }
-
-    .profile-name{
-        font-size: 36px;
-        padding-top: 15px;
-        padding-bottom: 15px;
-    }
-
-    .parent-text{
-        width: 30%;
-        font-size: 15px;
-    }
-
-    .parent-text-info{
-        font-size: 15px;
-    }
-
-    .parent-text-info2{
-        padding-top: 5px;
-    }
-
-    .details-div{
-        width: 75%;
-    }
-}
-
-@media (max-width: 810px) {
-    
-    #active{
-        right: 35px;
-    }
-    
-    #lifestyles{
-        display: none;
-    }
-    
-    #lifestyles{
-        display: none;
-    }
-
-    .parent-profile-div{
-        margin-top: 13px;
-    }
-
-    .profile-name{
-        font-size: 36px;
-        padding-top: 15px;
-        padding-bottom: 15px;
-    }
-
-    .parent-text{
-        width: 30%;
-        font-size: 15px;
-    }
-
-    .parent-text-info{
-        font-size: 15px;
-    }
-
-    .parent-text-info2{
-        padding-top: 5px;
-    }
-
-    .details-div{
-        width: 75%;
-    }
-}
-
-@media (max-width: 1240px) {
-    .empty-div{
-        width: 0%;
-    }
 }
