@@ -2,23 +2,20 @@ h2{
     display: flex;
     justify-content: center;
     align-items: center;
-    top: 90px;
-    margin: 0;
     font-style: normal;
-    font-weight: 700;
-    font-size: 48px;
-    line-height: 56px;
-    text-transform: capitalize;
+    font-size: 42px;
     position: relative;
     text-align: center;
-    padding-bottom: 80px;
     color: var(--ion-color-dark);
-    font-style: normal;
     font-weight: 700;
-    font-size: 48px;
     line-height: 56px;
     text-transform: capitalize;
-    padding-bottom: 110px;
+    font-family: TitanOne;
+    margin : 3rem 0px;
+}
+
+.verify-cards-container{
+    padding: 0 2rem;
 }
 
 .info {
