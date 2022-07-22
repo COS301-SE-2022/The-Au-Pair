@@ -118,7 +118,7 @@
     margin-top: 25px;
 }
 
-#active-2{
+#background-image-1{
     position: absolute;
     width: 160px;
     height: 160px;
@@ -127,7 +127,7 @@
     z-index: -10;
 }
 
-#active{
+#background-image-2{
     position: absolute;
     width: 130px;
     height: 130px;
@@ -137,7 +137,7 @@
     z-index: -10;
 }
 
-#lifestyles{
+#background-image-3{
     position: absolute;
     width: 280px;
     height: 280px;
@@ -149,11 +149,11 @@
 }
 
 @media (max-width: 642px) {
-    #active{
+    #background-image-2{
         right: 15px;
     }
     
-    #lifestyles{
+    #background-image-3{
         display: none;
     }
 
@@ -187,15 +187,11 @@
 
 @media (max-width: 810px) {
     
-    #active{
+    #background-image-2{
         right: 35px;
     }
     
-    #lifestyles{
-        display: none;
-    }
-    
-    #lifestyles{
+    #background-image-3{
         display: none;
     }
 
@@ -227,8 +223,8 @@
     }
 }
 
-@media (max-width: 1240px) {
-    .empty-div{
-        width: 0%;
+@media (max-width: 1000px) {
+    #background-image-3{
+        display: none;
     }
 }
