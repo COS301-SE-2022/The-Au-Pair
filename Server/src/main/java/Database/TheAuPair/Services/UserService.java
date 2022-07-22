@@ -75,7 +75,13 @@ public class UserService
   public List<User> getApplicants()
   {
     List<User> u =  ur.findAllByType(1);
-    return u;
+    List<User> notRegistered = new java.util.ArrayList<User>();
+    for (User user : u) {
+      if (!user.registered){
+        notRegistered.add(user);
+      }
+    }
+    return notRegistered;
   }
 
   public void resolveApplication(String id, String resolution)

@@ -27,7 +27,7 @@ export class AdminConsoleComponent implements OnInit{
 
   reject(userId : string) {
     this.serv.resolveApplication(userId,false).toPromise().then(res => {
-      console.log(res)
+      window.location.reload();
     }).catch(err => {
       console.log(err);
     });
@@ -35,7 +35,7 @@ export class AdminConsoleComponent implements OnInit{
 
   accept(userId : string) {
     this.serv.resolveApplication(userId,true).toPromise().then(res => {
-      console.log(res)
+      window.location.reload();
     }).catch(err => {
       console.log(err);
     });

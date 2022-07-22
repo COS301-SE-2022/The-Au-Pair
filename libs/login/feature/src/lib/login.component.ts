@@ -150,7 +150,7 @@ export class LoginComponent implements OnInit {
 
         if(type == 0)
         {
-          // window.location.href = "/admin-console";
+          window.location.href = "/admin-console";
         }
         if(type == 1)
         {
