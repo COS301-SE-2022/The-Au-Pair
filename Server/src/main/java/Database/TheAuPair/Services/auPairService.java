@@ -27,4 +27,9 @@ public class auPairService
   {
     apr.deleteById(id);
   }
+
+  public void addAuPair(auPair a)
+  {
+    apr.save(a);
+  }
 }

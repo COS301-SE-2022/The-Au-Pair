@@ -29,4 +29,11 @@ public class ParentController
   {
     this.ps.updateParent(p);
   }
+
+  @PostMapping("/addParent")
+  @CrossOrigin(origins = "http://localhost:4200")
+  public void addParent(@RequestBody Parent p)
+  {
+    this.ps.addParent(p);
+  }
 }

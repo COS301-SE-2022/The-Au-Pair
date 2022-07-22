@@ -1,5 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { ToastController } from '@ionic/angular';
+import { API } from '../../../../shared/api/api.service';
+import { Store } from '@ngxs/store';
+import { SetId , SetType } from '../../../../shared/ngxs/actions';
 import {
   ActionPerformed,
   PushNotificationSchema,
@@ -20,10 +24,10 @@ export class LoginComponent implements OnInit {
   
   showPassword = false;
 
-  constructor(public formBuilder: FormBuilder) {
+  constructor(public formBuilder: FormBuilder, public toastCtrl: ToastController, private serv: API, private store: Store) {
     this.loginDetailsForm = formBuilder.group({
-      email : ['', Validators.compose([Validators.maxLength(30), Validators.pattern('^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$'), Validators.required])],
-      pass : ['', Validators.compose([Validators.maxLength(20), Validators.pattern('^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$'), Validators.required])],
+      email : ['', Validators.compose([Validators.maxLength(30), Validators.required])],
+      pass : ['', Validators.compose([Validators.maxLength(20), Validators.required])],
     });
 
     this.submitAttempt = false;
@@ -72,15 +76,100 @@ export class LoginComponent implements OnInit {
     this.showPassword = !this.showPassword;
   }
   
-  loginUser() {
+  async loginUser() 
+  {
     this.submitAttempt = true;
 
-    if(this.loginDetailsForm.controls['email'].valid && this.loginDetailsForm.controls['pass'].valid) {
-      this.errState = false;
-      console.log(this.loginDetailsForm.value);
+    let dom = document.getElementById("emailError");
+    if(!this.loginDetailsForm.controls['email'].valid)
+    {
+      this.errState = true
+      if(dom != null)
+      {
+        dom.innerHTML = "Invalid email";
+        dom.style.display = "block";
+      }
     }
-    else {
-      this.errState = true;
+    else
+    {
+      if(dom != null)
+      {
+        dom.style.display = "none";
+      }
     }
+
+    dom = document.getElementById("pswError");
+    if(!this.loginDetailsForm.controls['pass'].valid)
+    {
+      this.errState = true
+      if(dom != null)
+      {
+        dom.innerHTML = "Password empty";
+        dom.style.display = "block";
+      }
+    }
+    else
+    {
+      if(dom != null)
+      {
+        dom.style.display = "none";
+      }
+    }
+
+    if(!this.errState)
+    {
+      let id = "";
+      let type = 0
+      await this.serv.login((this.loginDetailsForm.value.email).toLowerCase(),this.loginDetailsForm.value.pass)
+      .toPromise()
+      .then(
+        res => {
+          id = res.id;
+          type = res.type;
+        },
+        error => {
+          console.log("Error has occured with API: " + error);
+        }
+      )
+
+      if(id == "")
+      {
+        this.openToast("Inccorect email or password");
+      }
+      else if(id == "pending")
+      (
+        this.openToast("Your account is pending approval")
+      )
+      else  
+      {
+        this.store.dispatch(new SetId(id));
+        this.store.dispatch(new SetType(type));
+
+        if(type == 0)
+        {
+          // window.location.href = "/admin-console";
+        }
+        if(type == 1)
+        {
+          window.location.href = "/parent-dashboard";
+        }
+        else if(type == 2)
+        {
+          window.location.href = "/au-pair-dashboard";
+        }
+      }
+    }
+  }
+
+  async openToast(message: string)
+  {
+    const toast = await this.toastCtrl.create({
+      message: message,
+      duration: 4000,
+      position: 'top',
+      color: 'primary',
+      cssClass: 'toastPopUp'
+    });
+    await toast.present();
   }
 }
