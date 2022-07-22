@@ -5,11 +5,11 @@ import { PasswordFieldModule } from '@the-au-pair/shared/components/password-fie
 import { ReactiveFormsModule } from '@angular/forms';
 import { IonicModule } from '@ionic/angular';
 import { LoginComponent } from './login.component';
-import { InternalStateOperations } from '@ngxs/store/src/internal/state-operations';
 import { API } from '../../../../shared/api/api.service';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { HttpClient, HttpHandler } from '@angular/common/http';
-import { Store, StateStream} from '@ngxs/store/';
+import { NgxsModule } from '@ngxs/store';
+ 
 
 describe('LoginComponent', () => {
   let component: LoginComponent;
@@ -30,9 +30,10 @@ describe('LoginComponent', () => {
         PasswordFieldModule,
         ReactiveFormsModule,
         RouterTestingModule,
-        HttpClientTestingModule
+        HttpClientTestingModule,
+        NgxsModule.forRoot()
       ],
-      providers:[API, HttpClient, HttpHandler, Store, StateStream, InternalStateOperations],
+      providers:[API, HttpClient, HttpHandler],
       declarations: [LoginComponent],
     }).compileComponents();
   });
