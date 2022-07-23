@@ -19,7 +19,7 @@ public class User
     @Field ("address")
     private String address;
     @Field ("registered")
-    public boolean registered;
+    private boolean registered;
     @Field ("type")
     private int type;
     @Field ("password")

@@ -13,7 +13,6 @@ public interface UserRepository extends MongoRepository<User, String>
   @Query("{_id:'?0'}")
   User findUsingId(String id);
 
-  @Query("{ 'type': ?0 }")
-  List<User> findAllByType(int type);
+  @Query("{ $and:[{ 'type': ?0 },{ 'registered': ?1 }] }")
+  List<User> findAllByType(int type, boolean registered);
 }
-
