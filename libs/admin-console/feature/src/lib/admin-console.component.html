@@ -34,10 +34,10 @@
                             <img src="assets/images/profile.jpg" alt="ruben">  
                         </div>
                         <div>
-                            <button class = "button reject" (click)="reject(auPair.id)">
+                            <button class = "button reject" (click)="resolve(auPair.id,false)">
                                 Reject
                             </button>
-                            <button class = "button accept" (click)="accept(auPair.id)">
+                            <button class = "button accept" (click)="resolve(auPair.id,true)">
                                 Accept
                             </button>
                         </div>

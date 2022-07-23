@@ -25,17 +25,10 @@ export class AdminConsoleComponent implements OnInit{
     });
   }
 
-  reject(userId : string) {
-    this.serv.resolveApplication(userId,false).toPromise().then(res => {
+  resolve(userId : string, choice : boolean) {
+    this.serv.resolveApplication(userId,choice).toPromise().then(res => {
       window.location.reload();
-    }).catch(err => {
-      console.log(err);
-    });
-  }
-
-  accept(userId : string) {
-    this.serv.resolveApplication(userId,true).toPromise().then(res => {
-      window.location.reload();
+      return choice;
     }).catch(err => {
       console.log(err);
     });
