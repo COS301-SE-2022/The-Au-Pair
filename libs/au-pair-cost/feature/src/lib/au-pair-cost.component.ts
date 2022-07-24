@@ -68,8 +68,7 @@ export class AuPairCostComponent implements OnInit {
         this.totalCost = this.travelCost+this.activityCost+this.otherCost;
         this.totalCost = Number(this.totalCost.toFixed(3))
         this.totalRemuneration = (this.hourlyRate*this.totalHours) + this.totalCost; 
-        this.totalRemuneration = Number(this.totalRemuneration.toFixed(3))
-
+        this.totalRemuneration = Number(this.totalRemuneration.toFixed(3));
         this.calculatePie(this.otherCost, this.activityCost, this.totalCost);
         this.populateDaysCost();
         this.dateRange = this.dateRangeToString(7);

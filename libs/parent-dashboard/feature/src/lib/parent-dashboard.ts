@@ -53,6 +53,8 @@ export class ParentDashboardComponent implements OnInit{
     payRate: 0,
     bio: "",
     experience: "",
+    currentLong: 0.0,
+    currentLat: 0.0
   }
 
   constructor(private serv: API, private modalCtrl : ModalController){}
@@ -110,6 +112,8 @@ export class ParentDashboardComponent implements OnInit{
         this.auPairDetails.payRate = res.payRate;
         this.auPairDetails.bio = res.bio;
         this.auPairDetails.experience = res.experience;
+        this.auPairDetails.currentLong = res.currentLong;
+        this.auPairDetails.currentLat = res.currentLat;
       },
       error=>{console.log("Error has occured with API: " + error);}
     )
