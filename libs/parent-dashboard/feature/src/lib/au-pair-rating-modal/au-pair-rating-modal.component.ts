@@ -24,6 +24,8 @@ export class AuPairRatingModalComponent implements OnInit {
     payRate: 0,
     bio: "",
     experience: "",
+    currentLong: 0.0,
+    currentLat: 0.0
   }
   
   constructor(private serv: API, private modalCtrl : ModalController ,public toastCtrl: ToastController) {}
@@ -56,6 +58,8 @@ export class AuPairRatingModalComponent implements OnInit {
         this.currentAuPair.payRate = res.payRate;
         this.currentAuPair.bio = res.bio;
         this.currentAuPair.experience = res.experience;
+        this.currentAuPair.currentLong = res.currentLong;
+        this.currentAuPair.currentLat = res.currentLat;
       },
       error=>{console.log("Error has occured with API: " + error);}
     )

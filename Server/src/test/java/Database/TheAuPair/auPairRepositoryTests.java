@@ -22,8 +22,6 @@ public class auPairRepositoryTests
   @BeforeEach
   public void setup()
   {
-    double [] week = {1,2,3,4,5,6,7};
-
     expectedAuPair = new auPair("",0,0,0,0,true,"","","", 43.0,43.0);
     id = "7542108615984";
   }
