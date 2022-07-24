@@ -74,8 +74,8 @@ public class UserService
 
   public List<User> getApplicants()
   {
-    List<User> u =  ur.findAllByType(1);
-    return u;
+    List<User> notRegistered =  ur.findAllByType(2, false);
+    return notRegistered;
   }
 
   public void resolveApplication(String id, String resolution)
