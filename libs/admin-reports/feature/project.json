@@ -1,0 +1,26 @@
+{
+  "projectType": "library",
+  "root": "libs/admin-reports/feature",
+  "sourceRoot": "libs/admin-reports/feature/src",
+  "prefix": "the-au-pair",
+  "targets": {
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["coverage/libs/admin-reports/feature"],
+      "options": {
+        "jestConfig": "libs/admin-reports/feature/jest.config.js",
+        "passWithNoTests": true
+      }
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "options": {
+        "lintFilePatterns": [
+          "libs/admin-reports/feature/src/**/*.ts",
+          "libs/admin-reports/feature/src/**/*.html"
+        ]
+      }
+    }
+  },
+  "tags": []
+}

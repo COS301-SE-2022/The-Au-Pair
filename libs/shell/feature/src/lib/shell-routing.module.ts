@@ -104,8 +104,15 @@ const routes: Routes = [
   },
   {
     path: 'admin-console',
+    data: { animation: 'openClosePage' },
     loadChildren: () =>
     import('@the-au-pair/admin-console/feature').then((m) => m.AdminConsoleFeatureModule),
+  },
+  {
+    path: 'admin-reports',
+    data: { animation: 'openClosePage' },
+    loadChildren: () =>
+    import('@the-au-pair/admin-reports/feature').then((m) => m.AdminReportsFeatureModule),
   },
   {
     path: '**',
