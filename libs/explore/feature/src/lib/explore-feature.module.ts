@@ -6,9 +6,10 @@ import { IonicModule } from '@ionic/angular';
 import { NavbarModule } from '@the-au-pair/shared/components/navbar';
 import { API } from '../../../../shared/api/api.service';
 import { ExpandModalComponent } from './expand-modal/expand-modal.component';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
-  imports: [CommonModule, ExploreRoutingModule, IonicModule, NavbarModule],
+  imports: [CommonModule, FormsModule, ExploreRoutingModule, IonicModule, NavbarModule],
   declarations: [ExploreComponent, ExpandModalComponent],
   providers: [API],
   entryComponents: [ExpandModalComponent],

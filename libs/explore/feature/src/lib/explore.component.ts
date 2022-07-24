@@ -11,6 +11,12 @@ import { MenuController } from '@ionic/angular';
 })
 export class ExploreComponent implements OnInit {
   
+  minPayrate! : number;
+  maxPayrate! : number;
+
+  minDistance! : number;
+  maxDistance! : number;
+
   auPairs : any;
   auPairDetails : any = {
     id: "",
@@ -23,6 +29,8 @@ export class ExploreComponent implements OnInit {
     registered: "",
   }
   AuPairArray : any[] = [];
+  filteredAuPairArray : any[] = [];
+  restoredAuPairArray: any[] = [];
 
   constructor(private serv: API, private modalCtrl : ModalController, private menuController : MenuController){}
 
@@ -66,6 +74,7 @@ export class ExploreComponent implements OnInit {
 
           // This will be removed after hiring and terminating is added
           this.AuPairArray.push(auPairDetails);
+          this.restoredAuPairArray.push(auPairDetails);
         },
         error=>{console.log("Error has occured with API: " + error);}
       )
@@ -84,13 +93,69 @@ export class ExploreComponent implements OnInit {
 
   openMenu()
   {
-    // console.log('Here')
     this.menuController.toggle('start');
   }
 
   closeMenu()
   {
-    // console.log('Here')
     this.menuController.close('start');
+  }
+
+  async payRateFilter(formData: any)
+  {
+    this.AuPairArray.splice(0);
+    this.restoredAuPairArray.forEach(val => this.AuPairArray.push(Object.assign({}, val)));
+
+    this.minPayrate = formData.min_payrate;
+    this.maxPayrate = formData.max_payrate;
+        
+    this.AuPairArray.sort((obj1, obj2) => {
+      if(obj1.payRate > obj2.payRate)
+      {
+        return 1;
+      }
+
+      if(obj1.payRate < obj2.payRate)
+      {
+        return -1;
+      }
+
+      return 0;
+    });
+
+    console.log(this.AuPairArray);
+
+    this.AuPairArray.forEach((ap: { id: any; rating: any; payRate: any; fname: any; sname: any, address: any; employer: any;}) => {
+      this.serv.getUser(ap.id).subscribe(
+        res=>{
+          const auPairDetails = {
+            id: ap.id,
+            rating: ap.rating,
+            payRate: ap.payRate,
+            fname: res.fname,
+            sname: res.sname,
+            address: res.address,
+            employer: ap.employer,
+            registered: res.registered,
+          }
+
+          if(ap.payRate >= this.minPayrate && ap.payRate <= this.maxPayrate)
+          {
+            this.filteredAuPairArray.push(auPairDetails);
+          }
+        },
+        error=>{console.log("Error has occured with API: " + error);}
+      )
+    });
+
+    this.AuPairArray.length = 0;
+    this.AuPairArray = this.filteredAuPairArray;
+    this.closeMenu();
+  }
+
+  distanceFilter(formData : any)
+  {
+    this.minDistance = formData.min_distance;
+    this.maxDistance = formData.max_distance;
   }
 }

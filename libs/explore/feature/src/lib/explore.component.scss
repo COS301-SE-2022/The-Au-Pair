@@ -1,17 +1,12 @@
 ion-menu{
-    --max-width: 33%;
+    --min-width: 50%;
     background-color: transparent;
-    --max-height: 100%;
+    --max-height: 150%;
 }
 
 ion-menu::part(backdrop) {
     background-color: transparent;
     display: none;
-}
-
-.menu-inner{
-    display: none;
-    background-color: #176560;
 }
 
 .menu-gap{
@@ -93,6 +88,10 @@ ion-menu::part(backdrop) {
     background-color: #69A88DB2;
     margin-top: 8px;
     margin-bottom: 8px;
+}
+
+.payrate-sliders{
+    margin-right: 20px;
 }
 
 .au-pair-card-div-wrapper {
