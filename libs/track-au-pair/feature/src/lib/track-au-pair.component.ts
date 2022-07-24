@@ -53,11 +53,13 @@ export class TrackAuPairComponent implements OnInit {
 
   constructor(private serv : API) {}
 
-  ngOnInit(): void {
+  async ngOnInit(): Promise<void> {
     this.loadLeafletMap();
-    this.getUserDetails();
-    this.
+    await this.getParentDetails();
+    this.putMarker();
   }
+
+  
 
   loadLeafletMap() 
   {
@@ -75,45 +77,34 @@ export class TrackAuPairComponent implements OnInit {
 
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
       maxZoom: 15,
-      minZoom: 10,
+      minZoom: 1,
       attribution: '&copy; <a href="https://www.openstreetmap.org/copyright%22%3EOpenStreetMap</a> contributors'
     }).addTo(this.leafletMap);
-
-    //Create 5 random jitteries and add them to the map
-
-    // L.marker([-26, 28], {icon:
-    //   new L.Icon({iconUrl: 'https://unpkg.com/leaflet@1.6.0/dist/images/marker-icon.png'})}).addTo(this.leafletMap);
-
-    // const jittery = Array(5).fill(this.centroid).map(
-    //   x => [x[0] + (Math.random() - 0.5)/10, x[1] + (Math.random() - 0.5)/10]
-    // ).map(
-    //   x =>L.marker(x as L.LatLngExpression, {icon:
-    //     new L.Icon({iconUrl: 'https://unpkg.com/leaflet@1.6.0/dist/images/marker-icon.png'})})
-    // ).forEach(
-    //     x => x.addTo(this.leafletMap)
-    // );
   }
 
-  async getUserDetails()
+  async getParentDetails()
   {
     /* Find logged in user's au pair */
-    await this.serv.getParent("7542108615984").subscribe(
-      res=>{
-        this.parentDetails.auPair = res.auPair;       
-      },
-      error=>{console.log("Error has occured with API: " + error);}
-    )
-
+    let res = await this.serv.getParent("4561237814867").toPromise();
+    this.parentDetails.auPair = res.auPair;   
+    
     /* Get the onShift and current coords of the employed au pair  */
-    await this.serv.getAuPair(this.parentDetails.auPair).subscribe(
-      res=>{
-        this.auPairDetails.id = res.id;
-        this.auPairDetails.onShift = res.onShift;
-        this.auPairDetails.currentLong = res.currentLong;
-        this.auPairDetails.currentLat = res.currentLat;
-      },
-      error=>{console.log("Error has occured with API: " + error);}
-    )
+    res = await this.serv.getAuPair(this.parentDetails.auPair).toPromise();
+    this.auPairDetails.id = res.id;
+    this.auPairDetails.onShift = res.onShift;
+    this.auPairDetails.currentLong = res.currentLong;
+    this.auPairDetails.currentLat = res.currentLat;
   };
+
+  putMarker()
+  {    
+    //Put the marker and style the icon
+    L.marker(
+      [this.auPairDetails.currentLat, this.auPairDetails.currentLong],
+      {icon: new L.Icon({iconUrl: 'https://unpkg.com/leaflet@1.8.0/dist/images/marker-icon.png'})
+    }).addTo(this.leafletMap);
+    // this.leafletMap.flyTo([this.auPairDetails.currentLong, this.auPairDetails.currentLong], 8);
+    this.leafletMap.setView(new L.LatLng(this.auPairDetails.currentLat, this.auPairDetails.currentLong), 14, { animation: true });
+  }
 
 }
