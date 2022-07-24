@@ -3,7 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ToastController } from '@ionic/angular';
 import { API } from '../../../../shared/api/api.service';
 import { Store } from '@ngxs/store';
-import { SetId , SetType } from '../../../../shared/ngxs/actions';
+import { SetFcmToken, SetId , SetType, Navigate } from '../../../../shared/ngxs/actions';
 import {
   ActionPerformed,
   PushNotificationSchema,
@@ -11,6 +11,8 @@ import {
   Token,
 } from '@capacitor/push-notifications';
 import { Capacitor } from '@capacitor/core';
+import { HttpClient, HttpHeaders, HttpRequest } from '@angular/common/http';
+import { AppState } from '../../../../shared/ngxs/state';
 
 @Component({
   selector: 'the-au-pair-login',
@@ -22,10 +24,11 @@ export class LoginComponent implements OnInit {
   public loginDetailsForm: FormGroup;
   public submitAttempt: boolean;
   public errState: boolean;
-  
+
+  fcmToken = '';
   showPassword = false;
 
-  constructor(public formBuilder: FormBuilder, public toastCtrl: ToastController, private serv: API, private store: Store) {
+  constructor(public formBuilder: FormBuilder, public toastCtrl: ToastController, private serv: API, private store: Store, public httpClient: HttpClient) {
     this.loginDetailsForm = formBuilder.group({
       email : ['', Validators.compose([Validators.maxLength(30), Validators.required])],
       pass : ['', Validators.compose([Validators.maxLength(20), Validators.required])],
@@ -36,8 +39,6 @@ export class LoginComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    console.log('Initializing HomePage');
-
     if (Capacitor.getPlatform() !== 'web') {
       this.startPush();
     }
@@ -53,7 +54,9 @@ export class LoginComponent implements OnInit {
     });
 
     PushNotifications.addListener('registration', (token: Token) => {
+      console.log(token.value);
       alert('Push registration success, token: ' + token.value);
+      this.fcmToken = token.value;
     });
 
     PushNotifications.addListener('registrationError', (error: any) => {
@@ -81,6 +84,25 @@ export class LoginComponent implements OnInit {
   
   async loginUser() 
   {
+    // const  requestHeaders = new HttpHeaders().set('Authorization', 'key=AAAAlhtqIdQ:APA91bFlcYmdaqt5D_jodyiVQG8B1mkca2xGh6XKeMuTGtxQ6XKhSY0rdLnc0WrXDsV99grFamp3k0EVHRUJmUG9ULcxf-VSITFgwwaeNvrUq48q0Hn1GLxmZ3GBAYdCBzPFIRdbMxi9');
+
+
+    // const postData = {
+    //   "to":"cpCzpEgxS-a499oPCvLMen:APA91bFT5p3bJFyl4wVQw4TBs5WShA0jPhZTZrRtzlYjpo5SwlilkhER0LPQjB_ySMYaxiREpuEVuqiUZsIoBg-__zveSXUgS_ouwWFal3GzfNcYg47MDnJSlGpaZBqHjRkvFbH0i1Gb",
+    //   "notification":{
+    //     "title":"Order #44",
+    //     "body": "Hello bro"
+    //   }
+    // }
+    // console.log(requestHeaders)
+    // this.httpClient.post('https://fcm.googleapis.com/fcm/send',postData, {headers: requestHeaders})
+    // .subscribe(data => {
+    //   console.log(data);
+    // }, error => {
+    //   console.log(error);
+    // });
+
+
     this.submitAttempt = true;
 
     let dom = document.getElementById("emailError");
@@ -147,18 +169,19 @@ export class LoginComponent implements OnInit {
       {
         this.store.dispatch(new SetId(id));
         this.store.dispatch(new SetType(type));
+        this.store.dispatch(new SetFcmToken(this.fcmToken));
 
         if(type == 0)
         {
-          window.location.href = "/admin-console";
+          this.store.dispatch(new Navigate('/admin-console'));
         }
         if(type == 1)
         {
-          window.location.href = "/parent-dashboard";
+          this.store.dispatch(new Navigate('/parent-dashboard'));
         }
         else if(type == 2)
         {
-          window.location.href = "/au-pair-dashboard";
+          this.store.dispatch(new Navigate('/au-pair-dashboard'));
         }
       }
     }
