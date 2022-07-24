@@ -1,8 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { Activity , Child , medAid , Parent  , User, HoursLogged } from '../interfaces/interfaces';
-
+import { Activity , Child , medAid , Parent  , User, HoursLogged, auPair } from '../interfaces/interfaces';
 
 @Injectable()
 export class API{
@@ -57,12 +56,20 @@ export class API{
     return this.http.post('http://localhost:8080/getAuPair',id);
   }
 
+  editAuPair(aupair : auPair): Observable<any> {
+    return this.http.post('http://localhost:8080/editAuPair',aupair);
+  }
+
   getChildren(id : String): Observable<any> {
     return this.http.post('http://localhost:8080/getChildren',id);
   }
 
   addChild(child : Child): Observable<any> {
     return this.http.post('http://localhost:8080/addChild',child);
+  }
+
+  updateChild(child : Child) :Observable<any> {
+    return this.http.post('http://localhost:8080/updateChild',child);
   }
 
   getDateMinutes(id : string, date : string): Observable<any> {
@@ -119,5 +126,57 @@ export class API{
 
   updateHoursLog(hl : HoursLogged): Observable<any> {
     return this.http.post("http://localhost:8080/updateHoursLog", hl);
+  }
+
+  register(user : User): Observable<any>  {
+    return this.http.post('http://localhost:8080/register',user, {responseType: 'text'})
+  }
+
+  addParent(parent : Parent): Observable<any> {
+    return this.http.post('http://localhost:8080/addParent',parent);
+  }
+
+  addAuPair(aupair : auPair): Observable<any> {
+    return this.http.post('http://localhost:8080/addAuPair',aupair);
+  }
+
+  login(email : string, password : string): Observable<any> {
+    var details = {
+      "email" : email,
+      "password" : password
+    } 
+    return this.http.post('http://localhost:8080/login',details);
+  }
+
+  getApplicants(): Observable<any> {
+    return this.http.get('http://localhost:8080/getApplicants');
+  }
+
+  removeAuPair(id : string): Observable<any> {
+    return this.http.post('http://localhost:8080/removeAuPair',id);
+  }
+
+  resolveApplication(id : string, resolution : boolean): Observable<any> {
+    var decision = {
+      "id" : id,
+      "resolution" : ""
+    }
+    if(resolution)
+    {
+      decision.resolution = "approve";
+    }
+    else
+    {
+      decision.resolution = "decline";
+      this.removeAuPair(id).subscribe(
+        res => {
+          console.log("The response is:" + res); 
+        },
+        error => {
+          console.log("Error has occured with API: " + error);
+        }
+      );
+    }
+    return this.http.post('http://localhost:8080/resolveApplication',decision);
   }
 }

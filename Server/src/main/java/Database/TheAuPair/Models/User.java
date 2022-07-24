@@ -26,8 +26,10 @@ public class User
     private String password;
     @Field ("phone")
     private String number;
+    @Field ("salt")
+    private String salt;
 
-    public User(String id, String fname, String sname, String email, String address, boolean registered, int type, String password, String number)
+    public User(String id, String fname, String sname, String email, String address, boolean registered, int type, String password, String number, String salt)
     {
         this.id = id;
         this.fname = fname;
@@ -38,6 +40,7 @@ public class User
         this.type = type;
         this.password = password;
         this.number = number;
+        this.salt = salt;
     }
 
     public String getId()
@@ -130,6 +133,16 @@ public class User
         this.number = number;
     }
 
+    public String getSalt()
+    {
+      return salt;
+    }
+
+    public void setSalt(String salt)
+    {
+      this.salt = salt;
+    }
+
     @Override
     public String toString()
     {
@@ -143,6 +156,7 @@ public class User
                 ", t=" + type +
                 ", password='" + password + '\'' +
                 ", number='" + number + '\'' +
+                ", salt='" + salt + '\'' +
                 '}';
     }
 }

@@ -14,6 +14,7 @@ export class AuPairDashboardComponent implements OnInit {
   employerName!: string;
   employerSurname! : string;
   employerId! : string;
+  employerPhone! : string;
   children: any[] = [];
 
   alreadyLogging = false;
@@ -113,6 +114,7 @@ export class AuPairDashboardComponent implements OnInit {
           this.employerName = this.employer.fname;
           this.employerSurname = this.employer.sname;
           this.employerId = this.employer.id;
+          this.employerPhone = this.employer.number;
           this.getChildren();
       },
       error=>{console.log("Error has occured with API: " + error);}

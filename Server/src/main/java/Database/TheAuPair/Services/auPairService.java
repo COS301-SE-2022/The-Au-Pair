@@ -17,4 +17,19 @@ public class auPairService
     auPair ap =  apr.findUsingId(id);
     return ap;
   }
+
+  public void updateAuPair(auPair p)
+  {
+    apr.save(p);
+  }
+
+  public void deleteAuPair(String id)
+  {
+    apr.deleteById(id);
+  }
+
+  public void addAuPair(auPair a)
+  {
+    apr.save(a);
+  }
 }

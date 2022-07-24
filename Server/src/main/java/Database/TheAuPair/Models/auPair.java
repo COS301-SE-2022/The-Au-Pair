@@ -22,8 +22,12 @@ public class auPair
   private boolean onShift;
   @Field("employer")
   private String employer;
+  @Field("bio")
+  private String bio;
+  @Field("experience")
+  private String experience;
 
-  public auPair(String id, double rating, double payRate, double distTraveled, double costIncurred, boolean onShift, String employer)
+  public auPair(String id, double rating, double payRate, double distTraveled, double costIncurred, boolean onShift, String employer, String bio, String experience)
   {
     this.id = id;
     this.rating = rating;
@@ -32,6 +36,8 @@ public class auPair
     this.costIncurred = costIncurred;
     this.onShift = onShift;
     this.employer = employer;
+    this.bio = bio;
+    this.experience = experience;
   }
 
   public String getId()
@@ -104,6 +110,26 @@ public class auPair
     this.employer = employer;
   }
 
+  public String getBio()
+  {
+    return bio;
+  }
+
+  public void setBio(String bio)
+  {
+    this.bio = bio;
+  }
+
+  public String getExperience()
+  {
+    return experience;
+  }
+
+  public void setExperience(String experience)
+  {
+    this.experience = experience;
+  }
+
   @Override
   public String toString()
   {
@@ -114,7 +140,10 @@ public class auPair
       ", distTraveled=" + distTraveled +
       ", costIncurred=" + costIncurred +
       ", onShift=" + onShift +
-      ", employer='" + employer + '\'' +
+      ", employer='" + employer +
+      ", bio='" + bio +
+      ", experience='" + experience +
+      '\'' +
       '}';
   }
 }

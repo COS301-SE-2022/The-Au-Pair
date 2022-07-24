@@ -22,4 +22,25 @@ public class auPairController
     auPair ap =  aps.getAuPair(id);
     return ap;
   }
+
+  @PostMapping("/editAuPair")
+  @CrossOrigin(origins = "http://localhost:4200")
+  public void editAuPair(@RequestBody auPair p)
+  {
+    this.aps.updateAuPair(p);
+  }
+
+  @PostMapping("/removeAuPair")
+  @CrossOrigin(origins = "http://localhost:4200")
+  public void removeAuPair(@RequestBody String id)
+  {
+    this.aps.deleteAuPair(id);
+  }
+
+  @PostMapping("/addAuPair")
+  @CrossOrigin(origins = "http://localhost:4200")
+  public void addAuPair(@RequestBody auPair a)
+  {
+    this.aps.addAuPair(a);
+  }
 }

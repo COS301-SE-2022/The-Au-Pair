@@ -24,7 +24,7 @@ describe('ParentEditActivityComponent', () => {
   const emptyBudget = {activityName: "AI", description: "AI Lesson", location: "UP", dayOfWeek: "Wednesday", timeSlot: "13:00-14:00", budget: "", childId:"8675945310542"};
   const emptyChild = {activityName: "AI", description: "AI Lesson", location: "UP", dayOfWeek: "Wednesday", timeSlot: "13:00-14:00", budget: "0", childId:""};
 
-  //Invalid activity to be updates
+  //Invalid activity to be updated
   const invalidActivity = {id: "invalidId", name: "AI", description: "AI Lesson", location: "UP", timeStart:"13:00", timeEnd: "14:00",  budget: 0.0 ,comment: "", behavior: 0, day: "Wednesday", child:"8675945310542"};
 
   beforeEach(async () => {
@@ -56,30 +56,6 @@ describe('ParentEditActivityComponent', () => {
     const expectedValue = undefined;
     jest.spyOn(component,"editActivity");
     expect(await component.editActivity(invalidActivity)).toEqual(expectedValue);
-  })
-
-  //------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-  /**Populated form fields form testing**/
-  it('should, given valid input from the form, update the activityDetails variable', async ()=>{
-    const expectedValue: Activity = {
-      id: "",
-      name: "AI",
-      description: "AI Lesson",
-      location:"UP",
-      timeStart: "13:00",
-      timeEnd: "14:00",
-      budget: 0.0,
-      comment: "",
-      behavior: 0,
-      day: "Wednesday",
-      child: "8675945310542",
-    };
-
-    jest.spyOn(component,"getActivityValues");
-
-    await component.getActivityValues(populatedForm);
-
-    expect(component.activityDetails).toEqual(expectedValue);
   })
 
   //------------------------------------------------------------------------------------------------------------------------------------------------------------------------

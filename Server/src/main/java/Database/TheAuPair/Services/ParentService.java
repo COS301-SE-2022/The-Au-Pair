@@ -22,4 +22,9 @@ public class ParentService
   {
     pr.save(p);
   }
+
+  public void addParent(Parent p)
+  {
+    pr.save(p);
+  }
 }

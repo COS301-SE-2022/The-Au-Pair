@@ -21,7 +21,7 @@ public class UserRepositoryTests
   @BeforeEach
   public void setup()
   {
-    expectedUser = new User("","","","","",true,1,"","");
+    expectedUser = new User("","","","","",true,1,"","","");
     id = "7542108615984";
   }
 

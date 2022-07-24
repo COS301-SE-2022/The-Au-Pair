@@ -1,5 +1,5 @@
 import { Component} from '@angular/core';
-import { ChildActivationStart, Router } from '@angular/router';
+import { Router } from '@angular/router';
 import { ToastController } from '@ionic/angular';
 import { API } from '../../../../shared/api/api.service';
 import { Child, Parent } from '../../../../shared/interfaces/interfaces';

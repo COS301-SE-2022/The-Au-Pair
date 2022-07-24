@@ -1,0 +1,233 @@
+.profile-name {
+    font-size: 3.6vw;
+    padding-top: 2%;
+    margin-bottom: 2%;
+    color: var(--ion-color-dark);
+    text-align: center;
+    font-family: TitanOne;
+    margin-top: 0px;
+}
+
+.parent-profile-div{
+    width: 90%;
+    margin-top: 60px;
+    margin-left: auto;
+    margin-right: auto;
+    background-color: #69A88DB2;
+    border-radius: 16px;
+    margin-bottom: 60px;
+}
+
+.profile-picture-div{
+    width: 33.3%;
+    height: 100%;
+    float: left;
+}
+
+.details-div{
+    width: 40%;
+    height: 100%;
+    margin-left: auto;
+    margin-right: auto;
+    padding-bottom: 25px;
+}
+
+.empty-div{
+    width: 33.3%;
+    height: 100%;
+    float: right;
+}
+
+.profile-picture-wrapper{
+    width: 62%;
+    height: 40%;
+    background-color: rgba($color: #032927BF, $alpha: 0.75);
+    border-radius: 16px;
+    align-items: center;
+    justify-items: center;
+    text-align: center;
+    left: 9%;
+    margin: auto;
+    display: block;
+    margin-bottom: 40px;
+}
+
+.profile-picture {
+    width: 80%;
+    height: 100%;
+}
+
+.parent-info-small{
+    height: 6%;
+    background-color: var(--ion-background-color);
+    display:flex;
+    font-family: Roboto;
+    align-items: center;
+    color: var(--ion-color-tertiary);
+    margin-bottom: 12px;
+    box-shadow: 1px 2px 5px rgba(0, 0, 0, 0.13);
+    border-radius: 6px;
+}
+
+.parent-info-large{
+    height: 26%;
+    background-color: var(--ion-background-color);
+    display:flex;
+    margin-top: 10px;
+    font-family: Roboto;
+    color: #79BA9E;
+    margin-bottom: 12px;
+    box-shadow: 1px 2px 5px rgba(0, 0, 0, 0.13);
+    border-radius: 6px;
+}
+
+.parent-text{
+    margin-left: 12px;
+    font-size: 100%;
+    width: 35%;
+    margin: 10px;
+}
+
+.parent-text-info{
+    color: var(--ion-color-dark);
+    font-size: 100%;
+    margin-right: auto;
+    line-height: 170%;
+    margin-top: auto;
+    margin-bottom: auto;
+}
+
+.parent-text-info2{
+    color: var(--ion-color-dark);
+    font-size: 100%;
+    margin-right: auto;
+    line-height: 170%;
+    margin-top: auto;
+    margin-bottom: auto;
+}
+
+.change-button{
+    padding: 10px 22px;
+    gap: 10px;
+    border: 2px solid var(--ion-color-secondary);
+    border-radius: 10px;
+    background-color: #69A88DB2;
+    margin: auto;
+    display: block;
+    margin-top: 25px;
+}
+
+#active-2{
+    position: absolute;
+    width: 160px;
+    height: 160px;
+    margin-top: -160px;
+    opacity: 0.14;
+    z-index: -10;
+}
+
+#active{
+    position: absolute;
+    width: 130px;
+    height: 130px;
+    right: 150px;
+    margin-top: -200px;
+    opacity: 0.14;
+    z-index: -10;
+}
+
+#lifestyles{
+    position: absolute;
+    width: 280px;
+    height: 280px;
+    right: 400px;
+    top: 0px;
+    margin-top: 120px;
+    opacity: 0.14;
+    z-index: -10;
+}
+
+@media (max-width: 642px) {
+    #active{
+        right: 15px;
+    }
+    
+    #lifestyles{
+        display: none;
+    }
+
+    .parent-profile-div{
+        margin-top: 13px;
+    }
+
+    .profile-name{
+        font-size: 36px;
+        padding-top: 15px;
+        padding-bottom: 15px;
+    }
+
+    .parent-text{
+        width: 30%;
+        font-size: 15px;
+    }
+
+    .parent-text-info{
+        font-size: 15px;
+    }
+
+    .parent-text-info2{
+        padding-top: 5px;
+    }
+
+    .details-div{
+        width: 75%;
+    }
+}
+
+@media (max-width: 810px) {
+    
+    #active{
+        right: 35px;
+    }
+    
+    #lifestyles{
+        display: none;
+    }
+    
+    #lifestyles{
+        display: none;
+    }
+
+    .parent-profile-div{
+        margin-top: 13px;
+    }
+
+    .profile-name{
+        font-size: 36px;
+        padding-top: 15px;
+        padding-bottom: 15px;
+    }
+
+    .parent-text{
+        width: 30%;
+        font-size: 15px;
+    }
+
+    .parent-text-info{
+        font-size: 15px;
+    }
+
+    .parent-text-info2{
+        padding-top: 5px;
+    }
+
+    .details-div{
+        width: 75%;
+    }
+}
+
+@media (max-width: 1240px) {
+    .empty-div{
+        width: 0%;
+    }
+}
