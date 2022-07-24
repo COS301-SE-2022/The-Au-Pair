@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { API } from '../../../../shared/api/api.service';
 import { ExpandModalComponent } from './expand-modal/expand-modal.component';
 import { ModalController } from '@ionic/angular';
+import { MenuController } from '@ionic/angular';
 
 @Component({
   selector: 'the-au-pair-explore',
@@ -19,10 +20,11 @@ export class ExploreComponent implements OnInit {
     sname: "",
     address: "",
     employer: "",
+    registered: "",
   }
   AuPairArray : any[] = [];
 
-  constructor(private serv: API, private modalCtrl : ModalController){}
+  constructor(private serv: API, private modalCtrl : ModalController, private menuController : MenuController){}
 
   ngOnInit(): void
   {
@@ -53,13 +55,14 @@ export class ExploreComponent implements OnInit {
             sname: res.sname,
             address: res.address,
             employer: ap.employer,
+            registered: res.registered,
           }
           // Logic for explore that will only show Au Pairs whom are not yet employed
           // This will be added after hiring and terminating is complete
-          /* if(ap.employer == "")
-          {
-            this.AuPairArray.push(auPairDetails);
-          } */
+          // if(ap.employer == "" && res.registered == true)
+          // {
+          //   this.AuPairArray.push(auPairDetails);
+          // }
 
           // This will be removed after hiring and terminating is added
           this.AuPairArray.push(auPairDetails);
@@ -78,6 +81,16 @@ export class ExploreComponent implements OnInit {
     });
     await modal.present();
   }
+
+  openMenu()
+  {
+    // console.log('Here')
+    this.menuController.toggle('start');
+  }
+
+  closeMenu()
+  {
+    // console.log('Here')
+    this.menuController.close('start');
+  }
 }
-
-
