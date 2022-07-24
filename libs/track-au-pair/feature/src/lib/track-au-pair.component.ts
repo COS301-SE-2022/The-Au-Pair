@@ -76,7 +76,7 @@ export class TrackAuPairComponent implements OnInit {
     this.leafletMap.setView([this.lat, this.long], this.zoom);
 
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-      maxZoom: 15,
+      maxZoom: 17,
       minZoom: 1,
       attribution: '&copy; <a href="https://www.openstreetmap.org/copyright%22%3EOpenStreetMap</a> contributors'
     }).addTo(this.leafletMap);
@@ -98,13 +98,27 @@ export class TrackAuPairComponent implements OnInit {
 
   putMarker()
   {    
-    //Put the marker and style the icon
-    L.marker(
-      [this.auPairDetails.currentLat, this.auPairDetails.currentLong],
-      {icon: new L.Icon({iconUrl: 'https://unpkg.com/leaflet@1.8.0/dist/images/marker-icon.png'})
-    }).addTo(this.leafletMap);
-    // this.leafletMap.flyTo([this.auPairDetails.currentLong, this.auPairDetails.currentLong], 8);
-    this.leafletMap.setView(new L.LatLng(this.auPairDetails.currentLat, this.auPairDetails.currentLong), 14, { animation: true });
+    //Only show location if the au pair is on shift
+    if(this.auPairDetails.onShift)
+    {
+      //Put the marker and style the icon
+      L.marker(
+        [this.auPairDetails.currentLat, this.auPairDetails.currentLong],
+        {icon: new L.Icon({iconUrl: 'https://unpkg.com/leaflet@1.8.0/dist/images/marker-icon.png'})
+      }).addTo(this.leafletMap);
+      // this.leafletMap.flyTo([this.auPairDetails.currentLong, this.auPairDetails.currentLong], 8);
+      this.leafletMap.setView(new L.LatLng(this.auPairDetails.currentLat, this.auPairDetails.currentLong), 14, { animation: true });
+    }
+    else
+    {
+      const dom = document.getElementById("auPairStatus");
+      if(dom != null)
+      {
+        dom.innerHTML = "Your Au Pair is currently not on shift, and their location cannot currently be shown.";
+        dom.style.display = "flex";
+      }
+    
+    }
   }
 
 }
