@@ -63,7 +63,7 @@ export class RegisterComponent {
       phone : ['', Validators.compose([Validators.maxLength(30), Validators.pattern('^(\\+27|0)[6-8][0-9]{8}$'), Validators.required])],
       id : ['', Validators.compose([Validators.maxLength(13), Validators.pattern('(((\\d{2}((0[13578]|1[02])(0[1-9]|[12]\\d|3[01])|(0[13456789]|1[012])(0[1-9]|[12]\\d|30)|02(0[1-9]|1\\d|2[0-8])))|([02468][048]|[13579][26])0229))(( |-)(\\d{4})( |-)(\\d{3})|(\\d{7}))'), Validators.required])],
       medAid : ['', Validators.compose([Validators.maxLength(30), Validators.pattern('\\d*'), Validators.required])],
-      address : ['', Validators.compose([Validators.maxLength(30), Validators.required])],
+      // address : ['', Validators.compose([Validators.maxLength(30), Validators.required])],
       pass : ['', Validators.compose([Validators.maxLength(20), Validators.pattern('^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$'), Validators.required])],
       confPass : ['', Validators.compose([Validators.maxLength(30), Validators.pattern('^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$'), Validators.required])],
     });
@@ -79,175 +79,49 @@ export class RegisterComponent {
     this.notSamePasswords = true;
     let formError = false;
 
-    let dom = document.getElementById("nameError");
-    if(!this.parentRegisterDetailsForm.controls['name'].valid)
-    {
-      formError = true
-      if(dom != null)
-      {
-        dom.innerHTML = "Name is empty";
-        dom.style.display = "block";
-      }
-    }
-    else
-    {
-      if(dom != null)
-      {
-        dom.style.display = "none";
-      }
-    }
-
-    dom = document.getElementById("snameError");
-    if(!this.parentRegisterDetailsForm.controls['surname'].valid)
-    {
-      formError = true
-      if(dom != null)
-      {
-        dom.innerHTML = "Surname is empty";
-        dom.style.display = "block";
-      }
-    }
-    else
-    {
-      if(dom != null)
-      {
-        dom.style.display = "none";
-      }
-    }
-
-    dom = document.getElementById("emailError");
-    if(!this.parentRegisterDetailsForm.controls['email'].valid)
-    {
-      formError = true
-      if(dom != null)
-      {
-        dom.innerHTML = "Invalid email";
-        dom.style.display = "block";
-      }
-    }
-    else
-    {
-      if(dom != null)
-      {
-        dom.style.display = "none";
-      }
-    }
-
-    dom = document.getElementById("numberError");
-    if(!this.parentRegisterDetailsForm.controls['phone'].valid)
-    {
-      formError = true
-      if(dom != null)
-      {
-        dom.innerHTML = "Invalid phone number";
-        dom.style.display = "block";
-      }
-    }
-    else
-    {
-      if(dom != null)
-      {
-        dom.style.display = "none";
-      }
-    }
-
-    dom = document.getElementById("idError");
-    if(!this.parentRegisterDetailsForm.controls['id'].valid)
-    {
-      formError = true
-      if(dom != null)
-      {
-        dom.innerHTML = "Invalid ID";
-        dom.style.display = "block";
-      }
-    }
-    else
-    {
-      if(dom != null)
-      {
-        dom.style.display = "none";
-      }
-    }
-
     if(this.parentChosen)
     {
-      dom = document.getElementById("medError");
-      if(!this.parentRegisterDetailsForm.controls['medAid'].valid)
-      {
-        formError = true
-        if(dom != null)
-        {
-          dom.innerHTML = "Invalid medical aid number";
-          dom.style.display = "block";
-        }
-      }
-      else
-      {
-        if(dom != null)
-        {
-          dom.style.display = "none";
-        }
-      }
+
     }
 
-    dom = document.getElementById("addrError");
-    if(dom != null)
-    {
-      this.getLocations();
-      if (this.potentialLocations.indexOf(this.parentRegisterDetailsForm.value.address) == -1)
-      {
-        formError = true
-        this.locationError = true;
-        dom.innerHTML = "Please select a valid location from the suggested below.";
-        dom.style.display = "block";
-      }
-      else
-      {
-        this.locationError = false;
-        if(dom != null)
-        {
-          dom.style.display = "none";
-        }
-      }
-    }
+    // dom = document.getElementById("addrError");
+    // if(dom != null)
+    // {
+    //   this.getLocations();
+    //   if (this.potentialLocations.indexOf(this.parentRegisterDetailsForm.value.address) == -1)
+    //   {
+    //     formError = true
+    //     this.locationError = true;
+    //     dom.innerHTML = "Please select a valid location from the suggested below.";
+    //     dom.style.display = "block";
+    //   }
+    //   else
+    //   {
+    //     this.locationError = false;
+    //     if(dom != null)
+    //     {
+    //       dom.style.display = "none";
+    //     }
+    //   }
+    // }
 
-    dom = document.getElementById("pswError");
-    if(!this.parentRegisterDetailsForm.controls['pass'].valid)
-    {
-      formError = true
-      if(dom != null)
-      {
-        dom.innerHTML = "Invalid password : should be of minimum length 8 and contain upper and lowercase characters as well as special characters and numbers";
-        dom.style.display = "block";
-      }
-    }
-    else
-    {
-      if(dom != null)
-      {
-        dom.style.display = "none";
-      }
-    }
-
-    dom = document.getElementById("cpswError");
-    if(this.parentRegisterDetailsForm.get('pass')?.value !== this.parentRegisterDetailsForm.get('confPass')?.value)
-    {
-      formError = true
-      this.notSamePasswords = true;
-      if(dom != null)
-      {
-        dom.innerHTML = "Passwords do not match";
-        dom.style.display = "block";
-      }
-    }
-    else
-    {
-      this.notSamePasswords = false;
-      if(dom != null)
-      {
-        dom.style.display = "none";
-      }
-    }
+    // dom = document.getElementById("pswError");
+    // if(!this.parentRegisterDetailsForm.controls['pass'].valid)
+    // {
+    //   formError = true
+    //   if(dom != null)
+    //   {
+    //     dom.innerHTML = "Invalid password : should be of minimum length 8 and contain upper and lowercase characters as well as special characters and numbers";
+    //     dom.style.display = "block";
+    //   }
+    // }
+    // else
+    // {
+    //   if(dom != null)
+    //   {
+    //     dom.style.display = "none";
+    //   }
+    // }
 
     if(!formError)
     {
