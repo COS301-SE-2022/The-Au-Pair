@@ -35,7 +35,8 @@ export class AppComponent implements OnInit
   {
     //if user is an auPair
     setInterval(()=> {
-      this.updateCoordinates();
+      if(this.auPairDetails.onShift == true)
+        this.updateCoordinates();
         }, 5000);
   }
 
