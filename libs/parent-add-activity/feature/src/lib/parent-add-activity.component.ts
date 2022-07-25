@@ -240,11 +240,8 @@ export class ParentAddActivityComponent implements OnInit{
 
   getChildren()
   {
-    console.log("Getting children"+this.paretnID
-    );
     this.serv.getParent(this.paretnID).subscribe(
       res=>{
-          console.log("The response is:" + res); 
           this.allChildren = res.children;
       },
       error=>{
