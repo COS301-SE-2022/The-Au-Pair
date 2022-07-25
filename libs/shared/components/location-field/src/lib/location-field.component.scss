@@ -43,13 +43,10 @@
 
 .form-input:focus ~ .form-label,
 .form-input:not(:placeholder-shown).form-input:not(:focus) ~ .form-label {
-  top: 3rem;
+  top: 2rem;
   left: 0rem;
   opacity: 1;
   font-size: 15px;
-  background-color: var(--ion-color-light-white);
-  border-radius: 10px;
-  line-height: 30px;
 }
 
 .error{
