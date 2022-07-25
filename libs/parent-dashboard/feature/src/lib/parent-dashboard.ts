@@ -22,16 +22,20 @@ export class ParentDashboardComponent implements OnInit{
     auPair: "",
   }
 
-  childDetails: Child = {
-    id: "",
-    fname: "",
-    sname: "",
-    allergies: "",
-    diet: "",
-    parent: "",
+  userDetails: User = {
+    id: '',
+    fname: '',
+    sname: '',
+    email: '',
+    address: '',
+    registered: false,
+    type: 0,
+    password: '',
+    number: '',
+    salt: ''
   }
 
-  userDetails: User = {
+  auPairDetails: User = {
     id: "",
     fname: "",
     sname: "",
@@ -44,19 +48,7 @@ export class ParentDashboardComponent implements OnInit{
     salt: "",
   }
 
-  auPairDetails: auPair = {
-    id: "",
-    rating: 0,
-    onShift: false,
-    employer: "",
-    costIncurred: 0,
-    distTraveled: 0,
-    payRate: 0,
-    bio: "",
-    experience: "",
-  }
-
-  constructor(private serv: API, private modalCtrl : ModalController, public store : Store, public toastCtrl : ToastController){}
+  constructor(private serv: API, private modalCtrl : ModalController, private store: Store, public toastCtrl: ToastController){}
 
   async openModal(actId : string) {
     const modal = await this.modalCtrl.create({
@@ -68,61 +60,60 @@ export class ParentDashboardComponent implements OnInit{
     await modal.present();
   }
 
-  ngOnInit(): void
+  async ngOnInit()
   {
     this.parentID = this.store.snapshot().user.id;
-    this.getParentDetails();
-  }
 
-  async getParentDetails()
-  {
-    await this.serv.getParent(this.parentID).subscribe(
+    await this.serv.getUser(this.parentID).toPromise()
+    .then( 
       res=>{
-        this.parentDetails.id = res.id;       
-        this.parentID = res.id;
-        this.parentDetails.children = res.cildren;
-        this.parentDetails.medID = res.medID;
-        this.parentDetails.auPair = res.auPair;
+        this.userDetails.id = res.id;
+        this.userDetails.fname = res.fname;
+        this.userDetails.sname = res.sname;
+        this.userDetails.email = res.email;
+        this.userDetails.address = res.address;
+        this.userDetails.number = res.number;
       },
-      error=>{console.log("Error has occured with API: " + error);}
+      error => {
+        console.log("Error has occured with API: " + error);
+      }
     )
+    
+    await this.serv.getParent(this.parentID)
+    .toPromise()
+      .then( 
+        res=>{
+          this.parentDetails.id = res.id;      
+          this.parentID = res.id;
+          this.parentDetails.children = res.children;
+          this.parentDetails.medID = res.medID;
+          this.parentDetails.auPair = res.auPair;
+      },
+      error => {
+        console.log("Error has occured with API: " + error);
+      }
+    )
+
     if(this.parentDetails.auPair != "")
     {
-      await this.serv.getUser(this.parentID).subscribe(
-        res=>{
-          this.userDetails.id = res.id;
-          this.userDetails.fname = res.fname;
-          this.userDetails.sname = res.sname;
-          this.userDetails.email = res.email;
-          this.userDetails.address = res.address;
-          this.userDetails.registered = res.registered;
-          this.userDetails.type = res.type;
-          this.userDetails.password = res.password;
-          this.userDetails.number = res.number;
-          this.userDetails.salt = res.salt;
-        },
-        error=>{console.log("Error has occured with API: " + error);}
-      )
-
-      await this.serv.getAuPair(this.parentDetails.auPair).subscribe(
-        res=>{
+      await this.serv.getUser(this.parentDetails.auPair)
+      .toPromise()
+      .then(
+        res => {
           this.auPairDetails.id = res.id;
-          this.auPairDetails.rating = res.rating;
-          this.auPairDetails.onShift = res.onShift;
-          this.auPairDetails.employer = res.employer;
-          this.auPairDetails.costIncurred = res.costIncurred;
-          this.auPairDetails.distTraveled = res.distTraveled;
-          this.auPairDetails.payRate = res.payRate;
-          this.auPairDetails.bio = res.bio;
-          this.auPairDetails.experience = res.experience;
+          this.auPairDetails.fname = res.fname;
+          this.auPairDetails.sname = res.sname;
+          this.auPairDetails.email = res.email;
+          this.auPairDetails.address = res.address;
+          this.auPairDetails.number = res.number;
         },
-        error=>{console.log("Error has occured with API: " + error);}
+        error => { 
+          console.log("Error has occured with API: " + error);
+        }
       )
     }
-    if(this.parentDetails.children != undefined)
-    {
-      this.getChildren()
-    }
+
+    this.getChildren();
   }
 
   async getChildren(){
@@ -131,7 +122,7 @@ export class ParentDashboardComponent implements OnInit{
         let i = 0;
         res.forEach((element: string) => {
           this.children[i++] = element;
-        });        
+        });
       },
       error =>{console.log("Error has occured with API: " + error);}
     )

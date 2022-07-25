@@ -5,9 +5,9 @@
         <p class='welcome-heading'>Welcome {{this.userDetails.fname}}</p>
 
         <div class="au-pair-div-wrapper">
-            <div class='au-pair-name' *ngIf='this.parentDetails.auPair != ""; else noaupair'>Au Pair: {{this.userDetails.fname}} {{this.userDetails.sname}>
-                <a href = 'tel:{{this.userDetails.number}}'><ion-icon name="call" class = 'call-icon'></ion-icon></a>
-                <a href = 'sms:{{this.userDetails.number}}'><ion-icon name="chatbubble-ellipses" class = 'message-icon'></ion-icon></a>
+            <div class='au-pair-name' *ngIf='this.parentDetails.auPair != ""; else noaupair'>Au Pair: {{this.auPairDetails.fname}} {{this.auPairDetails.sname}}
+                <a href = 'tel:{{this.auPairDetails.number}}'><ion-icon name="call" class = 'call-icon'></ion-icon></a>
+                <a href = 'sms:{{this.auPairDetails.number}}'><ion-icon name="chatbubble-ellipses" class = 'message-icon'></ion-icon></a>
                 <ion-icon class="rating-icon" name="star" (click)="openModal(this.userDetails.id)"></ion-icon>
             </div>
             <ng-template #noaupair>
