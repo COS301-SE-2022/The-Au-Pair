@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { API } from '../../../../shared/api/api.service';
-import { Parent, User } from '../../../../shared/interfaces/interfaces';
+import { Child, Parent, User } from '../../../../shared/interfaces/interfaces';
 import { AuPairRatingModalComponent } from './au-pair-rating-modal/au-pair-rating-modal.component';
 import { ModalController, ToastController } from '@ionic/angular';
 import { Store } from '@ngxs/store';
@@ -12,7 +12,7 @@ import { Store } from '@ngxs/store';
 })
 export class ParentDashboardComponent implements OnInit{
 
-  children: any[] = [];
+  children: Child[] = [];
   parentID = "";
 
   parentDetails: Parent = {
@@ -120,7 +120,7 @@ export class ParentDashboardComponent implements OnInit{
     this.serv.getChildren(this.parentID).subscribe(
       res=>{
         let i = 0;
-        res.forEach((element: string) => {
+        res.forEach((element: Child) => {
           this.children[i++] = element;
         });
       },
