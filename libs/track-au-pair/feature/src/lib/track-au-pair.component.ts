@@ -8,8 +8,9 @@ import * as L from 'leaflet'
   templateUrl: './track-au-pair.component.html',
   styleUrls: ['./track-au-pair.component.scss'],
 })
-export class TrackAuPairComponent implements OnInit {
 
+export class TrackAuPairComponent implements OnInit 
+{
   //Map variables
   leafletMap : any;
   lat = -26;
@@ -51,15 +52,20 @@ export class TrackAuPairComponent implements OnInit {
     currentLat : 0.0
   }
 
-  constructor(private serv : API) {}
-
-  async ngOnInit(): Promise<void> {
-    this.loadLeafletMap();
-    await this.getParentDetails();
-    this.putMarker();
+  constructor(private serv : API) 
+  {
+    setInterval(()=> {
+      this.getUserDetails();
+      this.putMarker();
+     }, 5000);
   }
 
-  
+  async ngOnInit(): Promise<void> 
+  { 
+    this.loadLeafletMap();
+    await this.getUserDetails();
+    this.putMarker();
+  }
 
   loadLeafletMap() 
   {
@@ -82,7 +88,7 @@ export class TrackAuPairComponent implements OnInit {
     }).addTo(this.leafletMap);
   }
 
-  async getParentDetails()
+  async getUserDetails()
   {
     /* Find logged in user's au pair */
     let res = await this.serv.getParent("4561237814867").toPromise();
@@ -94,6 +100,7 @@ export class TrackAuPairComponent implements OnInit {
     this.auPairDetails.onShift = res.onShift;
     this.auPairDetails.currentLong = res.currentLong;
     this.auPairDetails.currentLat = res.currentLat;
+    console.log("Current location: ", this.auPairDetails.currentLat, " , ", this.auPairDetails.currentLong);
   };
 
   putMarker()
@@ -117,8 +124,6 @@ export class TrackAuPairComponent implements OnInit {
         dom.innerHTML = "Your Au Pair is currently not on shift, and their location cannot currently be shown.";
         dom.style.display = "flex";
       }
-    
     }
   }
-
 }
