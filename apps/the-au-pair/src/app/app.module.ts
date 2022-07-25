@@ -6,6 +6,8 @@ import { AppComponent } from './app.component';
 import { HttpClientModule } from '@angular/common/http';
 import { NgxsModule } from '@ngxs/store';
 import { AppState } from '../../../../libs/shared/ngxs/state';
+import { API } from '../../../../libs/shared/api/api.service';
+import { Geolocation } from '@awesome-cordova-plugins/geolocation/ngx';
 
 @NgModule({
   declarations: [AppComponent],
@@ -20,5 +22,6 @@ import { AppState } from '../../../../libs/shared/ngxs/state';
     ]),
   ],
   bootstrap: [AppComponent],
+  providers: [API, Geolocation]
 })
 export class AppModule {}

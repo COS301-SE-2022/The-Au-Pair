@@ -3,11 +3,6 @@ import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 
 const routes: Routes = [
   {
-    path: 'home',
-    loadChildren: () =>
-      import('@the-au-pair/home/feature').then((m) => m.HomePageModule),
-  },
-  {
     path: 'schedule',
     loadChildren: () =>
       import('@the-au-pair/schedule/feature').then((m) => m.ScheduleFeatureModule),

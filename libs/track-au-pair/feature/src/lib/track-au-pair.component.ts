@@ -100,7 +100,6 @@ export class TrackAuPairComponent implements OnInit
     this.auPairDetails.onShift = res.onShift;
     this.auPairDetails.currentLong = res.currentLong;
     this.auPairDetails.currentLat = res.currentLat;
-    console.log("Current location: ", this.auPairDetails.currentLat, " , ", this.auPairDetails.currentLong);
   };
 
   putMarker()
