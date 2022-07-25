@@ -3,7 +3,7 @@ import { DatePipe } from '@angular/common';
 import { API } from '../../../../shared/api/api.service';
 import { Router } from '@angular/router';
 import { Store } from '@ngxs/store';
-import { Activity } from 'libs/shared/interfaces/interfaces';
+import { Activity } from '../../../../shared/interfaces/interfaces';
 
 @Component({
   selector: 'the-au-pair-schedule',
