@@ -7,6 +7,8 @@ import { NavbarModule } from '@the-au-pair/shared/components/navbar';
 import { API } from '../../../../shared/api/api.service';
 import { IonicModule } from '@ionic/angular';
 import { Child } from '../../../../shared/interfaces/interfaces';
+import { NgxsModule } from '@ngxs/store';
+import { AppState } from '../../../../shared/ngxs/state';
 
 describe('AddChildComponent', () => {
   let component: AddChildComponent;
@@ -30,7 +32,8 @@ describe('AddChildComponent', () => {
         IonicModule,
         HttpClientTestingModule,
         NavbarModule,
-        RouterTestingModule
+        RouterTestingModule,
+        NgxsModule.forRoot([AppState])
     ],
     providers: [API]
     }).compileComponents();
