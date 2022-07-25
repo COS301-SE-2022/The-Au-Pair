@@ -8,6 +8,7 @@ import { CommonModule } from '@angular/common';
 import { AuPairNavbarModule } from '@the-au-pair/shared/components/aupair-navbar';
 import { FormsModule } from '@angular/forms';
 import { NgxsModule } from '@ngxs/store';
+import { AppState } from 'libs/shared/ngxs/state';
 
 describe('AuPairScheduleComponent', () => {
   let component: AuPairScheduleComponent;
@@ -16,7 +17,7 @@ describe('AuPairScheduleComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [AuPairScheduleComponent],
-      imports: [IonicModule, CommonModule,HttpClientTestingModule,AuPairNavbarModule, RouterTestingModule, FormsModule,NgxsModule.forRoot()],
+      imports: [IonicModule, CommonModule,HttpClientTestingModule,AuPairNavbarModule, RouterTestingModule, FormsModule,NgxsModule.forRoot([AppState])],
       providers: [API,ModalController]
     }).compileComponents();
   });

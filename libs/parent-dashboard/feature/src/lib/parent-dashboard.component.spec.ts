@@ -8,6 +8,7 @@ import { RouterTestingModule} from '@angular/router/testing';
 import { API } from '../../../../shared/api/api.service';
 import { By } from '@angular/platform-browser';
 import { NgxsModule } from '@ngxs/store';
+import { AppState } from 'libs/shared/ngxs/state';
 
 describe('ParentProfileComponent', () => {
   let component: ParentDashboardComponent;
@@ -27,7 +28,7 @@ describe('ParentProfileComponent', () => {
         HttpClientTestingModule,
         NavbarModule,
         RouterTestingModule,
-        NgxsModule.forRoot()
+        NgxsModule.forRoot([AppState])
        ],
        providers:[API, ModalController]
     }).compileComponents();

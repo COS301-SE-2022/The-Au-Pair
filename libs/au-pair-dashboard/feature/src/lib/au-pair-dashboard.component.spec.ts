@@ -8,6 +8,7 @@ import { IonicModule } from '@ionic/angular';
 import { CommonModule } from '@angular/common';
 import { By } from '@angular/platform-browser';
 import { NgxsModule } from '@ngxs/store';
+import { AppState } from 'libs/shared/ngxs/state';
 
 describe('AuPairDashboardComponent', () => {
   let component: AuPairDashboardComponent;
@@ -15,7 +16,7 @@ describe('AuPairDashboardComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [HttpClientTestingModule, RouterTestingModule,AuPairNavbarModule,IonicModule, CommonModule,NgxsModule.forRoot()],
+      imports: [HttpClientTestingModule, RouterTestingModule,AuPairNavbarModule,IonicModule, CommonModule,NgxsModule.forRoot([AppState])],
       declarations: [AuPairDashboardComponent],
       providers: [API]
     }).compileComponents();

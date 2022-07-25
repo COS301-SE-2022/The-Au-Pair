@@ -6,6 +6,7 @@ import { IonicModule } from '@ionic/angular';
 import { NavbarModule } from '@the-au-pair/shared/components/navbar';
 import { RouterTestingModule} from '@angular/router/testing';
 import { NgxsModule } from '@ngxs/store';
+import { AppState } from 'libs/shared/ngxs/state';
 
 
 describe('AuPairCostComponent', () => {
@@ -15,7 +16,7 @@ describe('AuPairCostComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [AuPairCostComponent],
-      imports: [HttpClientTestingModule, IonicModule,NavbarModule, RouterTestingModule,NgxsModule.forRoot()],
+      imports: [HttpClientTestingModule, IonicModule,NavbarModule, RouterTestingModule,NgxsModule.forRoot([AppState])],
       providers: [API]
     }).compileComponents();
   });

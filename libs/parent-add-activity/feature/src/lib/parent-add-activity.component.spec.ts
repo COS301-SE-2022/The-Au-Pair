@@ -8,6 +8,7 @@ import {HttpClientTestingModule} from "@angular/common/http/testing";
 import { NavbarModule } from '@the-au-pair/shared/components/navbar';
 import { RouterTestingModule} from '@angular/router/testing';
 import { NgxsModule } from '@ngxs/store';
+import { AppState } from 'libs/shared/ngxs/state';
 
 
 describe('ParentAddActivityComponent', () => {
@@ -34,7 +35,7 @@ describe('ParentAddActivityComponent', () => {
          HttpClientTestingModule,
          NavbarModule,
          RouterTestingModule,
-         NgxsModule.forRoot()
+         NgxsModule.forRoot([AppState])
         ],
         providers:[API]
     }).compileComponents();

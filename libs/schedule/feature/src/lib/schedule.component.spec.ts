@@ -7,6 +7,7 @@ import { API } from '../../../../shared/api/api.service';
 import { NavbarModule } from '@the-au-pair/shared/components/navbar';
 import { RouterTestingModule} from '@angular/router/testing';
 import { NgxsModule } from '@ngxs/store';
+import { AppState } from 'libs/shared/ngxs/state';
 
 describe('ScheduleComponent', () => {
   let component: ScheduleComponent;
@@ -15,7 +16,7 @@ describe('ScheduleComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [ScheduleComponent],
-      imports: [IonicModule, CommonModule,HttpClientTestingModule,NavbarModule, RouterTestingModule.withRoutes,NgxsModule.forRoot()],
+      imports: [IonicModule, CommonModule,HttpClientTestingModule,NavbarModule, RouterTestingModule,NgxsModule.forRoot([AppState])],
       providers:[API]
     }).compileComponents();
   });
