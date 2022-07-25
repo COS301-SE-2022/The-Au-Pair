@@ -44,20 +44,26 @@ export class AuPairCostComponent implements OnInit {
   pieSplit = "";
 
   async ngOnInit() { 
-    this.parentID = this.store.snapshot().user.id;
-
-    await this.api.getParent(this.parentID)
-    .toPromise()
-    .then(
-      data => {
-        this.aupiarID = data.auPair;
-      }
-    )
-    .catch(
-      error => {
-        console.log("Error has occured with API: " + error);
-      }
-    )
+    if(this.store.snapshot().user.type === 2) 
+    {
+      this.aupiarID = this.store.snapshot().user.id;
+    }
+    else if (this.store.snapshot().user.type === 1) 
+    {
+      this.parentID = this.store.snapshot().user.id;
+      await this.api.getParent(this.parentID)
+      .toPromise()
+      .then(
+        data => {
+          this.aupiarID = data.auPair;
+        }
+      )
+      .catch(
+        error => {
+          console.log("Error has occured with API: " + error);
+        }
+      )
+    }
 
     this.api.getUser(this.aupiarID).subscribe( 
       data => { 
