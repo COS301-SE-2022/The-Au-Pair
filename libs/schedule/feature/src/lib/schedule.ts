@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { DatePipe } from '@angular/common';
 import { API } from '../../../../shared/api/api.service';
 import { Router } from '@angular/router';
+import { Store } from '@ngxs/store';
 
 @Component({
   selector: 'the-au-pair-schedule',
@@ -9,6 +10,7 @@ import { Router } from '@angular/router';
   styleUrls: ['schedule.scss'],
 })
 export class ScheduleComponent implements OnInit{
+  paretnID = "";
   days = [
     "Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"
   ]
@@ -17,9 +19,10 @@ export class ScheduleComponent implements OnInit{
   curDay =  this.getCurDay(this.days);
   activities: any;
 
-  constructor(private serv: API, private router: Router) {}
+  constructor(private serv: API, private router: Router, private store: Store) {}
 
   ngOnInit(): void {
+      this.paretnID = this.store.snapshot().user.id;
       this.getActivities();
   }
 
