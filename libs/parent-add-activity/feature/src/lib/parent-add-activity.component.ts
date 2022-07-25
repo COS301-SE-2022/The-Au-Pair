@@ -10,7 +10,7 @@ import { Store } from '@ngxs/store';
   styleUrls: ['./parent-add-activity.component.scss'],
 })
 export class ParentAddActivityComponent implements OnInit{
-  paretnID = "";
+  parentID = "";
   //Activity Model
   activityDetails: Activity = {
     id: "",
@@ -39,7 +39,7 @@ export class ParentAddActivityComponent implements OnInit{
   ngOnInit(): void 
   {
     //Call getChildren service
-    this.paretnID = this.store.snapshot().user.id;
+    this.parentID = this.store.snapshot().user.id;
     this.getChildren();
   }
 
@@ -240,7 +240,7 @@ export class ParentAddActivityComponent implements OnInit{
 
   getChildren()
   {
-    this.serv.getParent(this.paretnID).subscribe(
+    this.serv.getParent(this.parentID).subscribe(
       res=>{
           this.allChildren = res.children;
       },

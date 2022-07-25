@@ -13,7 +13,6 @@ export class AuPairRatingModalComponent implements OnInit {
   parentID = "";
   auPairId = "";
   public navParams = new NavParams;
-  // auPairId: string = this.navParams.get('auPairId');
   auPairRating! : number;
 
   currentAuPair: auPair = {

@@ -176,7 +176,7 @@ export class EditChildComponent implements OnInit {
       this.childDetails.sname= val.surname;
       this.childDetails.allergies= val.Allergies;
       this.childDetails.diet= val.diet;
-      this.childDetails.parent= this.store.snapshot().user.id; //Assumed logged in user for now
+      this.childDetails.parent= this.store.snapshot().user.id;
       this.childDetails.aupair = this.parent.auPair;
       this.updateChild(this.childDetails);
     }

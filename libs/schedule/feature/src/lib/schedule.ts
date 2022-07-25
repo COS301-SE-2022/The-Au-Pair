@@ -10,7 +10,7 @@ import { Store } from '@ngxs/store';
   styleUrls: ['schedule.scss'],
 })
 export class ScheduleComponent implements OnInit{
-  paretnID = "";
+  parentID = "";
   days = [
     "Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"
   ]
@@ -22,7 +22,7 @@ export class ScheduleComponent implements OnInit{
   constructor(private serv: API, private router: Router, private store: Store) {}
 
   ngOnInit(): void {
-      this.paretnID = this.store.snapshot().user.id;
+      this.parentID = this.store.snapshot().user.id;
       this.getActivities();
   }
 

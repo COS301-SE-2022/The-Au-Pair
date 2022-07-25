@@ -13,7 +13,7 @@ export class AuPairCostComponent implements OnInit {
   constructor(private api:API, private store: Store) { }
 
   parentID = "";
-  aupiarID = "";
+  aupairID = "";
   days = [
     "Mon","Tue","Wed","Thu","Fri","Sat","Sun"
   ];
@@ -46,7 +46,7 @@ export class AuPairCostComponent implements OnInit {
   async ngOnInit() { 
     if(this.store.snapshot().user.type === 2) 
     {
-      this.aupiarID = this.store.snapshot().user.id;
+      this.aupairID = this.store.snapshot().user.id;
     }
     else if (this.store.snapshot().user.type === 1) 
     {
@@ -55,7 +55,7 @@ export class AuPairCostComponent implements OnInit {
       .toPromise()
       .then(
         data => {
-          this.aupiarID = data.auPair;
+          this.aupairID = data.auPair;
         }
       )
       .catch(
@@ -65,7 +65,7 @@ export class AuPairCostComponent implements OnInit {
       )
     }
 
-    this.api.getUser(this.aupiarID).subscribe( 
+    this.api.getUser(this.aupairID).subscribe( 
       data => { 
         this.auPairName = data.fname
       },
@@ -74,7 +74,7 @@ export class AuPairCostComponent implements OnInit {
       }
     )
 
-    this.api.getMonthMinutes(this.aupiarID, this.getStartDateOfWeek(0)).subscribe( 
+    this.api.getMonthMinutes(this.aupairID, this.getStartDateOfWeek(0)).subscribe( 
       data => {
         this.totalHours = Number((data/60).toFixed(2));
       },
@@ -83,7 +83,7 @@ export class AuPairCostComponent implements OnInit {
       }
     )
 
-    this.api.getAuPair(this.aupiarID).subscribe( 
+    this.api.getAuPair(this.aupairID).subscribe( 
       data => { 
         this.hourlyRate = data.payRate;
         this.travelCost = data.distTraveled;
@@ -115,7 +115,7 @@ export class AuPairCostComponent implements OnInit {
     for (let i = 0; i < 7; i++) {
       
       const weekDay = this.getStartDateOfWeek(i);
-      this.api.getDateMinutes(this.aupiarID, weekDay).subscribe( 
+      this.api.getDateMinutes(this.aupairID, weekDay).subscribe( 
         data => {
           this.dayHoursWorked[i] = data/60;
         },

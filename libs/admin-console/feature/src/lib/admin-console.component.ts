@@ -1,8 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { API } from "../../../../shared/api/api.service";
 import { Store } from "@ngxs/store";
-import { Observable } from 'rxjs';
-import { JsonPipe } from '@angular/common';
 
 @Component({
   selector: 'the-au-pair-admin-console',
@@ -15,7 +13,6 @@ export class AdminConsoleComponent implements OnInit{
   
   constructor(private serv: API, public store:Store) {
     this.idNum = this.store.snapshot().user.id;
-    console.log(this.store.snapshot().user.id);
   }
 
   async ngOnInit(): Promise<void> {
