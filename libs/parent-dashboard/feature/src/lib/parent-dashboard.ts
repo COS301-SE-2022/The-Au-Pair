@@ -73,7 +73,7 @@ export class ParentDashboardComponent implements OnInit{
   ngOnInit(): void
   {
     this.parentID = this.store.snapshot().user.id;
-    this.getParentDetails()
+    this.getParentDetails();
   }
 
   async getParentDetails()
@@ -121,7 +121,7 @@ export class ParentDashboardComponent implements OnInit{
         error=>{console.log("Error has occured with API: " + error);}
       )
     }
-    if(this.parentDetails.children.length > 0)
+    if(this.parentDetails.children != undefined)
     {
       this.getChildren()
     }
@@ -133,9 +133,7 @@ export class ParentDashboardComponent implements OnInit{
         let i = 0;
         res.forEach((element: string) => {
           this.children[i++] = element;
-        });
-        console.log(this.children);
-        
+        });        
       },
       error =>{console.log("Error has occured with API: " + error);}
     )
