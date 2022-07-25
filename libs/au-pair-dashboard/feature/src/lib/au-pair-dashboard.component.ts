@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Store } from '@ngxs/store';
 import { API } from '../../../../shared/api/api.service'
 import { HoursLogged } from '../../../../shared/interfaces/interfaces';
 
@@ -10,6 +11,8 @@ import { HoursLogged } from '../../../../shared/interfaces/interfaces';
 })
 export class AuPairDashboardComponent implements OnInit {
   
+  aupairID = "";
+
   employer : any;
   employerName!: string;
   employerSurname! : string;
@@ -28,13 +31,15 @@ export class AuPairDashboardComponent implements OnInit {
     timeEnd: ""
   };
   
-  constructor(private serv: API) {}
+  constructor(private serv: API, private store: Store) {}
 
   async ngOnInit(): Promise<void> {
+    this.aupairID = this.store.snapshot().user.id;
+
     await this.getEmployer();
 
     const todaysDate = this.getToday();
-    this.serv.getStartedLog("7542108615984", todaysDate).subscribe( 
+    this.serv.getStartedLog(this.aupairID, todaysDate).subscribe( 
       data => {
         if(data == null || data == "") {
           this.alreadyLogging = false;
@@ -53,7 +58,7 @@ export class AuPairDashboardComponent implements OnInit {
   logSwitch() {
     if(this.alreadyLogging) {
       if(this.logID == null || this.logID == "") {
-        this.serv.getStartedLog("7542108615984", this.getToday()).subscribe( 
+        this.serv.getStartedLog(this.aupairID, this.getToday()).subscribe( 
           data => {
             this.logID = data;
           },
@@ -74,7 +79,7 @@ export class AuPairDashboardComponent implements OnInit {
       )
     }
     else {
-      this.hoursLogDetail.user = "7542108615984";
+      this.hoursLogDetail.user = this.aupairID;
       this.hoursLogDetail.date = this.getToday();
       this.hoursLogDetail.timeStart = this.getCurrentTime();
       this.serv.addHoursLog(this.hoursLogDetail).subscribe( 
@@ -108,7 +113,18 @@ export class AuPairDashboardComponent implements OnInit {
   }
 
   async getEmployer(){
-    this.serv.getUser("4561237814867").subscribe(
+    await this.serv.getAuPair(this.aupairID)
+    .toPromise()
+    .then(
+      res => {
+        this.employer = res.employer;
+      },
+      error => {
+        console.log("Error has occured with API: " + error);
+      }
+    )
+
+    this.serv.getUser(this.employer).subscribe(
       res=>{
           this.employer = res;
           this.employerName = this.employer.fname;
