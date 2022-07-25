@@ -1,6 +1,6 @@
 import { Component, OnInit} from '@angular/core';
 import { API } from '../../../../shared/api/api.service';
-import { Activity } from '../../../../shared/interfaces/interfaces';
+import { Activity, Child } from '../../../../shared/interfaces/interfaces';
 import { HttpClient } from '@angular/common/http';
 import { Store } from '@ngxs/store';
 
@@ -31,7 +31,7 @@ export class ParentAddActivityComponent implements OnInit{
   potentialLocations : string[] = [];
 
   //Children of logged in user
-  allChildren: any;
+  allChildren: Child[] = [];
 
   //Constructor
   constructor(private serv: API, private http: HttpClient, private store: Store) {}

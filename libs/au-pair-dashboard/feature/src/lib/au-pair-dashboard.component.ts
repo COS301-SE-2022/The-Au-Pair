@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngxs/store';
 import { API } from '../../../../shared/api/api.service'
-import { HoursLogged } from '../../../../shared/interfaces/interfaces';
+import { auPair, Child, HoursLogged } from '../../../../shared/interfaces/interfaces';
 
 @Component({
   selector: 'the-au-pair-au-pair-dashboard',
@@ -13,12 +13,12 @@ export class AuPairDashboardComponent implements OnInit {
   
   aupairID = "";
 
-  employer : any;
+  employer = "";
   employerName!: string;
   employerSurname! : string;
   employerId! : string;
   employerPhone! : string;
-  children: any[] = [];
+  children: Child[] = [];
 
   alreadyLogging = false;
   logID = "";
@@ -126,11 +126,10 @@ export class AuPairDashboardComponent implements OnInit {
 
     this.serv.getUser(this.employer).subscribe(
       res=>{
-          this.employer = res;
-          this.employerName = this.employer.fname;
-          this.employerSurname = this.employer.sname;
-          this.employerId = this.employer.id;
-          this.employerPhone = this.employer.number;
+          this.employerName = res.fname;
+          this.employerSurname = res.sname;
+          this.employerId = res.id;
+          this.employerPhone = res.number;
           this.getChildren();
       },
       error=>{console.log("Error has occured with API: " + error);}
@@ -141,7 +140,7 @@ export class AuPairDashboardComponent implements OnInit {
     this.serv.getChildren(this.employerId).subscribe(
       res=>{
         let i = 0;
-        res.forEach((element: string) => {
+        res.forEach((element: Child) => {
           this.children[i++] = element;
           
         });

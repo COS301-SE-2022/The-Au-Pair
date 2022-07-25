@@ -8,8 +8,8 @@ import { Store } from "@ngxs/store";
   styleUrls: ['./admin-console.component.scss'],
 })
 export class AdminConsoleComponent implements OnInit{
-  auPairs : any[] = [];
-  idNum : any;
+  auPairs : any [] = [];
+  idNum = "";
   
   constructor(private serv: API, public store:Store) {
     this.idNum = this.store.snapshot().user.id;
@@ -30,6 +30,7 @@ export class AdminConsoleComponent implements OnInit{
 
   resolve(userId : string, choice : boolean) {
     this.serv.resolveApplication(userId,choice).toPromise().then(res => {
+      console.log("The response is "+res);
       window.location.reload();
       return choice;
     }).catch(err => {

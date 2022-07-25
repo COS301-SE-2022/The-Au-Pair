@@ -9,7 +9,7 @@ import { API } from '../../../../shared/api/api.service';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { HttpClient, HttpHandler } from '@angular/common/http';
 import { NgxsModule } from '@ngxs/store';
-import { AppState } from 'libs/shared/ngxs/state';
+import { AppState } from '../../../../shared/ngxs/state';
  
 
 describe('LoginComponent', () => {

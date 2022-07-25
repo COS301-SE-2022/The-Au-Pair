@@ -8,7 +8,7 @@ import { CommonModule } from '@angular/common';
 import { AuPairNavbarModule } from '@the-au-pair/shared/components/aupair-navbar';
 import { FormsModule } from '@angular/forms';
 import { NgxsModule } from '@ngxs/store';
-import { AppState } from 'libs/shared/ngxs/state';
+import { AppState } from '../../../../shared/ngxs/state';
 
 describe('AuPairScheduleComponent', () => {
   let component: AuPairScheduleComponent;

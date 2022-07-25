@@ -3,6 +3,7 @@ import { DatePipe } from '@angular/common';
 import { API } from '../../../../shared/api/api.service';
 import { Router } from '@angular/router';
 import { Store } from '@ngxs/store';
+import { Activity } from 'libs/shared/interfaces/interfaces';
 
 @Component({
   selector: 'the-au-pair-schedule',
@@ -17,7 +18,7 @@ export class ScheduleComponent implements OnInit{
   actid = -1;
 
   curDay =  this.getCurDay(this.days);
-  activities: any;
+  activities: Activity[] = [];
 
   constructor(private serv: API, private router: Router, private store: Store) {}
 

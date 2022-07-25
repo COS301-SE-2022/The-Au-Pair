@@ -8,7 +8,7 @@ import { RouterTestingModule} from '@angular/router/testing';
 import { API } from '../../../../shared/api/api.service';
 import { By } from '@angular/platform-browser';
 import { NgxsModule } from '@ngxs/store';
-import { AppState } from 'libs/shared/ngxs/state';
+import { AppState } from '../../../../shared/ngxs/state';
 
 describe('ParentProfileComponent', () => {
   let component: ParentDashboardComponent;

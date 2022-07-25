@@ -12,7 +12,7 @@ import {
   Token,
 } from '@capacitor/push-notifications';
 import { Capacitor } from '@capacitor/core';
-import { HttpClient, HttpHeaders, HttpRequest } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'the-au-pair-login',
@@ -59,7 +59,7 @@ export class LoginComponent implements OnInit {
       this.fcmToken = token.value;
     });
 
-    PushNotifications.addListener('registrationError', (error: any) => {
+    PushNotifications.addListener('registrationError', (error: JSON) => {
       alert('Error on registration: ' + JSON.stringify(error));
     });
 

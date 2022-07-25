@@ -8,7 +8,7 @@ import { NavbarModule } from '@the-au-pair/shared/components/navbar';
 import { RouterTestingModule} from '@angular/router/testing';
 import { By } from '@angular/platform-browser';
 import { NgxsModule } from '@ngxs/store';
-import { AppState } from 'libs/shared/ngxs/state';
+import { AppState } from '../../../../shared/ngxs/state';
 
 describe('ChildrenDashboardComponent', () => {
   let component: ChildrenDashboardComponent;

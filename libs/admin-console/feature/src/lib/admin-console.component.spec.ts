@@ -6,7 +6,7 @@ import { AdminConsoleComponent } from './admin-console.component';
 import { API } from '../../../../shared/api/api.service';
 import { AdminNavbarModule } from '@the-au-pair/shared/components/admin-navbar';
 import { NgxsModule } from '@ngxs/store';
-import { AppState } from 'libs/shared/ngxs/state';
+import { AppState } from '../../../../shared/ngxs/state';
 
 describe('AdminConsoleComponent', () => {
   let component: AdminConsoleComponent;

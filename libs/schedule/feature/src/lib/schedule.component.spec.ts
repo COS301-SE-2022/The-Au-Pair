@@ -7,7 +7,7 @@ import { API } from '../../../../shared/api/api.service';
 import { NavbarModule } from '@the-au-pair/shared/components/navbar';
 import { RouterTestingModule} from '@angular/router/testing';
 import { NgxsModule } from '@ngxs/store';
-import { AppState } from 'libs/shared/ngxs/state';
+import { AppState } from '../../../../shared/ngxs/state';
 
 describe('ScheduleComponent', () => {
   let component: ScheduleComponent;
