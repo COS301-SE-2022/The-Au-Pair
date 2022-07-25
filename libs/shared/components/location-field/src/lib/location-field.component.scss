@@ -23,14 +23,13 @@
     border: 1px solid red;
 }
 
-
 .fld .form-label {
     position: absolute;
     left: 0.8rem;
     top: 5.1rem;
-    padding: 0 0.5rem;  
+    padding: 0 0.5rem;
     pointer-events: none; 
-    transition: top 200ms ease-in, left 200ms ease-in;
+    transition: 100ms ease-out;
     font-style: normal;
     font-weight: 600;
     font-size: 16px;
@@ -49,39 +48,16 @@
   opacity: 1;
   font-size: 15px;
   background-color: var(--ion-color-light-white);
-  height: 13px;
-  border-radius: 10px 10px 0 0;
-  line-height: 25px;
-  border-left: red 1px solid;
-  border-top: red 1px solid;
-  border-right: red 1px solid;
+  border-radius: 10px;
+  line-height: 30px;
 }
 
-input:focus,
-.form-input:not(:placeholder-shown).form-input:not(:focus){
-  top: 3rem;
-  left: 0rem;
-  opacity: 1;
-  font-size: 15px;
-  background-color: var(--ion-color-light-white);
-  height: 13px;
-  border-radius: 0;
-  line-height: 25px;
-  border-left: red 1px solid;
-  border-top: red 1px solid;
-  border-right: red 1px solid;
-}
-
-.type-toggle {
+.error{
     position: absolute;
     right: 1rem;
-    top: 5.05rem;
-    padding: 0 0.5rem;  
-    font-size: 20px;
-    color: var(--ion-color-primary);
-}
-
-.type-toggle-error {
+    top: 4.95rem;
+    padding: 0 0.5rem;
+    font-size: 25px;
     color: red;
 }
 

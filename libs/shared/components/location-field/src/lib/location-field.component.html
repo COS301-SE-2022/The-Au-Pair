@@ -1,0 +1,12 @@
+<div class="fld">
+        <input [name]="labelContent" [(ngModel)]="value" type="text" autocomplete="off" [ngClass]="(this.showError===false) ? 'form-input' : 'form-input form-input-error' " (input)="getLocations()" list="locations" placeholder=" "/>
+
+        <label [for]="labelContent" class="form-label">{{ labelContent }}</label>
+        <ion-icon class="error" [hidden]="!showError" name="close"></ion-icon>
+
+        <div class="errorType"><p [hidden]="!showError">{{ errorContent }}</p></div> 
+        
+        <datalist id="locations">
+                <option *ngFor="let location of potentialLocations" value="{{location}}">
+        </datalist>
+</div>
