@@ -43,7 +43,7 @@ describe('AuPairDashboardComponent', () => {
     jest.spyOn(component, "getCurrentTime");
     
     const str = component.getCurrentTime();
-    expect(str).toMatch(/^((0[1-9])|(1[0-9])|(2[0-4])):((0[1-9])|([1-6]\d))$/);
+    expect(str).toMatch(/^((0[1-9])|(1[0-9])|(2[0-4])):((0[0-9])|([1-6]\d))$/);
   });
 
   it('should, have a redirect to the au-pair schedule', () => {

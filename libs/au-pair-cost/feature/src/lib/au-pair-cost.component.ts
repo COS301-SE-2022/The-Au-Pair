@@ -144,9 +144,11 @@ export class AuPairCostComponent implements OnInit {
     const day = now.getDay();
     
     const diff =  new Date(now.setDate(now.getDate() - day + (day == 0 ? 6:1)));
+    const next = new Date(diff);
 
+    next.setDate(next.getDate() + range);
     const strDate = ('0' + diff.getDate()).slice(-2) + " " + (this.months[diff.getMonth()]) +
-    " - " + ('0' + (diff.getDate()+range)).slice(-2) + " " + (this.months[diff.getMonth()])
+    " - " + ('0' + (next.getDate())).slice(-2) + " " + (this.months[next.getMonth()])
 
     return strDate;
   }
