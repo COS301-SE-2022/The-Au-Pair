@@ -4,6 +4,7 @@ import { Child, Parent, User } from '../../../../shared/interfaces/interfaces';
 import { AuPairRatingModalComponent } from './au-pair-rating-modal/au-pair-rating-modal.component';
 import { ModalController, ToastController } from '@ionic/angular';
 import { Store } from '@ngxs/store';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'the-au-pair-parent-dashboard',
@@ -48,7 +49,7 @@ export class ParentDashboardComponent implements OnInit{
     salt: "",
   }
 
-  constructor(private serv: API, private modalCtrl : ModalController, private store: Store, public toastCtrl: ToastController){}
+  constructor(private serv: API, private modalCtrl : ModalController, private store: Store, public toastCtrl: ToastController, public router: Router){}
 
   async openModal(actId : string) {
     const modal = await this.modalCtrl.create({
@@ -138,5 +139,25 @@ export class ParentDashboardComponent implements OnInit{
       cssClass: 'toastPopUp'
     });
     await toast.present();
+  }
+
+  async checkHasChildren(){
+    if (this.parentDetails.children.length >= 1){
+      this.router.navigate(['/add-activity']);
+    }
+    else
+    {
+      this.openToast('You have no children to assign activities to');
+    }
+  }
+
+  async checkHasEmployer(){
+    if (this.parentDetails.auPair !== ""){
+      this.router.navigate(['/au-pair-cost']);
+    }
+    else
+    {
+      this.openToast('No Au Pair employed');
+    }
   }
 }

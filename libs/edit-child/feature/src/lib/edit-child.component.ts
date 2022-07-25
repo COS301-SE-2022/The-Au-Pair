@@ -20,7 +20,7 @@ export class EditChildComponent implements OnInit {
     allergies: "",
     diet: "",
     parent: "",
-    aupair: ''
+    aupair: ""
   }  
 
   parent: Parent ={

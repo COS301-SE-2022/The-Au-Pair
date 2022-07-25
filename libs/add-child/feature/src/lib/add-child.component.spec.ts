@@ -58,8 +58,8 @@ describe('AddChildComponent', () => {
       sname: "surname",
       allergies: "none",
       diet: "none",
-      parent: "4561237814867",
-      aupair: 'none'
+      parent: "",
+      aupair: ''
     };
 
     jest.spyOn(component,"getChildValues");
