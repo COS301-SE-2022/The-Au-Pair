@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ToastController } from '@ionic/angular';
+import { Router } from '@angular/router';
 import { API } from '../../../../shared/api/api.service';
 import { Store } from '@ngxs/store';
-import { SetFcmToken, SetId , SetType, Navigate } from '../../../../shared/ngxs/actions';
+import { SetFcmToken, SetId , SetType } from '../../../../shared/ngxs/actions';
 import {
   ActionPerformed,
   PushNotificationSchema,
@@ -12,7 +13,6 @@ import {
 } from '@capacitor/push-notifications';
 import { Capacitor } from '@capacitor/core';
 import { HttpClient, HttpHeaders, HttpRequest } from '@angular/common/http';
-import { AppState } from '../../../../shared/ngxs/state';
 
 @Component({
   selector: 'the-au-pair-login',
@@ -28,7 +28,7 @@ export class LoginComponent implements OnInit {
   fcmToken = '';
   showPassword = false;
 
-  constructor(public formBuilder: FormBuilder, public toastCtrl: ToastController, private serv: API, private store: Store, public httpClient: HttpClient) {
+  constructor(public formBuilder: FormBuilder, public toastCtrl: ToastController, private serv: API, private store: Store, public httpClient: HttpClient, public router: Router) {
     this.loginDetailsForm = formBuilder.group({
       email : ['', Validators.compose([Validators.maxLength(30), Validators.required])],
       pass : ['', Validators.compose([Validators.maxLength(20), Validators.required])],
@@ -173,15 +173,15 @@ export class LoginComponent implements OnInit {
 
         if(type == 0)
         {
-          this.store.dispatch(new Navigate('/admin-console'));
+          this.router.navigate(['/admin-console']);
         }
         if(type == 1)
         {
-          this.store.dispatch(new Navigate('/parent-dashboard'));
+          this.router.navigate(['/parent-dashboard']);
         }
         else if(type == 2)
         {
-          this.store.dispatch(new Navigate('/au-pair-dashboard'));
+          this.router.navigate(['/au-pair-child']);
         }
       }
     }

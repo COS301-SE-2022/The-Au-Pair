@@ -3,7 +3,6 @@ import { Child } from '../../../../shared/interfaces/interfaces';
 import { API } from '../../../../shared/api/api.service';
 import { Router } from '@angular/router';
 import { Store } from '@ngxs/store';
-import { Navigate } from 'libs/shared/ngxs/actions';
 
 @Component({
   selector: 'the-au-pair-children-dashboard',
@@ -44,10 +43,5 @@ export class ChildrenDashboardComponent implements OnInit
     this.router.navigate(['/edit-child'],{
       state: {child: child}
     });
-  }
-
-  nav(path: string) 
-  {
-    this.store.dispatch(new Navigate(path));
   }
 }

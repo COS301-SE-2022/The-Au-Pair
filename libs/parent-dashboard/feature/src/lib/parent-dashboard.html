@@ -29,7 +29,7 @@
         <div class="actions-div-wrapper">
             <div class='actions-div'>
 
-                <div class='action' id="addAct" *ngIf='this.parentDetails.children == undefined; else nochildren' (click)="nav('/add-activity')">
+                <div class='action' id="addAct" *ngIf='this.parentDetails.children == undefined; else nochildren' routerLink="/add-activity">
                     <ion-icon name="add-circle-outline" class='action-icon '></ion-icon>
                     <div class='action-tag'>Add Activity</div>
                 </div>
@@ -39,15 +39,15 @@
                         <div class='action-tag'>Add Activity</div>
                     </div>
                 </ng-template>
-                <div class='action' id="schedule" (click)="nav('/schedule')">
+                <div class='action' id="schedule" routerLink="/schedule">
                     <ion-icon name="calendar-outline" class='action-icon '></ion-icon>
                     <div class='action-tag '>Schedule</div>
                 </div>
-                <div class='action' id="childDash" (click)="nav('/children-dashboard')">
+                <div class='action' id="childDash" routerLink="/children-dashboard">
                     <ion-icon name="people-circle-outline" class='action-icon '></ion-icon>
                     <div class='action-tag '>Children</div>
                 </div>
-                <div class='action' id="auPairCost" *ngIf='this.parentDetails.auPair != ""; else nocost' (click)="nav('/au-pair-cost')">
+                <div class='action' id="auPairCost" *ngIf='this.parentDetails.auPair != ""; else nocost' routerLink="/au-pair-cost">
                     <ion-icon name="cash-outline" class='action-icon '></ion-icon>
                     <div class='action-tag '>Au Pair Cost</div>
                 </div>

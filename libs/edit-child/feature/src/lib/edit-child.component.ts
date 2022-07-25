@@ -3,7 +3,6 @@ import { Router } from '@angular/router';
 import { API } from '../../../../shared/api/api.service';
 import { ToastController } from '@ionic/angular';
 import { Child, Parent } from '../../../../shared/interfaces/interfaces';
-import { Navigate } from 'libs/shared/ngxs/actions';
 import { Store } from '@ngxs/store';
 
 @Component({
@@ -196,7 +195,7 @@ export class EditChildComponent implements OnInit {
 
   returnToChildrenDashboard()
   {
-    this.store.dispatch(new Navigate('/children-dashboard'));
+    this.router.navigate(['/children-dashboard']);
   }
 
   updateChild(child : Child){

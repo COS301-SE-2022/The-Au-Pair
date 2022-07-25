@@ -4,8 +4,6 @@ import { auPair, Child, Parent, User } from '../../../../shared/interfaces/inter
 import { AuPairRatingModalComponent } from './au-pair-rating-modal/au-pair-rating-modal.component';
 import { ModalController, ToastController } from '@ionic/angular';
 import { Store } from '@ngxs/store';
-import { AppState, AppStateModel } from 'libs/shared/ngxs/state';
-import { Navigate } from 'libs/shared/ngxs/actions';
 
 @Component({
   selector: 'the-au-pair-parent-dashboard',
@@ -137,11 +135,6 @@ export class ParentDashboardComponent implements OnInit{
       },
       error =>{console.log("Error has occured with API: " + error);}
     )
-  }
-
-  nav(path: string) 
-  {
-    this.store.dispatch(new Navigate(path));
   }
 
   async openToast(message: string)

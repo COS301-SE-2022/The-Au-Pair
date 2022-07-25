@@ -2,7 +2,6 @@ import { Component} from '@angular/core';
 import { Router } from '@angular/router';
 import { ToastController } from '@ionic/angular';
 import { Store } from '@ngxs/store';
-import { Navigate } from 'libs/shared/ngxs/actions';
 import { API } from '../../../../shared/api/api.service';
 import { Child, Parent } from '../../../../shared/interfaces/interfaces';
 
@@ -185,7 +184,7 @@ export class AddChildComponent
 
   returnToChildrenDashboard()
   {
-    this.store.dispatch(new Navigate('/children-dashboard'));
+    this.router.navigate(['/children-dashboard']);
   }
 
   //Service calls
