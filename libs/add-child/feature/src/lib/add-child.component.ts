@@ -186,7 +186,9 @@ export class AddChildComponent
 
   returnToChildrenDashboard()
   {
-    this.router.navigate(['/children-dashboard']);
+    this.router.navigate(['/children-dashboard']).then(()=>{
+      window.location.reload();
+    });
   }
 
   //Service calls
