@@ -181,7 +181,7 @@ export class LoginComponent implements OnInit {
         }
         else if(type == 2)
         {
-          this.router.navigate(['/au-pair-child']);
+          this.router.navigate(['/au-pair-dashboard']);
         }
       }
     }
