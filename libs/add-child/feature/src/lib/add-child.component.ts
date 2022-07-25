@@ -1,6 +1,8 @@
 import { Component} from '@angular/core';
 import { Router } from '@angular/router';
 import { ToastController } from '@ionic/angular';
+import { Store } from '@ngxs/store';
+import { Navigate } from 'libs/shared/ngxs/actions';
 import { API } from '../../../../shared/api/api.service';
 import { Child, Parent } from '../../../../shared/interfaces/interfaces';
 
@@ -32,7 +34,7 @@ export class AddChildComponent
   SA_ID = new RegExp(/(((\d{2}((0[13578]|1[02])(0[1-9]|[12]\d|3[01])|(0[13456789]|1[012])(0[1-9]|[12]\d|30)|02(0[1-9]|1\d|2[0-8])))|([02468][048]|[13579][26])0229))(( |-)(\d{4})( |-)(\d{3})|(\d{7}))/);
 
   //Constructor
-  constructor(private serv: API, public router: Router, public toastCtrl: ToastController) {}
+  constructor(private serv: API, public router: Router, public toastCtrl: ToastController, private store: Store) {}
 
   //Function to retrieve the child's details
   async getChildValues(val: any)
@@ -162,7 +164,7 @@ export class AddChildComponent
       this.childDetails.sname= val.surname;
       this.childDetails.allergies= val.Allergies;
       this.childDetails.diet= val.diet;
-      this.childDetails.parent= "4561237814867"; //Assumed logged in user for now
+      this.childDetails.parent= this.store.snapshot().user.id;
       this.addChild(this.childDetails);
     }
   }
@@ -183,15 +185,13 @@ export class AddChildComponent
 
   returnToChildrenDashboard()
   {
-    this.router.navigate(['/children-dashboard']).then(()=>{
-      window.location.reload();
-    });
+    this.store.dispatch(new Navigate('/children-dashboard'));
   }
 
   //Service calls
   addChild(child: Child)
   {
-    this.serv.getParent("4561237814867").subscribe(
+    this.serv.getParent(this.childDetails.parent).subscribe(
       res=>{
         this.parent.id = res.id;
         this.parent.children = res.children;
