@@ -29,7 +29,7 @@
         <div class="actions-div-wrapper">
             <div class='actions-div'>
 
-                <div class='action' id="addAct" *ngIf='this.parentDetails.children != undefined; else nochildren' (click)="nav('/add-activity')">
+                <div class='action' id="addAct" *ngIf='this.parentDetails.children == undefined; else nochildren' (click)="nav('/add-activity')">
                     <ion-icon name="add-circle-outline" class='action-icon '></ion-icon>
                     <div class='action-tag'>Add Activity</div>
                 </div>
