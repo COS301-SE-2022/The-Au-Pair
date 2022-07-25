@@ -7,6 +7,7 @@ import { NavbarModule } from '@the-au-pair/shared/components/navbar';
 import { RouterTestingModule} from '@angular/router/testing';
 import { API } from '../../../../shared/api/api.service';
 import { By } from '@angular/platform-browser';
+import { NgxsModule } from '@ngxs/store';
 
 describe('ParentProfileComponent', () => {
   let component: ParentDashboardComponent;
@@ -25,7 +26,8 @@ describe('ParentProfileComponent', () => {
         IonicModule,
         HttpClientTestingModule,
         NavbarModule,
-        RouterTestingModule
+        RouterTestingModule,
+        NgxsModule.forRoot()
        ],
        providers:[API, ModalController]
     }).compileComponents();

@@ -5,6 +5,7 @@ import { RouterTestingModule} from '@angular/router/testing';
 import { AdminConsoleComponent } from './admin-console.component';
 import { API } from '../../../../shared/api/api.service';
 import { AdminNavbarModule } from '@the-au-pair/shared/components/admin-navbar';
+import { NgxsModule } from '@ngxs/store';
 
 describe('AdminConsoleComponent', () => {
   let component: AdminConsoleComponent;
@@ -13,7 +14,7 @@ describe('AdminConsoleComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [AdminConsoleComponent],
-      imports: [IonicModule,HttpClientTestingModule,RouterTestingModule,AdminNavbarModule],
+      imports: [IonicModule,HttpClientTestingModule,RouterTestingModule,AdminNavbarModule,NgxsModule.forRoot()],
       providers: [API]
     }).compileComponents();
   });

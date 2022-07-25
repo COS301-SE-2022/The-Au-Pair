@@ -7,6 +7,7 @@ import {HttpClientTestingModule} from "@angular/common/http/testing";
 import { NavbarModule } from '@the-au-pair/shared/components/navbar';
 import { RouterTestingModule} from '@angular/router/testing';
 import { By } from '@angular/platform-browser';
+import { NgxsModule } from '@ngxs/store';
 
 describe('ChildrenDashboardComponent', () => {
   let component: ChildrenDashboardComponent;
@@ -19,7 +20,8 @@ describe('ChildrenDashboardComponent', () => {
         IonicModule,
         HttpClientTestingModule,
         NavbarModule,
-        RouterTestingModule
+        RouterTestingModule,
+        NgxsModule.forRoot()
        ],
        providers:[API]
     }).compileComponents();
