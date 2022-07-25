@@ -5,11 +5,14 @@
         <p class='welcome-heading'>Welcome {{this.userDetails.fname}}</p>
 
         <div class="au-pair-div-wrapper">
-            <div class='au-pair-name'>Au Pair: {{this.userDetails.fname}} {{this.userDetails.sname}}
+            <div class='au-pair-name' *ngIf='this.parentDetails.auPair != ""; else noaupair'>Au Pair: {{this.userDetails.fname}} {{this.userDetails.sname}>
                 <a href = 'tel:{{this.userDetails.number}}'><ion-icon name="call" class = 'call-icon'></ion-icon></a>
                 <a href = 'sms:{{this.userDetails.number}}'><ion-icon name="chatbubble-ellipses" class = 'message-icon'></ion-icon></a>
                 <ion-icon class="rating-icon" name="star" (click)="openModal(this.userDetails.id)"></ion-icon>
             </div>
+            <ng-template #noaupair>
+                <div class='au-pair-name'>Au Pair: No Au Pair employed</div>
+            </ng-template>
         </div>
 
         <div class="children-div-wrapper">
@@ -25,22 +28,35 @@
 
         <div class="actions-div-wrapper">
             <div class='actions-div'>
-                <div class='action' id="addAct" routerLink="/add-activity">
+
+                <div class='action' id="addAct" *ngIf='this.parentDetails.children.length > 0; else nochildren' (click)="nav('/add-activity')">
                     <ion-icon name="add-circle-outline" class='action-icon '></ion-icon>
                     <div class='action-tag'>Add Activity</div>
                 </div>
-                <div class='action' id="schedule" routerLink="/schedule">
+                <ng-template #nochildren>
+                    <div class='action' id="addAct" (click)="openToast('No children to assign activities to')">
+                        <ion-icon name="add-circle-outline" class='action-icon '></ion-icon>
+                        <div class='action-tag'>Add Activity</div>
+                    </div>
+                </ng-template>
+                <div class='action' id="schedule" (click)="nav('/schedule')">
                     <ion-icon name="calendar-outline" class='action-icon '></ion-icon>
                     <div class='action-tag '>Schedule</div>
                 </div>
-                <div class='action' id="childDash" routerLink="/children-dashboard">
+                <div class='action' id="childDash" (click)="nav('/children-dashboard')">
                     <ion-icon name="people-circle-outline" class='action-icon '></ion-icon>
                     <div class='action-tag '>Children</div>
                 </div>
-                <div class='action' id="auPairCost" routerLink="/au-pair-cost">
+                <div class='action' id="auPairCost" *ngIf='this.parentDetails.auPair != ""; else nocost' (click)="nav('/au-pair-cost')">
                     <ion-icon name="cash-outline" class='action-icon '></ion-icon>
                     <div class='action-tag '>Au Pair Cost</div>
                 </div>
+                <ng-template #nocost>
+                    <div class='action' id="addAct" (click)="openToast('No Au Pair employed')">
+                        <ion-icon name="add-circle-outline" class='action-icon '></ion-icon>
+                        <div class='action-tag'>Au Pair Cost</div>
+                    </div>
+                </ng-template>
             </div>
         </div>
     </div>
