@@ -1,7 +1,7 @@
 .fld {
     display: flex;
     flex-direction: column;
-    margin-bottom: -0.8rem;
+    margin-bottom: 0;
     position: relative;
 }
 
@@ -27,7 +27,7 @@
     position: absolute;
     left: 0.8rem;
     top: 5.1rem;
-    padding: 0 0.5rem;  
+    padding: 0 0.5rem;
     pointer-events: none; 
     transition: top 200ms ease-in, left 200ms ease-in;
     font-style: normal;
@@ -52,7 +52,21 @@
     position: absolute;
     right: 1rem;
     top: 4.95rem;
-    padding: 0 0.5rem;  
+    padding: 0 0.5rem;
     font-size: 25px;
     color: red;
+}
+
+.errorType{
+    position: relative;
+    display: block;
+    margin: 0;
+    padding: 0;
+    height: 0;
+    margin-top: -0.5rem;
+}
+
+.errorType p {
+    color: red;
+    text-align: center;
 }

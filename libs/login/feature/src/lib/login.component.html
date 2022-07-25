@@ -2,14 +2,12 @@
     <h2>Login</h2>
     <div class="loginDetails">
         <form [formGroup]="loginDetailsForm" (ngSubmit)="loginUser()" class="form-details">
-            <the-au-pair-input-field labelContent="Email" [showError]="errState && (!loginDetailsForm.controls['email'].valid)" formControlName="email"></the-au-pair-input-field>
-            <p id="emailError" class="error">Error in field</p>
-
-            <the-au-pair-password-field labelContent="Password" [showError]="errState && (!loginDetailsForm.controls['pass'].valid)" formControlName="pass"></the-au-pair-password-field>
-            <p id="pswError" class="error">Error in field</p>
+            <the-au-pair-input-field labelContent="Email" errorContent="" [showError]="errState" formControlName="email"></the-au-pair-input-field>
+            
+            <the-au-pair-password-field labelContent="Password" [errorContent]="errStatement" [showError]="errState" formControlName="pass"></the-au-pair-password-field>
             
             <div class="buttons">
-                <input class = "loginUser" disable value="Login" type="submit">
+                <input [ngClass]="(this.loggingIn===false) ? 'loginUser' : 'disabled-loginUser' " [disabled]="loggingIn" value="Login" type="submit">
             </div>
 
             <div class="clickables">

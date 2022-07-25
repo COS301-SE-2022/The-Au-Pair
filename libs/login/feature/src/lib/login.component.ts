@@ -22,6 +22,8 @@ export class LoginComponent implements OnInit {
   public loginDetailsForm: FormGroup;
   public submitAttempt: boolean;
   public errState: boolean;
+  public errStatement: string;
+  public loggingIn: boolean;
   
   showPassword = false;
 
@@ -33,6 +35,8 @@ export class LoginComponent implements OnInit {
 
     this.submitAttempt = false;
     this.errState = false;
+    this.errStatement = "";
+    this.loggingIn = false;
   }
 
   ngOnInit(): void {
@@ -83,44 +87,13 @@ export class LoginComponent implements OnInit {
   {
     this.submitAttempt = true;
 
-    let dom = document.getElementById("emailError");
-    if(!this.loginDetailsForm.controls['email'].valid)
+    if(!this.loginDetailsForm.controls['email'].valid || !this.loginDetailsForm.controls['pass'].valid)
     {
-      this.errState = true
-      if(dom != null)
-      {
-        dom.innerHTML = "Invalid email";
-        dom.style.display = "block";
-      }
+      this.errStatement = "Fields cannot be empty";
+      this.errState = true;
     }
-    else
-    {
-      if(dom != null)
-      {
-        dom.style.display = "none";
-      }
-    }
-
-    dom = document.getElementById("pswError");
-    if(!this.loginDetailsForm.controls['pass'].valid)
-    {
-      this.errState = true
-      if(dom != null)
-      {
-        dom.innerHTML = "Password empty";
-        dom.style.display = "block";
-      }
-    }
-    else
-    {
-      if(dom != null)
-      {
-        dom.style.display = "none";
-      }
-    }
-
-    if(!this.errState)
-    {
+    else {
+      this.loggingIn = true;
       let id = "";
       let type = 0
       await this.serv.login((this.loginDetailsForm.value.email).toLowerCase(),this.loginDetailsForm.value.pass)
@@ -133,11 +106,13 @@ export class LoginComponent implements OnInit {
         error => {
           console.log("Error has occured with API: " + error);
         }
-      )
+      );
 
       if(id == "")
       {
         this.openToast("Inccorect email or password");
+        this.errStatement = "Inccorect email or password";
+        this.errState = true;
       }
       else if(id == "pending")
       (
@@ -145,6 +120,7 @@ export class LoginComponent implements OnInit {
       )
       else  
       {
+        this.errState = false;
         this.store.dispatch(new SetId(id));
         this.store.dispatch(new SetType(type));
 
@@ -161,6 +137,7 @@ export class LoginComponent implements OnInit {
           window.location.href = "/au-pair-dashboard";
         }
       }
+      this.loggingIn = false;
     }
   }
 
