@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { ParentDashboardComponent } from './parent-dashboard';
+import { ParentDashboardComponent } from "./parent-dashboard";
 
 const routes: Routes = [
   {

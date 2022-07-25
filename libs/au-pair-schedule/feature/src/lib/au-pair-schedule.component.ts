@@ -31,11 +31,13 @@ export class AuPairScheduleComponent implements OnInit {
 
   constructor(private serv: API, private modalCtrl : ModalController) {}
 
-  async openModal() {
+  async openModal(actId : string) {
     const modal = await this.modalCtrl.create({
       component: ScheduleModalComponent,
+      componentProps :{
+        activityId : actId
+      }
     });
-     
     await modal.present();
   }
 

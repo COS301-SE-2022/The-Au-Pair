@@ -1,0 +1,26 @@
+{
+  "projectType": "library",
+  "root": "libs/forgot-password/feature",
+  "sourceRoot": "libs/forgot-password/feature/src",
+  "prefix": "the-au-pair",
+  "targets": {
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["coverage/libs/forgot-password/feature"],
+      "options": {
+        "jestConfig": "libs/forgot-password/feature/jest.config.js",
+        "passWithNoTests": true
+      }
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "options": {
+        "lintFilePatterns": [
+          "libs/forgot-password/feature/src/**/*.ts",
+          "libs/forgot-password/feature/src/**/*.html"
+        ]
+      }
+    }
+  },
+  "tags": []
+}

@@ -2,12 +2,13 @@
 <ion-content [fullscreen]="true">
 
     <div class='parent-dashboard-div'>
-        <p class='welcome-heading'>Welcome EPI-USE</p>
+        <p class='welcome-heading'>Welcome {{this.userDetails.fname}}</p>
 
         <div class="au-pair-div-wrapper">
             <div class='au-pair-name'>Au Pair: {{this.userDetails.fname}} {{this.userDetails.sname}}
                 <a href = 'tel:{{this.userDetails.number}}'><ion-icon name="call" class = 'call-icon'></ion-icon></a>
                 <a href = 'sms:{{this.userDetails.number}}'><ion-icon name="chatbubble-ellipses" class = 'message-icon'></ion-icon></a>
+                <ion-icon class="rating-icon" name="star" (click)="openModal(this.userDetails.id)"></ion-icon>
             </div>
         </div>
 
@@ -15,7 +16,7 @@
 
             <ion-card class='children-div' *ngFor="let child of children; let last = last">
                 <div class='child-name'>Child: {{ child.fname }}</div>
-                <div class='child-status'>Allergies: {{ child.allergies }}</div>
+                <div class='child-status'>ID Number: {{ child.id }}</div>
             </ion-card>
 
         </div>
@@ -24,19 +25,19 @@
 
         <div class="actions-div-wrapper">
             <div class='actions-div'>
-                <div class='action' routerLink="/add-activity">
+                <div class='action' id="addAct" routerLink="/add-activity">
                     <ion-icon name="add-circle-outline" class='action-icon '></ion-icon>
                     <div class='action-tag'>Add Activity</div>
                 </div>
-                <div class='action' routerLink="/schedule">
+                <div class='action' id="schedule" routerLink="/schedule">
                     <ion-icon name="calendar-outline" class='action-icon '></ion-icon>
                     <div class='action-tag '>Schedule</div>
                 </div>
-                <div class='action' routerLink="/children-dashboard">
+                <div class='action' id="childDash" routerLink="/children-dashboard">
                     <ion-icon name="people-circle-outline" class='action-icon '></ion-icon>
                     <div class='action-tag '>Children</div>
                 </div>
-                <div class='action' routerLink="/au-pair-cost">
+                <div class='action' id="auPairCost" routerLink="/au-pair-cost">
                     <ion-icon name="cash-outline" class='action-icon '></ion-icon>
                     <div class='action-tag '>Au Pair Cost</div>
                 </div>

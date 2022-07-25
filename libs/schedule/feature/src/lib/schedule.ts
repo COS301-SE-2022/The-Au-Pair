@@ -39,10 +39,18 @@ export class ScheduleComponent implements OnInit{
     )
   }
 
-  navigate(id : string)
+  navigateEdit(id : string)
   { 
     //Route to the edit-activity page and parse the ActivityID of the selected Activity 
     this.router.navigate(['/edit-activity'],{
+      state: {id: id}
+    });
+  }
+
+  navigateViewActivity(id : string)
+  { 
+    //Route to the edit-activity page and parse the ActivityID of the selected Activity 
+    this.router.navigate(['/view-activity'],{
       state: {id: id}
     });
   }

@@ -1,4 +1,4 @@
-<the-au-pair-navbar></the-au-pair-navbar>
+<the-au-pair-aupair-navbar></the-au-pair-aupair-navbar>
 <ion-content [fullscreen]="true">
   <div id="container">
     <h2 class="heading ion-text-center ion-padding-top">Your weekly schedule</h2>
@@ -10,11 +10,11 @@
         <div *ngFor="let item of childActivities; let l = count">
           <div class="card" *ngIf="item.dayofweek === days[day]" >
             <ion-row  class="ion-align-items-center .ion-justify-content-between">
-              <ion-col class="content">{{ item.childName }}</ion-col>
+              <ion-col  class="content">{{ item.childName }}</ion-col>
               <ion-col class="content">{{ item.activityName }}</ion-col>
               <ion-col class="content">{{ item.time }}</ion-col>
               <ion-col><ion-icon class="icon edit" name="location-outline"></ion-icon></ion-col>
-              <ion-col><ion-icon class="icon edit" name="chatbox-outline" (click)="openModal()"></ion-icon></ion-col>
+              <ion-col><ion-icon class="icon edit" name="chatbox-outline" (click)="openModal(item.activityId)"></ion-icon></ion-col>
             </ion-row>
           </div>
         </div>
@@ -29,14 +29,14 @@
         <div class="day ion-text-center">
           <h2 class="heading">{{ days[day] }}</h2>
           <ion-card class="day-card" id="{{ day }}" [class.active] = "day === curDay">
-            <div *ngFor="let item of activities; let l = count">
-              <div class="card" *ngIf="item.day === days[day]" >
+            <div *ngFor="let item of childActivities; let l = count">
+              <div class="card" *ngIf="item.dayofweek === days[day]" >
                 <ion-row  class="ion-align-items-center .ion-justify-content-between">
-                  <ion-col class="content">Sarah:</ion-col>
-                  <ion-col class="content">{{item.name}}</ion-col>
-                  <ion-col class="content">{{item.timeStart}}</ion-col>
+                  <ion-col class="content">{{ item.childName }}</ion-col>
+                  <ion-col class="content">{{ item.childName }}</ion-col>
+                  <ion-col class="content">{{ item.time }}</ion-col>
                   <ion-col><ion-icon class="icon edit" name="location-outline"></ion-icon></ion-col>
-                  <ion-col><ion-icon class="icon edit" name="chatbox-outline" (click)="openModal()"></ion-icon></ion-col>
+                  <ion-col><ion-icon class="icon edit" name="chatbox-outline" (click)="openModal(item.activityId)"></ion-icon></ion-col>
                 </ion-row>
               </div>
             </div>

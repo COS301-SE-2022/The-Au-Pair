@@ -17,30 +17,30 @@
             <div class = "profile-details-div">
                 <div class="parent-info-small">
                     <div class="parent-text">Email: </div>
-                    <input type = 'text' name = "email" class="parent-text-info" ngModel = '{{this.userDetails.email}}'>
+                    <input type = 'text' name = "email" class="parent-text-info" ngModel = '{{this.userDetails.email}}' placeholder="Email Address">
                     <p id="emailError" class="error" style="display: none;">Error in field</p>
                 </div>
                 <div class="parent-info-small">
                     <div class="parent-text">Phone: </div>
-                    <input type = 'text' name = "phone" class="parent-text-info" ngModel = '{{this.userDetails.number}}'>
+                    <input type = 'text' name = "phone" class="parent-text-info" ngModel = '{{this.userDetails.number}}' placeholder="Phone Number">
                     <p id="phoneError" class="error" style="display: none;">Error in field</p>
                 </div>
                 <div class="parent-info-small">
                     <div class="parent-text">Address: </div>
-                    <input type = 'text' name = "address" class="parent-text-info" ngModel = '{{this.userDetails.address}}'>
+                    <input type = 'text' name = "address" class="parent-text-info" ngModel = '{{this.userDetails.address}}' placeholder="Address">
                     <p id="addressError" class="error" style="display: none;">Error in field</p>
                 </div>
                 <div class="parent-info-large">
                     <div class="parent-text2">Medical Aid: </div>
-                    <input type = 'text' name = "medicalAidMM" class="parent-text-info2" ngModel = '{{this.medAidDetails.name}}'>
+                    <input type = 'text' name = "medicalAidMM" class="parent-text-info2" ngModel = '{{this.medAidDetails.name}}' placeholder="Main Member Name">
                     <p id="medAidMMError" class="error" style="display: none;">Error in field</p>
-                    <input type = 'text' name = "medicalAidMS" class="parent-text-info2" ngModel = '{{this.medAidDetails.sname}}'>
+                    <input type = 'text' name = "medicalAidMS" class="parent-text-info2" ngModel = '{{this.medAidDetails.sname}}' placeholder="Main Member Surname">
                     <p id="medAidMSError" class="error" style="display: none;">Error in field</p>
-                    <input type = 'text' name = "medicalAidNo" class="parent-text-info2" ngModel = '{{this.medAidDetails.id}}'>
+                    <input type = 'text' name = "medicalAidNo" class="parent-text-info2" ngModel = '{{this.medAidDetails.id}}' placeholder="Medical Aid Number">
                     <p id="medAidNoError" class="error" style="display: none;">Error in field</p>
-                    <input type = 'text' name = "medicalAidProvider" class="parent-text-info2" ngModel = '{{this.medAidDetails.provider}}'>
+                    <input type = 'text' name = "medicalAidProvider" class="parent-text-info2" ngModel = '{{this.medAidDetails.provider}}' placeholder="Medical Aid Provider">
                     <p id="medAidProviderError" class="error" style="display: none;">Error in field</p>
-                    <input type = 'text' name = "medicalAidPlan" class="parent-text-info2" ngModel = '{{this.medAidDetails.plan}}'>
+                    <input type = 'text' name = "medicalAidPlan" class="parent-text-info2" ngModel = '{{this.medAidDetails.plan}}' placeholder="Medical Aid Plan">
                     <p id="medAidPlanError" class="error" style="display: none;">Error in field</p>
                 </div>
                 <input type = 'submit' class="change-button" value = 'Update Details'>

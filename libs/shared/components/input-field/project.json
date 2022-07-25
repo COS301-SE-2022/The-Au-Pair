@@ -1,0 +1,26 @@
+{
+  "projectType": "library",
+  "root": "libs/shared/components/input-field",
+  "sourceRoot": "libs/shared/components/input-field/src",
+  "prefix": "the-au-pair",
+  "targets": {
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["coverage/libs/shared/components/input-field"],
+      "options": {
+        "jestConfig": "libs/shared/components/input-field/jest.config.js",
+        "passWithNoTests": true
+      }
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "options": {
+        "lintFilePatterns": [
+          "libs/shared/components/input-field/src/**/*.ts",
+          "libs/shared/components/input-field/src/**/*.html"
+        ]
+      }
+    }
+  },
+  "tags": []
+}

@@ -15,10 +15,12 @@
 
   
   <p align="center">
-    <a href="https://github.com/COS301-SE-2022/The-Au-Pair/wiki"><strong>Quick Links»</strong></a>
+    <a href="#demolinks"><strong>Demo Links»</strong></a>
     <br />
     <br />
-    <a href="https://github.com/COS301-SE-2022/The-Au-Pair/projects/1">Project Board</a>
+    <a href="https://drive.google.com/file/d/1bbkz5DlxMrSKnEIY9LDXKkoflCZH3Lga/view?usp=sharing"><strong>CheemsChaps-Demo2</strong></a> | 
+    <a href="https://docs.google.com/document/d/18vKESVoNjol4EZzjzmbdzlKqipAGSXseNxcDelAnqaQ/edit?usp=sharing"><strong>SRS Document 2</strong></a> |
+    <a href="https://github.com/COS301-SE-2022/The-Au-Pair/projects/1"><strong>Projet Board</strong></a> 
   </p>
   
   <br />
@@ -76,15 +78,19 @@
 <!-- All demo information -->
 ### Demo1
 
-<a href="https://drive.google.com/file/d/1iBMNdAej-kbDxPGT9k8_Q5t6aJUk0UNE/view?usp=sharing">CheemsChaps-Demo1</a>
+<a href="https://drive.google.com/file/d/1iBMNdAej-kbDxPGT9k8_Q5t6aJUk0UNE/view?usp=sharing">CheemsChaps-Demo Video 1</a>
     <br>
     <a href="https://docs.google.com/document/d/18CSPDD1SnMIpAknKGA97uaO6s_-WgM7UnW_6i9DhmC4/edit?usp=sharing">SRS Document - Demo 1</a>
 
 ### Demo2
 
-<a href="">CheemsChaps-Demo2</a>
+<a href="https://drive.google.com/file/d/1bbkz5DlxMrSKnEIY9LDXKkoflCZH3Lga/view?usp=sharing">CheemsChaps-Demo Video 2</a>
     <br>
     <a href="https://docs.google.com/document/d/18vKESVoNjol4EZzjzmbdzlKqipAGSXseNxcDelAnqaQ/edit?usp=sharing">SRS Document - Demo 2</a>
+    <br>
+    <a href="https://docs.google.com/document/d/1ihLufRX8ceP3pRIZUOesw-P-wXx4HSN_RTviKj5u1_o/edit?usp=sharing">User Manual Document - Demo 2</a>
+    <br>
+    <a href="https://docs.google.com/document/d/1exfQzlmPJN50VN70wiKA6kkd6IgsQrhrz8IkSIx71jA/edit?usp=sharing">Coding Standards - Demo 2</a>
     <br>
     <br>
                                      
@@ -127,18 +133,19 @@ npm run start:client
 <p align="right">(<a href="#top">back to top</a>)</p>
 
 ### Sprint 2 Burn-Down
-<div>
-  <img style="height: 350px; width:350px" src="https://user-images.githubusercontent.com/100611949/172818063-3853f47c-14e1-4428-83fa-a25077dd88c4.png">
-  <img style="height: 350px; width:650px" src="https://user-images.githubusercontent.com/93247114/172879622-a8313404-8996-4cfa-898c-754ea174b4cb.png">
+<div align="center">
+  <img style="height: 350px; width:39%" src="https://user-images.githubusercontent.com/100611949/172818063-3853f47c-14e1-4428-83fa-a25077dd88c4.png">
+  <img style="height: 350px; width:60%" src="https://user-images.githubusercontent.com/93247114/172879622-a8313404-8996-4cfa-898c-754ea174b4cb.png">
 </div>
 <!-- Contributors -->
+
 # The Team
 
 ## Daniel Azmanov 
 
 [![LinkedIn][linkedin-shield]](https://www.linkedin.com/in/daniel-azmanov-8b4235239)[![GitHub][github-shield]](https://github.com/d-azmanov)
 
-<img style="height: 100px; width:100px" src="https://user-images.githubusercontent.com/100611949/167245024-d43da573-93e8-48ff-8e05-e2853301a464.png"  align="left" height="150px"/>
+<img src="https://user-images.githubusercontent.com/100611949/167245024-d43da573-93e8-48ff-8e05-e2853301a464.png"  align="left" height="150px"/>
 
 As a third-year computer scientist, I have developed an expansive knowledge and skill set, perfect for project development and management.   Over the years, I have learnt, and worked with, Java, C++, HTML, PHP, JavaScript, CSS, and Angular, and other related technologies and frameworks.  I enjoy putting myself in many different work environments (technologies as well as team members) to broaden my knowledge, which has proved useful in my overall development as a software developer and project leader. 
 

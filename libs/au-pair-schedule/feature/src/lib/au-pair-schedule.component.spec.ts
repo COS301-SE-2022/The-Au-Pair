@@ -5,8 +5,8 @@ import { HttpClientTestingModule } from "@angular/common/http/testing";
 import { RouterTestingModule} from '@angular/router/testing';
 import { AuPairScheduleComponent } from './au-pair-schedule.component';
 import { CommonModule } from '@angular/common';
-import { NavbarModule } from '@the-au-pair/shared/components/navbar';
-import { of } from 'rxjs';
+import { AuPairNavbarModule } from '@the-au-pair/shared/components/aupair-navbar';
+import { FormsModule } from '@angular/forms';
 
 describe('AuPairScheduleComponent', () => {
   let component: AuPairScheduleComponent;
@@ -15,7 +15,7 @@ describe('AuPairScheduleComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [AuPairScheduleComponent],
-      imports: [IonicModule, CommonModule,HttpClientTestingModule,NavbarModule, RouterTestingModule],
+      imports: [IonicModule, CommonModule,HttpClientTestingModule,AuPairNavbarModule, RouterTestingModule, FormsModule],
       providers: [API,ModalController]
     }).compileComponents();
   });
@@ -28,6 +28,12 @@ describe('AuPairScheduleComponent', () => {
 
   it('should create', () => {
     expect(component).toBeTruthy();
+  });
+
+  it('should,open the modal when called', async ()=>{
+    jest.spyOn(component,"openModal");
+    component.openModal("dxzv6chgn5zp19ezfiqn7fxf");
+    expect(await component.openModal).toReturn();
   });
 
   it('should,return an integer representation of Monday',async () => {

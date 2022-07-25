@@ -3,18 +3,13 @@ import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 
 const routes: Routes = [
   {
-    path: 'home',
-    loadChildren: () =>
-      import('@the-au-pair/home/feature').then((m) => m.HomePageModule),
-  },
-  {
     path: 'schedule',
     loadChildren: () =>
       import('@the-au-pair/schedule/feature').then((m) => m.ScheduleFeatureModule),
   },
   {
     path: '',
-    redirectTo: 'parent-dashboard',
+    redirectTo: 'login-page',
     pathMatch: 'full',
   },
   {
@@ -48,6 +43,11 @@ const routes: Routes = [
     import('@the-au-pair/parent-edit-activity/feature').then((m) => m.ParentEditActivityFeatureModule),
   },
   {
+    path: 'view-activity',
+    loadChildren: () =>
+    import('@the-au-pair/parent-view-activity/feature').then((m) => m.ParentViewActivityFeatureModule),
+  },
+  {
     path: 'children-dashboard',
     loadChildren: () =>
     import('@the-au-pair/children-dashboard/feature').then((m) => m.ChildrenDashboardFeatureModule),
@@ -58,6 +58,11 @@ const routes: Routes = [
     import('@the-au-pair/add-child/feature').then((m) => m.AddChildFeatureModule),
   },
   {
+    path: 'edit-child',
+    loadChildren: () =>
+    import('@the-au-pair/edit-child/feature').then((m) => m.EditChildFeatureModule),
+  },
+  {
     path: 'au-pair-schedule',
     loadChildren: () =>
     import('@the-au-pair/au-pair-schedule/feature').then((m) => m.AuPairScheduleModule),
@@ -66,6 +71,45 @@ const routes: Routes = [
     path: 'au-pair-dashboard',
     loadChildren: () =>
     import('@the-au-pair/au-pair-dashboard/feature').then((m) => m.AuPairDashboardFeatureModule),
+  },
+  {
+    path: 'au-pair-profile',
+    loadChildren: () =>
+    import('@the-au-pair/au-pair-profile/feature').then((m) => m.AuPairProfileFeatureModule),
+  },
+  {
+    path: 'edit-au-pair-profile',
+    loadChildren: () =>
+    import('@the-au-pair/edit-au-pair-profile/feature').then((m) => m.EditAuPairProfileFeatureModule),
+  },
+  {
+    path: 'login-page',
+    loadChildren: () =>
+    import('@the-au-pair/login/feature').then((m) => m.LoginFeatureModule),
+  },
+  {
+    path: 'forgot-password',
+    loadChildren: () =>
+    import('@the-au-pair/forgot-password/feature').then((m) => m.ForgotPasswordFeatureModule)
+  },
+  {
+    path: 'register-page',
+    loadChildren: () =>
+    import('@the-au-pair/register/feature').then((m) => m.RegisterFeatureModule)
+  },
+  {
+    path: 'parent-notifications',
+    loadChildren: () =>
+    import('@the-au-pair/parent-notifications/feature').then((m) => m.ParentNotificationsFeatureModule),
+  },
+  {
+    path: 'admin-console',
+    loadChildren: () =>
+    import('@the-au-pair/admin-console/feature').then((m) => m.AdminConsoleFeatureModule),
+  },
+  {
+    path: '**',
+    redirectTo: 'login-page',
   }
 ];
 
