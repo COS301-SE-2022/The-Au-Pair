@@ -42,14 +42,19 @@
             </ion-header>
         <ion-content id="page-wrapper">
         <div class="menu-gap"></div>
+        <ion-icon class="icon-close" name="close-circle-outline" (click)="closeMenu()"></ion-icon>
+        <h1 class="slider-headings">Gender:</h1>
+        <div class="gender-toggle-div">
+            <ion-toggle class="gender-toggle" (ionChange)="updateDriverOnlineStatus()" [checked]="isOnline"></ion-toggle>
+            <h3 class="male-female">{{ isOnline ? 'Male' : 'Female' }}</h3>
+        </div>
         <div class="payrate-sliders">
             <form id="payRateForm" #payRateForm="ngForm" (ngSubmit)="payRateFilter(payRateForm.value)">
-                <ion-icon class="icon-close" name="close-circle-outline" (click)="closeMenu()"></ion-icon>
                 <h1 class="slider-headings">Pay Rate (R):</h1>
-                    <ion-range class="location-slider" pin [ticks]="true" [snaps]="true" [min]="10" [max]="500" pin color="secondary" value="23" ngModel name="min_payrate" step="10">
+                    <ion-range class="location-slider" pin [min]="10" [max]="1000" pin color="secondary" value="23" ngModel name="min_payrate" step="10">
                         <ion-label class="slider-icons" slot="start">Min:</ion-label>
                     </ion-range>
-                    <ion-range class="location-slider" pin [ticks]="true" [snaps]="true" [min]="500" [max]="10000" pin color="secondary" value="23" ngModel name="max_payrate" step="10">
+                    <ion-range class="location-slider" pin [min]="10" [max]="1000" pin color="secondary" value="23" ngModel name="max_payrate" step="10">
                         <ion-label class="slider-icons" slot="start">Max:</ion-label>
                     </ion-range>
                 <input type="submit" class="filter-submit-button" id="change" value="APPLY"/>
@@ -58,10 +63,10 @@
         <div class="payrate-sliders">
             <form id="locationForm" #locationForm="ngForm" (ngSubmit)="distanceFilter(locationForm.value)">
             <h1 class="slider-headings">Distance (km):</h1>
-                <ion-range class="location-slider" pin [ticks]="true" [snaps]="true" [min]="0" [max]="50" pin color="secondary" value="23" ngModel name="min_distance" step="10">
+                <ion-range class="location-slider" pin [min]="0" [max]="50" pin color="secondary" value="23" ngModel name="min_distance" step="10">
                     <ion-label class="slider-icons" slot="start">Min:</ion-label>
                 </ion-range>
-                <ion-range class="location-slider" pin [ticks]="true" [snaps]="true" [min]="50" [max]="100" pin color="secondary" value="23" ngModel name="max_distance" step="10">
+                <ion-range class="location-slider" pin [min]="50" [max]="100" pin color="secondary" value="23" ngModel name="max_distance" step="10">
                     <ion-label class="slider-icons" slot="start">Max:</ion-label>
                 </ion-range>
             <input type="submit" class="filter-submit-button" id="change" value="APPLY"/>

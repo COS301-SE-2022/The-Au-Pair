@@ -4,9 +4,29 @@ ion-menu{
     --max-height: 150%;
 }
 
+ion-toggle {
+    --background: var(--ion-color-champagne);
+}
+
 ion-menu::part(backdrop) {
     background-color: transparent;
     display: none;
+}
+
+.male-female{
+    color: var(--ion-color-dark);
+    padding-bottom: 5px;
+}
+
+.gender-toggle{
+    margin-left: 5px;
+}
+
+.gender-toggle-div{
+    display: flex;
+    text-align: center;
+    align-items: center;
+    margin-bottom: 30px;
 }
 
 .menu-gap{
@@ -46,6 +66,10 @@ ion-menu::part(backdrop) {
     padding-left: 15px;
     cursor: pointer;
 }
+
+ion-range::part(pin) {
+    transform: translate3d(0px, -25px, 0px) scale(1);
+  }
 
 .icon-close{
     height: 32px;
@@ -195,6 +219,12 @@ ion-card {
 .expand-arrow{
     width: 20px;
     height: 20px;
+}
+
+@media (max-width: 384px) {
+    .explore-heading{
+        font-size: 26px;
+    }
 }
 
 @media (max-width: 580px) {

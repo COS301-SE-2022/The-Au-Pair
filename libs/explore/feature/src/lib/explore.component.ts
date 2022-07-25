@@ -3,6 +3,8 @@ import { API } from '../../../../shared/api/api.service';
 import { ExpandModalComponent } from './expand-modal/expand-modal.component';
 import { ModalController } from '@ionic/angular';
 import { MenuController } from '@ionic/angular';
+import { NavController } from '@ionic/angular';
+import { ToastController } from '@ionic/angular';
 
 @Component({
   selector: 'the-au-pair-explore',
@@ -31,12 +33,14 @@ export class ExploreComponent implements OnInit {
   AuPairArray : any[] = [];
   filteredAuPairArray : any[] = [];
   restoredAuPairArray: any[] = [];
+  isOnline!: boolean;
 
-  constructor(private serv: API, private modalCtrl : ModalController, private menuController : MenuController){}
+  constructor(private serv: API, public toastCtrl: ToastController, private modalCtrl : ModalController, private menuController : MenuController, public navCtrl: NavController){}
 
   ngOnInit(): void
   {
     this.getAuPairs();
+    this.isOnline = false;
   }
 
   async getAuPairs()
@@ -105,51 +109,36 @@ export class ExploreComponent implements OnInit {
   {
     this.AuPairArray.splice(0);
     this.restoredAuPairArray.forEach(val => this.AuPairArray.push(Object.assign({}, val)));
-
+    
     this.minPayrate = formData.min_payrate;
     this.maxPayrate = formData.max_payrate;
-        
-    this.AuPairArray.sort((obj1, obj2) => {
-      if(obj1.payRate > obj2.payRate)
-      {
-        return 1;
-      }
 
-      if(obj1.payRate < obj2.payRate)
-      {
-        return -1;
-      }
-
-      return 0;
-    });
-
-    console.log(this.AuPairArray);
-
-    this.AuPairArray.forEach((ap: { id: any; rating: any; payRate: any; fname: any; sname: any, address: any; employer: any;}) => {
-      this.serv.getUser(ap.id).subscribe(
-        res=>{
-          const auPairDetails = {
-            id: ap.id,
-            rating: ap.rating,
-            payRate: ap.payRate,
-            fname: res.fname,
-            sname: res.sname,
-            address: res.address,
-            employer: ap.employer,
-            registered: res.registered,
-          }
-
-          if(ap.payRate >= this.minPayrate && ap.payRate <= this.maxPayrate)
-          {
-            this.filteredAuPairArray.push(auPairDetails);
-          }
-        },
-        error=>{console.log("Error has occured with API: " + error);}
-      )
-    });
-
-    this.AuPairArray.length = 0;
-    this.AuPairArray = this.filteredAuPairArray;
+    if(this.minPayrate > this.maxPayrate)
+    {
+      this.errToast()
+    }
+    else
+    {
+      this.AuPairArray.sort((obj1, obj2) => {
+      
+        if(obj1.payRate > obj2.payRate)
+        {
+          return 1;
+        }
+  
+        if(obj1.payRate < obj2.payRate)
+        {
+          return -1;
+        }
+  
+        return 0;
+      });
+  
+      this.AuPairArray = this.AuPairArray.filter((element) => {
+        return element.payRate > this.minPayrate && element.payRate < this.maxPayrate;
+      });
+    }
+    
     this.closeMenu();
   }
 
@@ -157,5 +146,35 @@ export class ExploreComponent implements OnInit {
   {
     this.minDistance = formData.min_distance;
     this.maxDistance = formData.max_distance;
+  }
+
+  updateDriverOnlineStatus() 
+  {
+    this.isOnline = !this.isOnline;
+
+  //   this.AuPairArray.splice(0);
+  //   this.restoredAuPairArray.forEach(val => this.AuPairArray.push(Object.assign({}, val)));
+
+  //   this.AuPairArray = this.AuPairArray.filter((element) => {
+  //     if(this.isOnline)
+  //     {
+  //       return element.gender === 'male';
+  //     }
+  //     else
+  //     {
+  //       return element.gender !== 'male';
+  //     }
+  //   });
+  }
+
+  async errToast()
+  {
+    const toast = await this.toastCtrl.create({
+      message: 'Maximum values cannot be lower than minimum values!',
+      duration: 2000,
+      position: 'top',
+      cssClass: 'toastPopUp'
+    });
+    await toast.present();
   }
 }
