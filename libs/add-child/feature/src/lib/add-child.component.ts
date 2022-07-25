@@ -19,7 +19,8 @@ export class AddChildComponent
     sname: "",
     allergies: "",
     diet: "",
-    parent: ""
+    parent: "",
+    aupair: "",
   }  
 
   parent: Parent ={
@@ -164,6 +165,7 @@ export class AddChildComponent
       this.childDetails.allergies= val.Allergies;
       this.childDetails.diet= val.diet;
       this.childDetails.parent= this.store.snapshot().user.id;
+      this.childDetails.aupair= this.parent.auPair;
       this.addChild(this.childDetails);
     }
   }

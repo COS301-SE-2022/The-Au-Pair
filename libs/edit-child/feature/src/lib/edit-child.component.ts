@@ -19,7 +19,8 @@ export class EditChildComponent implements OnInit {
     sname: "",
     allergies: "",
     diet: "",
-    parent: ""
+    parent: "",
+    aupair: ''
   }  
 
   parent: Parent ={
@@ -176,6 +177,7 @@ export class EditChildComponent implements OnInit {
       this.childDetails.allergies= val.Allergies;
       this.childDetails.diet= val.diet;
       this.childDetails.parent= this.store.snapshot().user.id; //Assumed logged in user for now
+      this.childDetails.aupair = this.parent.auPair;
       this.updateChild(this.childDetails);
     }
   }
