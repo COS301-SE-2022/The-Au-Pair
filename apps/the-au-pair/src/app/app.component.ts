@@ -7,9 +7,9 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   constructor() {
-    setInterval(()=> {
+    // setInterval(()=> {
       
       
-     }, 5000);
+    //  }, 5000);
   }
 }
