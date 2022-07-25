@@ -15,9 +15,6 @@ import { AppState } from '../../../../libs/shared/ngxs/state';
     ShellModule, 
     HttpClientModule, 
     NavbarModule,
-    NgxsModule.forRoot([
-      AppState
-    ]),
   ],
   bootstrap: [AppComponent],
 })
