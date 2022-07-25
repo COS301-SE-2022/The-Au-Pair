@@ -1,8 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { API } from "../../../../shared/api/api.service";
 import { Store } from "@ngxs/store";
-import { Observable } from 'rxjs';
-import { JsonPipe } from '@angular/common';
 
 @Component({
   selector: 'the-au-pair-admin-console',
