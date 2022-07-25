@@ -47,7 +47,6 @@ export class LoginComponent implements OnInit {
   startPush() {
     PushNotifications.requestPermissions().then(result => {
       if (result.receive === 'granted') {
-        // Register with Apple / Google to receive push via APNS/FCM
         PushNotifications.register();
       } else {
         // Show some error
@@ -77,7 +76,7 @@ export class LoginComponent implements OnInit {
         alert('Push action performed: ' + JSON.stringify(notification));
       },
     );
-  } 
+  }
 
   toggleShow() {
     this.showPassword = !this.showPassword;
