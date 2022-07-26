@@ -90,12 +90,10 @@ export class TrackAuPairComponent implements OnInit
     this.leafletMap = new L.Map('leafletMap');
     this.markerGroup = L.layerGroup().addTo(this.leafletMap);
 
-    const self = this;
-
         //Load the map
-    this.leafletMap.on("load", function () {
+    this.leafletMap.on("load",  () => {
       setTimeout(() => {
-        self.leafletMap.invalidateSize();
+        this.leafletMap.invalidateSize();
       }, 1000);
     });
     this.leafletMap.setView([this.lat, this.long], this.zoom);
