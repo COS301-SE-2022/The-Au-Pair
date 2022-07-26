@@ -6,6 +6,7 @@ import { MenuController } from '@ionic/angular';
 import { NavController } from '@ionic/angular';
 import { ToastController } from '@ionic/angular';
 import { Store } from '@ngxs/store';
+import { User } from '../../../../shared/interfaces/interfaces';
 
 @Component({
   selector: 'the-au-pair-explore',
@@ -14,8 +15,10 @@ import { Store } from '@ngxs/store';
 })
 export class ExploreComponent implements OnInit {
 
-  currentParentx = 0;
-  currentParenty = 0;
+  parentID = "";
+
+  currentParentx! : number;
+  currentParenty! : number;
 
   minPayrate! : number;
   maxPayrate! : number;
@@ -41,6 +44,7 @@ export class ExploreComponent implements OnInit {
     latitude: 0,
     distance: 0,
   }
+
   AuPairArray : any[] = [];
   filteredAuPairArray : any[] = [];
   restoredAuPairArray: any[] = [];
@@ -48,10 +52,20 @@ export class ExploreComponent implements OnInit {
 
   constructor(private serv: API, public toastCtrl: ToastController, private modalCtrl : ModalController, private menuController : MenuController, public navCtrl: NavController, private store: Store){}
 
-  ngOnInit(): void
+  async ngOnInit()
   {
-    this.currentParentx = this.store.snapshot().user.latitude;
-    this.currentParenty = this.store.snapshot().user.longitude;
+    this.parentID = this.store.snapshot().user.id;
+
+    await this.serv.getUser(this.parentID).toPromise()
+    .then( 
+      res=>{
+        this.currentParentx = res.latitude;
+        this.currentParenty = res.longitude;
+      },
+      error => {
+        console.log("Error has occured with API: " + error);
+      }
+    )
 
     this.getAuPairs();
     this.isOnline = false;
@@ -264,13 +278,19 @@ export class ExploreComponent implements OnInit {
 
   calculateEucDistance(auPairx : number, auPairy : number)
   {
-    this.currentParentx = this.currentParentx * 110.574;
-    this.currentParenty = this.currentParenty * 110.574;
+    this.currentParentx = (this.currentParentx * Math.PI) / 180;
+    this.currentParenty = (this.currentParenty * Math.PI) / 180;
+    auPairx = (auPairx * Math.PI) / 180;
+    auPairy = (auPairy * Math.PI) / 180;
 
-    auPairx = auPairx * 110.574;
-    auPairy = auPairy * 110.574;
+    const dlong = auPairy - this.currentParenty;
+    const dlat = auPairx - this.currentParentx;
 
-    this.eucDistance = Math.sqrt((auPairy - this.currentParenty) * (auPairy - this.currentParenty) + (auPairx - this.currentParentx) * (auPairx - this.currentParentx));
+    this.eucDistance = Math.pow(Math.sin(dlat / 2), 2) + Math.cos(this.currentParentx) * Math.cos(auPairx) * Math.pow(Math.sin(dlong / 2), 2);
+
+    this.eucDistance = 2 * Math.asin(Math.sqrt(this.eucDistance));
+
+    this.eucDistance = this.eucDistance * 6371;
 
     return this.eucDistance;
   }

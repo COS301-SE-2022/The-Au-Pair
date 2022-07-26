@@ -31,7 +31,7 @@
                         <div class='profile-picture-wrapper'>
                             <img class="profile-picture" src="assets/images/placeholder-profile.jpg" alt="">
                         </div>
-                        <div class="au-pair-details"><div class="detail-title">Suburb: </div>{{this.ap.distance}}</div>
+                        <div class="au-pair-details"><div class="detail-title">Suburb: </div>{{this.ap.suburb}}</div>
                         <div class="au-pair-details"><div class="detail-title">Pay Rate: </div>R{{this.ap.payRate}} per hour</div>
                         <div *ngIf="this.ap.rating !== 0" class="au-pair-details"><div class="detail-title">Rating: </div> {{this.ap.rating}} / 5</div>
                         <div *ngIf="this.ap.rating === 0" class="au-pair-details"><div class="detail-title">Rating: </div> Not yet rated</div>
