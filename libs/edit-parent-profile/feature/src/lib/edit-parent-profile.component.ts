@@ -273,7 +273,9 @@ export class EditParentProfileComponent implements OnInit{
   }
 
   async editUser(user:User){    
-    await this.serv.editUser(user).subscribe(
+    await this.serv.editUser(user)
+    .toPromise()
+    .then(
       res=>{
         console.log("The response is:" + res); 
         return res;

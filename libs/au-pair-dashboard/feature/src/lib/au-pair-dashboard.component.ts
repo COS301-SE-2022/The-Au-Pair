@@ -13,6 +13,8 @@ export class AuPairDashboardComponent implements OnInit {
   
   aupairID = "";
 
+  aupairName = "";
+
   employer = "";
   employerName!: string;
   employerSurname! : string;
@@ -35,6 +37,18 @@ export class AuPairDashboardComponent implements OnInit {
 
   async ngOnInit(): Promise<void> {
     this.aupairID = this.store.snapshot().user.id;
+
+    await this.serv.getUser(this.aupairID)
+    .toPromise()
+    .then(
+      res => {
+        this.aupairName = res.fname;
+      },
+      error => {
+        console.log("Error has occured with API: " + error);
+      }
+    )
+
 
     await this.getEmployer();
 

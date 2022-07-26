@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { User, auPair, medAid } from '../../../../shared/interfaces/interfaces';
+import { User, auPair } from '../../../../shared/interfaces/interfaces';
 import { API } from '../../../../shared/api/api.service';
 import { Store } from '@ngxs/store';
 
