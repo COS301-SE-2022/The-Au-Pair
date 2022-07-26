@@ -59,8 +59,8 @@ export class TrackAuPairComponent implements OnInit
 
   constructor(private serv : API,  private http: HttpClient) 
   {
-    setInterval(()=> {
-      this.getUserDetails();
+    setInterval(async ()=> {
+      await this.getUserDetails();
       this.putMarker();
      }, 5000);
   }
@@ -108,6 +108,8 @@ export class TrackAuPairComponent implements OnInit
 
     /* Get the onShift and current coords of the employed au pair  */
     res = await this.serv.getAuPair(this.parentDetails.auPair).toPromise();
+    //Only show location if the au pair is on shift
+    console.log("AU pair on shift: ", res.onShift);
     this.auPairDetails.id = res.id;
     this.auPairDetails.onShift = res.onShift;
     this.auPairDetails.currentLong = res.currentLong;
@@ -117,6 +119,8 @@ export class TrackAuPairComponent implements OnInit
   async putMarker()
   {    
     //Only show location if the au pair is on shift
+    // console.log("AU pair on shift: ", this.auPairDetails.id, this.auPairDetails.onShift);
+    
     if(this.auPairDetails.onShift)
     {
       //Get the nearrest location to the au pair
@@ -167,11 +171,16 @@ export class TrackAuPairComponent implements OnInit
     }
     else
     {
+      //Clear all location markers
+      this.leafletMap.removeLayer(this.markerGroup);
+      this.markerGroup = L.layerGroup().addTo(this.leafletMap);
+      
       const dom = document.getElementById("auPairStatus");
       if(dom != null)
       {
         dom.innerHTML = "Your Au Pair is currently not on shift, and their location cannot currently be shown.";
         dom.style.display = "flex";
+        dom.style.color = "var( --ion-color-danger-tint)";
       }
     }
   }

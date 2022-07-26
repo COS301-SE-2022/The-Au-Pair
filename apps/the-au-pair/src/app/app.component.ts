@@ -36,6 +36,7 @@ export class AppComponent implements OnInit
     //if user is an auPair
     setInterval(()=> {
       if(this.auPairDetails.onShift == true)
+        this.getCurrentAuPairDetails();
         this.updateCoordinates();
         }, 5000);
   }
@@ -59,7 +60,7 @@ export class AppComponent implements OnInit
   async updateCoordinates()
   { 
     let flag = false;
-    await this.geolocation.getCurrentPosition().then((resp) => 
+    await this.geolocation.getCurrentPosition().then((resp: { coords: { longitude: number; latitude: number; }; }) => 
     {
       //Check if auPair has actually moved
       if(this.auPairDetails.currentLong != resp.coords.longitude || this.auPairDetails.currentLat != resp.coords.latitude)
@@ -68,7 +69,7 @@ export class AppComponent implements OnInit
       //Set new coords
       this.auPairDetails.currentLong = resp.coords.longitude;
       this.auPairDetails.currentLat = resp.coords.latitude;
-    }).catch((error) => 
+    }).catch((error: any) => 
     {
       console.log('Error getting location', error);
     });
