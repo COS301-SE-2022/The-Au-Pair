@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { API } from '../../../../libs/shared/api/api.service';
 import { Geolocation } from '@awesome-cordova-plugins/geolocation/ngx';
-import { auPair } from '../../../../libs/shared/interfaces/interfaces';
+import { auPair, Parent } from '../../../../libs/shared/interfaces/interfaces';
+import { Store } from '@ngxs/store';
 
 @Component({
   selector: 'the-au-pair-root',
@@ -10,7 +11,18 @@ import { auPair } from '../../../../libs/shared/interfaces/interfaces';
 })
 export class AppComponent implements OnInit 
 {
-  
+  //Logged in User details
+  userID = "";
+  userType = 0;
+
+  parentDetails: Parent = {
+    id: "",
+    children: [],
+    medID: "",
+    auPair: "",
+  }
+
+
   //Au Pair object to update their current position
   auPairDetails: auPair = {
     id: "",
@@ -26,33 +38,40 @@ export class AppComponent implements OnInit
     currentLat : 0.0
   }
 
-  constructor(private serv: API, private geolocation: Geolocation)
+  constructor(private serv: API, private geolocation: Geolocation, private store: Store)
   {
-    this.getCurrentAuPairDetails();
+    //Initialise parentID for logged in user
+    this.userID = this.store.snapshot().user.id;
+    this.userType = this.store.snapshot().user.type;
+
+    console.log(this.userID, this.userType);
+    
+    if(this.userType == 2 && this.userID != '')
+    {
+      this.getCurrentAuPairDetails();
+    }
   }
 
   ngOnInit(): void 
-  {
-    //if user is an auPair
+  { 
+    //Only update coordinates if you are an au pair
     setInterval(()=> {
+    if(this.userType == 2 && this.userID != '')
+    {
       if(this.auPairDetails.onShift == true)
+      {
         this.getCurrentAuPairDetails();
         this.updateCoordinates();
-        }, 10000);
+      }
+    } }, 10000);
   }
 
   async getCurrentAuPairDetails()
-  {
-    const res = await this.serv.getAuPair("7542108615984").toPromise()
+  { 
+    const res = await this.serv.getAuPair(this.userID).toPromise()
     this.auPairDetails.id = res.id;
-    this.auPairDetails.rating = res.rating;
     this.auPairDetails.onShift = res.onShift;
     this.auPairDetails.employer = res.employer;
-    this.auPairDetails.costIncurred = res.costIncurred;
-    this.auPairDetails.distTraveled = res.distTraveled;
-    this.auPairDetails.payRate = res.payRate;
-    this.auPairDetails.bio = res.bio;
-    this.auPairDetails.experience = res.experience;
     this.auPairDetails.currentLong = res.currentLong;
     this.auPairDetails.currentLat = res.currentLat;
   };
@@ -69,6 +88,7 @@ export class AppComponent implements OnInit
       //Set new coords
       this.auPairDetails.currentLong = resp.coords.longitude;
       this.auPairDetails.currentLat = resp.coords.latitude;
+      
     }).catch((error: any) => 
     {
       console.log('Error getting location', error);

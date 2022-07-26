@@ -3,6 +3,7 @@ import { User, auPair, Parent } from '../../../../shared/interfaces/interfaces';
 import { API } from '../../../../shared/api/api.service';
 import * as L from 'leaflet'
 import { HttpClient } from '@angular/common/http';
+import { Store } from '@ngxs/store';
 
 @Component({
   selector: 'the-au-pair-track-au-pair',
@@ -20,7 +21,12 @@ export class TrackAuPairComponent implements OnInit
   zoom = 8;
   nearestAddy = "";
 
-  //User variables
+  /*User variables*/
+
+  //Logged in parent details
+  userID = "";
+  userType = 0;
+
   userDetails: User = {
     id: "",
     fname: "",
@@ -57,8 +63,12 @@ export class TrackAuPairComponent implements OnInit
 
   auPairName = "";
 
-  constructor(private serv : API,  private http: HttpClient) 
+  constructor(private serv : API,  private http: HttpClient,  private store: Store) 
   {
+    //Initialise parentID for logged in user
+    this.userID = this.store.snapshot().user.id;
+    this.userType = this.store.snapshot().user.type;
+
     setInterval(async ()=> {
       await this.getUserDetails();
       this.putMarker();
@@ -99,7 +109,7 @@ export class TrackAuPairComponent implements OnInit
   async getUserDetails()
   {
     /* Find logged in user's au pair */
-    let res = await this.serv.getParent("4561237814867").toPromise();
+    let res = await this.serv.getParent(this.userID).toPromise();
     this.parentDetails.auPair = res.auPair;  
     
     /* Get the au pairs name */

@@ -4,7 +4,7 @@ import { ToastController } from '@ionic/angular';
 import { Router } from '@angular/router';
 import { API } from '../../../../shared/api/api.service';
 import { Store } from '@ngxs/store';
-import { SetFcmToken, SetId , SetType } from '../../../../shared/ngxs/actions';
+import { SetFcmToken, SetId , SetType, SetName } from '../../../../shared/ngxs/actions';
 import {
   ActionPerformed,
   PushNotificationSchema,
@@ -117,12 +117,14 @@ export class LoginComponent implements OnInit {
     else {
       this.loggingIn = true;
       let id = "";
+      let name = "";
       let type = 0
       await this.serv.login((this.loginDetailsForm.value.email).toLowerCase(),this.loginDetailsForm.value.pass)
       .toPromise()
       .then(
         res => {
           id = res.id;
+          name = res.fname;
           type = res.type;
         },
         error => {
@@ -145,6 +147,7 @@ export class LoginComponent implements OnInit {
         this.store.dispatch(new SetId(id));
         this.store.dispatch(new SetType(type));
         this.store.dispatch(new SetFcmToken(this.fcmToken));
+        this.store.dispatch(new SetName(name));
 
         if(type == 0)
         {

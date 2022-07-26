@@ -49,7 +49,9 @@ export class RegisterComponent {
     distTraveled: 0,
     payRate: 0,
     bio: '',
-    experience: ''
+    experience: '',
+    currentLong: 0.0,
+    currentLat : 0.0
   }
 
 
