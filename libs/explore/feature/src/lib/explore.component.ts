@@ -86,7 +86,6 @@ export class ExploreComponent implements OnInit {
     this.auPairs.forEach((ap: { id: any; rating: any; payRate: any; fname: any; sname: any, suburb: any; employer: any; age: any; gender: any; longitude: any; latitude: any; distance: any;}) => {
       this.serv.getUser(ap.id).subscribe(
         res=>{
-
           const eucdistance = this.calculateEucDistance(res.latitude, res.longitude);
 
           const auPairDetails = {
