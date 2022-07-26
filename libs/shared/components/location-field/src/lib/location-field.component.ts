@@ -82,22 +82,21 @@ export class LocationFieldComponent implements ControlValueAccessor {
       //Jump out if no results returned
       if(json_data === "{}")
       {
-        this.spinnerActive = false;
         return;
       }
   
       //Add returned data to the array
       const len = res.length;
-      this.potentialLocations = [];
-      for (let j = 0; j < len || j<4; j++)
+      for (let j = 0; j < len; j++)
       { 
         this.potentialLocations.push(res[j].display_name);
       }
-      this.spinnerActive = false;
     })
     .catch(error=>{ // Failure
       console.log(error);
     });
+
+    this.spinnerActive = false;
     
   }
 

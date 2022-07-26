@@ -4,7 +4,6 @@ import { ToastController } from '@ionic/angular';
 import { HttpClient } from '@angular/common/http';
 import { User, auPair, Parent } from '../../../../shared/interfaces/interfaces';
 import { API } from '../../../../shared/api/api.service';
-import { ThisReceiver } from '@angular/compiler';
 
 @Component({
   selector: 'the-au-pair-register',

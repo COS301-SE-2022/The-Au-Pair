@@ -8,10 +8,12 @@ import { LocationFieldModule } from '@the-au-pair/shared/components/location-fie
 import { IonicModule } from '@ionic/angular';
 import { API } from '../../../../shared/api/api.service';
 import { ReactiveFormsModule } from '@angular/forms';
+import { MapsModule } from '@syncfusion/ej2-angular-maps';
+import { LegendService, MarkerService, MapsTooltipService, DataLabelService, BubbleService, NavigationLineService, SelectionService, AnnotationsService, ZoomService } from '@syncfusion/ej2-angular-maps';
 
 @NgModule({
-  imports: [CommonModule, ReactiveFormsModule, IonicModule, RegisterComponentRoutingModule, InputFieldModule, PasswordFieldModule, LocationFieldModule],
+  imports: [CommonModule, ReactiveFormsModule, IonicModule, RegisterComponentRoutingModule, InputFieldModule, PasswordFieldModule, LocationFieldModule, MapsModule],
   declarations: [RegisterComponent],
-  providers:[API]
+  providers:[API,LegendService, MarkerService, MapsTooltipService, DataLabelService, BubbleService, NavigationLineService , SelectionService, AnnotationsService, ZoomService]
 })
 export class RegisterFeatureModule {}
