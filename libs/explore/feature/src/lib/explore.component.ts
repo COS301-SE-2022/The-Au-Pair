@@ -6,7 +6,6 @@ import { MenuController } from '@ionic/angular';
 import { NavController } from '@ionic/angular';
 import { ToastController } from '@ionic/angular';
 import { Store } from '@ngxs/store';
-import { User } from '../../../../shared/interfaces/interfaces';
 
 @Component({
   selector: 'the-au-pair-explore',

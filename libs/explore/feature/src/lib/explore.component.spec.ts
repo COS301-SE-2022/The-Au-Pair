@@ -1,5 +1,10 @@
+import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-
+import { FormsModule } from '@angular/forms';
+import { RouterTestingModule } from '@angular/router/testing';
+import { IonicModule } from '@ionic/angular';
+import { NavbarModule } from '@the-au-pair/shared/components/navbar';
+import { API } from '../../../../shared/api/api.service';
 import { ExploreComponent } from './explore.component';
 
 describe('ExploreComponent', () => {
@@ -9,6 +14,13 @@ describe('ExploreComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [ExploreComponent],
+      imports: [FormsModule,
+        IonicModule,
+        HttpClientTestingModule,
+        NavbarModule,
+        RouterTestingModule
+       ],
+       providers:[API]
     }).compileComponents();
   });
 
