@@ -28,8 +28,16 @@ public class User
     private String number;
     @Field ("salt")
     private String salt;
+    @Field ("latitude")
+    private double latitude;
+    @Field ("longitude")
+    private double longitude;
+    @Field ("suburb")
+    private String suburb;
+    @Field ("gender")
+    private String gender;
 
-    public User(String id, String fname, String sname, String email, String address, boolean registered, int type, String password, String number, String salt)
+    public User(String id, String fname, String sname, String email, String address, boolean registered, int type, String password, String number, String salt, double latitude, double longitude, String suburb, String gender)
     {
         this.id = id;
         this.fname = fname;
@@ -41,6 +49,10 @@ public class User
         this.password = password;
         this.number = number;
         this.salt = salt;
+        this.latitude = latitude;
+        this.longitude = longitude;
+        this.suburb = suburb;
+        this.gender = gender;
     }
 
     public String getId()
@@ -143,6 +155,46 @@ public class User
       this.salt = salt;
     }
 
+    public double getLatitude()
+    {
+        return latitude;
+    }
+
+    public void setLatitiude(double latitude)
+    {
+        this.latitude = latitude;
+    }
+
+    public double getLongitude()
+    {
+        return longitude;
+    }
+
+    public void setLongitude(double longitude)
+    {
+        this.longitude = longitude;
+    }
+
+    public String getSuburb()
+    {
+        return suburb;
+    }
+
+    public void setSuburb(String suburb)
+    {
+        this.suburb = suburb;
+    }
+
+    public String getGender()
+    {
+        return gender;
+    }
+
+    public void setGender(String gender)
+    {
+        this.gender = gender;
+    }
+
     @Override
     public String toString()
     {
@@ -157,6 +209,10 @@ public class User
                 ", password='" + password + '\'' +
                 ", number='" + number + '\'' +
                 ", salt='" + salt + '\'' +
+                ", latitude='" + latitude + '\'' +
+                ", longitude='" + longitude + '\'' +
+                ", suburb='" + suburb + '\'' +
+                ", gender='" + gender + '\'' +
                 '}';
     }
 }
