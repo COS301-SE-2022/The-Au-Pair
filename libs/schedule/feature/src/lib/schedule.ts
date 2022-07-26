@@ -16,6 +16,7 @@ export class ScheduleComponent implements OnInit{
     "Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"
   ]
   actid = -1;
+  childrenNames : string[] = [];
 
   curDay =  this.getCurDay(this.days);
   activities: Activity[] = [];
@@ -24,7 +25,17 @@ export class ScheduleComponent implements OnInit{
 
   ngOnInit(): void {
       this.parentID = this.store.snapshot().user.id;
+      this.getParentChildren();
       this.getActivities();
+  }
+
+  getParentChildren(){
+    this.serv.getChildren(this.parentID).toPromise().then(
+      res => {
+      res.forEach((element: { fname: string; }) => {
+        this.childrenNames.push(element.fname);
+      });
+    });
   }
 
   getCurDay(days : string[]) : number {
