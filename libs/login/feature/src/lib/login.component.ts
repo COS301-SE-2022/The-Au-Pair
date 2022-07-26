@@ -132,7 +132,7 @@ export class LoginComponent implements OnInit {
 
       if(id == "")
       {
-        this.errStatement = "Inccorect email or password";
+        this.errStatement = "Incorrect email or password";
         this.errState = true;
       }
       else if(id == "pending")
