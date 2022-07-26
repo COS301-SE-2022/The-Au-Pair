@@ -6,6 +6,8 @@ import { IonicModule } from '@ionic/angular';
 import { NavbarModule } from '@the-au-pair/shared/components/navbar';
 import { API } from '../../../../shared/api/api.service';
 import { ExploreComponent } from './explore.component';
+import { NgxsModule } from '@ngxs/store';
+import { AppState } from '../../../../shared/ngxs/state';
 
 describe('ExploreComponent', () => {
   let component: ExploreComponent;
@@ -18,7 +20,8 @@ describe('ExploreComponent', () => {
         IonicModule,
         HttpClientTestingModule,
         NavbarModule,
-        RouterTestingModule
+        RouterTestingModule,
+        NgxsModule.forRoot([AppState])
        ],
        providers:[API]
     }).compileComponents();
