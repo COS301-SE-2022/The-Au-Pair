@@ -108,6 +108,11 @@ const routes: Routes = [
     import('@the-au-pair/admin-console/feature').then((m) => m.AdminConsoleFeatureModule),
   },
   {
+    path: 'hire-requests',
+    loadChildren: () =>
+    import('@the-au-pair/hire-requests/feature').then((m) => m.HireRequestsFeatureModule),
+  },
+  {
     path: '**',
     redirectTo: 'login-page',
   }
