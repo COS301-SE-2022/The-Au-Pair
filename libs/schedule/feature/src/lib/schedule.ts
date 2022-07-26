@@ -37,10 +37,10 @@ export class ScheduleComponent implements OnInit{
   getSelectedChild(){
     this.children.forEach(element => {
       if(element.name == this.selectedChildName){
+        this.selectedChild.name = element.name;
         this.selectedChild.id = element.id;
       }
     });
-    console.log(this.selectedChild);
     this.getActivities(this.selectedChild.id)
   }
 
@@ -54,6 +54,8 @@ export class ScheduleComponent implements OnInit{
         }
         this.children.push(child);
       });
+      this.selectedChildName = this.children[0].name;
+      this.getActivities(this.children[0].id);
     });
   }
 
