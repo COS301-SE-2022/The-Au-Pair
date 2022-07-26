@@ -75,9 +75,6 @@
       "@the-au-pair/schedule/feature": [
         "libs/schedule/feature/src/index.ts"
       ],
-      "@the-au-pair/shared/components/aupair-navbar": [
-        "libs/shared/components/aupair-navbar/src/index.ts"
-      ],
       "@the-au-pair/shared/components/admin-navbar": [
         "libs/shared/components/admin-navbar/src/index.ts"
       ],
