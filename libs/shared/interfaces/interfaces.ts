@@ -71,6 +71,11 @@ export interface Activity{
     password: string;
     number: string;
     salt: string;
+    latitude: number;
+    longitude: number;
+    suburb: string;
+    gender: string;
+    age: number;
   }
 
   export interface auPair{

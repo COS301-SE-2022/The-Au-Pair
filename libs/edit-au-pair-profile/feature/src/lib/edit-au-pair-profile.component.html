@@ -1,56 +1,48 @@
-<the-au-pair-navbar></the-au-pair-navbar>
+<the-au-pair-aupair-navbar></the-au-pair-aupair-navbar>
 <ion-content [fullscreen]="true">
-    <div class = "parent-profile-div">
-        <div class = 'title-div'>
-            <p class='profile-name'>{{this.userDetails.fname}}</p>
+    <div class = "edit-profile-div">
+        <h1 class='profile-name'>{{this.userDetails.fname}} {{this.userDetails.sname}}</h1>
+        <div class='profile-picture-wrapper'>
+            <img class="profile-picture" src="assets/images/placeholder-profile.jpg" alt="">
         </div>
-        <!-- <div class = "profile-picture-div">
-            <div class='profile-picture-wrapper'>
-                <ion-icon name="people-circle-outline" class='profile-picture'></ion-icon>
-                <form>
-                    <input type = "file" name = "img" accept="image/*" class = "browse-button">
-                    <input type = "submit" class = "change-button" value = "Change Picture">
-                  </form>
-            </div>
-        </div> -->
         <form id = "profForm" #profileForm = "ngForm" (ngSubmit) = "getUserFormDetails(profileForm.value)">
             <div class = "profile-details-div">
-                <div class="parent-info-small">
-                    <div class="parent-text">Email: </div>
-                    <input type = 'text' name = "email" class="parent-text-info" ngModel = '{{this.userDetails.email}}' placeholder="Email Address">
+                <div class="details-div">
+                    <div class="details-title">Email: </div>
+                    <input type = 'text' name = "email" class="user-details" ngModel = '{{this.userDetails.email}}' placeholder="Email Address">
                     <p id="emailError" class="error" style="display: none;">Error in field</p>
                 </div>
-                <div class="parent-info-small">
-                    <div class="parent-text">Phone: </div>
-                    <input type = 'text' name = "phone" class="parent-text-info" ngModel = '{{this.userDetails.number}}' placeholder="Phone Number">
+                <div class="details-div">
+                    <div class="details-title">Phone: </div>
+                    <input type = 'text' name = "phone" class="user-details" ngModel = '{{this.userDetails.number}}' placeholder="Phone Number">
                     <p id="phoneError" class="error" style="display: none;">Error in field</p>
                 </div>
-                <div class="parent-info-small">
-                    <div class="parent-text">Address: </div>
-                    <input type = 'text' name = "address" class="parent-text-info" ngModel = '{{this.userDetails.address}}' placeholder="Address">
+                <div class="details-div">
+                    <div class="details-title">Address: </div>
+                    <input type = 'text' name = "address" class="user-details" ngModel = '{{this.userDetails.address}}' placeholder="Address">
                     <p id="addressError" class="error" style="display: none;">Error in field</p>
                 </div>
-                <div class="parent-info-small">
-                    <div class="parent-text">Pay rate: </div>
-                    <input type = 'text' name = "payRate" class="parent-text-info" ngModel = '{{this.auPairDetails.payRate}}' placeholder="Pay rate">
+                <div class="details-div">
+                    <div class="details-title">Pay rate: </div>
+                    <input type = 'text' name = "payRate" class="user-details" ngModel = '{{this.auPairDetails.payRate}}' placeholder="Pay rate">
                     <p id="payRateError" class="error" style="display: none;">Error in field</p>
                 </div>
-                <div class="parent-info-large">
-                    <div class="parent-text">Bio: </div>
-                    <textarea name = "bio" class="parent-text-info" ngModel = '{{this.auPairDetails.bio}}' placeholder="Bio"></textarea>
+                <div class="details-div-large">
+                    <div class="details-title">Bio: </div>
+                    <textarea name = "bio" class="user-details" ngModel = '{{this.auPairDetails.bio}}' placeholder="Bio"></textarea>
                     <p id="bioError" class="error" style="display: none;">Error in field</p>
                 </div>
-                <div class="parent-info-large">
-                    <div class="parent-text">Experience: </div>
-                    <textarea name = "experience" class="parent-text-info" ngModel = '{{this.auPairDetails.experience}}' placeholder="Experience"></textarea>
+                <div class="details-div-large">
+                    <div class="details-title">Experience: </div>
+                    <textarea name = "experience" class="user-details" ngModel = '{{this.auPairDetails.experience}}' placeholder="Experience"></textarea>
                     <p id="experienceError" class="error" style="display: none;">Error in field</p>
                 </div>
-                <input type = 'submit' class="change-button" value = 'Update Details'>
+                <input type = 'submit' class="submit-button" value = 'Update Details'>
             </div>
         </form>
-        <img id="active-2" src="assets/images/active.png">
-        <img id="active" src="assets/images/active-2.png">
-        <img id="lifestyles" src="assets/images/lifestyles.png">
+        <img id="background-image-1" src="assets/images/active.png">
+        <img id="background-image-2" src="assets/images/active-2.png">
+        <img id="background-image-3" src="assets/images/lifestyles.png">
     </div>
 
 </ion-content>

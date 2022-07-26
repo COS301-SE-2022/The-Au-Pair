@@ -45,6 +45,7 @@
       "@the-au-pair/edit-parent-profile/feature": [
         "libs/edit-parent-profile/feature/src/index.ts"
       ],
+      "@the-au-pair/explore/feature": ["libs/explore/feature/src/index.ts"],
       "@the-au-pair/forgot-password/feature": [
         "libs/forgot-password/feature/src/index.ts"
       ],
