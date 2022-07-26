@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { API } from '../../../../shared/api/api.service';
 import { User, medAid, Parent } from '../../../../shared/interfaces/interfaces';
 import { ToastController } from '@ionic/angular';
+import { Store } from '@ngxs/store';
 
 @Component({
   selector: 'the-au-pair-edit-parent-profile',
@@ -10,6 +11,7 @@ import { ToastController } from '@ionic/angular';
 })
 export class EditParentProfileComponent implements OnInit{
   
+  parentID = "";
   hasErr = false;
 
   userDetails: User = {
@@ -41,17 +43,20 @@ export class EditParentProfileComponent implements OnInit{
     auPair: "",
   }
 
-  constructor(private serv: API, public toastCtrl: ToastController){}
+  constructor(private serv: API, public toastCtrl: ToastController, private store: Store){}
 
   ngOnInit(): void
   {
+    this.parentID = this.store.snapshot().user.id;
     this.getUserDetails()
   }
 
   async getUserDetails()
   {
     /* User Details */
-    await this.serv.getUser("4561237814867").subscribe(
+    await this.serv.getUser(this.parentID)
+    .toPromise()
+    .then(
       res=>{
         this.userDetails.id = res.id;
         this.userDetails.fname = res.fname;
@@ -64,9 +69,28 @@ export class EditParentProfileComponent implements OnInit{
         this.userDetails.number = res.number;
         this.userDetails.salt = res.salt;
       },
-      error=>{console.log("Error has occured with API: " + error);}
+      error => {
+        console.log("Error has occured with API: " + error);
+      }
     )
-    await this.serv.getMedAid("7534286951").subscribe(
+
+    await this.serv.getParent(this.parentID)
+    .toPromise()
+    .then(
+      res => {
+        this.parent.id = res.id;
+        this.parent.children = res.children;
+        this.parent.medID = res.medID;
+        this.parent.auPair = res.auPair;
+      },
+      error => {
+        console.log("Error has occured with API: " + error);
+      }
+    )  
+
+    await this.serv.getMedAid(this.parent.medID)
+    .toPromise()
+    .then(
       res=>{
         this.medAidDetails.id = res.id;
         this.medAidDetails.plan = res.plan;
@@ -75,7 +99,9 @@ export class EditParentProfileComponent implements OnInit{
         this.medAidDetails.mID = res.mID;
         this.medAidDetails.provider = res.provider;
       },
-      error=>{console.log("Error has occured with API: " + error);}
+      error => {
+        console.log("Error has occured with API: " + error);
+      }
     )
   };
 
@@ -243,12 +269,11 @@ export class EditParentProfileComponent implements OnInit{
     else
     {
       this.openToast();
-    }
-    
+    } 
   }
 
-  editUser(user:User){    
-    this.serv.editUser(user).subscribe(
+  async editUser(user:User){    
+    await this.serv.editUser(user).subscribe(
       res=>{
         console.log("The response is:" + res); 
         return res;
@@ -261,29 +286,23 @@ export class EditParentProfileComponent implements OnInit{
     )
   };
 
-  editMedAid(medAid:medAid){
-    this.serv.getParent("4561237814867").subscribe(
-      res=>{
-        this.parent.id = res.id;
-        this.parent.children = res.children;
-        this.parent.medID = medAid.mID;
-        this.parent.auPair = res.auPair;
-        
-        //Update the parent object to contain the new child ID
-        this.serv.editParent(this.parent).subscribe(
-          res=>{
-            console.log("The response is:" + res); 
-          },
-          error=>{
-            console.log("Error has occured with API: " + error);
-          }
-        );
+  async editMedAid(medAid:medAid)
+  {
+    this.parent.medID = medAid.mID;
+    await this.serv.editParent(this.parent)
+    .toPromise()
+    .then(
+      res => {
+        console.log("The response is:" + res); 
       },
       error=>{
         console.log("Error has occured with API: " + error);
       }
     )
-    this.serv.editMedAid(medAid).subscribe(
+
+    await this.serv.editMedAid(medAid)
+    .toPromise()
+    .then(
       res=>{
         console.log("The response is:" + res); 
         return res;

@@ -7,6 +7,8 @@ import { HttpClientTestingModule } from "@angular/common/http/testing";
 import { NavbarModule } from '@the-au-pair/shared/components/navbar';
 import { RouterTestingModule } from "@angular/router/testing";
 import { EditAuPairProfileComponent } from './edit-au-pair-profile.component';
+import { NgxsModule } from '@ngxs/store';
+import { AppState } from '../../../../shared/ngxs/state';
 
 describe('EditAuPairProfileComponent', () => {
   let component: EditAuPairProfileComponent;
@@ -37,6 +39,7 @@ describe('EditAuPairProfileComponent', () => {
         HttpClientTestingModule,
         NavbarModule,
         RouterTestingModule,
+        NgxsModule.forRoot([AppState])
     ],
     providers: [API]
     }).compileComponents();

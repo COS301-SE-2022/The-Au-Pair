@@ -7,6 +7,8 @@ import { HttpClientTestingModule } from "@angular/common/http/testing";
 import { NavbarModule } from '@the-au-pair/shared/components/navbar';
 import {RouterTestingModule} from "@angular/router/testing";
 import { EditParentProfileComponent } from './edit-parent-profile.component';
+import { NgxsModule } from '@ngxs/store';
+import { AppState } from '../../../../shared/ngxs/state';
 
 describe('EditParentProfileComponent', () => {
   let component: EditParentProfileComponent;
@@ -39,6 +41,7 @@ describe('EditParentProfileComponent', () => {
         HttpClientTestingModule,
         NavbarModule,
         RouterTestingModule,
+        NgxsModule.forRoot([AppState])
     ],
     providers: [API]
     }).compileComponents();

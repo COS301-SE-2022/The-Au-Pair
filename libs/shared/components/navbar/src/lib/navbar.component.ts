@@ -19,6 +19,7 @@ export class NavbarComponent implements OnInit
   {
     this.type = this.store.snapshot().user.type;
   }
+
   dash()
   {
     if(this.type == 0)
@@ -47,7 +48,7 @@ export class NavbarComponent implements OnInit
     }
     else if(this.type == 2)
     {
-      this.router.navigate(['/aupair-profile']);
+      this.router.navigate(['/au-pair-profile']);
     }
   }
 

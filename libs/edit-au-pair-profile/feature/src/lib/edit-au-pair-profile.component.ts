@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { API } from '../../../../shared/api/api.service';
 import { User, auPair } from '../../../../shared/interfaces/interfaces';
 import { ToastController } from '@ionic/angular';
+import { Store } from '@ngxs/store';
 
 @Component({
   selector: 'the-au-pair-edit-au-pair-profile',
@@ -10,6 +11,8 @@ import { ToastController } from '@ionic/angular';
 })
 export class EditAuPairProfileComponent implements OnInit {
   
+  aupairID = "";
+
   hasErr = false;
 
   userDetails: User = {
@@ -37,17 +40,18 @@ export class EditAuPairProfileComponent implements OnInit {
     experience: "",
   }
 
-  constructor(private serv: API, public toastCtrl: ToastController){}
+  constructor(private serv: API, public toastCtrl: ToastController, private store: Store){}
 
   ngOnInit(): void
   {
+    this.aupairID = this.store.snapshot().user.id;
     this.getUserDetails()
   }
 
   async getUserDetails()
   {
     /* User Details */
-    await this.serv.getUser("7542108615984").subscribe(
+    await this.serv.getUser(this.aupairID).subscribe(
       res=>{
         this.userDetails.id = res.id;
         this.userDetails.fname = res.fname;
@@ -62,7 +66,7 @@ export class EditAuPairProfileComponent implements OnInit {
       },
       error=>{console.log("Error has occured with API: " + error);}
     )
-    await this.serv.getAuPair("7542108615984").subscribe(
+    await this.serv.getAuPair(this.aupairID).subscribe(
       res=>{
         this.auPairDetails.id = res.id;
         this.auPairDetails.rating = res.rating;
