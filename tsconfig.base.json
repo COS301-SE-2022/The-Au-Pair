@@ -91,6 +91,9 @@
       "@the-au-pair/shared/components/password-field": [
         "libs/shared/components/password-field/src/index.ts"
       ],
+      "@the-au-pair/shared/components/location-field": [
+        "libs/shared/components/location-field/src/index.ts"
+      ],
       "@the-au-pair/shell/feature": [
         "libs/shell/feature/src/index.ts"
       ]

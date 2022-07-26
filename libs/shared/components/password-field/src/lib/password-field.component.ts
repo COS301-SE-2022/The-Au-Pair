@@ -22,6 +22,8 @@ export class PasswordFieldComponent implements ControlValueAccessor {
   @Input()
   labelContent!: string;
 
+  @Input() errorContent = "";
+
   @Input() showError = false;
 
   // eslint-disable-next-line @typescript-eslint/no-empty-function

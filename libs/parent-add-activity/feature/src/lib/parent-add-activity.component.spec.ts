@@ -4,7 +4,7 @@ import { IonicModule } from '@ionic/angular';
 import { ParentAddActivityComponent } from './parent-add-activity.component';
 import { Activity } from '../../../../shared/interfaces/interfaces';
 import { API } from '../../../../shared/api/api.service';
-import {HttpClientTestingModule} from "@angular/common/http/testing";
+import { HttpClientTestingModule } from "@angular/common/http/testing";
 import { NavbarModule } from '@the-au-pair/shared/components/navbar';
 import { RouterTestingModule} from '@angular/router/testing';
 import { NgxsModule } from '@ngxs/store';
