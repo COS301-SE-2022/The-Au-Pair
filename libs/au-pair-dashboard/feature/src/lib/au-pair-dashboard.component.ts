@@ -49,7 +49,6 @@ export class AuPairDashboardComponent implements OnInit {
       }
     )
 
-
     await this.getEmployer();
 
     const todaysDate = this.getToday();
