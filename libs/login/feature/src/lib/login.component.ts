@@ -110,7 +110,6 @@ export class LoginComponent implements OnInit {
 
       if(id == "")
       {
-        this.openToast("Inccorect email or password");
         this.errStatement = "Inccorect email or password";
         this.errState = true;
       }

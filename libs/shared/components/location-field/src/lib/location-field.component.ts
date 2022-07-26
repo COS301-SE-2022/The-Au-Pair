@@ -21,6 +21,7 @@ export class LocationFieldComponent implements ControlValueAccessor {
   //Possible locations searched for
   location = "";
   potentialLocations : string[] = [];
+  spinnerActive = false;
 
   @Input()
   labelContent!: string;
@@ -69,31 +70,51 @@ export class LocationFieldComponent implements ControlValueAccessor {
     const params = locationParam + '&limit=4&format=json&polygon_geojson=1&addressdetails=1';
 
     //Make the API call
+    this.spinnerActive = true;
     await this.http.get('https://nominatim.openstreetmap.org/search?q='+params)
     .toPromise()
     .then(data=>{ // Success
       //Populate potential Locations Array
       const json_data = JSON.stringify(data);
 
-      console.log(data);
-
       const res = JSON.parse(json_data);
 
       //Jump out if no results returned
       if(json_data === "{}")
       {
+        this.spinnerActive = false;
         return;
       }
   
       //Add returned data to the array
       const len = res.length;
-      for (let j = 0; j < len && j<4; j++) 
+      this.potentialLocations = [];
+      for (let j = 0; j < len || j<4; j++)
       { 
         this.potentialLocations.push(res[j].display_name);
       }
+      this.spinnerActive = false;
     })
     .catch(error=>{ // Failure
       console.log(error);
     });
+    
+  }
+
+  validateSelection()
+  {    
+    const len = this.potentialLocations.length;
+
+    if(len <= 0) {
+      return false;
+    }
+
+    for (let j = 0; j < len; j++) 
+    { 
+      if(this.potentialLocations[j] == this.val){
+        return true;
+      }
+    }
+    return false;
   }
 }

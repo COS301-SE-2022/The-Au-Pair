@@ -14,7 +14,7 @@
     box-shadow: 1px 2px 5px rgba(0, 0, 0, 0.13);
     border-style: none;
     border-radius: 10px;
-    margin-top: 60px;
+    margin-top: 70px;
     padding-left: 20px;
     color: black;
 }
@@ -26,7 +26,7 @@
 .fld .form-label {
     position: absolute;
     left: 0.8rem;
-    top: 5.1rem;
+    top: 5.75rem;
     padding: 0 0.5rem;
     pointer-events: none; 
     transition: 100ms ease-out;
@@ -43,19 +43,28 @@
 
 .form-input:focus ~ .form-label,
 .form-input:not(:placeholder-shown).form-input:not(:focus) ~ .form-label {
-  top: 2rem;
-  left: 0rem;
-  opacity: 1;
-  font-size: 15px;
+    top: 3rem;
+    left: 0rem;
+    opacity: 1;
+    font-size: 15px;
 }
 
 .error{
     position: absolute;
     right: 1rem;
-    top: 4.95rem;
+    top: 5.55rem;
     padding: 0 0.5rem;
     font-size: 25px;
     color: red;
+}
+
+.spinner{
+    position: absolute;
+    right: 1.2rem;
+    top: 5.45rem;
+    padding: 0 0.5rem;
+    font-size: 25px;
+    color: var(--ion-color-grey);
 }
 
 .errorType{
