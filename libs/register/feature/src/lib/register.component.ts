@@ -62,7 +62,9 @@ export class RegisterComponent {
       phone : ['', Validators.compose([Validators.maxLength(30), Validators.pattern('^(\\+27|0)[6-8][0-9]{8}$'), Validators.required])],
       id : ['', Validators.compose([Validators.maxLength(13), Validators.pattern('(((\\d{2}((0[13578]|1[02])(0[1-9]|[12]\\d|3[01])|(0[13456789]|1[012])(0[1-9]|[12]\\d|30)|02(0[1-9]|1\\d|2[0-8])))|([02468][048]|[13579][26])0229))(( |-)(\\d{4})( |-)(\\d{3})|(\\d{7}))'), Validators.required])],
       medAid : ['', Validators.compose([Validators.maxLength(100), Validators.pattern('[a-zA-Z\\d]*')])],
-      location : ['', Validators.compose([Validators.required])],
+      location : ['', Validators.compose([Validators.maxLength(1000), Validators.pattern('[a-zA-Z\\d]*'), Validators.required])],
+      motivation : ['', Validators.compose([Validators.maxLength(1000), Validators.pattern('[a-zA-Z\\d]*'), Validators.required])],
+      experience : ['', Validators.compose([Validators.required])],
       pass : ['', Validators.compose([Validators.maxLength(20), Validators.pattern('^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$'), Validators.required])],
       confPass : ['', Validators.compose([Validators.maxLength(30), Validators.pattern('^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$'), Validators.required])],
     });
@@ -79,7 +81,7 @@ export class RegisterComponent {
     this.locationError = false;
 
     this.submitAttempt = true;
-    this.notSamePasswords = true;
+    this.notSamePasswords = false;
     let formError = false;
 
     if(this.parentChosen)
@@ -104,16 +106,25 @@ export class RegisterComponent {
           this.openToast("Please select a valid location from the suggested below.");
           formError = true;
         }
-      }
+    }
 
-    if(!formError && this.parentRegisterDetailsForm.controls['name'].valid && this.parentRegisterDetailsForm.controls['surname'].valid && this.parentRegisterDetailsForm.controls['email'].valid && this.parentRegisterDetailsForm.controls['phone'].valid && this.parentRegisterDetailsForm.controls['id'].valid && this.parentRegisterDetailsForm.controls['medAid'].valid && this.parentRegisterDetailsForm.controls['location'].valid  && this.parentRegisterDetailsForm.controls['pass'].valid  && this.parentRegisterDetailsForm.controls['confPass'].valid)
+    if(this.parentRegisterDetailsForm.value.location.pass != this.parentRegisterDetailsForm.value.location.confPass)
+    {
+      this.notSamePasswords = true;
+    }
+
+    if(!formError && this.parentRegisterDetailsForm.controls['name'].valid && this.parentRegisterDetailsForm.controls['surname'].valid && this.parentRegisterDetailsForm.controls['email'].valid && this.parentRegisterDetailsForm.controls['phone'].valid && this.parentRegisterDetailsForm.controls['id'].valid && this.parentRegisterDetailsForm.controls['medAid'].valid && this.parentRegisterDetailsForm.controls['location'].valid && this.parentRegisterDetailsForm.controls['motivation'].valid && this.parentRegisterDetailsForm.controls['experience'].valid && this.parentRegisterDetailsForm.controls['pass'].valid  && this.parentRegisterDetailsForm.controls['confPass'].valid)
     {
       let application = "";
       this.userDetails.id = this.parentRegisterDetailsForm.value.id;
+      // this.userDetails.birthDate = this.parentRegisterDetailsForm.value.id.substring(0, 6); //TODO: add database for age this
       this.userDetails.fname = this.parentRegisterDetailsForm.value.name;
       this.userDetails.sname = this.parentRegisterDetailsForm.value.surname;
       this.userDetails.email = (this.parentRegisterDetailsForm.value.email).toLowerCase();
       this.userDetails.address = this.parentRegisterDetailsForm.value.location;
+      // this.userDetails.gender = this.maleChosen; //TODO: connect database for this
+      // this.userDetails.bio = this.parentRegisterDetailsForm.value.motivation; //TODO: connect database for this
+      // this.userDetails.experience = this.parentRegisterDetailsForm.value.experience; //TODO: connect database for this
       this.userDetails.number = this.parentRegisterDetailsForm.value.phone;
       this.userDetails.password = this.parentRegisterDetailsForm.value.pass;
 
@@ -228,5 +239,5 @@ export class RegisterComponent {
     
     this.locationError = true;
   }
-
+  
 }
