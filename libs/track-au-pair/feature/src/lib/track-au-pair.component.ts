@@ -62,7 +62,7 @@ export class TrackAuPairComponent implements OnInit
     setInterval(async ()=> {
       await this.getUserDetails();
       this.putMarker();
-     }, 5000);
+     }, 10000);
   }
 
   async ngOnInit(): Promise<void> 
@@ -108,8 +108,8 @@ export class TrackAuPairComponent implements OnInit
 
     /* Get the onShift and current coords of the employed au pair  */
     res = await this.serv.getAuPair(this.parentDetails.auPair).toPromise();
+    
     //Only show location if the au pair is on shift
-    console.log("AU pair on shift: ", res.onShift);
     this.auPairDetails.id = res.id;
     this.auPairDetails.onShift = res.onShift;
     this.auPairDetails.currentLong = res.currentLong;
@@ -118,9 +118,7 @@ export class TrackAuPairComponent implements OnInit
 
   async putMarker()
   {    
-    //Only show location if the au pair is on shift
-    // console.log("AU pair on shift: ", this.auPairDetails.id, this.auPairDetails.onShift);
-    
+    //Only show location if the au pair is on shift    
     if(this.auPairDetails.onShift)
     {
       //Get the nearrest location to the au pair

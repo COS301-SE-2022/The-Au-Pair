@@ -38,7 +38,7 @@ export class AppComponent implements OnInit
       if(this.auPairDetails.onShift == true)
         this.getCurrentAuPairDetails();
         this.updateCoordinates();
-        }, 5000);
+        }, 10000);
   }
 
   async getCurrentAuPairDetails()
