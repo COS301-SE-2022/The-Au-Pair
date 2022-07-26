@@ -93,6 +93,9 @@
       "@the-au-pair/shared/components/location-field": [
         "libs/shared/components/location-field/src/index.ts"
       ],
+      "@the-au-pair/shared/components/long-field": [
+        "libs/shared/components/long-field/src/index.ts"
+      ],
       "@the-au-pair/shell/feature": [
         "libs/shell/feature/src/index.ts"
       ]
