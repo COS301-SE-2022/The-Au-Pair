@@ -240,9 +240,9 @@ export class ParentAddActivityComponent implements OnInit{
 
   getChildren()
   {
-    this.serv.getParent(this.parentID).subscribe(
+    this.serv.getChildren(this.parentID).subscribe(
       res=>{
-          this.allChildren = res.children;
+          this.allChildren = res;
       },
       error=>{
         console.log("Error has occured with API: " + error);

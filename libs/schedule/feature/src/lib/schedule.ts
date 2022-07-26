@@ -40,6 +40,7 @@ export class ScheduleComponent implements OnInit{
         this.selectedChild.id = element.id;
       }
     });
+    console.log(this.selectedChild);
     this.getActivities(this.selectedChild.id)
   }
 
@@ -53,7 +54,6 @@ export class ScheduleComponent implements OnInit{
         }
         this.children.push(child);
       });
-      console.log(this.children)
     });
   }
 
