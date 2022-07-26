@@ -30,4 +30,14 @@ public class auPairService
     List<auPair> auPairs = apr.findAll();
     return auPairs;
   }
+  
+  public void deleteAuPair(String id)
+  {
+    apr.deleteById(id);
+  }
+
+  public void addAuPair(auPair a)
+  {
+    apr.save(a);
+  }
 }

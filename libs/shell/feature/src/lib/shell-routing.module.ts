@@ -3,18 +3,13 @@ import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 
 const routes: Routes = [
   {
-    path: 'home',
-    loadChildren: () =>
-      import('@the-au-pair/home/feature').then((m) => m.HomePageModule),
-  },
-  {
     path: 'schedule',
     loadChildren: () =>
       import('@the-au-pair/schedule/feature').then((m) => m.ScheduleFeatureModule),
   },
   {
     path: '',
-    redirectTo: 'parent-dashboard',
+    redirectTo: 'login-page',
     pathMatch: 'full',
   },
   {
@@ -90,17 +85,17 @@ const routes: Routes = [
   {
     path: 'login-page',
     loadChildren: () =>
-    import('@the-au-pair/login/feature').then((m) => m.LoginFeatureModule ),
+    import('@the-au-pair/login/feature').then((m) => m.LoginFeatureModule),
   },
   {
     path: 'forgot-password',
     loadChildren: () =>
-    import('@the-au-pair/forgot-password/feature').then((m) => m.ForgotPasswordFeatureModule )
+    import('@the-au-pair/forgot-password/feature').then((m) => m.ForgotPasswordFeatureModule)
   },
   {
     path: 'register-page',
     loadChildren: () =>
-    import('@the-au-pair/register/feature').then((m) => m.RegisterFeatureModule )
+    import('@the-au-pair/register/feature').then((m) => m.RegisterFeatureModule)
   },
   {
     path: 'parent-notifications',
@@ -111,6 +106,15 @@ const routes: Routes = [
     path: 'explore',
     loadChildren: () =>
     import('@the-au-pair/explore/feature').then((m) => m.ExploreFeatureModule),
+  },
+  {
+    path: 'admin-console',
+    loadChildren: () =>
+    import('@the-au-pair/admin-console/feature').then((m) => m.AdminConsoleFeatureModule),
+  },
+  {
+    path: '**',
+    redirectTo: 'login-page',
   }
 ];
 

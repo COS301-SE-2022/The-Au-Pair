@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ModalController, NavParams, ToastController } from '@ionic/angular';
 import { auPair } from '../../../../../shared/interfaces/interfaces';
 import { API } from '../../../../../shared/api/api.service';
+import { Store } from '@ngxs/store';
 
 @Component({
   selector: 'the-au-pair-au-pair-rating-modal',
@@ -9,9 +10,9 @@ import { API } from '../../../../../shared/api/api.service';
   styleUrls: ['./au-pair-rating-modal.component.scss'],
 })
 export class AuPairRatingModalComponent implements OnInit {
-
+  parentID = "";
+  auPairId = "";
   public navParams = new NavParams;
-  auPairId: string = this.navParams.get('auPairId');
   auPairRating! : number;
 
   currentAuPair: auPair = {
@@ -26,9 +27,21 @@ export class AuPairRatingModalComponent implements OnInit {
     experience: "",
   }
   
-  constructor(private serv: API, private modalCtrl : ModalController ,public toastCtrl: ToastController) {}
+  constructor(private serv: API, private modalCtrl : ModalController ,public toastCtrl: ToastController, private store: Store) {}
 
-  ngOnInit(): void {
+  async ngOnInit() {
+    this.parentID = this.store.snapshot().user.id;
+    await this.serv.getParent(this.parentID)
+    .toPromise()
+      .then( 
+        res=>{
+          this.auPairId = res.auPair;
+      },
+      error => {
+        console.log("Error has occured with API: " + error);
+      }
+    )
+
     this.getAuPair(this.auPairId);
   }
 
@@ -45,7 +58,7 @@ export class AuPairRatingModalComponent implements OnInit {
 
   async getAuPairDetails()
   {
-    await this.serv.getAuPair("7542108615984").subscribe(
+    await this.serv.getAuPair(this.auPairId).subscribe(
       res=>{
         this.currentAuPair.id = res.id;
         this.currentAuPair.rating = res.rating;
@@ -62,7 +75,7 @@ export class AuPairRatingModalComponent implements OnInit {
   }
 
   getAuPair(auPairId : string){
-    this.serv.getAuPair("7542108615984").subscribe(
+    this.serv.getAuPair(auPairId).subscribe(
       res => { 
         this.currentAuPair = res;
       },

@@ -1,6 +1,6 @@
 module.exports = {
-  displayName: 'home-feature',
-  preset: '../../../jest.preset.js',
+  displayName: 'shared-components-navbar',
+  preset: '../../../../jest.preset.js',
   setupFilesAfterEnv: ['<rootDir>/src/test-setup.ts'],
   globals: {
     'ts-jest': {
@@ -8,7 +8,7 @@ module.exports = {
       stringifyContentPathRegex: '\\.(html|svg)$',
     },
   },
-  coverageDirectory: '../../../coverage/libs/home/feature',
+  coverageDirectory: '../../../../coverage/libs/shared/components/navbar',
   transform: {
     '^.+\\.(ts|mjs|js|html)$': 'jest-preset-angular',
   },

@@ -2,5 +2,8 @@
   "name": "the-au-pair",
   "devDependencies": {
     "@capacitor/cli": "^3.2.5"
+  },
+  "dependencies": {
+    "@capacitor/push-notifications": "^1.0.9"
   }
 }
