@@ -83,7 +83,6 @@ export class AppComponent implements OnInit
     //Save new auPair object in the database
     this.serv.editAuPair(aupair).subscribe(
       res=>{
-        console.log("The response is:" + res); 
         return res;
       },
       error=>{

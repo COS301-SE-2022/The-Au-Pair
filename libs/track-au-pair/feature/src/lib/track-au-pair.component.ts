@@ -13,6 +13,7 @@ export class TrackAuPairComponent implements OnInit
 {
   //Map variables
   leafletMap : any;
+  markerGroup : any;
   lat = -26;
   long = 28;
   zoom = 8;
@@ -65,22 +66,25 @@ export class TrackAuPairComponent implements OnInit
     this.loadLeafletMap();
     await this.getUserDetails();
     this.putMarker();
+    this.leafletMap.setView(new L.LatLng(this.auPairDetails.currentLat, this.auPairDetails.currentLong),15, {animate: true});
+    
   }
 
   loadLeafletMap() 
   {
-
+    //Clearing the current marker before adding the new one
     this.leafletMap = new L.Map('leafletMap');
+    this.markerGroup = L.layerGroup().addTo(this.leafletMap);
 
     const self = this;
 
+        //Load the map
     this.leafletMap.on("load", function () {
       setTimeout(() => {
         self.leafletMap.invalidateSize();
       }, 1000);
     });
     this.leafletMap.setView([this.lat, this.long], this.zoom);
-
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
       maxZoom: 17,
       minZoom: 1,
@@ -107,13 +111,24 @@ export class TrackAuPairComponent implements OnInit
     //Only show location if the au pair is on shift
     if(this.auPairDetails.onShift)
     {
+      //Clear all old markers
+      this.leafletMap.removeLayer(this.markerGroup);
+      this.markerGroup = L.layerGroup().addTo(this.leafletMap);
+
       //Put the marker and style the icon
       L.marker(
         [this.auPairDetails.currentLat, this.auPairDetails.currentLong],
-        {icon: new L.Icon({iconUrl: 'https://unpkg.com/leaflet@1.8.0/dist/images/marker-icon.png'})
-      }).addTo(this.leafletMap);
-      // this.leafletMap.flyTo([this.auPairDetails.currentLong, this.auPairDetails.currentLong], 8);
-      this.leafletMap.setView(new L.LatLng(this.auPairDetails.currentLat, this.auPairDetails.currentLong), 14, { animation: true });
+        {icon: new L.Icon({iconUrl: 'https://unpkg.com/leaflet@1.6.0/dist/images/marker-icon.png'})
+      }).addTo(this.markerGroup);
+      // this.leafletMap.panTo([this.auPairDetails.currentLat, this.auPairDetails.currentLong], 14);
+
+      //Display name of au pair and current address they are at
+      const dom = document.getElementById("auPairStatus");
+      if(dom != null)
+      {
+        dom.innerHTML = this.auPairDetails."";
+        dom.style.display = "flex";
+      }
     }
     else
     {
