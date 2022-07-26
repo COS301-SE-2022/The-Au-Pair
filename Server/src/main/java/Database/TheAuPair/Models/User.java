@@ -36,8 +36,10 @@ public class User
     private String suburb;
     @Field ("gender")
     private String gender;
+    @Field ("age")
+    private int age;
 
-    public User(String id, String fname, String sname, String email, String address, boolean registered, int type, String password, String number, String salt, double latitude, double longitude, String suburb, String gender)
+    public User(String id, String fname, String sname, String email, String address, boolean registered, int type, String password, String number, String salt, double latitude, double longitude, String suburb, String gender, int age)
     {
         this.id = id;
         this.fname = fname;
@@ -53,6 +55,7 @@ public class User
         this.longitude = longitude;
         this.suburb = suburb;
         this.gender = gender;
+        this.age = age;
     }
 
     public String getId()
@@ -195,6 +198,17 @@ public class User
         this.gender = gender;
     }
 
+    public int getAge()
+    {
+        return age;
+    }
+
+    public void setAge(int age)
+    {
+        this.age = age;
+    }
+    
+
     @Override
     public String toString()
     {
@@ -213,6 +227,7 @@ public class User
                 ", longitude='" + longitude + '\'' +
                 ", suburb='" + suburb + '\'' +
                 ", gender='" + gender + '\'' +
+                ", age='" + age + '\'' +
                 '}';
     }
 }

@@ -19,6 +19,11 @@ export class ExploreComponent implements OnInit {
   minDistance! : number;
   maxDistance! : number;
 
+  currentParentx! : number;
+  currentParenty! : number;
+
+  eucDistance! : number;
+
   auPairs : any;
   auPairDetails : any = {
     id: "",
@@ -26,9 +31,14 @@ export class ExploreComponent implements OnInit {
     payRate: 0,
     fname: "",
     sname: "",
-    address: "",
+    suburb: "",
     employer: "",
     registered: "",
+    age: 0,
+    gender: "",
+    longitude: 0,
+    latitude: 0,
+    distance: 0,
   }
   AuPairArray : any[] = [];
   filteredAuPairArray : any[] = [];
@@ -39,6 +49,8 @@ export class ExploreComponent implements OnInit {
 
   ngOnInit(): void
   {
+    this.currentParentx = 0;
+    this.currentParenty = 0;
     this.getAuPairs();
     this.isOnline = false;
   }
@@ -56,24 +68,31 @@ export class ExploreComponent implements OnInit {
 
   async setAuPairArray()
   {
-    this.auPairs.forEach((ap: { id: any; rating: any; payRate: any; fname: any; sname: any, address: any; employer: any;}) => {
+    this.auPairs.forEach((ap: { id: any; rating: any; payRate: any; fname: any; sname: any, suburb: any; employer: any; age: any; gender: any; longitude: any; latitude: any; distance: any;}) => {
       this.serv.getUser(ap.id).subscribe(
         res=>{
+
+          const eucdistance = this.calculateEucDistance(res.latitude, res.longitude);
+
           const auPairDetails = {
             id: ap.id,
             rating: ap.rating,
             payRate: ap.payRate,
             fname: res.fname,
             sname: res.sname,
-            address: res.address,
+            suburb: res.suburb,
             employer: ap.employer,
             registered: res.registered,
+            age: res.age,
+            gender: res.gender,
+            distance: eucdistance,
           }
           // Logic for explore that will only show Au Pairs whom are not yet employed
           // This will be added after hiring and terminating is complete
           // if(ap.employer == "" && res.registered == true)
           // {
           //   this.AuPairArray.push(auPairDetails);
+          //   this.restoredAuPairArray.push(auPairDetails);
           // }
 
           // This will be removed after hiring and terminating is added
@@ -110,8 +129,24 @@ export class ExploreComponent implements OnInit {
     this.AuPairArray.splice(0);
     this.restoredAuPairArray.forEach(val => this.AuPairArray.push(Object.assign({}, val)));
     
-    this.minPayrate = formData.min_payrate;
-    this.maxPayrate = formData.max_payrate;
+
+    if(formData.min_payrate === undefined)
+    {
+      this.minPayrate = 10;
+    }
+    else
+    {
+      this.minPayrate = formData.min_payrate;
+    }
+    
+    if(formData.max_payrate === undefined)
+    {
+      this.maxPayrate = 10;
+    }
+    else
+    {
+      this.maxPayrate = formData.max_payrate;
+    }
 
     if(this.minPayrate > this.maxPayrate)
     {
@@ -144,27 +179,74 @@ export class ExploreComponent implements OnInit {
 
   distanceFilter(formData : any)
   {
-    this.minDistance = formData.min_distance;
-    this.maxDistance = formData.max_distance;
+    this.AuPairArray.splice(0);
+    this.restoredAuPairArray.forEach(val => this.AuPairArray.push(Object.assign({}, val)));
+    
+    if(formData.max_distance === undefined)
+    {
+      this.maxDistance = 10;
+    }
+    else
+    {
+      this.maxDistance = formData.max_distance;
+    }
+
+    this.AuPairArray.sort((obj1, obj2) => {
+      
+      if(obj1.distance > obj2.distance)
+      {
+        return 1;
+      }
+
+      if(obj1.distance < obj2.distance)
+      {
+        return -1;
+      }
+
+      return 0;
+    });
+
+    this.AuPairArray.sort((obj1, obj2) => {
+    
+      if(obj1.distance > obj2.distance)
+      {
+        return 1;
+      }
+
+      if(obj1.distance < obj2.distance)
+      {
+        return -1;
+      }
+
+      return 0;
+    });
+
+    this.AuPairArray = this.AuPairArray.filter((element) => {
+      return element.distance <= this.maxDistance;
+    });
+
+    this.closeMenu();
   }
 
   updateDriverOnlineStatus() 
   {
     this.isOnline = !this.isOnline;
 
-  //   this.AuPairArray.splice(0);
-  //   this.restoredAuPairArray.forEach(val => this.AuPairArray.push(Object.assign({}, val)));
+    this.AuPairArray.splice(0);
+    this.restoredAuPairArray.forEach(val => this.AuPairArray.push(Object.assign({}, val)));
 
-  //   this.AuPairArray = this.AuPairArray.filter((element) => {
-  //     if(this.isOnline)
-  //     {
-  //       return element.gender === 'male';
-  //     }
-  //     else
-  //     {
-  //       return element.gender !== 'male';
-  //     }
-  //   });
+    this.AuPairArray = this.AuPairArray.filter((element) => {
+      if(this.isOnline)
+      {
+        return element.gender === 'male';
+      }
+      else
+      {
+        return element.gender !== 'male';
+      }
+    });
+
+    this.closeMenu();
   }
 
   async errToast()
@@ -176,5 +258,18 @@ export class ExploreComponent implements OnInit {
       cssClass: 'toastPopUp'
     });
     await toast.present();
+  }
+
+  calculateEucDistance(auPairx : number, auPairy : number)
+  {
+    this.currentParentx = this.currentParentx * 110.574;
+    this.currentParenty = this.currentParenty * 110.574;
+
+    auPairx = auPairx * 110.574;
+    auPairy = auPairy * 110.574;
+
+    this.eucDistance = Math.sqrt((auPairy - this.currentParenty) * (auPairy - this.currentParenty) + (auPairx - this.currentParentx) * (auPairx - this.currentParentx));
+
+    return this.eucDistance;
   }
 }
