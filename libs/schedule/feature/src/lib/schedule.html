@@ -3,6 +3,12 @@
   <div id="container">
     <h2 class="heading ion-text-center ion-padding-top">Your schedule</h2>
   </div>
+  <div class="filter ion-text-center">
+    <span id="scheduleText">View schedule for: </span>
+      <select (change)="getSelectedChild()" [(ngModel)]="selectedChildName">
+        <option  *ngFor="let child of children" [value]="child.name">{{child.name}}</option>
+      </select>
+  </div>
   <div id="schedule-grid-desktop">
     <div *ngFor="let day of [0,1,2,3,4,5,6]" class="day ion-text-center">
       <h2 class="heading">{{ days[day] }}</h2>
