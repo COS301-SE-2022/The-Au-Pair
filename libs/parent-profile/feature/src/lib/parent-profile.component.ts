@@ -20,6 +20,11 @@ export class ParentProfileComponent implements OnInit {
     password: "",
     number: "",
     salt: "",
+    latitude: 0,
+    longitude: 0,
+    suburb: "",
+    gender: "",
+    age: 0,
   }
 
   parentDetails: Parent = {
@@ -49,7 +54,7 @@ export class ParentProfileComponent implements OnInit {
   async getUserDetails()
   {
     /* User Details */
-    await this.serv.getUser("4561237814867").subscribe(
+    await this.serv.getUser("0105845069834").subscribe(
       res=>{
         this.userDetails.id = res.id;
         this.userDetails.fname = res.fname;
@@ -60,10 +65,15 @@ export class ParentProfileComponent implements OnInit {
         this.userDetails.type = res.type;
         this.userDetails.password = res.password;
         this.userDetails.number = res.number;
+        this.userDetails.latitude = res.latitude;
+        this.userDetails.longitude = res.longitude;
+        this.userDetails.suburb = res.suburb;
+        this.userDetails.gender = res.gender;
+        this.userDetails.age = res.age;
       },
       error=>{console.log("Error has occured with API: " + error);}
     )
-      await this.serv.getParent("4561237814867").subscribe(
+      await this.serv.getParent("0105845069834").subscribe(
         res=>{
           this.parentDetails.id = res.id;
           this.parentDetails.children = res.children;

@@ -148,6 +148,11 @@ export class API{
     return this.http.post('http://localhost:8080/login',details);
   }
 
+  getAllAuPairs()
+  {
+    return this.http.get('http://localhost:8080/getAllAuPairs');
+  }
+  
   getApplicants(): Observable<any> {
     return this.http.get('http://localhost:8080/getApplicants');
   }

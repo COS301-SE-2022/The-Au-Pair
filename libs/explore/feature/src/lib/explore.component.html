@@ -1,0 +1,85 @@
+<the-au-pair-navbar></the-au-pair-navbar>
+<ion-content [fullscreen]="true">
+
+    <div class="page-wrapper">
+        <div class="explore-header">
+            <ion-row>
+                <ion-col size="4"></ion-col>
+                <ion-col size="4" class="explore-heading ion-text-center">Explore</ion-col>
+                <ion-col size="4" class="ion-text-end filter-buttons-wrapper">
+                    <div>
+                        <ion-icon class="filter-icon-desktop" name="filter-outline" (click)="openMenu()"></ion-icon>
+                    </div>
+                </ion-col>
+            </ion-row>
+        </div>
+        <div *ngIf="AuPairArray.length !== 0" class="au-pair-card-div-wrapper" id="page-wrapper">
+            <div class='au-pair-card-div'>
+                <ion-card class='au-pair-card' *ngFor="let ap of AuPairArray; let last = last" (click)="openModal(this.ap.id)">
+                    <div class="au-pair-details-wrapper">
+                        <div class="au-pair-name">
+                        <ion-row>
+                            <ion-col size="2"></ion-col>
+                            <ion-col size="8" class="name">{{this.ap.fname}} {{this.ap.sname}}</ion-col>
+                            <ion-col size="2">
+                                <div *ngIf="this.ap.gender === 'male'" class="gender-icon-male ion-content-end"><ion-icon class="gender-icon-male ion-content-end" name="man"></ion-icon></div>
+                                <div *ngIf="this.ap.gender === 'female'" class="gender-icon-female ion-content-end"><ion-icon class="gender-icon-female ion-content-end" name="woman"></ion-icon></div>
+                            </ion-col>
+                        </ion-row>
+                        </div>
+                        <div class='profile-picture-wrapper'>
+                            <img class="profile-picture" src="assets/images/placeholder-profile.jpg" alt="">
+                        </div>
+                        <div class="au-pair-details"><div class="detail-title">Suburb: </div>{{this.ap.suburb}}</div>
+                        <div class="au-pair-details"><div class="detail-title">Pay Rate: </div>R{{this.ap.payRate}} per hour</div>
+                        <div *ngIf="this.ap.rating !== 0" class="au-pair-details"><div class="detail-title">Rating: </div> {{this.ap.rating}} / 5</div>
+                        <div *ngIf="this.ap.rating === 0" class="au-pair-details"><div class="detail-title">Rating: </div> Not yet rated</div>
+                        <div class="au-pair-details"><div class="detail-title">Age: </div> {{this.ap.age}}</div>
+                    </div>
+                    <div class='expand-tag'><ion-icon class="expand-arrow" name="arrow-down-circle-outline"></ion-icon></div>
+                </ion-card>
+            </div>
+        </div>
+        <div *ngIf="AuPairArray.length === 0" class="noaupair" id="page-wrapper">
+            There are no Au Pairs matching your filters
+        </div>
+    </div>
+
+    <ion-menu content-id="page-wrapper" class="menu">
+        <ion-header class="menu-header">
+                <ion-toolbar translucent>
+                    <ion-title></ion-title>
+                </ion-toolbar>
+            </ion-header>
+        <ion-content id="page-wrapper">
+        <div class="menu-gap"></div>
+        <ion-icon class="icon-close" name="close-circle-outline" (click)="closeMenu()"></ion-icon>
+        <h1 class="slider-headings">Gender:</h1>
+        <div class="gender-toggle-div">
+            <ion-toggle class="gender-toggle" (ionChange)="updateDriverOnlineStatus()" [checked]="isOnline"></ion-toggle>
+            <h3 class="male-female">{{ isOnline ? 'Male' : 'Female' }}</h3>
+        </div>
+        <div class="payrate-sliders">
+            <form id="payRateForm" #payRateForm="ngForm" (ngSubmit)="payRateFilter(payRateForm.value)">
+                <h1 class="slider-headings">Pay Rate (R):</h1>
+                    <ion-range class="location-slider" pin [min]="10" [max]="1000" pin color="secondary" value="23" ngModel name="min_payrate" step="10">
+                        <ion-label class="slider-icons" slot="start">Min:</ion-label>
+                    </ion-range>
+                    <ion-range class="location-slider" pin [min]="10" [max]="1000" pin color="secondary" value="23" ngModel name="max_payrate" step="10">
+                        <ion-label class="slider-icons" slot="start">Max:</ion-label>
+                    </ion-range>
+                <input type="submit" class="filter-submit-button" id="change" value="APPLY"/>
+            </form>
+        </div>
+        <div class="payrate-sliders">
+            <form id="locationForm" #locationForm="ngForm" (ngSubmit)="distanceFilter(locationForm.value)">
+            <h1 class="slider-headings">Distance (km):</h1>
+                <ion-range class="location-slider" pin [min]="0" [max]="100" pin color="secondary" value="23" ngModel name="max_distance" step="10">
+                    <ion-label class="slider-icons" slot="start">Max:</ion-label>
+                </ion-range>
+            <input type="submit" class="filter-submit-button" id="change" value="APPLY"/>
+            </form>
+        </div>
+        </ion-content>
+    </ion-menu>
+</ion-content>
