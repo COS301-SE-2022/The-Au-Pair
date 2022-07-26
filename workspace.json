@@ -23,7 +23,6 @@
     "schedule-feature": "libs/schedule/feature",
     "shared-components-input-field": "libs/shared/components/input-field",
     "shared-components-navbar": "libs/shared/components/navbar",
-    "shared-components-admin-navbar": "libs/shared/components/admin-navbar",
     "shared-components-password-field": "libs/shared/components/password-field",
     "shared-components-location-field": "libs/shared/components/location-field",
     "shell-feature": "libs/shell/feature",
