@@ -32,7 +32,7 @@ export class NavbarComponent implements OnInit
     }
     else if(this.type == 2)
     {
-      this.router.navigate(['/aupair-dashboard']);
+      this.router.navigate(['/au-pair-dashboard']);
     }
   }
 
@@ -64,7 +64,7 @@ export class NavbarComponent implements OnInit
     }
     else if(this.type == 2)
     {
-      this.router.navigate(['/aupair-dashboard']);
+      this.router.navigate(['/au-pair-dashboard']);
     }
   }
 
