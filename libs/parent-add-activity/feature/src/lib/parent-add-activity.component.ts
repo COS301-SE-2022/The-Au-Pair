@@ -228,7 +228,7 @@ export class ParentAddActivityComponent implements OnInit{
 
   //Service calls
   addActivity(act:Activity){
-    this.serv.addActivity(act).subscribe(
+    this.serv.addActivity(act).toPromise().then(
       res=>{
         console.log("The response is:" + res); 
         location.reload()},
@@ -240,7 +240,7 @@ export class ParentAddActivityComponent implements OnInit{
 
   getChildren()
   {
-    this.serv.getChildren(this.parentID).subscribe(
+    this.serv.getChildren(this.parentID).toPromise().then(
       res=>{
           this.allChildren = res;
       },
