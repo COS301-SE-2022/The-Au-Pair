@@ -25,6 +25,11 @@ export class EditParentProfileComponent implements OnInit{
     password: "",
     number: "",
     salt: "",
+    latitude: 0,
+    longitude: 0,
+    suburb: "",
+    gender: "",
+    age: 0,
   }
 
   medAidDetails: medAid = {
@@ -68,6 +73,11 @@ export class EditParentProfileComponent implements OnInit{
         this.userDetails.password = res.password;
         this.userDetails.number = res.number;
         this.userDetails.salt = res.salt;
+        this.userDetails.latitude = res.latitude;
+        this.userDetails.longitude = res.longitude;
+        this.userDetails.suburb = res.suburb;
+        this.userDetails.gender = res.gender;
+        this.userDetails.age = res.age;
       },
       error => {
         console.log("Error has occured with API: " + error);

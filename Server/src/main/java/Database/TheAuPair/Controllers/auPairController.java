@@ -3,6 +3,9 @@ package Database.TheAuPair.Controllers;
 import Database.TheAuPair.Models.auPair;
 import Database.TheAuPair.Repositories.auPairRepository;
 import Database.TheAuPair.Services.auPairService;
+
+import java.util.List;
+
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -30,6 +33,13 @@ public class auPairController
     this.aps.updateAuPair(p);
   }
 
+  @GetMapping("/getAllAuPairs")
+  @CrossOrigin(origins = "http://localhost:4200")
+  public List<auPair> getAllAuPairs()
+  {
+    return this.aps.getAllAuPairs();
+  }
+  
   @PostMapping("/removeAuPair")
   @CrossOrigin(origins = "http://localhost:4200")
   public void removeAuPair(@RequestBody String id)

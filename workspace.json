@@ -11,6 +11,7 @@
     "edit-au-pair-profile-feature": "libs/edit-au-pair-profile/feature",
     "edit-child-feature": "libs/edit-child/feature",
     "edit-parent-profile-feature": "libs/edit-parent-profile/feature",
+    "explore-feature": "libs/explore/feature",
     "forgot-password-feature": "libs/forgot-password/feature",
     "login-feature": "libs/login/feature",
     "parent-add-activity-feature": "libs/parent-add-activity/feature",
