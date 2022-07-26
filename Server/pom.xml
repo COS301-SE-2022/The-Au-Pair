@@ -14,7 +14,7 @@
 	<name>The-Au-Pair</name>
 	<description>backend for The Au Pair project</description>
 	<properties>
-		<java.version>18</java.version>
+		<java.version>17</java.version>
 	</properties>
 	<dependencies>
 		<dependency>
