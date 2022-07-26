@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { User, auPair, Parent } from '../../../../shared/interfaces/interfaces';
 import { API } from '../../../../shared/api/api.service';
 import * as L from 'leaflet'
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'the-au-pair-track-au-pair',
@@ -17,6 +18,7 @@ export class TrackAuPairComponent implements OnInit
   lat = -26;
   long = 28;
   zoom = 8;
+  nearestAddy = "";
 
   //User variables
   userDetails: User = {
@@ -53,7 +55,9 @@ export class TrackAuPairComponent implements OnInit
     currentLat : 0.0
   }
 
-  constructor(private serv : API) 
+  auPairName = "";
+
+  constructor(private serv : API,  private http: HttpClient) 
   {
     setInterval(()=> {
       this.getUserDetails();
@@ -96,8 +100,12 @@ export class TrackAuPairComponent implements OnInit
   {
     /* Find logged in user's au pair */
     let res = await this.serv.getParent("4561237814867").toPromise();
-    this.parentDetails.auPair = res.auPair;   
+    this.parentDetails.auPair = res.auPair;  
     
+    /* Get the au pairs name */
+    const auPairUser = await this.serv.getUser(this.parentDetails.auPair).toPromise();
+    this.auPairName = auPairUser.fname;
+
     /* Get the onShift and current coords of the employed au pair  */
     res = await this.serv.getAuPair(this.parentDetails.auPair).toPromise();
     this.auPairDetails.id = res.id;
@@ -106,11 +114,36 @@ export class TrackAuPairComponent implements OnInit
     this.auPairDetails.currentLat = res.currentLat;
   };
 
-  putMarker()
+  async putMarker()
   {    
     //Only show location if the au pair is on shift
     if(this.auPairDetails.onShift)
     {
+      //Get the nearrest location to the au pair
+      //Building the API query according to what is in the location input field
+      const reverseGeoCode = 'https://nominatim.openstreetmap.org/reverse?format=json&lat=' + this.auPairDetails.currentLat + '&lon=' + this.auPairDetails.currentLong + '&addressdetails=1';
+
+      //Make the API call
+      await this.http.get(reverseGeoCode)
+      .toPromise()
+      .then(data=>{ // Success
+        //Populate nearest address
+        const json_data = JSON.stringify(data);
+        const res = JSON.parse(json_data);
+
+        //Jump out if no results returned
+        if(json_data === "{}")
+        {
+          return;
+        }
+    
+        //Add returned data to the array
+        this.nearestAddy = res.display_name;
+      })
+      .catch(error=>{ // Failure
+        console.log(error);
+      });
+
       //Clear all old markers
       this.leafletMap.removeLayer(this.markerGroup);
       this.markerGroup = L.layerGroup().addTo(this.leafletMap);
@@ -126,8 +159,10 @@ export class TrackAuPairComponent implements OnInit
       const dom = document.getElementById("auPairStatus");
       if(dom != null)
       {
-        dom.innerHTML = this.auPairDetails."";
+        dom.innerHTML = this.auPairName + " is near " + this.nearestAddy;
         dom.style.display = "flex";
+        dom.style.color = "green";
+        dom.style.fontSize = "20px";
       }
     }
     else
