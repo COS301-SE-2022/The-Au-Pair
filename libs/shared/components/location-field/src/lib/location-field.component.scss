@@ -23,12 +23,11 @@
     border: 1px solid red;
 }
 
-
 .fld .form-label {
     position: absolute;
     left: 0.8rem;
     top: 5.75rem;
-    padding: 0 0.5rem;  
+    padding: 0 0.5rem;
     pointer-events: none; 
     transition: 100ms ease-out;
     font-style: normal;
@@ -50,17 +49,22 @@
     font-size: 15px;
 }
 
-.type-toggle {
+.error{
     position: absolute;
     right: 1rem;
-    top: 5.7rem;
-    padding: 0 0.5rem;  
-    font-size: 20px;
-    color: var(--ion-color-primary);
+    top: 5.55rem;
+    padding: 0 0.5rem;
+    font-size: 25px;
+    color: red;
 }
 
-.type-toggle-error {
-    color: red;
+.spinner{
+    position: absolute;
+    right: 1.2rem;
+    top: 5.45rem;
+    padding: 0 0.5rem;
+    font-size: 25px;
+    color: var(--ion-color-grey);
 }
 
 .errorType{

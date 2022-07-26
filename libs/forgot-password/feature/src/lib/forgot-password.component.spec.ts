@@ -9,12 +9,6 @@ describe('ForgotPasswordComponent', () => {
   let component: ForgotPasswordComponent;
   let fixture: ComponentFixture<ForgotPasswordComponent>;
 
-  //Valid form
-  const populatedForm = { email: "test@test.com" };
-
-  //Inalid form
-  const invalidEmail = { email: "test@@test.com" };
-
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [
