@@ -1,5 +1,7 @@
 package Database.TheAuPair.Models;
 
+import java.sql.Timestamp;
+
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.Field;
@@ -14,6 +16,8 @@ public class Contract
   private String parentID;
   @Field("auPairID")
   private String auPairID;
+  @Field("timeStamp")
+  private Timestamp timestamp;
 
   public Contract(String parentID, String auPairID)
   {
@@ -41,12 +45,23 @@ public class Contract
     this.auPairID = auPairID;
   }
 
+  public Timestamp getTimestamp()
+  {
+    return timestamp;
+  }
+
+  public void setTimestamp(Timestamp timestamp)
+  {
+    this.timestamp = timestamp;
+  }
+
   @Override
   public String toString()
   {
     return "Contract{" +
       "parentID='" + parentID + '\'' +
       ", auPairID='" + auPairID +
+      ", timestamp='" + timestamp +
       '\'' +
       '}';
   }

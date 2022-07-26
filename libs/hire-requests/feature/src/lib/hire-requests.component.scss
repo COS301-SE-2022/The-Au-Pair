@@ -9,14 +9,15 @@
 }
 
 .requests-wrapper{
-    padding: 2em;
+    padding: 15px;
+    width: 100%;
 }
 
 .request-item{
     height: 70px;
     width: 100%;
-    margin-inline: 0px  !important;
-    margin-bottom: 2em;
+    margin-inline: 0px;
+    margin-bottom: 15px;
     border-radius: 10px;
     background-color: #F9F9F9;
     
@@ -32,6 +33,7 @@
     height: 100%;
     display: flex;
     align-items: center;
+    width: 100%;
 }
 
 .details-col{
@@ -48,7 +50,7 @@
 }
 
 .request-content{
-    margin-left: 1em;
+    margin-left: 10px;
 }
 
 .heading{
@@ -66,7 +68,7 @@
     color: var(--ion-color-dark);
     font-size: 16px;
     font-weight: bold;
-    margin-right: 1em;
+    margin-right: 10px;
 }
 
 .action-buttons{
@@ -91,7 +93,7 @@
     margin-left: 15px;
 }
 
-@media (max-width:572px) {
+@media (max-width:560px) {
     .heading{
         font-size: 12px;
     }
@@ -105,11 +107,16 @@
     }
 
     .accept-button{
-        padding: 10px 10px;
+        padding: 7px 7px;
 
     }
     
     .reject-button{
-        padding: 10px 10px;
+        padding: 7px 7px;
+    }
+
+    .profile{
+        height: 50px;
+        width: 100px;
     }
 }

@@ -79,4 +79,10 @@ export interface Activity{
     onShift: boolean;
     employer: string;
   }
+
+  export interface Contract{
+    parentID: string;
+    auPairID: string;
+    timestamp: string;
+  }
   
