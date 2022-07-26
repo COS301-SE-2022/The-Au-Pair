@@ -29,13 +29,7 @@ describe('ExpandModalComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
-
-  it('should, open a toast when openToast is called', async ()=>{
-    jest.spyOn(component,"openToast");
-    component.openToast();
-    expect(await component.openToast).toReturn();
-  });
-
+  
   it('should,close the modal when closeModal is called', async ()=>{
     jest.spyOn(component,"closeModal");
     component.closeModal();
