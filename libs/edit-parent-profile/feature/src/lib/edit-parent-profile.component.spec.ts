@@ -73,15 +73,6 @@ describe('EditParentProfileComponent', () => {
   })
 
   //------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-  /**Testing the services**/
-  /*Testing for invalid user IDs*/
-  it('should, when editMedAid() is called with an invalid medAid ID, return an error from the API', async ()=>{
-    const expectedValue = undefined;
-    jest.spyOn(component,"editMedAid");
-    expect(await component.editMedAid(invalidMedAid)).toEqual(expectedValue);
-  })
-
-  //------------------------------------------------------------------------------------------------------------------------------------------------------------------------
   /**Populated form fields form testing**/
   it('should, given valid input from the form, update the userDetails and medAidDetails variable', async ()=>{
     const expectedUserValue: User = {
