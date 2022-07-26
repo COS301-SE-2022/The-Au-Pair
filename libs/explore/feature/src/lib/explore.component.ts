@@ -5,6 +5,7 @@ import { ModalController } from '@ionic/angular';
 import { MenuController } from '@ionic/angular';
 import { NavController } from '@ionic/angular';
 import { ToastController } from '@ionic/angular';
+import { Store } from '@ngxs/store';
 
 @Component({
   selector: 'the-au-pair-explore',
@@ -12,15 +13,15 @@ import { ToastController } from '@ionic/angular';
   styleUrls: ['./explore.component.scss'],
 })
 export class ExploreComponent implements OnInit {
-  
+
+  currentParentx = 0;
+  currentParenty = 0;
+
   minPayrate! : number;
   maxPayrate! : number;
 
   minDistance! : number;
   maxDistance! : number;
-
-  currentParentx! : number;
-  currentParenty! : number;
 
   eucDistance! : number;
 
@@ -45,12 +46,13 @@ export class ExploreComponent implements OnInit {
   restoredAuPairArray: any[] = [];
   isOnline!: boolean;
 
-  constructor(private serv: API, public toastCtrl: ToastController, private modalCtrl : ModalController, private menuController : MenuController, public navCtrl: NavController){}
+  constructor(private serv: API, public toastCtrl: ToastController, private modalCtrl : ModalController, private menuController : MenuController, public navCtrl: NavController, private store: Store){}
 
   ngOnInit(): void
   {
-    this.currentParentx = 0;
-    this.currentParenty = 0;
+    this.currentParentx = this.store.snapshot().user.latitude;
+    this.currentParenty = this.store.snapshot().user.longitude;
+
     this.getAuPairs();
     this.isOnline = false;
   }

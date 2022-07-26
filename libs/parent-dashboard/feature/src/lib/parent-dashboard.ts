@@ -33,7 +33,12 @@ export class ParentDashboardComponent implements OnInit{
     type: 0,
     password: '',
     number: '',
-    salt: ''
+    salt: '',
+    latitude: 0,
+    longitude: 0,
+    suburb: "",
+    gender: "",
+    age: 0,
   }
 
   auPairDetails: User = {

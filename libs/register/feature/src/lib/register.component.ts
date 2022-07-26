@@ -31,7 +31,12 @@ export class RegisterComponent {
     type: 3,
     password: '',
     number: '',
-    salt: ''
+    salt: '',
+    latitude: 0,
+    longitude: 0,
+    suburb: "",
+    gender: "",
+    age: 0,
   }
 
   parentDetails: Parent ={
