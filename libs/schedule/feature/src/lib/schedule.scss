@@ -47,7 +47,7 @@
   grid-template-columns: repeat(7,minmax(198px,1fr));
   width: 95%;
   margin-inline: auto;
-  
+  margin-bottom: 20px;
 }
 
 @media (max-width: 1475px) {
@@ -129,7 +129,8 @@ ion-card{
 }
 
 .filter{
-  color : var(--ion-color-dark)
+  color : var(--ion-color-dark);
+  margin-bottom: 1.5rem;
 }
 
 input[type=text], select{
