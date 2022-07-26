@@ -15,7 +15,9 @@
     border-style: none;
     border-radius: 10px;
     margin-top: 70px;
-    padding-left: 20px;
+    padding: 15px 20px 0 20px;
+    transition: 300ms ease-out;
+    resize: none;
     color: black;
 }
 
@@ -47,6 +49,11 @@
   left: 0rem;
   opacity: 1;
   font-size: 15px;
+}
+
+.fld .form-input:focus,
+.form-input:not(:placeholder-shown).form-input:not(:focus) {
+    height: 150px;
 }
 
 .error{
