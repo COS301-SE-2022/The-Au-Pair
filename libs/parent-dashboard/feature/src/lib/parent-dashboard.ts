@@ -33,7 +33,12 @@ export class ParentDashboardComponent implements OnInit{
     type: 0,
     password: '',
     number: '',
-    salt: ''
+    salt: '',
+    latitude: 0,
+    longitude: 0,
+    suburb: "",
+    gender: "",
+    age: 0,
   }
 
   auPairDetails: User = {
@@ -47,6 +52,11 @@ export class ParentDashboardComponent implements OnInit{
     password: "",
     number: "",
     salt: "",
+    latitude: 0,
+    longitude: 0,
+    suburb: "",
+    gender: "",
+    age: 0,
   }
 
   constructor(private serv: API, private modalCtrl : ModalController, private store: Store, public toastCtrl: ToastController, public router: Router){}
@@ -74,6 +84,12 @@ export class ParentDashboardComponent implements OnInit{
         this.userDetails.email = res.email;
         this.userDetails.address = res.address;
         this.userDetails.number = res.number;
+        this.userDetails.salt = res.salt;
+        this.userDetails.latitude = res.latitude;
+        this.userDetails.longitude = res.longitude;
+        this.userDetails.suburb = res.suburb;
+        this.userDetails.gender = res.gender;
+        this.userDetails.age = res.age;
       },
       error => {
         console.log("Error has occured with API: " + error);
