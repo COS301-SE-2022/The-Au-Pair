@@ -19,6 +19,7 @@ export interface Activity{
     allergies: string;
     diet: string;
     parent: string;
+    aupair: string;
   }
 
   export interface HoursLogged{

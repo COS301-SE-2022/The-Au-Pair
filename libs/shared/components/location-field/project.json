@@ -1,0 +1,26 @@
+{
+  "projectType": "library",
+  "root": "libs/shared/components/location-field",
+  "sourceRoot": "libs/shared/components/location-field/src",
+  "prefix": "the-au-pair",
+  "targets": {
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["coverage/libs/shared/components/location-field"],
+      "options": {
+        "jestConfig": "libs/shared/components/location-field/jest.config.js",
+        "passWithNoTests": true
+      }
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "options": {
+        "lintFilePatterns": [
+          "libs/shared/components/location-field/src/**/*.ts",
+          "libs/shared/components/location-field/src/**/*.html"
+        ]
+      }
+    }
+  },
+  "tags": []
+}

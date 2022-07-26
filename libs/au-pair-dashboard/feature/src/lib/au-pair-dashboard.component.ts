@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { Store } from '@ngxs/store';
 import { API } from '../../../../shared/api/api.service'
-import { HoursLogged } from '../../../../shared/interfaces/interfaces';
+import { auPair, Child, HoursLogged } from '../../../../shared/interfaces/interfaces';
 
 @Component({
   selector: 'the-au-pair-au-pair-dashboard',
@@ -10,12 +11,14 @@ import { HoursLogged } from '../../../../shared/interfaces/interfaces';
 })
 export class AuPairDashboardComponent implements OnInit {
   
-  employer : any;
+  aupairID = "";
+
+  employer = "";
   employerName!: string;
   employerSurname! : string;
   employerId! : string;
   employerPhone! : string;
-  children: any[] = [];
+  children: Child[] = [];
 
   alreadyLogging = false;
   logID = "";
@@ -28,13 +31,15 @@ export class AuPairDashboardComponent implements OnInit {
     timeEnd: ""
   };
   
-  constructor(private serv: API) {}
+  constructor(private serv: API, private store: Store) {}
 
   async ngOnInit(): Promise<void> {
+    this.aupairID = this.store.snapshot().user.id;
+
     await this.getEmployer();
 
     const todaysDate = this.getToday();
-    this.serv.getStartedLog("7542108615984", todaysDate).subscribe( 
+    this.serv.getStartedLog(this.aupairID, todaysDate).subscribe( 
       data => {
         if(data == null || data == "") {
           this.alreadyLogging = false;
@@ -53,7 +58,7 @@ export class AuPairDashboardComponent implements OnInit {
   logSwitch() {
     if(this.alreadyLogging) {
       if(this.logID == null || this.logID == "") {
-        this.serv.getStartedLog("7542108615984", this.getToday()).subscribe( 
+        this.serv.getStartedLog(this.aupairID, this.getToday()).subscribe( 
           data => {
             this.logID = data;
           },
@@ -74,7 +79,7 @@ export class AuPairDashboardComponent implements OnInit {
       )
     }
     else {
-      this.hoursLogDetail.user = "7542108615984";
+      this.hoursLogDetail.user = this.aupairID;
       this.hoursLogDetail.date = this.getToday();
       this.hoursLogDetail.timeStart = this.getCurrentTime();
       this.serv.addHoursLog(this.hoursLogDetail).subscribe( 
@@ -108,13 +113,23 @@ export class AuPairDashboardComponent implements OnInit {
   }
 
   async getEmployer(){
-    this.serv.getUser("4561237814867").subscribe(
+    await this.serv.getAuPair(this.aupairID)
+    .toPromise()
+    .then(
+      res => {
+        this.employer = res.employer;
+      },
+      error => {
+        console.log("Error has occured with API: " + error);
+      }
+    )
+
+    this.serv.getUser(this.employer).subscribe(
       res=>{
-          this.employer = res;
-          this.employerName = this.employer.fname;
-          this.employerSurname = this.employer.sname;
-          this.employerId = this.employer.id;
-          this.employerPhone = this.employer.number;
+          this.employerName = res.fname;
+          this.employerSurname = res.sname;
+          this.employerId = res.id;
+          this.employerPhone = res.number;
           this.getChildren();
       },
       error=>{console.log("Error has occured with API: " + error);}
@@ -125,7 +140,7 @@ export class AuPairDashboardComponent implements OnInit {
     this.serv.getChildren(this.employerId).subscribe(
       res=>{
         let i = 0;
-        res.forEach((element: string) => {
+        res.forEach((element: Child) => {
           this.children[i++] = element;
           
         });

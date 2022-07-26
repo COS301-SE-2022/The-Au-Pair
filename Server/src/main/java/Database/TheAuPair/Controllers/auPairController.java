@@ -29,4 +29,18 @@ public class auPairController
   {
     this.aps.updateAuPair(p);
   }
+
+  @PostMapping("/removeAuPair")
+  @CrossOrigin(origins = "http://localhost:4200")
+  public void removeAuPair(@RequestBody String id)
+  {
+    this.aps.deleteAuPair(id);
+  }
+
+  @PostMapping("/addAuPair")
+  @CrossOrigin(origins = "http://localhost:4200")
+  public void addAuPair(@RequestBody auPair a)
+  {
+    this.aps.addAuPair(a);
+  }
 }

@@ -9,7 +9,7 @@
     "test-front-end": "npx nx run-many --target=test --all",
     "postinstall": "ngcc --properties es2015 browser module main",
     "start:api": "cd Server && mvn spring-boot:run",
-    "open:android": "nx run the-au-pair:open:android"
+    "open:android": "nx run the-au-pair:open:android --livereload --consolelogs --serverlogs"
   },
   "private": true,
   "devDependencies": {
@@ -65,7 +65,9 @@
     "@angular/router": "~13.3.0",
     "@awesome-cordova-plugins/geolocation": "^5.44.0",
     "@capacitor/core": "^3.2.5",
+    "@capacitor/push-notifications": "^1.0.9",
     "@ionic/angular": "^5.8.3",
+    "@ngxs/storage-plugin": "^3.7.4",
     "@ngxs/store": "^3.7.4",
     "@syncfusion/ej2-angular-grids": "^20.2.38",
     "@syncfusion/ej2-angular-maps": "^20.2.38",

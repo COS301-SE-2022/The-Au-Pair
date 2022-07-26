@@ -1,8 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { API } from '../../../../shared/api/api.service';
-import { auPair, Child, Parent, User } from '../../../../shared/interfaces/interfaces';
+import { Child, Parent, User } from '../../../../shared/interfaces/interfaces';
 import { AuPairRatingModalComponent } from './au-pair-rating-modal/au-pair-rating-modal.component';
-import { ModalController } from '@ionic/angular';
+import { ModalController, ToastController } from '@ionic/angular';
+import { Store } from '@ngxs/store';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'the-au-pair-parent-dashboard',
@@ -11,7 +13,7 @@ import { ModalController } from '@ionic/angular';
 })
 export class ParentDashboardComponent implements OnInit{
 
-  children: any[] = [];
+  children: Child[] = [];
   parentID = "";
 
   parentDetails: Parent = {
@@ -21,16 +23,20 @@ export class ParentDashboardComponent implements OnInit{
     auPair: "",
   }
 
-  childDetails: Child = {
-    id: "",
-    fname: "",
-    sname: "",
-    allergies: "",
-    diet: "",
-    parent: "",
+  userDetails: User = {
+    id: '',
+    fname: '',
+    sname: '',
+    email: '',
+    address: '',
+    registered: false,
+    type: 0,
+    password: '',
+    number: '',
+    salt: ''
   }
 
-  userDetails: User = {
+  auPairDetails: User = {
     id: "",
     fname: "",
     sname: "",
@@ -43,21 +49,7 @@ export class ParentDashboardComponent implements OnInit{
     salt: "",
   }
 
-  auPairDetails: auPair = {
-    id: "",
-    rating: 0,
-    onShift: false,
-    employer: "",
-    costIncurred: 0,
-    distTraveled: 0,
-    payRate: 0,
-    bio: "",
-    experience: "",
-    currentLong: 0.0,
-    currentLat: 0.0
-  }
-
-  constructor(private serv: API, private modalCtrl : ModalController){}
+  constructor(private serv: API, private modalCtrl : ModalController, private store: Store, public toastCtrl: ToastController, public router: Router){}
 
   async openModal(actId : string) {
     const modal = await this.modalCtrl.create({
@@ -69,70 +61,103 @@ export class ParentDashboardComponent implements OnInit{
     await modal.present();
   }
 
-  ngOnInit(): void
+  async ngOnInit()
   {
-    this.getParentDetails()
-  }
+    this.parentID = this.store.snapshot().user.id;
 
-  async getParentDetails()
-  {
-    await this.serv.getParent("4561237814867").subscribe(
-      res=>{
-        this.parentDetails.id = res.id;       
-        this.parentID = res.id;
-        this.parentDetails.children = res.cildren;
-        this.parentDetails.medID = res.medID;
-        this.parentDetails.auPair = res.auPair;
-      },
-      error=>{console.log("Error has occured with API: " + error);}
-    )
-    await this.serv.getUser("7542108615984").subscribe(
+    await this.serv.getUser(this.parentID).toPromise()
+    .then( 
       res=>{
         this.userDetails.id = res.id;
         this.userDetails.fname = res.fname;
         this.userDetails.sname = res.sname;
         this.userDetails.email = res.email;
         this.userDetails.address = res.address;
-        this.userDetails.registered = res.registered;
-        this.userDetails.type = res.type;
-        this.userDetails.password = res.password;
         this.userDetails.number = res.number;
-        this.userDetails.salt = res.salt;
       },
-      error=>{console.log("Error has occured with API: " + error);}
+      error => {
+        console.log("Error has occured with API: " + error);
+      }
     )
-    await this.serv.getAuPair("7542108615984").subscribe(
-      res=>{
-        this.auPairDetails.id = res.id;
-        this.auPairDetails.rating = res.rating;
-        this.auPairDetails.onShift = res.onShift;
-        this.auPairDetails.employer = res.employer;
-        this.auPairDetails.costIncurred = res.costIncurred;
-        this.auPairDetails.distTraveled = res.distTraveled;
-        this.auPairDetails.payRate = res.payRate;
-        this.auPairDetails.bio = res.bio;
-        this.auPairDetails.experience = res.experience;
-        this.auPairDetails.currentLong = res.currentLong;
-        this.auPairDetails.currentLat = res.currentLat;
+    
+    await this.serv.getParent(this.parentID)
+    .toPromise()
+      .then( 
+        res=>{
+          this.parentDetails.id = res.id;      
+          this.parentID = res.id;
+          this.parentDetails.children = res.children;
+          this.parentDetails.medID = res.medID;
+          this.parentDetails.auPair = res.auPair;
       },
-      error=>{console.log("Error has occured with API: " + error);}
+      error => {
+        console.log("Error has occured with API: " + error);
+      }
     )
 
-    this.getChildren()
+    if(this.parentDetails.auPair != "")
+    {
+      await this.serv.getUser(this.parentDetails.auPair)
+      .toPromise()
+      .then(
+        res => {
+          this.auPairDetails.id = res.id;
+          this.auPairDetails.fname = res.fname;
+          this.auPairDetails.sname = res.sname;
+          this.auPairDetails.email = res.email;
+          this.auPairDetails.address = res.address;
+          this.auPairDetails.number = res.number;
+        },
+        error => { 
+          console.log("Error has occured with API: " + error);
+        }
+      )
+    }
+
+    this.getChildren();
   }
 
   async getChildren(){
-    this.serv.getChildren("4561237814867").subscribe(
+    this.serv.getChildren(this.parentID).subscribe(
       res=>{
         let i = 0;
-        res.forEach((element: string) => {
+        res.forEach((element: Child) => {
           this.children[i++] = element;
         });
-        console.log(this.children);
-        
       },
       error =>{console.log("Error has occured with API: " + error);}
     )
   }
 
+  async openToast(message: string)
+  {
+    const toast = await this.toastCtrl.create({
+      message: message,
+      duration: 4000,
+      position: 'top',
+      color: 'primary',
+      cssClass: 'toastPopUp'
+    });
+    await toast.present();
+  }
+
+  async checkHasChildren(){
+    if (this.parentDetails.children.length >= 1){
+      this.router.navigate(['/add-activity']);
+    }
+    else
+    {
+      this.openToast('You have no children to assign activities to');
+    }
+  }
+
+  async checkHasEmployer(){
+    if (this.parentDetails.auPair !== ""){
+      this.router.navigate(['/au-pair-cost']);
+    }
+    else
+    {
+      this.openToast('No Au Pair employed');
+    }
+  }
 }

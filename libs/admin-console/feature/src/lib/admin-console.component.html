@@ -1,0 +1,49 @@
+<the-au-pair-admin-navbar></the-au-pair-admin-navbar>
+
+<ion-content [fullscreen]="true">
+    <h2>Verify Au {{idNum}}</h2>
+    <ion-grid class="verify-cards-container">
+        <ion-row class="ion-justify-content-around">
+            <ion-col *ngFor="let auPair of auPairs" sizeLg="5" sizeMd="12" sizeXs="12">
+                <div class="auPairCard">
+                    <div class="leftInfo">
+                        <div class="info">
+                            <div class="desc label">Full Name:</div>
+                            <div class="cont">{{auPair.fname}}  {{auPair.sname}}</div>
+                        </div>
+                        <div class="info">
+                            <div class="desc label">ID Number:</div>
+                            <div class="cont">{{auPair.id}}</div>
+                        </div>
+                        <div class="info">
+                            <div class="desc label">Address:</div>
+                            <div class="cont">{{auPair.address}}</div>
+                        </div>
+                        <div class="info">
+                            <div class="desc label">Email:</div>
+                            <div class="cont">{{auPair.email}}</div>
+                        </div>
+                        <div class="info">
+                            <div class="desc label">Document:</div>
+                            <div class="cont">Documents</div>
+                        </div>
+                    </div>
+    
+                    <div class="rightInfo">
+                        <div class="userImg">
+                            <img src="assets/images/profile.jpg" alt="ruben">  
+                        </div>
+                        <div>
+                            <button class = "button reject" (click)="resolve(auPair.id,false)">
+                                Reject
+                            </button>
+                            <button class = "button accept" (click)="resolve(auPair.id,true)">
+                                Accept
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </ion-col>
+        </ion-row>
+    </ion-grid>
+</ion-content>

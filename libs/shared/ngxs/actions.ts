@@ -7,3 +7,8 @@ export class SetType{
     static readonly type = '[User] set type';
     constructor(public payload: number) {}
 }
+
+export class SetFcmToken{
+    static readonly type = '[User] set fcmToken';
+    constructor(public payload: string) {}
+}
