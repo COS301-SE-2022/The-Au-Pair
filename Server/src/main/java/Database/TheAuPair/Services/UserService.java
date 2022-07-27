@@ -47,7 +47,7 @@ public class UserService
 
   public User login(String email, String password)
   {
-    User nr = new User("","","","","",false,1,"","","");
+    User nr = new User("","","","","",false,1,"","","", 0, 0, "", "", 0);
     for (User registered : ur.findAll())
     {
       if (registered.getEmail().equals(email))

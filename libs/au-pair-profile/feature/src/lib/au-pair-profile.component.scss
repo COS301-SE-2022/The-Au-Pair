@@ -1,3 +1,13 @@
+.profile-div{
+    width: 90%;
+    margin-top: 60px;
+    margin-left: auto;
+    margin-right: auto;
+    background-color: #69A88DB2;
+    border-radius: 16px;
+    margin-bottom: 60px;
+}
+
 .profile-name {
     font-size: 3.6vw;
     padding-top: 2%;
@@ -8,20 +18,24 @@
     margin-top: 0px;
 }
 
-.parent-profile-div{
-    width: 90%;
-    margin-top: 60px;
-    margin-left: auto;
-    margin-right: auto;
-    background-color: #69A88DB2;
-    border-radius: 16px;
-    margin-bottom: 60px;
+.profile-picture-wrapper{
+    width: 166px;
+    height: 166px;
+    background-color: rgba($color: #032927BF, $alpha: 0.75);
+    border-radius: 50%;
+    margin: auto;
+    display: flex;
+    align-items: center;
+    text-align: center;
+    justify-content: center;
+    margin-top: 20px;
+    margin-bottom: 25px;
 }
 
-.profile-picture-div{
-    width: 33.3%;
-    height: 100%;
-    float: left;
+.profile-picture {
+    width: 140px;
+    height: 140px;
+    border-radius: 50%;
 }
 
 .details-div{
@@ -32,72 +46,26 @@
     padding-bottom: 25px;
 }
 
-.empty-div{
-    width: 33.3%;
-    height: 100%;
-    float: right;
-}
-
-.profile-picture-wrapper{
-    width: 62%;
-    height: 40%;
-    background-color: rgba($color: #032927BF, $alpha: 0.75);
-    border-radius: 16px;
-    align-items: center;
-    justify-items: center;
-    text-align: center;
-    left: 9%;
-    margin: auto;
-    display: block;
-    margin-bottom: 40px;
-}
-
-.profile-picture {
-    width: 80%;
-    height: 100%;
-}
-
-.parent-info-small{
+.details{
     height: 6%;
     background-color: var(--ion-background-color);
     display:flex;
     font-family: Roboto;
     align-items: center;
-    color: var(--ion-color-tertiary);
+    color: black;
     margin-bottom: 12px;
     box-shadow: 1px 2px 5px rgba(0, 0, 0, 0.13);
     border-radius: 6px;
 }
 
-.parent-info-large{
-    height: 26%;
-    background-color: var(--ion-background-color);
-    display:flex;
-    margin-top: 10px;
-    font-family: Roboto;
-    color: #79BA9E;
-    margin-bottom: 12px;
-    box-shadow: 1px 2px 5px rgba(0, 0, 0, 0.13);
-    border-radius: 6px;
-}
-
-.parent-text{
+.details-title{
     margin-left: 12px;
     font-size: 100%;
     width: 35%;
     margin: 10px;
 }
 
-.parent-text-info{
-    color: var(--ion-color-dark);
-    font-size: 100%;
-    margin-right: auto;
-    line-height: 170%;
-    margin-top: auto;
-    margin-bottom: auto;
-}
-
-.parent-text-info2{
+.user-details{
     color: var(--ion-color-dark);
     font-size: 100%;
     margin-right: auto;
@@ -117,7 +85,7 @@
     margin-top: 25px;
 }
 
-#active-2{
+#background-image-1{
     position: absolute;
     width: 160px;
     height: 160px;
@@ -126,7 +94,7 @@
     z-index: -10;
 }
 
-#active{
+#background-image-2{
     position: absolute;
     width: 130px;
     height: 130px;
@@ -136,7 +104,7 @@
     z-index: -10;
 }
 
-#lifestyles{
+#background-image-3{
     position: absolute;
     width: 280px;
     height: 280px;
@@ -148,15 +116,15 @@
 }
 
 @media (max-width: 642px) {
-    #active{
+    #background-image-2{
         right: 15px;
     }
     
-    #lifestyles{
+    #background-image-3{
         display: none;
     }
 
-    .parent-profile-div{
+    .profile-div{
         margin-top: 13px;
     }
 
@@ -166,17 +134,13 @@
         padding-bottom: 15px;
     }
 
-    .parent-text{
+    .details-title{
         width: 30%;
         font-size: 15px;
     }
 
-    .parent-text-info{
+    .user-details{
         font-size: 15px;
-    }
-
-    .parent-text-info2{
-        padding-top: 5px;
     }
 
     .details-div{
@@ -186,19 +150,19 @@
 
 @media (max-width: 810px) {
     
-    #active{
+    #background-image-2{
         right: 35px;
     }
     
-    #lifestyles{
+    #background-image-3{
         display: none;
     }
     
-    #lifestyles{
+    #background-image-3{
         display: none;
     }
 
-    .parent-profile-div{
+    .profile-div{
         margin-top: 13px;
     }
 
@@ -208,26 +172,16 @@
         padding-bottom: 15px;
     }
 
-    .parent-text{
+    .details-title{
         width: 30%;
         font-size: 15px;
     }
 
-    .parent-text-info{
+    .user-details{
         font-size: 15px;
-    }
-
-    .parent-text-info2{
-        padding-top: 5px;
     }
 
     .details-div{
         width: 75%;
-    }
-}
-
-@media (max-width: 1240px) {
-    .empty-div{
-        width: 0%;
     }
 }
