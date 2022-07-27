@@ -184,4 +184,12 @@ export class API{
     }
     return this.http.post('http://localhost:8080/resolveApplication',decision);
   }
+
+  getNotificationsByParentId(id : string): Observable<any> {
+    return this.http.post('http://localhost:8080/getNotificationsByParentId',id);
+  }
+
+  getNotificationsByAuPairId(id : string): Observable<any> {
+    return this.http.post('http://localhost:8080/getNotificationsByAuPairId',id);
+  }
 }

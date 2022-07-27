@@ -88,4 +88,14 @@ export interface Activity{
     onShift: boolean;
     employer: string;
   }
+
+  export interface Notification{
+    id: string;
+    parentId: string;
+    auPairId: string;
+    title: string;
+    body: string;
+    date: string;
+    time: string;
+  }
   

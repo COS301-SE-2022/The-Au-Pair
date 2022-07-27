@@ -139,7 +139,7 @@ const routes: Routes = [
       ),
   },
   {
-    path: 'parent-notifications',
+    path: 'notifications',
     loadChildren: () =>
       import('@the-au-pair/notifications-feature').then(
         (m) => m.NotificationsFeatureModule
