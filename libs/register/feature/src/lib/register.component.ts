@@ -75,8 +75,8 @@ export class RegisterComponent {
       id : ['', Validators.compose([Validators.maxLength(13), Validators.pattern('(((\\d{2}((0[13578]|1[02])(0[1-9]|[12]\\d|3[01])|(0[13456789]|1[012])(0[1-9]|[12]\\d|30)|02(0[1-9]|1\\d|2[0-8])))|([02468][048]|[13579][26])0229))(( |-)(\\d{4})( |-)(\\d{3})|(\\d{7}))'), Validators.required])],
       medAid : ['', Validators.compose([Validators.maxLength(100), Validators.pattern('[a-z A-Z\\d]*')])],
       location : ['', Validators.compose([Validators.required])],
-      motivation : ['', Validators.compose([Validators.maxLength(1000), Validators.pattern('[a-z A-Z\\d]*'), Validators.required])],
-      experience : ['', Validators.compose([Validators.maxLength(1000), Validators.pattern('[a-z A-Z\\d]*'), Validators.required])],
+      motivation : ['', Validators.compose([Validators.maxLength(1000), Validators.pattern('[a-z A-Z\\d]*')])],
+      experience : ['', Validators.compose([Validators.maxLength(1000), Validators.pattern('[a-z A-Z\\d]*')])],
       pass : ['', Validators.compose([Validators.maxLength(20), Validators.pattern('^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$'), Validators.required])],
       confPass : ['', Validators.compose([Validators.maxLength(30), Validators.pattern('^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$'), Validators.required])],
     });
@@ -134,7 +134,7 @@ export class RegisterComponent {
     {
       let application = "";
       this.userDetails.id = this.parentRegisterDetailsForm.value.id;
-      // this.userDetails.birthDate = this.parentRegisterDetailsForm.value.id.substring(0, 6);
+      this.userDetails.birth = this.convertIDtoDate(this.parentRegisterDetailsForm.value.id);
       this.userDetails.fname = this.parentRegisterDetailsForm.value.name;
       this.userDetails.sname = this.parentRegisterDetailsForm.value.surname;
       this.userDetails.email = (this.parentRegisterDetailsForm.value.email).toLowerCase();
@@ -270,6 +270,25 @@ export class RegisterComponent {
     });
     
     this.locationError = true;
+  }
+
+  convertIDtoDate(id: string) : string {
+    let year = id.substring(0, 2);
+    let month = id.substring(2, 4);
+    let day = id.substring(4, 6);
+    
+    const thisYear = new Date().getFullYear().toString().substring(2, 4);
+
+    if(year >= thisYear)
+    {
+      year = "19" + year;
+    }
+    else 
+    {
+      year = "20" + year;
+    }
+
+    return month + "/" + day + "/" + year;
   }
   
 }
