@@ -24,6 +24,10 @@ h2{
     margin: 20px 0;
 }
 
+.long-info {
+    margin: 20px 0;
+}
+
 .label {
     font-weight: bold;
     margin-right: 1rem;
@@ -82,8 +86,12 @@ h2{
     color: white;
 }
 
-.reject {
+.ban {
     background: var(--ion-color-danger);
+}
+
+.warn {
+    background: var(--ion-color-warning);
 }
 
 .buttons{   

@@ -19,9 +19,9 @@
                             <div class="desc label">Email:</div>
                             <div class="cont">{{auPair.email}}</div>
                         </div>
-                        <div class="info">
+                        <div class="long-info">
                             <div class="desc label">Reason:</div>
-                            <div class="cont">Never picked up kids from schoolw</div>
+                            <p class="cont">Never picked kids up from school</p> 
                         </div>
                     </div>
     
@@ -30,11 +30,14 @@
                             <img src="assets/images/profile.jpg" alt="ruben">  
                         </div>
                         <div>
-                            <button class = "button reject" (click)="resolve(auPair.id,false)">
-                                Reject
+                            <button class = "button ban" (click)="resolve(auPair.id,false)">
+                                Ban Au Pair
                             </button>
-                            <button class = "button accept" (click)="resolve(auPair.id,true)">
-                                Accept
+                            <button class = "button warn" (click)="resolve(auPair.id,true)">
+                                Warn Au Pair
+                            </button>
+                            <button class = "button dismiss" (click)="resolve(auPair.id,true)">
+                                Dismiss Report
                             </button>
                         </div>
                     </div>
