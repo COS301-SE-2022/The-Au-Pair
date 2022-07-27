@@ -27,6 +27,7 @@
     border-radius: 50%;
     height: 60px;
     width: 60px;
+    margin: auto;
 }
 
 .wrapper{
@@ -117,6 +118,8 @@
 
     .profile{
         height: 50px;
-        width: 100px;
+        width: 100%;
+        margin-left: 0px;
+        margin-right: 0px;
     }
 }
