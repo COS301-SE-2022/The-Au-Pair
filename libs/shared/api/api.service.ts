@@ -184,4 +184,17 @@ export class API{
     }
     return this.http.post('http://localhost:8080/resolveApplication',decision);
   }
+
+  getAllReports(): Observable<any> 
+  {
+    return this.http.get('http://localhost:8080/getAllReports');
+  }
+  
+  getReportsForAuPair(id : string): Observable<any> {
+    return this.http.post('http://localhost:8080/getReportsForAuPair', id);
+  }
+
+  deleteReport(id : string): Observable<any> {
+    return this.http.post('http://localhost:8080/deleteReport',id);
+  }
 }
