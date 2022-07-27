@@ -88,3 +88,9 @@ export interface Activity{
     employer: string;
   }
   
+  export interface Report{
+    id: string;
+    issuerId: string;
+    auPairId: string;
+    description: string;
+  }
