@@ -7,6 +7,8 @@ import { HttpClientTestingModule } from "@angular/common/http/testing";
 import { NavbarModule } from '@the-au-pair/shared/components/navbar';
 import {RouterTestingModule} from "@angular/router/testing";
 import { EditParentProfileComponent } from './edit-parent-profile.component';
+import { NgxsModule } from '@ngxs/store';
+import { AppState } from '../../../../shared/ngxs/state';
 
 describe('EditParentProfileComponent', () => {
   let component: EditParentProfileComponent;
@@ -39,6 +41,7 @@ describe('EditParentProfileComponent', () => {
         HttpClientTestingModule,
         NavbarModule,
         RouterTestingModule,
+        NgxsModule.forRoot([AppState])
     ],
     providers: [API]
     }).compileComponents();
@@ -59,24 +62,6 @@ describe('EditParentProfileComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
-
-  //------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-  /**Testing the services**/
-  /*Testing for invalid user IDs*/
-  it('should, when editUser() is called with an invalid user ID, return an error from the API', async ()=>{
-    const expectedValue = undefined;
-    jest.spyOn(component,"editUser");
-    expect(await component.editUser(invalidUser)).toEqual(expectedValue);
-  })
-
-  //------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-  /**Testing the services**/
-  /*Testing for invalid user IDs*/
-  it('should, when editMedAid() is called with an invalid medAid ID, return an error from the API', async ()=>{
-    const expectedValue = undefined;
-    jest.spyOn(component,"editMedAid");
-    expect(await component.editMedAid(invalidMedAid)).toEqual(expectedValue);
-  })
 
   //------------------------------------------------------------------------------------------------------------------------------------------------------------------------
   /**Populated form fields form testing**/

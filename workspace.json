@@ -22,15 +22,14 @@
     "parent-view-activity-feature": "libs/parent-view-activity/feature",
     "register-feature": "libs/register/feature",
     "schedule-feature": "libs/schedule/feature",
-    "shared-components-aupair-navbar": "libs/shared/components/aupair-navbar",
     "shared-components-input-field": "libs/shared/components/input-field",
     "shared-components-navbar": "libs/shared/components/navbar",
-    "shared-components-admin-navbar": "libs/shared/components/admin-navbar",
     "shared-components-password-field": "libs/shared/components/password-field",
     "shared-components-location-field": "libs/shared/components/location-field",
     "shared-components-long-field": "libs/shared/components/long-field",
     "shell-feature": "libs/shell/feature",
     "the-au-pair": "apps/the-au-pair",
-    "the-au-pair-e2e": "apps/the-au-pair-e2e"
+    "the-au-pair-e2e": "apps/the-au-pair-e2e",
+    "track-au-pair-feature": "libs/track-au-pair/feature"
   }
 }

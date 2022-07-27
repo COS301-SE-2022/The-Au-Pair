@@ -3,6 +3,11 @@ export class SetId{
     constructor(public payload: string) {}
 }
 
+export class SetName{
+    static readonly type = '[User] set name';
+    constructor(public payload: string) {};
+}
+
 export class SetType{
     static readonly type = '[User] set type';
     constructor(public payload: number) {}
@@ -11,4 +16,8 @@ export class SetType{
 export class SetFcmToken{
     static readonly type = '[User] set fcmToken';
     constructor(public payload: string) {}
+}
+
+export class Reset{
+    static readonly type = '[AppState] Reset Store';
 }

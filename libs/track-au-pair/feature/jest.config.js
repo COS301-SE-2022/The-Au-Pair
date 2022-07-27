@@ -1,6 +1,6 @@
 module.exports = {
-  displayName: 'shared-components-navbar',
-  preset: '../../../../jest.preset.js',
+  displayName: 'track-au-pair-feature',
+  preset: '../../../jest.preset.js',
   setupFilesAfterEnv: ['<rootDir>/src/test-setup.ts'],
   globals: {
     'ts-jest': {
@@ -8,7 +8,7 @@ module.exports = {
       stringifyContentPathRegex: '\\.(html|svg)$',
     },
   },
-  coverageDirectory: '../../../../coverage/libs/shared/components/navbar',
+  coverageDirectory: '../../../coverage/libs/track-au-pair/feature',
   transform: {
     '^.+\\.(ts|mjs|js|html)$': 'jest-preset-angular',
   },

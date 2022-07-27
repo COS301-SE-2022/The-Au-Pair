@@ -22,6 +22,8 @@ export class ExpandModalComponent implements OnInit {
     payRate: 0,
     bio: "",
     experience: "",
+    currentLong: 0.0,
+    currentLat: 0.0
   }
 
   userDetails: User = {
