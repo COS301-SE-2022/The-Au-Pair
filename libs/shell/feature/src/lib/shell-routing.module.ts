@@ -83,6 +83,11 @@ const routes: Routes = [
     import('@the-au-pair/edit-au-pair-profile/feature').then((m) => m.EditAuPairProfileFeatureModule),
   },
   {
+    path: 'track-au-pair',
+    loadChildren: () =>
+    import('@the-au-pair/track-au-pair/feature').then((m) => m.TrackAuPairFeatureModule),
+  },
+  {
     path: 'login-page',
     loadChildren: () =>
     import('@the-au-pair/login/feature').then((m) => m.LoginFeatureModule),
@@ -101,6 +106,11 @@ const routes: Routes = [
     path: 'parent-notifications',
     loadChildren: () =>
     import('@the-au-pair/parent-notifications/feature').then((m) => m.ParentNotificationsFeatureModule),
+  },
+  {
+    path: 'explore',
+    loadChildren: () =>
+    import('@the-au-pair/explore/feature').then((m) => m.ExploreFeatureModule),
   },
   {
     path: 'admin-console',

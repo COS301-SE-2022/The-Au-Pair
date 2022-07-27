@@ -19,6 +19,7 @@ export interface Activity{
     allergies: string;
     diet: string;
     parent: string;
+    aupair: string;
   }
 
   export interface HoursLogged{
@@ -55,6 +56,8 @@ export interface Activity{
     payRate: number;
     bio: string;
     experience: string;
+    currentLong: number;
+    currentLat: number;
   }
 
   export interface User{
@@ -68,6 +71,11 @@ export interface Activity{
     password: string;
     number: string;
     salt: string;
+    latitude: number;
+    longitude: number;
+    suburb: string;
+    gender: string;
+    age: number;
   }
 
   export interface auPair{

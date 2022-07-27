@@ -11,6 +11,7 @@
     "edit-au-pair-profile-feature": "libs/edit-au-pair-profile/feature",
     "edit-child-feature": "libs/edit-child/feature",
     "edit-parent-profile-feature": "libs/edit-parent-profile/feature",
+    "explore-feature": "libs/explore/feature",
     "forgot-password-feature": "libs/forgot-password/feature",
     "hire-requests-feature": "libs/hire-requests/feature",
     "login-feature": "libs/login/feature",
@@ -27,8 +28,10 @@
     "shared-components-input-field": "libs/shared/components/input-field",
     "shared-components-navbar": "libs/shared/components/navbar",
     "shared-components-password-field": "libs/shared/components/password-field",
+    "shared-components-location-field": "libs/shared/components/location-field",
     "shell-feature": "libs/shell/feature",
     "the-au-pair": "apps/the-au-pair",
-    "the-au-pair-e2e": "apps/the-au-pair-e2e"
+    "the-au-pair-e2e": "apps/the-au-pair-e2e",
+    "track-au-pair-feature": "libs/track-au-pair/feature"
   }
 }

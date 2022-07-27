@@ -9,6 +9,7 @@ import { API } from '../../../../shared/api/api.service';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { HttpClient, HttpHandler } from '@angular/common/http';
 import { NgxsModule } from '@ngxs/store';
+import { AppState } from '../../../../shared/ngxs/state';
  
 
 describe('LoginComponent', () => {
@@ -31,7 +32,7 @@ describe('LoginComponent', () => {
         ReactiveFormsModule,
         RouterTestingModule,
         HttpClientTestingModule,
-        NgxsModule.forRoot()
+        NgxsModule.forRoot([AppState])
       ],
       providers:[API, HttpClient, HttpHandler],
       declarations: [LoginComponent],

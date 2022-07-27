@@ -43,6 +43,7 @@
       "@the-au-pair/edit-parent-profile/feature": [
         "libs/edit-parent-profile/feature/src/index.ts"
       ],
+      "@the-au-pair/explore/feature": ["libs/explore/feature/src/index.ts"],
       "@the-au-pair/forgot-password/feature": [
         "libs/forgot-password/feature/src/index.ts"
       ],
@@ -85,7 +86,18 @@
       "@the-au-pair/shared/components/password-field": [
         "libs/shared/components/password-field/src/index.ts"
       ],
-      "@the-au-pair/shell/feature": ["libs/shell/feature/src/index.ts"]
+      "@the-au-pair/shell/feature": [
+        "libs/shell/feature/src/index.ts"
+      ],
+      "@the-au-pair/track-au-pair/feature": [
+        "libs/track-au-pair/feature/src/index.ts"
+      ],
+      "@the-au-pair/shared/components/location-field": [
+        "libs/shared/components/location-field/src/index.ts"
+      ],
+      "@the-au-pair/shell/feature": [
+        "libs/shell/feature/src/index.ts"
+      ]
     }
   },
   "exclude": ["node_modules", "tmp"]

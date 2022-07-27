@@ -23,6 +23,11 @@ export class EditAuPairProfileComponent implements OnInit {
     password: "",
     number: "",
     salt: "",
+    latitude: 0,
+    longitude: 0,
+    suburb: "",
+    gender: "",
+    age: 0,
   }
 
   auPairDetails: auPair = {
@@ -35,6 +40,8 @@ export class EditAuPairProfileComponent implements OnInit {
     payRate: 0,
     bio: "",
     experience: "",
+    currentLong: 0.0,
+    currentLat: 0.0
   }
 
   constructor(private serv: API, public toastCtrl: ToastController){}
@@ -59,6 +66,11 @@ export class EditAuPairProfileComponent implements OnInit {
         this.userDetails.password = res.password;
         this.userDetails.number = res.number;
         this.userDetails.salt = res.salt;
+        this.userDetails.latitude = res.latitude;
+        this.userDetails.longitude = res.longitude;
+        this.userDetails.suburb = res.suburb;
+        this.userDetails.gender = res.gender;
+        this.userDetails.age = res.age;
       },
       error=>{console.log("Error has occured with API: " + error);}
     )
@@ -73,6 +85,8 @@ export class EditAuPairProfileComponent implements OnInit {
         this.auPairDetails.payRate = res.payRate;
         this.auPairDetails.bio = res.bio;
         this.auPairDetails.experience = res.experience;
+        this.auPairDetails.currentLong = res.currentLong;
+        this.auPairDetails.currentLat = res.currentLat;
       },
       error=>{console.log("Error has occured with API: " + error);}
     )
