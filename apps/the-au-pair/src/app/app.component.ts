@@ -43,8 +43,6 @@ export class AppComponent implements OnInit
     //Initialise parentID for logged in user
     this.userID = this.store.snapshot().user.id;
     this.userType = this.store.snapshot().user.type;
-
-    console.log(this.userID, this.userType);
     
     if(this.userType == 2 && this.userID != '')
     {
