@@ -1,58 +1,43 @@
-<the-au-pair-aupair-navbar></the-au-pair-aupair-navbar>
+<the-au-pair-navbar></the-au-pair-navbar>
 <ion-content [fullscreen]="true">
-    <div class = "profile-div">    
+    <div class = "parent-profile-div">
         <h1 class='profile-name'>{{this.userDetails.fname}} {{this.userDetails.sname}}</h1>
-        <div class='profile-picture-wrapper'>
-            <img class="profile-picture" src="assets/images/placeholder-profile.jpg" alt="">
-        </div>
+            <div class='profile-picture-wrapper'>
+                <img class="profile-picture" src="assets/images/placeholder-profile.jpg" alt="">
+            </div>
         <div class = 'details-div'>
-            <div>
-                <div class="details">
-                    <div class="details-title">Email: </div>
-                    <p class="user-details">{{this.userDetails.email}}</p>
+            <div class = "small-profile-details-div">
+                <div class="parent-info-small">
+                    <div class="parent-text">Email: </div>
+                    <p class="parent-text-info">{{this.userDetails.email}}</p>
                 </div>
-                <div class="details">
-                    <div class="details-title">Phone: </div>
-                    <p class="user-details">{{this.userDetails.number}}</p>
+                <div class="parent-info-small">
+                    <div class="parent-text">Phone: </div>
+                    <p class="parent-text-info">{{this.userDetails.number}}</p>
                 </div>
-                <div class="details">
-                    <div class="details-title">ID Number: </div>
-                    <p class="user-details">{{this.userDetails.id}}</p>
+                <div class="parent-info-small">
+                    <div class="parent-text">ID Number: </div>
+                    <p class="parent-text-info">{{this.userDetails.id}}</p>
                 </div>
-                <div class="details">
-                    <div class="details-title">Address: </div>
-                    <p class="user-details">{{this.userDetails.address}}</p>
+                <div class="parent-info-small">
+                    <div class="parent-text">Address: </div>
+                    <p class="parent-text-info">{{this.userDetails.address}}</p>
                 </div>
-                <div class="details">
-                    <div class="details-title">Suburb: </div>
-                    <p class="user-details">{{this.userDetails.suburb}}</p>
+                <div class="parent-info-small">
+                  <div class="parent-text">Pay rate: </div>
+                  <p class="parent-text-info">R{{this.auPairDetails.payRate}} per hour</p>
+              </div>
+            </div>
+            <div class = 'large-profile-details-div'>
+                <div class="parent-info-large">
+                    <div class="parent-text">Bio: </div>
+                    <p class="parent-text-info">{{this.auPairDetails.bio}}</p>
                 </div>
-                <div class="details">
-                    <div class="details-title">Gender: </div>
-                    <p class="user-details">{{this.userDetails.gender}}</p>
+                <div class="parent-info-large">
+                    <div class="parent-text">Experience: </div>
+                    <p class="parent-text-info">{{this.auPairDetails.experience}}</p>
                 </div>
-                <div class="details">
-                    <div class="details-title">Age: </div>
-                    <p class="user-details">{{this.userDetails.age}}</p>
-                </div>
-                <div class="details">
-                  <div class="details-title">Pay rate: </div>
-                  <p class="user-details">R{{this.auPairDetails.payRate}} per hour</p>
-                </div>
-                <div class="details">
-                    <div class="details-title">Rating: </div>
-                    <div *ngIf="this.auPairDetails.rating !== 0" class="user-details">{{this.auPairDetails.rating}} / 5</div>
-                    <div *ngIf="this.auPairDetails.rating === 0" class="user-details">Not yet rated</div>
-                  </div>
-                </div>
-                <div class="details">
-                    <div class="details-title">Bio: </div>
-                    <p class="user-details">{{this.auPairDetails.bio}}</p>
-                </div>
-                <div class="details">
-                    <div class="details-title">Experience: </div>
-                    <p class="user-details">{{this.auPairDetails.experience}}</p>
-                </div>
+            </div>
             <button class="change-button" id="change" routerLink="/edit-au-pair-profile">CHANGE</button>
         </div>
         <img id="background-image-1" src="assets/images/active.png">

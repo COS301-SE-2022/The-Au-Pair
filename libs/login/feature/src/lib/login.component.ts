@@ -4,7 +4,7 @@ import { ToastController } from '@ionic/angular';
 import { Router } from '@angular/router';
 import { API } from '../../../../shared/api/api.service';
 import { Store } from '@ngxs/store';
-import { SetFcmToken, SetId , SetType, SetName } from '../../../../shared/ngxs/actions';
+import { SetFcmToken, SetId , SetType, SetName, Reset } from '../../../../shared/ngxs/actions';
 import {
   ActionPerformed,
   PushNotificationSchema,
@@ -43,6 +43,8 @@ export class LoginComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.store.dispatch(new Reset());
+
     if (Capacitor.getPlatform() !== 'web') {
       this.startPush();
     }
