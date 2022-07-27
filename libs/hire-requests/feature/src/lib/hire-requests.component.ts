@@ -3,7 +3,7 @@ import { ModalController, ToastController } from '@ionic/angular';
 import { API } from '../../../../shared/api/api.service';
 import { Store } from '@ngxs/store';
 import { Router } from '@angular/router';
-import { auPair, Parent } from 'libs/shared/interfaces/interfaces';
+import { auPair, Parent } from '../../../../shared/interfaces/interfaces';
 
 @Component({
   selector: 'the-au-pair-hire-requests',
@@ -51,7 +51,7 @@ export class HireRequestsComponent implements OnInit {
 
   ngOnInit(): void 
   {
-    this.auPairID = "7954231654823";
+    this.auPairID = "9845621036712";
     this.getContracts();
   }
 
@@ -136,21 +136,100 @@ export class HireRequestsComponent implements OnInit {
 
   acceptRequest(cID : string, parentID : string)
   {
-    this.sucToast();
-    // this.router.navigate(['/au-pair-dashboard']);
-    console.log(parentID);
-    
+    this.sucToast();    
+
+    this.getAuPairDetails();
+    this.getParentDetails(parentID);
+
+    this.currentAuPair.employer = parentID;
+    this.parentDetails.auPair = this.auPairID;
+
+    this.updateAuPair();
+    this.updateParent();
+
+    this.serv.removeContract(cID).subscribe(
+      res=>{
+        this.router.navigate(['/au-pair-dashboard']);
+      },
+      error=>{console.log("Error has occured with API: " + error);}
+    )
   }
 
   rejectRequest(cID : string)
   {
-    console.log(cID);
     this.serv.removeContract(cID).subscribe(
       res=>{
         location.reload();
       },
       error=>{console.log("Error has occured with API: " + error);}
     )
+  }
+
+  async getAuPairDetails()
+  {
+    await this.serv.getAuPair(this.auPairID)
+    .toPromise()
+      .then(
+      res=>{
+        this.currentAuPair.id = res.id;
+        this.currentAuPair.rating = res.rating;
+        this.currentAuPair.onShift = res.onShift;
+        this.currentAuPair.employer = res.employer;
+        this.currentAuPair.costIncurred = res.costIncurred;
+        this.currentAuPair.distTraveled = res.distTraveled;
+        this.currentAuPair.payRate = res.payRate;
+        this.currentAuPair.bio = res.bio;
+        this.currentAuPair.experience = res.experience;
+        this.currentAuPair.currentLong = res.currentLong;
+        this.currentAuPair.currentLat = res.currentLat;
+      },
+      error=>{console.log("Error has occured with API: " + error);}
+    )
+  }
+
+  async getParentDetails(parentID : string)
+  {
+    await this.serv.getParent(parentID)
+    .toPromise()
+      .then( 
+        res=>{
+          this.parentDetails.id = res.id;      
+          this.parentDetails.children = res.children;
+          this.parentDetails.medID = res.medID;
+          this.parentDetails.auPair = res.auPair;
+      },
+      error => {
+        console.log("Error has occured with API: " + error);
+      }
+    )
+  }
+
+  updateAuPair(){
+    this.serv.editAuPair(this.currentAuPair).toPromise()
+    .then(
+      res=>{
+        console.log("The response is:" + res);
+        return res;
+      },
+      error=>{
+        console.log("Error has occured with API: " + error);
+        return error;
+      }
+    );
+  }
+
+  updateParent(){
+    this.serv.editParent(this.parentDetails).toPromise()
+    .then(
+      res=>{
+        console.log("The response is:" + res);
+        return res;
+      },
+      error=>{
+        console.log("Error has occured with API: " + error);
+        return error;
+      }
+    );
   }
 }
   

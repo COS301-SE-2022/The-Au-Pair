@@ -22,6 +22,7 @@ public class auPairService
 
   public void updateAuPair(auPair p)
   {
+    System.out.println("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n" + p);
     apr.save(p);
   }
 

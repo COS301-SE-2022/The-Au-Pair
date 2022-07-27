@@ -22,7 +22,7 @@ public class ContractRepositoryTests
   @BeforeEach
   public void setup()
   {
-    expectedContract = new Contract("","","");
+    expectedContract = new Contract("","","", "");
     id = "7542108615984";
   }
 
