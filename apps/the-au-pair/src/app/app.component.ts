@@ -77,7 +77,6 @@ export class AppComponent implements OnInit {
       this.userID = this.store.snapshot().user.id;
       this.userType = this.store.snapshot().user.type;
       if (this.userType == 2 && this.userID != '') {
-        console.log(this.userID, this.userType)
         if (this.auPairDetails.onShift == true) {
           this.getCurrentAuPairDetails();
           this.updateCoordinates();
@@ -140,7 +139,7 @@ export class AppComponent implements OnInit {
         }
 
         this.serv.logNotification(this.notificationToSend).toPromise().then(res => {
-          console.log(res);
+          this.monitorActivities();
         }, err => {
           console.log(err);
         });
@@ -150,7 +149,6 @@ export class AppComponent implements OnInit {
   }
 
   async getAcitivities(id: string) {
-    console.log("getting activities");
     await this.serv.getChildren(id).toPromise().then(res => {
       res.forEach((element: any) => {
         this.serv.getSchedule(element.id).toPromise().then(res => {
@@ -184,41 +182,54 @@ export class AppComponent implements OnInit {
       if (Number(obj1.day) > Number(obj2.day)) {
         return 1;
       }
-
+      else
       if (Number(obj1.day) < Number(obj2.day)) {
         return -1;
       }
+      else if(Number(obj1.day) == Number(obj2.day)){
+        if(Number(obj1.timeStart.substring(0,2)) > Number(obj2.timeStart.substring(3))){
+          return 1;
+        }
+        else if(Number(obj1.timeStart.substring(0,2)) < Number(obj2.timeStart.substring(3))){
+          return -1;
+        }
+        else{
+          return 0;
+        }
+      }
 
       return 0;
+      
     });
 
     const current = new Date();
     const currentDay = current.getDay();
 
-    console.log(this.activitydays)
     if (this.activitydays.includes(currentDay)) {
       //check if activity has already passed
       const act = this.activities.find(x => Number(x.day) == currentDay);
-      console.log(act);
       //check hour first
-      let hasPassed = false;
-      if (current.getHours() > Number(act?.timeStart.slice(0, 2))) {
-        hasPassed = true;
-      }
-      else if (current.getHours() == Number(act?.timeStart.slice(0, 2))) {
-        //check minutes
-        if (current.getMinutes() > Number(act?.timeStart.slice(3))) {
-          hasPassed = true;
-        }
-      }
+      const hasPassed = this.activityHasFinished(act);
 
       if (!hasPassed) {
         this.upcomingActivity = act;
       }
       else {
         if (this.activities.filter(x => Number(x.day) == currentDay).length > 1){
-          const nextAct = this.activities.filter(x => Number(x.day) == currentDay)[1];
-          this.upcomingActivity = nextAct;
+          const filteredActs = this.activities.filter(x => Number(x.day) == currentDay);
+          let updated = false;
+          for(let i = 1; i < filteredActs.length; i++){
+            if(!this.activityHasFinished(filteredActs[i])){
+              this.upcomingActivity = filteredActs[i];
+              break;
+              updated = true;
+            }
+          }
+
+          if(!updated){
+            const nextAct = this.activities.find(x => Number(x.day) > currentDay);
+            this.upcomingActivity = nextAct;
+          }
         }
         else {
           const nextAct = this.activities.find(x => Number(x.day) > currentDay);
@@ -232,13 +243,10 @@ export class AppComponent implements OnInit {
       this.upcomingActivity = nextAct;
 
       if (this.upcomingActivity == undefined) {
-        console.log(this.activities);
         this.upcomingActivity = this.activities[0];
       }
 
     }
-
-    console.log(this.upcomingActivity);
 
     const today = current.getDate() + "/" + (current.getMonth() + 1) + "/" + current.getFullYear();
     this.notificationToSend.auPairId = this.userID;
@@ -248,7 +256,24 @@ export class AppComponent implements OnInit {
     this.notificationToSend.time = this.upcomingActivity.timeStart;
     this.notificationToSend.date = today;
 
+    console.log(this.upcomingActivity);
+
     this.setNotification();
+  }
+
+  activityHasFinished(act : any) : boolean{
+    let hasPassed = false;
+    const current = new Date();
+      if (current.getHours() > Number(act?.timeStart.slice(0, 2))) {
+        hasPassed = true;
+      }
+      else if (current.getHours() == Number(act?.timeStart.slice(0, 2))) {
+        //check minutes
+        if (current.getMinutes() > Number(act?.timeStart.slice(3))) {
+          hasPassed = true;
+        }
+      }
+    return hasPassed;
   }
 
   async getCurrentAuPairDetails() {
