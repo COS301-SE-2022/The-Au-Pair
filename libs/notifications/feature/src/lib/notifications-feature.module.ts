@@ -9,7 +9,12 @@ import { IonicModule } from '@ionic/angular';
 export const parentNotificationsFeatureRoutes: Route[] = [];
 
 @NgModule({
-  imports: [CommonModule, ParentNotificationsRoutingModule,NavbarModule,IonicModule],
+  imports: [
+    CommonModule,
+    ParentNotificationsRoutingModule,
+    NavbarModule,
+    IonicModule,
+  ],
   declarations: [ParentNotificationsComponent],
 })
-export class ParentNotificationsFeatureModule {}
+export class NotificationsFeatureModule {}

@@ -5,5 +5,4 @@ import { Component } from '@angular/core';
   templateUrl: './parent-notifications.component.html',
   styleUrls: ['./parent-notifications.component.scss'],
 })
-export class ParentNotificationsComponent{}
-
+export class ParentNotificationsComponent {}

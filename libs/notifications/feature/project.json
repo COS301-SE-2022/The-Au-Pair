@@ -1,0 +1,26 @@
+{
+  "projectType": "library",
+  "root": "libs/notifications/feature",
+  "sourceRoot": "libs/notifications/feature/src",
+  "prefix": "the-au-pair",
+  "targets": {
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["coverage/libs/notifications/feature"],
+      "options": {
+        "jestConfig": "libs/notifications/feature/jest.config.js",
+        "passWithNoTests": true
+      }
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "options": {
+        "lintFilePatterns": [
+          "libs/notifications/feature/src/**/*.ts",
+          "libs/notifications/feature/src/**/*.html"
+        ]
+      }
+    }
+  },
+  "tags": []
+}
