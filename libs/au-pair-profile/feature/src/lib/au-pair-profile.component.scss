@@ -1,4 +1,14 @@
-.profile-div{
+.profile-name {
+    font-size: 3.6vw;
+    padding-top: 2%;
+    margin-bottom: 2%;
+    color: var(--ion-color-dark);
+    text-align: center;
+    font-family: TitanOne;
+    margin-top: 0px;
+}
+
+.parent-profile-div{
     width: 90%;
     margin-top: 60px;
     margin-left: auto;
@@ -8,14 +18,24 @@
     margin-bottom: 60px;
 }
 
-.profile-name {
-    font-size: 3.6vw;
-    padding-top: 2%;
-    margin-bottom: 2%;
-    color: var(--ion-color-dark);
-    text-align: center;
-    font-family: TitanOne;
-    margin-top: 0px;
+.profile-picture-div{
+    width: 33.3%;
+    height: 100%;
+    float: left;
+}
+
+.details-div{
+    width: 40%;
+    height: 100%;
+    margin-left: auto;
+    margin-right: auto;
+    padding-bottom: 25px;
+}
+
+.empty-div{
+    width: 33.3%;
+    height: 100%;
+    float: right;
 }
 
 .profile-picture-wrapper{
@@ -38,15 +58,7 @@
     border-radius: 50%;
 }
 
-.details-div{
-    width: 40%;
-    height: 100%;
-    margin-left: auto;
-    margin-right: auto;
-    padding-bottom: 25px;
-}
-
-.details{
+.parent-info-small{
     height: 6%;
     background-color: var(--ion-background-color);
     display:flex;
@@ -58,14 +70,35 @@
     border-radius: 6px;
 }
 
-.details-title{
+.parent-info-large{
+    height: 26%;
+    background-color: var(--ion-background-color);
+    display:flex;
+    margin-top: 10px;
+    font-family: Roboto;
+    color: black;
+    margin-bottom: 12px;
+    box-shadow: 1px 2px 5px rgba(0, 0, 0, 0.13);
+    border-radius: 6px;
+}
+
+.parent-text{
     margin-left: 12px;
     font-size: 100%;
     width: 35%;
     margin: 10px;
 }
 
-.user-details{
+.parent-text-info{
+    color: var(--ion-color-dark);
+    font-size: 100%;
+    margin-right: auto;
+    line-height: 170%;
+    margin-top: auto;
+    margin-bottom: auto;
+}
+
+.parent-text-info2{
     color: var(--ion-color-dark);
     font-size: 100%;
     margin-right: auto;
@@ -124,7 +157,7 @@
         display: none;
     }
 
-    .profile-div{
+    .parent-profile-div{
         margin-top: 13px;
     }
 
@@ -134,13 +167,17 @@
         padding-bottom: 15px;
     }
 
-    .details-title{
+    .parent-text{
         width: 30%;
         font-size: 15px;
     }
 
-    .user-details{
+    .parent-text-info{
         font-size: 15px;
+    }
+
+    .parent-text-info2{
+        padding-top: 5px;
     }
 
     .details-div{
@@ -157,12 +194,8 @@
     #background-image-3{
         display: none;
     }
-    
-    #background-image-3{
-        display: none;
-    }
 
-    .profile-div{
+    .parent-profile-div{
         margin-top: 13px;
     }
 
@@ -172,16 +205,26 @@
         padding-bottom: 15px;
     }
 
-    .details-title{
+    .parent-text{
         width: 30%;
         font-size: 15px;
     }
 
-    .user-details{
+    .parent-text-info{
         font-size: 15px;
+    }
+
+    .parent-text-info2{
+        padding-top: 5px;
     }
 
     .details-div{
         width: 75%;
+    }
+}
+
+@media (max-width: 1000px) {
+    #background-image-3{
+        display: none;
     }
 }
