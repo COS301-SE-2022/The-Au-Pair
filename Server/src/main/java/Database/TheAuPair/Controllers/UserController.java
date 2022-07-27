@@ -3,6 +3,8 @@ package Database.TheAuPair.Controllers;
 import Database.TheAuPair.Models.User;
 import Database.TheAuPair.Repositories.UserRepository;
 import Database.TheAuPair.Services.UserService;
+import org.springframework.http.ResponseEntity;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -20,44 +22,109 @@ public class UserController
 
   @PostMapping("/getUser")
   @CrossOrigin(origins = "http://localhost:4200")
-  public User getUser(@RequestBody String id)
+  public ResponseEntity<User> getUser(@RequestBody String id, BindingResult bindingResult)
   {
-    User u =  us.getUser(id);
-    return u;
+    if (bindingResult.hasErrors())
+    {
+      return ResponseEntity
+        .badRequest()
+        .body(null);
+    }
+    else
+    {
+      return ResponseEntity
+        .ok()
+        .body(this.us.getUser(id));
+    }
   }
 
   @PostMapping("/editUser")
   @CrossOrigin(origins = "http://localhost:4200")
-  public void editUser(@RequestBody User u)
+  public ResponseEntity.BodyBuilder editUser(@RequestBody User u, BindingResult bindingResult)
   {
-    this.us.updateUser(u);
+    if (bindingResult.hasErrors())
+    {
+      return (ResponseEntity.BodyBuilder) ResponseEntity
+        .badRequest()
+        .body(null);
+    }
+    else
+    {
+      this.us.updateUser(u);
+      return ResponseEntity
+        .ok();
+    }
   }
 
   @PostMapping("/register")
   @CrossOrigin(origins = "http://localhost:4200")
-  public String register(@RequestBody User u)
+  public ResponseEntity<String> register(@RequestBody User u, BindingResult bindingResult)
   {
-    return this.us.register(u);
+    if (bindingResult.hasErrors())
+    {
+      return ResponseEntity
+        .badRequest()
+        .body(null);
+    }
+    else
+    {
+      return ResponseEntity
+        .ok()
+        .body(this.us.register(u));
+    }
   }
 
   @PostMapping("/login")
   @CrossOrigin(origins = "http://localhost:4200")
-  public User login(@RequestBody Map<String, String> details)
+  public ResponseEntity<User> login(@RequestBody Map<String, String> details, BindingResult bindingResult)
   {
-    return this.us.login(details.get("email"), details.get("password"));
+    if (bindingResult.hasErrors())
+    {
+      return ResponseEntity
+        .badRequest()
+        .body(null);
+    }
+    else
+    {
+      return ResponseEntity
+        .ok()
+        .body(this.us.login(details.get("email"), details.get("password")));
+    }
   }
 
   @GetMapping("/getApplicants")
   @CrossOrigin(origins = "http://localhost:4200")
-  public List<User> getApplicants()
+  public ResponseEntity<List<User>> getApplicants(BindingResult bindingResult)
   {
-    return this.us.getApplicants();
+    if (bindingResult.hasErrors())
+    {
+      return ResponseEntity
+        .badRequest()
+        .body(null);
+    }
+    else
+    {
+      return ResponseEntity
+        .ok()
+        .body(this.us.getApplicants());
+    }
   }
 
   @PostMapping("/resolveApplication")
   @CrossOrigin(origins = "http://localhost:4200")
-  public void resolveApplication(@RequestBody Map<String, String> decision)
+  public ResponseEntity.BodyBuilder resolveApplication(@RequestBody Map<String, String> decision, BindingResult bindingResult)
   {
-    this.us.resolveApplication(decision.get("id"), decision.get("resolution"));
+    if (bindingResult.hasErrors())
+    {
+      return (ResponseEntity.BodyBuilder) ResponseEntity
+        .badRequest()
+        .body(null);
+    }
+    else
+    {
+      this.us.resolveApplication(decision.get("id"), decision.get("resolution"));
+      return ResponseEntity
+        .ok();
+    }
   }
 }

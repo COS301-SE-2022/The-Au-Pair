@@ -6,6 +6,8 @@ import Database.TheAuPair.Services.auPairService;
 
 import java.util.List;
 
+import org.springframework.http.ResponseEntity;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -20,37 +22,91 @@ public class auPairController
 
   @PostMapping("/getAuPair")
   @CrossOrigin(origins = "http://localhost:4200")
-  public auPair getAuPair(@RequestBody String id)
+  public ResponseEntity<auPair> getAuPair(@RequestBody String id, BindingResult bindingResult)
   {
-    auPair ap =  aps.getAuPair(id);
-    return ap;
+    if (bindingResult.hasErrors())
+    {
+      return ResponseEntity
+        .badRequest()
+        .body(null);
+    }
+    else
+    {
+      return ResponseEntity
+        .ok()
+        .body(this.aps.getAuPair(id));
+    }
   }
 
   @PostMapping("/editAuPair")
   @CrossOrigin(origins = "http://localhost:4200")
-  public void editAuPair(@RequestBody auPair p)
+  public ResponseEntity.BodyBuilder editAuPair(@RequestBody auPair p, BindingResult bindingResult)
   {
-    this.aps.updateAuPair(p);
+    if (bindingResult.hasErrors())
+    {
+      return (ResponseEntity.BodyBuilder) ResponseEntity
+        .badRequest()
+        .body(null);
+    }
+    else
+    {
+      this.aps.updateAuPair(p);
+      return ResponseEntity
+        .ok();
+    }
   }
 
   @GetMapping("/getAllAuPairs")
   @CrossOrigin(origins = "http://localhost:4200")
-  public List<auPair> getAllAuPairs()
+  public ResponseEntity<List<auPair>> getAllAuPairs(BindingResult bindingResult)
   {
-    return this.aps.getAllAuPairs();
+    if (bindingResult.hasErrors())
+    {
+      return ResponseEntity
+        .badRequest()
+        .body(null);
+    }
+    else
+    {
+      return ResponseEntity
+        .ok()
+        .body(this.aps.getAllAuPairs());
+    }
   }
-  
+
   @PostMapping("/removeAuPair")
   @CrossOrigin(origins = "http://localhost:4200")
-  public void removeAuPair(@RequestBody String id)
+  public ResponseEntity.BodyBuilder removeAuPair(@RequestBody String id, BindingResult bindingResult)
   {
-    this.aps.deleteAuPair(id);
+    if (bindingResult.hasErrors())
+    {
+      return (ResponseEntity.BodyBuilder) ResponseEntity
+        .badRequest()
+        .body(null);
+    }
+    else
+    {
+      this.aps.deleteAuPair(id);
+      return ResponseEntity
+        .ok();
+    }
   }
 
   @PostMapping("/addAuPair")
   @CrossOrigin(origins = "http://localhost:4200")
-  public void addAuPair(@RequestBody auPair a)
+  public ResponseEntity.BodyBuilder addAuPair(@RequestBody auPair a, BindingResult bindingResult)
   {
-    this.aps.addAuPair(a);
+    if (bindingResult.hasErrors())
+    {
+      return (ResponseEntity.BodyBuilder) ResponseEntity
+        .badRequest()
+        .body(null);
+    }
+    else
+    {
+      this.aps.addAuPair(a);
+      return ResponseEntity
+        .ok();
+    }
   }
 }

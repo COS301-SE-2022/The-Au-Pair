@@ -3,6 +3,8 @@ package Database.TheAuPair.Controllers;
 import Database.TheAuPair.Models.Parent;
 import Database.TheAuPair.Repositories.ParentRepository;
 import Database.TheAuPair.Services.ParentService;
+import org.springframework.http.ResponseEntity;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -17,23 +19,55 @@ public class ParentController
 
   @PostMapping("/getParent")
   @CrossOrigin(origins = "http://localhost:4200")
-  public Parent getParent(@RequestBody String id)
+  public ResponseEntity<Parent> getParent(@RequestBody String id, BindingResult bindingResult)
   {
-    Parent p = ps.getParent(id);
-    return p;
+    if (bindingResult.hasErrors())
+    {
+      return ResponseEntity
+        .badRequest()
+        .body(null);
+    }
+    else
+    {
+      return ResponseEntity
+        .ok()
+        .body(this.ps.getParent(id));
+    }
   }
 
   @PostMapping("/editParent")
   @CrossOrigin(origins = "http://localhost:4200")
-  public void editParent(@RequestBody Parent p)
+  public ResponseEntity.BodyBuilder editParent(@RequestBody Parent p, BindingResult bindingResult)
   {
-    this.ps.updateParent(p);
+    if (bindingResult.hasErrors())
+    {
+      return (ResponseEntity.BodyBuilder) ResponseEntity
+        .badRequest()
+        .body(null);
+    }
+    else
+    {
+      this.ps.updateParent(p);
+      return ResponseEntity
+        .ok();
+    }
   }
 
   @PostMapping("/addParent")
   @CrossOrigin(origins = "http://localhost:4200")
-  public void addParent(@RequestBody Parent p)
+  public ResponseEntity.BodyBuilder addParent(@RequestBody Parent p, BindingResult bindingResult)
   {
-    this.ps.addParent(p);
+    if (bindingResult.hasErrors())
+    {
+      return (ResponseEntity.BodyBuilder) ResponseEntity
+        .badRequest()
+        .body(null);
+    }
+    else
+    {
+      this.ps.addParent(p);
+      return ResponseEntity
+        .ok();
+    }
   }
 }
