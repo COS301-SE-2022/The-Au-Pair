@@ -28,7 +28,7 @@
 
             <the-au-pair-location-field labelContent="Location" errorContent="Invalid location" [showError]="submitAttempt && (!parentRegisterDetailsForm.controls['location'].valid)" formControlName="location"></the-au-pair-location-field>
 
-            <the-au-pair-long-field [hidden]="parentChosen" labelContent="Motivation" errorContent="Invalid motivation field" [showError]="submitAttempt && (!parentRegisterDetailsForm.controls['motivation'].valid) || motivationError" formControlName="motivation"></the-au-pair-long-field>
+            <the-au-pair-long-field [hidden]="parentChosen" labelContent="Bio" errorContent="Invalid bio field" [showError]="submitAttempt && (!parentRegisterDetailsForm.controls['bio'].valid) || bioError" formControlName="bio"></the-au-pair-long-field>
 
             <the-au-pair-long-field [hidden]="parentChosen" labelContent="Experience" errorContent="Invalid experience field" [showError]="submitAttempt && (!parentRegisterDetailsForm.controls['experience'].valid) || experienceError" formControlName="experience"></the-au-pair-long-field>
 

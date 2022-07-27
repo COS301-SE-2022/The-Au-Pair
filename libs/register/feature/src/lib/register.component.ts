@@ -16,7 +16,7 @@ export class RegisterComponent {
   public notSamePasswords: boolean;
   public locationError: boolean;
   public medError: boolean;
-  public motivationError: boolean;
+  public bioError: boolean;
   public experienceError: boolean;
   
   parentChosen = true;
@@ -36,8 +36,8 @@ export class RegisterComponent {
     password: '',
     number: '',
     salt: '',
-    latitude: 0,
-    longitude: 0,
+    latitude: 0.0,
+    longitude: 0.0,
     suburb: "",
     gender: "",
     birth: "",
@@ -73,10 +73,10 @@ export class RegisterComponent {
       email : ['', Validators.compose([Validators.maxLength(30), Validators.pattern('^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,4}$'), Validators.required])],
       phone : ['', Validators.compose([Validators.maxLength(30), Validators.pattern('^(\\+27|0)[6-8][0-9]{8}$'), Validators.required])],
       id : ['', Validators.compose([Validators.maxLength(13), Validators.pattern('(((\\d{2}((0[13578]|1[02])(0[1-9]|[12]\\d|3[01])|(0[13456789]|1[012])(0[1-9]|[12]\\d|30)|02(0[1-9]|1\\d|2[0-8])))|([02468][048]|[13579][26])0229))(( |-)(\\d{4})( |-)(\\d{3})|(\\d{7}))'), Validators.required])],
-      medAid : ['', Validators.compose([Validators.maxLength(100), Validators.pattern('[a-z A-Z\\d]*')])],
+      medAid : ['', Validators.compose([Validators.maxLength(200)])],
       location : ['', Validators.compose([Validators.required])],
-      motivation : ['', Validators.compose([Validators.maxLength(1000), Validators.pattern('[a-z A-Z\\d]*')])],
-      experience : ['', Validators.compose([Validators.maxLength(1000), Validators.pattern('[a-z A-Z\\d]*')])],
+      bio : ['', Validators.compose([Validators.maxLength(1000)])],
+      experience : ['', Validators.compose([Validators.maxLength(1000)])],
       pass : ['', Validators.compose([Validators.maxLength(20), Validators.pattern('^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$'), Validators.required])],
       confPass : ['', Validators.compose([Validators.maxLength(30), Validators.pattern('^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$'), Validators.required])],
     });
@@ -85,7 +85,7 @@ export class RegisterComponent {
     this.notSamePasswords = false;
     this.locationError = false;
     this.medError = false;
-    this.motivationError = false;
+    this.bioError = false;
     this.experienceError = false;
   }
 
@@ -96,7 +96,7 @@ export class RegisterComponent {
 
     this.submitAttempt = true;
     this.notSamePasswords = false;
-    this.motivationError = false;
+    this.bioError = false;
     this.experienceError = false;
 
     let formError = false;
@@ -109,6 +109,19 @@ export class RegisterComponent {
         formError = true;
       }
     }
+    else {
+      if(this.parentRegisterDetailsForm.value.experience === '')
+      {
+        this.experienceError = true;
+        formError = true;
+      }
+
+      if(this.parentRegisterDetailsForm.value.bio === '')
+      {
+        this.bioError = true;
+        formError = true;
+      }
+    }
 
     if(!this.parentRegisterDetailsForm.controls['location'].valid)
     {
@@ -116,7 +129,7 @@ export class RegisterComponent {
     }
     else
     {
-        this.verifyLocation(this.parentRegisterDetailsForm.value.location)
+        await this.verifyLocation(this.parentRegisterDetailsForm.value.location);
 
         if (this.locationError)
         {
@@ -130,7 +143,7 @@ export class RegisterComponent {
       this.notSamePasswords = true;
     }
 
-    if(!formError && this.parentRegisterDetailsForm.controls['name'].valid && this.parentRegisterDetailsForm.controls['surname'].valid && this.parentRegisterDetailsForm.controls['email'].valid && this.parentRegisterDetailsForm.controls['phone'].valid && this.parentRegisterDetailsForm.controls['id'].valid && this.parentRegisterDetailsForm.controls['medAid'].valid && this.parentRegisterDetailsForm.controls['location'].valid && this.parentRegisterDetailsForm.controls['motivation'].valid && this.parentRegisterDetailsForm.controls['experience'].valid && this.parentRegisterDetailsForm.controls['pass'].valid  && this.parentRegisterDetailsForm.controls['confPass'].valid)
+    if(!formError && this.parentRegisterDetailsForm.controls['name'].valid && this.parentRegisterDetailsForm.controls['surname'].valid && this.parentRegisterDetailsForm.controls['email'].valid && this.parentRegisterDetailsForm.controls['phone'].valid && this.parentRegisterDetailsForm.controls['id'].valid && this.parentRegisterDetailsForm.controls['medAid'].valid && this.parentRegisterDetailsForm.controls['location'].valid && this.parentRegisterDetailsForm.controls['bio'].valid && this.parentRegisterDetailsForm.controls['experience'].valid && this.parentRegisterDetailsForm.controls['pass'].valid  && this.parentRegisterDetailsForm.controls['confPass'].valid)
     {
       let application = "";
       this.userDetails.id = this.parentRegisterDetailsForm.value.id;
@@ -197,7 +210,7 @@ export class RegisterComponent {
         {
           this.openToast("Registration succesfull pending approval");
           this.aupairDetails.id = this.userDetails.id;
-          this.aupairDetails.bio = this.parentRegisterDetailsForm.value.motivation;
+          this.aupairDetails.bio = this.parentRegisterDetailsForm.value.bio;
           this.aupairDetails.experience = this.parentRegisterDetailsForm.value.experience;
 
           this.serv.addAuPair(this.aupairDetails)
@@ -233,7 +246,7 @@ export class RegisterComponent {
 
   async verifyLocation(loc : string)
   {    
-    this.locationError = false;
+    this.locationError = true;
 
     const locationParam = loc.replace(' ', '+');
     const params = locationParam + '&limit=4&format=json&polygon_geojson=1&addressdetails=1';
@@ -249,7 +262,7 @@ export class RegisterComponent {
       //Jump out if no results returned
       if(json_data === "{}")
       {
-        this.locationError = true;
+        return;
       }
   
       //Add returned data to the array
@@ -258,18 +271,18 @@ export class RegisterComponent {
       { 
         if(loc == res[j].display_name) {
           this.locationError = false;
-
+          
           this.long = res[j].geojson.coordinates[0];
           this.lat = res[j].geojson.coordinates[1];
           this.foundSuburb =  res[j].address.suburb;
+
+          break;
         }
       }
     })
     .catch(error=>{ // Failure
       console.log(error);
     });
-    
-    this.locationError = true;
   }
 
   convertIDtoDate(id: string) : string {
