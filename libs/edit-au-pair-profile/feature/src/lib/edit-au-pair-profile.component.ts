@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { API } from '../../../../shared/api/api.service';
 import { User, auPair } from '../../../../shared/interfaces/interfaces';
 import { ToastController } from '@ionic/angular';
+import { Store } from '@ngxs/store';
 
 @Component({
   selector: 'the-au-pair-edit-au-pair-profile',
@@ -10,6 +11,8 @@ import { ToastController } from '@ionic/angular';
 })
 export class EditAuPairProfileComponent implements OnInit {
   
+  aupairID = "";
+
   hasErr = false;
 
   userDetails: User = {
@@ -23,6 +26,11 @@ export class EditAuPairProfileComponent implements OnInit {
     password: "",
     number: "",
     salt: "",
+    latitude: 0,
+    longitude: 0,
+    suburb: "",
+    gender: "",
+    age: 0,
   }
 
   auPairDetails: auPair = {
@@ -35,19 +43,22 @@ export class EditAuPairProfileComponent implements OnInit {
     payRate: 0,
     bio: "",
     experience: "",
+    currentLong: 0.0,
+    currentLat: 0.0
   }
 
-  constructor(private serv: API, public toastCtrl: ToastController){}
+  constructor(private serv: API, public toastCtrl: ToastController, private store: Store){}
 
   ngOnInit(): void
   {
+    this.aupairID = this.store.snapshot().user.id;
     this.getUserDetails()
   }
 
   async getUserDetails()
   {
     /* User Details */
-    await this.serv.getUser("7542108615984").subscribe(
+    await this.serv.getUser(this.aupairID).subscribe(
       res=>{
         this.userDetails.id = res.id;
         this.userDetails.fname = res.fname;
@@ -59,10 +70,15 @@ export class EditAuPairProfileComponent implements OnInit {
         this.userDetails.password = res.password;
         this.userDetails.number = res.number;
         this.userDetails.salt = res.salt;
+        this.userDetails.latitude = res.latitude;
+        this.userDetails.longitude = res.longitude;
+        this.userDetails.suburb = res.suburb;
+        this.userDetails.gender = res.gender;
+        this.userDetails.age = res.age;
       },
       error=>{console.log("Error has occured with API: " + error);}
     )
-    await this.serv.getAuPair("7542108615984").subscribe(
+    await this.serv.getAuPair(this.aupairID).subscribe(
       res=>{
         this.auPairDetails.id = res.id;
         this.auPairDetails.rating = res.rating;
@@ -73,6 +89,8 @@ export class EditAuPairProfileComponent implements OnInit {
         this.auPairDetails.payRate = res.payRate;
         this.auPairDetails.bio = res.bio;
         this.auPairDetails.experience = res.experience;
+        this.auPairDetails.currentLong = res.currentLong;
+        this.auPairDetails.currentLat = res.currentLat;
       },
       error=>{console.log("Error has occured with API: " + error);}
     )

@@ -1,13 +1,15 @@
 import { Component, OnInit } from '@angular/core';
 import { API } from '../../../../shared/api/api.service';
 import { User, Parent, medAid } from '../../../../shared/interfaces/interfaces';
-
+import { Store } from '@ngxs/store';
 @Component({
   selector: 'the-au-pair-parent-profile',
   templateUrl: './parent-profile.component.html',
   styleUrls: ['./parent-profile.component.scss'],
 })
 export class ParentProfileComponent implements OnInit {
+
+  parentID = "";
 
   userDetails: User = {
     id: "",
@@ -20,6 +22,11 @@ export class ParentProfileComponent implements OnInit {
     password: "",
     number: "",
     salt: "",
+    latitude: 0,
+    longitude: 0,
+    suburb: "",
+    gender: "",
+    age: 0,
   }
 
   parentDetails: Parent = {
@@ -39,17 +46,20 @@ export class ParentProfileComponent implements OnInit {
   }
 
 
-  constructor(private serv: API){}
+  constructor(private serv: API, private store: Store){}
 
   ngOnInit(): void
   {
+    this.parentID = this.store.snapshot().user.id;
     this.getUserDetails()
   }
 
   async getUserDetails()
   {
     /* User Details */
-    await this.serv.getUser("4561237814867").subscribe(
+    await this.serv.getUser(this.parentID)
+    .toPromise()
+    .then(
       res=>{
         this.userDetails.id = res.id;
         this.userDetails.fname = res.fname;
@@ -60,28 +70,39 @@ export class ParentProfileComponent implements OnInit {
         this.userDetails.type = res.type;
         this.userDetails.password = res.password;
         this.userDetails.number = res.number;
+        this.userDetails.latitude = res.latitude;
+        this.userDetails.longitude = res.longitude;
+        this.userDetails.suburb = res.suburb;
+        this.userDetails.gender = res.gender;
+        this.userDetails.age = res.age;
       },
       error=>{console.log("Error has occured with API: " + error);}
     )
-      await this.serv.getParent("4561237814867").subscribe(
-        res=>{
-          this.parentDetails.id = res.id;
-          this.parentDetails.children = res.children;
-          this.parentDetails.medID = res.medID;
-          this.parentDetails.auPair = res.auPair;
-        },
-        error=>{console.log("Error has occured with API: " + error);}
-      )
-      await this.serv.getMedAid("7534286951").subscribe(
-        res=>{
-          this.medAidDetails.id = res.id;
-          this.medAidDetails.plan = res.plan;
-          this.medAidDetails.name = res.name;
-          this.medAidDetails.sname = res.sname;
-          this.medAidDetails.mID = res.mID;
-          this.medAidDetails.provider = res.provider;
-        },
-        error=>{console.log("Error has occured with API: " + error);}
-      )
+
+    await this.serv.getParent(this.parentID)
+    .toPromise()
+    .then(
+      res=>{
+        this.parentDetails.id = res.id;
+        this.parentDetails.children = res.children;
+        this.parentDetails.medID = res.medID;
+        this.parentDetails.auPair = res.auPair;
+      },
+      error=>{console.log("Error has occured with API: " + error);}
+    )
+
+    await this.serv.getMedAid(this.parentDetails.medID)
+    .toPromise()
+    .then(
+      res=>{
+        this.medAidDetails.id = res.id;
+        this.medAidDetails.plan = res.plan;
+        this.medAidDetails.name = res.name;
+        this.medAidDetails.sname = res.sname;
+        this.medAidDetails.mID = res.mID;
+        this.medAidDetails.provider = res.provider;
+      },
+      error=>{console.log("Error has occured with API: " + error);}
+    )
   };
 }

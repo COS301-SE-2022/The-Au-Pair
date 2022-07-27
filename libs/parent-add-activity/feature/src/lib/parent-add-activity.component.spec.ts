@@ -4,9 +4,11 @@ import { IonicModule } from '@ionic/angular';
 import { ParentAddActivityComponent } from './parent-add-activity.component';
 import { Activity } from '../../../../shared/interfaces/interfaces';
 import { API } from '../../../../shared/api/api.service';
-import {HttpClientTestingModule} from "@angular/common/http/testing";
+import { HttpClientTestingModule } from "@angular/common/http/testing";
 import { NavbarModule } from '@the-au-pair/shared/components/navbar';
 import { RouterTestingModule} from '@angular/router/testing';
+import { NgxsModule } from '@ngxs/store';
+import { AppState } from '../../../../shared/ngxs/state';
 
 
 describe('ParentAddActivityComponent', () => {
@@ -14,7 +16,7 @@ describe('ParentAddActivityComponent', () => {
   let fixture: ComponentFixture<ParentAddActivityComponent>;
 
   //Valid form
-  const populatedForm = {activityName: "AI", description: "AI Lesson", location: "UP", dayOfWeek: "Wednesday", timeSlot: "13:00-14:00", budget: "0", childId:"8675945310542"};
+  // const populatedForm = {activityName: "AI", description: "AI Lesson", location: "UP", dayOfWeek: "Wednesday", timeSlot: "13:00-14:00", budget: "0", childId:"8675945310542"};
 
   //Inavlid forms
   const emptyActName = {activityName: "", description: "AI Lesson", location: "UP", dayOfWeek: "Wednesday", timeSlot: "13:00-14:00", budget: "0", childId:"8675945310542"};
@@ -32,7 +34,8 @@ describe('ParentAddActivityComponent', () => {
          IonicModule,
          HttpClientTestingModule,
          NavbarModule,
-         RouterTestingModule
+         RouterTestingModule,
+         NgxsModule.forRoot([AppState])
         ],
         providers:[API]
     }).compileComponents();

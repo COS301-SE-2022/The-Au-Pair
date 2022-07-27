@@ -1,10 +1,12 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { AuPairCostComponent } from './au-pair-cost.component';
 import { API } from '../../../../shared/api/api.service';
-import {HttpClientTestingModule} from "@angular/common/http/testing";
+import { HttpClientTestingModule } from "@angular/common/http/testing";
 import { IonicModule } from '@ionic/angular';
 import { NavbarModule } from '@the-au-pair/shared/components/navbar';
 import { RouterTestingModule} from '@angular/router/testing';
+import { NgxsModule } from '@ngxs/store';
+import { AppState } from '../../../../shared/ngxs/state';
 
 
 describe('AuPairCostComponent', () => {
@@ -14,7 +16,7 @@ describe('AuPairCostComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [AuPairCostComponent],
-      imports: [HttpClientTestingModule, IonicModule,NavbarModule, RouterTestingModule],
+      imports: [HttpClientTestingModule, IonicModule,NavbarModule, RouterTestingModule,NgxsModule.forRoot([AppState])],
       providers: [API]
     }).compileComponents();
   });

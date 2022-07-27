@@ -1,0 +1,26 @@
+{
+  "projectType": "library",
+  "root": "libs/track-au-pair/feature",
+  "sourceRoot": "libs/track-au-pair/feature/src",
+  "prefix": "the-au-pair",
+  "targets": {
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["coverage/libs/track-au-pair/feature"],
+      "options": {
+        "jestConfig": "libs/track-au-pair/feature/jest.config.js",
+        "passWithNoTests": true
+      }
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "options": {
+        "lintFilePatterns": [
+          "libs/track-au-pair/feature/src/**/*.ts",
+          "libs/track-au-pair/feature/src/**/*.html"
+        ]
+      }
+    }
+  },
+  "tags": []
+}

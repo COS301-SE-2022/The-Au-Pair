@@ -75,6 +75,15 @@ ion-content {
     margin-top: 20px;
 }
 
+.disabled-loginUser{ 
+    font-style: normal;
+    font-weight: 700;
+    font-size: 16px;
+    line-height: 19px;
+    background-color: var(--ion-color-grey) !important;
+    margin-top: 20px;
+}
+
 .clickables{   
     color: var(--ion-color-grey);
     padding: 15px;
@@ -84,7 +93,6 @@ ion-content {
     float: left;
     text-decoration: underline;
     cursor: pointer;
-
 }
 
 .clickables .account {
@@ -121,14 +129,4 @@ ion-content {
     top: -5px;
     opacity: 0.04;
     z-index: -10;
-}
-
-.error{
-    display: none;
-    position: relative;
-    display: block;
-    text-align: center;
-    margin: 0;
-    top: 27px;
-    color: red;
 }
