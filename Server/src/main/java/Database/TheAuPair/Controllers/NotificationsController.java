@@ -31,4 +31,11 @@ public class NotificationsController
     List<Notification> c = ns.getNotifcationsByParentId(id);
     return c;
   }
+
+  @PostMapping("/logNotification")
+  @CrossOrigin(origins = "http://localhost:4200")
+  public void logNotification(@RequestBody Notification n)
+  {
+    this.ns.logNotification(n);
+  }
 }
