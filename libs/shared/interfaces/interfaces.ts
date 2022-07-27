@@ -76,6 +76,7 @@ export interface Activity{
     suburb: string;
     gender: string;
     age: number;
+    fcmToken : string;
   }
 
   export interface auPair{

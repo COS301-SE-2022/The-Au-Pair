@@ -30,6 +30,7 @@ export class EditParentProfileComponent implements OnInit{
     suburb: "",
     gender: "",
     age: 0,
+    fcmToken : "",
   }
 
   medAidDetails: medAid = {

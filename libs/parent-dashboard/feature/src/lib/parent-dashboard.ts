@@ -39,6 +39,7 @@ export class ParentDashboardComponent implements OnInit{
     suburb: "",
     gender: "",
     age: 0,
+    fcmToken : "",
   }
 
   auPairDetails: User = {
@@ -57,6 +58,7 @@ export class ParentDashboardComponent implements OnInit{
     suburb: "",
     gender: "",
     age: 0,
+    fcmToken : "",
   }
 
   constructor(private serv: API, private modalCtrl : ModalController, private store: Store, public toastCtrl: ToastController, public router: Router){}

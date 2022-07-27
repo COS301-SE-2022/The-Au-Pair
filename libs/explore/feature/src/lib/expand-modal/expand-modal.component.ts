@@ -42,6 +42,7 @@ export class ExpandModalComponent implements OnInit {
     suburb: "",
     gender: "",
     age: 0,
+    fcmToken : "",
   }
   
   constructor(private serv: API, private modalCtrl : ModalController ,public toastCtrl: ToastController) {}

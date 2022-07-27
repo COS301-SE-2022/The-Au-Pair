@@ -26,7 +26,7 @@ describe('EditAuPairProfileComponent', () => {
   const emptyExperience = {email: "testemail@gmail.com", phone: "0832422323", address: "123 Valid Street", payRate: "", bio: "test bio", experience: ""}
 
   // Invalid User
-  const invalidUser = {id: "invalidId", fname: "Kyle", sname: "Pottinger", email: "testemail@gmail.com", address: "123 Valid Street", registered: false, type: 0, password: "test", number: "0832422323", salt: "mrs", latitude: 20, longitude: 20, suburb: 'Midrand', gender: "male", age: 20}
+  const invalidUser = {id: "invalidId", fname: "Kyle", sname: "Pottinger", email: "testemail@gmail.com", address: "123 Valid Street", registered: false, type: 0, password: "test", number: "0832422323", salt: "mrs", latitude: 20, longitude: 20, suburb: 'Midrand', gender: "male", age: 20,fcmToken : "",}
 
   // Invalid Au Pair
   const invalidAuPair = {id: "invalidId", rating: 5, onShift: false, employer: "David", costIncurred: 100, distTraveled: 300, payRate: 50, bio: "test bio", experience: "test experience", currentLong: 0.0,  currentLat: 0.0}
@@ -98,6 +98,7 @@ describe('EditAuPairProfileComponent', () => {
       suburb: "", 
       gender: "", 
       age: 0,
+      fcmToken : "",
     };
 
     const expectedAuPairValue: auPair = {
@@ -142,6 +143,7 @@ describe('EditAuPairProfileComponent', () => {
       suburb: "", 
       gender: "", 
       age: 0,
+      fcmToken : "",
     };
 
     const expectedAuPairValue: auPair = {
@@ -184,6 +186,7 @@ describe('EditAuPairProfileComponent', () => {
       suburb: "", 
       gender: "", 
       age: 0,
+      fcmToken : "",
     };
 
     const expectedAuPairValue: auPair = {
@@ -226,6 +229,7 @@ describe('EditAuPairProfileComponent', () => {
       suburb: "", 
       gender: "", 
       age: 0,
+      fcmToken : "",
     };
 
     const expectedAuPairValue: auPair = {
@@ -268,6 +272,7 @@ describe('EditAuPairProfileComponent', () => {
       suburb: "", 
       gender: "", 
       age: 0,
+      fcmToken : "",
     };
 
     const expectedAuPairValue: auPair = {
@@ -310,6 +315,7 @@ describe('EditAuPairProfileComponent', () => {
       suburb: "", 
       gender: "", 
       age: 0,
+      fcmToken : "",
     };
 
     const expectedAuPairValue: auPair = {
@@ -352,6 +358,7 @@ describe('EditAuPairProfileComponent', () => {
       suburb: "", 
       gender: "", 
       age: 0,
+      fcmToken : "",
     };
 
     const expectedAuPairValue: auPair = {

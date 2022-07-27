@@ -36,6 +36,7 @@ export class RegisterComponent {
     suburb: "",
     gender: "",
     age: 0,
+    fcmToken : "",
   }
 
   parentDetails: Parent ={

@@ -27,6 +27,7 @@ export class AuPairProfileComponent implements OnInit {
     suburb: "",
     gender: "",
     age: 0,
+    fcmToken : "",
   }
 
   auPairDetails: auPair = {
