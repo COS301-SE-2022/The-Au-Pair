@@ -40,7 +40,7 @@ export class RegisterComponent {
     longitude: 0,
     suburb: "",
     gender: "",
-    age: 0,
+    birth: "",
   }
 
   parentDetails: Parent ={

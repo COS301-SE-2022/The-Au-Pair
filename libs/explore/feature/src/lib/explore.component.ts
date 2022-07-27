@@ -37,7 +37,7 @@ export class ExploreComponent implements OnInit {
     suburb: "",
     employer: "",
     registered: "",
-    age: 0,
+    birth: "",
     gender: "",
     longitude: 0,
     latitude: 0,
@@ -83,7 +83,7 @@ export class ExploreComponent implements OnInit {
 
   async setAuPairArray()
   {
-    this.auPairs.forEach((ap: { id: any; rating: any; payRate: any; fname: any; sname: any, suburb: any; employer: any; age: any; gender: any; longitude: any; latitude: any; distance: any;}) => {
+    this.auPairs.forEach((ap: { id: any; rating: any; payRate: any; fname: any; sname: any, suburb: any; employer: any; birth: any; gender: any; longitude: any; latitude: any; distance: any;}) => {
       this.serv.getUser(ap.id).subscribe(
         res=>{
           const eucdistance = this.calculateEucDistance(res.latitude, res.longitude);
@@ -97,7 +97,7 @@ export class ExploreComponent implements OnInit {
             suburb: res.suburb,
             employer: ap.employer,
             registered: res.registered,
-            age: res.age,
+            birth: res.birth,
             gender: res.gender,
             distance: eucdistance,
           }
@@ -291,5 +291,16 @@ export class ExploreComponent implements OnInit {
     this.eucDistance = this.eucDistance * 6371;
 
     return this.eucDistance;
+  }
+
+  getAge(dateString : string) {
+    var today = new Date();
+    var birthDate = new Date(dateString);
+    var age = today.getFullYear() - birthDate.getFullYear();
+    var m = today.getMonth() - birthDate.getMonth();
+    if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate())) {
+        age--;
+    }
+    return age;
   }
 }
