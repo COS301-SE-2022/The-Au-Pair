@@ -1,8 +1,9 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
+import { DatePipe } from '@angular/common';
 import { API } from '../../../../libs/shared/api/api.service';
 import { Geolocation } from '@awesome-cordova-plugins/geolocation/ngx';
-import { auPair, Parent } from '../../../../libs/shared/interfaces/interfaces';
+import { Activity, auPair, Parent } from '../../../../libs/shared/interfaces/interfaces';
 import { Store } from '@ngxs/store';
 
 @Component({
@@ -15,6 +16,13 @@ export class AppComponent implements OnInit
   //Logged in User details
   userID = "";
   userType = 0;
+  userFcmToken = "";
+
+  days = [
+    "Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"
+  ]
+
+  activities: Activity[] = [];
 
   parentDetails: Parent = {
     id: "",
@@ -50,8 +58,8 @@ export class AppComponent implements OnInit
       this.getCurrentAuPairDetails();
     }
 
+
     this.monitorActivities();
-    
   }
 
   ngOnInit(): void { 
@@ -68,37 +76,96 @@ export class AppComponent implements OnInit
         this.updateCoordinates();
       }
     } }, 10000);
+
+    const monInt = setInterval(()=> {
+      this.userID = this.store.snapshot().user.id;
+      this.userType = this.store.snapshot().user.type;
+      if(this.userType == 2 || this.userType == 1)
+      {
+        this.monitorActivities();
+        clearInterval(monInt);
+      }
+    }, 6000);
   }
 
   monitorActivities() {
-    const  requestHeaders = new HttpHeaders().set('Authorization', 'key=AAAAlhtqIdQ:APA91bFlcYmdaqt5D_jodyiVQG8B1mkca2xGh6XKeMuTGtxQ6XKhSY0rdLnc0WrXDsV99grFamp3k0EVHRUJmUG9ULcxf-VSITFgwwaeNvrUq48q0Hn1GLxmZ3GBAYdCBzPFIRdbMxi9');
-    
-    const postData = {
-      "to":"e7q50QKSR0I1_Wenw7Hdll:APA91bE2_LMf6MAfCmBAsSye4f9vLIvXWt5c4lKrKdamNsf5lyLoefH6_qbN-3psEh2EIQWcnzw0VbN6x8mfpC0cosQnOqC5-OdPEyg_8EeKJB6F0tBGNRIq5YNiGjem5AnZcV7xqm0Fg",
-      "notification":{
-        "title":"Order #44",
-        "body": "Hello bro"
-      }
+    //if parent, get childrens id's
+    if(this.userType == 1){
+      this.getAcitivities(this.userID);
     }
 
-    const hour = 12;
-    const mins = 38;
-    const day = 3;
+    //if au pair, get parent id
+    if(this.userType == 2){
+      this.serv.getAuPair(this.userID).toPromise().then(res => {
+        this.getAcitivities(res.employer)
+      }).catch(err => {
+        console.log(err);
+      });
+    }
+
+
+
+    // if (this.userFcmToken != ""){ 
+    //   const  requestHeaders = new HttpHeaders().set('Authorization', 'key=AAAAlhtqIdQ:APA91bFlcYmdaqt5D_jodyiVQG8B1mkca2xGh6XKeMuTGtxQ6XKhSY0rdLnc0WrXDsV99grFamp3k0EVHRUJmUG9ULcxf-VSITFgwwaeNvrUq48q0Hn1GLxmZ3GBAYdCBzPFIRdbMxi9');
     
-    const intv = setInterval( () => {
-      const current = new Date();
-      console.log(current.getHours(), current.getMinutes(), current.getSeconds());
-      if ( current.getHours() == hour && current.getMinutes() == mins && current.getDay() == day ) {
-        console.log("sending");
-        this.httpClient.post('https://fcm.googleapis.com/fcm/send',postData, {headers: requestHeaders}).subscribe(data => {
-          console.log(data);
-        }, error => {
-          console.log(error);
-        });
-        clearInterval(intv);
-      }
+
+    // const postData = {
+    //   "to":"e7q50QKSR0I1_Wenw7Hdll:APA91bE2_LMf6MAfCmBAsSye4f9vLIvXWt5c4lKrKdamNsf5lyLoefH6_qbN-3psEh2EIQWcnzw0VbN6x8mfpC0cosQnOqC5-OdPEyg_8EeKJB6F0tBGNRIq5YNiGjem5AnZcV7xqm0Fg",
+    //   "notification":{
+    //     "title":"Order #44",
+    //     "body": "Hello bro"
+    //   }
+    // }
+
+    // const hour = 12;
+    // const mins = 38;
+    // const day = 3;
+    
+    // const intv = setInterval( () => {
+    //   const current = new Date();
+    //   console.log(current.getHours(), current.getMinutes(), current.getSeconds());
+    //   if ( current.getHours() == hour && current.getMinutes() == mins && current.getDay() == day ) {
+    //     console.log("sending");
+    //     this.httpClient.post('https://fcm.googleapis.com/fcm/send',postData, {headers: requestHeaders}).subscribe(data => {
+    //       console.log(data);
+    //     }, error => {
+    //       console.log(error);
+    //     });
+    //     clearInterval(intv);
+    //   }
   
-    }, 60000);
+    // }, 60000);
+    //  }
+
+    
+  }
+
+  async getAcitivities(id : string) {
+    await this.serv.getChildren(id).toPromise().then(res => {
+      res.forEach((element: any) => {
+        this.serv.getSchedule(element.id).toPromise().then(res => {
+          res.forEach((element: any) => {
+            this.activities.push(element);
+          });
+        }).catch(err => {
+          console.log(err);
+        });
+      });
+    }).catch(err => {
+      console.log(err);
+    });
+
+    console.log(this.activities);
+    
+    //determine closest activity
+    this.activities.forEach(element => {
+      const stringval = element.day;
+      const intval  = this.days.indexOf(stringval) + 1;
+      const current = new Date();
+      console.log("Today is: " +  current.getDay());
+      console.log( element.name + " is on: " + intval);
+      
+    });
   }
 
   async getCurrentAuPairDetails()
