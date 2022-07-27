@@ -16,9 +16,14 @@ export class RegisterComponent {
   public notSamePasswords: boolean;
   public locationError: boolean;
   public medError: boolean;
+  public motivationError: boolean;
+  public experienceError: boolean;
   
   parentChosen = true;
   maleChosen = true;
+  long = 0;
+  lat = 0;
+  foundSuburb =  "";
 
   userDetails: User ={
     id: '',
@@ -68,10 +73,10 @@ export class RegisterComponent {
       email : ['', Validators.compose([Validators.maxLength(30), Validators.pattern('^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,4}$'), Validators.required])],
       phone : ['', Validators.compose([Validators.maxLength(30), Validators.pattern('^(\\+27|0)[6-8][0-9]{8}$'), Validators.required])],
       id : ['', Validators.compose([Validators.maxLength(13), Validators.pattern('(((\\d{2}((0[13578]|1[02])(0[1-9]|[12]\\d|3[01])|(0[13456789]|1[012])(0[1-9]|[12]\\d|30)|02(0[1-9]|1\\d|2[0-8])))|([02468][048]|[13579][26])0229))(( |-)(\\d{4})( |-)(\\d{3})|(\\d{7}))'), Validators.required])],
-      medAid : ['', Validators.compose([Validators.maxLength(100), Validators.pattern('[a-zA-Z\\d]*')])],
-      location : ['', Validators.compose([Validators.maxLength(1000), Validators.pattern('[a-zA-Z\\d]*'), Validators.required])],
-      motivation : ['', Validators.compose([Validators.maxLength(1000), Validators.pattern('[a-zA-Z\\d]*'), Validators.required])],
-      experience : ['', Validators.compose([Validators.required])],
+      medAid : ['', Validators.compose([Validators.maxLength(100), Validators.pattern('[a-z A-Z\\d]*')])],
+      location : ['', Validators.compose([Validators.required])],
+      motivation : ['', Validators.compose([Validators.maxLength(1000), Validators.pattern('[a-z A-Z\\d]*'), Validators.required])],
+      experience : ['', Validators.compose([Validators.maxLength(1000), Validators.pattern('[a-z A-Z\\d]*'), Validators.required])],
       pass : ['', Validators.compose([Validators.maxLength(20), Validators.pattern('^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$'), Validators.required])],
       confPass : ['', Validators.compose([Validators.maxLength(30), Validators.pattern('^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$'), Validators.required])],
     });
@@ -80,6 +85,8 @@ export class RegisterComponent {
     this.notSamePasswords = false;
     this.locationError = false;
     this.medError = false;
+    this.motivationError = false;
+    this.experienceError = false;
   }
 
   async registerUser() 
@@ -89,6 +96,9 @@ export class RegisterComponent {
 
     this.submitAttempt = true;
     this.notSamePasswords = false;
+    this.motivationError = false;
+    this.experienceError = false;
+
     let formError = false;
 
     if(this.parentChosen)
@@ -124,18 +134,26 @@ export class RegisterComponent {
     {
       let application = "";
       this.userDetails.id = this.parentRegisterDetailsForm.value.id;
-      // this.userDetails.birthDate = this.parentRegisterDetailsForm.value.id.substring(0, 6); //TODO: add database for age this
+      // this.userDetails.birthDate = this.parentRegisterDetailsForm.value.id.substring(0, 6);
       this.userDetails.fname = this.parentRegisterDetailsForm.value.name;
       this.userDetails.sname = this.parentRegisterDetailsForm.value.surname;
       this.userDetails.email = (this.parentRegisterDetailsForm.value.email).toLowerCase();
       this.userDetails.address = this.parentRegisterDetailsForm.value.location;
-      // this.userDetails.gender = this.maleChosen; //TODO: connect database for this
-      // this.userDetails.bio = this.parentRegisterDetailsForm.value.motivation; //TODO: connect database for this
-      // this.userDetails.experience = this.parentRegisterDetailsForm.value.experience; //TODO: connect database for this
+      this.userDetails.longitude = this.long;
+      this.userDetails.latitude = this.lat;
+      this.userDetails.suburb = this.foundSuburb;
+
+      if(this.maleChosen) {
+        this.userDetails.gender = "Male";
+      }
+      else {
+        this.userDetails.gender = "Female";
+      }
+      
       this.userDetails.number = this.parentRegisterDetailsForm.value.phone;
       this.userDetails.password = this.parentRegisterDetailsForm.value.pass;
 
-      if(this.parentChosen) 
+      if(this.parentChosen)
       {
         this.userDetails.type = 1;
         this.userDetails.registered = true;
@@ -179,6 +197,9 @@ export class RegisterComponent {
         {
           this.openToast("Registration succesfull pending approval");
           this.aupairDetails.id = this.userDetails.id;
+          this.aupairDetails.bio = this.parentRegisterDetailsForm.value.motivation;
+          this.aupairDetails.experience = this.parentRegisterDetailsForm.value.experience;
+
           this.serv.addAuPair(this.aupairDetails)
           .toPromise()
           .then(
@@ -235,8 +256,12 @@ export class RegisterComponent {
       const len = res.length;
       for (let j = 0; j < len && j<4; j++) 
       { 
-        if(loc == res[j]) {
+        if(loc == res[j].display_name) {
           this.locationError = false;
+
+          this.long = res[j].geojson.coordinates[0];
+          this.lat = res[j].geojson.coordinates[1];
+          this.foundSuburb =  res[j].address.suburb;
         }
       }
     })

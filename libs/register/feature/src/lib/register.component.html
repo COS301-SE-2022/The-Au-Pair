@@ -28,9 +28,9 @@
 
             <the-au-pair-location-field labelContent="Location" errorContent="Invalid location" [showError]="submitAttempt && (!parentRegisterDetailsForm.controls['location'].valid)" formControlName="location"></the-au-pair-location-field>
 
-            <the-au-pair-long-field labelContent="Motivation" errorContent="Invalid location" [showError]="submitAttempt && (!parentRegisterDetailsForm.controls['motivation'].valid)" formControlName="motivation"></the-au-pair-long-field>
+            <the-au-pair-long-field [hidden]="!parentChosen" labelContent="Motivation" errorContent="Invalid motivation field" [showError]="submitAttempt && (!parentRegisterDetailsForm.controls['motivation'].valid) || motivationError" formControlName="motivation"></the-au-pair-long-field>
 
-            <the-au-pair-long-field labelContent="Experience" errorContent="Invalid location" [showError]="submitAttempt && (!parentRegisterDetailsForm.controls['experience'].valid)" formControlName="experience"></the-au-pair-long-field>
+            <the-au-pair-long-field [hidden]="!parentChosen" labelContent="Experience" errorContent="Invalid experience field" [showError]="submitAttempt && (!parentRegisterDetailsForm.controls['experience'].valid) || experienceError" formControlName="experience"></the-au-pair-long-field>
 
             <the-au-pair-password-field labelContent="Password" errorContent="Password should be at least 8 characters, and have uppercase, lowercase, special and number characters" [showError]="(submitAttempt && (!parentRegisterDetailsForm.controls['pass'].valid))" formControlName="pass"></the-au-pair-password-field>
 
