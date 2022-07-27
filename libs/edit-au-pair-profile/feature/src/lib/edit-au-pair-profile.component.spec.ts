@@ -27,7 +27,7 @@ describe('EditAuPairProfileComponent', () => {
   const invalidUser = {id: "invalidId", fname: "Kyle", sname: "Pottinger", email: "testemail@gmail.com", address: "123 Valid Street", registered: false, type: 0, password: "test", number: "0832422323", salt: "mrs", latitude: 20, longitude: 20, suburb: 'Midrand', gender: "male", age: 20}
 
   // Invalid Au Pair
-  const invalidAuPair = {id: "invalidId", rating: 5, onShift: false, employer: "David", costIncurred: 100, distTraveled: 300, payRate: 50, bio: "test bio", experience: "test experience"}
+  const invalidAuPair = {id: "invalidId", rating: 5, onShift: false, employer: "David", costIncurred: 100, distTraveled: 300, payRate: 50, bio: "test bio", experience: "test experience", currentLong: 0.0,  currentLat: 0.0}
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
@@ -107,6 +107,8 @@ describe('EditAuPairProfileComponent', () => {
       payRate: 50,
       bio: "test bio",
       experience: "test experience",
+      currentLong: 0.0,
+      currentLat: 0.0
     };
 
     jest.spyOn(component,"getUserDetails");
@@ -149,6 +151,8 @@ describe('EditAuPairProfileComponent', () => {
       payRate: 0,
       bio: "",
       experience: "",
+      currentLong: 0.0,
+      currentLat: 0.0
     };
 
     jest.spyOn(component,"getUserDetails");
@@ -189,6 +193,8 @@ describe('EditAuPairProfileComponent', () => {
       payRate: 0,
       bio: "",
       experience: "",
+      currentLong: 0.0,
+      currentLat: 0.0
     };
 
     jest.spyOn(component,"getUserDetails");
@@ -229,6 +235,8 @@ describe('EditAuPairProfileComponent', () => {
       payRate: 0,
       bio: "",
       experience: "",
+      currentLong: 0.0,
+      currentLat: 0.0
     };
 
     jest.spyOn(component,"getUserDetails");
@@ -269,6 +277,8 @@ describe('EditAuPairProfileComponent', () => {
       payRate: 0,
       bio: "",
       experience: "",
+      currentLong: 0.0,
+      currentLat: 0.0
     };
 
     jest.spyOn(component,"getUserDetails");
@@ -309,6 +319,8 @@ describe('EditAuPairProfileComponent', () => {
       payRate: 0,
       bio: "",
       experience: "",
+      currentLong: 0.0,
+      currentLat: 0.0
     };
 
     jest.spyOn(component,"getUserDetails");
@@ -349,6 +361,8 @@ describe('EditAuPairProfileComponent', () => {
       payRate: 0,
       bio: "",
       experience: "",
+      currentLong: 0.0,
+      currentLat: 0.0
     };
 
     jest.spyOn(component,"getUserDetails");

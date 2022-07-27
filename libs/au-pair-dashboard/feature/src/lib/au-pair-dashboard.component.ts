@@ -12,6 +12,7 @@ import { auPair, Child, HoursLogged } from '../../../../shared/interfaces/interf
 export class AuPairDashboardComponent implements OnInit {
   
   aupairID = "";
+  aupairName = "";
 
   employer = "";
   employerName!: string;
@@ -35,6 +36,7 @@ export class AuPairDashboardComponent implements OnInit {
 
   async ngOnInit(): Promise<void> {
     this.aupairID = this.store.snapshot().user.id;
+    this.aupairName = this.store.snapshot().user.name;
 
     await this.getEmployer();
 

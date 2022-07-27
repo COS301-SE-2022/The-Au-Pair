@@ -16,7 +16,7 @@
         <div *ngFor="let item of activities; let l = count">
           <div class="card" *ngIf="item.day === days[day]" >
             <ion-row  class="ion-align-items-center .ion-justify-content-between">
-              <ion-col size="2"><ion-icon class="icon edit" name="book-outline" (click)="navigateViewActivity(item.id)"></ion-icon></ion-col>
+              <ion-col size="2"><ion-icon class="icon edit" name="eye" (click)="navigateViewActivity(item.id)"></ion-icon></ion-col>
               <ion-col size="4"class="content">{{item.name}}</ion-col>
               <ion-col size="3"class="content">{{item.timeStart}}</ion-col>
               <ion-col size="1"><ion-icon class="icon edit" name="pencil-outline" (click)="navigateEdit(item.id)"></ion-icon></ion-col>

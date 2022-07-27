@@ -3,6 +3,11 @@ export class SetId{
     constructor(public payload: string) {}
 }
 
+export class SetName{
+    static readonly type = '[User] set name';
+    constructor(public payload: string) {};
+}
+
 export class SetType{
     static readonly type = '[User] set type';
     constructor(public payload: number) {}
