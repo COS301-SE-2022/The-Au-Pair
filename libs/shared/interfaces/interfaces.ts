@@ -56,6 +56,8 @@ export interface Activity{
     payRate: number;
     bio: string;
     experience: string;
+    currentLong: number;
+    currentLat: number;
   }
 
   export interface User{

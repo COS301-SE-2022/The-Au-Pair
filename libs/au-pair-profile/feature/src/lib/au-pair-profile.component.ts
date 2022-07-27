@@ -39,6 +39,8 @@ export class AuPairProfileComponent implements OnInit {
     payRate: 0,
     bio: "",
     experience: "",
+    currentLong: 0.0,
+    currentLat : 0.0
   }
 
   constructor(private serv: API, private store: Store){}
