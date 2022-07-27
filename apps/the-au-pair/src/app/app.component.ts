@@ -17,6 +17,8 @@ export class AppComponent implements OnInit
   userID = "";
   userType = 0;
   userFcmToken = "";
+  activitydays: number[] = [];
+  upcomingActivity : any;
 
   days = [
     "Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"
@@ -102,50 +104,56 @@ export class AppComponent implements OnInit
         console.log(err);
       });
     }
+  }
 
+  setNotification(){
 
-
-    // if (this.userFcmToken != ""){ 
-    //   const  requestHeaders = new HttpHeaders().set('Authorization', 'key=AAAAlhtqIdQ:APA91bFlcYmdaqt5D_jodyiVQG8B1mkca2xGh6XKeMuTGtxQ6XKhSY0rdLnc0WrXDsV99grFamp3k0EVHRUJmUG9ULcxf-VSITFgwwaeNvrUq48q0Hn1GLxmZ3GBAYdCBzPFIRdbMxi9');
+    //user is on mobile
+    //TODO: This will finished in future, focusing on web now
+    if (this.userFcmToken != ""){ 
+      const  requestHeaders = new HttpHeaders().set('Authorization', 'key=AAAAlhtqIdQ:APA91bFlcYmdaqt5D_jodyiVQG8B1mkca2xGh6XKeMuTGtxQ6XKhSY0rdLnc0WrXDsV99grFamp3k0EVHRUJmUG9ULcxf-VSITFgwwaeNvrUq48q0Hn1GLxmZ3GBAYdCBzPFIRdbMxi9');
     
 
-    // const postData = {
-    //   "to":"e7q50QKSR0I1_Wenw7Hdll:APA91bE2_LMf6MAfCmBAsSye4f9vLIvXWt5c4lKrKdamNsf5lyLoefH6_qbN-3psEh2EIQWcnzw0VbN6x8mfpC0cosQnOqC5-OdPEyg_8EeKJB6F0tBGNRIq5YNiGjem5AnZcV7xqm0Fg",
-    //   "notification":{
-    //     "title":"Order #44",
-    //     "body": "Hello bro"
-    //   }
-    // }
+      const postData = {
+        "to":"e7q50QKSR0I1_Wenw7Hdll:APA91bE2_LMf6MAfCmBAsSye4f9vLIvXWt5c4lKrKdamNsf5lyLoefH6_qbN-3psEh2EIQWcnzw0VbN6x8mfpC0cosQnOqC5-OdPEyg_8EeKJB6F0tBGNRIq5YNiGjem5AnZcV7xqm0Fg",
+        "notification":{
+          "title":"Order #44",
+          "body": "Hello bro"
+        }
+      }
 
-    // const hour = 12;
-    // const mins = 38;
-    // const day = 3;
+      const hour = 12;
+      const mins = 38;
+      const day = 3;
     
-    // const intv = setInterval( () => {
-    //   const current = new Date();
-    //   console.log(current.getHours(), current.getMinutes(), current.getSeconds());
-    //   if ( current.getHours() == hour && current.getMinutes() == mins && current.getDay() == day ) {
-    //     console.log("sending");
-    //     this.httpClient.post('https://fcm.googleapis.com/fcm/send',postData, {headers: requestHeaders}).subscribe(data => {
-    //       console.log(data);
-    //     }, error => {
-    //       console.log(error);
-    //     });
-    //     clearInterval(intv);
-    //   }
-  
-    // }, 60000);
-    //  }
+      const intv = setInterval( () => {
+        const current = new Date();
+        console.log(current.getHours(), current.getMinutes(), current.getSeconds());
+        if ( current.getHours() == hour && current.getMinutes() == mins && current.getDay() == day ) {
+          console.log("sending");
+          this.httpClient.post('https://fcm.googleapis.com/fcm/send',postData, {headers: requestHeaders}).subscribe(data => {
+            console.log(data);
+          }, error => {
+            console.log(error);
+          });
+          clearInterval(intv);
+        }
+    
+      }, 60000);
+    }
 
     
   }
 
   async getAcitivities(id : string) {
+    console.log("getting activities");
     await this.serv.getChildren(id).toPromise().then(res => {
       res.forEach((element: any) => {
         this.serv.getSchedule(element.id).toPromise().then(res => {
           res.forEach((element: any) => {
-            this.activities.push(element);
+            if (this.activities.find(x => x.id == element.id ) == undefined) {
+              this.activities.push(element);
+            }
           });
         }).catch(err => {
           console.log(err);
@@ -154,18 +162,74 @@ export class AppComponent implements OnInit
     }).catch(err => {
       console.log(err);
     });
-
-    console.log(this.activities);
     
-    //determine closest activity
+    //udpate day strings to numbers
     this.activities.forEach(element => {
       const stringval = element.day;
       const intval  = this.days.indexOf(stringval) + 1;
-      const current = new Date();
-      console.log("Today is: " +  current.getDay());
-      console.log( element.name + " is on: " + intval);
-      
+      element.day = String(intval);
+      this.activitydays.push(intval);
     });
+
+    //sort activitydays
+    this.activitydays.sort((a, b) => a - b);
+    console.log(this.activitydays);
+
+    //sort activities by day
+    this.activities.sort((obj1, obj2) => {
+      
+      if(Number(obj1.day) > Number(obj2.day))
+      {
+        return 1;
+      }
+
+      if(Number(obj1.day) < Number(obj2.day))
+      {
+        return -1;
+      }
+
+      return 0;
+    });
+
+    const current = new Date();
+    const currentDay = 7;
+
+    if (this.activitydays.includes(currentDay)){
+      //check if activity has already passed
+      const act = this.activities.find(x => Number(x.day) == currentDay);
+
+      //check hour first
+      let hasPassed = false;
+      if(current.getHours() > Number(act?.timeStart.slice(0,2))){
+        hasPassed = true;
+      }
+      else if(current.getHours() == Number(act?.timeStart.slice(0,2))){
+        //check minutes
+        if(current.getMinutes() > Number(act?.timeStart.slice(3))){
+          hasPassed = true;
+        }
+      }
+
+      if(!hasPassed){
+        this.upcomingActivity = act;
+      }
+      else{ const nextAct = this.activities.find(x => Number(x.day) > currentDay);
+        console.log(nextAct);
+        this.upcomingActivity = nextAct;
+      }
+    }
+    else{
+      //find next activity within the week
+      const nextAct = this.activities.find(x => Number(x.day) > currentDay);
+      this.upcomingActivity = nextAct;
+
+      if (this.upcomingActivity == undefined){
+        this.upcomingActivity = this.activities[0];
+      }
+      
+    }
+
+    this.setNotification();
   }
 
   async getCurrentAuPairDetails()
