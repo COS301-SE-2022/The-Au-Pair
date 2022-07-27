@@ -52,7 +52,7 @@ export class AuPairRatingModalComponent implements OnInit {
   }
 
   getDescription(formData : any){
-    this.getAuPairDetails()
+    this.getAuPairDetails();
     this.auPairRating = formData.behaviour;
     this.currentAuPair.rating = this.auPairRating;  
     this.submitRating();

@@ -136,8 +136,6 @@ export class ExpandModalComponent implements OnInit {
     this.contractDetails.auPairID = auPairID;
     this.contractDetails.timestamp = ts.getFullYear() + "/" + (ts.getMonth() + 1) + "/" + ts.getDate() + " - " + ts.getHours() + ":" + ts.getMinutes();
 
-    console.log(ts.getFullYear(), ts.getMonth() + 1, ts.getDate(), " - ",ts.getHours(), ts.getMinutes());
-
     await this.serv.getContractbyIDs(this.contractDetails.parentID, this.contractDetails.auPairID)
     .toPromise()
     .then(
@@ -158,7 +156,6 @@ export class ExpandModalComponent implements OnInit {
       }
     )
     
-
     if(this.flag === false)
     {
       this.sucToast();

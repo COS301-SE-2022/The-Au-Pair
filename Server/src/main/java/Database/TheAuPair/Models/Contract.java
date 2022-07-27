@@ -17,11 +17,22 @@ public class Contract
   @Field("timeStamp")
   private String timestamp;
 
-  public Contract(String parentID, String auPairID, String timestamp)
+  public Contract(String id, String parentID, String auPairID, String timestamp)
   {
+    this.id = id;
     this.parentID = parentID;
     this.auPairID = auPairID;
     this.timestamp = timestamp;
+  }
+
+  public String getId()
+  {
+    return id;
+  }
+
+  public void setId(String id)
+  {
+    this.id = id;
   }
 
   public String getParentID()

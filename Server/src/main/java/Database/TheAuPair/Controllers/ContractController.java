@@ -4,6 +4,8 @@ import Database.TheAuPair.Models.Contract;
 import Database.TheAuPair.Repositories.ContractRepository;
 import Database.TheAuPair.Services.ContractService;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 import java.util.Map;
 
 @RestController
@@ -51,5 +53,12 @@ public class ContractController
   public void addContract(@RequestBody Contract c)
   {
     this.cts.addContract(c);
+  }
+
+  @GetMapping("/getAllContracts")
+  @CrossOrigin(origins = "http://localhost:4200")
+  public List<Contract> getAllContracts()
+  {
+    return this.cts.getAllContracts();
   }
 }

@@ -148,6 +148,10 @@ export class API{
     return this.http.post('http://localhost:8080/getContract',id);
   }
 
+  removeContract(id : string): Observable<any> {
+    return this.http.post('http://localhost:8080/removeContract',id);
+  }
+
   getContractbyIDs(parentID : String, auPairID : String): Observable<any> {
     var ids = {
       "parentID" : parentID,
@@ -167,6 +171,11 @@ export class API{
   getAllAuPairs()
   {
     return this.http.get('http://localhost:8080/getAllAuPairs');
+  }
+
+  getAllContracts()
+  {
+    return this.http.get('http://localhost:8080/getAllContracts');
   }
   
   getApplicants(): Observable<any> {
