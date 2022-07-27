@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { Activity , Child , medAid , Parent  , User, HoursLogged, auPair } from '../interfaces/interfaces';
+import { Activity , Child , medAid , Parent  , User, HoursLogged, auPair, Contract } from '../interfaces/interfaces';
 
 @Injectable()
 export class API{
@@ -138,6 +138,22 @@ export class API{
 
   addAuPair(aupair : auPair): Observable<any> {
     return this.http.post('http://localhost:8080/addAuPair',aupair);
+  }
+
+  addContract(contract : Contract): Observable<any> {
+    return this.http.post('http://localhost:8080/addContract',contract);
+  }
+
+  getContract(id : String): Observable<any> {
+    return this.http.post('http://localhost:8080/getContract',id);
+  }
+
+  getContractbyIDs(parentID : String, auPairID : String): Observable<any> {
+    var ids = {
+      "parentID" : parentID,
+      "auPairID" : auPairID
+    }
+    return this.http.post('http://localhost:8080/getContractbyIDs', ids);
   }
 
   login(email : string, password : string): Observable<any> {

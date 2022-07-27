@@ -47,7 +47,7 @@
                         <p class="user-details">{{this.auPairDetails.experience}}</p>
                     </div>
                 </div>
-            <button class="hire-button" id="change">HIRE</button>
+            <button class="hire-button" id="change" (click)="sendHireRequests(this.auPairDetails.id)">HIRE</button>
         </div>
     </div>
 </ion-content>

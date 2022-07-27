@@ -18,6 +18,12 @@ public class ContractService
     return ct;
   }
 
+  public Contract getContractbyIDs(String parentID, String auPairID)
+  {
+    Contract ct = ctr.findUsingPIDAID(parentID, auPairID);
+    return ct;
+  }
+
   public void updateContract(Contract c)
   {
     ctr.save(c);
