@@ -286,22 +286,20 @@ export class RegisterComponent {
   }
 
   convertIDtoDate(id: string) : string {
-    let year = id.substring(0, 2);
-    let month = id.substring(2, 4);
-    let day = id.substring(4, 6);
+    const year = id.substring(0, 2);
+    const month = id.substring(2, 4);
+    const day = id.substring(4, 6);
     
     const thisYear = new Date().getFullYear().toString().substring(2, 4);
 
     if(year >= thisYear)
     {
-      year = "19" + year;
+      return month + "/" + day + "/19" + year;
     }
     else 
     {
-      year = "20" + year;
+      return month + "/" + day + "/20" + year;
     }
-
-    return month + "/" + day + "/" + year;
   }
   
 }
