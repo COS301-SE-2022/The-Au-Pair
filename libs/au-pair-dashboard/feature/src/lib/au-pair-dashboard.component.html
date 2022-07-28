@@ -2,7 +2,7 @@
 <ion-content [fullscreen]="true">
   <div class="parent-dashboard-div">
     <p class="welcome-heading">Welcome {{this.aupairName}}</p>
-    <div class="children-div-wrapper">
+    <div *ngIf="employerId !== ''" class="children-div-wrapper">
       <ion-card class="children-div">
         <div class="employer-name"><span class="bold-text">Employer:</span> {{ employerName }} {{ employerSurname }}
           <a href = 'tel:{{ employerPhone }}'><ion-icon name="call" class = 'call-icon'></ion-icon></a>
@@ -21,6 +21,9 @@
         <div class="logging-button logging-start" (click)="logSwitch()" [style.display]="alreadyLogging ? 'none' : 'flex'">Start Logging</div>
         <div class="logging-button logging-stop" (click)="logSwitch()" [style.display]="alreadyLogging ? 'flex' : 'none'">Stop Logging</div>
       </ion-card>
+    </div>
+    <div *ngIf="employerId === ''">
+      <div class='au-pair-name'>Employer: You are not employed</div>
     </div>
     <p class="actions-heading">Actions</p>
     <div class="actions-div-wrapper">

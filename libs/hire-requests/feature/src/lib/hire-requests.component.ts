@@ -155,7 +155,9 @@ export class HireRequestsComponent implements OnInit {
 
     this.serv.removeContract(cID).subscribe(
       res=>{
-        this.router.navigate(['/au-pair-dashboard']);
+        this.router.navigate(['/au-pair-dashboard']).then(()=>{
+          window.location.reload();
+        });;
       },
       error=>{console.log("Error has occured with API: " + error);}
     )

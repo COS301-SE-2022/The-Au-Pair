@@ -19,7 +19,7 @@ export class AuPairDashboardComponent implements OnInit {
   employer = "";
   employerName!: string;
   employerSurname! : string;
-  employerId! : string;
+  employerId = '';
   employerPhone! : string;
   children: Child[] = [];
 
@@ -166,7 +166,7 @@ export class AuPairDashboardComponent implements OnInit {
   }
 
   async checkHasEmployerEmployedSchedule(){
-    if (this.employerId !== ""){
+    if (this.employerId !== ''){
       this.router.navigate(['/au-pair-schedule']);
     }
     else
@@ -176,7 +176,7 @@ export class AuPairDashboardComponent implements OnInit {
   }
 
   async checkHasEmployerEmployedRequests(){
-    if (this.employerId === ""){
+    if (this.employerId === ''){
       this.router.navigate(['/hire-requests']);
     }
     else

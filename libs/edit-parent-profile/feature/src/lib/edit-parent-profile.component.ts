@@ -16,7 +16,11 @@ export class EditParentProfileComponent implements OnInit{
   hasErr = false;
 
   location = "";
-  potentialLocations : string[] = [];
+  long = 0;
+  lat = 0;
+  suburb = "";
+
+  potentialLocations : any[] = [];
 
   userDetails: User = {
     id: "",
@@ -170,15 +174,36 @@ export class EditParentProfileComponent implements OnInit{
       if(dom != null)
       {
         //Check that the selected location is from the API
+        let flag = false;
         this.getLocations()
-        if (this.potentialLocations.indexOf(this.location) == -1)
+        this.potentialLocations.forEach((element) => {
+          if(dom != null)
+          {
+            if(element.display_name == this.location)
+            {
+              flag = true;
+              return;
+            }
+          }
+        })
+        if(!flag)
         {
           dom.innerHTML = "Please select a valid location from the suggested below.";
           dom.style.display = "block";
-          return;
+          flag = false;
         }
         else
+        {
           dom.style.display = "none";
+          this.potentialLocations.forEach((element) => {
+            if(element.display_name == this.location)
+            {
+              this.long = parseFloat(element.lon);
+              this.lat = parseFloat(element.lat);
+              this.suburb = element.address.suburb;
+            }
+          })
+        }
       }
     }
     dom = document.getElementById("medAidMMError");
@@ -271,6 +296,9 @@ export class EditParentProfileComponent implements OnInit{
       this.userDetails.email = val.email;
       this.userDetails.number = val.phone;
       this.userDetails.address = val.address;
+      this.userDetails.latitude = this.lat;
+      this.userDetails.longitude = this.long;
+      this.userDetails.suburb = this.suburb;
       this.medAidDetails.name = val.medicalAidMM;
       this.medAidDetails.plan = val.medicalAidPlan;
       this.medAidDetails.provider = val.medicalAidProvider;
@@ -282,17 +310,12 @@ export class EditParentProfileComponent implements OnInit{
 
   async editDetails(user:User, medAid:medAid)
   {
+    console.log("N:", user);
+    
     await this.editUser(user);
     await this.editMedAid(medAid);    
 
-    if(this.hasErr)
-    {
-      this.errToast();
-    }
-    else
-    {
-      this.openToast();
-    } 
+    this.openToast();
   }
 
   async editUser(user:User){    
@@ -388,9 +411,8 @@ export class EditParentProfileComponent implements OnInit{
       //Add returned data to the array
       const len = res.length;
       for (let j = 0; j < len && j<4; j++) 
-      { 
-        this.potentialLocations.push(res[j].display_name);
-        console.log(res[j].display_name);
+      {      
+        this.potentialLocations.push(res[j]);
       }
       
     })

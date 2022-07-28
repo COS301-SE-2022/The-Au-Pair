@@ -5,6 +5,8 @@ import { AuPairRatingModalComponent } from './au-pair-rating-modal/au-pair-ratin
 import { ModalController, ToastController } from '@ionic/angular';
 import { Store } from '@ngxs/store';
 import { Router } from '@angular/router';
+import { AlertController } from '@ionic/angular';
+import { Handler } from 'leaflet';
 
 @Component({
   selector: 'the-au-pair-parent-dashboard',
@@ -15,6 +17,8 @@ export class ParentDashboardComponent implements OnInit{
 
   children: Child[] = [];
   parentID = "";
+
+  handlerMessage!: boolean;
 
   parentDetails: Parent = {
     id: "",
@@ -73,7 +77,7 @@ export class ParentDashboardComponent implements OnInit{
     currentLat: 0.0
   }
 
-  constructor(private serv: API, private modalCtrl : ModalController, private store: Store, public toastCtrl: ToastController, public router: Router){}
+  constructor(private serv: API, private modalCtrl : ModalController, private store: Store, public toastCtrl: ToastController, public router: Router, private alertController: AlertController){}
 
   async openModal(actId : string) {
     const modal = await this.modalCtrl.create({
@@ -303,5 +307,25 @@ export class ParentDashboardComponent implements OnInit{
         return error;
       }
     );
+  }
+
+  async presentAlert() {
+    const alert = await this.alertController.create({
+      header: 'Terminate Contract?',
+      cssClass: 'custom-alert',
+      buttons: [
+        {
+          text: 'No',
+          cssClass: 'alert-button-cancel',
+        },
+        {
+          text: 'Yes',
+          cssClass: 'alert-button-confirm',
+          handler: () => { this.terminateAuPair(); }
+        }
+      ]
+    });
+
+    await alert.present();
   }
 }
