@@ -1,5 +1,5 @@
 module.exports = {
-  displayName: 'parent-notifications-feature',
+  displayName: 'notifications-feature',
   preset: '../../../jest.preset.js',
   setupFilesAfterEnv: ['<rootDir>/src/test-setup.ts'],
   globals: {
@@ -8,7 +8,7 @@ module.exports = {
       stringifyContentPathRegex: '\\.(html|svg)$',
     },
   },
-  coverageDirectory: '../../../coverage/libs/parent-notifications/feature',
+  coverageDirectory: '../../../coverage/libs/notifications/feature',
   transform: {
     '^.+\\.(ts|mjs|js|html)$': 'jest-preset-angular',
   },
