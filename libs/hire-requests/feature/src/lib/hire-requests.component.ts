@@ -51,7 +51,7 @@ export class HireRequestsComponent implements OnInit {
 
   ngOnInit(): void 
   {
-    this.auPairID = "9845621036712";
+    this.auPairID = this.store.snapshot().user.id;
     this.getContracts();
   }
 
@@ -69,15 +69,18 @@ export class HireRequestsComponent implements OnInit {
   setContractArray()
   {
     this.contracts.forEach((c: { id: any, parentID: any; auPairID: any; timestamp: any; parentName: any; parentSurname: any; parentEmployee: any;}) => {
-      this.serv.getParent(c.parentID).subscribe(
-        res=>{
+      this.serv.getParent(c.parentID).toPromise()
+      .then(
+        res=>{          
           if(res.auPair === "")
           {
-            this.serv.getAuPair(c.auPairID).subscribe(
-              res=>{                
+            this.serv.getAuPair(this.auPairID).toPromise()
+            .then(
+              res=>{     
                 if(res.employer === "")
                 {
-                  this.serv.getUser(c.parentID).subscribe(
+                  this.serv.getUser(c.parentID).toPromise()
+                  .then(
                     res=>{
                       const contractDetails = {
                         id: c.id,
@@ -134,18 +137,21 @@ export class HireRequestsComponent implements OnInit {
     this.modalCtrl.dismiss();
   }
 
-  acceptRequest(cID : string, parentID : string)
+  async acceptRequest(cID : string, parentID : string)
   {
     this.sucToast();    
 
-    this.getAuPairDetails();
-    this.getParentDetails(parentID);
+    await this.getAuPairDetails();
+    await this.getParentDetails(parentID);
 
     this.currentAuPair.employer = parentID;
-    this.parentDetails.auPair = this.auPairID;
+    this.parentDetails.auPair = this.auPairID;    
 
-    this.updateAuPair();
-    this.updateParent();
+    console.log(JSON.stringify(this.currentAuPair));
+    console.log(JSON.stringify(this.parentDetails));  
+
+    await this.updateAuPair();
+    await this.updateParent();
 
     this.serv.removeContract(cID).subscribe(
       res=>{
@@ -204,8 +210,8 @@ export class HireRequestsComponent implements OnInit {
     )
   }
 
-  updateAuPair(){
-    this.serv.editAuPair(this.currentAuPair).toPromise()
+  async updateAuPair(){
+    await this.serv.editAuPair(this.currentAuPair).toPromise()
     .then(
       res=>{
         console.log("The response is:" + res);
@@ -218,8 +224,8 @@ export class HireRequestsComponent implements OnInit {
     );
   }
 
-  updateParent(){
-    this.serv.editParent(this.parentDetails).toPromise()
+  async updateParent(){
+    await this.serv.editParent(this.parentDetails).toPromise()
     .then(
       res=>{
         console.log("The response is:" + res);

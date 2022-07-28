@@ -3,6 +3,7 @@ import { API } from '../../../../shared/api/api.service';
 import { User, medAid, Parent } from '../../../../shared/interfaces/interfaces';
 import { ToastController } from '@ionic/angular';
 import { Store } from '@ngxs/store';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'the-au-pair-edit-parent-profile',
@@ -13,6 +14,9 @@ export class EditParentProfileComponent implements OnInit{
   
   parentID = "";
   hasErr = false;
+
+  location = "";
+  potentialLocations : string[] = [];
 
   userDetails: User = {
     id: "",
@@ -48,7 +52,7 @@ export class EditParentProfileComponent implements OnInit{
     auPair: "",
   }
 
-  constructor(private serv: API, public toastCtrl: ToastController, private store: Store){}
+  constructor(private serv: API, private http: HttpClient, public toastCtrl: ToastController, private store: Store){}
 
   ngOnInit(): void
   {
@@ -165,7 +169,16 @@ export class EditParentProfileComponent implements OnInit{
     {
       if(dom != null)
       {
-        dom.style.display = "none";
+        //Check that the selected location is from the API
+        this.getLocations()
+        if (this.potentialLocations.indexOf(this.location) == -1)
+        {
+          dom.innerHTML = "Please select a valid location from the suggested below.";
+          dom.style.display = "block";
+          return;
+        }
+        else
+          dom.style.display = "none";
       }
     }
     dom = document.getElementById("medAidMMError");
@@ -348,5 +361,41 @@ export class EditParentProfileComponent implements OnInit{
       cssClass: 'toastPopUp'
     });
     await toast.present();
+  }
+
+  async getLocations()
+  {
+    const loc = this.location;
+    
+    //Building the API query according to what is in the location input field
+    const locationParam = loc.replace(' ', '+');
+    const params = locationParam + '&limit=4&format=json&polygon_geojson=1&addressdetails=1';
+
+    //Make the API call
+    await this.http.get('https://nominatim.openstreetmap.org/search?q='+params)
+    .toPromise()
+    .then(data=>{ // Success
+      //Populate potential Locations Array
+      const json_data = JSON.stringify(data);
+      const res = JSON.parse(json_data);
+
+      //Jump out if no results returned
+      if(json_data === "{}")
+      {
+        return;
+      }
+  
+      //Add returned data to the array
+      const len = res.length;
+      for (let j = 0; j < len && j<4; j++) 
+      { 
+        this.potentialLocations.push(res[j].display_name);
+        console.log(res[j].display_name);
+      }
+      
+    })
+    .catch(error=>{ // Failure
+      console.log(error);
+    });
   }
 }

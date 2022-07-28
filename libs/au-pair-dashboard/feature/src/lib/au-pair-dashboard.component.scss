@@ -151,7 +151,7 @@ ion-card {
     width: 90%;
     height: 100%;
     display: grid;
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: repeat(3, 1fr);
     justify-items: center;
     align-items: center;
     margin: auto;
@@ -173,7 +173,7 @@ ion-card {
     text-align: center;
     justify-content: center;
     align-items: center;
-    width: 50%;
+    width: 75%;
     font-size: 24px;
     border-radius: 16px;
     cursor: pointer;

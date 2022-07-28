@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { API } from '../../../../shared/api/api.service';
-import { Child, Parent, User } from '../../../../shared/interfaces/interfaces';
+import { auPair, Child, Parent, User } from '../../../../shared/interfaces/interfaces';
 import { AuPairRatingModalComponent } from './au-pair-rating-modal/au-pair-rating-modal.component';
 import { ModalController, ToastController } from '@ionic/angular';
 import { Store } from '@ngxs/store';
@@ -57,6 +57,20 @@ export class ParentDashboardComponent implements OnInit{
     suburb: "",
     gender: "",
     age: 0,
+  }
+
+  currentAuPair: auPair = {
+    id: "",
+    rating: 0,
+    onShift: false,
+    employer: "",
+    costIncurred: 0,
+    distTraveled: 0,
+    payRate: 0,
+    bio: "",
+    experience: "",
+    currentLong: 0.0,
+    currentLat: 0.0
   }
 
   constructor(private serv: API, private modalCtrl : ModalController, private store: Store, public toastCtrl: ToastController, public router: Router){}
@@ -167,6 +181,20 @@ export class ParentDashboardComponent implements OnInit{
     }
   }
 
+  async checkHasChildrenExplore(){
+    if (this.parentDetails.children.length < 1){
+      this.openToast('You need to have children added to your profile in order to hire an Au Pair');
+    }
+    else if(this.parentDetails.auPair != "")
+    {
+      this.openToast('You already have an Au Pair employed');
+    }
+    else
+    {
+      this.router.navigate(['/explore']);
+    }
+  }
+
   async checkHasEmployer(){
     if (this.parentDetails.auPair !== ""){
       this.router.navigate(['/au-pair-cost']);
@@ -175,5 +203,86 @@ export class ParentDashboardComponent implements OnInit{
     {
       this.openToast('No Au Pair employed');
     }
+  }
+
+  async terminateAuPair()
+  {
+    await this.getAuPairDetails();
+    await this.getParentDetails();
+
+    this.currentAuPair.employer = "";
+    this.parentDetails.auPair = "";
+
+    await this.updateAuPair();
+    await this.updateParent();
+
+    location.reload();
+  }
+
+  async getAuPairDetails()
+  {
+    await this.serv.getAuPair(this.parentDetails.auPair)
+    .toPromise()
+      .then(
+      res=>{
+        this.currentAuPair.id = res.id;
+        this.currentAuPair.rating = res.rating;
+        this.currentAuPair.onShift = res.onShift;
+        this.currentAuPair.employer = res.employer;
+        this.currentAuPair.costIncurred = res.costIncurred;
+        this.currentAuPair.distTraveled = res.distTraveled;
+        this.currentAuPair.payRate = res.payRate;
+        this.currentAuPair.bio = res.bio;
+        this.currentAuPair.experience = res.experience;
+        this.currentAuPair.currentLong = res.currentLong;
+        this.currentAuPair.currentLat = res.currentLat;
+      },
+      error=>{console.log("Error has occured with API: " + error);}
+    )
+  }
+
+  async getParentDetails()
+  {
+    await this.serv.getParent(this.parentID)
+    .toPromise()
+      .then( 
+        res=>{
+          this.parentDetails.id = res.id;      
+          this.parentDetails.children = res.children;
+          this.parentDetails.medID = res.medID;
+          this.parentDetails.auPair = res.auPair;
+      },
+      error => {
+        console.log("Error has occured with API: " + error);
+      }
+    )
+  }
+
+  async updateAuPair(){
+    await this.serv.editAuPair(this.currentAuPair).toPromise()
+    .then(
+      res=>{
+        console.log("The response is:" + res);
+        return res;
+      },
+      error=>{
+        console.log("Error has occured with API: " + error);
+        return error;
+      }
+    );
+  }
+
+  async updateParent(){
+    await this.serv.editParent(this.parentDetails).toPromise()
+    .then(
+      res=>{
+        console.log("The response is:" + res);
+        return res;
+      },
+      error=>{
+        console.log("Error has occured with API: " + error);
+        return error;
+      }
+    );
   }
 }

@@ -3,6 +3,7 @@ import { ModalController, NavParams, ToastController } from '@ionic/angular';
 import { auPair, Contract, User } from '../../../../../shared/interfaces/interfaces';
 import { API } from '../../../../../shared/api/api.service';
 import { Store } from '@ngxs/store';
+import { min } from 'rxjs';
 
 @Component({
   selector: 'the-au-pair-expand-modal',
@@ -134,7 +135,10 @@ export class ExpandModalComponent implements OnInit {
 
     this.contractDetails.parentID = this.parentID;
     this.contractDetails.auPairID = auPairID;
-    this.contractDetails.timestamp = ts.getFullYear() + "/" + (ts.getMonth() + 1) + "/" + ts.getDate() + " - " + ts.getHours() + ":" + ts.getMinutes();
+
+    const minutes = String(ts.getMinutes()).padStart(2, '0');
+
+    this.contractDetails.timestamp = ts.getFullYear() + "/" + (ts.getMonth() + 1) + "/" + ts.getDate() + " - " + ts.getHours() + ":" + minutes;
 
     await this.serv.getContractbyIDs(this.contractDetails.parentID, this.contractDetails.auPairID)
     .toPromise()

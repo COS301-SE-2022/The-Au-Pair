@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngxs/store';
 import { API } from '../../../../shared/api/api.service'
-import { auPair, Child, HoursLogged } from '../../../../shared/interfaces/interfaces';
+import { Child, HoursLogged } from '../../../../shared/interfaces/interfaces';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'the-au-pair-au-pair-dashboard',
@@ -150,5 +151,25 @@ export class AuPairDashboardComponent implements OnInit {
       error =>{console.log("Error has occured with API: " + error);}
       
     )
+  }
+
+  async checkHasEmployerEmployedSchedule(){
+    if (this.employerId !== ""){
+      this.router.navigate(['/au-pair-cost']);
+    }
+    else
+    {
+      this.openToast('No Au Pair employed');
+    }
+  }
+
+  async checkHasEmployerEmployedRequests(){
+    if (this.parentDetails.auPair !== ""){
+      this.router.navigate(['/au-pair-cost']);
+    }
+    else
+    {
+      this.openToast('No Au Pair employed');
+    }
   }
 }

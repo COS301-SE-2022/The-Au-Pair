@@ -102,16 +102,11 @@ export class ExploreComponent implements OnInit {
             distance: eucdistance,
           }
           // Logic for explore that will only show Au Pairs whom are not yet employed
-          // This will be added after hiring and terminating is complete
-          // if(ap.employer == "" && res.registered == true)
-          // {
-          //   this.AuPairArray.push(auPairDetails);
-          //   this.restoredAuPairArray.push(auPairDetails);
-          // }
-
-          // This will be removed after hiring and terminating is added
-          this.AuPairArray.push(auPairDetails);
-          this.restoredAuPairArray.push(auPairDetails);
+          if(ap.employer == "" && res.registered == true)
+          {
+            this.AuPairArray.push(auPairDetails);
+            this.restoredAuPairArray.push(auPairDetails);
+          }
         },
         error=>{console.log("Error has occured with API: " + error);}
       )
