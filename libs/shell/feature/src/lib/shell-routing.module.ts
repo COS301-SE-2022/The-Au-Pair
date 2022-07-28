@@ -5,7 +5,9 @@ const routes: Routes = [
   {
     path: 'schedule',
     loadChildren: () =>
-      import('@the-au-pair/schedule/feature').then((m) => m.ScheduleFeatureModule),
+      import('@the-au-pair/schedule/feature').then(
+        (m) => m.ScheduleFeatureModule
+      ),
   },
   {
     path: '',
@@ -15,112 +17,152 @@ const routes: Routes = [
   {
     path: 'au-pair-cost',
     loadChildren: () =>
-      import('@the-au-pair/au-pair-cost/feature').then((m) => m.AuPairCostFeatureModule),
-  },
-  {  
-    path: 'parent-dashboard',
-    loadChildren: () =>
-      import('@the-au-pair/parent-dashboard/feature').then((m) => m.ParentDashboardFeatureModule),
+      import('@the-au-pair/au-pair-cost/feature').then(
+        (m) => m.AuPairCostFeatureModule
+      ),
   },
   {
-      path: 'add-activity',
-      loadChildren: () =>
-      import('@the-au-pair/parent-add-activity/feature').then((m) => m.ParentAddActivityFeatureModule),
+    path: 'parent-dashboard',
+    loadChildren: () =>
+      import('@the-au-pair/parent-dashboard/feature').then(
+        (m) => m.ParentDashboardFeatureModule
+      ),
+  },
+  {
+    path: 'add-activity',
+    loadChildren: () =>
+      import('@the-au-pair/parent-add-activity/feature').then(
+        (m) => m.ParentAddActivityFeatureModule
+      ),
   },
   {
     path: 'parent-profile',
     loadChildren: () =>
-    import('@the-au-pair/parent-profile/feature').then((m) => m.ParentProfileFeatureModule),
+      import('@the-au-pair/parent-profile/feature').then(
+        (m) => m.ParentProfileFeatureModule
+      ),
   },
   {
     path: 'edit-parent-profile',
     loadChildren: () =>
-    import('@the-au-pair/edit-parent-profile/feature').then((m) => m.EditParentProfileFeatureModule),
+      import('@the-au-pair/edit-parent-profile/feature').then(
+        (m) => m.EditParentProfileFeatureModule
+      ),
   },
   {
     path: 'edit-activity',
     loadChildren: () =>
-    import('@the-au-pair/parent-edit-activity/feature').then((m) => m.ParentEditActivityFeatureModule),
+      import('@the-au-pair/parent-edit-activity/feature').then(
+        (m) => m.ParentEditActivityFeatureModule
+      ),
   },
   {
     path: 'view-activity',
     loadChildren: () =>
-    import('@the-au-pair/parent-view-activity/feature').then((m) => m.ParentViewActivityFeatureModule),
+      import('@the-au-pair/parent-view-activity/feature').then(
+        (m) => m.ParentViewActivityFeatureModule
+      ),
   },
   {
     path: 'children-dashboard',
     loadChildren: () =>
-    import('@the-au-pair/children-dashboard/feature').then((m) => m.ChildrenDashboardFeatureModule),
+      import('@the-au-pair/children-dashboard/feature').then(
+        (m) => m.ChildrenDashboardFeatureModule
+      ),
   },
   {
     path: 'add-child',
     loadChildren: () =>
-    import('@the-au-pair/add-child/feature').then((m) => m.AddChildFeatureModule),
+      import('@the-au-pair/add-child/feature').then(
+        (m) => m.AddChildFeatureModule
+      ),
   },
   {
     path: 'edit-child',
     loadChildren: () =>
-    import('@the-au-pair/edit-child/feature').then((m) => m.EditChildFeatureModule),
+      import('@the-au-pair/edit-child/feature').then(
+        (m) => m.EditChildFeatureModule
+      ),
   },
   {
     path: 'au-pair-schedule',
     loadChildren: () =>
-    import('@the-au-pair/au-pair-schedule/feature').then((m) => m.AuPairScheduleModule),
+      import('@the-au-pair/au-pair-schedule/feature').then(
+        (m) => m.AuPairScheduleModule
+      ),
   },
   {
     path: 'au-pair-dashboard',
     loadChildren: () =>
-    import('@the-au-pair/au-pair-dashboard/feature').then((m) => m.AuPairDashboardFeatureModule),
+      import('@the-au-pair/au-pair-dashboard/feature').then(
+        (m) => m.AuPairDashboardFeatureModule
+      ),
   },
   {
     path: 'au-pair-profile',
     loadChildren: () =>
-    import('@the-au-pair/au-pair-profile/feature').then((m) => m.AuPairProfileFeatureModule),
+      import('@the-au-pair/au-pair-profile/feature').then(
+        (m) => m.AuPairProfileFeatureModule
+      ),
   },
   {
     path: 'edit-au-pair-profile',
     loadChildren: () =>
-    import('@the-au-pair/edit-au-pair-profile/feature').then((m) => m.EditAuPairProfileFeatureModule),
+      import('@the-au-pair/edit-au-pair-profile/feature').then(
+        (m) => m.EditAuPairProfileFeatureModule
+      ),
   },
   {
     path: 'track-au-pair',
     loadChildren: () =>
-    import('@the-au-pair/track-au-pair/feature').then((m) => m.TrackAuPairFeatureModule),
+      import('@the-au-pair/track-au-pair/feature').then(
+        (m) => m.TrackAuPairFeatureModule
+      ),
   },
   {
     path: 'login-page',
     loadChildren: () =>
-    import('@the-au-pair/login/feature').then((m) => m.LoginFeatureModule),
+      import('@the-au-pair/login/feature').then((m) => m.LoginFeatureModule),
   },
   {
     path: 'forgot-password',
     loadChildren: () =>
-    import('@the-au-pair/forgot-password/feature').then((m) => m.ForgotPasswordFeatureModule)
+      import('@the-au-pair/forgot-password/feature').then(
+        (m) => m.ForgotPasswordFeatureModule
+      ),
   },
   {
     path: 'register-page',
     loadChildren: () =>
-    import('@the-au-pair/register/feature').then((m) => m.RegisterFeatureModule)
+      import('@the-au-pair/register/feature').then(
+        (m) => m.RegisterFeatureModule
+      ),
   },
   {
-    path: 'parent-notifications',
+    path: 'notifications',
     loadChildren: () =>
-    import('@the-au-pair/parent-notifications/feature').then((m) => m.ParentNotificationsFeatureModule),
+      import('@the-au-pair/notifications-feature').then(
+        (m) => m.NotificationsFeatureModule
+      ),
   },
   {
     path: 'explore',
     loadChildren: () =>
-    import('@the-au-pair/explore/feature').then((m) => m.ExploreFeatureModule),
+      import('@the-au-pair/explore/feature').then(
+        (m) => m.ExploreFeatureModule
+      ),
   },
   {
     path: 'admin-console',
     loadChildren: () =>
-    import('@the-au-pair/admin-console/feature').then((m) => m.AdminConsoleFeatureModule),
+      import('@the-au-pair/admin-console/feature').then(
+        (m) => m.AdminConsoleFeatureModule
+      ),
   },
   {
     path: '**',
     redirectTo: 'login-page',
-  }
+  },
 ];
 
 @NgModule({

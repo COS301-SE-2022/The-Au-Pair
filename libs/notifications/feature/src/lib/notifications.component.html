@@ -1,0 +1,23 @@
+<the-au-pair-navbar></the-au-pair-navbar>
+<ion-content>
+  <div class="ion-text-center">
+    <h2 class="header">Notifications</h2>
+    <div class="notifications-wrapper">
+
+      <ion-card *ngFor="let note of notifications" class="notification-item activity">
+        <div class="wrapper">
+          <div class="img">
+            <img class="profile" src="assets/images/profile.jpg" alt="" />
+          </div>
+          <div class="notification-content ion-text-start">
+            <div class="heading">{{ note.title }}</div>
+            <div class="details">
+              {{ note.body}}
+            </div>
+          </div>
+          <div class="time">{{note.time}}  <br/>  {{note.date}}</div>
+        </div>
+      </ion-card>
+    </div>
+  </div>
+</ion-content>

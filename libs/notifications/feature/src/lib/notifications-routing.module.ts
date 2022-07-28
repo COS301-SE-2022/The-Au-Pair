@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { ParentNotificationsComponent } from './parent-notifications.component';
+import { ParentNotificationsComponent } from './notifications.component';
 
 const routes: Routes = [
   {
