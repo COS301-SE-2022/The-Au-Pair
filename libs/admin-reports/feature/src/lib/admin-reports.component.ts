@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Report, User } from 'libs/shared/interfaces/interfaces';
+import { User } from '../../../../shared/interfaces/interfaces';
 import { API } from "../../../../shared/api/api.service";
 
 @Component({
