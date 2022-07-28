@@ -154,15 +154,15 @@ export class HireRequestsComponent implements OnInit {
         console.log(res);
         this.router.navigate(['/au-pair-dashboard']).then(()=>{
         window.location.reload();
-        });;
+        });
       },
       error=>{console.log("Error has occured with API: " + error);}
     )
   }
 
-  rejectRequest(cID : string)
+  async rejectRequest(cID : string)
   {
-    this.serv.removeContract(cID).subscribe(
+    await this.serv.removeContract(cID).subscribe(
       res=>{
         console.log(res);
         location.reload();
