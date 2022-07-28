@@ -3,6 +3,9 @@ package Database.TheAuPair.Controllers;
 import Database.TheAuPair.Models.Notification;
 import Database.TheAuPair.Repositories.NotificationsRepository;
 import Database.TheAuPair.Services.NotificationsService;
+
+import org.springframework.http.ResponseEntity;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
@@ -18,24 +21,55 @@ public class NotificationsController
 
   @PostMapping("/getNotifcationsByAuPairId")
   @CrossOrigin(origins = "http://localhost:4200")
-  public List<Notification> getNotifcationsByAuPairId(@RequestBody String id)
+  public ResponseEntity<List<Notification>> getNotifcationsByAuPairId(@RequestBody String id, BindingResult bindingResult)
   {
-    List<Notification> c = ns.getNotifcationsByAuPairId(id);
-    return c;
+    if (bindingResult.hasErrors())
+    {
+      return ResponseEntity
+        .badRequest()
+        .body(null);
+    }
+    else
+    {
+      return ResponseEntity
+        .ok()
+        .body(this.ns.getNotifcationsByAuPairId(id));
+    }
   }
 
   @PostMapping("/getNotifcationsByParentId")
   @CrossOrigin(origins = "http://localhost:4200")
-  public List<Notification> getNotifcationsByParentId(@RequestBody String id)
+  public ResponseEntity<List<Notification>> getNotifcationsByParentId(@RequestBody String id, BindingResult bindingResult)
   {
-    List<Notification> c = ns.getNotifcationsByParentId(id);
-    return c;
+    if (bindingResult.hasErrors())
+    {
+      return ResponseEntity
+        .badRequest()
+        .body(null);
+    }
+    else
+    {
+      return ResponseEntity
+        .ok()
+        .body(this.ns.getNotifcationsByParentId(id));
+    }
   }
 
   @PostMapping("/logNotification")
   @CrossOrigin(origins = "http://localhost:4200")
-  public void logNotification(@RequestBody Notification n)
+  public ResponseEntity.BodyBuilder logNotification(@RequestBody Notification n, BindingResult bindingResult)
   {
-    this.ns.logNotification(n);
+    if (bindingResult.hasErrors())
+    {
+      return (ResponseEntity.BodyBuilder) ResponseEntity
+        .badRequest()
+        .body(null);
+    }
+    else
+    {
+      this.ns.logNotification(n);
+      return ResponseEntity
+        .ok();
+    }
   }
 }

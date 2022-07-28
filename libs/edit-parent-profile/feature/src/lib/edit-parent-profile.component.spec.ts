@@ -82,6 +82,7 @@ describe('EditParentProfileComponent', () => {
       suburb: "", 
       gender: "", 
       birth: "",
+      fcmToken:""
     };
 
     const expectedMedAidValue: medAid = {
@@ -121,6 +122,7 @@ describe('EditParentProfileComponent', () => {
       suburb: "", 
       gender: "", 
       birth: "",
+      fcmToken: ""
     };
 
     const expectedMedAidValue: medAid = {
@@ -158,6 +160,7 @@ describe('EditParentProfileComponent', () => {
       suburb: "", 
       gender: "", 
       birth: "",
+      fcmToken:""
     };
 
     const expectedMedAidValue: medAid = {
@@ -195,6 +198,7 @@ describe('EditParentProfileComponent', () => {
       suburb: "", 
       gender: "", 
       birth: "",
+      fcmToken: ""
     };
 
     const expectedMedAidValue: medAid = {
@@ -232,6 +236,7 @@ describe('EditParentProfileComponent', () => {
       suburb: "", 
       gender: "", 
       birth: "",
+      fcmToken:""
     };
 
     const expectedMedAidValue: medAid = {
@@ -269,6 +274,7 @@ describe('EditParentProfileComponent', () => {
       suburb: "", 
       gender: "", 
       birth: "",
+      fcmToken: ""
     };
 
     const expectedMedAidValue: medAid = {
@@ -306,6 +312,7 @@ describe('EditParentProfileComponent', () => {
       suburb: "", 
       gender: "", 
       birth: "",
+      fcmToken: ""
     };
 
     const expectedMedAidValue: medAid = {
@@ -343,6 +350,7 @@ describe('EditParentProfileComponent', () => {
       suburb: "", 
       gender: "", 
       birth: "",
+      fcmToken: ""
     };
 
     const expectedMedAidValue: medAid = {
@@ -380,6 +388,7 @@ describe('EditParentProfileComponent', () => {
       suburb: "", 
       gender: "", 
       birth: "",
+      fcmToken: ""
     };
 
     const expectedMedAidValue: medAid = {

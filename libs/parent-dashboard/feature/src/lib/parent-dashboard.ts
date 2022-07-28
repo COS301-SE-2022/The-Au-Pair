@@ -38,7 +38,6 @@ export class ParentDashboardComponent implements OnInit{
     longitude: 0,
     suburb: "",
     gender: "",
-    age: 0,
     fcmToken : "",
     birth: "",
   }
@@ -58,7 +57,6 @@ export class ParentDashboardComponent implements OnInit{
     longitude: 0,
     suburb: "",
     gender: "",
-    age: 0,
     fcmToken : "",
     birth: "",
   }

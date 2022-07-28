@@ -40,7 +40,6 @@ export class RegisterComponent {
     longitude: 0.0,
     suburb: "",
     gender: "",
-    age: 0,
     fcmToken : "",
     birth: "",
   }

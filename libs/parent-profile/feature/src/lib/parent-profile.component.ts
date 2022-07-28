@@ -26,7 +26,6 @@ export class ParentProfileComponent implements OnInit {
     longitude: 0,
     suburb: "",
     gender: "",
-    age: 0,
     fcmToken : "",
     birth: "",
   }

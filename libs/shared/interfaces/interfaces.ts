@@ -75,7 +75,6 @@ export interface Activity{
     longitude: number;
     suburb: string;
     gender: string;
-    age: number;
     fcmToken : string;
     birth: string;
   }
