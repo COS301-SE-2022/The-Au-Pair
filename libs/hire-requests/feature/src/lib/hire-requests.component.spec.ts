@@ -6,6 +6,8 @@ import { FormsModule } from '@angular/forms';
 import { IonicModule } from '@ionic/angular';
 import { NavbarModule } from '@the-au-pair/shared/components/navbar';
 import { API } from '../../../../shared/api/api.service';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { RouterTestingModule} from '@angular/router/testing';
 
 describe('HireRequestsComponent', () => {
   let component: HireRequestsComponent;
@@ -17,6 +19,8 @@ describe('HireRequestsComponent', () => {
       imports: [FormsModule,
         IonicModule,
         NavbarModule,
+        HttpClientTestingModule,
+        RouterTestingModule,
         NgxsModule.forRoot([AppState])
         ],
         providers:[API]
