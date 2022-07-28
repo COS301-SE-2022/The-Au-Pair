@@ -75,7 +75,7 @@ export interface Activity{
     longitude: number;
     suburb: string;
     gender: string;
-    age: number;
+    birth: string;
   }
 
   export interface auPair{
