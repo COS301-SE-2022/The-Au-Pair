@@ -12,6 +12,7 @@ export class AuPairCostComponent implements OnInit {
 
   constructor(private api:API, private store: Store) { }
 
+  type = -1;
   parentID = "";
   aupairID = "";
   days = [
@@ -43,7 +44,10 @@ export class AuPairCostComponent implements OnInit {
 
   pieSplit = "";
 
-  async ngOnInit() { 
+  async ngOnInit() {
+    
+    this.type = this.store.snapshot().user.type;
+    
     if(this.store.snapshot().user.type === 2) 
     {
       this.aupairID = this.store.snapshot().user.id;

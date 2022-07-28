@@ -31,7 +31,14 @@ public class UserService
     {
       if (registered.getId().equals(u.getId()) || registered.getEmail().equals(u.getEmail()))
       {
-        return registered.getEmail();
+        if(registered.getBanned().equals(""))
+        {
+          return registered.getEmail();
+        }
+        else
+        {
+          return "Banned " + registered.getBanned();
+        }
       }
     }
 
