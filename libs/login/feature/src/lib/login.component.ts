@@ -44,7 +44,6 @@ export class LoginComponent implements OnInit {
 
   ngOnInit(): void {
     this.store.dispatch(new Reset());
-
     if (Capacitor.getPlatform() !== 'web') {
       this.startPush();
     }

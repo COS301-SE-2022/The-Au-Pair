@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { Activity , Child , medAid , Parent  , User, HoursLogged, auPair } from '../interfaces/interfaces';
+import { Activity , Child , medAid , Parent  , User, HoursLogged, auPair, Notification } from '../interfaces/interfaces';
 
 @Injectable()
 export class API{
@@ -183,5 +183,17 @@ export class API{
       );
     }
     return this.http.post('http://localhost:8080/resolveApplication',decision);
+  }
+
+  getNotificationsByParentId(id : string): Observable<any> {
+    return this.http.post('http://localhost:8080/getNotifcationsByParentId',id);
+  }
+
+  getNotificationsByAuPairId(id : string): Observable<any> {
+    return this.http.post('http://localhost:8080/getNotifcationsByAuPairId',id);
+  }
+
+  logNotification(notification : Notification): Observable<any> {
+    return this.http.post('http://localhost:8080/logNotification',notification);
   }
 }
