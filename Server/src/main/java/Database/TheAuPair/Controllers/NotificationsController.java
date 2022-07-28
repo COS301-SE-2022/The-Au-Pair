@@ -21,55 +21,22 @@ public class NotificationsController
 
   @PostMapping("/getNotifcationsByAuPairId")
   @CrossOrigin(origins = "http://localhost:4200")
-  public ResponseEntity<List<Notification>> getNotifcationsByAuPairId(@RequestBody String id, BindingResult bindingResult)
+  public List<Notification> getNotifcationsByAuPairId(@RequestBody String id)
   {
-    if (bindingResult.hasErrors())
-    {
-      return ResponseEntity
-        .badRequest()
-        .body(null);
-    }
-    else
-    {
-      return ResponseEntity
-        .ok()
-        .body(this.ns.getNotifcationsByAuPairId(id));
-    }
+    return this.ns.getNotifcationsByAuPairId(id);
   }
 
   @PostMapping("/getNotifcationsByParentId")
   @CrossOrigin(origins = "http://localhost:4200")
-  public ResponseEntity<List<Notification>> getNotifcationsByParentId(@RequestBody String id, BindingResult bindingResult)
+  public List<Notification> getNotifcationsByParentId(@RequestBody String id)
   {
-    if (bindingResult.hasErrors())
-    {
-      return ResponseEntity
-        .badRequest()
-        .body(null);
-    }
-    else
-    {
-      return ResponseEntity
-        .ok()
-        .body(this.ns.getNotifcationsByParentId(id));
-    }
+    return this.ns.getNotifcationsByParentId(id);
   }
 
   @PostMapping("/logNotification")
   @CrossOrigin(origins = "http://localhost:4200")
-  public ResponseEntity.BodyBuilder logNotification(@RequestBody Notification n, BindingResult bindingResult)
+  public void logNotification(@RequestBody Notification n)
   {
-    if (bindingResult.hasErrors())
-    {
-      return (ResponseEntity.BodyBuilder) ResponseEntity
-        .badRequest()
-        .body(null);
-    }
-    else
-    {
-      this.ns.logNotification(n);
-      return ResponseEntity
-        .ok();
-    }
+    this.ns.logNotification(n);
   }
 }

@@ -1,6 +1,6 @@
 /// <reference types="cypress" />
 
-describe('User login and registration tests', () => {});
+describe('Parent integration tests', () => {});
 
 beforeEach( () => {
     cy.visit("/login-page")
@@ -16,7 +16,7 @@ it('should populate the parent dashboard with your registered children from the 
     cy.contains("Sally");
 })
 
-it('should allow a Au Pair to logout', () =>
+it('should allow a parent to logout', () =>
 {
     cy.get('.logout-button').click({force:true}).then( () => {
         cy.contains("Login");
