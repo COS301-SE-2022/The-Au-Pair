@@ -88,7 +88,7 @@ export class LocationFieldComponent implements ControlValueAccessor {
       //Add returned data to the array
       const len = res.length;
       for (let j = 0; j < len; j++)
-      { 
+      {
         this.potentialLocations.push(res[j].display_name);
       }
     })

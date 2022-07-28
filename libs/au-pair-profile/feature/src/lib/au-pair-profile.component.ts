@@ -26,7 +26,7 @@ export class AuPairProfileComponent implements OnInit {
     longitude: 0,
     suburb: "",
     gender: "",
-    age: 0,
+    birth: "",
   }
 
   auPairDetails: auPair = {
@@ -72,7 +72,7 @@ export class AuPairProfileComponent implements OnInit {
         this.userDetails.longitude = res.longitude;
         this.userDetails.suburb = res.suburb;
         this.userDetails.gender = res.gender;
-        this.userDetails.age = res.age;
+        this.userDetails.birth = res.birth;
       },
       error=>{console.log("Error has occured with API: " + error);}
     )

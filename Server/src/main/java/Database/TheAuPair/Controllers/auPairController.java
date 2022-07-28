@@ -56,20 +56,11 @@ public class auPairController
 
   @GetMapping("/getAllAuPairs")
   @CrossOrigin(origins = "http://localhost:4200")
-  public ResponseEntity<List<auPair>> getAllAuPairs(BindingResult bindingResult)
+  public ResponseEntity<List<auPair>> getAllAuPairs()
   {
-    if (bindingResult.hasErrors())
-    {
-      return ResponseEntity
-        .badRequest()
-        .body(null);
-    }
-    else
-    {
       return ResponseEntity
         .ok()
         .body(this.aps.getAllAuPairs());
-    }
   }
 
   @PostMapping("/removeAuPair")
