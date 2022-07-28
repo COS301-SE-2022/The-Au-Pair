@@ -50,12 +50,6 @@ describe('ParentProfileComponent', () => {
     expect(await component.openModal).toReturn();
   });
 
-  it('should, have a redirect to the schedule page', () => {
-    const href = fixture.debugElement.query(By.css('#schedule')).nativeElement
-    .getAttribute('routerLink');
-    expect(href).toEqual('/schedule'); 
-  });
-
   it('should, have a redirect to the children dashboard page', () => {
     const href = fixture.debugElement.query(By.css('#childDash')).nativeElement
     .getAttribute('routerLink');

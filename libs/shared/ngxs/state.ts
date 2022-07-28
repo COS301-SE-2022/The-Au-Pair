@@ -67,7 +67,7 @@ export class AppState{
         return of(ctx.getState())
         .pipe(
         map(currentState => {
-            ctx.patchState({type: -1, id: ""});
+            ctx.patchState({type: -1, id: "", name: "", fcmToken: ""});
             return currentState;
         })
         );
