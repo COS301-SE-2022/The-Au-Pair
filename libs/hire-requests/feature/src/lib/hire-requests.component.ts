@@ -151,8 +151,9 @@ export class HireRequestsComponent implements OnInit {
 
     this.serv.removeContract(cID).subscribe(
       res=>{
+        console.log(res);
         this.router.navigate(['/au-pair-dashboard']).then(()=>{
-          window.location.reload();
+        window.location.reload();
         });;
       },
       error=>{console.log("Error has occured with API: " + error);}
@@ -163,6 +164,7 @@ export class HireRequestsComponent implements OnInit {
   {
     this.serv.removeContract(cID).subscribe(
       res=>{
+        console.log(res);
         location.reload();
       },
       error=>{console.log("Error has occured with API: " + error);}
