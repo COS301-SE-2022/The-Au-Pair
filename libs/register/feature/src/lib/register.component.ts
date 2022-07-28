@@ -272,18 +272,9 @@ export class RegisterComponent {
         if(loc == res[j].display_name) {
           this.locationError = false;
           
-          this.long = res[j].lon;
-          this.lat = res[j].lat;
-
-          if(res[j].address.suburb != undefined) {
-            this.foundSuburb =  res[j].address.suburb;
-          }
-          else if(res[j].address.town != undefined) {
-            this.foundSuburb =  res[j].address.town;
-          }
-          else {
-            this.foundSuburb = res[j].address.city;
-          }
+          this.long = res[j].geojson.coordinates[0];
+          this.lat = res[j].geojson.coordinates[1];
+          this.foundSuburb =  res[j].address.suburb;
 
           break;
         }
