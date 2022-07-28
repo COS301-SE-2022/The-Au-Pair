@@ -117,7 +117,6 @@ export class AppComponent implements OnInit {
 
     const intv = setInterval(() => {
       const current = new Date();
-      console.log(current.getHours(), current.getMinutes(), current.getSeconds());
       if (current.getHours() == hour && current.getMinutes() == mins && current.getDay() == day) {
 
 
@@ -187,10 +186,10 @@ export class AppComponent implements OnInit {
         return -1;
       }
       else if(Number(obj1.day) == Number(obj2.day)){
-        if(Number(obj1.timeStart.substring(0,2)) > Number(obj2.timeStart.substring(3))){
+        if(Number(obj1.timeStart.substring(0,2)) > Number(obj2.timeStart.substring(0,2))){
           return 1;
         }
-        else if(Number(obj1.timeStart.substring(0,2)) < Number(obj2.timeStart.substring(3))){
+        else if(Number(obj1.timeStart.substring(0,2)) < Number(obj2.timeStart.substring(0,2))){
           return -1;
         }
         else{
@@ -206,7 +205,6 @@ export class AppComponent implements OnInit {
     const currentDay = current.getDay();
 
     if (this.activitydays.includes(currentDay)) {
-      //check if activity has already passed
       const act = this.activities.find(x => Number(x.day) == currentDay);
       //check hour first
       const hasPassed = this.activityHasFinished(act);
@@ -249,14 +247,28 @@ export class AppComponent implements OnInit {
     }
 
     const today = current.getDate() + "/" + (current.getMonth() + 1) + "/" + current.getFullYear();
-    this.notificationToSend.auPairId = this.userID;
-    this.notificationToSend.parentId = this.userID;
+    if(this.userType == 1){
+      this.serv.getParent(this.userID).toPromise().then(res => {
+        this.notificationToSend.auPairId = res.auPair
+      }).catch(err => {
+        console.log(err);
+      });
+      this.notificationToSend.parentId = this.userID;
+    }
+    else if (this.userType == 2){
+      this.notificationToSend.auPairId = this.userID;
+      this.serv.getAuPair(this.userID).toPromise().then(res => {
+        this.notificationToSend.parentId = res.employer;
+      }, err => {
+        console.log(err);
+      });
+    }
     this.notificationToSend.title = this.upcomingActivity.name;
     this.notificationToSend.body = this.upcomingActivity.description;
     this.notificationToSend.time = this.upcomingActivity.timeStart;
     this.notificationToSend.date = today;
 
-    console.log(this.upcomingActivity);
+    console.log(this.notificationToSend);
 
     this.setNotification();
   }

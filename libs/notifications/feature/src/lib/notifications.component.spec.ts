@@ -1,6 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { ParentNotificationsComponent } from './parent-notifications.component';
+import { ParentNotificationsComponent } from './notifications.component';
 
 describe('ParentNotificationsComponent', () => {
   let component: ParentNotificationsComponent;
