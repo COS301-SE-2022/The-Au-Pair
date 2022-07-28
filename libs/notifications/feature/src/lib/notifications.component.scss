@@ -84,9 +84,14 @@
   align-items: center;
   justify-content: center;
   color: var(--ion-color-dark);
-  font-size: 16px;
+  font-size: 14px;
   font-weight: bold;
   margin-right: 1em;
+}
+
+.timeColour{
+  color: var(--ion-color-primary);
+  margin-left: 5px;
 }
 
 @media (max-width: 572px) {

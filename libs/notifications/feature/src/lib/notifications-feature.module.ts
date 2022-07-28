@@ -5,6 +5,7 @@ import { ParentNotificationsComponent } from './notifications.component';
 import { ParentNotificationsRoutingModule } from './notifications-routing.module';
 import { NavbarModule } from '@the-au-pair/shared/components/navbar';
 import { IonicModule } from '@ionic/angular';
+import { API } from '../../../../shared/api/api.service';
 
 export const parentNotificationsFeatureRoutes: Route[] = [];
 
@@ -16,5 +17,6 @@ export const parentNotificationsFeatureRoutes: Route[] = [];
     IonicModule,
   ],
   declarations: [ParentNotificationsComponent],
+  providers: [API],
 })
 export class NotificationsFeatureModule {}

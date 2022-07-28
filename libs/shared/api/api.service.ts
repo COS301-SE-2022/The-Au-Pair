@@ -186,11 +186,11 @@ export class API{
   }
 
   getNotificationsByParentId(id : string): Observable<any> {
-    return this.http.post('http://localhost:8080/getNotificationsByParentId',id);
+    return this.http.post('http://localhost:8080/getNotifcationsByParentId',id);
   }
 
   getNotificationsByAuPairId(id : string): Observable<any> {
-    return this.http.post('http://localhost:8080/getNotificationsByAuPairId',id);
+    return this.http.post('http://localhost:8080/getNotifcationsByAuPairId',id);
   }
 
   logNotification(notification : Notification): Observable<any> {

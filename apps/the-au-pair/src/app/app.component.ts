@@ -268,8 +268,6 @@ export class AppComponent implements OnInit {
     this.notificationToSend.time = this.upcomingActivity.timeStart;
     this.notificationToSend.date = today;
 
-    console.log(this.notificationToSend);
-
     this.setNotification();
   }
 
