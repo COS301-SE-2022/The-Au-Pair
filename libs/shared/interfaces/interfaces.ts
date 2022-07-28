@@ -75,6 +75,7 @@ export interface Activity{
     longitude: number;
     suburb: string;
     gender: string;
+    fcmToken : string;
     birth: string;
     warnings: number;
     banned: string;
@@ -88,6 +89,16 @@ export interface Activity{
     costIncurred: number;
     onShift: boolean;
     employer: string;
+  }
+
+  export interface Notification{
+    id: string;
+    parentId: string;
+    auPairId: string;
+    title: string;
+    body: string;
+    date: string;
+    time: string;
   }
   
   export interface Report{

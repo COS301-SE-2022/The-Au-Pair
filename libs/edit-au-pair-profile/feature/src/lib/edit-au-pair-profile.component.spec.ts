@@ -26,7 +26,7 @@ describe('EditAuPairProfileComponent', () => {
   const emptyExperience = {email: "testemail@gmail.com", phone: "0832422323", address: "123 Valid Street", payRate: "", bio: "test bio", experience: ""}
 
   // Invalid User
-  const invalidUser = {id: "invalidId", fname: "Kyle", sname: "Pottinger", email: "testemail@gmail.com", address: "123 Valid Street", registered: false, type: 0, password: "test", number: "0832422323", salt: "mrs", latitude: 20, longitude: 20, suburb: 'Midrand', gender: "male", birth: "01/01/2001"}
+  const invalidUser = {id: "invalidId", fname: "Kyle", sname: "Pottinger", email: "testemail@gmail.com", address: "123 Valid Street", registered: false, type: 0, password: "test", number: "0832422323", salt: "mrs", latitude: 20, longitude: 20, suburb: 'Midrand', gender: "male",fcmToken : "", birth: "01/01/2001"}
 
   // Invalid Au Pair
   const invalidAuPair = {id: "invalidId", rating: 5, onShift: false, employer: "David", costIncurred: 100, distTraveled: 300, payRate: 50, bio: "test bio", experience: "test experience", currentLong: 0.0,  currentLat: 0.0}
@@ -96,7 +96,8 @@ describe('EditAuPairProfileComponent', () => {
       latitude: 0, 
       longitude: 0, 
       suburb: "", 
-      gender: "", 
+      gender: "",      
+      fcmToken : "",
       birth: "",
     };
 
@@ -141,6 +142,7 @@ describe('EditAuPairProfileComponent', () => {
       longitude: 0, 
       suburb: "", 
       gender: "", 
+      fcmToken : "",
       birth: "",
     };
 
@@ -182,7 +184,8 @@ describe('EditAuPairProfileComponent', () => {
       latitude: 0, 
       longitude: 0, 
       suburb: "", 
-      gender: "", 
+      gender: "",       
+      fcmToken : "",
       birth: "",
     };
 
@@ -225,6 +228,7 @@ describe('EditAuPairProfileComponent', () => {
       longitude: 0, 
       suburb: "", 
       gender: "", 
+      fcmToken : "",
       birth: "",
     };
 
@@ -267,6 +271,7 @@ describe('EditAuPairProfileComponent', () => {
       longitude: 0, 
       suburb: "", 
       gender: "", 
+      fcmToken : "",
       birth: "",
     };
 
@@ -309,6 +314,7 @@ describe('EditAuPairProfileComponent', () => {
       longitude: 0, 
       suburb: "", 
       gender: "", 
+      fcmToken : "",
       birth: "",
     };
 
@@ -351,6 +357,7 @@ describe('EditAuPairProfileComponent', () => {
       longitude: 0, 
       suburb: "", 
       gender: "", 
+      fcmToken : "",
       birth: "",
     };
 

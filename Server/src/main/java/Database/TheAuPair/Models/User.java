@@ -36,6 +36,8 @@ public class User
     private String suburb;
     @Field ("gender")
     private String gender;
+    @Field ("fcmToken")
+    private String fcmToken;    
     @Field ("birth")
     private String birth;
     @Field ("warnings")
@@ -43,7 +45,7 @@ public class User
     @Field ("banned")
     private String banned;
 
-    public User(String id, String fname, String sname, String email, String address, boolean registered, int type, String password, String number, String salt, double latitude, double longitude, String suburb, String gender, String birth, int warnings, String banned)
+    public User(String id, String fname, String sname, String email, String address, boolean registered, int type, String password, String number, String salt, double latitude, double longitude, String suburb, String gender, String birth, int warnings, String banned, String fcmToken)
     {
         this.id = id;
         this.fname = fname;
@@ -59,6 +61,7 @@ public class User
         this.longitude = longitude;
         this.suburb = suburb;
         this.gender = gender;
+        this.fcmToken = fcmToken;
         this.birth = birth;
         this.warnings = warnings;
         this.banned = banned;
@@ -217,6 +220,10 @@ public class User
     public int getWarnings() {
       return warnings;
     }
+    public String getFcmToken()
+    {
+        return fcmToken;
+    }
 
     public void setWarnings(int warnings) {
       this.warnings = warnings;
@@ -229,6 +236,12 @@ public class User
     public void setBanned(String banned) {
       this.banned = banned;
     }
+
+    public void setFcmToken(String fcmToken)
+    {
+        this.fcmToken = fcmToken;
+    }
+    
 
     @Override
     public String toString() {
@@ -248,6 +261,7 @@ public class User
         ", suburb='" + suburb + '\'' +
         ", gender='" + gender + '\'' +
         ", birth='" + birth + '\'' +
+        ", fcmToken='" + fcmToken + '\'' +
         ", warnings=" + warnings +
         ", banned='" + banned + '\'' +
         '}';

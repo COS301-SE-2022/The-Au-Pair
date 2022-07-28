@@ -36,6 +36,10 @@ export class NavbarComponent implements OnInit
     }
   }
 
+  notifications(){
+    this.router.navigate(['/notifications']);
+  }
+
   profile()
   {
     if(this.type == 0)

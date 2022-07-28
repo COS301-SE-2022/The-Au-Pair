@@ -30,6 +30,7 @@ export class EditAuPairProfileComponent implements OnInit {
     longitude: 0,
     suburb: "",
     gender: "",
+    fcmToken : "",
     birth: "",
     warnings: 0,
     banned: "",
