@@ -156,11 +156,16 @@ export class LoginComponent implements OnInit {
         }
         if(type == 1)
         {
-          this.router.navigate(['/parent-dashboard']);
+          this.router.navigate(['/parent-dashboard']).then(() => {
+            document.location.reload()
+          });
         }
         else if(type == 2)
         {
-          this.router.navigate(['/au-pair-dashboard']);
+          this.router.navigate(['/au-pair-dashboard']).then( () =>{
+            document.location.reload();
+          }
+          );
         }
       }
       this.loggingIn = false;
