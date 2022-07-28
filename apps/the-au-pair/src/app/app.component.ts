@@ -306,13 +306,16 @@ export class AppComponent implements OnInit {
       //Set new coords
       this.auPairDetails.currentLong = resp.coords.longitude;
       this.auPairDetails.currentLat = resp.coords.latitude;
-    }).catch((error: any) => {
+      
+      //Only update if coordinates have changed
+      if(flag)
+      this.updateAuPair(this.auPairDetails);
+    }).catch((error: any) => 
+    {
       console.log('Error getting location', error);
     });
 
-    //Only update if coordinates have changed
-    if (flag)
-      this.updateAuPair(this.auPairDetails);
+
   }
 
   updateAuPair(aupair: auPair) {

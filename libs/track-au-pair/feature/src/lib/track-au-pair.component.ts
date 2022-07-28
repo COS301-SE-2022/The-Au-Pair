@@ -77,6 +77,9 @@ export class TrackAuPairComponent implements OnInit
     this.userType = this.store.snapshot().user.type;
 
     setInterval(async ()=> {
+      //Initialise parentID for logged in user
+      this.userID = this.store.snapshot().user.id;
+      this.userType = this.store.snapshot().user.type;
       await this.getUserDetails();
       this.putMarker();
      }, 10000);
@@ -124,7 +127,6 @@ export class TrackAuPairComponent implements OnInit
     /* Get the onShift and current coords of the employed au pair  */
     res = await this.serv.getAuPair(this.parentDetails.auPair).toPromise();
     
-    //Only show location if the au pair is on shift
     this.auPairDetails.id = res.id;
     this.auPairDetails.onShift = res.onShift;
     this.auPairDetails.currentLong = res.currentLong;
