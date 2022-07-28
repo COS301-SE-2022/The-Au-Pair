@@ -9,12 +9,18 @@
 }
 
 .requests-wrapper{
-    padding: 15px;
+    padding: 10px;
     width: 100%;
 }
 
+.info{
+    display: flex;
+    align-items: center;
+
+}
+
 .request-item{
-    height: 70px;
+    height: 80px;
     width: 100%;
     margin-inline: 0px;
     margin-bottom: 15px;
@@ -27,7 +33,7 @@
     border-radius: 50%;
     height: 60px;
     width: 60px;
-    margin: auto;
+    margin-left: 15px;
 }
 
 .wrapper{
@@ -51,7 +57,8 @@
 }
 
 .request-content{
-    margin-left: 10px;
+    margin-left: 25px;
+    margin-top: 10px;
 }
 
 .heading{
@@ -100,7 +107,7 @@
     }
 
     .time{
-        font-size: 12px;
+        font-size: 7px;
     }
 
     .details{
@@ -118,8 +125,16 @@
 
     .profile{
         height: 50px;
-        width: 100%;
+        width: 50px;
         margin-left: 0px;
         margin-right: 0px;
+    }
+
+    .request-content{
+        margin-top: 8px;
+    }
+
+    .details{
+        font-size: 10px;
     }
 }

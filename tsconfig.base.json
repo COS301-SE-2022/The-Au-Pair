@@ -92,7 +92,7 @@
       ],
       "@the-au-pair/shared/components/long-field": [
         "libs/shared/components/long-field/src/index.ts"
-      ],
+      ]
     }
   },
   "exclude": ["node_modules", "tmp"]

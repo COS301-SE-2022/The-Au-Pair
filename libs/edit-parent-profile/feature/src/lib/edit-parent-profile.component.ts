@@ -310,9 +310,7 @@ export class EditParentProfileComponent implements OnInit{
   }
 
   async editDetails(user:User, medAid:medAid)
-  {
-    console.log("N:", user);
-    
+  {    
     await this.editUser(user);
     await this.editMedAid(medAid);    
 

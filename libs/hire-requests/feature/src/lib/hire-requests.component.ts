@@ -106,7 +106,6 @@ export class HireRequestsComponent implements OnInit {
         error=>{console.log("Error has occured with API: " + error);}
       )
     });
-    console.log(this.ContractArray);
   }
   
   async errToast()
@@ -146,9 +145,6 @@ export class HireRequestsComponent implements OnInit {
 
     this.currentAuPair.employer = parentID;
     this.parentDetails.auPair = this.auPairID;    
-
-    console.log(JSON.stringify(this.currentAuPair));
-    console.log(JSON.stringify(this.parentDetails));  
 
     await this.updateAuPair();
     await this.updateParent();
