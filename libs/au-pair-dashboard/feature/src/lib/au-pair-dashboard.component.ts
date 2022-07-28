@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngxs/store';
 import { API } from '../../../../shared/api/api.service'
-import { auPair, Child, HoursLogged } from '../../../../shared/interfaces/interfaces';
+import { Child, HoursLogged } from '../../../../shared/interfaces/interfaces';
+import { Router } from '@angular/router';
+import { ToastController } from '@ionic/angular';
 
 @Component({
   selector: 'the-au-pair-au-pair-dashboard',
@@ -17,7 +19,7 @@ export class AuPairDashboardComponent implements OnInit {
   employer = "";
   employerName!: string;
   employerSurname! : string;
-  employerId! : string;
+  employerId = '';
   employerPhone! : string;
   children: Child[] = [];
 
@@ -32,7 +34,7 @@ export class AuPairDashboardComponent implements OnInit {
     timeEnd: ""
   };
   
-  constructor(private serv: API, private store: Store) {}
+  constructor(private serv: API, private store: Store, public router: Router, public toastCtrl: ToastController) {}
 
   async ngOnInit(): Promise<void> {
     this.aupairID = this.store.snapshot().user.id;
@@ -150,5 +152,36 @@ export class AuPairDashboardComponent implements OnInit {
       error =>{console.log("Error has occured with API: " + error);}
       
     )
+  }
+
+  async openToast(message: string)
+  {
+    const toast = await this.toastCtrl.create({
+      message: message,
+      duration: 4000,
+      position: 'top',
+      cssClass: 'toastPopUp'
+    });
+    await toast.present();
+  }
+
+  async checkHasEmployerEmployedSchedule(){
+    if (this.employerId !== ''){
+      this.router.navigate(['/au-pair-schedule']);
+    }
+    else
+    {
+      this.openToast('You need to be employed to view your schedule');
+    }
+  }
+
+  async checkHasEmployerEmployedRequests(){
+    if (this.employerId === ''){
+      this.router.navigate(['/hire-requests']);
+    }
+    else
+    {
+      this.openToast('You are already employed');
+    }
   }
 }
