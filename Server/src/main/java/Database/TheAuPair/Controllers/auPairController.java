@@ -3,9 +3,7 @@ package Database.TheAuPair.Controllers;
 import Database.TheAuPair.Models.auPair;
 import Database.TheAuPair.Repositories.auPairRepository;
 import Database.TheAuPair.Services.auPairService;
-
 import java.util.List;
-
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
