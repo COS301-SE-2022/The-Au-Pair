@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { ModalController, NavParams, ToastController } from '@ionic/angular';
-import { auPair, User } from '../../../../../shared/interfaces/interfaces';
+import { auPair, Contract, User } from '../../../../../shared/interfaces/interfaces';
 import { API } from '../../../../../shared/api/api.service';
+import { Store } from '@ngxs/store';
+import { min } from 'rxjs';
 
 @Component({
   selector: 'the-au-pair-expand-modal',
@@ -11,6 +13,10 @@ import { API } from '../../../../../shared/api/api.service';
 export class ExpandModalComponent implements OnInit {
   public navParams = new NavParams;
   auPairId: string = this.navParams.get('auPairId');
+
+  parentID = "";
+
+  flag!: boolean;
 
   auPairDetails: auPair = {
     id: "",
@@ -46,15 +52,45 @@ export class ExpandModalComponent implements OnInit {
     warnings: 0,
     banned: "",
   }
+
+  contractDetails: Contract= {
+    parentID: "",
+    auPairID: "",
+    timestamp: "",
+  }
   
-  constructor(private serv: API, private modalCtrl : ModalController ,public toastCtrl: ToastController) {}
+  constructor(private serv: API, private modalCtrl : ModalController ,public toastCtrl: ToastController, private store: Store) {}
 
   ngOnInit(): void {
+    this.parentID = this.store.snapshot().user.id;
     this.getAuPairDetails(this.auPairId);
   }
 
   closeModal(){
     this.modalCtrl.dismiss();
+  }
+
+  async errToast()
+  {
+    const toast = await this.toastCtrl.create({
+      message: 'You have already requested to hire this Au Pair.',
+      duration: 2000,
+      position: 'top',
+      cssClass: 'toastPopUp'
+    });
+    await toast.present();
+  }
+
+  async sucToast()
+  {
+    const toast = await this.toastCtrl.create({
+      message: 'Request sent successfully!',
+      duration: 2000,
+      position: 'top',
+      color: 'primary',
+      cssClass: 'toastPopUp'
+    });
+    await toast.present();
   }
 
   async getAuPairDetails(APID : string)
@@ -97,6 +133,58 @@ export class ExpandModalComponent implements OnInit {
     )
   }
 
+  async sendHireRequests(auPairID : string)
+  {
+    this.flag = false;
+    const ts = new Date();
+
+    this.contractDetails.parentID = this.parentID;
+    this.contractDetails.auPairID = auPairID;
+
+    const minutes = String(ts.getMinutes()).padStart(2, '0');
+
+    this.contractDetails.timestamp = ts.getFullYear() + "/" + (ts.getMonth() + 1) + "/" + ts.getDate() + " - " + ts.getHours() + ":" + minutes;
+
+    await this.serv.getContractbyIDs(this.contractDetails.parentID, this.contractDetails.auPairID)
+    .toPromise()
+    .then(
+      res => {
+        console.log("The response is:" + res);
+        
+        if(res === null)
+        {
+          this.flag = false;
+        }
+        else
+        {
+          this.flag = true;
+        }
+      },
+      error => {
+        console.log("Error has occured with API: " + error);
+      }
+    )
+    
+    if(this.flag === false)
+    {
+      this.sucToast();
+      this.serv.addContract(this.contractDetails)
+      .toPromise()
+      .then(
+        res => {
+          console.log("The response is:" + res);
+        },
+        error => {
+          console.log("Error has occured with API: " + error);
+        }
+      )
+    }
+    else
+    {
+      this.errToast();
+    }
+  }
+  
   getAge(dateString : string) {
     const today = new Date();
     const birthDate = new Date(dateString);

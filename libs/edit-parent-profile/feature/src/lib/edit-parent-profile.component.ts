@@ -3,6 +3,7 @@ import { API } from '../../../../shared/api/api.service';
 import { User, medAid, Parent } from '../../../../shared/interfaces/interfaces';
 import { ToastController } from '@ionic/angular';
 import { Store } from '@ngxs/store';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'the-au-pair-edit-parent-profile',
@@ -13,6 +14,13 @@ export class EditParentProfileComponent implements OnInit{
   
   parentID = "";
   hasErr = false;
+
+  location = "";
+  long = 0;
+  lat = 0;
+  suburb = "";
+
+  potentialLocations : any[] = [];
 
   userDetails: User = {
     id: "",
@@ -51,7 +59,7 @@ export class EditParentProfileComponent implements OnInit{
     auPair: "",
   }
 
-  constructor(private serv: API, public toastCtrl: ToastController, private store: Store){}
+  constructor(private serv: API, private http: HttpClient, public toastCtrl: ToastController, private store: Store){}
 
   ngOnInit(): void
   {
@@ -170,7 +178,37 @@ export class EditParentProfileComponent implements OnInit{
     {
       if(dom != null)
       {
-        dom.style.display = "none";
+        //Check that the selected location is from the API
+        let flag = false;
+        this.getLocations()
+        this.potentialLocations.forEach((element) => {
+          if(dom != null)
+          {
+            if(element.display_name == this.location)
+            {
+              flag = true;
+              return;
+            }
+          }
+        })
+        if(!flag)
+        {
+          dom.innerHTML = "Please select a valid location from the suggested below.";
+          dom.style.display = "block";
+          flag = false;
+        }
+        else
+        {
+          dom.style.display = "none";
+          this.potentialLocations.forEach((element) => {
+            if(element.display_name == this.location)
+            {
+              this.long = parseFloat(element.lon);
+              this.lat = parseFloat(element.lat);
+              this.suburb = element.address.suburb;
+            }
+          })
+        }
       }
     }
     dom = document.getElementById("medAidMMError");
@@ -263,6 +301,9 @@ export class EditParentProfileComponent implements OnInit{
       this.userDetails.email = val.email;
       this.userDetails.number = val.phone;
       this.userDetails.address = val.address;
+      this.userDetails.latitude = this.lat;
+      this.userDetails.longitude = this.long;
+      this.userDetails.suburb = this.suburb;
       this.medAidDetails.name = val.medicalAidMM;
       this.medAidDetails.plan = val.medicalAidPlan;
       this.medAidDetails.provider = val.medicalAidProvider;
@@ -273,18 +314,11 @@ export class EditParentProfileComponent implements OnInit{
   }
 
   async editDetails(user:User, medAid:medAid)
-  {
+  {    
     await this.editUser(user);
     await this.editMedAid(medAid);    
 
-    if(this.hasErr)
-    {
-      this.errToast();
-    }
-    else
-    {
-      this.openToast();
-    } 
+    this.openToast();
   }
 
   async editUser(user:User){    
@@ -353,5 +387,40 @@ export class EditParentProfileComponent implements OnInit{
       cssClass: 'toastPopUp'
     });
     await toast.present();
+  }
+
+  async getLocations()
+  {
+    const loc = this.location;
+    
+    //Building the API query according to what is in the location input field
+    const locationParam = loc.replace(' ', '+');
+    const params = locationParam + '&limit=4&format=json&polygon_geojson=1&addressdetails=1';
+
+    //Make the API call
+    await this.http.get('https://nominatim.openstreetmap.org/search?q='+params)
+    .toPromise()
+    .then(data=>{ // Success
+      //Populate potential Locations Array
+      const json_data = JSON.stringify(data);
+      const res = JSON.parse(json_data);
+
+      //Jump out if no results returned
+      if(json_data === "{}")
+      {
+        return;
+      }
+  
+      //Add returned data to the array
+      const len = res.length;
+      for (let j = 0; j < len && j<4; j++) 
+      {      
+        this.potentialLocations.push(res[j]);
+      }
+      
+    })
+    .catch(error=>{ // Failure
+      console.log(error);
+    });
   }
 }

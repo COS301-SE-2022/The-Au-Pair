@@ -26,6 +26,22 @@
     color: white;   
 }
 
+.au-pair-name {
+    background-color: #176560;
+    color: white;
+    margin: auto;
+    height: 94px;
+    display: flex;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+    width: 90%;
+    font-size: 24px;
+    border-radius: 16px;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
 .actions-heading {
     font-size: 36px;
     margin-top: 95px;
@@ -151,7 +167,7 @@ ion-card {
     width: 90%;
     height: 100%;
     display: grid;
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: repeat(3, 1fr);
     justify-items: center;
     align-items: center;
     margin: auto;
@@ -173,7 +189,7 @@ ion-card {
     text-align: center;
     justify-content: center;
     align-items: center;
-    width: 50%;
+    width: 75%;
     font-size: 24px;
     border-radius: 16px;
     cursor: pointer;

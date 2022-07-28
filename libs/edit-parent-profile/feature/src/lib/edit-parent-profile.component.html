@@ -19,7 +19,10 @@
                 </div>
                 <div class="details-div">
                     <div class="details-title">Address: </div>
-                    <input type = 'text' name = "address" class="user-details" ngModel = '{{this.userDetails.address}}' placeholder="Address">
+                    <input [(ngModel)]="location" (input)="getLocations()" list="locations" type = 'text' name = "address" class="user-details" ngModel = '{{this.userDetails.address}}' placeholder="Address">
+                    <datalist id="locations">
+                        <option *ngFor="let location of potentialLocations" value="{{location}}">
+                      </datalist>
                     <p id="addressError" class="error" style="display: none;">Error in field</p>
                 </div>
                 <div class="details-div-large">

@@ -6,7 +6,6 @@ import { API } from '../../../../shared/api/api.service';
 import { NavbarModule } from '@the-au-pair/shared/components/navbar';
 import { IonicModule } from '@ionic/angular';
 import { CommonModule } from '@angular/common';
-import { By } from '@angular/platform-browser';
 import { NgxsModule } from '@ngxs/store';
 import { AppState } from '../../../../shared/ngxs/state';
 
@@ -44,17 +43,5 @@ describe('AuPairDashboardComponent', () => {
     
     const str = component.getCurrentTime();
     expect(str).toMatch(/^((0[1-9])|(1[0-9])|(2[0-4])):((0[0-9])|([1-6]\d))$/);
-  });
-
-  it('should, have a redirect to the au-pair schedule', () => {
-      const href = fixture.debugElement.query(By.css('#cal')).nativeElement
-    .getAttribute('routerLink');
-    expect(href).toEqual('/au-pair-schedule'); 
-  });
-
-  it('should, have a redirect to the au-pair cost', () => {
-    const href = fixture.debugElement.query(By.css('#cost')).nativeElement
-    .getAttribute('routerLink');
-    expect(href).toEqual('/au-pair-cost'); 
   });
 });
