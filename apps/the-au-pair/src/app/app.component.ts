@@ -54,14 +54,17 @@ export class AppComponent implements OnInit
   { 
     //Only update coordinates if you are an au pair
     setInterval(()=> {
-    if(this.userType == 2 && this.userID != '')
-    {
-      if(this.auPairDetails.onShift == true)
+      this.userID = this.store.snapshot().user.id;
+      this.userType = this.store.snapshot().user.type;
+      if(this.userType == 2 && this.userID != '')
       {
-        this.getCurrentAuPairDetails();
-        this.updateCoordinates();
-      }
-    } }, 10000);
+        if(this.auPairDetails.onShift == true)
+        {
+          this.getCurrentAuPairDetails();
+          this.updateCoordinates();
+        }
+      } 
+    }, 10000);
   }
 
   async getCurrentAuPairDetails()
@@ -87,14 +90,15 @@ export class AppComponent implements OnInit
       this.auPairDetails.currentLong = resp.coords.longitude;
       this.auPairDetails.currentLat = resp.coords.latitude;
       
+      //Only update if coordinates have changed
+      if(flag)
+      this.updateAuPair(this.auPairDetails);
     }).catch((error: any) => 
     {
       console.log('Error getting location', error);
     });
 
-    //Only update if coordinates have changed
-    if(flag)
-      this.updateAuPair(this.auPairDetails);
+
   }
 
   updateAuPair(aupair: auPair)
