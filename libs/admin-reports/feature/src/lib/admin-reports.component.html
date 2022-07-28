@@ -9,7 +9,7 @@
                     <div class="leftInfo">
                         <div class="info">
                             <div class="desc label">Full Name:</div>
-                            <div class="cont">{{report.auPair.fname}}  {{report.auPair.sname}}</div>
+                            <div class="cont">{{report.fname}}  {{report.sname}}</div>
                         </div>
                         <div class="info">
                             <div class="desc label">ID Number:</div>
@@ -17,7 +17,7 @@
                         </div>
                         <div class="info">
                             <div class="desc label">Email:</div>
-                            <div class="cont">{{report.auPair.email}}</div>
+                            <div class="cont">{{report.email}}</div>
                         </div>
                         <div class="long-info">
                             <div class="desc label">Reason:</div>
@@ -30,13 +30,13 @@
                             <img src="assets/images/profile.jpg" alt="ruben">  
                         </div>
                         <div>
-                            <button class = "button ban" (click)="ban(report.auPairId, report.auPair)">
+                            <button class = "button ban" (click)="ban(report)">
                                 Ban Au Pair
                             </button>
-                            <button class = "button warn" (click)="warn(report.auPairId, report.auPair)">
+                            <button class = "button warn" (click)="warn(report)">
                                 Warn Au Pair
                             </button>
-                            <button class = "button dismiss" (click)="dismiss(report.id)">
+                            <button class = "button dismiss" (click)="dismiss(report)">
                                 Dismiss Report
                             </button>
                         </div>

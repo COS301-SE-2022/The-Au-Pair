@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { User } from 'libs/shared/interfaces/interfaces';
+import { Report, User } from 'libs/shared/interfaces/interfaces';
 import { API } from "../../../../shared/api/api.service";
 
 @Component({
@@ -30,6 +30,7 @@ export class AdminReportsComponent implements OnInit {
     birth: "",
     warnings: 0,
     banned: "",
+    fcmToken: "",
   }
 
   
@@ -42,20 +43,29 @@ export class AdminReportsComponent implements OnInit {
 
   getReports() {
     this.serv.getAllReports().toPromise().then(res => {
-      // console.log(res);
       this.reports = res;
 
       for(let i = 0; i < this.reports.length; i++) {
         this.serv.getUser(this.reports[i].auPairId).toPromise().then(dat => {
+          
+          this.reports[i].fname = dat.fname;
+          this.reports[i].sname = dat.sname;
+          this.reports[i].email = dat.email;
+          this.reports[i].address = dat.address;
+          this.reports[i].registered = dat.registered;
+          this.reports[i].type = dat.type;
+          this.reports[i].password = dat.password;
+          this.reports[i].number = dat.number;
+          this.reports[i].salt = dat.salt;
+          this.reports[i].latitude = dat.latitude;
+          this.reports[i].longitude = dat.longitude;
+          this.reports[i].suburb = dat.suburb;
+          this.reports[i].gender = dat.gender;
+          this.reports[i].birth = dat.birth;
+          this.reports[i].warnings = dat.warnings;
+          this.reports[i].banned = dat.banned;
+          this.reports[i].fcmToken = dat.fcmToken;
 
-          this.user[i] = dat;
-          this.reports[i].auPair = this.user[i];
-
-          // this.reports[i].fname = dat.fname;
-          // this.reports[i].sname = dat.sname;
-          // this.reports[i].email = dat.email;
-          // this.reports[i].warnings = dat.warnings;
-          // this.reports[i].banned = dat.banned;
         }).catch(err => {
           console.log(err);
         });
@@ -77,37 +87,45 @@ export class AdminReportsComponent implements OnInit {
     return outp;
   }
 
-  dismiss(reportId : string) {
-    this.serv.deleteReport(reportId).toPromise().then(res => {
+  dismiss(reportId : any) {
+    this.serv.deleteReport(reportId.id).toPromise().then(res => {
       window.location.reload();
     }).catch(err => {
       console.log(err);
     });
   }
 
-  warn(reportId : string, user : any) {
-    this.userDetails.id = user.id;
-    this.userDetails.fname = user.fname;
-    this.userDetails.sname = user.sname;
-    this.userDetails.email = user.email;
-    this.userDetails.address = user.address;
-    this.userDetails.registered = user.registered;
-    this.userDetails.type = user.type;
-    this.userDetails.password = user.password;
-    this.userDetails.number = user.number;
-    this.userDetails.salt = user.salt;
-    this.userDetails.latitude = user.latitude;
-    this.userDetails.longitude = user.longitude;
-    this.userDetails.suburb = user.suburb;
-    this.userDetails.gender = user.gender;
-    this.userDetails.birth = user.birth;
-    this.userDetails.warnings = user.warnings + 1;
+  warn(customReport : any) {
+    this.userDetails.id = customReport.auPairId;
+    this.userDetails.fname = customReport.fname;
+    this.userDetails.sname = customReport.sname;
+    this.userDetails.email = customReport.email;
+    this.userDetails.address = customReport.address;
+    this.userDetails.registered = customReport.registered;
+    this.userDetails.type = customReport.type;
+    this.userDetails.password = customReport.password;
+    this.userDetails.number = customReport.number;
+    this.userDetails.salt = customReport.salt;
+    this.userDetails.latitude = customReport.latitude;
+    this.userDetails.longitude = customReport.longitude;
+    this.userDetails.suburb = customReport.suburb;
+    this.userDetails.gender = customReport.gender;
+    this.userDetails.birth = customReport.birth;
+    this.userDetails.fcmToken = customReport.fcmToken;
+    this.userDetails.warnings = customReport.warnings;
+    this.userDetails.warnings += 1;
 
-    if(user.warnings > 3) {
+    if(this.userDetails.warnings > 3) {
       this.userDetails.banned = "Due to receiving more than 3 warnings";
     }
 
-    this.serv.deleteReport(reportId).toPromise().then(res => {
+    this.serv.editUser(this.userDetails).toPromise().then(res => {
+      window.location.reload();
+    }).catch(err => {
+      console.log(err);
+    });
+
+    this.serv.deleteReport(customReport.id).toPromise().then(res => {
       window.location.reload();
     }).catch(err => {
       console.log(err);
@@ -117,24 +135,25 @@ export class AdminReportsComponent implements OnInit {
     this.userDetails.id = "";
   }
 
-  ban(reportId : string, user : any) {
+  ban(customReport : any) {
     
-    this.userDetails.id = user.id;
-    this.userDetails.fname = user.fname;
-    this.userDetails.sname = user.sname;
-    this.userDetails.email = user.email;
-    this.userDetails.address = user.address;
-    this.userDetails.registered = user.registered;
-    this.userDetails.type = user.type;
-    this.userDetails.password = user.password;
-    this.userDetails.number = user.number;
-    this.userDetails.salt = user.salt;
-    this.userDetails.latitude = user.latitude;
-    this.userDetails.longitude = user.longitude;
-    this.userDetails.suburb = user.suburb;
-    this.userDetails.gender = user.gender;
-    this.userDetails.birth = user.birth;
-    this.userDetails.warnings = user.warnings;
+    this.userDetails.id = customReport.auPairId;
+    this.userDetails.fname = customReport.fname;
+    this.userDetails.sname = customReport.sname;
+    this.userDetails.email = customReport.email;
+    this.userDetails.address = customReport.address;
+    this.userDetails.registered = customReport.registered;
+    this.userDetails.type = customReport.type;
+    this.userDetails.password = customReport.password;
+    this.userDetails.number = customReport.number;
+    this.userDetails.salt = customReport.salt;
+    this.userDetails.latitude = customReport.latitude;
+    this.userDetails.longitude = customReport.longitude;
+    this.userDetails.suburb = customReport.suburb;
+    this.userDetails.gender = customReport.gender;
+    this.userDetails.birth = customReport.birth;
+    this.userDetails.fcmToken = customReport.fcmToken;
+    this.userDetails.warnings = customReport.warnings;
     this.userDetails.banned = "Due to violation of community guidelines";
 
     this.serv.editUser(this.userDetails).toPromise().then(res => {
@@ -143,7 +162,7 @@ export class AdminReportsComponent implements OnInit {
       console.log(err);
     });
 
-    this.serv.deleteReport(reportId).toPromise().then(res => {
+    this.serv.deleteReport(customReport.id).toPromise().then(res => {
       window.location.reload();
     }).catch(err => {
       console.log(err);

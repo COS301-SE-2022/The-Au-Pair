@@ -105,5 +105,5 @@ export interface Activity{
     id: string;
     issuerId: string;
     auPairId: string;
-    description: string;
+    desc: string;
   }

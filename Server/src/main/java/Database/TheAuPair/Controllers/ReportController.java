@@ -17,21 +17,11 @@ public class ReportController {
 
   @GetMapping("/getAllReports")
   @CrossOrigin(origins = "http://localhost:4200")
-  public ResponseEntity<List<Report>> getAllReports(BindingResult bindingResult)
+  public ResponseEntity<List<Report>> getAllReports()
   {
-    if (bindingResult.hasErrors())
-    {
-      return ResponseEntity
-        .badRequest()
-        .body(null);
-    }
-    else
-    {
-      return ResponseEntity
-        .ok()
-        .body(this.repServ.getAllReports());
-    }
-
+    return ResponseEntity
+      .ok()
+      .body(this.repServ.getAllReports());
   }
 
   @PostMapping("/getReportsForAuPair")

@@ -10,5 +10,5 @@ import java.util.List;
 @Repository
 public interface ReportRepository extends MongoRepository<Report, String> {
   @Query("{issuerId:'?0'}")
-  List<Report> findUsingAuPairId(String id);
+  List<Report> findUsingAuPairId(String issuerId);
 }
