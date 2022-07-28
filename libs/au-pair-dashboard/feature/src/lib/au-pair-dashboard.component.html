@@ -25,11 +25,19 @@
     <p class="actions-heading">Actions</p>
     <div class="actions-div-wrapper">
       <div class="actions-div">
-        <div id="cal" class="action" (click)="checkHasEmployerEmployedSchedule()">
+        <div *ngIf="employerId !== ''" id="cal" class="action" (click)="checkHasEmployerEmployedSchedule()">
           <ion-icon name="calendar-outline" class="action-icon"></ion-icon>
           <div class="action-tag">Your Calendar</div>
         </div>
-        <div id="cost" class="action" (click)="checkHasEmployerEmployedRequests()">
+        <div *ngIf="employerId === ''" style="opacity : 0.4;" id="cal" class="action" (click)="checkHasEmployerEmployedSchedule()">
+          <ion-icon name="calendar-outline" class="action-icon"></ion-icon>
+          <div class="action-tag">Your Calendar</div>
+        </div>
+        <div *ngIf="employerId !== ''" style="opacity : 0.4;" id="cost" class="action" (click)="checkHasEmployerEmployedRequests()">
+          <ion-icon name="mail-outline" class="action-icon"></ion-icon>
+          <div class="action-tag">Hire Requests</div>
+        </div>
+        <div *ngIf="employerId === ''" id="cost" class="action" (click)="checkHasEmployerEmployedRequests()">
           <ion-icon name="mail-outline" class="action-icon"></ion-icon>
           <div class="action-tag">Hire Requests</div>
         </div>

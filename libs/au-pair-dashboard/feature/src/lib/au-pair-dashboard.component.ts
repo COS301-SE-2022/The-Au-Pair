@@ -3,6 +3,7 @@ import { Store } from '@ngxs/store';
 import { API } from '../../../../shared/api/api.service'
 import { Child, HoursLogged } from '../../../../shared/interfaces/interfaces';
 import { Router } from '@angular/router';
+import { ToastController } from '@ionic/angular';
 
 @Component({
   selector: 'the-au-pair-au-pair-dashboard',
@@ -33,7 +34,7 @@ export class AuPairDashboardComponent implements OnInit {
     timeEnd: ""
   };
   
-  constructor(private serv: API, private store: Store) {}
+  constructor(private serv: API, private store: Store, public router: Router, public toastCtrl: ToastController) {}
 
   async ngOnInit(): Promise<void> {
     this.aupairID = this.store.snapshot().user.id;
@@ -153,23 +154,34 @@ export class AuPairDashboardComponent implements OnInit {
     )
   }
 
+  async openToast(message: string)
+  {
+    const toast = await this.toastCtrl.create({
+      message: message,
+      duration: 4000,
+      position: 'top',
+      cssClass: 'toastPopUp'
+    });
+    await toast.present();
+  }
+
   async checkHasEmployerEmployedSchedule(){
     if (this.employerId !== ""){
-      this.router.navigate(['/au-pair-cost']);
+      this.router.navigate(['/au-pair-schedule']);
     }
     else
     {
-      this.openToast('No Au Pair employed');
+      this.openToast('You need to be employed to view your schedule');
     }
   }
 
   async checkHasEmployerEmployedRequests(){
-    if (this.parentDetails.auPair !== ""){
-      this.router.navigate(['/au-pair-cost']);
+    if (this.employerId === ""){
+      this.router.navigate(['/hire-requests']);
     }
     else
     {
-      this.openToast('No Au Pair employed');
+      this.openToast('You are already employed');
     }
   }
 }

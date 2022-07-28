@@ -163,9 +163,8 @@ export class ParentDashboardComponent implements OnInit{
   {
     const toast = await this.toastCtrl.create({
       message: message,
-      duration: 4000,
+      duration: 1500,
       position: 'top',
-      color: 'primary',
       cssClass: 'toastPopUp'
     });
     await toast.present();
@@ -178,6 +177,16 @@ export class ParentDashboardComponent implements OnInit{
     else
     {
       this.openToast('You have no children to assign activities to');
+    }
+  }
+
+  async checkHasChildrenSchedule(){
+    if (this.parentDetails.children.length >= 1){
+      this.router.navigate(['/schedule']);
+    }
+    else
+    {
+      this.openToast("You have no childrens' schedules to view");
     }
   }
 
@@ -201,7 +210,17 @@ export class ParentDashboardComponent implements OnInit{
     }
     else
     {
-      this.openToast('No Au Pair employed');
+      this.openToast('You do not have an Au Pair Employed');
+    }
+  }
+
+  async checkHasEmployerTrack(){
+    if (this.parentDetails.auPair !== ""){
+      this.router.navigate(['/track-au-pair']);
+    }
+    else
+    {
+      this.openToast('You do not have an Au Pair Employed');
     }
   }
 
