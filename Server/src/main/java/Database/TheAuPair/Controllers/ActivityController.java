@@ -3,8 +3,6 @@ package Database.TheAuPair.Controllers;
 import Database.TheAuPair.Models.Activity;
 import Database.TheAuPair.Repositories.ActivityRepository;
 import Database.TheAuPair.Services.ActivityService;
-import org.springframework.http.ResponseEntity;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
@@ -20,91 +18,36 @@ public class ActivityController
 
   @PostMapping("/getActivity")
   @CrossOrigin(origins = "http://localhost:4200")
-  public ResponseEntity<Activity> getActivity(@RequestBody String id, BindingResult bindingResult)
+  public Activity getActivity(@RequestBody String id)
   {
-    if (bindingResult.hasErrors())
-    {
-      return ResponseEntity
-        .badRequest()
-        .body(null);
-    }
-    else
-    {
-      return ResponseEntity
-        .ok()
-        .body(as.getActivity(id));
-    }
+    return this.as.getActivity(id);
   }
 
   @PostMapping("/addActivity")
   @CrossOrigin(origins = "http://localhost:4200")
-  public ResponseEntity.BodyBuilder addActivity(@RequestBody Activity a, BindingResult bindingResult)
+  public void addActivity(@RequestBody Activity a)
   {
-    if (bindingResult.hasErrors())
-    {
-      return (ResponseEntity.BodyBuilder) ResponseEntity
-        .badRequest()
-        .body(null);
-    }
-    else
-    {
-      this.as.addActivity(a);
-      return ResponseEntity
-        .ok();
-    }
+    this.as.addActivity(a);
   }
 
   @PostMapping("/editActivity")
   @CrossOrigin(origins = "http://localhost:4200")
-  public ResponseEntity.BodyBuilder editActivity(@RequestBody Activity a, BindingResult bindingResult)
+  public void editActivity(@RequestBody Activity a)
   {
-    if (bindingResult.hasErrors())
-    {
-      return (ResponseEntity.BodyBuilder) ResponseEntity
-        .badRequest()
-        .body(null);
-    }
-    else
-    {
-      this.as.updateActivity(a);
-      return ResponseEntity
-        .ok();
-    }
+    this.as.updateActivity(a);
   }
 
   @PostMapping("/getSchedule")
   @CrossOrigin(origins = "http://localhost:4200")
-  public ResponseEntity<List<Activity>> getSchedule(@RequestBody String id, BindingResult bindingResult)
+  public List<Activity> getSchedule(@RequestBody String id)
   {
-    if (bindingResult.hasErrors())
-    {
-      return ResponseEntity
-        .badRequest()
-        .body(null);
-    }
-    else
-    {
-      return ResponseEntity
-        .ok()
-        .body(as.getSchedule(id));
-    }
+    return this.as.getSchedule(id);
   }
 
   @PostMapping("/getAuPairSchedule")
   @CrossOrigin(origins = "http://localhost:4200")
-  public ResponseEntity<List<Activity>> getAuPairSchedule(@RequestBody String [] children, BindingResult bindingResult)
+  public List<Activity> getAuPairSchedule(@RequestBody String [] children)
   {
-    if (bindingResult.hasErrors())
-    {
-      return ResponseEntity
-        .badRequest()
-        .body(null);
-    }
-    else
-    {
-      return ResponseEntity
-        .ok()
-        .body(as.getAuPairSchedule(children));
-    }
+    return this.as.getAuPairSchedule(children);
   }
 }
