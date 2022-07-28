@@ -160,6 +160,11 @@ const routes: Routes = [
       ),
   },
   {
+    path: 'hire-requests',
+    loadChildren: () =>
+    import('@the-au-pair/hire-requests/feature').then((m) => m.HireRequestsFeatureModule),
+  },
+  {
     path: '**',
     redirectTo: 'login-page',
   },

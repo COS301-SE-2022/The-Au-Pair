@@ -89,6 +89,12 @@ export interface Activity{
     employer: string;
   }
 
+  export interface Contract{
+    parentID: string;
+    auPairID: string;
+    timestamp: string;
+  }
+  
   export interface Notification{
     id: string;
     parentId: string;
