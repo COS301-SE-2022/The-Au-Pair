@@ -228,6 +228,10 @@ export class RegisterComponent {
           )
         }
       }
+      else if(application.substring(0,7) == "Banned ")
+      {
+        this.openToast("Email or ID has been banned : "+application);
+      }
       else
       {
         this.openToast("Account already exists with email : "+application);
@@ -278,10 +282,10 @@ export class RegisterComponent {
           this.long = res[j].lon;
           this.lat = res[j].lat;
 
-          if(res[j].address.suburb != undefined) {
+          if(res[j].address.suburb != undefined && res[j].address.suburb != null) {
             this.foundSuburb =  res[j].address.suburb;
           }
-          else if(res[j].address.town != undefined) {
+          else if(res[j].address.town != undefined && res[j].address.town != null) {
             this.foundSuburb =  res[j].address.town;
           }
           else {
