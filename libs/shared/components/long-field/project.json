@@ -1,0 +1,26 @@
+{
+  "projectType": "library",
+  "root": "libs/shared/components/long-field",
+  "sourceRoot": "libs/shared/components/long-field/src",
+  "prefix": "the-au-pair",
+  "targets": {
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["coverage/libs/shared/components/long-field"],
+      "options": {
+        "jestConfig": "libs/shared/components/long-field/jest.config.js",
+        "passWithNoTests": true
+      }
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "options": {
+        "lintFilePatterns": [
+          "libs/shared/components/long-field/src/**/*.ts",
+          "libs/shared/components/long-field/src/**/*.html"
+        ]
+      }
+    }
+  },
+  "tags": []
+}
