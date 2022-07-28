@@ -28,7 +28,7 @@ describe('EditParentProfileComponent', () => {
   const emptyMedAidPlan = {email: "testemail@gmail.com", phone: "0832422323", address: "123 Valid Street", medicalAidMM: "Kyle", medicalAidMS: "Pottinger", medicalAidNo: "7534286951", medicalAidProvider: "Discovery", medicalAidPlan: ""}
 
   // Invalid User
-  const invalidUser = {id: "invalidId", fname: "Kyle", sname: "Pottinger", email: "testemail@gmail.com", address: "123 Valid Street", registered: false, type: 0, password: "test", number: "0832422323", salt: "mrs", latitude: 20, longitude: 20, suburb: 'Midrand', gender: "male", birth: "01/01/2001"}
+  const invalidUser = {id: "invalidId", fname: "Kyle", sname: "Pottinger", email: "testemail@gmail.com", address: "123 Valid Street", registered: false, type: 0, password: "test", number: "0832422323", salt: "mrs", latitude: 20, longitude: 20, suburb: 'Midrand', gender: "male", birth: "01/01/2001", banned: "", warnings: 0}
 
   // Invalid Med Aid
   const invalidMedAid = {id: "invalidId", plan: "Full", name: "Kyle", sname: "Pottinger", mID: "7534286951", provider: "Discovery"}
@@ -82,7 +82,9 @@ describe('EditParentProfileComponent', () => {
       suburb: "", 
       gender: "", 
       birth: "",
-      fcmToken:""
+      fcmToken:"",
+      banned: "",
+      warnings: 0,
     };
 
     const expectedMedAidValue: medAid = {
@@ -122,7 +124,9 @@ describe('EditParentProfileComponent', () => {
       suburb: "", 
       gender: "", 
       birth: "",
-      fcmToken: ""
+      fcmToken: "",
+      banned: "",
+      warnings: 0,
     };
 
     const expectedMedAidValue: medAid = {
@@ -160,7 +164,9 @@ describe('EditParentProfileComponent', () => {
       suburb: "", 
       gender: "", 
       birth: "",
-      fcmToken:""
+      fcmToken:"",
+      banned: "",
+      warnings: 0,
     };
 
     const expectedMedAidValue: medAid = {
@@ -198,7 +204,9 @@ describe('EditParentProfileComponent', () => {
       suburb: "", 
       gender: "", 
       birth: "",
-      fcmToken: ""
+      fcmToken: "",
+      banned: "",
+      warnings: 0,
     };
 
     const expectedMedAidValue: medAid = {
@@ -236,7 +244,9 @@ describe('EditParentProfileComponent', () => {
       suburb: "", 
       gender: "", 
       birth: "",
-      fcmToken:""
+      fcmToken:"",
+      banned: "",
+      warnings: 0,
     };
 
     const expectedMedAidValue: medAid = {
@@ -274,7 +284,9 @@ describe('EditParentProfileComponent', () => {
       suburb: "", 
       gender: "", 
       birth: "",
-      fcmToken: ""
+      fcmToken: "",
+      banned: "",
+      warnings: 0,
     };
 
     const expectedMedAidValue: medAid = {
@@ -312,7 +324,9 @@ describe('EditParentProfileComponent', () => {
       suburb: "", 
       gender: "", 
       birth: "",
-      fcmToken: ""
+      fcmToken: "",
+      banned: "",
+      warnings: 0,
     };
 
     const expectedMedAidValue: medAid = {
@@ -350,7 +364,9 @@ describe('EditParentProfileComponent', () => {
       suburb: "", 
       gender: "", 
       birth: "",
-      fcmToken: ""
+      fcmToken: "",
+      banned: "",
+      warnings: 0,
     };
 
     const expectedMedAidValue: medAid = {
@@ -388,7 +404,9 @@ describe('EditParentProfileComponent', () => {
       suburb: "", 
       gender: "", 
       birth: "",
-      fcmToken: ""
+      fcmToken: "",
+      banned: "",
+      warnings: 0,
     };
 
     const expectedMedAidValue: medAid = {

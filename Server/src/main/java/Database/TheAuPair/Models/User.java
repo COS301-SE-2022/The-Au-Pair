@@ -40,8 +40,13 @@ public class User
     private String fcmToken;    
     @Field ("birth")
     private String birth;
+    @Field ("warnings")
+    private int warnings;
+    @Field ("banned")
+    private String banned;
 
-    public User(String id, String fname, String sname, String email, String address, boolean registered, int type, String password, String number, String salt, double latitude, double longitude, String suburb, String gender, String fcmToken,String birth)    {
+    public User(String id, String fname, String sname, String email, String address, boolean registered, int type, String password, String number, String salt, double latitude, double longitude, String suburb, String gender, String birth, int warnings, String banned, String fcmToken)
+    {
         this.id = id;
         this.fname = fname;
         this.sname = sname;
@@ -58,6 +63,8 @@ public class User
         this.gender = gender;
         this.fcmToken = fcmToken;
         this.birth = birth;
+        this.warnings = warnings;
+        this.banned = banned;
     }
 
     public String getId()
@@ -210,9 +217,24 @@ public class User
         this.birth = birth;
     }
 
+    public int getWarnings() {
+      return warnings;
+    }
     public String getFcmToken()
     {
         return fcmToken;
+    }
+
+    public void setWarnings(int warnings) {
+      this.warnings = warnings;
+    }
+
+    public String getBanned() {
+      return banned;
+    }
+
+    public void setBanned(String banned) {
+      this.banned = banned;
     }
 
     public void setFcmToken(String fcmToken)
@@ -222,25 +244,26 @@ public class User
     
 
     @Override
-    public String toString()
-    {
-        return "User{" +
-                "id='" + id + '\'' +
-                ", fname='" + fname + '\'' +
-                ", sname='" + sname + '\'' +
-                ", email='" + email + '\'' +
-                ", address='" + address + '\'' +
-                ", reg=" + registered +
-                ", t=" + type +
-                ", password='" + password + '\'' +
-                ", number='" + number + '\'' +
-                ", salt='" + salt + '\'' +
-                ", latitude='" + latitude + '\'' +
-                ", longitude='" + longitude + '\'' +
-                ", suburb='" + suburb + '\'' +
-                ", gender='" + gender + '\'' +
-                ", fcmToken='" + fcmToken + '\'' +
-                ", birth='" + birth + '\'' +
-                '}';
+    public String toString() {
+      return "User{" +
+        "id='" + id + '\'' +
+        ", fname='" + fname + '\'' +
+        ", sname='" + sname + '\'' +
+        ", email='" + email + '\'' +
+        ", address='" + address + '\'' +
+        ", registered=" + registered +
+        ", type=" + type +
+        ", password='" + password + '\'' +
+        ", number='" + number + '\'' +
+        ", salt='" + salt + '\'' +
+        ", latitude=" + latitude +
+        ", longitude=" + longitude +
+        ", suburb='" + suburb + '\'' +
+        ", gender='" + gender + '\'' +
+        ", birth='" + birth + '\'' +
+        ", fcmToken='" + fcmToken + '\'' +
+        ", warnings=" + warnings +
+        ", banned='" + banned + '\'' +
+        '}';
     }
 }

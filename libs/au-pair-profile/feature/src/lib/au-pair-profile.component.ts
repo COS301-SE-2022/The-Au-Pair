@@ -28,6 +28,8 @@ export class AuPairProfileComponent implements OnInit {
     gender: "",
     fcmToken : "",
     birth: "",
+    warnings: 0,
+    banned: "",
   }
 
   auPairDetails: auPair = {
@@ -74,6 +76,8 @@ export class AuPairProfileComponent implements OnInit {
         this.userDetails.suburb = res.suburb;
         this.userDetails.gender = res.gender;
         this.userDetails.birth = res.birth;
+        this.userDetails.warnings = res.warnings;
+        this.userDetails.banned = res.banned;
       },
       error=>{console.log("Error has occured with API: " + error);}
     )

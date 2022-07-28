@@ -19,6 +19,9 @@
       "@the-au-pair/admin-console/feature": [
         "libs/admin-console/feature/src/index.ts"
       ],
+      "@the-au-pair/admin-reports/feature": [
+        "libs/admin-reports/feature/src/index.ts"
+      ],
       "@the-au-pair/au-pair-cost/feature": [
         "libs/au-pair-cost/feature/src/index.ts"
       ],
