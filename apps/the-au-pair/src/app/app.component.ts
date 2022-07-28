@@ -138,6 +138,7 @@ export class AppComponent implements OnInit {
         }
 
         this.serv.logNotification(this.notificationToSend).toPromise().then(res => {
+          console.log(res);
           this.monitorActivities();
         }, err => {
           console.log(err);
