@@ -80,9 +80,13 @@
       "@the-au-pair/shared/components/password-field": [
         "libs/shared/components/password-field/src/index.ts"
       ],
-      "@the-au-pair/shell/feature": ["libs/shell/feature/src/index.ts"],
       "@the-au-pair/track-au-pair/feature": [
-        "libs/track-au-pair/feature/src/index.ts"
+        "libs/track-au-pair/feature/src/index.ts"],
+      "@the-au-pair/shared/components/long-field": [
+        "libs/shared/components/long-field/src/index.ts"
+      ],
+      "@the-au-pair/shell/feature": [
+        "libs/shell/feature/src/index.ts"
       ]
     }
   },

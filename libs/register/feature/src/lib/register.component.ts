@@ -16,9 +16,14 @@ export class RegisterComponent {
   public notSamePasswords: boolean;
   public locationError: boolean;
   public medError: boolean;
+  public bioError: boolean;
+  public experienceError: boolean;
   
   parentChosen = true;
   maleChosen = true;
+  long = 0;
+  lat = 0;
+  foundSuburb =  "";
 
   userDetails: User ={
     id: '',
@@ -31,12 +36,13 @@ export class RegisterComponent {
     password: '',
     number: '',
     salt: '',
-    latitude: 0,
-    longitude: 0,
+    latitude: 0.0,
+    longitude: 0.0,
     suburb: "",
     gender: "",
     age: 0,
     fcmToken : "",
+    birth: "",
   }
 
   parentDetails: Parent ={
@@ -69,8 +75,10 @@ export class RegisterComponent {
       email : ['', Validators.compose([Validators.maxLength(30), Validators.pattern('^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,4}$'), Validators.required])],
       phone : ['', Validators.compose([Validators.maxLength(30), Validators.pattern('^(\\+27|0)[6-8][0-9]{8}$'), Validators.required])],
       id : ['', Validators.compose([Validators.maxLength(13), Validators.pattern('(((\\d{2}((0[13578]|1[02])(0[1-9]|[12]\\d|3[01])|(0[13456789]|1[012])(0[1-9]|[12]\\d|30)|02(0[1-9]|1\\d|2[0-8])))|([02468][048]|[13579][26])0229))(( |-)(\\d{4})( |-)(\\d{3})|(\\d{7}))'), Validators.required])],
-      medAid : ['', Validators.compose([Validators.maxLength(100), Validators.pattern('[a-zA-Z\\d]*')])],
+      medAid : ['', Validators.compose([Validators.maxLength(200)])],
       location : ['', Validators.compose([Validators.required])],
+      bio : ['', Validators.compose([Validators.maxLength(1000)])],
+      experience : ['', Validators.compose([Validators.maxLength(1000)])],
       pass : ['', Validators.compose([Validators.maxLength(20), Validators.pattern('^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$'), Validators.required])],
       confPass : ['', Validators.compose([Validators.maxLength(30), Validators.pattern('^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$'), Validators.required])],
     });
@@ -79,6 +87,8 @@ export class RegisterComponent {
     this.notSamePasswords = false;
     this.locationError = false;
     this.medError = false;
+    this.bioError = false;
+    this.experienceError = false;
   }
 
   async registerUser() 
@@ -87,7 +97,10 @@ export class RegisterComponent {
     this.locationError = false;
 
     this.submitAttempt = true;
-    this.notSamePasswords = true;
+    this.notSamePasswords = false;
+    this.bioError = false;
+    this.experienceError = false;
+
     let formError = false;
 
     if(this.parentChosen)
@@ -98,6 +111,19 @@ export class RegisterComponent {
         formError = true;
       }
     }
+    else {
+      if(this.parentRegisterDetailsForm.value.experience === '')
+      {
+        this.experienceError = true;
+        formError = true;
+      }
+
+      if(this.parentRegisterDetailsForm.value.bio === '')
+      {
+        this.bioError = true;
+        formError = true;
+      }
+    }
 
     if(!this.parentRegisterDetailsForm.controls['location'].valid)
     {
@@ -105,27 +131,44 @@ export class RegisterComponent {
     }
     else
     {
-        this.verifyLocation(this.parentRegisterDetailsForm.value.location)
+        await this.verifyLocation(this.parentRegisterDetailsForm.value.location);
 
         if (this.locationError)
         {
           this.openToast("Please select a valid location from the suggested below.");
           formError = true;
         }
-      }
+    }
 
-    if(!formError && this.parentRegisterDetailsForm.controls['name'].valid && this.parentRegisterDetailsForm.controls['surname'].valid && this.parentRegisterDetailsForm.controls['email'].valid && this.parentRegisterDetailsForm.controls['phone'].valid && this.parentRegisterDetailsForm.controls['id'].valid && this.parentRegisterDetailsForm.controls['medAid'].valid && this.parentRegisterDetailsForm.controls['location'].valid  && this.parentRegisterDetailsForm.controls['pass'].valid  && this.parentRegisterDetailsForm.controls['confPass'].valid)
+    if(this.parentRegisterDetailsForm.value.location.pass != this.parentRegisterDetailsForm.value.location.confPass)
+    {
+      this.notSamePasswords = true;
+    }
+
+    if(!formError && this.parentRegisterDetailsForm.controls['name'].valid && this.parentRegisterDetailsForm.controls['surname'].valid && this.parentRegisterDetailsForm.controls['email'].valid && this.parentRegisterDetailsForm.controls['phone'].valid && this.parentRegisterDetailsForm.controls['id'].valid && this.parentRegisterDetailsForm.controls['medAid'].valid && this.parentRegisterDetailsForm.controls['location'].valid && this.parentRegisterDetailsForm.controls['bio'].valid && this.parentRegisterDetailsForm.controls['experience'].valid && this.parentRegisterDetailsForm.controls['pass'].valid  && this.parentRegisterDetailsForm.controls['confPass'].valid)
     {
       let application = "";
       this.userDetails.id = this.parentRegisterDetailsForm.value.id;
+      this.userDetails.birth = this.convertIDtoDate(this.parentRegisterDetailsForm.value.id);
       this.userDetails.fname = this.parentRegisterDetailsForm.value.name;
       this.userDetails.sname = this.parentRegisterDetailsForm.value.surname;
       this.userDetails.email = (this.parentRegisterDetailsForm.value.email).toLowerCase();
       this.userDetails.address = this.parentRegisterDetailsForm.value.location;
+      this.userDetails.longitude = this.long;
+      this.userDetails.latitude = this.lat;
+      this.userDetails.suburb = this.foundSuburb;
+
+      if(this.maleChosen) {
+        this.userDetails.gender = "Male";
+      }
+      else {
+        this.userDetails.gender = "Female";
+      }
+      
       this.userDetails.number = this.parentRegisterDetailsForm.value.phone;
       this.userDetails.password = this.parentRegisterDetailsForm.value.pass;
 
-      if(this.parentChosen) 
+      if(this.parentChosen)
       {
         this.userDetails.type = 1;
         this.userDetails.registered = true;
@@ -169,6 +212,9 @@ export class RegisterComponent {
         {
           this.openToast("Registration succesfull pending approval");
           this.aupairDetails.id = this.userDetails.id;
+          this.aupairDetails.bio = this.parentRegisterDetailsForm.value.bio;
+          this.aupairDetails.experience = this.parentRegisterDetailsForm.value.experience;
+
           this.serv.addAuPair(this.aupairDetails)
           .toPromise()
           .then(
@@ -202,7 +248,7 @@ export class RegisterComponent {
 
   async verifyLocation(loc : string)
   {    
-    this.locationError = false;
+    this.locationError = true;
 
     const locationParam = loc.replace(' ', '+');
     const params = locationParam + '&limit=4&format=json&polygon_geojson=1&addressdetails=1';
@@ -218,23 +264,44 @@ export class RegisterComponent {
       //Jump out if no results returned
       if(json_data === "{}")
       {
-        this.locationError = true;
+        return;
       }
   
       //Add returned data to the array
       const len = res.length;
       for (let j = 0; j < len && j<4; j++) 
       { 
-        if(loc == res[j]) {
+        if(loc == res[j].display_name) {
           this.locationError = false;
+          
+          this.long = res[j].geojson.coordinates[0];
+          this.lat = res[j].geojson.coordinates[1];
+          this.foundSuburb =  res[j].address.suburb;
+
+          break;
         }
       }
     })
     .catch(error=>{ // Failure
       console.log(error);
     });
-    
-    this.locationError = true;
   }
 
+  convertIDtoDate(id: string) : string {
+    const year = id.substring(0, 2);
+    const month = id.substring(2, 4);
+    const day = id.substring(4, 6);
+    
+    const thisYear = new Date().getFullYear().toString().substring(2, 4);
+
+    if(year >= thisYear)
+    {
+      return month + "/" + day + "/19" + year;
+    }
+    else 
+    {
+      return month + "/" + day + "/20" + year;
+    }
+  }
+  
 }

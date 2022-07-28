@@ -36,13 +36,12 @@ public class User
     private String suburb;
     @Field ("gender")
     private String gender;
-    @Field ("age")
-    private int age;
     @Field ("fcmToken")
-    private String fcmToken;
+    private String fcmToken;    
+    @Field ("birth")
+    private String birth;
 
-    public User(String id, String fname, String sname, String email, String address, boolean registered, int type, String password, String number, String salt, double latitude, double longitude, String suburb, String gender, int age, String fcmToken)
-    {
+    public User(String id, String fname, String sname, String email, String address, boolean registered, int type, String password, String number, String salt, double latitude, double longitude, String suburb, String gender, String fcmToken,String birth)    {
         this.id = id;
         this.fname = fname;
         this.sname = sname;
@@ -57,8 +56,8 @@ public class User
         this.longitude = longitude;
         this.suburb = suburb;
         this.gender = gender;
-        this.age = age;
         this.fcmToken = fcmToken;
+        this.birth = birth;
     }
 
     public String getId()
@@ -201,14 +200,14 @@ public class User
         this.gender = gender;
     }
 
-    public int getAge()
+    public String getBirth()
     {
-        return age;
+        return birth;
     }
 
-    public void setAge(int age)
+    public void setBirth(String birth)
     {
-        this.age = age;
+        this.birth = birth;
     }
 
     public String getFcmToken()
@@ -240,8 +239,8 @@ public class User
                 ", longitude='" + longitude + '\'' +
                 ", suburb='" + suburb + '\'' +
                 ", gender='" + gender + '\'' +
-                ", age='" + age + '\'' +
                 ", fcmToken='" + fcmToken + '\'' +
+                ", birth='" + birth + '\'' +
                 '}';
     }
 }

@@ -77,6 +77,7 @@ export interface Activity{
     gender: string;
     age: number;
     fcmToken : string;
+    birth: string;
   }
 
   export interface auPair{

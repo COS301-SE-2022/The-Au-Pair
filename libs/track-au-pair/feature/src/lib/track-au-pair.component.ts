@@ -44,6 +44,7 @@ export class TrackAuPairComponent implements OnInit
     gender: "",
     age: 0,
     fcmToken : "",
+    birth: ""
   }
 
   parentDetails: Parent = {
