@@ -6,7 +6,6 @@ import { API } from '../../../../shared/api/api.service';
 import { NavbarModule } from '@the-au-pair/shared/components/navbar';
 import { IonicModule } from '@ionic/angular';
 import { CommonModule } from '@angular/common';
-import { By } from '@angular/platform-browser';
 import { NgxsModule } from '@ngxs/store';
 import { AppState } from '../../../../shared/ngxs/state';
 
