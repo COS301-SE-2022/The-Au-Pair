@@ -3,6 +3,7 @@
   "projects": {
     "add-child-feature": "libs/add-child/feature",
     "admin-console-feature": "libs/admin-console/feature",
+    "admin-reports-feature": "libs/admin-reports/feature",
     "au-pair-cost-feature": "libs/au-pair-cost/feature",
     "au-pair-dashboard-feature": "libs/au-pair-dashboard/feature",
     "au-pair-profile-feature": "libs/au-pair-profile/feature",

@@ -42,6 +42,8 @@ export class RegisterComponent {
     gender: "",
     fcmToken : "",
     birth: "",
+    warnings: 0,
+    banned: "",
   }
 
   parentDetails: Parent ={

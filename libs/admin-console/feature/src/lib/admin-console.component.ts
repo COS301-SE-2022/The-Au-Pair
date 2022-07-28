@@ -22,7 +22,17 @@ export class AdminConsoleComponent implements OnInit{
   getSignUpRequests() {
     this.serv.getApplicants().toPromise().then(res => {
       this.auPairs = res;
-      console.log(this.store.snapshot());
+
+      for(let i = 0; i < this.auPairs.length; i++) {
+        this.serv.getAuPair(this.auPairs[i].id).toPromise().then(dat => {
+          
+          this.auPairs[i].bio = dat.bio;
+          this.auPairs[i].experience = dat.experience;
+          
+        }).catch(err => {
+          console.log(err);
+        });
+      }
     }).catch(err => {
       console.log(err);
     });

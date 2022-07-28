@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { Activity , Child , medAid , Parent  , User, HoursLogged, auPair, Contract , Notification} from '../interfaces/interfaces';
+import { Activity , Child , medAid , Parent  , User, HoursLogged, auPair, Notification, Report, Contract} from '../interfaces/interfaces';
 
 @Injectable()
 export class API{
@@ -221,4 +221,22 @@ export class API{
   logNotification(notification : Notification): Observable<any> {
     return this.http.post('http://localhost:8080/logNotification',notification);
   }
+
+  getAllReports(): Observable<any> 
+  {
+    return this.http.get('http://localhost:8080/getAllReports');
+  }
+  
+  getReportsForAuPair(id : string): Observable<any> {
+    return this.http.post('http://localhost:8080/getReportsForAuPair', id);
+  }
+
+  deleteReport(id : string): Observable<any> {
+    return this.http.post('http://localhost:8080/deleteReport',id);
+  }
+
+  addReport(report : Report): Observable<any> {
+    return this.http.post('http://localhost:8080/addReport',report);
+  }
+  
 }

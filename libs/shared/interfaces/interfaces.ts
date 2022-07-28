@@ -77,6 +77,8 @@ export interface Activity{
     gender: string;
     fcmToken : string;
     birth: string;
+    warnings: number;
+    banned: string;
   }
 
   export interface auPair{
@@ -103,5 +105,12 @@ export interface Activity{
     body: string;
     date: string;
     time: string;
+  }
+  
+  export interface Report{
+    id: string;
+    issuerId: string;
+    auPairId: string;
+    desc: string;
   }
   

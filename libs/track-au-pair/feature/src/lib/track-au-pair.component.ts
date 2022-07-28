@@ -42,8 +42,10 @@ export class TrackAuPairComponent implements OnInit
     longitude: 0,
     suburb: "",
     gender: "",
+    birth: "",
+    warnings: 0,
+    banned: "",
     fcmToken : "",
-    birth: ""
   }
 
   parentDetails: Parent = {
