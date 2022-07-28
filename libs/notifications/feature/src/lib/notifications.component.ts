@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngxs/store';
-import { API } from 'libs/shared/api/api.service';
-import { Notification } from 'libs/shared/interfaces/interfaces';
+import { API } from '../../../../shared/api/api.service';
+import { Notification } from '../../../../shared/interfaces/interfaces';
 
 @Component({
   selector: 'the-au-pair-notifications',
@@ -23,11 +23,12 @@ export class ParentNotificationsComponent implements OnInit {
     {
       this.api.getNotificationsByParentId(this.userId).toPromise().then(res => {
         this.notifications = res;
-        console.log(this.notifications);
-        const time = this.notifications[0].date + 'T' + this.notifications[0].time+':00';
-        const date = new Date(time);
-        console.log(date);
-        console.log(time);
+        //loop through all notifications and order by date
+        this.notifications.sort((a, b) => {
+          const first = new Date(b.date + 'T' + b.time+':00');
+          const second = new Date(a.date + 'T' + a.time+':00');
+          return  Number(first) - Number(second);
+        });
       }, err => {
         console.log(err);
       });

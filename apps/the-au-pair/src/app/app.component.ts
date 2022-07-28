@@ -246,7 +246,7 @@ export class AppComponent implements OnInit {
 
     }
 
-    const today = current.getDate() + "/" + (current.getMonth() + 1) + "/" + current.getFullYear();
+    const today = current.getFullYear() + "-" + (current.getMonth() + 1) + "-" + current.getDate();
     if(this.userType == 1){
       this.serv.getParent(this.userID).toPromise().then(res => {
         this.notificationToSend.auPairId = res.auPair
