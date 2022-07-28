@@ -1,7 +1,7 @@
 import { Action, Selector, State, StateContext } from '@ngxs/store';
-import { SetId , SetType, SetFcmToken, SetName } from './actions';
+import { SetId , SetType, SetFcmToken, SetName, Reset } from './actions';
 import { Injectable } from '@angular/core';
-
+import { map, Observable, of } from 'rxjs';
 export interface AppStateModel{
     id: string;
     name: string;
@@ -13,8 +13,8 @@ export interface AppStateModel{
     name: 'user',
     defaults: {
         id: '',
+        type: -1,
         name: '',
-        type: 0,
         fcmToken: ''
     },
 })
@@ -60,5 +60,16 @@ export class AppState{
     @Selector()
     static getFcmToken(state : AppStateModel) {
         return state.fcmToken;
+    }
+
+    @Action(Reset)
+    reset(ctx: StateContext<AppStateModel>): Observable<AppStateModel> {
+        return of(ctx.getState())
+        .pipe(
+        map(currentState => {
+            ctx.patchState({type: -1, id: ""});
+            return currentState;
+        })
+        );
     }
 }
