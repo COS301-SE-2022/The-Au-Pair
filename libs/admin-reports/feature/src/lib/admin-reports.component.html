@@ -9,15 +9,15 @@
                     <div class="leftInfo">
                         <div class="info">
                             <div class="desc label">Full Name:</div>
-                            <div class="cont">{{report.fname}}  {{report.sname}}</div>
+                            <div class="cont">{{report.auPair.fname}}  {{report.auPair.sname}}</div>
                         </div>
                         <div class="info">
                             <div class="desc label">ID Number:</div>
-                            <div class="cont">{{report.id}}</div>
+                            <div class="cont">{{report.auPairId}}</div>
                         </div>
                         <div class="info">
                             <div class="desc label">Email:</div>
-                            <div class="cont">{{report.email}}</div>
+                            <div class="cont">{{report.auPair.email}}</div>
                         </div>
                         <div class="long-info">
                             <div class="desc label">Reason:</div>
@@ -30,13 +30,13 @@
                             <img src="assets/images/profile.jpg" alt="ruben">  
                         </div>
                         <div>
-                            <button class = "button ban" (click)="resolve(report.id,false)">
+                            <button class = "button ban" (click)="ban(report.auPairId, report.auPair)">
                                 Ban Au Pair
                             </button>
-                            <button class = "button warn" (click)="resolve(report.id,true)">
+                            <button class = "button warn" (click)="warn(report.auPairId, report.auPair)">
                                 Warn Au Pair
                             </button>
-                            <button class = "button dismiss" (click)="resolve(report.id,true)">
+                            <button class = "button dismiss" (click)="dismiss(report.id)">
                                 Dismiss Report
                             </button>
                         </div>

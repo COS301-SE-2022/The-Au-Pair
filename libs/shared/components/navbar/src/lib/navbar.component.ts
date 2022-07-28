@@ -73,4 +73,12 @@ export class NavbarComponent implements OnInit
     this.store.dispatch(new Reset());
     this.router.navigate(['/login-page']);
   }
+
+  reports() 
+  {
+    if(this.type == 0)
+    {
+      this.router.navigate(['/admin-reports']);
+    }
+  }
 }
