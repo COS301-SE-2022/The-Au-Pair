@@ -94,20 +94,11 @@ public class UserController
 
   @GetMapping("/getApplicants")
   @CrossOrigin(origins = "http://localhost:4200")
-  public ResponseEntity<List<User>> getApplicants(BindingResult bindingResult)
+  public ResponseEntity<List<User>> getApplicants()
   {
-    if (bindingResult.hasErrors())
-    {
-      return ResponseEntity
-        .badRequest()
-        .body(null);
-    }
-    else
-    {
       return ResponseEntity
         .ok()
         .body(this.us.getApplicants());
-    }
   }
 
   @PostMapping("/resolveApplication")

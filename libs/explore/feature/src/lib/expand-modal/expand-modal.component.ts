@@ -47,7 +47,7 @@ export class ExpandModalComponent implements OnInit {
     longitude: 0,
     suburb: "",
     gender: "",
-    age: 0,
+    birth: "",
   }
 
   contractDetails: Contract= {
@@ -108,7 +108,7 @@ export class ExpandModalComponent implements OnInit {
           this.userDetails.longitude = res.longitude;
           this.userDetails.suburb = res.suburb;
           this.userDetails.gender = res.gender;
-          this.userDetails.age = res.age;
+          this.userDetails.birth = res.birth;
         },
       error=>{console.log("Error has occured with API: " + error);}
       )
@@ -178,5 +178,17 @@ export class ExpandModalComponent implements OnInit {
     {
       this.errToast();
     }
+  }
+  
+  getAge(dateString : string) {
+    const today = new Date();
+    const birthDate = new Date(dateString);
+    let age = today.getFullYear() - birthDate.getFullYear();
+    const m = today.getMonth() - birthDate.getMonth();
+    if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate())) {
+        age--;
+    }
+
+    return age;
   }
 }

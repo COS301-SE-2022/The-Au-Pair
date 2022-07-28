@@ -38,7 +38,7 @@ export class ParentDashboardComponent implements OnInit{
     longitude: 0,
     suburb: "",
     gender: "",
-    age: 0,
+    birth: "",
   }
 
   auPairDetails: User = {
@@ -56,7 +56,7 @@ export class ParentDashboardComponent implements OnInit{
     longitude: 0,
     suburb: "",
     gender: "",
-    age: 0,
+    birth: "",
   }
 
   currentAuPair: auPair = {
@@ -103,7 +103,7 @@ export class ParentDashboardComponent implements OnInit{
         this.userDetails.longitude = res.longitude;
         this.userDetails.suburb = res.suburb;
         this.userDetails.gender = res.gender;
-        this.userDetails.age = res.age;
+        this.userDetails.birth = res.birth;
       },
       error => {
         console.log("Error has occured with API: " + error);
