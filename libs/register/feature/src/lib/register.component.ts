@@ -41,6 +41,8 @@ export class RegisterComponent {
     suburb: "",
     gender: "",
     birth: "",
+    warnings: 0,
+    banned: "",
   }
 
   parentDetails: Parent ={

@@ -38,8 +38,12 @@ public class User
     private String gender;
     @Field ("birth")
     private String birth;
+    @Field ("warnings")
+    private int warnings;
+    @Field ("banned")
+    private String banned;
 
-    public User(String id, String fname, String sname, String email, String address, boolean registered, int type, String password, String number, String salt, double latitude, double longitude, String suburb, String gender, String birth)
+    public User(String id, String fname, String sname, String email, String address, boolean registered, int type, String password, String number, String salt, double latitude, double longitude, String suburb, String gender, String birth, int warnings, String banned)
     {
         this.id = id;
         this.fname = fname;
@@ -56,6 +60,8 @@ public class User
         this.suburb = suburb;
         this.gender = gender;
         this.birth = birth;
+        this.warnings = warnings;
+        this.banned = banned;
     }
 
     public String getId()
@@ -208,26 +214,42 @@ public class User
         this.birth = birth;
     }
 
+    public int getWarnings() {
+      return warnings;
+    }
+
+    public void setWarnings(int warnings) {
+      this.warnings = warnings;
+    }
+
+    public String getBanned() {
+      return banned;
+    }
+
+    public void setBanned(String banned) {
+      this.banned = banned;
+    }
 
     @Override
-    public String toString()
-    {
-        return "User{" +
-                "id='" + id + '\'' +
-                ", fname='" + fname + '\'' +
-                ", sname='" + sname + '\'' +
-                ", email='" + email + '\'' +
-                ", address='" + address + '\'' +
-                ", reg=" + registered +
-                ", t=" + type +
-                ", password='" + password + '\'' +
-                ", number='" + number + '\'' +
-                ", salt='" + salt + '\'' +
-                ", latitude='" + latitude + '\'' +
-                ", longitude='" + longitude + '\'' +
-                ", suburb='" + suburb + '\'' +
-                ", gender='" + gender + '\'' +
-                ", birth='" + birth + '\'' +
-                '}';
+    public String toString() {
+      return "User{" +
+        "id='" + id + '\'' +
+        ", fname='" + fname + '\'' +
+        ", sname='" + sname + '\'' +
+        ", email='" + email + '\'' +
+        ", address='" + address + '\'' +
+        ", registered=" + registered +
+        ", type=" + type +
+        ", password='" + password + '\'' +
+        ", number='" + number + '\'' +
+        ", salt='" + salt + '\'' +
+        ", latitude=" + latitude +
+        ", longitude=" + longitude +
+        ", suburb='" + suburb + '\'' +
+        ", gender='" + gender + '\'' +
+        ", birth='" + birth + '\'' +
+        ", warnings=" + warnings +
+        ", banned='" + banned + '\'' +
+        '}';
     }
 }

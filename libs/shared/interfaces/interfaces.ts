@@ -76,6 +76,8 @@ export interface Activity{
     suburb: string;
     gender: string;
     birth: string;
+    warnings: number;
+    banned: string;
   }
 
   export interface auPair{
