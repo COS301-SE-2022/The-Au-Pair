@@ -75,6 +75,7 @@ export interface Activity{
     longitude: number;
     suburb: string;
     gender: string;
+    fcmToken : string;
     birth: string;
   }
 
@@ -92,5 +93,15 @@ export interface Activity{
     parentID: string;
     auPairID: string;
     timestamp: string;
+  }
+  
+  export interface Notification{
+    id: string;
+    parentId: string;
+    auPairId: string;
+    title: string;
+    body: string;
+    date: string;
+    time: string;
   }
   

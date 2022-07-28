@@ -37,6 +37,7 @@ export class EditParentProfileComponent implements OnInit{
     longitude: 0,
     suburb: "",
     gender: "",
+    fcmToken : "",
     birth: "",
   }
 

@@ -18,6 +18,7 @@ public class TheAuPairApplication implements CommandLineRunner
   private final auPairRepository apr;
   private final hoursLoggedRepository hlr;
   private final ContractRepository ctr;
+  private final NotificationsRepository nr;
 
   private final UserController uc;
   private final ParentController pc;
@@ -27,9 +28,10 @@ public class TheAuPairApplication implements CommandLineRunner
   private final auPairController apc;
   private final hoursLoggedController hlc;
   private final ContractController ctc;
+  private final NotificationsController nc;
 
   @Autowired
-  public TheAuPairApplication(UserRepository ur, ParentRepository pr, medAidRepository mr, ChildRepository cr, ActivityRepository ar, auPairRepository apr, hoursLoggedRepository hlr, ContractRepository ctr)
+  public TheAuPairApplication(UserRepository ur, ParentRepository pr, medAidRepository mr, ChildRepository cr, ActivityRepository ar, auPairRepository apr, hoursLoggedRepository hlr, ContractRepository ctr, NotificationsRepository nr)
   {
     this.ur = ur;
     this.pr = pr;
@@ -39,6 +41,8 @@ public class TheAuPairApplication implements CommandLineRunner
     this.apr = apr;
     this.hlr = hlr;
     this.ctr = ctr;
+    this.nr = nr;
+    
     uc = new UserController(this.ur);
     pc = new ParentController(this.pr);
     mc = new medAidController(this.mr);
@@ -47,6 +51,7 @@ public class TheAuPairApplication implements CommandLineRunner
     apc = new auPairController(this.apr);
     hlc = new hoursLoggedController(this.hlr);
     ctc = new ContractController(this.ctr);
+    nc = new NotificationsController(this.nr);
   }
 
   public static void main(String[] args)

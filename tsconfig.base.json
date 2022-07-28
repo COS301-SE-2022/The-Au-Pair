@@ -48,9 +48,13 @@
         "libs/forgot-password/feature/src/index.ts"
       ],
       "@the-au-pair/hire-requests/feature": [
-        "libs/hire-requests/feature/src/index.ts"
-      ],
+        "libs/hire-requests/feature/src/index.ts"],
+
       "@the-au-pair/login/feature": ["libs/login/feature/src/index.ts"],
+
+      "@the-au-pair/notifications-feature": [
+        "libs/notifications/feature/src/index.ts"
+      ],      
       "@the-au-pair/parent-add-activity/feature": [
         "libs/parent-add-activity/feature/src/index.ts"
       ],
@@ -59,9 +63,6 @@
       ],
       "@the-au-pair/parent-edit-activity/feature": [
         "libs/parent-edit-activity/feature/src/index.ts"
-      ],
-      "@the-au-pair/parent-notifications/feature": [
-        "libs/parent-notifications/feature/src/index.ts"
       ],
       "@the-au-pair/parent-profile/feature": [
         "libs/parent-profile/feature/src/index.ts"
@@ -92,9 +93,6 @@
       "@the-au-pair/shared/components/long-field": [
         "libs/shared/components/long-field/src/index.ts"
       ],
-      "@the-au-pair/shell/feature": [
-        "libs/shell/feature/src/index.ts"
-      ]
     }
   },
   "exclude": ["node_modules", "tmp"]
