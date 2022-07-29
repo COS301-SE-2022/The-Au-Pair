@@ -99,7 +99,7 @@ it('should show the correct employed au pair when loading au pair cost', () => {
 })
 
 //Explore testing
-it('should allow a parent who hasnt employed an au pair yet, to view/explore au pairs to potentially hire', () => {
+it('should allow a parent who hasnt employed an au pair yet, to view/explore au pairs to potentially hire', {defaultCommandTimeout: 10000}, () => {
     cy.visit("/login-page")
     cy.get(`[ng-reflect-name="Email"]`).type("dylan@gmail.com"); 
     cy.get(`[ng-reflect-name="Password"]`).type("Dylan@1234"); 
