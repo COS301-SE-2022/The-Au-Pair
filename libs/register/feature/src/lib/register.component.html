@@ -1,0 +1,53 @@
+<ion-content>
+    <h2>Register</h2>
+    <div class="registerDetails">
+
+        <form [formGroup]="parentRegisterDetailsForm" (ngSubmit)="registerUser()" class = "form-details">
+        
+            <div class="selector">
+                <input class = "parent" [class]="(this.parentChosen) ? 'chosen' : 'notchosen'" type="button" (click)="this.parentChosen = true" value="I am a Parent">
+                <input class = "aupair" [class]="(this.parentChosen) ? 'notchosen' : 'chosen'" type="button" (click)="this.parentChosen = false" value="I am an Au Pair">
+            </div>
+            
+            <the-au-pair-input-field labelContent="Name" errorContent="Invalid name" [showError]="submitAttempt && (!parentRegisterDetailsForm.controls['name'].valid)" formControlName="name"></the-au-pair-input-field>
+            
+            <the-au-pair-input-field labelContent="Surname" errorContent="Invalid surname" [showError]="submitAttempt && (!parentRegisterDetailsForm.controls['surname'].valid)" formControlName="surname"></the-au-pair-input-field>
+            
+            <the-au-pair-input-field labelContent="Email" errorContent="Invalid email" [showError]="submitAttempt && (!parentRegisterDetailsForm.controls['email'].valid)" formControlName="email"></the-au-pair-input-field>
+            
+            <the-au-pair-input-field labelContent="Phone Number" errorContent="Invalid phone number" [showError]="submitAttempt && (!parentRegisterDetailsForm.controls['phone'].valid)" formControlName="phone"></the-au-pair-input-field>
+            
+            <the-au-pair-input-field labelContent="ID" errorContent="Invalid South African ID number" [showError]="submitAttempt && (!parentRegisterDetailsForm.controls['id'].valid)" formControlName="id"></the-au-pair-input-field>
+            
+            <the-au-pair-input-field [hidden]="!parentChosen" labelContent="Medical Aid Number" errorContent="Invalid medical aid number" [showError]="submitAttempt && (!parentRegisterDetailsForm.controls['medAid'].valid) || medError" formControlName="medAid"></the-au-pair-input-field>
+
+            <div class="mfSelector">
+                <input class = "male" [class]="(maleChosen) ? 'chosen' : 'notchosen'" type="button" (click)="this.maleChosen = true" value="Male">
+                <input class = "female" [class]="(maleChosen) ? 'notchosen' : 'chosen'" type="button" (click)="this.maleChosen = false" value="Female">
+            </div>
+
+            <the-au-pair-location-field labelContent="Location" errorContent="Invalid location" [showError]="submitAttempt && (!parentRegisterDetailsForm.controls['location'].valid)" formControlName="location"></the-au-pair-location-field>
+
+            <the-au-pair-long-field [hidden]="parentChosen" labelContent="Bio" errorContent="Invalid bio field" [showError]="submitAttempt && (!parentRegisterDetailsForm.controls['bio'].valid) || bioError" formControlName="bio"></the-au-pair-long-field>
+
+            <the-au-pair-long-field [hidden]="parentChosen" labelContent="Experience" errorContent="Invalid experience field" [showError]="submitAttempt && (!parentRegisterDetailsForm.controls['experience'].valid) || experienceError" formControlName="experience"></the-au-pair-long-field>
+
+            <the-au-pair-password-field labelContent="Password" errorContent="Password should be at least 8 characters, and have uppercase, lowercase, special and number characters" [showError]="(submitAttempt && (!parentRegisterDetailsForm.controls['pass'].valid))" formControlName="pass"></the-au-pair-password-field>
+
+            <the-au-pair-password-field labelContent="Confirm Password" errorContent="Passwords do not match" [showError]="notSamePasswords" formControlName="confPass"></the-au-pair-password-field>
+
+            <div class="buttons">
+                <input class = "registerUser" type="submit" value="Register">
+            </div>
+
+            <div class="clickables">
+                <p class="account" routerLink="/login-page">Already have an account?</p>
+            </div>
+          
+        </form>
+    </div>
+    <img id="active-2" src="assets/images/active.png">
+    <img id="active" src="assets/images/active-2.png">
+    <img id="lifestyles" src="assets/images/lifestyles.png">
+</ion-content>
+

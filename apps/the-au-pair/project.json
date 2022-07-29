@@ -41,7 +41,7 @@
             {
               "type": "anyComponentStyle",
               "maximumWarning": "2kb",
-              "maximumError": "4kb"
+              "maximumError": "5kb"
             }
           ],
           "fileReplacements": [
@@ -156,7 +156,7 @@
           "cmd": "run ios"
         },
         "android": {
-          "cmd": "run android"
+          "cmd": "run android --livereload --external"
         }
       }
     },

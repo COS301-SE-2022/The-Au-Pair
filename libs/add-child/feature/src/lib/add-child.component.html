@@ -1,0 +1,44 @@
+<ion-content>
+    <the-au-pair-navbar></the-au-pair-navbar>
+    <h2>Add A child</h2>
+    <div class="childrenDetails">
+        <form #childDetailsForm="ngForm" (ngSubmit)="getChildValues(childDetailsForm.value)" class = "form-details">
+
+          <!-- Child ID -->
+          <label id="labelID" for="childID">Child ID</label>
+          <input type="text" ngModel name="childID"placeholder="Child ID">
+          <p id="childIDError" class="error" style="display: none;">Error in field</p>
+
+          <!-- Child First Name -->
+          <label id="firstName" for="childName">Child Name</label>
+          <input type="text" ngModel name="childName"placeholder="Child Name">
+          <p id="childNameError" class="error" style="display: none;">Error in field</p>
+
+          <!-- Surname -->
+          <label id="surname" for="surname">Surname</label>
+          <input type="text" ngModel name="surname" placeholder="Surname"> 
+          <p id="surnameError" class="error" style="display: none;">Error in field</p>
+
+          <!-- Allergies -->
+          <label id="allergies" for="Allergies">Allergies</label>
+          <textarea name="Allergies" ngModel></textarea>
+          <p id="allergiesError" class="error" style="display: none;">Error in field</p>
+
+          <!-- Dietery requirements -->
+          <label id="diet" for="diet">Dietery requirements</label>
+          <textarea name="diet" ngModel></textarea>
+          <p id="dietError" class="error" style="display: none;">Error in field</p>
+
+          <!-- Submit -->
+          <div class="buttons">
+            <input class = "addChild" type="submit" value="Add child">
+            <input class = "cancel" value="Cancel" (click)="returnToChildrenDashboard()">
+          </div>
+          
+        </form>
+    </div>
+    <img id="active-2" src="assets/images/active.png">
+    <img id="active" src="assets/images/active-2.png">
+    <img id="lifestyles" src="assets/images/lifestyles.png">
+</ion-content>
+

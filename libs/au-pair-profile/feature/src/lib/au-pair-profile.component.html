@@ -1,0 +1,48 @@
+<the-au-pair-navbar></the-au-pair-navbar>
+<ion-content [fullscreen]="true">
+    <div class = "parent-profile-div">
+        <h1 class='profile-name'>{{this.userDetails.fname}} {{this.userDetails.sname}}</h1>
+            <div class='profile-picture-wrapper'>
+                <img class="profile-picture" src="assets/images/placeholder-profile.jpg" alt="">
+            </div>
+        <div class = 'details-div'>
+            <div class = "small-profile-details-div">
+                <div class="parent-info-small">
+                    <div class="parent-text">Email: </div>
+                    <p class="parent-text-info">{{this.userDetails.email}}</p>
+                </div>
+                <div class="parent-info-small">
+                    <div class="parent-text">Phone: </div>
+                    <p class="parent-text-info">{{this.userDetails.number}}</p>
+                </div>
+                <div class="parent-info-small">
+                    <div class="parent-text">ID Number: </div>
+                    <p class="parent-text-info">{{this.userDetails.id}}</p>
+                </div>
+                <div class="parent-info-small">
+                    <div class="parent-text">Address: </div>
+                    <p class="parent-text-info">{{this.userDetails.address}}</p>
+                </div>
+                <div class="parent-info-small">
+                  <div class="parent-text">Pay rate: </div>
+                  <p class="parent-text-info">R{{this.auPairDetails.payRate}} per hour</p>
+              </div>
+            </div>
+            <div class = 'large-profile-details-div'>
+                <div class="parent-info-large">
+                    <div class="parent-text">Bio: </div>
+                    <p class="parent-text-info">{{this.auPairDetails.bio}}</p>
+                </div>
+                <div class="parent-info-large">
+                    <div class="parent-text">Experience: </div>
+                    <p class="parent-text-info">{{this.auPairDetails.experience}}</p>
+                </div>
+            </div>
+            <button class="change-button" id="change" routerLink="/edit-au-pair-profile">CHANGE</button>
+        </div>
+        <img id="background-image-1" src="assets/images/active.png">
+        <img id="background-image-2" src="assets/images/active-2.png">
+        <img id="background-image-3" src="assets/images/lifestyles.png">
+    </div>
+
+</ion-content>

@@ -1,0 +1,26 @@
+{
+  "projectType": "library",
+  "root": "libs/login/feature",
+  "sourceRoot": "libs/login/feature/src",
+  "prefix": "the-au-pair",
+  "targets": {
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["coverage/libs/login/feature"],
+      "options": {
+        "jestConfig": "libs/login/feature/jest.config.js",
+        "passWithNoTests": true
+      }
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "options": {
+        "lintFilePatterns": [
+          "libs/login/feature/src/**/*.ts",
+          "libs/login/feature/src/**/*.html"
+        ]
+      }
+    }
+  },
+  "tags": []
+}

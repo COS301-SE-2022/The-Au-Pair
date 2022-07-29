@@ -1,0 +1,42 @@
+<ion-content>
+    <the-au-pair-navbar></the-au-pair-navbar>
+    <h2>Edit Child Details</h2>
+    <div class="childrenDetails">
+        <form id="childForm" #activityForm="ngForm" (ngSubmit)="getChildValues(activityForm.value)" class = "form-details">
+            <!-- Child ID -->
+            <label id="labelID" for="childID">Child ID</label>
+            <input style="background-color: rgb(182, 182, 182);" type="text" ngModel="{{this.childDetails.id}}" name="childID"placeholder="Child ID" readonly>
+            <p id="childIDError" class="error" style="display: none;">Error in field</p>
+
+            <!-- Child First Name -->
+            <label id="firstName" for="childName">Child Name</label>
+            <input type="text" ngModel="{{this.childDetails.fname}}" name="childName"placeholder="Child Name">
+            <p id="childNameError" class="error" style="display: none;">Error in field</p>
+
+            <!-- Surname -->
+            <label id="surname" for="surname">Surname</label>
+            <input type="text" ngModel="{{this.childDetails.sname}}" name="surname" placeholder="Surname"> 
+            <p id="surnameError" class="error" style="display: none;">Error in field</p>
+
+            <!-- Allergies -->
+            <label id="allergies" for="Allergies">Allergies</label>
+            <textarea name="Allergies" ngModel="{{this.childDetails.allergies}}"></textarea>
+            <p id="allergiesError" class="error" style="display: none;">Error in field</p>
+
+            <!-- Dietery requirements -->
+            <label id="diet" for="diet">Dietery requirements</label>
+            <textarea name="diet" ngModel="{{this.childDetails.diet}}"></textarea>
+            <p id="dietError" class="error" style="display: none;">Error in field</p>
+
+            <!-- Submit -->
+            <div class="buttons">
+            <input class = "updateChild" type="submit" value="Update child">
+            <input class = "cancel" value="Return" (click)="returnToChildrenDashboard()">
+            </div>
+          
+        </form>
+    </div>
+    <img id="active-2" src="assets/images/active.png">
+    <img id="active" src="assets/images/active-2.png">
+    <img id="lifestyles" src="assets/images/lifestyles.png">
+</ion-content>

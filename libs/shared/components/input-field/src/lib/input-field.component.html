@@ -1,0 +1,8 @@
+<div class="fld">
+        <input [name]="labelContent"  [(ngModel)]="value" type="text" autocomplete="off" [ngClass]="(this.showError===false) ? 'form-input' : 'form-input form-input-error' " placeholder=" ">
+        <label [for]="labelContent" class="form-label">{{ labelContent }}</label>
+        <ion-icon class="error" [hidden]="!showError" name="close"></ion-icon>
+
+        <div class="errorType"><p [hidden]="!showError">{{ errorContent }}</p></div> 
+</div>
+

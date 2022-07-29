@@ -1,0 +1,52 @@
+<the-au-pair-navbar></the-au-pair-navbar>
+<ion-content [fullscreen]="true">
+    <div class = "parent-profile-div">
+        <h1 class='profile-name'>{{this.userDetails.fname}} {{this.userDetails.sname}}</h1>
+            <div class='profile-picture-wrapper'>
+                <img class="profile-picture" src="assets/images/placeholder-profile.jpg" alt="">
+            </div>
+        <div class = 'details-div'>
+            <div class = "small-profile-details-div">
+                <div class="parent-info-small">
+                    <div class="parent-text">Email: </div>
+                    <p class="parent-text-info">{{this.userDetails.email}}</p>
+                </div>
+                <div class="parent-info-small">
+                    <div class="parent-text">Phone: </div>
+                    <p class="parent-text-info">{{this.userDetails.number}}</p>
+                </div>
+                <div class="parent-info-small">
+                    <div class="parent-text">ID Number: </div>
+                    <p class="parent-text-info">{{this.userDetails.id}}</p>
+                </div>
+            </div>
+            <div class = 'large-profile-details-div'>
+                <div class="parent-info-large">
+                    <div class="parent-text">Address: </div>
+                    <p class="parent-text-info">{{this.userDetails.address}}</p>
+                </div>
+                <div class="parent-info-large">
+                    <div class="parent-text">Suburb: </div>
+                    <p class="parent-text-info">{{this.userDetails.suburb}}</p>
+                </div>
+                <div class="parent-info-large">
+                    <div class="parent-text">Gender: </div>
+                    <p class="parent-text-info">{{this.userDetails.gender}}</p>
+                </div>
+                <div class="parent-info-large">
+                    <div class="parent-text">Birth Date: </div>
+                    <p class="parent-text-info">{{this.userDetails.birth}}</p>
+                </div>
+                <div class="parent-info-large">
+                    <div class="parent-text">Medical Aid: </div>
+                    <p class="parent-text-info2">{{this.medAidDetails.name}}<br>{{this.medAidDetails.sname}}<br>{{this.medAidDetails.id}}<br>{{this.medAidDetails.provider}}<br>{{this.medAidDetails.plan}}</p>
+                </div>
+            </div>
+            <button class="change-button" id="change" routerLink="/edit-parent-profile">CHANGE</button>
+        </div>
+        <img id="background-image-1" src="assets/images/active.png">
+        <img id="background-image-2" src="assets/images/active-2.png">
+        <img id="background-image-3" src="assets/images/lifestyles.png">
+    </div>
+
+</ion-content>

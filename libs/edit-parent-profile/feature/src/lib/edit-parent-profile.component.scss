@@ -1,0 +1,255 @@
+.parent-profile-div{
+    width: 90%;
+    margin-top: 60px;
+    margin-left: auto;
+    margin-right: auto;
+    background-color: #69A88DB2;
+    border-radius: 16px;
+    margin-bottom: 60px;
+}
+
+.profile-name {
+    font-size: 3.6vw;
+    margin-top: 2%;
+    margin-bottom: 2%;
+    color: var(--ion-color-dark);
+    text-align: center;
+    font-family: TitanOne;
+    margin-top: 0px;
+}
+
+.profile-picture-wrapper{
+    width: 166px;
+    height: 166px;
+    background-color: rgba($color: #032927BF, $alpha: 0.75);
+    border-radius: 50%;
+    margin: auto;
+    display: flex;
+    align-items: center;
+    text-align: center;
+    justify-content: center;
+    margin-top: 20px;
+    margin-bottom: 25px;
+}
+
+.profile-picture {
+    width: 140px;
+    height: 140px;
+    border-radius: 50%;
+}
+
+.profile-details-div{
+    width: 40%;
+    height: 100%;
+
+    margin-left: auto;
+    margin-right: auto;
+    padding-bottom: 25px;
+}
+
+.details-div{
+    height: 6%;
+    background-color: var(--ion-background-color);
+    display:flex;
+    font-family: Roboto;
+    align-items: center;
+    color: black;
+    margin-bottom: 12px;
+    box-shadow: 1px 2px 5px rgba(0, 0, 0, 0.13);
+    border-radius: 6px;
+}
+
+.details-title{
+    margin-left: 14px;
+    font-size: 100%;
+    width: 35%;
+    margin: 10px;
+}
+
+.user-details{
+    background-color: var(--ion-background-color);
+    color: var(--ion-color-dark);
+    font-size: 100%;
+    margin-right: auto;
+    line-height: 170%;
+    margin-top: auto;
+    margin-bottom: auto;
+    height: 95%;
+    border-radius: 5px;
+    border-color: var(--ion-color-dark);
+}
+
+.details-div-large{
+    height: 150px;
+    background-color: var(--ion-background-color);
+    display: block;
+    margin-top: 10px;
+    font-family: Roboto;
+    color: black;
+    margin-bottom: 12px;
+    box-shadow: 1px 2px 5px rgba(0, 0, 0, 0.13);
+    border-radius: 6px;
+}
+
+.medAid-details-div{
+    margin-left: 14px;
+    font-size: 100%;
+    width: 35%;
+    padding-top: 10px;
+}
+
+.medAid-details{
+    background-color: var(--ion-background-color);
+    color: var(--ion-color-dark);
+    font-size: 100%;
+    line-height: 170%;
+    height: 20%;
+    margin-top: 5px;
+    border-radius: 5px;
+    width: 45%;
+    padding-left: 3px;
+    margin-left: 14px;
+    border-color: var(--ion-color-dark);
+}
+
+.submit-button{
+    padding: 10px 22px;
+    gap: 10px;
+    border: 2px solid var(--ion-color-secondary);
+    border-radius: 10px;
+    background-color: var(--ion-color-primary);
+    margin: auto;
+    display: block;
+}
+
+#background-image-1{
+    position: absolute;
+    width: 160px;
+    height: 160px;
+    margin-top: -160px;
+    opacity: 0.24;
+    z-index: -10;
+}
+
+#background-image-2{
+    position: absolute;
+    width: 130px;
+    height: 130px;
+    right: 150px;
+    margin-top: -200px;
+    opacity: 0.14;
+    z-index: -10;
+}
+
+#background-image-3{
+    position: absolute;
+    width: 280px;
+    height: 280px;
+    right: 400px;
+    top: 0px;
+    margin-top: 120px;
+    opacity: 0.14;
+    z-index: -10;
+}
+
+.error{
+    display: none;
+    position: relative;
+    display: block;
+    text-align: left;
+    margin: 0;
+    color: red;
+}
+
+input:focus{
+    outline:none;
+}
+
+@media (max-width: 642px) {
+    
+    #background-image-2{
+        right: 15px;
+    }
+    
+    #background-image-3{
+        display: none;
+    }
+
+    .parent-profile-div{
+        margin-top: 13px;
+    }
+
+    .profile-name{
+        font-size: 36px;
+        padding-top: 15px;
+        padding-bottom: 15px;
+    }
+
+    .details-title{
+        width: 30%;
+        font-size: 15px;
+    }
+
+    .user-details{
+        font-size: 15px;
+        width: 100%;
+    }
+
+    .profile-details-div{
+        width: 75%;
+    }
+
+    .medAid-details{
+        width: 40%;
+        padding-left: 8px;
+    }
+
+    .medAid-details{
+        padding-top: 5px;
+    }
+}
+
+@media (max-width: 810px) {
+    
+    #background-image-2{
+        right: 35px;
+    }
+    
+    #background-image-3{
+        display: none;
+    }
+
+    .parent-profile-div{
+        margin-top: 13px;
+    }
+
+    .profile-name{
+        font-size: 36px;
+        padding-top: 15px;
+        padding-bottom: 15px;
+    }
+
+    .details-title{
+        width: 30%;
+        font-size: 15px;
+    }
+
+    .user-details{
+        font-size: 15px;
+        width: 100%;
+    }
+
+    .profile-details-div{
+        width: 75%;
+    }
+
+    .medAid-details{
+        width: 40%;
+        padding-right: 18px;
+    }
+
+    .medAid-details{
+        padding-top: 5px;
+    }
+
+}

@@ -1,0 +1,230 @@
+.profile-name {
+    font-size: 3.6vw;
+    padding-top: 2%;
+    margin-bottom: 2%;
+    color: var(--ion-color-dark);
+    text-align: center;
+    font-family: TitanOne;
+    margin-top: 0px;
+}
+
+.parent-profile-div{
+    width: 90%;
+    margin-top: 60px;
+    margin-left: auto;
+    margin-right: auto;
+    background-color: #69A88DB2;
+    border-radius: 16px;
+    margin-bottom: 60px;
+}
+
+.profile-picture-div{
+    width: 33.3%;
+    height: 100%;
+    float: left;
+}
+
+.details-div{
+    width: 40%;
+    height: 100%;
+    margin-left: auto;
+    margin-right: auto;
+    padding-bottom: 25px;
+}
+
+.empty-div{
+    width: 33.3%;
+    height: 100%;
+    float: right;
+}
+
+.profile-picture-wrapper{
+    width: 166px;
+    height: 166px;
+    background-color: rgba($color: #032927BF, $alpha: 0.75);
+    border-radius: 50%;
+    margin: auto;
+    display: flex;
+    align-items: center;
+    text-align: center;
+    justify-content: center;
+    margin-top: 20px;
+    margin-bottom: 25px;
+}
+
+.profile-picture {
+    width: 140px;
+    height: 140px;
+    border-radius: 50%;
+}
+
+.parent-info-small{
+    height: 6%;
+    background-color: var(--ion-background-color);
+    display:flex;
+    font-family: Roboto;
+    align-items: center;
+    color: black;
+    margin-bottom: 12px;
+    box-shadow: 1px 2px 5px rgba(0, 0, 0, 0.13);
+    border-radius: 6px;
+}
+
+.parent-info-large{
+    height: 26%;
+    background-color: var(--ion-background-color);
+    display:flex;
+    margin-top: 10px;
+    font-family: Roboto;
+    color: black;
+    margin-bottom: 12px;
+    box-shadow: 1px 2px 5px rgba(0, 0, 0, 0.13);
+    border-radius: 6px;
+}
+
+.parent-text{
+    margin-left: 12px;
+    font-size: 100%;
+    width: 35%;
+    margin: 10px;
+}
+
+.parent-text-info{
+    color: var(--ion-color-dark);
+    font-size: 100%;
+    margin-right: auto;
+    line-height: 170%;
+    margin-top: auto;
+    margin-bottom: auto;
+}
+
+.parent-text-info2{
+    color: var(--ion-color-dark);
+    font-size: 100%;
+    margin-right: auto;
+    line-height: 170%;
+    margin-top: auto;
+    margin-bottom: auto;
+}
+
+.change-button{
+    padding: 10px 22px;
+    gap: 10px;
+    border: 2px solid var(--ion-color-secondary);
+    border-radius: 10px;
+    background-color: #69A88DB2;
+    margin: auto;
+    display: block;
+    margin-top: 25px;
+}
+
+#background-image-1{
+    position: absolute;
+    width: 160px;
+    height: 160px;
+    margin-top: -160px;
+    opacity: 0.14;
+    z-index: -10;
+}
+
+#background-image-2{
+    position: absolute;
+    width: 130px;
+    height: 130px;
+    right: 150px;
+    margin-top: -200px;
+    opacity: 0.14;
+    z-index: -10;
+}
+
+#background-image-3{
+    position: absolute;
+    width: 280px;
+    height: 280px;
+    right: 400px;
+    top: 0px;
+    margin-top: 120px;
+    opacity: 0.14;
+    z-index: -10;
+}
+
+@media (max-width: 642px) {
+    #background-image-2{
+        right: 15px;
+    }
+    
+    #background-image-3{
+        display: none;
+    }
+
+    .parent-profile-div{
+        margin-top: 13px;
+    }
+
+    .profile-name{
+        font-size: 36px;
+        padding-top: 15px;
+        padding-bottom: 15px;
+    }
+
+    .parent-text{
+        width: 30%;
+        font-size: 15px;
+    }
+
+    .parent-text-info{
+        font-size: 15px;
+    }
+
+    .parent-text-info2{
+        padding-top: 5px;
+    }
+
+    .details-div{
+        width: 75%;
+    }
+}
+
+@media (max-width: 810px) {
+    
+    #background-image-2{
+        right: 35px;
+    }
+    
+    #background-image-3{
+        display: none;
+    }
+
+    .parent-profile-div{
+        margin-top: 13px;
+    }
+
+    .profile-name{
+        font-size: 36px;
+        padding-top: 15px;
+        padding-bottom: 15px;
+    }
+
+    .parent-text{
+        width: 30%;
+        font-size: 15px;
+    }
+
+    .parent-text-info{
+        font-size: 15px;
+    }
+
+    .parent-text-info2{
+        padding-top: 5px;
+    }
+
+    .details-div{
+        width: 75%;
+    }
+}
+
+@media (max-width: 1000px) {
+    #background-image-3{
+        display: none;
+    }
+}

@@ -1,0 +1,207 @@
+h2{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    top: 90px;
+    margin: 0;
+    font-style: normal;
+    font-weight: 700;
+    font-size: 48px;
+    line-height: 56px;
+    text-transform: capitalize;
+    position: relative;
+    text-align: center;
+    margin-bottom: -40px;
+    color: var(--ion-color-dark);
+}
+
+.childrenDetails{
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    top: 130px;
+}
+
+.form-details{
+    display:flex;
+    align-items: center;
+    flex-direction: column;
+    text-align: right;
+}
+
+// Button styling
+.childrenDetails input{
+    width: 411px;
+    height: 62px;
+    background: #F9F9F9;
+    box-shadow: 1px 2px 5px rgba(0, 0, 0, 0.13);
+    border-style: none;
+    border-radius: 10px;
+    padding-left: 20px;
+}
+.childrenDetails textarea{
+    margin-top: 40px;
+    resize: none;
+    width: 411px;
+    height: 169px;
+    background: #F9F9F9;
+    box-shadow: 1px 2px 5px rgba(0, 0, 0, 0.13);
+    border-style: none;
+    border-radius: 10px;
+    padding-left: 20px;
+    color: black;
+}
+
+label{
+    position:relative;
+    color: #797979;
+    display: block;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 16px;
+    line-height: 20px;
+    top:35px;
+    text-align: left !important;
+}
+
+input{
+    padding-left: 10px !important;
+}
+
+textarea{
+    padding-left: 10px !important;
+    padding-top: 7px !important;
+}
+
+input[type=text], select{
+    width: 411px;
+    height: 62px;
+    background: #F9F9F9;
+    box-shadow: 1px 2px 5px rgba(0, 0, 0, 0.13);
+    border-style: none;
+    border-radius: 10px;
+    margin-top: 40px;
+    padding-left: 20px;
+    color: black;
+}
+
+
+input[type=text]::placeholder{
+    color:transparent;
+}
+
+input:focus{
+    outline:none;
+}
+
+textarea:focus{
+    outline:none;
+}
+
+.buttons{
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 15px;
+    width: 411px;
+    height: auto;
+    text-align: center;
+    margin-top: 10px;
+    margin-bottom: 100px;
+}
+
+.addChild{
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+    width: 195px !important;
+    font-style: normal;
+    font-weight: 700;
+    font-size: 16px;
+    line-height: 19px;
+    color: white;
+    background-color: var(--ion-color-primary) !important;
+    margin-top: 20px;
+}
+
+.cancel{
+    cursor: pointer;
+    text-align: center;
+    flex-direction: row;
+    justify-content: center;
+    padding: 10px 22px;
+    margin-left: 3px;
+
+    width: 195px !important;
+    height: 60px;
+    left: 973px;
+    top: 980px;
+    font-style: normal;
+    font-weight: 700;
+    font-size: 16px;
+    line-height: 19px;
+    color: var(--ion-color-primary);
+    background-color: transparent !important;
+    border: 2px solid var(--ion-color-primary) !important;
+    border-radius: 10px;
+    margin-top: 20px;
+}
+
+//Labels for input
+#labelID{
+    left: -169px !important;
+}
+#firstName{
+    left: -156px !important;
+}
+#surname{
+    left: -165px !important;
+}
+#allergies{
+    left: -165px !important;
+}
+#diet{
+    left: -120px !important;
+}
+
+
+
+//Errors styling
+.error{
+    display: none;
+    position: relative;
+    display: block;
+    text-align: left;
+    margin: 0;
+    color: red;
+}
+
+//Images
+#active-2{
+    position: absolute;
+    width: 375px;
+    height: 348px;
+    left: 276px;
+    top: 757px;
+    opacity: 0.04;
+    z-index: -10;
+}
+
+#active{
+    position: absolute;
+    width: 330px;
+    height: 350px;
+    left: 1313px;
+    top: 281px;
+    opacity: 0.04;
+    z-index: -10;
+}
+
+#lifestyles{
+    position: absolute;
+    width: 344px;
+    height: 325px;
+    left: -79px;
+    top: -5px;
+    opacity: 0.04;
+    z-index: -10;
+}

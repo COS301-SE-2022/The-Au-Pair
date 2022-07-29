@@ -1,17 +1,22 @@
 import { NgModule } from '@angular/core';
-import { BrowserModule } from '@angular/platform-browser';
-import { RouteReuseStrategy } from '@angular/router';
-
-import { IonicModule, IonicRouteStrategy } from '@ionic/angular';
-
+import { IonicModule } from '@ionic/angular';
+import { NavbarModule } from '@the-au-pair/shared/components/navbar';
+import { ShellModule } from '@the-au-pair/shell/feature';
 import { AppComponent } from './app.component';
-import { AppRoutingModule } from './app-routing.module';
+import { HttpClientModule } from '@angular/common/http';
+import { API } from '../../../../libs/shared/api/api.service';
+import { Geolocation } from '@awesome-cordova-plugins/geolocation/ngx';
 
 @NgModule({
   declarations: [AppComponent],
   entryComponents: [],
-  imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule],
-  providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }],
+  imports: [
+    IonicModule.forRoot(), 
+    ShellModule, 
+    HttpClientModule, 
+    NavbarModule,
+  ],
   bootstrap: [AppComponent],
+  providers: [API, Geolocation]
 })
 export class AppModule {}

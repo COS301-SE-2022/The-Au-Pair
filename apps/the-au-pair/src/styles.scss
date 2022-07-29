@@ -24,3 +24,70 @@
 @import '~@ionic/angular/css/text-alignment.css';
 @import '~@ionic/angular/css/text-transformation.css';
 @import '~@ionic/angular/css/flex-utils.css';
+
+@font-face {
+    font-family: "TitanOne";
+    src: url('../../../libs/shared/assets/fonts/titan1.woff2');
+}
+
+@font-face {
+    font-family: "Roboto";
+    src: url('../../../libs/shared/assets/fonts/roboto.woff2');
+}
+
+h1{
+    font-family: TitanOne;
+}
+
+body{
+    font-family: Roboto;
+}
+
+ion-button{
+    font-family: Roboto;
+    font-weight: 500 !important;
+    font-size: 18px !important;
+    line-height: 23px !important;
+    --color: white !important;
+}
+
+.ion-page{
+    background-clip: content-box;
+}
+
+.toastPopUp{
+    text-align: center;
+    position: relative;
+    top: 60px;
+    font-size: 20px;
+    width: 420px;
+    margin: auto;
+}
+
+ion-alert.custom-alert {
+    --backdrop-opacity: 0.7;
+}
+
+.custom-alert .alert-button-group {
+padding: 8px;
+}
+
+button.alert-button.alert-button-confirm {
+background-color: var(--ion-color-danger);
+color: white;
+}
+
+.md button.alert-button.alert-button-confirm {
+border-radius: 4px;
+}
+
+.custom-alert {
+    .alert-wrapper {
+        .alert-head {
+            h2 {
+                color: black;
+            }
+        }
+    }
+}
+

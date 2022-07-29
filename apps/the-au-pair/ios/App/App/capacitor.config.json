@@ -1,6 +1,0 @@
-{
-	"appId": "io.ionic.starter",
-	"appName": "TheAuPair",
-	"webDir": "../../dist/apps/the-au-pair",
-	"bundledWebRuntime": false
-}

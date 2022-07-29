@@ -1,0 +1,19 @@
+<ion-header [translucent]="true">
+    <ion-toolbar mode="ios" class="navbar">
+      <ion-buttons slot="start" *ngIf="isHome">
+        <button (click)="back()" class="back-button"><ion-icon name="arrow-back-circle-outline"></ion-icon></button>
+      </ion-buttons>
+      <ion-buttons slot="start" class="start-buttons">
+        <ion-button (click)="dash()">Dashboard</ion-button>
+        <ion-button [hidden]="this.type!==1 && this.type!==2">Manage Contract</ion-button> <!-- routerlink to page to be added-->
+        <ion-button (click)="reports()" [hidden]="this.type!==0">Reports</ion-button>
+        <ion-button href="https://github.com/COS301-SE-2022/The-Au-Pair">About</ion-button>
+      </ion-buttons>
+      <ion-buttons slot="end" class="end-buttons">
+        <ion-button (click)="logout()"class="logout-button">Logout</ion-button>
+        <ion-button (click)="profile()" id="profile"><ion-icon name="person-circle-outline"></ion-icon></ion-button>
+        <ion-button (click)="notifications()"><ion-icon name="notifications-circle-outline"></ion-icon></ion-button>
+      </ion-buttons>
+      <ion-title><h1 class="text-white ion-text-center">The Au Pair</h1></ion-title>
+    </ion-toolbar>
+</ion-header>
