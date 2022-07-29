@@ -6,6 +6,8 @@ import { API } from '../../../../shared/api/api.service';
 import { HttpClientTestingModule } from "@angular/common/http/testing";
 import { NavbarModule } from '@the-au-pair/shared/components/navbar';
 import { RouterTestingModule } from "@angular/router/testing";
+import { NgxsModule } from '@ngxs/store';
+import { AppState } from '../../../../shared/ngxs/state';
 
 describe('ParentViewActivityComponent', () => {
   let component: ParentViewActivityComponent;
@@ -19,6 +21,7 @@ describe('ParentViewActivityComponent', () => {
         HttpClientTestingModule,
         NavbarModule,
         RouterTestingModule,
+        NgxsModule.forRoot([AppState])
     ],
     providers: [API]
     }).compileComponents();

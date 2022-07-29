@@ -19,70 +19,64 @@ public class hoursLoggedController
 
   @PostMapping("/getDateMinutes")
   @CrossOrigin(origins = "http://localhost:4200")
-  public int getDateMinutes(@RequestBody Map<String, String> idAndDate)
+  public Integer getDateMinutes(@RequestBody Map<String, String> idAndDate)
   {
-    int minutes = hls.getDateMinutes(idAndDate.get("id"), idAndDate.get("date"));
-    return minutes;
+    return this.hls.getDateMinutes(idAndDate.get("id"), idAndDate.get("date"));
   }
 
   @PostMapping("/getAllMinutes")
   @CrossOrigin(origins = "http://localhost:4200")
-  public int getAllMinutes(@RequestBody String id)
+  public Integer getAllMinutes(@RequestBody String id)
   {
-    int minutes = hls.getAllMinutes(id);
-    return minutes;
+    return this.hls.getAllMinutes(id);
   }
 
   @PostMapping("/getMonthMinutes")
   @CrossOrigin(origins = "http://localhost:4200")
-  public int getMonthMinutes(@RequestBody Map<String, String> idAndDate)
+  public Integer getMonthMinutes(@RequestBody Map<String, String> idAndDate)
   {
-    int minutes = hls.getMonthMinutes(idAndDate.get("id"), idAndDate.get("date"));
-    return minutes;
+    return this.hls.getMonthMinutes(idAndDate.get("id"), idAndDate.get("date"));
   }
 
   @PostMapping("/getDateTimes")
   @CrossOrigin(origins = "http://localhost:4200")
   public List<hoursLogged> getDateTimes(@RequestBody Map<String, String> idAndDate)
   {
-    List<hoursLogged> times = hls.getDateTimes(idAndDate.get("id"), idAndDate.get("date"));
-    return times;
+    return this.hls.getDateTimes(idAndDate.get("id"), idAndDate.get("date"));
   }
 
   @PostMapping("/getAllTimes")
   @CrossOrigin(origins = "http://localhost:4200")
   public List<hoursLogged> getAllTimes(@RequestBody String id)
   {
-    List<hoursLogged> times = hls.getAllTimes(id);
-    return times;
+    return this.hls.getAllTimes(id);
   }
 
   @PostMapping("/getStartedLog")
   @CrossOrigin(origins = "http://localhost:4200")
   public String getStartedLog(@RequestBody Map<String, String> idAndDate)
   {
-    String id = hls.getStartedLog(idAndDate.get("id"), idAndDate.get("date"));
-    return id;
+    return this.hls.getStartedLog(idAndDate.get("id"), idAndDate.get("date"));
   }
 
   @PostMapping("/addHoursLog")
   @CrossOrigin(origins = "http://localhost:4200")
   public void addHoursLog(@RequestBody hoursLogged hl)
   {
-    hls.addHoursLog(hl);
+    this.hls.addHoursLog(hl);
   }
 
   @PostMapping("/addTimeEnd")
   @CrossOrigin(origins = "http://localhost:4200")
   public void addTimeEnd(@RequestBody Map<String, String> idAndEnd)
   {
-    hls.addTimeEnd(idAndEnd.get("id"), idAndEnd.get("endTime"));
+    this.hls.addTimeEnd(idAndEnd.get("id"), idAndEnd.get("endTime"));
   }
 
   @PostMapping("/updateHoursLog")
   @CrossOrigin(origins = "http://localhost:4200")
   public void updateHoursLog(@RequestBody hoursLogged hl)
   {
-    hls.updateHoursLog(hl);
+    this.hls.updateHoursLog(hl);
   }
 }

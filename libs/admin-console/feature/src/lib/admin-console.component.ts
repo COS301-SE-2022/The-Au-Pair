@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { API } from "../../../../shared/api/api.service";
+import { Store } from "@ngxs/store";
 
 @Component({
   selector: 'the-au-pair-admin-console',
@@ -7,19 +8,31 @@ import { API } from "../../../../shared/api/api.service";
   styleUrls: ['./admin-console.component.scss'],
 })
 export class AdminConsoleComponent implements OnInit{
+  auPairs : any [] = [];
+  idNum = "";
+  
+  constructor(private serv: API, public store:Store) {
+    this.idNum = this.store.snapshot().user.id;
+  }
 
-  auPairs : any[] = [];
-
-  constructor(private serv: API) {}
-
-  ngOnInit(): void {
-    this.getSignUpRequests();
+  async ngOnInit(): Promise<void> {
+    this.getSignUpRequests();    
   }
 
   getSignUpRequests() {
     this.serv.getApplicants().toPromise().then(res => {
       this.auPairs = res;
-      console.log(this.auPairs);
+
+      for(let i = 0; i < this.auPairs.length; i++) {
+        this.serv.getAuPair(this.auPairs[i].id).toPromise().then(dat => {
+          
+          this.auPairs[i].bio = dat.bio;
+          this.auPairs[i].experience = dat.experience;
+          
+        }).catch(err => {
+          console.log(err);
+        });
+      }
     }).catch(err => {
       console.log(err);
     });
@@ -27,6 +40,7 @@ export class AdminConsoleComponent implements OnInit{
 
   resolve(userId : string, choice : boolean) {
     this.serv.resolveApplication(userId,choice).toPromise().then(res => {
+      console.log("The response is "+res);
       window.location.reload();
       return choice;
     }).catch(err => {

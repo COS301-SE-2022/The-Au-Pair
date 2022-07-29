@@ -1,0 +1,111 @@
+.modal{
+    width: 100%;
+    height: 100%;
+    color: #69A88DB2;
+}
+
+.expand-details-div{
+    width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+    background-color: #69A88DB2;
+}
+
+.icon-close{
+    height: 32px;
+    width: 28px;
+    color: white;
+    cursor: pointer;
+    position: absolute;
+    right: 0px;
+}
+
+.expand-div{
+    width: 80%;
+    height: 100%;
+    margin-left: auto;
+    margin-right: auto;
+    padding-bottom: 25px;
+}
+
+.profile-name {
+    font-size: 3.6vw;
+    padding-top: 2%;
+    margin-bottom: 2%;
+    color: var(--ion-color-dark);
+    text-align: center;
+    font-family: TitanOne;
+    margin-top: 0px;
+}
+
+.details-div{
+    height: 6%;
+    background-color: var(--ion-background-color);
+    display:flex;
+    font-family: Roboto;
+    align-items: center;
+    color: black;
+    margin-bottom: 12px;
+    box-shadow: 1px 2px 5px rgba(0, 0, 0, 0.13);
+    border-radius: 6px;
+}
+
+.profile-picture-wrapper{
+    width: 166px;
+    height: 166px;
+    background-color: rgba($color: #032927BF, $alpha: 0.75);
+    border-radius: 50%;
+    margin: auto;
+    display: flex;
+    align-items: center;
+    text-align: center;
+    justify-content: center;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+.profile-picture {
+    width: 140px;
+    height: 140px;
+    border-radius: 50%;
+}
+
+.details-title{
+    margin-left: 12px;
+    font-size: 100%;
+    width: 35%;
+    margin: 10px;
+}
+
+.user-details{
+    color: var(--ion-color-dark);
+    font-size: 100%;
+    margin-right: auto;
+    line-height: 170%;
+    margin-top: auto;
+    margin-bottom: auto;
+    padding-right: 15px;
+}
+
+.user-details-large{
+    height: 26%;
+    background-color: var(--ion-background-color);
+    display:flex;
+    margin-top: 10px;
+    font-family: Roboto;
+    color: black;
+    margin-bottom: 12px;
+    box-shadow: 1px 2px 5px rgba(0, 0, 0, 0.13);
+    border-radius: 6px;
+}
+
+.hire-button{
+    padding: 10px 22px;
+    gap: 10px;
+    border: 2px solid var(--ion-color-secondary);
+    border-radius: 10px;
+    background-color: #69A88DB2;
+    margin: auto;
+    display: block;
+    margin-top: 25px;
+}

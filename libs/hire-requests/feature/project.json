@@ -1,0 +1,26 @@
+{
+  "projectType": "library",
+  "root": "libs/hire-requests/feature",
+  "sourceRoot": "libs/hire-requests/feature/src",
+  "prefix": "the-au-pair",
+  "targets": {
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["coverage/libs/hire-requests/feature"],
+      "options": {
+        "jestConfig": "libs/hire-requests/feature/jest.config.js",
+        "passWithNoTests": true
+      }
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "options": {
+        "lintFilePatterns": [
+          "libs/hire-requests/feature/src/**/*.ts",
+          "libs/hire-requests/feature/src/**/*.html"
+        ]
+      }
+    }
+  },
+  "tags": []
+}

@@ -5,9 +5,10 @@ import { ScheduleRoutingModule } from './schedule-routing.module';
 import { IonicModule } from '@ionic/angular';
 import { NavbarModule } from '@the-au-pair/shared/components/navbar';
 import { API } from '../../../../shared/api/api.service';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
-  imports: [CommonModule, ScheduleRoutingModule, IonicModule, NavbarModule],
+  imports: [CommonModule, ScheduleRoutingModule, IonicModule, NavbarModule, FormsModule],
   declarations: [ScheduleComponent],
   providers: [API]
 })

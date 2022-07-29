@@ -5,8 +5,10 @@ import { HttpClientTestingModule } from "@angular/common/http/testing";
 import { RouterTestingModule} from '@angular/router/testing';
 import { AuPairScheduleComponent } from './au-pair-schedule.component';
 import { CommonModule } from '@angular/common';
-import { AuPairNavbarModule } from '@the-au-pair/shared/components/aupair-navbar';
+import { NavbarModule } from '@the-au-pair/shared/components/navbar';
 import { FormsModule } from '@angular/forms';
+import { NgxsModule } from '@ngxs/store';
+import { AppState } from '../../../../shared/ngxs/state';
 
 describe('AuPairScheduleComponent', () => {
   let component: AuPairScheduleComponent;
@@ -15,7 +17,7 @@ describe('AuPairScheduleComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [AuPairScheduleComponent],
-      imports: [IonicModule, CommonModule,HttpClientTestingModule,AuPairNavbarModule, RouterTestingModule, FormsModule],
+      imports: [IonicModule, CommonModule,HttpClientTestingModule,NavbarModule, RouterTestingModule, FormsModule,NgxsModule.forRoot([AppState])],
       providers: [API,ModalController]
     }).compileComponents();
   });

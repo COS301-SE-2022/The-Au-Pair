@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Child } from '../../../../shared/interfaces/interfaces';
 import { API } from '../../../../shared/api/api.service';
 import { Router } from '@angular/router';
+import { Store } from '@ngxs/store';
 
 @Component({
   selector: 'the-au-pair-children-dashboard',
@@ -11,19 +12,20 @@ import { Router } from '@angular/router';
 export class ChildrenDashboardComponent implements OnInit 
 {
   //Parent and children information
-  employerId = "4561237814867";
+  parentID = "";
   children: Child[] = []
 
-  constructor(private serv: API, public router: Router) {}
+  constructor(private serv: API, public router: Router, private store: Store) {}
 
   ngOnInit(): void
   {
+    this.parentID = this.store.snapshot().user.id;
     this.getChildren();
   }
 
   async getChildren()
   {
-    this.serv.getChildren(this.employerId).subscribe(
+    this.serv.getChildren(this.parentID).subscribe(
       res=>{
         let i = 0;
         res.forEach((element: Child) => 

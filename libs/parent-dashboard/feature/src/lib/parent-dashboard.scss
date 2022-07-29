@@ -106,7 +106,7 @@ ion-card {
     text-align: center;
     width: 100%;
     position: relative;
-    height: 285px;
+    height: 100%;
     display: block;
 }
 
@@ -183,6 +183,15 @@ ion-card {
     cursor: pointer;    
 }
 
+.terminate-contract{
+    padding-left: 10px;
+    float: right;
+    width: 35px;
+    height: 35px;
+    color: var(--ion-color-danger);
+    cursor: pointer;   
+}
+
 @media (max-width: 642px) {
     .children-div {
         grid-template-columns: repeat(1, 1fr);
@@ -222,6 +231,9 @@ ion-card {
         width: 90%;
     }
 
+    .actions-div-wrapper {
+        height: 100%;
+    }
 }
 
 @media (max-width: 810px) {
@@ -262,6 +274,10 @@ ion-card {
     .au-pair-div-wrapper{
         width: 90%;
     }
+
+    .actions-div-wrapper {
+        height: 100%;
+    }
 }
 
 @media (max-width: 1240px) {
@@ -271,5 +287,9 @@ ion-card {
 
    .au-pair-div-wrapper{
     width: 90%;
-}
+    }
+
+    .actions-div-wrapper {
+        height: 100%;
+    }
 }

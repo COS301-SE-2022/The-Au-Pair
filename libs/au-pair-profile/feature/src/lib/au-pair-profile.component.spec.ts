@@ -7,6 +7,8 @@ import { NavbarModule } from '@the-au-pair/shared/components/navbar';
 import { RouterTestingModule} from '@angular/router/testing';
 import { API } from '../../../../shared/api/api.service';
 import { By } from '@angular/platform-browser';
+import { NgxsModule } from '@ngxs/store';
+import { AppState } from '../../../../shared/ngxs/state';
 
 describe('AuPairProfileComponent', () => {
   let component: AuPairProfileComponent;
@@ -25,7 +27,8 @@ describe('AuPairProfileComponent', () => {
         IonicModule,
         HttpClientTestingModule,
         NavbarModule,
-        RouterTestingModule
+        RouterTestingModule,
+        NgxsModule.forRoot([AppState])
        ],
        providers:[API]
     }).compileComponents();

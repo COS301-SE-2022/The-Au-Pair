@@ -2,6 +2,8 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { RouterTestingModule} from '@angular/router/testing';
 import { InputFieldModule } from '@the-au-pair/shared/components/input-field';
 import { PasswordFieldModule } from '@the-au-pair/shared/components/password-field';
+import { LocationFieldModule } from '@the-au-pair/shared/components/location-field';
+import { LongFieldModule } from '@the-au-pair/shared/components/long-field';
 import { ReactiveFormsModule } from '@angular/forms';
 import { IonicModule } from '@ionic/angular';
 import { RegisterComponent } from './register.component';
@@ -33,7 +35,9 @@ describe('RegisterComponent', () => {
       imports: [
         IonicModule,
         InputFieldModule,
+        LocationFieldModule,
         PasswordFieldModule,
+        LongFieldModule,
         ReactiveFormsModule,
         RouterTestingModule,
         HttpClientTestingModule,

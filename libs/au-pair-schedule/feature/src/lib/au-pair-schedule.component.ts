@@ -2,6 +2,7 @@
 import { DatePipe } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { ModalController } from '@ionic/angular';
+import { Store } from '@ngxs/store';
 import { API } from '../../../../shared/api/api.service';
 import { ScheduleModalComponent } from './schedule-modal/schedule-modal.component';
 
@@ -11,6 +12,9 @@ import { ScheduleModalComponent } from './schedule-modal/schedule-modal.componen
   styleUrls: ['./au-pair-schedule.component.scss'],
 })
 export class AuPairScheduleComponent implements OnInit {
+
+  aupairID = "";
+
   days = [
     "Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"
   ]
@@ -29,7 +33,7 @@ export class AuPairScheduleComponent implements OnInit {
   }
   childActivities : any[] = [];
 
-  constructor(private serv: API, private modalCtrl : ModalController) {}
+  constructor(private serv: API, private modalCtrl : ModalController, private store: Store) {}
 
   async openModal(actId : string) {
     const modal = await this.modalCtrl.create({
@@ -42,6 +46,7 @@ export class AuPairScheduleComponent implements OnInit {
   }
 
   ngOnInit(): void {
+      this.aupairID = this.store.snapshot().user.id;
       this.getActivities();
   }
 
@@ -53,7 +58,7 @@ export class AuPairScheduleComponent implements OnInit {
 
   async getActivities(){
     console.log("getActivities");
-    this.serv.getChildren("7542108615984").subscribe(
+    this.serv.getChildren(this.aupairID).subscribe(
       res => {
         this.children = res;
         this.children.forEach((element: { id: string; }) => {
