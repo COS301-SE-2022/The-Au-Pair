@@ -74,6 +74,8 @@ export class ExploreComponent implements OnInit {
   {
     await this.serv.getAllAuPairs().subscribe(
       res=>{
+        console.log(res);
+        
         this.auPairs = res;
         this.setAuPairArray();
       },
@@ -87,7 +89,7 @@ export class ExploreComponent implements OnInit {
       this.serv.getUser(ap.id).subscribe(
         res=>{
           const eucdistance = this.calculateEucDistance(res.latitude, res.longitude);
-
+          
           const auPairDetails = {
             id: ap.id,
             rating: ap.rating,
@@ -271,15 +273,15 @@ export class ExploreComponent implements OnInit {
 
   calculateEucDistance(auPairx : number, auPairy : number)
   {
-    this.currentParentx = (this.currentParentx * Math.PI) / 180;
-    this.currentParenty = (this.currentParenty * Math.PI) / 180;
+    const parX = (this.currentParentx * Math.PI) / 180;
+    const parY = (this.currentParenty * Math.PI) / 180;
     auPairx = (auPairx * Math.PI) / 180;
     auPairy = (auPairy * Math.PI) / 180;
 
-    const dlong = auPairy - this.currentParenty;
-    const dlat = auPairx - this.currentParentx;
+    const dlong = auPairy - parY;
+    const dlat = auPairx - parX;
 
-    this.eucDistance = Math.pow(Math.sin(dlat / 2), 2) + Math.cos(this.currentParentx) * Math.cos(auPairx) * Math.pow(Math.sin(dlong / 2), 2);
+    this.eucDistance = Math.pow(Math.sin(dlat / 2), 2) + Math.cos(parX) * Math.cos(auPairx) * Math.pow(Math.sin(dlong / 2), 2);
 
     this.eucDistance = 2 * Math.asin(Math.sqrt(this.eucDistance));
 

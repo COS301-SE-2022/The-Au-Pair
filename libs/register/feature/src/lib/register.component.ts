@@ -20,7 +20,7 @@ export class RegisterComponent {
   public experienceError: boolean;
   
   parentChosen = true;
-  maleChosen = true;
+  public maleChosen: boolean;
   long = 0;
   lat = 0;
   foundSuburb =  "";
@@ -90,6 +90,7 @@ export class RegisterComponent {
     this.medError = false;
     this.bioError = false;
     this.experienceError = false;
+    this.maleChosen = true;
   }
 
   async registerUser() 
@@ -160,10 +161,10 @@ export class RegisterComponent {
       this.userDetails.suburb = this.foundSuburb;
 
       if(this.maleChosen) {
-        this.userDetails.gender = "Male";
+        this.userDetails.gender = "male";
       }
       else {
-        this.userDetails.gender = "Female";
+        this.userDetails.gender = "female";
       }
       
       this.userDetails.number = this.parentRegisterDetailsForm.value.phone;
