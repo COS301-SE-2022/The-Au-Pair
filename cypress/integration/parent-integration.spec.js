@@ -9,7 +9,7 @@ beforeEach( () => {
     cy.get(".loginUser").click();
 });
 
-//Activity Tests
+// Activity Tests
 it('should not add an activity with a location not returned by the API', () => {
     cy.get("#addAct").click({force:true}).then( () => {
         cy.get('[ng-reflect-name="activityName"]').type("Test Activity");
@@ -95,5 +95,16 @@ it('should allow a parent to route to "add a child" page', () => {
 it('should show the correct employed au pair when loading au pair cost', () => {
     cy.get("#auPairCost").click({force:true}).then( () => {
         cy.get(".au-pair-name").contains("Denny");
+    });
+})
+
+//Explore testing
+it('should allow a parent who hasnt employed an au pair yet, to view/explore au pairs to potentially hire', () => {
+    cy.visit("/login-page")
+    cy.get(`[ng-reflect-name="Email"]`).type("dylan@gmail.com"); 
+    cy.get(`[ng-reflect-name="Password"]`).type("Dylan@1234"); 
+    cy.get(".loginUser").click();
+    cy.get("#exploreAuPairs").click({force:true}).then( () => {
+        cy.get(".au-pair-details-wrapper").contains("Ruben Brits");
     });
 })
