@@ -14,24 +14,49 @@ export class ParentNotificationsComponent implements OnInit {
   userId = "";
   constructor(private api: API, private store : Store) {}
 
-  ngOnInit() {
+  getParentNotifications(){
+    this.api.getNotificationsByParentId(this.userId).toPromise().then(res => {
+      this.notifications = res;
+      this.sortNotifications();
+    }, err => {
+      console.log(err);
+    });
+  }
+
+  getAuPairNotifications(){
+    this.api.getNotificationsByAuPairId(this.userId).toPromise().then(res => {
+      this.notifications = res;
+      this.sortNotifications();
+    }, err => {
+      console.log(err);
+    });
+  }
+
+  sortNotifications(){
+    this.notifications.sort((a, b) => {
+      const first = new Date(b.date + 'T' + b.time+':00');
+      const second = new Date(a.date + 'T' + a.time+':00');
+      return  Number(first) - Number(second);
+    });
+  }
+
+  setUserData(){
     this.userType = this.store.snapshot().user.type;
     this.userId = this.store.snapshot().user.id;
+  }
+
+  ngOnInit() {
+    this.setUserData();
+    
     console.log(this.userId);
 
     if(this.userType == 1)
     {
-      this.api.getNotificationsByParentId(this.userId).toPromise().then(res => {
-        this.notifications = res;
-        //loop through all notifications and order by date
-        this.notifications.sort((a, b) => {
-          const first = new Date(b.date + 'T' + b.time+':00');
-          const second = new Date(a.date + 'T' + a.time+':00');
-          return  Number(first) - Number(second);
-        });
-      }, err => {
-        console.log(err);
-      });
+      this.getParentNotifications();
+    }
+    else if(this.userType == 2)
+    {
+      this.getAuPairNotifications();
     }
   }
 }
