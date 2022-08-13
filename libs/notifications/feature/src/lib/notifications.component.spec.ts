@@ -94,11 +94,5 @@ describe('ParentNotificationsComponent', () => {
       expect(component.getParentNotifications).toHaveBeenCalled();
     });
   });
-
-  jest.mock('http');
-  describe('getAuPairNotifications', () => {
-    api.getNotificationsByAuPairId = jest.fn();
-    
-  });
   
 });
