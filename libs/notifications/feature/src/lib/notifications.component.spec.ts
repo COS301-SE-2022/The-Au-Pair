@@ -12,17 +12,16 @@ import { AppState } from '../../../../shared/ngxs/state';
 describe('ParentNotificationsComponent', () => {
   let component: ParentNotificationsComponent;
   let fixture: ComponentFixture<ParentNotificationsComponent>;
-  let api : API;
 
-  const notifResponse : any = {
-    auPairId: "0110135054098",
-    body: "Michael's cricket has started",
-    date: "2022-07-26",
-    id: "62e285f376110f2e6acad693",
-    parentId: "0108125215084",
-    time: "13:30",
-    title: "Cricket match",
-  }
+  // const notifResponse : any = {
+  //   auPairId: "0110135054098",
+  //   body: "Michael's cricket has started",
+  //   date: "2022-07-26",
+  //   id: "62e285f376110f2e6acad693",
+  //   parentId: "0108125215084",
+  //   time: "13:30",
+  //   title: "Cricket match",
+  // }
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
