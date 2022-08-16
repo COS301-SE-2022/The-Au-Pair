@@ -1,7 +1,7 @@
 <ion-header [translucent]="true">
     <ion-toolbar mode="ios" class="navbar">
       <ion-buttons slot="start" *ngIf="isHome">
-        <button (click)="back()" class="back-button"><ion-icon name="arrow-back-circle-outline"></ion-icon></button>
+        <button class="back-button"><ion-icon name="menu-outline" (click)="openMenu()"></ion-icon></button>
       </ion-buttons>
       <ion-buttons slot="start" class="start-buttons">
         <ion-button (click)="dash()">Dashboard</ion-button>
@@ -16,4 +16,16 @@
       </ion-buttons>
       <ion-title><h1 class="text-white ion-text-center">The Au Pair</h1></ion-title>
     </ion-toolbar>
+
+    
 </ion-header>
+<ion-menu content-id="page-wrapper" class="menu">
+  <ion-header class="menu-header">
+          <ion-toolbar translucent>
+              <ion-title></ion-title>
+          </ion-toolbar>
+      </ion-header>
+  <ion-content id="page-wrapper">
+ 
+  </ion-content>
+</ion-menu>

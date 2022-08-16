@@ -64,5 +64,69 @@ h1{
 
 .back-button{
     background-color: transparent;
+    display: block;
+}
+ //=====================================================================================================================
+ ion-menu{
+    --min-width: 50%;
+    background-color: transparent;
+    --max-height: 150%;
+}
+
+ion-toggle {
+    --background: var(--ion-color-champagne);
+}
+
+ion-menu::part(backdrop) {
+    background-color: transparent;
     display: none;
+}
+
+.menu-gap{
+    margin-top: 58px;
+}
+
+.slider-headings{
+    color: black;
+    font-family: 'Roboto';
+    margin-left: 15px;
+}
+
+
+.page-wrapper{
+    margin-bottom: 40px;
+}
+
+.icon-close{
+    height: 32px;
+    width: 28px;
+    color: black;
+    cursor: pointer;
+    float: right;
+}
+
+
+
+ion-card {
+    background-color: transparent;
+    box-shadow: none;
+}
+
+.profile-picture-wrapper{
+    width: 166px;
+    height: 166px;
+    background-color: rgba($color: #032927BF, $alpha: 0.75);
+    border-radius: 50%;
+    margin: auto;
+    display: flex;
+    align-items: center;
+    text-align: center;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+.profile-picture {
+    width: 140px;
+    height: 140px;
+    border-radius: 50%;
 }

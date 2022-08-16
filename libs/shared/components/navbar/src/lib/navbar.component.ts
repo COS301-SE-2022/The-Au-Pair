@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { MenuController } from '@ionic/angular';
 import { Store } from '@ngxs/store';
 import { Reset } from '../../../../../shared/ngxs/actions';
 
@@ -13,7 +14,7 @@ export class NavbarComponent implements OnInit
   type = -1;
   isHome = this.router.url != "/parent-dashboard";
 
-  constructor(private router : Router,private store: Store){}
+  constructor(private router : Router,private store: Store, private menuController : MenuController){}
 
   ngOnInit() 
   {
@@ -70,6 +71,16 @@ export class NavbarComponent implements OnInit
     {
       this.router.navigate(['/au-pair-dashboard']);
     }
+  }
+
+  openMenu()
+  {
+    this.menuController.toggle('start');
+  }
+
+  closeMenu()
+  {
+    this.menuController.close('start');
   }
 
   logout()
