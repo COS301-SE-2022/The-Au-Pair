@@ -198,7 +198,7 @@ export class ParentAddActivityComponent implements OnInit{
     
     //Building the API query according to what is in the location input field
     const locationParam = loc.replace(' ', '+');
-    const params = locationParam + '&limit=4&format=json&polygon_geojson=1&addressdetails=1';
+    const params = locationParam + '&limit=10&format=json&polygon_geojson=1&addressdetails=1';
 
     //Make the API call
     await this.http.get('https://nominatim.openstreetmap.org/search?q='+params)
@@ -213,10 +213,13 @@ export class ParentAddActivityComponent implements OnInit{
       {
         return;
       }
+
+      //Clear previous suggested locations
+      this.potentialLocations.splice(0);
   
       //Add returned data to the array
       const len = res.length;
-      for (let j = 0; j < len && j<4; j++) 
+      for (let j = 0; j < len && j<10; j++) 
       { 
         this.potentialLocations.push(res[j].display_name);
       }
