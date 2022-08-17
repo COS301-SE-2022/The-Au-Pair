@@ -3,6 +3,7 @@ export interface Activity{
     name: string;
     description: string;
     location: string;
+    boundary: number;
     timeStart: string;
     timeEnd: string;
     budget: number;

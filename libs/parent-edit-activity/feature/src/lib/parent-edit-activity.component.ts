@@ -24,6 +24,7 @@ export class ParentEditActivityComponent implements OnInit {
   description: "",
   location: "",
   timeStart: "",
+  boundary: 0.0,
   timeEnd: "",
   budget: 0.0,
   comment: "",
