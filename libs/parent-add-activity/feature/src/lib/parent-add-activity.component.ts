@@ -49,6 +49,8 @@ export class ParentAddActivityComponent implements OnInit{
     //FORM ERROR CHECKING
     let emptyInput = false;
     let dom = document.getElementById("actNameError");
+
+    //Activity Name
     if(val.activityName === "")
     {
       emptyInput = true;
@@ -65,6 +67,8 @@ export class ParentAddActivityComponent implements OnInit{
         dom.style.display = "none";
       }
     }
+
+    //Description Name
     dom = document.getElementById("descripError");
     if(val.description === "")
     { 
@@ -81,6 +85,8 @@ export class ParentAddActivityComponent implements OnInit{
         dom.style.display = "none";
       }
     }
+
+    //Location
     dom = document.getElementById("locError");
     if(val.location === "")
     {
@@ -107,6 +113,35 @@ export class ParentAddActivityComponent implements OnInit{
           dom.style.display = "none";
       }
     }
+
+    //Boundary
+    dom = document.getElementById("boundaryError");
+    if(val.boundary === "")
+    {
+      emptyInput = true;
+      if(dom != null)
+      {
+        dom.innerHTML = "Boundary is empty";
+        dom.style.display = "block";
+      }
+    }else
+    {
+      if(dom != null)
+      { 
+        if(isNaN(parseInt(val.boundary)))
+        {
+          dom.innerHTML = "Please ensure this is a number e.g. 5.2";
+          dom.style.display = "block";
+          return;
+        }
+        else
+        {
+          dom.style.display = "none";
+        }
+      }
+    }
+
+    //Day of the week
     dom = document.getElementById("dayError");
     if(val.dayOfWeek === "")
     {
@@ -123,6 +158,8 @@ export class ParentAddActivityComponent implements OnInit{
         dom.style.display = "none";
       }
     }
+
+    //Time
     dom = document.getElementById("timeError");
     if(val.timeSlot === "" || val.timeSlot.length < 11)
     {
@@ -139,6 +176,8 @@ export class ParentAddActivityComponent implements OnInit{
         dom.style.display = "none";
       }
     }
+
+    //Budget
     dom = document.getElementById("budgetError");
     if(val.budget === "")
     {
@@ -152,9 +191,20 @@ export class ParentAddActivityComponent implements OnInit{
     {
       if(dom != null)
       {
-        dom.style.display = "none";
+        if(isNaN(parseInt(val.budget)))
+        {
+          dom.innerHTML = "Please ensure this is a number e.g. 500.50";
+          dom.style.display = "block";
+          return;
+        }
+        else
+        {
+          dom.style.display = "none";
+        }
       }
     }
+
+    //Child selected
     dom = document.getElementById("childError");
     if(val.childId === "")
     {
@@ -173,6 +223,7 @@ export class ParentAddActivityComponent implements OnInit{
       }
     }
     
+    //Empty input
     if(emptyInput == true)
     {
       console.log("You cannot add an activity with empty fields.");
