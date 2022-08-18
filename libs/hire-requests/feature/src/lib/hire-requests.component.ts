@@ -3,7 +3,7 @@ import { ModalController, ToastController } from '@ionic/angular';
 import { API } from '../../../../shared/api/api.service';
 import { Store } from '@ngxs/store';
 import { Router } from '@angular/router';
-import { auPair, Parent } from '../../../../shared/interfaces/interfaces';
+import { auPair, Child, Parent } from '../../../../shared/interfaces/interfaces';
 
 @Component({
   selector: 'the-au-pair-hire-requests',
@@ -13,6 +13,16 @@ import { auPair, Parent } from '../../../../shared/interfaces/interfaces';
 export class HireRequestsComponent implements OnInit {
   auPairID = "";
   contracts : any;
+  
+  childDetails: Child ={
+    id: "",
+    fname: "",
+    sname: "",
+    allergies: "",
+    diet: "",
+    parent: "",
+    aupair: "",
+  }
   
   contractDetails : any = {
     id: "",
@@ -142,6 +152,7 @@ export class HireRequestsComponent implements OnInit {
 
     await this.getAuPairDetails();
     await this.getParentDetails(parentID);
+    await this.getChildrenDetails(parentID);
 
     this.currentAuPair.employer = parentID;
     this.parentDetails.auPair = this.auPairID;    
@@ -210,6 +221,31 @@ export class HireRequestsComponent implements OnInit {
     )
   }
 
+  async getChildrenDetails(parent : string)
+  {
+     await this.serv.getChildren(parent)
+     .toPromise()
+     .then(
+       res=>{        
+         for(let i = 0; i < res.length; i++)
+         {
+           this.childDetails.id = res[i].id;
+           this.childDetails.fname = res[i].fname;
+           this.childDetails.sname = res[i].sname;
+           this.childDetails.allergies = res[i].allergies;
+           this.childDetails.diet = res[i].diet;
+           this.childDetails.parent = res[i].parent;
+           this.childDetails.aupair = this.auPairID;
+ 
+           this.updateChild(this.childDetails);
+         }
+       },
+       error => {
+         console.log("Error has occured with API: " + error);
+       }
+     ) 
+  }
+
   async updateAuPair(){
     await this.serv.editAuPair(this.currentAuPair).toPromise()
     .then(
@@ -236,6 +272,20 @@ export class HireRequestsComponent implements OnInit {
         return error;
       }
     );
+  }
+
+  async updateChild(child : Child){
+    await this.serv.updateChild(child).toPromise()
+    .then(
+      res=>{
+        console.log("The response is:" + res);
+        return res;
+      },
+      error=>{
+        console.log("Error has occured with API: " + error);
+        return error;
+      }
+    )
   }
 }
   
