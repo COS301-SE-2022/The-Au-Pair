@@ -20,6 +20,16 @@ export class ParentDashboardComponent implements OnInit{
 
   handlerMessage!: boolean;
 
+  childDetails: Child ={
+    id: "",
+    fname: "",
+    sname: "",
+    allergies: "",
+    diet: "",
+    parent: "",
+    aupair: "",
+  }
+
   parentDetails: Parent = {
     id: "",
     children: [],
@@ -247,6 +257,7 @@ export class ParentDashboardComponent implements OnInit{
   {
     await this.getAuPairDetails();
     await this.getParentDetails();
+    await this.getChildrenDetails();
 
     this.currentAuPair.employer = "";
     this.parentDetails.auPair = "";
@@ -296,6 +307,31 @@ export class ParentDashboardComponent implements OnInit{
     )
   }
 
+ async getChildrenDetails()
+ {
+    await this.serv.getChildren(this.parentID)
+    .toPromise()
+    .then(
+      res=>{        
+        for(let i = 0; i < res.length; i++)
+        {
+          this.childDetails.id = res[i].id;
+          this.childDetails.fname = res[i].fname;
+          this.childDetails.sname = res[i].sname;
+          this.childDetails.allergies = res[i].allergies;
+          this.childDetails.diet = res[i].diet;
+          this.childDetails.parent = res[i].parent;
+          this.childDetails.aupair = "";
+
+          this.updateChild(this.childDetails);
+        }
+      },
+      error => {
+        console.log("Error has occured with API: " + error);
+      }
+    ) 
+ }
+
   async updateAuPair(){
     await this.serv.editAuPair(this.currentAuPair).toPromise()
     .then(
@@ -322,6 +358,20 @@ export class ParentDashboardComponent implements OnInit{
         return error;
       }
     );
+  }
+
+  async updateChild(child : Child){
+    await this.serv.updateChild(child).toPromise()
+    .then(
+      res=>{
+        console.log("The response is:" + res);
+        return res;
+      },
+      error=>{
+        console.log("Error has occured with API: " + error);
+        return error;
+      }
+    )
   }
 
   async presentAlert() {
