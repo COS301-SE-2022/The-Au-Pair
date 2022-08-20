@@ -235,6 +235,7 @@ export class ParentAddActivityComponent implements OnInit{
       this.activityDetails.name = val.activityName;
       this.activityDetails.description = val.description;
       this.activityDetails.location = val.location;
+      this.activityDetails.boundary = val.boundary;
       this.activityDetails.day = val.dayOfWeek;
       this.activityDetails.timeStart = val.timeSlot.substring(0,5);
       this.activityDetails.timeEnd = val.timeSlot.substring(6,11);
@@ -286,7 +287,7 @@ export class ParentAddActivityComponent implements OnInit{
     this.serv.addActivity(act).toPromise().then(
       res=>{
         console.log("The response is:" + res); 
-        location.reload()},
+      },
       error=>{
         console.log("Error has occured with API: " + error);
       }
