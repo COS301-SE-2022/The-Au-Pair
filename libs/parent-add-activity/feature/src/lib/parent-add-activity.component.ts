@@ -129,7 +129,7 @@ export class ParentAddActivityComponent implements OnInit{
     {
       if(dom != null)
       { 
-        if(isNaN(parseInt(val.boundary)))
+        if(isNaN(parseFloat(val.boundary)))
         {
           dom.innerHTML = "Please ensure this is a number e.g. 5.2";
           dom.style.display = "block";
@@ -192,7 +192,7 @@ export class ParentAddActivityComponent implements OnInit{
     {
       if(dom != null)
       {
-        if(isNaN(parseInt(val.budget)))
+        if(isNaN(parseFloat(val.budget)))
         {
           dom.innerHTML = "Please ensure this is a number e.g. 500.50";
           dom.style.display = "block";
@@ -231,11 +231,12 @@ export class ParentAddActivityComponent implements OnInit{
     }
     else
     {
-      const budget = parseInt(val.budget);
+      const budget = parseFloat(val.budget);
+      const bound = parseFloat(val.boundary)
       this.activityDetails.name = val.activityName;
       this.activityDetails.description = val.description;
       this.activityDetails.location = val.location;
-      this.activityDetails.boundary = val.boundary;
+      this.activityDetails.boundary = bound;
       this.activityDetails.day = val.dayOfWeek;
       this.activityDetails.timeStart = val.timeSlot.substring(0,5);
       this.activityDetails.timeEnd = val.timeSlot.substring(6,11);

@@ -56,6 +56,7 @@ export class ParentViewActivityComponent implements OnInit
         this.activityDetails.name = res.name;
         this.activityDetails.description = res.description;
         this.activityDetails.location = res.location;
+        this.activityDetails.boundary = res.boundary;
         this.activityDetails.day = res.day;
         this.activityDetails.timeStart = res.timeStart;
         this.activityDetails.timeEnd = res.timeEnd;
