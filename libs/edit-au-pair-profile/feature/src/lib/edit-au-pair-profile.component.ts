@@ -54,7 +54,8 @@ export class EditAuPairProfileComponent implements OnInit {
     bio: "",
     experience: "",
     currentLong: 0.0,
-    currentLat: 0.0
+    currentLat: 0.0,
+    terminateDate: "",
   }
 
   constructor(private serv: API, private http: HttpClient, public toastCtrl: ToastController, private store: Store){}
@@ -103,6 +104,7 @@ export class EditAuPairProfileComponent implements OnInit {
         this.auPairDetails.experience = res.experience;
         this.auPairDetails.currentLong = res.currentLong;
         this.auPairDetails.currentLat = res.currentLat;
+        this.auPairDetails.terminateDate = res.terminateDate;
       },
       error=>{console.log("Error has occured with API: " + error);}
     )

@@ -90,7 +90,8 @@ export class ParentDashboardComponent implements OnInit{
     bio: "",
     experience: "",
     currentLong: 0.0,
-    currentLat: 0.0
+    currentLat: 0.0,
+    terminateDate: "",
   }
 
   constructor(private serv: API, private modalCtrl : ModalController, private store: Store, public toastCtrl: ToastController, public router: Router, private alertController: AlertController){}
@@ -285,6 +286,7 @@ export class ParentDashboardComponent implements OnInit{
         this.currentAuPair.experience = res.experience;
         this.currentAuPair.currentLong = res.currentLong;
         this.currentAuPair.currentLat = res.currentLat;
+        this.currentAuPair.terminateDate = res.terminateDate;
       },
       error=>{console.log("Error has occured with API: " + error);}
     )

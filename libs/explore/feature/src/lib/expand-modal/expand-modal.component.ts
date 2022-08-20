@@ -29,7 +29,8 @@ export class ExpandModalComponent implements OnInit {
     bio: "",
     experience: "",
     currentLong: 0.0,
-    currentLat: 0.0
+    currentLat: 0.0,
+    terminateDate: "",
   }
 
   userDetails: User = {
@@ -128,6 +129,9 @@ export class ExpandModalComponent implements OnInit {
           this.auPairDetails.payRate = res.payRate;
           this.auPairDetails.bio = res.bio;
           this.auPairDetails.experience = res.experience;
+          this.auPairDetails.currentLat = res.currentLat;
+          this.auPairDetails.currentLong = res.currentLong;
+          this.auPairDetails.terminateDate = res.terminateDate;
         },
       error=>{console.log("Error has occured with API: " + error);}
     )

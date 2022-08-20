@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngxs/store';
 import { API } from '../../../../shared/api/api.service'
-import { Child, HoursLogged } from '../../../../shared/interfaces/interfaces';
+import { auPair, Child, HoursLogged } from '../../../../shared/interfaces/interfaces';
 import { Router } from '@angular/router';
 import { ToastController } from '@ionic/angular';
 import { AlertController } from '@ionic/angular';
@@ -34,6 +34,21 @@ export class AuPairDashboardComponent implements OnInit {
     timeStart: "",
     timeEnd: ""
   };
+
+  currentAuPair: auPair = {
+    id: "",
+    rating: 0,
+    onShift: false,
+    employer: "",
+    costIncurred: 0,
+    distTraveled: 0,
+    payRate: 0,
+    bio: "",
+    experience: "",
+    currentLong: 0.0,
+    currentLat: 0.0,
+    terminateDate: "",
+  }
   
   constructor(private serv: API, private store: Store, public router: Router, public toastCtrl: ToastController, private alertController: AlertController) {}
 
@@ -198,11 +213,62 @@ export class AuPairDashboardComponent implements OnInit {
         {
           text: 'Yes',
           cssClass: 'alert-button-confirm',
-          handler: () => { console.log("RESIGN"); }
+          handler: () => { this.resign(); }
         }
       ]
     });
 
     await alert.present();
+  }
+
+  async resign()
+  {
+    await this.getAuPairDetails();
+
+    const ts = new Date();
+
+
+    const td = ts.getFullYear() + "/" + (ts.getMonth() + 1) + "/" + ts.getDate();    
+
+    this.currentAuPair.terminateDate = td;
+
+    await this.updateAuPair();
+  }
+
+  async getAuPairDetails()
+  {
+    await this.serv.getAuPair(this.aupairID)
+    .toPromise()
+      .then(
+      res=>{
+        this.currentAuPair.id = res.id;
+        this.currentAuPair.rating = res.rating;
+        this.currentAuPair.onShift = res.onShift;
+        this.currentAuPair.employer = res.employer;
+        this.currentAuPair.costIncurred = res.costIncurred;
+        this.currentAuPair.distTraveled = res.distTraveled;
+        this.currentAuPair.payRate = res.payRate;
+        this.currentAuPair.bio = res.bio;
+        this.currentAuPair.experience = res.experience;
+        this.currentAuPair.currentLong = res.currentLong;
+        this.currentAuPair.currentLat = res.currentLat;
+        this.currentAuPair.terminateDate = res.terminateDate;
+      },
+      error=>{console.log("Error has occured with API: " + error);}
+    )
+  }
+
+  async updateAuPair(){
+    await this.serv.editAuPair(this.currentAuPair).toPromise()
+    .then(
+      res=>{
+        console.log("The response is:" + res);
+        return res;
+      },
+      error=>{
+        console.log("Error has occured with API: " + error);
+        return error;
+      }
+    );
   }
 }
