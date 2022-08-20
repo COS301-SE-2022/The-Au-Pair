@@ -14,7 +14,7 @@ export class NavbarComponent implements OnInit
   type = -1;
   isHome = this.router.url != "/parent-dashboard";
 
-  constructor(private router : Router,private store: Store, private menuController : MenuController){}
+  constructor(private router : Router,private store: Store, private menController : MenuController){}
 
   ngOnInit() 
   {
@@ -73,14 +73,15 @@ export class NavbarComponent implements OnInit
     }
   }
 
-  openMenu()
+  menuOpen()
   {
-    this.menuController.toggle('start');
+    console.log("menu open");
+    this.menController.toggle('start');
   }
 
-  closeMenu()
+  menuClose()
   {
-    this.menuController.close('start');
+    this.menController.close('start');
   }
 
   logout()
@@ -94,6 +95,12 @@ export class NavbarComponent implements OnInit
     if(this.type == 0)
     {
       this.router.navigate(['/admin-reports']);
+    }
+  }
+
+  explore(){
+    if (this.type == 1){
+      this.router.navigate(['/explore']);
     }
   }
 }

@@ -74,12 +74,25 @@ h1{
     --max-height: 100%;
 }
 
+ion-title{
+    font-size: 20px;
+    font-weight: 500;
+    color: var(--ion-color-light);
+    font-family: TitanOne;
+    padding: 0px;
+}
+
 .menu-item{
     padding: 10px;
     background-color: var(--ion-color-secondary);
     border-radius: 20px;
     font-size: 14px;
     font-family: Roboto;
+    z-index: 1000;
+}
+
+.menu-item:hover{
+    cursor: pointer;
 }
 
 ion-col, ion-text{
@@ -104,7 +117,6 @@ ion-menu::part(backdrop) {
     
 }
 
-.page-wrapper{
+.menu-wrapper{
     margin-bottom: 40px;
-    background-color: red;
 }
