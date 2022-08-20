@@ -4,6 +4,7 @@ import { API } from '../../../../shared/api/api.service'
 import { Child, HoursLogged } from '../../../../shared/interfaces/interfaces';
 import { Router } from '@angular/router';
 import { ToastController } from '@ionic/angular';
+import { AlertController } from '@ionic/angular';
 
 @Component({
   selector: 'the-au-pair-au-pair-dashboard',
@@ -34,7 +35,7 @@ export class AuPairDashboardComponent implements OnInit {
     timeEnd: ""
   };
   
-  constructor(private serv: API, private store: Store, public router: Router, public toastCtrl: ToastController) {}
+  constructor(private serv: API, private store: Store, public router: Router, public toastCtrl: ToastController, private alertController: AlertController) {}
 
   async ngOnInit(): Promise<void> {
     this.aupairID = this.store.snapshot().user.id;
@@ -183,5 +184,25 @@ export class AuPairDashboardComponent implements OnInit {
     {
       this.openToast('You are already employed');
     }
+  }
+
+  async presentAlert() {
+    const alert = await this.alertController.create({
+      header: 'Are you sure you want to resign? (You will still be employed for 2 weeks or until the parent terminates the contract)',
+      cssClass: 'custom-alert',
+      buttons: [
+        {
+          text: 'No',
+          cssClass: 'alert-button-cancel',
+        },
+        {
+          text: 'Yes',
+          cssClass: 'alert-button-confirm',
+          handler: () => { console.log("RESIGN"); }
+        }
+      ]
+    });
+
+    await alert.present();
   }
 }
