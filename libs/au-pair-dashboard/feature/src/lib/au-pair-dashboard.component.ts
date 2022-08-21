@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngxs/store';
 import { API } from '../../../../shared/api/api.service'
-import { auPair, Child, HoursLogged } from '../../../../shared/interfaces/interfaces';
+import { auPair, Child, HoursLogged, Parent } from '../../../../shared/interfaces/interfaces';
 import { Router } from '@angular/router';
 import { ToastController } from '@ionic/angular';
 import { AlertController } from '@ionic/angular';
@@ -49,6 +49,23 @@ export class AuPairDashboardComponent implements OnInit {
     currentLat: 0.0,
     terminateDate: "",
   }
+
+  childDetails: Child ={
+    id: "",
+    fname: "",
+    sname: "",
+    allergies: "",
+    diet: "",
+    parent: "",
+    aupair: "",
+  }
+
+  parentDetails: Parent = {
+    id: "",
+    children: [],
+    medID: "",
+    auPair: "",
+  }
   
   constructor(private serv: API, private store: Store, public router: Router, public toastCtrl: ToastController, private alertController: AlertController) {}
 
@@ -57,6 +74,12 @@ export class AuPairDashboardComponent implements OnInit {
     this.aupairName = this.store.snapshot().user.name;
 
     await this.getEmployer();
+    await this.getAuPairDetails();
+
+    if(this.currentAuPair.terminateDate != '')
+    {
+      await this.checkResignation();
+    }
 
     const todaysDate = this.getToday();
     this.serv.getStartedLog(this.aupairID, todaysDate).subscribe( 
@@ -228,7 +251,7 @@ export class AuPairDashboardComponent implements OnInit {
     const ts = new Date();
 
 
-    const td = ts.getFullYear() + "/" + (ts.getMonth() + 1) + "/" + ts.getDate();    
+    const td = ts.getFullYear() + "-" + (ts.getMonth() + 1) + "-" + ts.getDate();    
 
     this.currentAuPair.terminateDate = td;
 
@@ -270,5 +293,112 @@ export class AuPairDashboardComponent implements OnInit {
         return error;
       }
     );
+  }
+
+  async checkResignation()
+  {
+    await this.getAuPairDetails();   
+        
+    const then  = new Date(this.currentAuPair.terminateDate);
+    const now = new Date();
+
+    const msBetweenDates = Math.abs(then.getTime() - now.getTime());
+
+    let daysBetweenDates = msBetweenDates / (24 * 60 * 60 * 1000);
+
+    daysBetweenDates = Math.ceil(daysBetweenDates);
+
+    console.log(daysBetweenDates);
+    
+
+    if(daysBetweenDates >= 14)
+    {
+      this.terminateAuPair();
+    }
+  }
+
+  async terminateAuPair()
+  {
+    await this.getAuPairDetails();
+    await this.getParentDetails();
+    await this.getChildrenDetails();
+
+    this.currentAuPair.terminateDate = "";
+    this.currentAuPair.employer = "";
+    this.parentDetails.auPair = "";
+
+    await this.updateAuPair();
+    await this.updateParent();
+
+    location.reload();
+  }
+
+  async getParentDetails()
+  {
+    await this.serv.getParent(this.currentAuPair.employer)
+    .toPromise()
+      .then( 
+        res=>{
+          this.parentDetails.id = res.id;      
+          this.parentDetails.children = res.children;
+          this.parentDetails.medID = res.medID;
+          this.parentDetails.auPair = res.auPair;
+      },
+      error => {
+        console.log("Error has occured with API: " + error);
+      }
+    )
+  }
+
+ async getChildrenDetails()
+ {
+    await this.serv.getChildren(this.currentAuPair.employer)
+    .toPromise()
+    .then(
+      res=>{        
+        for(let i = 0; i < res.length; i++)
+        {
+          this.childDetails.id = res[i].id;
+          this.childDetails.fname = res[i].fname;
+          this.childDetails.sname = res[i].sname;
+          this.childDetails.allergies = res[i].allergies;
+          this.childDetails.diet = res[i].diet;
+          this.childDetails.parent = res[i].parent;
+          this.childDetails.aupair = "";
+
+          this.updateChild(this.childDetails);
+        }
+      },
+      error => {
+        console.log("Error has occured with API: " + error);
+      }
+    ) 
+ }
+  async updateParent(){
+    await this.serv.editParent(this.parentDetails).toPromise()
+    .then(
+      res=>{
+        console.log("The response is:" + res);
+        return res;
+      },
+      error=>{
+        console.log("Error has occured with API: " + error);
+        return error;
+      }
+    );
+  }
+
+  async updateChild(child : Child){
+    await this.serv.updateChild(child).toPromise()
+    .then(
+      res=>{
+        console.log("The response is:" + res);
+        return res;
+      },
+      error=>{
+        console.log("Error has occured with API: " + error);
+        return error;
+      }
+    )
   }
 }

@@ -17,6 +17,7 @@ export class ParentDashboardComponent implements OnInit{
 
   children: Child[] = [];
   parentID = "";
+  umPoorID = "";
 
   handlerMessage!: boolean;
 
@@ -109,6 +110,21 @@ export class ParentDashboardComponent implements OnInit{
   async ngOnInit()
   {
     this.parentID = this.store.snapshot().user.id;
+    
+    await this.getParentDetails();
+    
+    this.umPoorID = this.parentDetails.auPair;
+    
+
+    if(this.umPoorID != "")
+    {
+      await this.getAuPairDetails();
+
+      if(this.currentAuPair.terminateDate != '')
+      {
+        await this.checkResignation();
+      }
+    }
 
     await this.serv.getUser(this.parentID).toPromise()
     .then( 
@@ -254,12 +270,39 @@ export class ParentDashboardComponent implements OnInit{
     }
   }
 
+  async checkResignation()
+  {
+    await this.getParentDetails();
+    await this.getAuPairDetails();    
+
+    console.log("HERE");
+    
+        
+    const then  = new Date(this.currentAuPair.terminateDate);
+    const now = new Date();
+
+    const msBetweenDates = Math.abs(then.getTime() - now.getTime());
+
+    let daysBetweenDates = msBetweenDates / (24 * 60 * 60 * 1000);
+
+    daysBetweenDates = Math.ceil(daysBetweenDates);
+
+    console.log(daysBetweenDates);
+    
+
+    if(daysBetweenDates >= 14)
+    {
+      this.terminateAuPair();
+    }
+  }
+
   async terminateAuPair()
   {
     await this.getAuPairDetails();
     await this.getParentDetails();
     await this.getChildrenDetails();
 
+    this.currentAuPair.terminateDate = "";
     this.currentAuPair.employer = "";
     this.parentDetails.auPair = "";
 
@@ -271,7 +314,7 @@ export class ParentDashboardComponent implements OnInit{
 
   async getAuPairDetails()
   {
-    await this.serv.getAuPair(this.parentDetails.auPair)
+    await this.serv.getAuPair(this.umPoorID)
     .toPromise()
       .then(
       res=>{
