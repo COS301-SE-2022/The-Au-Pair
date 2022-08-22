@@ -73,6 +73,7 @@
           <!-- Selected a child -->
           <label for="Child" style="left: -149px !important;">Select a child</label>
           <select ngModel="{{this.activityDetails.child}}" name="childId" id="childId">
+            <option value="{{this.activityDetails.child}}" selected>{{this.activityDetails.child}}</option>
             <option *ngFor="let childids of allChildren" value="{{childids}}">{{childids}}</option>
           </select>
           <p id="childError" class="error" style="display: none;">Error in field</p>

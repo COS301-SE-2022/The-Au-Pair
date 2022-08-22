@@ -11,13 +11,15 @@ ion-content{
 
 .activity-wrapper{
     height: fit-content;
+    max-width: 500px;
+    min-width: 500px;
     width: 40%;
     margin-top: 60px;
     margin-left: auto;
     margin-right: auto;
     background-color: #69A88DB2;
     border-radius: 16px;
-    padding-bottom: 3%;
+    padding-bottom: 7%;
 }
 
 h2{
@@ -187,14 +189,26 @@ textarea:focus{
 
 @media (max-width: 642px) {
     .activity-wrapper{
+        background-color: #69A88DB2;
         height: 100%;
         width: 100%;
         margin-top: 60px;
-        margin-left: auto;
-        margin-right: auto;
+        display: block;
         background-color: transparent !important;
         border-radius: 16px;
     }
+
+    .activity-wrapper{
+        height: fit-content;
+        min-width: 411px;
+        margin-top: 60px;
+        margin-left: auto;
+        margin-right: auto;
+        background-color: #69A88DB2;
+        border-radius: 16px;
+        // padding-bottom: 7%;
+    }
+
 
     h2{
         color:var(--ion-color-dark);

@@ -4,6 +4,7 @@ import { API } from '../../../../shared/api/api.service';
 import { ToastController } from '@ionic/angular';
 import { Activity } from '../../../../shared/interfaces/interfaces';
 import { HttpClient } from '@angular/common/http';
+import { Store } from '@ngxs/store';
 
 @Component({
   selector: 'the-au-pair-parent-edit-activity',
@@ -40,7 +41,7 @@ export class ParentEditActivityComponent implements OnInit {
   /**Functions*/
 
   //Constructor
-  constructor(private serv: API, private router: Router, public toastCtrl: ToastController, private http : HttpClient) 
+  constructor(private serv: API, private router: Router, public toastCtrl: ToastController, private http : HttpClient, private store: Store) 
   {
     const navigation = this.router.getCurrentNavigation();
     if(navigation !== null)
@@ -50,10 +51,10 @@ export class ParentEditActivityComponent implements OnInit {
       }
   }
 
-  ngOnInit(): void 
+  ngOnInit(): void
   {    
-    this.getChildren();
     this.getActivityDetails();
+    this.getChildrenDetails();
   }
 
   //From HTML Form
@@ -266,6 +267,7 @@ export class ParentEditActivityComponent implements OnInit {
     this.serv.getActivity(this.activityDetails.id).subscribe(
       res=>{
         console.log("The response is:" + res); 
+        
         this.activityDetails.id = res.id;
         this.activityDetails.name = res.name;
         this.activityDetails.description = res.description;
@@ -297,12 +299,21 @@ export class ParentEditActivityComponent implements OnInit {
     )
   };
 
-  getChildren()
+  getChildrenDetails()
   {
-    this.serv.getParent("4561237814867").subscribe(
+    this.serv.getParent(this.store.snapshot().user.id).subscribe(
       res=>{
         console.log("The response is:" + res); 
           this.allChildren = res.children;
+
+          //Removing the child that is already set from getActivity ( to avoid duplicates )
+          for (let i = 0; i < this.allChildren.length; i++) 
+          {
+            if(this.allChildren[i] === this.activityDetails.child)
+            { 
+              this.allChildren.splice(i, 1);
+            }
+          }
       },
       error=>{console.log("Error has occured with API: " + error);}
     )
