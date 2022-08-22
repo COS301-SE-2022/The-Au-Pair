@@ -18,8 +18,8 @@
     <a href="#demolinks"><strong>Demo Links»</strong></a>
     <br />
     <br />
-    <a href="https://drive.google.com/file/d/1bbkz5DlxMrSKnEIY9LDXKkoflCZH3Lga/view?usp=sharing"><strong>CheemsChaps-Demo2</strong></a> | 
-    <a href="https://docs.google.com/document/d/18vKESVoNjol4EZzjzmbdzlKqipAGSXseNxcDelAnqaQ/edit?usp=sharing"><strong>SRS Document 2</strong></a> |
+    <a href="https://drive.google.com/file/d/1NaXnfLn3lmfEGlzSfiJ8SzEfEWv57wFE/view?usp=sharing"><strong>CheemsChaps-Demo 3</strong></a> | 
+    <a href="https://docs.google.com/document/d/1kCEYDX8cWRBNyEANp6VYXPSW7PHgUMOl1XVQNcb5Iss/edit?usp=sharing"><strong>SRS Document 3</strong></a> |
     <a href="https://github.com/COS301-SE-2022/The-Au-Pair/projects/1"><strong>Projet Board</strong></a> 
   </p>
   
@@ -51,14 +51,17 @@
       <a href="#about">About</a>
       <ul>
         <li><a href="#built-with">Built With</a></li>
+        <li><a href="#installation">Installation</a></li>
         <li><a href="#usage">Usage</a></li>
       </ul>
     </li>
     <li>
       <a href="#demolinks">Demo Links</a>
       <ul>
-        <li><a href="#demo1">Demo 1</a></li>
-        <li><a href="#demo2">Demo 2</a></li>
+        <li><a href="#demo-1">Demo 1</a></li>
+        <li><a href="#demo-2">Demo 2</a></li>
+        <li><a href="#demo-3">Demo 3</a></li>
+        <li><a href="#completion">Completion</a></li>
       </ul>
     <li>
       <a href="#the-team">The Team</a>
@@ -76,13 +79,14 @@
 # Demolinks
 
 <!-- All demo information -->
-### Demo1
+### Demo 1
 
 <a href="https://drive.google.com/file/d/1iBMNdAej-kbDxPGT9k8_Q5t6aJUk0UNE/view?usp=sharing">CheemsChaps-Demo Video 1</a>
     <br>
     <a href="https://docs.google.com/document/d/18CSPDD1SnMIpAknKGA97uaO6s_-WgM7UnW_6i9DhmC4/edit?usp=sharing">SRS Document - Demo 1</a>
+    <br>
 
-### Demo2
+### Demo 2
 
 <a href="https://drive.google.com/file/d/1bbkz5DlxMrSKnEIY9LDXKkoflCZH3Lga/view?usp=sharing">CheemsChaps-Demo Video 2</a>
     <br>
@@ -92,7 +96,27 @@
     <br>
     <a href="https://docs.google.com/document/d/1exfQzlmPJN50VN70wiKA6kkd6IgsQrhrz8IkSIx71jA/edit?usp=sharing">Coding Standards - Demo 2</a>
     <br>
+    
+### Demo 3
+
+<a href="https://drive.google.com/file/d/1NaXnfLn3lmfEGlzSfiJ8SzEfEWv57wFE/view?usp=sharing">CheemsChaps-Demo Video 3</a>
     <br>
+    <a href="https://docs.google.com/document/d/1kCEYDX8cWRBNyEANp6VYXPSW7PHgUMOl1XVQNcb5Iss/edit?usp=sharing">SRS Document - Demo 3</a>
+    <br>
+    <a href="https://docs.google.com/document/d/1GzIiPELmaIagSMcnFb9RooccPXrH13E6ebZnEgdgcAs/edit?usp=sharing">User Manual Document - Demo 3</a>
+    <br>
+    <a href="https://docs.google.com/document/d/1exfQzlmPJN50VN70wiKA6kkd6IgsQrhrz8IkSIx71jA/edit?usp=sharing">Coding Standards - Demo 3</a>
+    <br>
+    <a href="https://docs.google.com/document/d/1BzV_dQf4nruvThbL45BrbIxXXQ2bb9X9ZtzenuAmqQg/edit?usp=sharing">Installation Manual - Demo 3</a>
+    <br>
+    
+### Completion
+<div align="left">
+
+  <img src="https://user-images.githubusercontent.com/49924445/181740788-f427c0da-df80-48f6-9ab0-02885d6bb411.png#gh-dark-mode-only" height="500px"/>
+  <img src="https://user-images.githubusercontent.com/49924445/181740795-4baa42e9-7c14-4fb0-a82a-85e3c49ead13.png#gh-light-mode-only" height="500px"/>
+
+</div>
                                      
 <!-- ABOUT -->
 # About
@@ -120,23 +144,27 @@ The Au Pair is a project created for the University of Pretoria's COS301 module.
 <p align="right">(<a href="#top">back to top</a>)</p>
 
 
+### Installation
+
+```sh
+
+npm install –legacy-peer-deps
+
+```
+
 ### Usage
 
-```bash
+```sh
 
 npm run start:api
 
 npm run start:client
 
 ```
+For more detailed information on installation and usage see the <a href="https://docs.google.com/document/d/1BzV_dQf4nruvThbL45BrbIxXXQ2bb9X9ZtzenuAmqQg/edit?usp=sharing">installation manual</a>
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
-### Sprint 2 Burn-Down
-<div align="center">
-  <img style="height: 350px; width:39%" src="https://user-images.githubusercontent.com/100611949/172818063-3853f47c-14e1-4428-83fa-a25077dd88c4.png">
-  <img style="height: 350px; width:60%" src="https://user-images.githubusercontent.com/93247114/172879622-a8313404-8996-4cfa-898c-754ea174b4cb.png">
-</div>
 <!-- Contributors -->
 
 # The Team
