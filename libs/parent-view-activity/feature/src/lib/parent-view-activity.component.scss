@@ -56,10 +56,9 @@ h2{
     display:flex;
     align-items: center;
     flex-direction: column;
-    text-align: right;
 }
 
-// Button styling
+// Form input stylings
 .activity-details input{
     width: 411px;
     height: 62px;
@@ -87,17 +86,18 @@ h2{
 label{
     position:relative;
     color: white;
-    display: block;
+    display: flex;
     font-style: normal;
     font-weight: 600;
     font-size: 16px;
     line-height: 20px;
     top:35px;
-    left:-132px !important;
+    text-align: left !important;
+    justify-content: left;
+    left:0px !important;
 }
 
 input[type=text], select{
-    width: 411px;
     height: 62px;
     background: var(--ion-background-color);
     box-shadow: 1px 2px 5px rgba(0, 0, 0, 0.13);
@@ -156,6 +156,47 @@ textarea:focus{
     margin-top: 20px;
 }
 
+//Labelling styles
+#activityLabel{
+    left: -145px !important;
+}
+
+#descriptionLabel{
+    left: -155px !important;
+}
+
+#commentLabel{
+    left: -161px !important;
+}
+
+#behaviourLabel{
+    left: -160px !important;
+}
+
+#locationLabel{
+    left: -165px !important;
+}
+
+#boundaryLabel{
+    left: -165px !important;
+}
+
+#dayLabel{
+    left: -149px !important;
+}
+
+#timeslotLabel{
+    left: -126px !important;
+}
+
+#budgetLabel{
+    left: -169px !important;
+}
+
+#childLabel{
+    left: -149px !important;
+}
+
 //Images
 #active-2{
     position: absolute;
@@ -200,7 +241,7 @@ textarea:focus{
 
     .activity-wrapper{
         height: fit-content;
-        min-width: 411px;
+        min-width: 350px;
         margin-top: 60px;
         margin-left: auto;
         margin-right: auto;
@@ -209,8 +250,69 @@ textarea:focus{
         // padding-bottom: 7%;
     }
 
+    .activity-details input{
+        width: 90%;
+    }
+    .activity-details textarea{
+        width: 90%;
+    }
+
+    .buttons{
+        grid-template-columns: repeat(1, 1fr);
+    }
+
+    .cancel{
+        color: #69A88D;
+        background-color: transparent !important;
+        border: 2px solid #69A88D !important;
+        margin-left: auto;
+        margin-right: auto;
+        width: 90% !important;
+    }
+
+    #activityLabel{
+        left: -125px !important;
+    }
+    
+    #descriptionLabel{
+        left: -135px !important;
+    }
+    
+    #commentLabel{
+        left: -138px !important;
+    }
+    
+    #behaviourLabel{
+        left: -140px !important;
+    }
+    
+    #boundaryLabel{
+        left: -145px !important;
+    }
+    
+    #locationLabel{
+        left: -145px !important;
+    }
+    
+    #dayLabel{
+        left: -129px !important;
+    }
+    
+    #timeslotLabel{
+        left: -106px !important;
+    }
+    
+    #budgetLabel{
+        left: -149px !important;
+    }
+    
+    #childLabel{
+        left: -129px !important;
+    }
+
 
     h2{
+        margin-top: -40px;
         color:var(--ion-color-dark);
     }
 
