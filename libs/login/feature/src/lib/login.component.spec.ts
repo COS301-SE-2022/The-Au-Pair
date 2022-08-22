@@ -11,12 +11,12 @@ import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { of } from 'rxjs';
 import { NgxsModule } from '@ngxs/store';
 import { AppState } from '../../../../shared/ngxs/state';
-import { AdminConsoleComponent } from 'libs/admin-console/feature/src/lib/admin-console.component';
-import { ParentDashboardComponent } from 'libs/parent-dashboard/feature/src/lib/parent-dashboard';
-import { AuPairDashboardComponent } from 'libs/au-pair-dashboard/feature/src/lib/au-pair-dashboard.component';
+import { AdminConsoleFeatureModule } from '@the-au-pair/admin-console/feature';
+import { ParentDashboardFeatureModule } from '@the-au-pair/parent-dashboard/feature';
+import { AuPairDashboardFeatureModule } from '@the-au-pair/au-pair-dashboard/feature';
 
 const apiMock = {
-  login(email: String, password: String) {
+  login(email: string, password: string) {
     return of({})
   }
 }
@@ -41,9 +41,9 @@ describe('LoginComponent', () => {
         PasswordFieldModule,
         ReactiveFormsModule,
         RouterTestingModule.withRoutes([
-            {path: 'admin-console', component: AdminConsoleComponent},
-            {path: 'parent-dashboard', component: ParentDashboardComponent},
-            {path: 'au-pair-dashboard', component: AuPairDashboardComponent}
+            {path: 'admin-console', component: AdminConsoleFeatureModule},
+            {path: 'parent-dashboard', component: ParentDashboardFeatureModule},
+            {path: 'au-pair-dashboard', component: AuPairDashboardFeatureModule}
           ]),
         HttpClientTestingModule,
         FormsModule,

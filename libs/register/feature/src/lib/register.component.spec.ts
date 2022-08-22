@@ -11,7 +11,7 @@ import { API } from '../../../../shared/api/api.service';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { HttpClient } from '@angular/common/http';
 import { of } from 'rxjs';
-import { auPair, Parent, User } from 'libs/shared/interfaces/interfaces';
+import { auPair, Parent, User } from '../../../../shared/interfaces/interfaces';
 
 const httpMock = {
   get(url: string) {

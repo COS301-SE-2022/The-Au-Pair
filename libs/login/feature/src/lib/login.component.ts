@@ -26,7 +26,7 @@ export class LoginComponent implements OnInit {
   public errState: boolean;
   public errStatement: string;
   public loggingIn: boolean;
-  public formValid: boolean = false;
+  public formValid = false;
   
   fcmToken = '';
 

@@ -18,7 +18,7 @@ export class RegisterComponent {
   public medError: boolean;
   public bioError: boolean;
   public experienceError: boolean;
-  public formValid: boolean = false;
+  public formValid = false;
   
   parentChosen = true;
   public maleChosen: boolean;
