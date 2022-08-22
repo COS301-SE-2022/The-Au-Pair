@@ -93,7 +93,19 @@ input:focus{
     outline:none;
 }
 
+.buttons{
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 15px;
+    width: 411px;
+    height: auto;
+    text-align: center;
+    margin-bottom: 100px;
+}
+
+
 .addActivity{
+    width: 195px !important;
     font-style: normal;
     font-weight: 700;
     font-size: 16px;
@@ -101,7 +113,29 @@ input:focus{
     color: white;
     background-color: #69A88D !important;
     margin-top: 20px;
-    margin-bottom: 40px;
+}
+
+.return{
+    cursor: pointer;
+    text-align: center;
+    flex-direction: row;
+    justify-content: center;
+    padding: 10px 22px;
+    margin-left: 3px;
+
+    width: 195px !important;
+    height: 60px;
+    left: 973px;
+    top: 980px;
+    font-style: normal;
+    font-weight: 700;
+    font-size: 16px;
+    line-height: 19px;
+    color: #69A88D;
+    background-color: transparent !important;
+    border: 2px solid #69A88D !important;
+    border-radius: 10px;
+    margin-top: 20px;
 }
 
 //Errors styling

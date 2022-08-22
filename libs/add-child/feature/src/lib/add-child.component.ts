@@ -176,6 +176,10 @@ export class AddChildComponent implements OnInit
         this.addChild(this.childDetails);
       }
     }
+    else
+    {
+      this.openErrToast("The maximum number of children is 4", "danger");
+    }
   }
 
   //Function to see number of existing children for the parent
@@ -198,6 +202,20 @@ export class AddChildComponent implements OnInit
       duration: 4000,
       position: 'top',
       color: 'primary',
+      cssClass: 'toastPopUp'
+    });
+    await toast.present();
+    return true;
+  }
+
+  //Pop-up if child is successfully updates
+  async openErrToast(message : string,  color: string) : Promise<boolean>
+  {
+    const toast = await this.toastCtrl.create({
+      message: message,
+      duration: 4000,
+      position: 'top',
+      color: color,
       cssClass: 'toastPopUp'
     });
     await toast.present();
