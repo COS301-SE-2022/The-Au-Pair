@@ -3,6 +3,8 @@ import { Child } from '../../../../shared/interfaces/interfaces';
 import { API } from '../../../../shared/api/api.service';
 import { Router } from '@angular/router';
 import { Store } from '@ngxs/store';
+import { ToastController } from '@ionic/angular';
+import { Color } from '@ionic/core';
 
 @Component({
   selector: 'the-au-pair-children-dashboard',
@@ -14,13 +16,15 @@ export class ChildrenDashboardComponent implements OnInit
   //Parent and children information
   parentID = "";
   children: Child[] = []
+  allChildren: any;
 
-  constructor(private serv: API, public router: Router, private store: Store) {}
+  constructor(private serv: API, public router: Router, private store: Store, public toastCtrl: ToastController) {}
 
   ngOnInit(): void
   {
     this.parentID = this.store.snapshot().user.id;
     this.getChildren();
+    this.getNumChildren();
   }
 
   async getChildren()
@@ -36,6 +40,43 @@ export class ChildrenDashboardComponent implements OnInit
       error =>{console.log("Error has occured with API: " + error);}
     )
   }
+
+  //Function to see number of existing children for the parent
+  async getNumChildren()
+  {
+    this.serv.getParent(this.store.snapshot().user.id).subscribe(
+      res=>{
+        console.log("The response is:" + res); 
+          this.allChildren = res.children;
+      },
+      error=>{console.log("Error has occured with API: " + error);}
+    )
+  }
+
+  //Checking the number of children (max=4)
+  checkNumChildren()
+  {
+    if(this.allChildren.length ==4)
+    {
+      //Show toast with an error
+      this.openToast("The maximum number of children is 4", "danger");
+    }
+  }
+
+    //Pop-up if child is successfully updates
+    async openToast(message : string,  color: string) : Promise<boolean>
+    {
+      const toast = await this.toastCtrl.create({
+        message: message,
+        duration: 4000,
+        position: 'top',
+        color: color,
+        cssClass: 'toastPopUp'
+      });
+      await toast.present();
+      return true;
+    }
+  
 
   navigateEdit(child : Child)
   { 
