@@ -119,7 +119,8 @@ export class LoginComponent implements OnInit {
       this.loggingIn = true;
       let id = "";
       let name = "";
-      let type = 0
+      let type = 0;
+      let banned = "";
       await this.serv.login((this.loginDetailsForm.value.email).toLowerCase(),this.loginDetailsForm.value.pass)
       .toPromise()
       .then(
@@ -127,13 +128,17 @@ export class LoginComponent implements OnInit {
           id = res.id;
           name = res.fname;
           type = res.type;
+          banned = res.banned;
         },
         error => {
           console.log("Error has occured with API: " + error);
         }
       );
 
-      if(id == "")
+      if(banned != ""){
+        this.openToast("Your account has been banned")
+      }
+      else if(id == "")
       {
         this.errStatement = "Incorrect email or password";
         this.errState = true;
@@ -142,7 +147,7 @@ export class LoginComponent implements OnInit {
       (
         this.openToast("Your account is pending approval")
       )
-      else  
+      else
       {
         this.errState = false;
         this.store.dispatch(new SetId(id));

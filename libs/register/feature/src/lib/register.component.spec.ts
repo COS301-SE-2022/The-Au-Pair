@@ -272,11 +272,11 @@ describe('RegisterComponent', () => {
     // Genders get set
     component.maleChosen = true;
     await component.registerUser();
-    expect(component.userDetails.gender).toEqual("Male");
+    expect(component.userDetails.gender).toEqual("male");
 
     component.maleChosen = false;
     await component.registerUser();
-    expect(component.userDetails.gender).toEqual("Female");
+    expect(component.userDetails.gender).toEqual("female");
   });
 
   it('should have registration fail with invalid parent inputs', async () => {
