@@ -103,6 +103,8 @@ describe('EditAuPairProfileComponent', () => {
       warnings: 0,
     };
 
+    component.potentialLocations.push("123 Valid Street");
+
     const expectedAuPairValue: auPair = {
       id: "",
       rating: 0,

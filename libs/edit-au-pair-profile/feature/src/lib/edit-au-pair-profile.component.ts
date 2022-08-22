@@ -256,12 +256,16 @@ export class EditAuPairProfileComponent implements OnInit {
     }
     else
     {
+      console.log("HUH");
+      
       if(this.errFlag === false)
       {
         this.errToast("Please select a valid location from the suggested below.");
+        console.log("NUMBER 1");
       }
       else if(this.sameFlag === true)
       {
+        console.log("NUMBER 2");
         this.userDetails.email = val.email;
         this.userDetails.number = val.phone;
         this.userDetails.address = val.address;
@@ -272,6 +276,7 @@ export class EditAuPairProfileComponent implements OnInit {
       }
       else
       {
+        console.log("NUMBER 3");
         this.userDetails.email = val.email;
         this.userDetails.number = val.phone;
         this.userDetails.address = val.address;
