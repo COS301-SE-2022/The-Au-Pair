@@ -3,15 +3,14 @@ import { RouterTestingModule} from '@angular/router/testing';
 import { InputFieldModule } from '@the-au-pair/shared/components/input-field';
 import { PasswordFieldModule } from '@the-au-pair/shared/components/password-field';
 import { LocationFieldModule } from '@the-au-pair/shared/components/location-field';
-import { LongFieldModule } from '@the-au-pair/shared/components/long-field';
 import { ReactiveFormsModule, FormsModule, FormBuilder } from '@angular/forms';
-import { IonicModule } from '@ionic/angular';
+import { LongFieldModule } from '@the-au-pair/shared/components/long-field';
+import { IonicModule, ToastController } from '@ionic/angular';
 import { RegisterComponent } from './register.component';
 import { API } from '../../../../shared/api/api.service';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { HttpClient } from '@angular/common/http';
-import { ToastController } from '@ionic/angular';
-import {of} from 'rxjs';
+import { of } from 'rxjs';
 import { auPair, Parent, User } from 'libs/shared/interfaces/interfaces';
 
 const httpMock = {
@@ -104,7 +103,7 @@ describe('RegisterComponent', () => {
     expect(component.parentRegisterDetailsForm.value).toEqual(populatedForm);
   });
   
-  it('should make the form invalid on inputs ', () => {
+  it('should make the form invalid on inputs', () => {
     // Name incorrect
     inputRegistration(invalidName.name, invalidName.surname, invalidName.email, invalidName.phone, invalidName.id, invalidName.medAid, invalidName.location, invalidName.bio, invalidName.experience, invalidName.pass, invalidName.confPass);
     expect(component.formValid).toBeFalsy();

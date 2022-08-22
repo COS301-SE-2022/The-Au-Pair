@@ -26,14 +26,18 @@ export class LoginComponent implements OnInit {
   public errState: boolean;
   public errStatement: string;
   public loggingIn: boolean;
+  public formValid: boolean = false;
   
   fcmToken = '';
-  showPassword = false;
 
   constructor(public formBuilder: FormBuilder, public toastCtrl: ToastController, private serv: API, private store: Store, public httpClient: HttpClient, public router: Router) {
     this.loginDetailsForm = formBuilder.group({
       email : ['', Validators.compose([Validators.maxLength(30), Validators.required])],
       pass : ['', Validators.compose([Validators.maxLength(20), Validators.required])],
+    });
+
+    this.loginDetailsForm.valueChanges.subscribe(() => {
+      this.formValid = this.loginDetailsForm.valid;
     });
 
     this.submitAttempt = false;
@@ -81,10 +85,6 @@ export class LoginComponent implements OnInit {
         alert('Push action performed: ' + JSON.stringify(notification));
       },
     );
-  }
-
-  toggleShow() {
-    this.showPassword = !this.showPassword;
   }
   
   async loginUser() 
