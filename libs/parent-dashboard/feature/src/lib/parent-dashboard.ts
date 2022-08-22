@@ -300,7 +300,7 @@ export class ParentDashboardComponent implements OnInit{
   {
     await this.getAuPairDetails();
     await this.getParentDetails();
-    await this.getChildrenDetails();
+    await this.removeChildrenAuPair();
 
     this.currentAuPair.terminateDate = "";
     this.currentAuPair.employer = "";
@@ -352,7 +352,7 @@ export class ParentDashboardComponent implements OnInit{
     )
   }
 
- async getChildrenDetails()
+ async removeChildrenAuPair()
  {
     await this.serv.getChildren(this.parentID)
     .toPromise()

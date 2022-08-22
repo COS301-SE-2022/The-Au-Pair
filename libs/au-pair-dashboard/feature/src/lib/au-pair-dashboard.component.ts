@@ -321,7 +321,7 @@ export class AuPairDashboardComponent implements OnInit {
   {
     await this.getAuPairDetails();
     await this.getParentDetails();
-    await this.getChildrenDetails();
+    await this.removeChildrenAuPair();
 
     this.currentAuPair.terminateDate = "";
     this.currentAuPair.employer = "";
@@ -350,7 +350,7 @@ export class AuPairDashboardComponent implements OnInit {
     )
   }
 
- async getChildrenDetails()
+ async removeChildrenAuPair()
  {
     await this.serv.getChildren(this.currentAuPair.employer)
     .toPromise()

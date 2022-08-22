@@ -153,7 +153,7 @@ export class HireRequestsComponent implements OnInit {
 
     await this.getAuPairDetails();
     await this.getParentDetails(parentID);
-    await this.getChildrenDetails(parentID);
+    await this.addChildrenAuPair(parentID);
 
     this.currentAuPair.employer = parentID;
     this.parentDetails.auPair = this.auPairID;    
@@ -223,7 +223,7 @@ export class HireRequestsComponent implements OnInit {
     )
   }
 
-  async getChildrenDetails(parent : string)
+  async addChildrenAuPair(parent : string)
   {
      await this.serv.getChildren(parent)
      .toPromise()
