@@ -138,6 +138,24 @@ input:focus{
     margin-top: 20px;
 }
 
+//Label stylings
+#locationLabel{
+    left: -165px !important;
+}
+
+
+#dayLabel{
+    left: -149px !important;
+}
+
+#timeslotLabel{
+    left: -126px !important;
+}
+
+#childLabel{
+    left: -149px !important;
+}
+
 //Errors styling
 .error{
     display: none;
@@ -178,3 +196,5 @@ input:focus{
     opacity: 0.04;
     z-index: -10;
 }
+
+

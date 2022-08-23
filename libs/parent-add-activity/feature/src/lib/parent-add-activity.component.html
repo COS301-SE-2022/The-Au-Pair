@@ -23,7 +23,7 @@
           <p id="boundaryError" class="error" style="display: none;">Please ensure this is a number e.g. 5.2</p>
 
           <!-- Day -->
-          <label for="day" style="left: -149px !important;">Choose a day</label>
+          <label id="dayLabel" for="day">Choose a day</label>
           <select ngModel name="dayOfWeek" id="selectedDay">
             <option value="Monday">Monday</option>
             <option value="Tuesday">Tuesday</option>
@@ -36,7 +36,7 @@
           <p id="dayError" class="error" style="display: none;">Error in field</p>
 
           <!-- Time-slot -->
-          <label for="times">Choose a timeslot</label>
+          <label id="timeslotLabel" for="times">Choose a timeslot</label>
             <select ngModel name="timeSlot" id="selectedTime">
               <option value="05:00-06:00">05:00-06:00</option>
               <option value="06:00-07:00">06:00-07:00</option>
@@ -62,7 +62,7 @@
           <p id="budgetError" class="error" style="display: none;">Please ensure this is a number e.g. 500.50</p>
 
           <!-- Selected a child -->
-          <label for="Child" style="left: -149px !important;">Select a child</label>
+          <label id="childLabel" for="Child">Select a child</label>
           <select ngModel name="childId" id="childId">
             <option *ngFor="let child of allChildren" value="{{child.id}}">{{child.fname}}</option>
           </select>
