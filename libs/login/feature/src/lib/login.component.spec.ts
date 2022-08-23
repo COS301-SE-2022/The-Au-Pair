@@ -16,7 +16,7 @@ import { ParentDashboardFeatureModule } from '@the-au-pair/parent-dashboard/feat
 import { AuPairDashboardFeatureModule } from '@the-au-pair/au-pair-dashboard/feature';
 
 const apiMock = {
-  login(email: string, password: string) {
+  login() {
     return of({})
   }
 }
@@ -61,8 +61,7 @@ describe('LoginComponent', () => {
     .then(() => {
       fixture = TestBed.createComponent(LoginComponent);
       component = fixture.componentInstance;
-      router = TestBed.get(Router);
-      // fixture.detectChanges();
+      router = TestBed.inject(Router);
     });
 
   });
@@ -110,6 +109,7 @@ describe('LoginComponent', () => {
   it('should login an admin', async () => {
     inputLogin(populatedForm.email, populatedForm.pass);
     const navigateSpy = jest.spyOn(router, 'navigate');
+    navigateSpy.mockImplementation(()=>Promise.resolve(true));
     
     jest.spyOn(apiMock, 'login').mockImplementation(()=>of(
       {
@@ -128,6 +128,7 @@ describe('LoginComponent', () => {
   it('should login a parent', async () => {
     inputLogin(populatedForm.email, populatedForm.pass);
     const navigateSpy = jest.spyOn(router, 'navigate');
+    navigateSpy.mockImplementation(()=>Promise.resolve(true));
     
     jest.spyOn(apiMock, 'login').mockImplementation(()=>of(
       {
@@ -146,6 +147,7 @@ describe('LoginComponent', () => {
   it('should login an au pair', async () => {
     inputLogin(populatedForm.email, populatedForm.pass);
     const navigateSpy = jest.spyOn(router, 'navigate');
+    navigateSpy.mockImplementation(()=>Promise.resolve(true));
     
     jest.spyOn(apiMock, 'login').mockImplementation(()=>of(
       {
@@ -183,17 +185,17 @@ describe('LoginComponent', () => {
     inputLogin(populatedForm.email, populatedForm.pass);
     
     jest.spyOn(apiMock, 'login').mockImplementation(()=>of(
-      {
-        id : "",
-        name : "",
-        type : 2,
-        banned : ""
-      }
-      ));
-      
-      await component.loginUser();
-      expect(component.errState).toBeTruthy();
-      expect(component.errStatement).toEqual("Incorrect email or password");
+    {
+      id : "",
+      name : "",
+      type : 2,
+      banned : ""
+    }
+    ));
+    
+    await component.loginUser();
+    expect(component.errState).toBeTruthy();
+    expect(component.errStatement).toEqual("Incorrect email or password");
   });
 
   it('should show a toast if account is pending approval', async () => {
@@ -209,7 +211,7 @@ describe('LoginComponent', () => {
     }
     ));
       
-      await component.loginUser();
+    await component.loginUser();
     expect(toastSpy).toHaveBeenCalledWith("Your account is pending approval");
   });
 });

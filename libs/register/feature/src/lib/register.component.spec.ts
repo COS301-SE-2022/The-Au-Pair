@@ -11,22 +11,21 @@ import { API } from '../../../../shared/api/api.service';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { HttpClient } from '@angular/common/http';
 import { of } from 'rxjs';
-import { auPair, Parent, User } from '../../../../shared/interfaces/interfaces';
 
 const httpMock = {
-  get(url: string) {
+  get() {
       return of({})
   }
 }
 
 const apiMock = {
-  register(user: User) {
+  register() {
     return of({})
   },
-  addParent(parent: Parent) {
+  addParent() {
     return of({})
   },
-  addAuPair(auPair: auPair) {
+  addAuPair() {
     return of({})
   }
 }
