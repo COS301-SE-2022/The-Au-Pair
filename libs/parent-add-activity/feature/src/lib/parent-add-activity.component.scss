@@ -47,9 +47,10 @@ h2{
     text-align: right;
 }
 
-// Button styling
+// Form input styling
 .activity-details input{
-    width: 411px;
+    // max-width: 411px;
+    // min-width: 411px;
     height: 62px;
     background: #F9F9F9;
     box-shadow: 1px 2px 5px rgba(0, 0, 0, 0.13);
@@ -71,7 +72,8 @@ label{
 }
 
 input[type=text], select{
-    width: 411px;
+    max-width: 411px !important;
+    min-width: 411px !important;
     height: 62px;
     background: #F9F9F9;
     box-shadow: 1px 2px 5px rgba(0, 0, 0, 0.13);
@@ -197,4 +199,43 @@ input:focus{
     z-index: -10;
 }
 
+@media (max-width: 642px) {
+
+    input[type=text], select{
+        min-width: 350px !important;
+    }
+
+    .activity-details input{
+        width: 90%;
+    }
+    .activity-details textarea{
+        width: 90%;
+    }
+
+    .buttons{
+        gap: 10px;
+        width: 350px;
+    }
+
+    .addActivity{
+        width: 165px !important;
+    }
+
+    .return{
+        width: 165px !important;
+    }
+    
+    #dayLabel{
+        left: -115px !important;
+    }
+    
+    #timeslotLabel{
+        left: -98px !important;
+    }
+    
+    #childLabel{
+        left: -115px !important;
+    }
+
+}
 

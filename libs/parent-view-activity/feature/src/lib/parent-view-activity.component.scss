@@ -229,32 +229,32 @@ textarea:focus{
 }
 
 @media (max-width: 642px) {
-    .activity-wrapper{
-        background-color: #69A88DB2;
-        height: 100%;
-        width: 100%;
-        margin-top: 60px;
-        display: block;
-        background-color: transparent !important;
-        border-radius: 16px;
-    }
+    // .activity-wrapper{
+    //     background-color: #69A88DB2;
+    //     height: 100%;
+    //     width: 100%;
+    //     margin-top: 60px;
+    //     display: block;
+    //     background-color: transparent !important;
+    //     border-radius: 16px;
+    // }
 
     .activity-wrapper{
         height: fit-content;
-        min-width: 350px;
+        min-width: 300px;
         margin-top: 60px;
         margin-left: auto;
         margin-right: auto;
-        background-color: #69A88DB2;
+        background-color: transparent;
         border-radius: 16px;
         // padding-bottom: 7%;
     }
 
     .activity-details input{
-        width: 90%;
+        width: 85%;
     }
     .activity-details textarea{
-        width: 90%;
+        width: 85%;
     }
 
     .buttons{
@@ -267,47 +267,47 @@ textarea:focus{
         border: 2px solid #69A88D !important;
         margin-left: auto;
         margin-right: auto;
-        width: 90% !important;
+        width: 85% !important;
     }
 
     #activityLabel{
-        left: -125px !important;
+        left: -120px !important;
     }
     
     #descriptionLabel{
-        left: -135px !important;
+        left: -130px !important;
     }
     
     #commentLabel{
-        left: -138px !important;
+        left: -133px !important;
     }
     
     #behaviourLabel{
-        left: -140px !important;
+        left: -135px !important;
     }
     
     #boundaryLabel{
-        left: -145px !important;
+        left: -140px !important;
     }
     
     #locationLabel{
-        left: -145px !important;
+        left: -140px !important;
     }
     
     #dayLabel{
-        left: -129px !important;
+        left: -124px !important;
     }
     
     #timeslotLabel{
-        left: -106px !important;
+        left: -101px !important;
     }
     
     #budgetLabel{
-        left: -149px !important;
+        left: -144px !important;
     }
     
     #childLabel{
-        left: -129px !important;
+        left: -124px !important;
     }
 
 
