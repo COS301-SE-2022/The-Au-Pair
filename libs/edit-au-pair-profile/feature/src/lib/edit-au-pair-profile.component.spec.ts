@@ -86,12 +86,12 @@ describe('EditAuPairProfileComponent', () => {
       id: "",
       fname: "",
       sname: "",
-      email: "testemail@gmail.com",
-      address: "123 Valid Street",
+      email: "",
+      address: "",
       registered: false,
       type: 0,
       password: "",
-      number: "0832422323",
+      number: "",
       salt: "",
       latitude: 0, 
       longitude: 0, 
@@ -102,8 +102,6 @@ describe('EditAuPairProfileComponent', () => {
       banned: "",
       warnings: 0,
     };
-
-    component.potentialLocations.push("123 Valid Street");
 
     const expectedAuPairValue: auPair = {
       id: "",
