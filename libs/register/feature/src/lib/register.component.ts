@@ -18,6 +18,7 @@ export class RegisterComponent {
   public medError: boolean;
   public bioError: boolean;
   public experienceError: boolean;
+  public formValid = false;
   
   parentChosen = true;
   public maleChosen: boolean;
@@ -84,6 +85,49 @@ export class RegisterComponent {
       confPass : ['', Validators.compose([Validators.maxLength(30), Validators.pattern('^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$'), Validators.required])],
     });
 
+    this.parentRegisterDetailsForm.valueChanges.subscribe(() => {
+      this.formValid = this.parentRegisterDetailsForm.valid;
+
+      if(this.parentChosen)
+      {
+        if(this.parentRegisterDetailsForm.value.medAid === '')
+        {
+          this.formValid = false;
+        }
+      }
+      else {
+        if(this.parentRegisterDetailsForm.value.experience === '')
+        {
+          this.formValid = false;
+        }
+
+        if(this.parentRegisterDetailsForm.value.bio === '')
+        {
+          this.formValid = false;
+        }
+      }
+
+      if(!this.parentRegisterDetailsForm.controls['location'].valid)
+      {
+        this.formValid = false;
+      }
+      else
+      {
+          this.verifyLocation(this.parentRegisterDetailsForm.value.location);
+
+          if (this.locationError)
+          {
+            this.formValid = false;
+          }
+      }
+
+      if(this.parentRegisterDetailsForm.value.pass != this.parentRegisterDetailsForm.value.confPass)
+      {
+        this.formValid = false;
+      }
+
+    });
+
     this.submitAttempt = false;
     this.notSamePasswords = false;
     this.locationError = false;
@@ -142,12 +186,12 @@ export class RegisterComponent {
         }
     }
 
-    if(this.parentRegisterDetailsForm.value.location.pass != this.parentRegisterDetailsForm.value.location.confPass)
+    if(this.parentRegisterDetailsForm.value.pass != this.parentRegisterDetailsForm.value.confPass)
     {
       this.notSamePasswords = true;
     }
 
-    if(!formError && this.parentRegisterDetailsForm.controls['name'].valid && this.parentRegisterDetailsForm.controls['surname'].valid && this.parentRegisterDetailsForm.controls['email'].valid && this.parentRegisterDetailsForm.controls['phone'].valid && this.parentRegisterDetailsForm.controls['id'].valid && this.parentRegisterDetailsForm.controls['medAid'].valid && this.parentRegisterDetailsForm.controls['location'].valid && this.parentRegisterDetailsForm.controls['bio'].valid && this.parentRegisterDetailsForm.controls['experience'].valid && this.parentRegisterDetailsForm.controls['pass'].valid  && this.parentRegisterDetailsForm.controls['confPass'].valid)
+    if(!formError && this.parentRegisterDetailsForm.controls['name'].valid && this.parentRegisterDetailsForm.controls['surname'].valid && this.parentRegisterDetailsForm.controls['email'].valid && this.parentRegisterDetailsForm.controls['phone'].valid && this.parentRegisterDetailsForm.controls['id'].valid && this.parentRegisterDetailsForm.controls['medAid'].valid && this.parentRegisterDetailsForm.controls['location'].valid && this.parentRegisterDetailsForm.controls['bio'].valid && this.parentRegisterDetailsForm.controls['experience'].valid && this.parentRegisterDetailsForm.controls['pass'].valid && this.parentRegisterDetailsForm.controls['confPass'].valid)
     {
       let application = "";
       this.userDetails.id = this.parentRegisterDetailsForm.value.id;
@@ -195,7 +239,7 @@ export class RegisterComponent {
       {
         if(this.parentChosen)
         {
-          this.openToast("Registration succesfull");
+          this.openToast("Registration successfull");
           this.parentDetails.id = this.userDetails.id;
           this.parentDetails.medID = this.parentRegisterDetailsForm.value.medAid;
 
@@ -231,11 +275,11 @@ export class RegisterComponent {
       }
       else if(application.substring(0,7) == "Banned ")
       {
-        this.openToast("Email or ID has been banned : "+application);
+        this.openToast("Email or ID has been banned : " + application);
       }
       else
       {
-        this.openToast("Account already exists with email : "+application);
+        this.openToast("Account already exists with email : " + application);
       }
     }
   }

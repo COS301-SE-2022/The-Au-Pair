@@ -26,14 +26,18 @@ export class LoginComponent implements OnInit {
   public errState: boolean;
   public errStatement: string;
   public loggingIn: boolean;
+  public formValid = false;
   
   fcmToken = '';
-  showPassword = false;
 
   constructor(public formBuilder: FormBuilder, public toastCtrl: ToastController, private serv: API, private store: Store, public httpClient: HttpClient, public router: Router) {
     this.loginDetailsForm = formBuilder.group({
       email : ['', Validators.compose([Validators.maxLength(30), Validators.required])],
       pass : ['', Validators.compose([Validators.maxLength(20), Validators.required])],
+    });
+
+    this.loginDetailsForm.valueChanges.subscribe(() => {
+      this.formValid = this.loginDetailsForm.valid;
     });
 
     this.submitAttempt = false;
@@ -82,10 +86,6 @@ export class LoginComponent implements OnInit {
       },
     );
   }
-
-  toggleShow() {
-    this.showPassword = !this.showPassword;
-  }
   
   async loginUser() 
   {
@@ -119,7 +119,8 @@ export class LoginComponent implements OnInit {
       this.loggingIn = true;
       let id = "";
       let name = "";
-      let type = 0
+      let type = 0;
+      let banned = "";
       await this.serv.login((this.loginDetailsForm.value.email).toLowerCase(),this.loginDetailsForm.value.pass)
       .toPromise()
       .then(
@@ -127,13 +128,17 @@ export class LoginComponent implements OnInit {
           id = res.id;
           name = res.fname;
           type = res.type;
+          banned = res.banned;
         },
         error => {
           console.log("Error has occured with API: " + error);
         }
       );
 
-      if(id == "")
+      if(banned != ""){
+        this.openToast("Your account has been banned")
+      }
+      else if(id == "")
       {
         this.errStatement = "Incorrect email or password";
         this.errState = true;
@@ -142,7 +147,7 @@ export class LoginComponent implements OnInit {
       (
         this.openToast("Your account is pending approval")
       )
-      else  
+      else
       {
         this.errState = false;
         this.store.dispatch(new SetId(id));
