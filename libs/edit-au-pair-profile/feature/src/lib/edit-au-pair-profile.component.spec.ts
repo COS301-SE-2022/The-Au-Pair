@@ -110,9 +110,9 @@ describe('EditAuPairProfileComponent', () => {
       employer: "",
       costIncurred: 0,
       distTraveled: 0,
-      payRate: 50,
-      bio: "test bio",
-      experience: "test experience",
+      payRate: 0,
+      bio: "",
+      experience: "",
       currentLong: 0.0,
       currentLat: 0.0,
       terminateDate: ""

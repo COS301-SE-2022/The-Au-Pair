@@ -89,11 +89,11 @@ describe('EditParentProfileComponent', () => {
 
     const expectedMedAidValue: medAid = {
       id: "",
-      plan: "Full",
-      name: "Kyle",
-      sname: "Pottinger",
-      mID: "7534286951",
-      provider: "Discovery",
+      plan: "",
+      name: "",
+      sname: "",
+      mID: "",
+      provider: "",
     };
 
     jest.spyOn(component,"getUserDetails");
