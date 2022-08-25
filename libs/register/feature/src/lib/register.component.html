@@ -37,7 +37,7 @@
             <the-au-pair-password-field labelContent="Confirm Password" errorContent="Passwords do not match" [showError]="notSamePasswords" formControlName="confPass"></the-au-pair-password-field>
 
             <div class="buttons">
-                <input class = "registerUser" type="submit" value="Register">
+                <input [ngClass]="(this.registering===false) ? 'registerUser' : 'disabled-registerUser' " [disabled]="registering" type="submit" value="Register">
             </div>
 
             <div class="clickables">
