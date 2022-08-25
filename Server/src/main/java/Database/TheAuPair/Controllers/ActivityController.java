@@ -20,8 +20,7 @@ public class ActivityController
   @CrossOrigin(origins = "http://localhost:4200")
   public Activity getActivity(@RequestBody String id)
   {
-    Activity a =  as.getActivity(id);
-    return a;
+    return this.as.getActivity(id);
   }
 
   @PostMapping("/addActivity")
@@ -42,15 +41,13 @@ public class ActivityController
   @CrossOrigin(origins = "http://localhost:4200")
   public List<Activity> getSchedule(@RequestBody String id)
   {
-    List<Activity> a =  as.getSchedule(id);
-    return a;
+    return this.as.getSchedule(id);
   }
 
   @PostMapping("/getAuPairSchedule")
   @CrossOrigin(origins = "http://localhost:4200")
   public List<Activity> getAuPairSchedule(@RequestBody String [] children)
   {
-    List<Activity> a =  as.getAuPairSchedule(children);
-    return a;
+    return this.as.getAuPairSchedule(children);
   }
 }

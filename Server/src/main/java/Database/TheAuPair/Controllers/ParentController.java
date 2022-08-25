@@ -19,21 +19,20 @@ public class ParentController
   @CrossOrigin(origins = "http://localhost:4200")
   public Parent getParent(@RequestBody String id)
   {
-    Parent p = ps.getParent(id);
-    return p;
+      return this.ps.getParent(id);
   }
 
   @PostMapping("/editParent")
   @CrossOrigin(origins = "http://localhost:4200")
   public void editParent(@RequestBody Parent p)
   {
-    this.ps.updateParent(p);
+      this.ps.updateParent(p);
   }
 
   @PostMapping("/addParent")
   @CrossOrigin(origins = "http://localhost:4200")
   public void addParent(@RequestBody Parent p)
   {
-    this.ps.addParent(p);
+      this.ps.addParent(p);
   }
 }

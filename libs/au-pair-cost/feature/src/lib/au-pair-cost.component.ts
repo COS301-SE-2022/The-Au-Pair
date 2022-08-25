@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Store } from '@ngxs/store';
 import { API } from '../../../../shared/api/api.service'
 
 @Component({
@@ -9,8 +10,11 @@ import { API } from '../../../../shared/api/api.service'
 })
 export class AuPairCostComponent implements OnInit {
 
-  constructor(private api:API) { }
+  constructor(private api:API, private store: Store) { }
 
+  type = -1;
+  parentID = "";
+  aupairID = "";
   days = [
     "Mon","Tue","Wed","Thu","Fri","Sat","Sun"
   ];
@@ -40,8 +44,32 @@ export class AuPairCostComponent implements OnInit {
 
   pieSplit = "";
 
-  ngOnInit() { 
-    this.api.getUser("7542108615984").subscribe( 
+  async ngOnInit() {
+    
+    this.type = this.store.snapshot().user.type;
+    
+    if(this.store.snapshot().user.type === 2) 
+    {
+      this.aupairID = this.store.snapshot().user.id;
+    }
+    else if (this.store.snapshot().user.type === 1) 
+    {
+      this.parentID = this.store.snapshot().user.id;
+      await this.api.getParent(this.parentID)
+      .toPromise()
+      .then(
+        data => {
+          this.aupairID = data.auPair;
+        }
+      )
+      .catch(
+        error => {
+          console.log("Error has occured with API: " + error);
+        }
+      )
+    }
+
+    this.api.getUser(this.aupairID).subscribe( 
       data => { 
         this.auPairName = data.fname
       },
@@ -50,7 +78,7 @@ export class AuPairCostComponent implements OnInit {
       }
     )
 
-    this.api.getMonthMinutes("7542108615984", this.getStartDateOfWeek(0)).subscribe( 
+    this.api.getMonthMinutes(this.aupairID, this.getStartDateOfWeek(0)).subscribe( 
       data => {
         this.totalHours = Number((data/60).toFixed(2));
       },
@@ -59,7 +87,7 @@ export class AuPairCostComponent implements OnInit {
       }
     )
 
-    this.api.getAuPair("7542108615984").subscribe( 
+    this.api.getAuPair(this.aupairID).subscribe( 
       data => { 
         this.hourlyRate = data.payRate;
         this.travelCost = data.distTraveled;
@@ -68,8 +96,7 @@ export class AuPairCostComponent implements OnInit {
         this.totalCost = this.travelCost+this.activityCost+this.otherCost;
         this.totalCost = Number(this.totalCost.toFixed(3))
         this.totalRemuneration = (this.hourlyRate*this.totalHours) + this.totalCost; 
-        this.totalRemuneration = Number(this.totalRemuneration.toFixed(3))
-
+        this.totalRemuneration = Number(this.totalRemuneration.toFixed(3));
         this.calculatePie(this.otherCost, this.activityCost, this.totalCost);
         this.populateDaysCost();
         this.dateRange = this.dateRangeToString(7);
@@ -91,7 +118,7 @@ export class AuPairCostComponent implements OnInit {
     for (let i = 0; i < 7; i++) {
       
       const weekDay = this.getStartDateOfWeek(i);
-      this.api.getDateMinutes("7542108615984", weekDay).subscribe( 
+      this.api.getDateMinutes(this.aupairID, weekDay).subscribe( 
         data => {
           this.dayHoursWorked[i] = data/60;
         },
@@ -120,9 +147,11 @@ export class AuPairCostComponent implements OnInit {
     const day = now.getDay();
     
     const diff =  new Date(now.setDate(now.getDate() - day + (day == 0 ? 6:1)));
+    const next = new Date(diff);
 
+    next.setDate(next.getDate() + range);
     const strDate = ('0' + diff.getDate()).slice(-2) + " " + (this.months[diff.getMonth()]) +
-    " - " + ('0' + (diff.getDate()+range)).slice(-2) + " " + (this.months[diff.getMonth()])
+    " - " + ('0' + (next.getDate())).slice(-2) + " " + (this.months[next.getMonth()])
 
     return strDate;
   }

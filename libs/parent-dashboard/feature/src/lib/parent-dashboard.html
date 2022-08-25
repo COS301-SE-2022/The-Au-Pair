@@ -1,48 +1,80 @@
 <the-au-pair-navbar></the-au-pair-navbar>
 <ion-content [fullscreen]="true">
+    <div class="page-wrapper">
+        <div class='parent-dashboard-div'>
+            <p class='welcome-heading'>Welcome {{this.userDetails.fname}}</p>
 
-    <div class='parent-dashboard-div'>
-        <p class='welcome-heading'>Welcome {{this.userDetails.fname}}</p>
-
-        <div class="au-pair-div-wrapper">
-            <div class='au-pair-name'>Au Pair: {{this.userDetails.fname}} {{this.userDetails.sname}}
-                <a href = 'tel:{{this.userDetails.number}}'><ion-icon name="call" class = 'call-icon'></ion-icon></a>
-                <a href = 'sms:{{this.userDetails.number}}'><ion-icon name="chatbubble-ellipses" class = 'message-icon'></ion-icon></a>
-                <ion-icon class="rating-icon" name="star" (click)="openModal(this.userDetails.id)"></ion-icon>
+            <div class="au-pair-div-wrapper">
+                <div class='au-pair-name' *ngIf='this.parentDetails.auPair !== ""; else noaupair'>Au Pair: {{this.auPairDetails.fname}} {{this.auPairDetails.sname}}
+                    <a href = 'tel:{{this.auPairDetails.number}}'><ion-icon name="call" class = 'call-icon'></ion-icon></a>
+                    <a href = 'sms:{{this.auPairDetails.number}}'><ion-icon name="chatbubble-ellipses" class = 'message-icon'></ion-icon></a>
+                    <ion-icon class="rating-icon" name="star" (click)="openModal(this.userDetails.id)"></ion-icon>
+                    <div *ngIf="this.parentDetails.auPair !== ''"><ion-icon class="terminate-contract" name="person-remove" (click)="presentAlert()"></ion-icon></div>
+                </div>
+                <ng-template #noaupair>
+                    <div class='au-pair-name'>Au Pair: No Au Pair employed</div>
+                </ng-template>
             </div>
-        </div>
 
-        <div class="children-div-wrapper">
+            <div class="children-div-wrapper">
 
-            <ion-card class='children-div' *ngFor="let child of children; let last = last">
-                <div class='child-name'>Child: {{ child.fname }}</div>
-                <div class='child-status'>ID Number: {{ child.id }}</div>
-            </ion-card>
+                <ion-card class='children-div' *ngFor="let child of children; let last = last">
+                    <div class='child-name'>Child: {{ child.fname }}</div>
+                    <div class='child-status'>ID Number: {{ child.id }}</div>
+                </ion-card>
 
-        </div>
+            </div>
 
-        <p class='actions-heading'>Actions</p>
+            <p class='actions-heading'>Actions</p>
 
-        <div class="actions-div-wrapper">
-            <div class='actions-div'>
-                <div class='action' id="addAct" routerLink="/add-activity">
-                    <ion-icon name="add-circle-outline" class='action-icon '></ion-icon>
-                    <div class='action-tag'>Add Activity</div>
-                </div>
-                <div class='action' id="schedule" routerLink="/schedule">
-                    <ion-icon name="calendar-outline" class='action-icon '></ion-icon>
-                    <div class='action-tag '>Schedule</div>
-                </div>
-                <div class='action' id="childDash" routerLink="/children-dashboard">
-                    <ion-icon name="people-circle-outline" class='action-icon '></ion-icon>
-                    <div class='action-tag '>Children</div>
-                </div>
-                <div class='action' id="auPairCost" routerLink="/au-pair-cost">
-                    <ion-icon name="cash-outline" class='action-icon '></ion-icon>
-                    <div class='action-tag '>Au Pair Cost</div>
+            <div class="actions-div-wrapper">
+                <div class='actions-div'>
+                    <div *ngIf="this.parentDetails.children.length === 0" style="opacity : 0.4;" class='action' id="addAct" (click)="checkHasChildren()">
+                        <ion-icon name="add-circle-outline" class='action-icon '></ion-icon>
+                        <div class='action-tag'>Add Activity</div>
+                    </div>
+                    <div *ngIf="this.parentDetails.children.length !== 0" class='action' id="addAct" (click)="checkHasChildren()">
+                        <ion-icon name="add-circle-outline" class='action-icon '></ion-icon>
+                        <div class='action-tag'>Add Activity</div>
+                    </div>
+                    <div *ngIf="this.parentDetails.children.length === 0" style="opacity : 0.4;" class='action' id="schedule" (click)="checkHasChildrenSchedule()">
+                        <ion-icon name="calendar-outline" class='action-icon '></ion-icon>
+                        <div class='action-tag '>Schedule</div>
+                    </div>
+                    <div *ngIf="this.parentDetails.children.length !== 0" class='action' id="schedule" (click)="checkHasChildrenSchedule()">
+                        <ion-icon name="calendar-outline" class='action-icon '></ion-icon>
+                        <div class='action-tag '>Schedule</div>
+                    </div>
+                    <div class='action' id="childDash" routerLink="/children-dashboard">
+                        <ion-icon name="people-circle-outline" class='action-icon '></ion-icon>
+                        <div class='action-tag '>Children</div>
+                    </div>
+                    <div *ngIf="this.parentDetails.auPair === ''" style="opacity : 0.4;" class='action' id="auPairCost" (click)="checkHasEmployer()">
+                        <ion-icon name="cash-outline" class='action-icon '></ion-icon>
+                        <div class='action-tag '>Au Pair Cost</div>
+                    </div>
+                    <div *ngIf="this.parentDetails.auPair !== ''" class='action' id="auPairCost" (click)="checkHasEmployer()">
+                        <ion-icon name="cash-outline" class='action-icon '></ion-icon>
+                        <div class='action-tag '>Au Pair Cost</div>
+                    </div>
+                    <div *ngIf="this.parentDetails.auPair === ''" style="opacity : 0.4;" class='action' id="trackAuPair" (click)="checkHasEmployerTrack()">
+                        <ion-icon name="compass" class='action-icon '></ion-icon>
+                        <div class='action-tag '>Track Au Pair</div>
+                    </div>
+                    <div *ngIf="this.parentDetails.auPair !== ''" class='action' id="trackAuPair" (click)="checkHasEmployerTrack()">
+                        <ion-icon name="compass" class='action-icon '></ion-icon>
+                        <div class='action-tag '>Track Au Pair</div>
+                    </div>
+                    <div *ngIf="this.parentDetails.auPair !== '' || this.parentDetails.children.length === 0" style="opacity : 0.4;" class='action' id="exploreAuPairs" (click)="checkHasChildrenExplore()">
+                        <ion-icon name="people-outline" class='action-icon '></ion-icon>
+                        <div class='action-tag '>Explore</div>
+                    </div>
+                    <div *ngIf="this.parentDetails.auPair === '' && this.parentDetails.children.length !== 0" class='action' id="exploreAuPairs" (click)="checkHasChildrenExplore()">
+                        <ion-icon name="people-outline" class='action-icon '></ion-icon>
+                        <div class='action-tag '>Explore</div>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-
 </ion-content>

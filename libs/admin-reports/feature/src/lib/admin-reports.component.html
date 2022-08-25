@@ -1,0 +1,48 @@
+<the-au-pair-navbar></the-au-pair-navbar>
+
+<ion-content [fullscreen]="true">
+    <h2>Reported Au Pairs</h2>
+    <ion-grid class="report-cards-container">
+        <ion-row class="ion-justify-content-around">
+            <ion-col *ngFor="let report of reports" sizeLg="5" sizeMd="12" sizeXs="12">
+                <div class="auPairCard">
+                    <div class="leftInfo">
+                        <div class="info">
+                            <div class="desc label">Full Name:</div>
+                            <div class="cont">{{report.fname}}  {{report.sname}}</div>
+                        </div>
+                        <div class="info">
+                            <div class="desc label">ID Number:</div>
+                            <div class="cont">{{report.auPairId}}</div>
+                        </div>
+                        <div class="info">
+                            <div class="desc label">Email:</div>
+                            <div class="cont">{{report.email}}</div>
+                        </div>
+                        <div class="long-info">
+                            <div class="desc label">Reason:</div>
+                            <p class="cont">{{report.desc}}</p> 
+                        </div>
+                    </div>
+    
+                    <div class="rightInfo">
+                        <div class="userImg">
+                            <img src="assets/images/profile.jpg" alt="ruben">  
+                        </div>
+                        <div>
+                            <button class = "button ban" (click)="ban(report)">
+                                Ban Au Pair
+                            </button>
+                            <button class = "button warn" (click)="warn(report)">
+                                Warn Au Pair
+                            </button>
+                            <button class = "button dismiss" (click)="dismiss(report)">
+                                Dismiss Report
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </ion-col>
+        </ion-row>
+    </ion-grid>
+</ion-content>

@@ -1,7 +1,8 @@
 import { Component, OnInit} from '@angular/core';
 import { API } from '../../../../shared/api/api.service';
-import { Activity } from '../../../../shared/interfaces/interfaces';
+import { Activity, Child } from '../../../../shared/interfaces/interfaces';
 import { HttpClient } from '@angular/common/http';
+import { Store } from '@ngxs/store';
 
 @Component({
   selector: 'the-au-pair-parent-add-activity',
@@ -9,6 +10,7 @@ import { HttpClient } from '@angular/common/http';
   styleUrls: ['./parent-add-activity.component.scss'],
 })
 export class ParentAddActivityComponent implements OnInit{
+  parentID = "";
   //Activity Model
   activityDetails: Activity = {
     id: "",
@@ -29,14 +31,15 @@ export class ParentAddActivityComponent implements OnInit{
   potentialLocations : string[] = [];
 
   //Children of logged in user
-  allChildren: any;
+  allChildren: Child[] = [];
 
   //Constructor
-  constructor(private serv: API, private http: HttpClient) {}
+  constructor(private serv: API, private http: HttpClient, private store: Store) {}
 
   ngOnInit(): void 
   {
     //Call getChildren service
+    this.parentID = this.store.snapshot().user.id;
     this.getChildren();
   }
 
@@ -225,7 +228,7 @@ export class ParentAddActivityComponent implements OnInit{
 
   //Service calls
   addActivity(act:Activity){
-    this.serv.addActivity(act).subscribe(
+    this.serv.addActivity(act).toPromise().then(
       res=>{
         console.log("The response is:" + res); 
         location.reload()},
@@ -237,10 +240,9 @@ export class ParentAddActivityComponent implements OnInit{
 
   getChildren()
   {
-    this.serv.getParent("4561237814867").subscribe(
+    this.serv.getChildren(this.parentID).toPromise().then(
       res=>{
-          console.log("The response is:" + res); 
-          this.allChildren = res.children;
+          this.allChildren = res;
       },
       error=>{
         console.log("Error has occured with API: " + error);

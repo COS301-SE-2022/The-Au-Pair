@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { API } from '../../../../shared/api/api.service';
 import { ToastController } from '@ionic/angular';
 import { Child, Parent } from '../../../../shared/interfaces/interfaces';
+import { Store } from '@ngxs/store';
 
 @Component({
   selector: 'the-au-pair-edit-child',
@@ -18,7 +19,8 @@ export class EditChildComponent implements OnInit {
     sname: "",
     allergies: "",
     diet: "",
-    parent: ""
+    parent: "",
+    aupair: ""
   }  
 
   parent: Parent ={
@@ -31,7 +33,7 @@ export class EditChildComponent implements OnInit {
   //Regex for south african ID number
   SA_ID = new RegExp(/(((\d{2}((0[13578]|1[02])(0[1-9]|[12]\d|3[01])|(0[13456789]|1[012])(0[1-9]|[12]\d|30)|02(0[1-9]|1\d|2[0-8])))|([02468][048]|[13579][26])0229))(( |-)(\d{4})( |-)(\d{3})|(\d{7}))/);
 
-  constructor(private serv: API, public router: Router, public toastCtrl: ToastController)
+  constructor(private serv: API, public router: Router, public toastCtrl: ToastController, private store: Store)
   {
     const navigation = this.router.getCurrentNavigation();
     if(navigation !== null)
@@ -174,7 +176,8 @@ export class EditChildComponent implements OnInit {
       this.childDetails.sname= val.surname;
       this.childDetails.allergies= val.Allergies;
       this.childDetails.diet= val.diet;
-      this.childDetails.parent= "4561237814867"; //Assumed logged in user for now
+      this.childDetails.parent= this.store.snapshot().user.id;
+      this.childDetails.aupair = this.parent.auPair;
       this.updateChild(this.childDetails);
     }
   }
@@ -194,9 +197,7 @@ export class EditChildComponent implements OnInit {
 
   returnToChildrenDashboard()
   {
-    this.router.navigate(['/children-dashboard']).then(()=>{
-      window.location.reload();
-    });
+    this.router.navigate(['/children-dashboard']);
   }
 
   updateChild(child : Child){

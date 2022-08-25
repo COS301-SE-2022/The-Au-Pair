@@ -1,15 +1,10 @@
 <the-au-pair-navbar></the-au-pair-navbar>
 <ion-content [fullscreen]="true">
     <div class = "parent-profile-div">
-        <div class = 'title-div'>
-            <p class='profile-name'>{{this.userDetails.fname}}</p>
-        </div>
-        <!-- <div class = "profile-picture-div">
+        <h1 class='profile-name'>{{this.userDetails.fname}} {{this.userDetails.sname}}</h1>
             <div class='profile-picture-wrapper'>
-                <ion-icon name="people-circle-outline" class='profile-picture'></ion-icon>
+                <img class="profile-picture" src="assets/images/placeholder-profile.jpg" alt="">
             </div>
-            <button class="change-button" routerLink="/edit-parent-profile">CHANGE</button>
-        </div> -->
         <div class = 'details-div'>
             <div class = "small-profile-details-div">
                 <div class="parent-info-small">
@@ -45,9 +40,9 @@
             </div>
             <button class="change-button" id="change" routerLink="/edit-au-pair-profile">CHANGE</button>
         </div>
-        <img id="active-2" src="assets/images/active.png">
-        <img id="active" src="assets/images/active-2.png">
-        <img id="lifestyles" src="assets/images/lifestyles.png">
+        <img id="background-image-1" src="assets/images/active.png">
+        <img id="background-image-2" src="assets/images/active-2.png">
+        <img id="background-image-3" src="assets/images/lifestyles.png">
     </div>
 
 </ion-content>

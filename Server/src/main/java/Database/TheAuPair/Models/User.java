@@ -28,8 +28,24 @@ public class User
     private String number;
     @Field ("salt")
     private String salt;
+    @Field ("latitude")
+    private double latitude;
+    @Field ("longitude")
+    private double longitude;
+    @Field ("suburb")
+    private String suburb;
+    @Field ("gender")
+    private String gender;
+    @Field ("fcmToken")
+    private String fcmToken;    
+    @Field ("birth")
+    private String birth;
+    @Field ("warnings")
+    private int warnings;
+    @Field ("banned")
+    private String banned;
 
-    public User(String id, String fname, String sname, String email, String address, boolean registered, int type, String password, String number, String salt)
+    public User(String id, String fname, String sname, String email, String address, boolean registered, int type, String password, String number, String salt, double latitude, double longitude, String suburb, String gender, String birth, int warnings, String banned, String fcmToken)
     {
         this.id = id;
         this.fname = fname;
@@ -41,6 +57,14 @@ public class User
         this.password = password;
         this.number = number;
         this.salt = salt;
+        this.latitude = latitude;
+        this.longitude = longitude;
+        this.suburb = suburb;
+        this.gender = gender;
+        this.fcmToken = fcmToken;
+        this.birth = birth;
+        this.warnings = warnings;
+        this.banned = banned;
     }
 
     public String getId()
@@ -143,20 +167,103 @@ public class User
       this.salt = salt;
     }
 
-    @Override
-    public String toString()
+    public double getLatitude()
     {
-        return "User{" +
-                "id='" + id + '\'' +
-                ", fname='" + fname + '\'' +
-                ", sname='" + sname + '\'' +
-                ", email='" + email + '\'' +
-                ", address='" + address + '\'' +
-                ", reg=" + registered +
-                ", t=" + type +
-                ", password='" + password + '\'' +
-                ", number='" + number + '\'' +
-                ", salt='" + salt + '\'' +
-                '}';
+        return latitude;
+    }
+
+    public void setLatitiude(double latitude)
+    {
+        this.latitude = latitude;
+    }
+
+    public double getLongitude()
+    {
+        return longitude;
+    }
+
+    public void setLongitude(double longitude)
+    {
+        this.longitude = longitude;
+    }
+
+    public String getSuburb()
+    {
+        return suburb;
+    }
+
+    public void setSuburb(String suburb)
+    {
+        this.suburb = suburb;
+    }
+
+    public String getGender()
+    {
+        return gender;
+    }
+
+    public void setGender(String gender)
+    {
+        this.gender = gender;
+    }
+
+    public String getBirth()
+    {
+        return birth;
+    }
+
+    public void setBirth(String birth)
+    {
+        this.birth = birth;
+    }
+
+    public int getWarnings() {
+      return warnings;
+    }
+    public String getFcmToken()
+    {
+        return fcmToken;
+    }
+
+    public void setWarnings(int warnings) {
+      this.warnings = warnings;
+    }
+
+    public String getBanned() {
+      return banned;
+    }
+
+    public void setBanned(String banned) {
+      this.banned = banned;
+    }
+
+    public void setFcmToken(String fcmToken)
+    {
+        this.fcmToken = fcmToken;
+    }
+    
+
+    @Override
+    public String toString() {
+      return "User{" +
+        "id='" + id + '\'' +
+        ", fname='" + fname + '\'' +
+        ", sname='" + sname + '\'' +
+        ", email='" + email + '\'' +
+        ", address='" + address + '\'' +
+        ", registered=" + registered +
+        ", type=" + type +
+        ", password='" + password + '\'' +
+        ", number='" + number + '\'' +
+        ", salt='" + salt + '\'' +
+        ", latitude=" + latitude +
+        ", longitude=" + longitude +
+        ", suburb='" + suburb + '\'' +
+        ", gender='" + gender + '\'' +
+        ", birth='" + birth + '\'' +
+        ", fcmToken='" + fcmToken + '\'' +
+        ", warnings=" + warnings +
+        ", banned='" + banned + '\'' +
+        '}';
     }
 }

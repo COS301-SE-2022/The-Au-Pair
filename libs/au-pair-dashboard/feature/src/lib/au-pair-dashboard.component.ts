@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
+import { Store } from '@ngxs/store';
 import { API } from '../../../../shared/api/api.service'
-import { HoursLogged } from '../../../../shared/interfaces/interfaces';
+import { Child, HoursLogged } from '../../../../shared/interfaces/interfaces';
+import { Router } from '@angular/router';
+import { ToastController } from '@ionic/angular';
 
 @Component({
   selector: 'the-au-pair-au-pair-dashboard',
@@ -10,12 +13,15 @@ import { HoursLogged } from '../../../../shared/interfaces/interfaces';
 })
 export class AuPairDashboardComponent implements OnInit {
   
-  employer : any;
+  aupairID = "";
+  aupairName = "";
+
+  employer = "";
   employerName!: string;
   employerSurname! : string;
-  employerId! : string;
+  employerId = '';
   employerPhone! : string;
-  children: any[] = [];
+  children: Child[] = [];
 
   alreadyLogging = false;
   logID = "";
@@ -28,13 +34,16 @@ export class AuPairDashboardComponent implements OnInit {
     timeEnd: ""
   };
   
-  constructor(private serv: API) {}
+  constructor(private serv: API, private store: Store, public router: Router, public toastCtrl: ToastController) {}
 
   async ngOnInit(): Promise<void> {
+    this.aupairID = this.store.snapshot().user.id;
+    this.aupairName = this.store.snapshot().user.name;
+
     await this.getEmployer();
 
     const todaysDate = this.getToday();
-    this.serv.getStartedLog("7542108615984", todaysDate).subscribe( 
+    this.serv.getStartedLog(this.aupairID, todaysDate).subscribe( 
       data => {
         if(data == null || data == "") {
           this.alreadyLogging = false;
@@ -53,7 +62,7 @@ export class AuPairDashboardComponent implements OnInit {
   logSwitch() {
     if(this.alreadyLogging) {
       if(this.logID == null || this.logID == "") {
-        this.serv.getStartedLog("7542108615984", this.getToday()).subscribe( 
+        this.serv.getStartedLog(this.aupairID, this.getToday()).subscribe( 
           data => {
             this.logID = data;
           },
@@ -74,7 +83,7 @@ export class AuPairDashboardComponent implements OnInit {
       )
     }
     else {
-      this.hoursLogDetail.user = "7542108615984";
+      this.hoursLogDetail.user = this.aupairID;
       this.hoursLogDetail.date = this.getToday();
       this.hoursLogDetail.timeStart = this.getCurrentTime();
       this.serv.addHoursLog(this.hoursLogDetail).subscribe( 
@@ -108,13 +117,23 @@ export class AuPairDashboardComponent implements OnInit {
   }
 
   async getEmployer(){
-    this.serv.getUser("4561237814867").subscribe(
+    await this.serv.getAuPair(this.aupairID)
+    .toPromise()
+    .then(
+      res => {
+        this.employer = res.employer;
+      },
+      error => {
+        console.log("Error has occured with API: " + error);
+      }
+    )
+
+    this.serv.getUser(this.employer).subscribe(
       res=>{
-          this.employer = res;
-          this.employerName = this.employer.fname;
-          this.employerSurname = this.employer.sname;
-          this.employerId = this.employer.id;
-          this.employerPhone = this.employer.number;
+          this.employerName = res.fname;
+          this.employerSurname = res.sname;
+          this.employerId = res.id;
+          this.employerPhone = res.number;
           this.getChildren();
       },
       error=>{console.log("Error has occured with API: " + error);}
@@ -125,7 +144,7 @@ export class AuPairDashboardComponent implements OnInit {
     this.serv.getChildren(this.employerId).subscribe(
       res=>{
         let i = 0;
-        res.forEach((element: string) => {
+        res.forEach((element: Child) => {
           this.children[i++] = element;
           
         });
@@ -133,5 +152,36 @@ export class AuPairDashboardComponent implements OnInit {
       error =>{console.log("Error has occured with API: " + error);}
       
     )
+  }
+
+  async openToast(message: string)
+  {
+    const toast = await this.toastCtrl.create({
+      message: message,
+      duration: 4000,
+      position: 'top',
+      cssClass: 'toastPopUp'
+    });
+    await toast.present();
+  }
+
+  async checkHasEmployerEmployedSchedule(){
+    if (this.employerId !== ''){
+      this.router.navigate(['/au-pair-schedule']);
+    }
+    else
+    {
+      this.openToast('You need to be employed to view your schedule');
+    }
+  }
+
+  async checkHasEmployerEmployedRequests(){
+    if (this.employerId === ''){
+      this.router.navigate(['/hire-requests']);
+    }
+    else
+    {
+      this.openToast('You are already employed');
+    }
   }
 }

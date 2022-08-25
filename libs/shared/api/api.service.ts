@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { Activity , Child , medAid , Parent  , User, HoursLogged, auPair } from '../interfaces/interfaces';
+import { Activity , Child , medAid , Parent  , User, HoursLogged, auPair, Notification, Report, Contract} from '../interfaces/interfaces';
 
 @Injectable()
 export class API{
@@ -140,6 +140,26 @@ export class API{
     return this.http.post('http://localhost:8080/addAuPair',aupair);
   }
 
+  addContract(contract : Contract): Observable<any> {
+    return this.http.post('http://localhost:8080/addContract',contract);
+  }
+
+  getContract(id : String): Observable<any> {
+    return this.http.post('http://localhost:8080/getContract',id);
+  }
+
+  removeContract(id : string): Observable<any> {
+    return this.http.post('http://localhost:8080/removeContract',id);
+  }
+
+  getContractbyIDs(parentID : String, auPairID : String): Observable<any> {
+    var ids = {
+      "parentID" : parentID,
+      "auPairID" : auPairID
+    }
+    return this.http.post('http://localhost:8080/getContractbyIDs', ids);
+  }
+
   login(email : string, password : string): Observable<any> {
     var details = {
       "email" : email,
@@ -148,6 +168,16 @@ export class API{
     return this.http.post('http://localhost:8080/login',details);
   }
 
+  getAllAuPairs()
+  {
+    return this.http.get('http://localhost:8080/getAllAuPairs');
+  }
+
+  getAllContracts()
+  {
+    return this.http.get('http://localhost:8080/getAllContracts');
+  }
+  
   getApplicants(): Observable<any> {
     return this.http.get('http://localhost:8080/getApplicants');
   }
@@ -179,4 +209,34 @@ export class API{
     }
     return this.http.post('http://localhost:8080/resolveApplication',decision);
   }
+
+  getNotificationsByParentId(id : string): Observable<any> {
+    return this.http.post('http://localhost:8080/getNotifcationsByParentId',id);
+  }
+
+  getNotificationsByAuPairId(id : string): Observable<any> {
+    return this.http.post('http://localhost:8080/getNotifcationsByAuPairId',id);
+  }
+
+  logNotification(notification : Notification): Observable<any> {
+    return this.http.post('http://localhost:8080/logNotification',notification);
+  }
+
+  getAllReports(): Observable<any> 
+  {
+    return this.http.get('http://localhost:8080/getAllReports');
+  }
+  
+  getReportsForAuPair(id : string): Observable<any> {
+    return this.http.post('http://localhost:8080/getReportsForAuPair', id);
+  }
+
+  deleteReport(id : string): Observable<any> {
+    return this.http.post('http://localhost:8080/deleteReport',id);
+  }
+
+  addReport(report : Report): Observable<any> {
+    return this.http.post('http://localhost:8080/addReport',report);
+  }
+  
 }

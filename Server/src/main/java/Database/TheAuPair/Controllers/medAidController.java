@@ -19,8 +19,7 @@ public class medAidController
   @CrossOrigin(origins = "http://localhost:4200")
   public medAid getMedAid(@RequestBody String id)
   {
-    medAid m = ms.getMedAid(id);
-    return m;
+    return this.ms.getMedAid(id);
   }
 
   @PostMapping("/editMedAid")

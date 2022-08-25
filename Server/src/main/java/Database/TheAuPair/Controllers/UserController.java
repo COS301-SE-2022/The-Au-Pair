@@ -3,6 +3,8 @@ package Database.TheAuPair.Controllers;
 import Database.TheAuPair.Models.User;
 import Database.TheAuPair.Repositories.UserRepository;
 import Database.TheAuPair.Services.UserService;
+import org.springframework.http.ResponseEntity;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -22,8 +24,7 @@ public class UserController
   @CrossOrigin(origins = "http://localhost:4200")
   public User getUser(@RequestBody String id)
   {
-    User u =  us.getUser(id);
-    return u;
+    return this.us.getUser(id);
   }
 
   @PostMapping("/editUser")
@@ -51,7 +52,7 @@ public class UserController
   @CrossOrigin(origins = "http://localhost:4200")
   public List<User> getApplicants()
   {
-    return this.us.getApplicants();
+      return this.us.getApplicants();
   }
 
   @PostMapping("/resolveApplication")

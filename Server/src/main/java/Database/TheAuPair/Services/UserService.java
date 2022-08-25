@@ -31,7 +31,14 @@ public class UserService
     {
       if (registered.getId().equals(u.getId()) || registered.getEmail().equals(u.getEmail()))
       {
-        return registered.getEmail();
+        if(registered.getBanned().equals(""))
+        {
+          return registered.getEmail();
+        }
+        else
+        {
+          return "Banned " + registered.getBanned();
+        }
       }
     }
 
@@ -47,7 +54,7 @@ public class UserService
 
   public User login(String email, String password)
   {
-    User nr = new User("","","","","",false,1,"","","");
+    User nr = new User("","","","","",false,1,"","","", 0, 0, "", "", "", 0, "", "");
     for (User registered : ur.findAll())
     {
       if (registered.getEmail().equals(email))
@@ -74,8 +81,8 @@ public class UserService
 
   public List<User> getApplicants()
   {
-    List<User> u =  ur.findAllByType(1);
-    return u;
+    List<User> notRegistered =  ur.findAllByType(2, false);
+    return notRegistered;
   }
 
   public void resolveApplication(String id, String resolution)

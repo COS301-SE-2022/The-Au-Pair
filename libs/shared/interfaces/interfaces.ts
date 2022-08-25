@@ -19,6 +19,7 @@ export interface Activity{
     allergies: string;
     diet: string;
     parent: string;
+    aupair: string;
   }
 
   export interface HoursLogged{
@@ -55,6 +56,8 @@ export interface Activity{
     payRate: number;
     bio: string;
     experience: string;
+    currentLong: number;
+    currentLat: number;
   }
 
   export interface User{
@@ -68,6 +71,14 @@ export interface Activity{
     password: string;
     number: string;
     salt: string;
+    latitude: number;
+    longitude: number;
+    suburb: string;
+    gender: string;
+    fcmToken : string;
+    birth: string;
+    warnings: number;
+    banned: string;
   }
 
   export interface auPair{
@@ -78,5 +89,28 @@ export interface Activity{
     costIncurred: number;
     onShift: boolean;
     employer: string;
+  }
+
+  export interface Contract{
+    parentID: string;
+    auPairID: string;
+    timestamp: string;
+  }
+  
+  export interface Notification{
+    id: string;
+    parentId: string;
+    auPairId: string;
+    title: string;
+    body: string;
+    date: string;
+    time: string;
+  }
+  
+  export interface Report{
+    id: string;
+    issuerId: string;
+    auPairId: string;
+    desc: string;
   }
   
