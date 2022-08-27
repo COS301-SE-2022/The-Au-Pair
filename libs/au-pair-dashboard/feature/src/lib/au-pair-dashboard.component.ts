@@ -306,10 +306,7 @@ export class AuPairDashboardComponent implements OnInit {
 
     let daysBetweenDates = msBetweenDates / (24 * 60 * 60 * 1000);
 
-    daysBetweenDates = Math.ceil(daysBetweenDates);
-
-    console.log(daysBetweenDates);
-    
+    daysBetweenDates = Math.ceil(daysBetweenDates);    
 
     if(daysBetweenDates >= 14)
     {

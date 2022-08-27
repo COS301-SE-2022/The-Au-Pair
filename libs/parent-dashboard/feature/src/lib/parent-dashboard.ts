@@ -273,10 +273,7 @@ export class ParentDashboardComponent implements OnInit{
   async checkResignation()
   {
     await this.getParentDetails();
-    await this.getAuPairDetails();    
-
-    console.log("HERE");
-    
+    await this.getAuPairDetails();        
         
     const then  = new Date(this.currentAuPair.terminateDate);
     const now = new Date();
