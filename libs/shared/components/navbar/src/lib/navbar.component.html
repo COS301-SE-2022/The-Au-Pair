@@ -1,7 +1,7 @@
 <ion-header [translucent]="true">
     <ion-toolbar mode="ios" class="navbar">
-      <ion-buttons menu="nav" slot="start" *ngIf="isHome">
-          <button class="back-button"><ion-icon id="nav" name="menu-outline" (click)="menuOpen()"></ion-icon></button>
+      <ion-buttons menu="nav" slot="start">
+          <button class="back-button" menuToggle><ion-icon id="nav" name="menu-outline" (click)="menuOpen()"></ion-icon></button>
       </ion-buttons>
       <ion-buttons slot="start" class="start-buttons">
         <ion-button (click)="dash()">Dashboard</ion-button>

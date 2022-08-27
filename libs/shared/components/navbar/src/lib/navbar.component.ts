@@ -12,13 +12,14 @@ import { Reset } from '../../../../../shared/ngxs/actions';
 export class NavbarComponent implements OnInit
 {
   type = -1;
-  isHome = this.router.url != "/parent-dashboard";
 
   constructor(private router : Router,private store: Store, private menController : MenuController){}
 
   ngOnInit() 
   {
+    console.log("Initializing navbar")
     this.type = this.store.snapshot().user.type;
+    console.log(this.type);
   }
 
   dash()
@@ -76,7 +77,9 @@ export class NavbarComponent implements OnInit
   menuOpen()
   {
     console.log("menu open");
-    this.menController.toggle('start');
+    console.log(this.menController.isEnabled());
+    this.menController.open('start')
+    //this.menController.toggle('start');
   }
 
   menuClose()
