@@ -65,7 +65,8 @@ export class RegisterComponent {
     bio: '',
     experience: '',
     currentLong: 0.0,
-    currentLat : 0.0
+    currentLat : 0.0,
+    terminateDate: "",
   }
 
 

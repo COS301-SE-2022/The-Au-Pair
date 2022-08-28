@@ -58,6 +58,7 @@ export interface Activity{
     experience: string;
     currentLong: number;
     currentLat: number;
+    terminateDate: string;
   }
 
   export interface User{

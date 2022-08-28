@@ -104,7 +104,7 @@ export class ExploreComponent implements OnInit {
             distance: eucdistance,
           }
           // Logic for explore that will only show Au Pairs whom are not yet employed
-          if(ap.employer == "" && res.registered == true)
+          if(ap.employer == "" && res.registered == true && res.banned == "")
           {
             this.AuPairArray.push(auPairDetails);
             this.restoredAuPairArray.push(auPairDetails);

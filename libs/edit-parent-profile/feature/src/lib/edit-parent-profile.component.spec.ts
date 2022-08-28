@@ -70,12 +70,12 @@ describe('EditParentProfileComponent', () => {
       id: "",
       fname: "",
       sname: "",
-      email: "testemail@gmail.com",
-      address: "123 Valid Street",
+      email: "",
+      address: "",
       registered: false,
       type: 0,
       password: "",
-      number: "0832422323",
+      number: "",
       salt: "",
       latitude: 0, 
       longitude: 0, 
@@ -89,11 +89,11 @@ describe('EditParentProfileComponent', () => {
 
     const expectedMedAidValue: medAid = {
       id: "",
-      plan: "Full",
-      name: "Kyle",
-      sname: "Pottinger",
-      mID: "7534286951",
-      provider: "Discovery",
+      plan: "",
+      name: "",
+      sname: "",
+      mID: "",
+      provider: "",
     };
 
     jest.spyOn(component,"getUserDetails");
