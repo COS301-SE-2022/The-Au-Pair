@@ -172,6 +172,11 @@ const routes: Routes = [
     import('@the-au-pair/hire-requests/feature').then((m) => m.HireRequestsFeatureModule),
   },
   {
+    path: 'job-summary-parent-view',
+    loadChildren: () =>
+    import('@the-au-pair/job-summary-parent-view/feature').then((m) => m.JobSummaryParentViewFeatureModule),
+  },
+  {
     path: '**',
     redirectTo: 'login-page',
   },

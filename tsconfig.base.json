@@ -51,13 +51,15 @@
         "libs/forgot-password/feature/src/index.ts"
       ],
       "@the-au-pair/hire-requests/feature": [
-        "libs/hire-requests/feature/src/index.ts"],
-
+        "libs/hire-requests/feature/src/index.ts"
+      ],
+      "@the-au-pair/job-summary-parent-view/feature": [
+        "libs/job-summary-parent-view/feature/src/index.ts"
+      ],
       "@the-au-pair/login/feature": ["libs/login/feature/src/index.ts"],
-
       "@the-au-pair/notifications-feature": [
         "libs/notifications/feature/src/index.ts"
-      ],      
+      ],
       "@the-au-pair/parent-add-activity/feature": [
         "libs/parent-add-activity/feature/src/index.ts"
       ],
@@ -78,23 +80,21 @@
       "@the-au-pair/shared/components/input-field": [
         "libs/shared/components/input-field/src/index.ts"
       ],
+      "@the-au-pair/shared/components/location-field": [
+        "libs/shared/components/location-field/src/index.ts"
+      ],
+      "@the-au-pair/shared/components/long-field": [
+        "libs/shared/components/long-field/src/index.ts"
+      ],
       "@the-au-pair/shared/components/navbar": [
         "libs/shared/components/navbar/src/index.ts"
       ],
       "@the-au-pair/shared/components/password-field": [
         "libs/shared/components/password-field/src/index.ts"
       ],
-      "@the-au-pair/shell/feature": [
-        "libs/shell/feature/src/index.ts"
-      ],
+      "@the-au-pair/shell/feature": ["libs/shell/feature/src/index.ts"],
       "@the-au-pair/track-au-pair/feature": [
         "libs/track-au-pair/feature/src/index.ts"
-      ],
-      "@the-au-pair/shared/components/location-field": [
-        "libs/shared/components/location-field/src/index.ts"
-      ],
-      "@the-au-pair/shared/components/long-field": [
-        "libs/shared/components/long-field/src/index.ts"
       ]
     }
   },
