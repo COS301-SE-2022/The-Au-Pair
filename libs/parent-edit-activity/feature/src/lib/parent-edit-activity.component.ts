@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { API } from '../../../../shared/api/api.service';
 import { ToastController } from '@ionic/angular';
-import { Activity } from '../../../../shared/interfaces/interfaces';
+import { Activity, Child } from '../../../../shared/interfaces/interfaces';
 import { HttpClient } from '@angular/common/http';
 import { Store } from '@ngxs/store';
 
@@ -17,6 +17,7 @@ export class ParentEditActivityComponent implements OnInit {
   //Possible locations searched for
   location = "";
   potentialLocations : string[] = [];
+  originalLocation = "";
 
   //Activity Model
   activityDetails: Activity = {
@@ -33,6 +34,17 @@ export class ParentEditActivityComponent implements OnInit {
   day: "",
   child: "",
   };
+
+  currentChild : Child = {
+    id:"",
+    fname :"",
+    sname:"",
+    allergies:"",
+    diet : "",
+    parent:"",
+    aupair:""
+  };
+
   timeslot = "";
   //Children of logged in user
   allChildren: any;
@@ -114,18 +126,22 @@ export class ParentEditActivityComponent implements OnInit {
     }
     else
     {
-      if(dom != null)
+      //Only check for valid location if its not empty and different from the original
+      if(this.originalLocation !== val.location)
       {
-        //Check that the selected location is from the API
-        this.getLocations()
-        if (this.potentialLocations.indexOf(this.location) == -1)
+        if(dom != null)
         {
-          dom.innerHTML = "Please select a valid location from the suggested below.";
-          dom.style.display = "block";
-          return;
+          //Check that the selected location is from the API
+          this.getLocations()
+          if (this.potentialLocations.indexOf(this.location) == -1)
+          {
+            dom.innerHTML = "Please select a valid location from the suggested below.";
+            dom.style.display = "block";
+            return;
+          }
+          else
+            dom.style.display = "none";
         }
-        else
-          dom.style.display = "none";
       }
     }
 
@@ -312,6 +328,8 @@ export class ParentEditActivityComponent implements OnInit {
         this.activityDetails.description = res.description;
         this.activityDetails.location = res.location;
         this.location = res.location;
+        this.activityDetails.boundary = res.boundary;
+        this.originalLocation = res.location;
         this.activityDetails.day = res.day;
         this.activityDetails.timeStart = res.timeStart;
         this.activityDetails.timeEnd = res.timeEnd;
@@ -340,21 +358,23 @@ export class ParentEditActivityComponent implements OnInit {
 
   getChildrenDetails()
   {
-    this.serv.getParent(this.store.snapshot().user.id).subscribe(
+    this.serv.getChildren(this.store.snapshot().user.id).toPromise().then(
       res=>{
-        console.log("The response is:" + res); 
-          this.allChildren = res.children;
-
-          //Removing the child that is already set from getActivity ( to avoid duplicates )
+          this.allChildren = res;
+          //Removing the child that is already set from getActivity ( to remove duplicates )
           for (let i = 0; i < this.allChildren.length; i++) 
           {
-            if(this.allChildren[i] === this.activityDetails.child)
+            if(this.allChildren[i].id === this.activityDetails.child)
             { 
+              this.currentChild = this.allChildren[i];
+              //Remove
               this.allChildren.splice(i, 1);
             }
           }
       },
-      error=>{console.log("Error has occured with API: " + error);}
+      error=>{
+        console.log("Error has occured with API: " + error);
+      }
     )
   }
   //------------------------------------------------------------------------------------------------------------------------------------------------------------------------

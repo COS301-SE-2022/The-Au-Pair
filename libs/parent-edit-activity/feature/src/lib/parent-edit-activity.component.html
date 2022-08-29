@@ -31,7 +31,7 @@
 
           <!-- Boundary -->
           <div>
-            <label id="boundaryLabel" for="boundaryText" >Boundary</label>
+            <label id="boundaryLabel" for="boundaryText" >Boundary (Km)</label>
             <input id="boundaryText" type="text" ngModel="{{this.activityDetails.boundary}}" name="boundary">
             <p id="boundaryError" class="error" style="display: none;">Error in field</p>
           </div>
@@ -86,7 +86,7 @@
 
           <!-- Budget -->
           <div>
-            <label id="budgetLabel" for="budget" >Budget</label>
+            <label id="budgetLabel" for="budget" >Budget (R)</label>
             <input id="budgetText" type="text" ngModel="{{this.activityDetails.budget}}" name="budget" placeholder="Budget"> 
             <p id="budgetError" class="error" style="display: none;">Error in field</p>
           </div>
@@ -95,8 +95,8 @@
           <div>
             <label id="childLabel" for="Child">Select a child</label>
             <select ngModel="{{this.activityDetails.child}}" name="childId" id="childId">
-              <option value="{{this.activityDetails.child}}" selected>{{this.activityDetails.child}}</option>
-              <option *ngFor="let childids of allChildren" value="{{childids}}">{{childids}}</option>
+              <option value="{{this.activityDetails.child}}" selected>{{this.currentChild.fname}}</option>
+              <option *ngFor="let childids of allChildren" value="{{childids}}">{{childids.fname}}</option>
             </select>
             <p id="childError" class="error" style="display: none;">Error in field</p>
           </div>
