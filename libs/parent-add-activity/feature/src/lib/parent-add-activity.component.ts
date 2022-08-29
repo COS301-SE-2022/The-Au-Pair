@@ -3,6 +3,7 @@ import { API } from '../../../../shared/api/api.service';
 import { Activity, Child } from '../../../../shared/interfaces/interfaces';
 import { HttpClient } from '@angular/common/http';
 import { Store } from '@ngxs/store';
+import { ToastController } from '@ionic/angular';
 
 @Component({
   selector: 'the-au-pair-parent-add-activity',
@@ -35,7 +36,7 @@ export class ParentAddActivityComponent implements OnInit{
   allChildren: Child[] = [];
 
   //Constructor
-  constructor(private serv: API, private http: HttpClient, private store: Store) {}
+  constructor(private serv: API, private http: HttpClient, private store: Store, public toastCtrl: ToastController) {}
 
   ngOnInit(): void 
   {
@@ -283,11 +284,25 @@ export class ParentAddActivityComponent implements OnInit{
     });
   }
 
+  //Pop-up if activity is successfully added
+  async openToast()
+  {
+    const toast = await this.toastCtrl.create({
+      message: 'Activity successfully added!',
+      duration: 4000,
+      position: 'top',
+      color: 'primary',
+      cssClass: 'toastPopUp'
+    });
+    await toast.present();
+  }
+
   //Service calls
   addActivity(act:Activity){
     this.serv.addActivity(act).toPromise().then(
       res=>{
         console.log("The response is:" + res); 
+        this.openToast();
       },
       error=>{
         console.log("Error has occured with API: " + error);
