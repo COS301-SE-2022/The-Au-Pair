@@ -161,6 +161,98 @@ textarea:focus{
     color: red;
 }
 
+//Label styling
+//Labelling styles
+#activityLabel{
+    position: inherit;
+    text-align: left;
+    margin-left: 5px;
+    margin-bottom: -30px;
+    margin-top: 30px;
+}
+
+#descriptionLabel{
+    position: inherit;
+    text-align: left;
+    align-self: left;
+    margin-left: 5px;
+    margin-bottom: -30px;
+    margin-top: 30px;
+}
+
+#commentLabel{
+    position: inherit;
+    text-align: left;
+    align-self: left;
+    margin-left: 5px;
+    margin-bottom: -30px;
+    margin-top: 30px;
+}
+
+#behaviourLabel{
+    position: inherit;
+    text-align: left;
+    align-self: left;
+    margin-left: 5px;
+    margin-bottom: -30px;
+    margin-top: 30px;
+}
+
+#boundaryLabel{
+    position: inherit;
+    text-align: left;
+    align-self: left;
+    margin-left: 5px;
+    margin-bottom: -30px;
+    margin-top: 30px;
+}
+
+#locationLabel{
+    position: inherit;
+    text-align: left;
+    align-self: left;
+    margin-left: 5px;
+    margin-bottom: -30px;
+    margin-top: 30px;
+}
+
+#dayLabel{
+    position: inherit;
+    text-align: left;
+    align-self: left;
+    margin-left: 5px;
+    margin-bottom: -30px;
+    margin-top: 30px;
+}
+
+#timeslotLabel{
+    position: inherit;
+    text-align: left;
+    align-self: left;
+    margin-left: 5px;
+    margin-bottom: -30px;
+    margin-top: 30px;
+}
+
+#budgetLabel{
+    position: inherit;
+    text-align: left;
+    align-self: left;
+    margin-left: 5px;
+    margin-bottom: -30px;
+    margin-top: 30px;
+}
+
+#childLabel{
+    position: inherit;
+    text-align: left;
+    align-self: left;
+    margin-left: 5px;
+    margin-bottom: -30px;
+    margin-top: 30px;
+}
+
+
 //Images
 #active-2{
     position: absolute;
@@ -190,4 +282,42 @@ textarea:focus{
     top: -5px;
     opacity: 0.04;
     z-index: -10;
+}
+
+@media (max-width: 411px) {
+    .activity-wrapper{
+        height: fit-content;
+        min-width: 290px;
+        margin-top: 60px;
+        margin-left: auto;
+        margin-right: auto;
+        background-color: transparent;
+        border-radius: 16px;
+        // padding-bottom: 7%;
+    }
+
+    .activity-details input{
+        width: 90vw;
+    }
+
+    .activity-details select{
+        width: 90vw;
+    }
+
+    .activity-details textarea{
+        width: 90vw;
+    }
+
+    .buttons{
+        gap: 5px;
+        width:90vw;
+    }
+
+    .updateActivity{
+        width: 44vw !important;
+    }
+    
+    .cancel{
+        width: 44vw !important;
+    }
 }

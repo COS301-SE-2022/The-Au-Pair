@@ -62,6 +62,8 @@ export class ParentEditActivityComponent implements OnInit {
   {  
     //FORM ERROR CHECKING
     let emptyInput = false;
+
+    //Activity Name
     let dom = document.getElementById("actNameError");
     if(val.activityName === "")
     {
@@ -79,6 +81,8 @@ export class ParentEditActivityComponent implements OnInit {
         dom.style.display = "none";
       }
     }
+
+  //Description
     dom = document.getElementById("descripError");
     if(val.description === "")
     { 
@@ -88,13 +92,16 @@ export class ParentEditActivityComponent implements OnInit {
         dom.innerHTML = "Description is empty";
         dom.style.display = "block";
       }
-    }else
+    }
+    else
     {
       if(dom != null)
       {
         dom.style.display = "none";
       }
     }
+
+    //Location
     dom = document.getElementById("locError");
     if(val.location === "")
     {
@@ -104,7 +111,8 @@ export class ParentEditActivityComponent implements OnInit {
         dom.innerHTML = "Location is empty";
         dom.style.display = "block";
       }
-    }else
+    }
+    else
     {
       if(dom != null)
       {
@@ -120,6 +128,35 @@ export class ParentEditActivityComponent implements OnInit {
           dom.style.display = "none";
       }
     }
+
+    //Boundary
+    dom = document.getElementById("boundaryError");
+    if(val.boundary === "")
+    {
+      emptyInput = true;
+      if(dom != null)
+      {
+        dom.innerHTML = "Boundary is empty";
+        dom.style.display = "block";
+      }
+    }else
+    {
+      if(dom != null)
+      { 
+        if(isNaN(parseFloat(val.boundary)))
+        {
+          dom.innerHTML = "Please ensure this is a number e.g. 5.2";
+          dom.style.display = "block";
+          return;
+        }
+        else
+        {
+          dom.style.display = "none";
+        }
+      }
+    }
+
+    //Day
     dom = document.getElementById("dayError");
     if(val.dayOfWeek === "")
     {
@@ -193,9 +230,11 @@ export class ParentEditActivityComponent implements OnInit {
     else
     {
       const budget = parseInt(val.budget);
+      const bound = parseFloat(val.boundary);
       this.activityDetails.name = val.activityName;
       this.activityDetails.description = val.description;
       this.activityDetails.location = val.location;
+      this.activityDetails.boundary = bound;
       this.activityDetails.day = val.dayOfWeek;
       this.activityDetails.timeStart = val.timeSlot.substring(0,5);
       this.activityDetails.timeEnd = val.timeSlot.substring(6,11);

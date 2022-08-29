@@ -5,45 +5,64 @@
         <div class="activity-details">
             <form class = "form-details">
             <!-- Activity Name -->
-            <label id="activityLabel" for="actNameText">Activity Name</label>
-            <input id="actNameText" type="text" value="{{this.activityDetails.name}}" readonly name="activityName">
+            <div>
+                <label id="activityLabel" for="actNameText">Activity Name</label>
+                <input id="actNameText" type="text" value="{{this.activityDetails.name}}" readonly name="activityName">    
+            </div>
 
             <!-- Description -->
-            <label id="descriptionLabel" for="description">Description</label>
-            <textarea id="descriptionText" type="text"  value="{{this.activityDetails.description}}" readonly name="description"></textarea>
+            <div>
+                <label id="descriptionLabel" for="description">Description</label>
+                <textarea id="descriptionText" type="text"  value="{{this.activityDetails.description}}" readonly name="description"></textarea>    
+            </div>
 
             <!-- Comment -->
-            <label id="commentLabel" for="comment">Comment</label>
-            <textarea id="commentText" type="text" value="{{this.activityDetails.comment}}" readonly name="comment"></textarea>
-
+            <div>
+                <label id="commentLabel" for="comment">Comment</label>
+                <textarea id="commentText" type="text" value="{{this.activityDetails.comment}}" readonly name="comment"></textarea>    
+            </div>
+   
             <!-- Behaviour -->
-            <label id="behaviourLabel" for="behavoiurText">Behaviour</label>
-            <input id="behaviourText" type="text" value="{{this.activityDetails.behavior}}" readonly name="behaviour">
+            <div>
+                <label id="behaviourLabel" for="behavoiurText">Behaviour</label>
+                <input id="behaviourText" type="text" value="{{this.activityDetails.behavior}}" readonly name="behaviour">    
+            </div>
 
             <!-- Location -->
-            <label id="locationLabel" for="location">Location</label>
-            <input id="locationText" type="text" value="{{this.activityDetails.location}}" name="location" readonly placeholder="Location"> 
+            <div>
+                <label id="locationLabel" for="location">Location</label>
+                <input id="locationText" type="text" value="{{this.activityDetails.location}}" name="location" readonly placeholder="Location">     
+            </div>
 
             <!-- Boundary -->
-            <label id="boundaryLabel" for="boundary">Boundary</label>
-            <input id="boundaryText" type="text" value="{{this.activityDetails.boundary}}km" name="location" readonly placeholder="Location"> 
-
+            <div>
+                <label id="boundaryLabel" for="boundary">Boundary</label>
+                <input id="boundaryText" type="text" value="{{this.activityDetails.boundary}}km" name="location" readonly placeholder="Location">     
+            </div>
+  
             <!-- Day -->
-            <label id="dayLabel" for="day" >Choose a day</label>
-            <input id="dayText" type="text" value="{{this.activityDetails.day}}" name="day" readonly placeholder="Day"> 
-
+            <div>
+                <label id="dayLabel" for="day" >Choose a day</label>
+                <input id="dayText" type="text" value="{{this.activityDetails.day}}" name="day" readonly placeholder="Day">     
+            </div>
+    
             <!-- Time-slot -->
-            <label id="timeslotLabel" for="times">Selected a timeslot</label>
-            <input id="timeText" type="text" value="{{this.timeslot}}" name="times" readonly placeholder="Times"> 
+            <div>
+                <label id="timeslotLabel" for="times">Selected a timeslot</label>
+                <input id="timeText" type="text" value="{{this.timeslot}}" name="times" readonly placeholder="Times">     
+            </div>
 
             <!-- Budget -->
-            <label id="budgetLabel" for="budget" >Budget</label>
-            <input id="budgetText" type="text" value="{{this.activityDetails.budget}}" name="budget" readonly placeholder="Budget"> 
-
+            <div>
+                <label id="budgetLabel" for="budget" >Budget</label>
+                <input id="budgetText" type="text" value="{{this.activityDetails.budget}}" name="budget" readonly placeholder="Budget">     
+            </div>
 
             <!-- Selected a child -->
-            <label id="childLabel" for="Child" >Select a child</label>
-            <input id="childText" type="text" value="{{this.activityDetails.child}}" name="child" readonly placeholder="Child"> 
+            <div>
+                <label id="childLabel" for="Child" >Select a child</label>
+                <input id="childText" type="text" value="{{this.activityDetails.child}}" name="child" readonly placeholder="Child">     
+            </div>
 
             <!-- Submit -->
             <div class="buttons">

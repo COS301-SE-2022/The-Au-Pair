@@ -158,43 +158,93 @@ textarea:focus{
 
 //Labelling styles
 #activityLabel{
-    left: -145px !important;
+    position: inherit;
+    text-align: left;
+    align-self: left;
+    margin-left: 5px;
+    margin-bottom: -30px;
+    margin-top: 30px;
 }
 
 #descriptionLabel{
-    left: -155px !important;
+    position: inherit;
+    text-align: left;
+    align-self: left;
+    margin-left: 5px;
+    margin-bottom: -30px;
+    margin-top: 30px;
 }
 
 #commentLabel{
-    left: -161px !important;
+    position: inherit;
+    text-align: left;
+    align-self: left;
+    margin-left: 5px;
+    margin-bottom: -30px;
+    margin-top: 30px;
 }
 
 #behaviourLabel{
-    left: -160px !important;
+    position: inherit;
+    text-align: left;
+    align-self: left;
+    margin-left: 5px;
+    margin-bottom: -30px;
+    margin-top: 30px;
 }
 
 #locationLabel{
-    left: -165px !important;
+    position: inherit;
+    text-align: left;
+    align-self: left;
+    margin-left: 5px;
+    margin-bottom: -30px;
+    margin-top: 30px;
 }
 
 #boundaryLabel{
-    left: -165px !important;
+    position: inherit;
+    text-align: left;
+    align-self: left;
+    margin-left: 5px;
+    margin-bottom: -30px;
+    margin-top: 30px;
 }
 
 #dayLabel{
-    left: -149px !important;
+    position: inherit;
+    text-align: left;
+    align-self: left;
+    margin-left: 5px;
+    margin-bottom: -30px;
+    margin-top: 30px;
 }
 
 #timeslotLabel{
-    left: -126px !important;
+    position: inherit;
+    text-align: left;
+    align-self: left;
+    margin-left: 5px;
+    margin-bottom: -30px;
+    margin-top: 30px;
 }
 
 #budgetLabel{
-    left: -169px !important;
+    position: inherit;
+    text-align: left;
+    align-self: left;
+    margin-left: 5px;
+    margin-bottom: -30px;
+    margin-top: 30px;
 }
 
 #childLabel{
-    left: -149px !important;
+    position: inherit;
+    text-align: left;
+    align-self: left;
+    margin-left: 5px;
+    margin-bottom: -30px;
+    margin-top: 30px;
 }
 
 //Images
@@ -228,20 +278,11 @@ textarea:focus{
     z-index: -10;
 }
 
-@media (max-width: 642px) {
-    // .activity-wrapper{
-    //     background-color: #69A88DB2;
-    //     height: 100%;
-    //     width: 100%;
-    //     margin-top: 60px;
-    //     display: block;
-    //     background-color: transparent !important;
-    //     border-radius: 16px;
-    // }
+@media (max-width: 500px) {
 
     .activity-wrapper{
         height: fit-content;
-        min-width: 300px;
+        min-width: 0px;
         margin-top: 60px;
         margin-left: auto;
         margin-right: auto;
@@ -251,13 +292,14 @@ textarea:focus{
     }
 
     .activity-details input{
-        width: 85%;
+        width: 95vw;
     }
     .activity-details textarea{
-        width: 85%;
+        width: 95vw;
     }
 
     .buttons{
+        width: 95vw;
         grid-template-columns: repeat(1, 1fr);
     }
 
@@ -267,49 +309,8 @@ textarea:focus{
         border: 2px solid #69A88D !important;
         margin-left: auto;
         margin-right: auto;
-        width: 85% !important;
+        width: 100% !important;
     }
-
-    #activityLabel{
-        left: -120px !important;
-    }
-    
-    #descriptionLabel{
-        left: -130px !important;
-    }
-    
-    #commentLabel{
-        left: -133px !important;
-    }
-    
-    #behaviourLabel{
-        left: -135px !important;
-    }
-    
-    #boundaryLabel{
-        left: -140px !important;
-    }
-    
-    #locationLabel{
-        left: -140px !important;
-    }
-    
-    #dayLabel{
-        left: -124px !important;
-    }
-    
-    #timeslotLabel{
-        left: -101px !important;
-    }
-    
-    #budgetLabel{
-        left: -144px !important;
-    }
-    
-    #childLabel{
-        left: -124px !important;
-    }
-
 
     h2{
         margin-top: -40px;

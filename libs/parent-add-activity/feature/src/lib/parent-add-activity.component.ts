@@ -233,7 +233,7 @@ export class ParentAddActivityComponent implements OnInit{
     else
     {
       const budget = parseFloat(val.budget);
-      const bound = parseFloat(val.boundary)
+      const bound = parseFloat(val.boundary);
       this.activityDetails.name = val.activityName;
       this.activityDetails.description = val.description;
       this.activityDetails.location = val.location;

@@ -141,21 +141,31 @@ input:focus{
 }
 
 //Label stylings
-#locationLabel{
-    left: -165px !important;
-}
-
-
 #dayLabel{
-    left: -149px !important;
+    position: inherit;
+    text-align: left;
+    align-self: left;
+    margin-left: 5px;
+    margin-bottom: -30px;
+    margin-top: 30px;
 }
 
 #timeslotLabel{
-    left: -126px !important;
+    position: inherit;
+    text-align: left;
+    align-self: left;
+    margin-left: 5px;
+    margin-bottom: -30px;
+    margin-top: 30px;
 }
 
 #childLabel{
-    left: -149px !important;
+    position: inherit;
+    text-align: left;
+    align-self: left;
+    margin-left: 5px;
+    margin-bottom: -30px;
+    margin-top: 30px;
 }
 
 //Errors styling
@@ -199,42 +209,33 @@ input:focus{
     z-index: -10;
 }
 
-@media (max-width: 642px) {
+@media (max-width: 440px) {
 
     input[type=text], select{
-        min-width: 350px !important;
+        min-width: 0 !important;
     }
 
     .activity-details input{
-        width: 90%;
+        width: 90vw;
     }
     .activity-details textarea{
-        width: 90%;
+        width: 90vw;
+    }
+    .activity-details select{
+        width: 90vw;
     }
 
     .buttons{
-        gap: 10px;
-        width: 350px;
+        gap: 5px;
+        width: 90vw;
     }
 
     .addActivity{
-        width: 165px !important;
+        width: 44vw !important;
     }
 
     .return{
-        width: 165px !important;
-    }
-    
-    #dayLabel{
-        left: -115px !important;
-    }
-    
-    #timeslotLabel{
-        left: -98px !important;
-    }
-    
-    #childLabel{
-        left: -115px !important;
+        width: 44vw !important;
     }
 
 }
