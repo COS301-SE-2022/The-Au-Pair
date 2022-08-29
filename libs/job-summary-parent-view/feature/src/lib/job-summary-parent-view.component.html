@@ -1,1 +1,129 @@
-<p>job-summary-parent-view works!</p>
+<the-au-pair-navbar></the-au-pair-navbar>
+<ion-content [fullscreen]="true">
+    <div class = "parent-profile-div">
+        <h1 class='job-summary-title'>Job Summary</h1>
+        <h3 class='profile-name'>Kyle Pottinger</h3>
+            <div class='profile-picture-wrapper'>
+                <img class="profile-picture" src="assets/images/placeholder-profile.jpg" alt="">
+            </div>
+        <div class = 'details-div'>
+            <div class = "small-profile-details-div">
+                <div class="parent-info-small">
+                    <div class="parent-text">Email: </div>
+                    <p class="parent-text-info"></p>
+                </div>
+                <div class="parent-info-small">
+                    <div class="parent-text">Phone: </div>
+                    <p class="parent-text-info"></p>
+                </div>
+            </div>
+            <div class = 'large-profile-details-div'>
+                <div class="parent-info-large">
+                    <div class="parent-text">Suburb: </div>
+                    <p class="parent-text-info"></p>
+                </div>
+                <div class="parent-info-large">
+                    <div class="parent-text">Gender: </div>
+                    <p class="parent-text-info"></p>
+                </div>
+            </div>
+            <button class="change-button" id="change" routerLink="/edit-parent-profile">CHANGE</button>
+        </div>
+        <h3 class='profile-name'>Children</h3>
+        <div class = 'details-div'>
+            <h3 class='children-name'>Danny Azmanov</h3>
+            <div class = "small-profile-details-div">
+                <div class="parent-info-small">
+                    <div class="parent-text">Age: </div>
+                    <p class="parent-text-info"></p>
+                </div>
+            </div>
+            <div class = 'large-profile-details-div'>
+                <div class="parent-info-large">
+                    <div class="parent-text">Allergies: </div>
+                    <p class="parent-text-info"></p>
+                </div>
+                <div class="parent-info-large">
+                    <div class="parent-text">Dietary Requirements: </div>
+                    <p class="parent-text-info"></p>
+                </div>
+            </div>
+            <h3 class='children-name'>Danny Azmanov</h3>
+            <div class = "small-profile-details-div">
+                <div class="parent-info-small">
+                    <div class="parent-text">Age: </div>
+                    <p class="parent-text-info"></p>
+                </div>
+            </div>
+            <div class = 'large-profile-details-div'>
+                <div class="parent-info-large">
+                    <div class="parent-text">Allergies: </div>
+                    <p class="parent-text-info"></p>
+                </div>
+                <div class="parent-info-large">
+                    <div class="parent-text">Dietary Requirements: </div>
+                    <p class="parent-text-info"></p>
+                </div>
+            </div>
+            <h3 class='children-name'>Danny Azmanov</h3>
+            <div class = "small-profile-details-div">
+                <div class="parent-info-small">
+                    <div class="parent-text">Age: </div>
+                    <p class="parent-text-info"></p>
+                </div>
+            </div>
+            <div class = 'large-profile-details-div'>
+                <div class="parent-info-large">
+                    <div class="parent-text">Allergies: </div>
+                    <p class="parent-text-info"></p>
+                </div>
+                <div class="parent-info-large">
+                    <div class="parent-text">Dietary Requirements: </div>
+                    <p class="parent-text-info"></p>
+                </div>
+            </div>
+            <h3 class='children-name'>Danny Azmanov</h3>
+            <div class = "small-profile-details-div">
+                <div class="parent-info-small">
+                    <div class="parent-text">Age: </div>
+                    <p class="parent-text-info"></p>
+                </div>
+            </div>
+            <div class = 'large-profile-details-div'>
+                <div class="parent-info-large">
+                    <div class="parent-text">Allergies: </div>
+                    <p class="parent-text-info"></p>
+                </div>
+                <div class="parent-info-large">
+                    <div class="parent-text">Dietary Requirements: </div>
+                    <p class="parent-text-info"></p>
+                </div>
+            </div>
+            <button class="change-button" id="change" routerLink="/edit-parent-profile">CHANGE</button>
+        </div>
+        <h3 class='profile-name'>Schedule</h3>      
+        <div class="mobile-container">
+            <ion-slides id="schedule-grid-mobile" [options]="{ slidesPerView: 'auto', zoom: false,loop: true, spaceBetween: 16 }">
+            <ion-slide *ngFor="let day of [0,1,2,3,4,5,6]" style="width: 70%; height: 81vh;">
+              <ion-col>
+                <div class="day ion-text-center">
+                  <h2 class="heading">{{ days[day] }}</h2>
+                  <ion-card class="day-card" id="{{ day }}" [class.active] = "day === curDay">
+                    <div *ngFor="let item of childActivities; let l = count">
+                      <div class="card" *ngIf="item.dayofweek === days[day]" >
+                        <ion-row  class="ion-align-items-center .ion-justify-content-between">
+                            <ion-col  class="content">{{ item.childName }}</ion-col>
+                            <ion-col class="content">{{ item.activityName }}</ion-col>
+                            <ion-col class="content">{{ item.time }}</ion-col>
+                        </ion-row>
+                      </div>
+                    </div>
+                  </ion-card> 
+                </div>
+              </ion-col>
+            </ion-slide>
+          </ion-slides>
+        </div>
+    </div>
+
+</ion-content>
