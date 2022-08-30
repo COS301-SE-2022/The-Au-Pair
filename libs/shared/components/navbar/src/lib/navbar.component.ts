@@ -12,14 +12,13 @@ import { Reset } from '../../../../../shared/ngxs/actions';
 export class NavbarComponent implements OnInit
 {
   type = -1;
+  isHome = (this.router.url == "/parent-dashboard" || this.router.url == "/au-pair-dashboard");
 
   constructor(private router : Router,private store: Store, private menController : MenuController){}
 
   ngOnInit() 
   {
-    console.log("Initializing navbar")
     this.type = this.store.snapshot().user.type;
-    console.log(this.type);
   }
 
   dash()
@@ -58,28 +57,11 @@ export class NavbarComponent implements OnInit
     }
   }
 
-  back()
-  {
-    if(this.type == 0)
-    {
-      this.router.navigate(['/admin-console']);
-    }
-    else if(this.type == 1)
-    {
-      this.router.navigate(['/parent-dashboard']);
-    }
-    else if(this.type == 2)
-    {
-      this.router.navigate(['/au-pair-dashboard']);
-    }
-  }
-
   menuOpen()
   {
     console.log("menu open");
     console.log(this.menController.isEnabled());
     this.menController.open('start')
-    //this.menController.toggle('start');
   }
 
   menuClose()
@@ -102,7 +84,17 @@ export class NavbarComponent implements OnInit
   }
 
   explore(){
-    if (this.type == 1){
+    const apID = this.store.snapshot().user.auPair;
+
+    if (this.store.snapshot().user.children.length < 1){
+      this.openToast('You need to have children added to your profile in order to hire an Au Pair');
+    }
+    else if(apID == "")
+    {
+      this.openToast('You already have an Au Pair employed');
+    }
+    else
+    {
       this.router.navigate(['/explore']);
     }
   }

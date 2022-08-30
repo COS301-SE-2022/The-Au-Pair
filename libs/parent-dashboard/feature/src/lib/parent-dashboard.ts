@@ -6,15 +6,14 @@ import { ModalController, ToastController } from '@ionic/angular';
 import { Store } from '@ngxs/store';
 import { Router } from '@angular/router';
 import { AlertController } from '@ionic/angular';
-import { Handler } from 'leaflet';
+import { SetAuPair, SetChildren } from '../../../../shared/ngxs/actions';
 
 @Component({
   selector: 'the-au-pair-parent-dashboard',
   templateUrl: 'parent-dashboard.html',
   styleUrls: ['parent-dashboard.scss'],
 })
-export class ParentDashboardComponent implements OnInit{
-
+export class ParentDashboardComponent implements OnInit{ 
   children: Child[] = [];
   parentID = "";
 
@@ -131,6 +130,12 @@ export class ParentDashboardComponent implements OnInit{
           this.parentDetails.children = res.children;
           this.parentDetails.medID = res.medID;
           this.parentDetails.auPair = res.auPair;
+
+          //setting the state
+          this.store.dispatch(new SetChildren(res.children));
+          this.store.dispatch(new SetAuPair(res.auPair));
+          console.log("Setting store for parent");
+          console.log( this.store.snapshot())
       },
       error => {
         console.log("Error has occured with API: " + error);

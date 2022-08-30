@@ -1,11 +1,13 @@
 import { Action, Selector, State, StateContext } from '@ngxs/store';
-import { SetId , SetType, SetFcmToken, SetName, Reset } from './actions';
+import { SetId , SetType, SetFcmToken, SetName, Reset, SetChildren, SetAuPair } from './actions';
 import { Injectable } from '@angular/core';
 import { map, Observable, of } from 'rxjs';
 export interface AppStateModel{
     id: string;
     name: string;
     type: number;
+    children: [];
+    auPair: string;
     fcmToken: string;
 }
 
@@ -15,6 +17,8 @@ export interface AppStateModel{
         id: '',
         type: -1,
         name: '',
+        children: [],
+        auPair: '',
         fcmToken: ''
     },
 })
@@ -71,5 +75,25 @@ export class AppState{
             return currentState;
         })
         );
+    }
+
+    @Action(SetChildren)
+    setChildren({ patchState }: StateContext<AppStateModel>, { payload }: SetChildren) {
+        patchState({children: payload});
+    }
+    
+    @Selector()
+    static getChildren(state : AppStateModel) {
+        return state.children;
+    }
+
+    @Action(SetAuPair)
+    setAuPair({ patchState }: StateContext<AppStateModel>, { payload }: SetAuPair) {
+        patchState({auPair: payload});
+    }
+    
+    @Selector()
+    static getAuPair(state : AppStateModel) {
+        return state.auPair;
     }
 }

@@ -3,7 +3,6 @@
     <div class="page-wrapper">
         <div class='parent-dashboard-div'>
             <p class='welcome-heading'>Welcome {{this.userDetails.fname}}</p>
-
             <div class="au-pair-div-wrapper">
                 <div class='au-pair-name' *ngIf='this.parentDetails.auPair !== ""; else noaupair'>Au Pair: {{this.auPairDetails.fname}} {{this.auPairDetails.sname}}
                     <a href = 'tel:{{this.auPairDetails.number}}'><ion-icon name="call" class = 'call-icon'></ion-icon></a>

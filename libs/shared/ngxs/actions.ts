@@ -21,3 +21,13 @@ export class SetFcmToken{
 export class Reset{
     static readonly type = '[AppState] Reset Store';
 }
+
+export class SetChildren{
+    static readonly type = '[Parent] set children';
+    constructor(public payload: []) {}
+}
+
+export class SetAuPair{
+    static readonly type = '[Parent] set auPair';
+    constructor(public payload: string) {}
+}
