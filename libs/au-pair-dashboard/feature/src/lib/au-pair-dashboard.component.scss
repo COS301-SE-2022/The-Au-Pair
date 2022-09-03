@@ -26,6 +26,15 @@
     color: white;   
 }
 
+.terminate-contract{
+    padding-left: 10px;
+    float: right;
+    width: 35px;
+    height: 35px;
+    color: var(--ion-color-danger);
+    cursor: pointer;   
+}
+
 .au-pair-name {
     background-color: #176560;
     color: white;

@@ -66,7 +66,8 @@ export class TrackAuPairComponent implements OnInit
     bio: "",
     experience: "",
     currentLong: 0.0,
-    currentLat : 0.0
+    currentLat : 0.0,
+    terminateDate: "",
   }
 
   auPairName = "";

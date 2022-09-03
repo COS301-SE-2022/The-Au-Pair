@@ -30,8 +30,10 @@ public class auPair
   private double currentLong;
   @Field("currentLat")
   private double currentLat;
+  @Field("terminateDate")
+  private String terminateDate;
 
-  public auPair(String id, double rating, double payRate, double distTraveled, double costIncurred, boolean onShift, String employer, String bio, String experience, double currentLong, double currentLat )
+  public auPair(String id, double rating, double payRate, double distTraveled, double costIncurred, boolean onShift, String employer, String bio, String experience, double currentLong, double currentLat, String terminateDate )
   {
     this.id = id;
     this.rating = rating;
@@ -44,6 +46,7 @@ public class auPair
     this.experience = experience;
     this.currentLong = currentLong;
     this.currentLat = currentLat;
+    this.terminateDate = terminateDate;
   }
 
   public String getId()
@@ -156,6 +159,15 @@ public class auPair
     this.currentLat = newLat;
   }
 
+  public String getTerminateDate()
+  {
+    return this.terminateDate;
+  }
+
+  public void setTerminateDate(String td)
+  {
+    this.terminateDate = td;
+  }
 
   @Override
   public String toString()
