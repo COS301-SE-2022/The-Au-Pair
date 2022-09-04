@@ -1,5 +1,5 @@
 ion-content{
-    --ion-background-color:#EFEFEF !important;
+    --ion-background-color: var(--ion-background-color) !important;
 }
 
 #nav{
