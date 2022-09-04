@@ -8,6 +8,16 @@
     margin-top: 0px; 
 }
 
+.parent-name {
+    font-size: 2.4vw;
+    padding-top: 2%;
+    margin-bottom: 2%;
+    color: black;
+    text-align: center;
+    font-family: Roboto;
+    margin-top: 0px;
+}
+
 .profile-name {
     font-size: 2.4vw;
     padding-top: 2%;
@@ -136,6 +146,65 @@
     margin: auto;
     display: block;
     margin-top: 25px;
+}
+
+.change-button-schedule{
+    padding: 10px 22px;
+    gap: 10px;
+    border: 2px solid var(--ion-color-secondary);
+    border-radius: 10px;
+    background-color: #69A88DB2;
+    margin: auto;
+    display: block;
+    margin-top: 25px;
+}
+
+.hire-button{
+    padding: 10px 22px;
+    gap: 10px;
+    border: 2px solid var(--ion-color-secondary);
+    border-radius: 10px;
+    background-color: #69A88DB2;
+    margin: auto;
+    display: block;
+    margin-top: 25px;
+}
+
+#active-2{
+    position: absolute;
+    width: 375px;
+    height: 348px;
+    left: 276px;
+    top: 757px;
+    opacity: 0.04;
+    z-index: -10;
+}
+
+#active{
+    position: absolute;
+    width: 330px;
+    height: 350px;
+    left: 1313px;
+    top: 281px;
+    opacity: 0.04;
+    z-index: -10;
+}
+
+#lifestyles{
+    position: absolute;
+    width: 344px;
+    height: 325px;
+    left: -79px;
+    top: -5px;
+    opacity: 0.04;
+    z-index: -10;
+}
+
+.terms-container{
+    margin-left: 20px;
+    margin-right: 20px;
+    color: black;
+    font-size: 15px;
 }
 
 @media (max-width: 642px) {
