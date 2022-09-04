@@ -72,6 +72,10 @@ export class API{
     return this.http.post('http://localhost:8080/updateChild',child);
   }
 
+  removeChild(id: String): Observable<any> {
+    return this.http.post('http://localhost:8080/removeChild', id);
+  }
+
   getDateMinutes(id : string, date : string): Observable<any> {
     var out = {
       "id" : id,
