@@ -62,9 +62,8 @@ describe('AddChildComponent', () => {
       aupair: ''
     };
 
-    component.allChildren = [expectedValue];
+    component.allChildren = [expectedValue];  
     
-
     jest.spyOn(component,"getChildValues");
 
     await component.getChildValues(populatedForm);

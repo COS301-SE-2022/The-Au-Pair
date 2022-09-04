@@ -62,7 +62,7 @@ h2{
 .activity-details input{
     width: 411px;
     height: 62px;
-    background: #F9F9F9;
+    background: var(--ion-color-light-white);
     box-shadow: 1px 2px 5px rgba(0, 0, 0, 0.13);
     border-style: none;
     border-radius: 10px;
@@ -73,7 +73,7 @@ h2{
     resize: none;
     width: 411px;
     height: 169px;
-    background: #F9F9F9;
+    background: var(--ion-color-light-white);
     box-shadow: 1px 2px 5px rgba(0, 0, 0, 0.13);
     border-style: none;
     border-radius: 10px;
@@ -288,7 +288,6 @@ textarea:focus{
         margin-right: auto;
         background-color: transparent;
         border-radius: 16px;
-        // padding-bottom: 7%;
     }
 
     .activity-details input{
@@ -304,9 +303,9 @@ textarea:focus{
     }
 
     .cancel{
-        color: #69A88D;
+        color: var(--ion-color-primary);
         background-color: transparent !important;
-        border: 2px solid #69A88D !important;
+        border: 2px solid var(--ion-color-primary) !important;
         margin-left: auto;
         margin-right: auto;
         width: 100% !important;
