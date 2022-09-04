@@ -91,6 +91,10 @@ ion-title{
     z-index: 1000;
 }
 
+.menu-item.greyed{
+    opacity: 0.4;
+}
+
 .menu-item:hover{
     cursor: pointer;
 }

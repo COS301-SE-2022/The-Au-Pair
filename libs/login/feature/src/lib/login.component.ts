@@ -157,7 +157,7 @@ export class LoginComponent implements OnInit {
         if(type == 1)
         {
           this.router.navigate(['/parent-dashboard']).then(() => {
-            document.location.reload()
+            //document.location.reload()
           });
         }
         else if(type == 2)
