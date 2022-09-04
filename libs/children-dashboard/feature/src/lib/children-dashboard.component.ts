@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Child } from '../../../../shared/interfaces/interfaces';
+import { Child, Parent } from '../../../../shared/interfaces/interfaces';
 import { API } from '../../../../shared/api/api.service';
 import { Router } from '@angular/router';
 import { Store } from '@ngxs/store';
@@ -15,6 +15,12 @@ export class ChildrenDashboardComponent implements OnInit
   //Parent and children information
   parentID = "";
   children: Child[] = []
+  parentDetails: Parent = {
+    id: "",
+    children: [],
+    medID: "",
+    auPair: "",
+  }
 
   constructor(private serv: API, public router: Router, private store: Store, public toastCtrl: ToastController, private alertController: AlertController) {}
 
@@ -22,6 +28,7 @@ export class ChildrenDashboardComponent implements OnInit
   {
     this.parentID = this.store.snapshot().user.id;
     this.getChildren();
+    this.getParent();
   }
 
   async getChildren()
@@ -86,17 +93,31 @@ export class ChildrenDashboardComponent implements OnInit
     await alert.present();
   }
 
-  removeChild(child: Child)
+  async removeChild(child: Child)
   {
-    console.log("Deleting child");
+    //Removing the child from the parent's array of child in their document
+    await this.removeChildFromParent(child.id);
 
     //Service call to delete child
-    this.serv.removeChild(child.id).subscribe(
-      res=>{
-        // location.reload();
-        console.log("The response is:" + res); 
-        location.reload();
-        this.openToast(child.fname + " removed successfully!", "primary");
+    await this.serv.removeChild(child.id).toPromise().then(res => 
+      {
+         // location.reload();
+         console.log("The response is:" + res); 
+         this.openToast(child.fname + " removed successfully!", "primary");
+         return res;
+      }).catch(err => 
+        {
+          console.log(err);
+        }
+      );
+    
+  }
+
+  getParent()
+  {
+    this.serv.getParent(this.parentID).subscribe(
+      res=>{        
+        this.parentDetails = res;
         return res;
       },
       error=>{
@@ -104,7 +125,27 @@ export class ChildrenDashboardComponent implements OnInit
         return error;
       }
     )
-    
+  }
+
+  async removeChildFromParent(id : string)
+  {
+    for (let i = 0; i < this.parentDetails.children.length; i++) 
+    {
+      const childID = this.parentDetails.children[i];
+      if(childID === id)
+      {
+        this.parentDetails.children.splice(i,1);
+      }
+    }
+
+    await this.serv.editParent(this.parentDetails).toPromise().then(res => 
+      {
+         console.log("The reponse is: ", res);   
+      }).catch(err => 
+        {
+          console.log(err);
+        }
+      );
   }
   
 

@@ -45,6 +45,8 @@ export class AddChildComponent implements OnInit
   //Function to retrieve the child's details
   async getChildValues(val: any)
   {
+    console.log("Children: ", this.allChildren);
+    
     //Max number of children for each user is 4
     if(this.allChildren.length < 4)
     {
