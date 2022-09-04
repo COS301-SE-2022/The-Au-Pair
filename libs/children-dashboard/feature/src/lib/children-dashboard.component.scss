@@ -76,14 +76,26 @@ ion-card {
 
 .edit{
     cursor: pointer;
-    height: 100%;
-    top: 8px;
+    top: 10px;
     align-items: center;
     position: relative;
     display: inline-block;
     align-items: center;
     color: white;
 }
+
+
+.remove-child{
+    cursor: pointer;
+    top: 10px;
+    margin-left: 40px;
+    align-items: center;
+    position: relative;
+    display: inline-block;
+    align-items: center;
+    color: var(--ion-color-danger);
+}
+
 
 .icon-edit{
     top: 12px;
