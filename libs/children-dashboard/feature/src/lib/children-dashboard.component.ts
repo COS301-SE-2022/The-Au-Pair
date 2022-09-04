@@ -3,8 +3,7 @@ import { Child } from '../../../../shared/interfaces/interfaces';
 import { API } from '../../../../shared/api/api.service';
 import { Router } from '@angular/router';
 import { Store } from '@ngxs/store';
-import { ToastController } from '@ionic/angular';
-import { Color } from '@ionic/core';
+import { ToastController, AlertController } from '@ionic/angular';
 
 @Component({
   selector: 'the-au-pair-children-dashboard',
@@ -17,7 +16,7 @@ export class ChildrenDashboardComponent implements OnInit
   parentID = "";
   children: Child[] = []
 
-  constructor(private serv: API, public router: Router, private store: Store, public toastCtrl: ToastController) {}
+  constructor(private serv: API, public router: Router, private store: Store, public toastCtrl: ToastController, private alertController: AlertController) {}
 
   ngOnInit(): void
   {
@@ -65,6 +64,34 @@ export class ChildrenDashboardComponent implements OnInit
     });
     await toast.present();
     return true;
+  }
+
+  async presentAlert(child: Child) {
+    const alert = await this.alertController.create({
+      header: 'Are you sure you want to delete ' + child.fname + '?',
+      cssClass: 'custom-alert',
+      buttons: [
+        {
+          text: 'No',
+          cssClass: 'alert-button-cancel',
+        },
+        {
+          text: 'Yes',
+          cssClass: 'alert-button-confirm',
+          handler: () => { this.removeChild(child); }
+        }
+      ]
+    });
+
+    await alert.present();
+  }
+
+  removeChild(child: Child)
+  {
+    console.log("Deleting child");
+
+    //Service call to delete child
+    
   }
   
 

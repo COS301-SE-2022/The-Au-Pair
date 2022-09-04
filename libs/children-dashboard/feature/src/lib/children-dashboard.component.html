@@ -11,7 +11,7 @@
                 <div class="edit-details">
                     <p class='edit' (click)="navigateEdit(child)">Edit details</p>
                     <ion-col><ion-icon class="icon-edit" name="pencil-outline" (click)="navigateEdit(child)"></ion-icon></ion-col>
-                    <ion-col><ion-icon class="remove-child" name="person-remove" ></ion-icon></ion-col>
+                    <ion-col><ion-icon class="remove-child" name="person-remove" (click)="presentAlert(child)"></ion-icon></ion-col>
                 </div>
             </ion-card>
         </div>
