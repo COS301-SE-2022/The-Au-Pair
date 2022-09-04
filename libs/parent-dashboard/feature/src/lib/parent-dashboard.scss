@@ -70,7 +70,7 @@ ion-card {
 }
 
 .child-name {
-    background-color: #69A88D;
+    background-color: var(--ion-color-primary);
     color: white;
     margin: 0;
     height: 100%;
@@ -147,7 +147,7 @@ ion-card {
     align-items: center;
     justify-content: center;
     display: flex;
-    background-color: #69A88D;
+    background-color: var(--ion-color-primary);
     border-radius: 0px 0px 16px 16px;
 }
 

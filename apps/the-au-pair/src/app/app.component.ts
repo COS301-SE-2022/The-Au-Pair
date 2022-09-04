@@ -221,8 +221,9 @@ export class AppComponent implements OnInit {
           for(let i = 1; i < filteredActs.length; i++){
             if(!this.activityHasFinished(filteredActs[i])){
               this.upcomingActivity = filteredActs[i];
-              break;
               updated = true;
+              break;
+              
             }
           }
 
