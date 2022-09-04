@@ -36,4 +36,11 @@ public class ChildController
   {
     this.cs.updateChild(c);
   }
+
+  @PostMapping("/removeChild")
+  @CrossOrigin(origins = "http://localhost:4200")
+  public void removeChild(@RequestBody String id)
+  {
+    this.cs.removeChild(id);
+  }
 }

@@ -91,6 +91,19 @@ export class ChildrenDashboardComponent implements OnInit
     console.log("Deleting child");
 
     //Service call to delete child
+    this.serv.removeChild(child.id).subscribe(
+      res=>{
+        // location.reload();
+        console.log("The response is:" + res); 
+        location.reload();
+        this.openToast(child.fname + " removed successfully!", "primary");
+        return res;
+      },
+      error=>{
+        console.log("Error has occured with API: " + error);
+        return error;
+      }
+    )
     
   }
   
