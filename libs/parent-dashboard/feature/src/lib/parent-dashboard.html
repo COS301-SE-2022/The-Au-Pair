@@ -49,10 +49,6 @@
                         <ion-icon name="people-circle-outline" class='action-icon '></ion-icon>
                         <div class='action-tag '>Children</div>
                     </div>
-                    <div class='action' id="childDash" routerLink="/job-summary-parent-view">
-                        <ion-icon name="document-text-outline" class='action-icon '></ion-icon>
-                        <div class='action-tag '>Job Summary</div>
-                    </div>
                     <div *ngIf="this.parentDetails.auPair === ''" style="opacity : 0.4;" class='action' id="auPairCost" (click)="checkHasEmployer()">
                         <ion-icon name="cash-outline" class='action-icon '></ion-icon>
                         <div class='action-tag '>Au Pair Cost</div>
