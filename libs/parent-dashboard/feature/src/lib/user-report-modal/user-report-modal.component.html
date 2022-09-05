@@ -1,0 +1,25 @@
+<div class="modal-body">
+    <div class="heading">
+        <ion-row>
+            <ion-col size="10" offset = "1" class="ion-text-center act">Report Au Pair</ion-col>
+            <ion-col size="1" class="ion-text-center"><ion-icon class="icon close" name="close-circle-outline" (click)="closeModal()"></ion-icon></ion-col>
+        </ion-row>
+    </div>
+    <div class="content">
+        <form id="reportForm" #reportForm="ngForm"  (ngSubmit)="getReport(reportForm.value)">
+            <ion-row class="slider-row">
+                <ion-col size="4" class="ion-text-center">
+                    Reason for Report:
+                </ion-col>
+                <ion-col size="8" class="ion-text-start">
+                    <textarea name="desc" class="descInp" ngModel></textarea>
+                </ion-col>  
+            </ion-row>
+            <ion-row class="submit-row">
+                <ion-col size="12" class="ion-text-center">
+                    <input type="submit" form="reportForm" type="submit" class="submit" value="Report Au Pair"/>
+                </ion-col>
+            </ion-row> 
+        </form>    
+    </div>
+</div>

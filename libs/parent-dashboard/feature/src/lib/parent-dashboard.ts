@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { API } from '../../../../shared/api/api.service';
 import { auPair, Child, Parent, User } from '../../../../shared/interfaces/interfaces';
 import { AuPairRatingModalComponent } from './au-pair-rating-modal/au-pair-rating-modal.component';
+import { UserReportModalComponent } from './user-report-modal/user-report-modal.component';
 import { ModalController, ToastController } from '@ionic/angular';
 import { Store } from '@ngxs/store';
 import { Router } from '@angular/router';
@@ -100,6 +101,16 @@ export class ParentDashboardComponent implements OnInit{
   async openModal(actId : string) {
     const modal = await this.modalCtrl.create({
       component: AuPairRatingModalComponent,
+      componentProps :{
+        activityId : actId
+      }
+    });
+    await modal.present();
+  }
+
+  async openReportModal(actId : string) {
+    const modal = await this.modalCtrl.create({
+      component: UserReportModalComponent,
       componentProps :{
         activityId : actId
       }

@@ -6,6 +6,7 @@ import { IonicModule } from '@ionic/angular';
 import { NavbarModule } from '@the-au-pair/shared/components/navbar';
 import { API } from '../../../../shared/api/api.service';
 import { AuPairRatingModalComponent } from './au-pair-rating-modal/au-pair-rating-modal.component';
+import { UserReportModalComponent } from './user-report-modal/user-report-modal.component';
 import { FormsModule } from '@angular/forms';
 
 @NgModule({
@@ -16,7 +17,7 @@ import { FormsModule } from '@angular/forms';
     NavbarModule,
     FormsModule,
   ],
-  declarations: [ParentDashboardComponent, AuPairRatingModalComponent],
+  declarations: [ParentDashboardComponent, AuPairRatingModalComponent, UserReportModalComponent],
   providers: [API],
   entryComponents: [AuPairRatingModalComponent],
 })
