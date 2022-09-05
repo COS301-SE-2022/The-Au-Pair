@@ -177,6 +177,11 @@ const routes: Routes = [
     import('@the-au-pair/job-summary-parent-view/feature').then((m) => m.JobSummaryParentViewFeatureModule),
   },
   {
+    path: 'job-summary-au-pair-view',
+    loadChildren: () =>
+    import('@the-au-pair/job-summary-au-pair-view/feature').then((m) => m.JobSummaryAuPairViewFeatureModule),
+  },
+  {
     path: '**',
     redirectTo: 'login-page',
   },

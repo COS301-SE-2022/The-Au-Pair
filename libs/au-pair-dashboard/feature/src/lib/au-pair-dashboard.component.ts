@@ -224,6 +224,16 @@ export class AuPairDashboardComponent implements OnInit {
     }
   }
 
+  async checkHasEmployerSummary(){
+    if (this.employerId !== ''){
+      this.router.navigate(['/job-summary-au-pair-view']);
+    }
+    else
+    {
+      this.openToast('You need to be employed to view your job summary');
+    }
+  }
+
   async presentAlert() {
     const alert = await this.alertController.create({
       header: 'Are you sure you want to resign? (You will still be employed for 2 weeks or until the parent terminates the contract)',

@@ -53,6 +53,9 @@
       "@the-au-pair/hire-requests/feature": [
         "libs/hire-requests/feature/src/index.ts"
       ],
+      "@the-au-pair/job-summary-au-pair-view/feature": [
+        "libs/job-summary-au-pair-view/feature/src/index.ts"
+      ],
       "@the-au-pair/job-summary-parent-view/feature": [
         "libs/job-summary-parent-view/feature/src/index.ts"
       ],
