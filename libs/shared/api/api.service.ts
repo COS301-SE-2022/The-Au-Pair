@@ -24,6 +24,10 @@ export class API{
     return this.http.post('http://localhost:8080/removeActivity', id);
   }
 
+  removeManyActivities(activities : Activity[]): Observable<any> {
+    return this.http.post('http://localhost:8080/removeManyActivities', activities);
+  }
+
   getSchedule(id : string): Observable<any> {
     return this.http.post('http://localhost:8080/getSchedule',id);
   }

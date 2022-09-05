@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Child, Parent } from '../../../../shared/interfaces/interfaces';
+import { Activity, Child, Parent } from '../../../../shared/interfaces/interfaces';
 import { API } from '../../../../shared/api/api.service';
 import { Router } from '@angular/router';
 import { Store } from '@ngxs/store';
@@ -21,6 +21,7 @@ export class ChildrenDashboardComponent implements OnInit
     medID: "",
     auPair: "",
   }
+  activities: Activity[] = [];
 
   constructor(private serv: API, public router: Router, private store: Store, public toastCtrl: ToastController, private alertController: AlertController) {}
 
@@ -110,6 +111,19 @@ export class ChildrenDashboardComponent implements OnInit
           console.log(err);
         }
       );
+
+    //Remove the activities associated with the child
+    await this.getActivities(child.id);
+    await this.serv.removeManyActivities(this.activities).toPromise().then(
+      res=>{
+        console.log("The response is: ", res);
+        return res;
+      }).catch(
+      error=>{
+        console.log("Error has occured with API: ", error);
+        return error;
+      }
+    )
     
   }
 
@@ -125,6 +139,18 @@ export class ChildrenDashboardComponent implements OnInit
         return error;
       }
     )
+  }
+
+  async getActivities(childID : string)
+  {
+    await this.serv.getSchedule(childID).toPromise().then(res=>
+      {
+          this.activities = res;
+      }).catch(
+          error=>{
+            console.log("Error has occured with API: " + error);
+        }
+      );
   }
 
   async removeChildFromParent(id : string)

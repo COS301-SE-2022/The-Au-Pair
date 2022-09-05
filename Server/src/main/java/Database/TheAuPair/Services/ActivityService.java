@@ -51,6 +51,14 @@ public class ActivityService
     ar.deleteById(id);
   }
 
+  public void removeManyActivities(Activity[] activities)
+  {
+    for (int i = 0; i < activities.length; i++) 
+    {
+      this.ar.deleteById(activities[i].getId());
+    }
+  }
+
   public List<Activity> getSchedule(String id)
   {
     List<Activity> a =  ar.findAllByChild(id, Sort.by(Sort.Direction.ASC, "timeStart"));
