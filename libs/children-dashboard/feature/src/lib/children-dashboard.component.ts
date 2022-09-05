@@ -102,7 +102,7 @@ export class ChildrenDashboardComponent implements OnInit
     await this.serv.removeChild(child.id).toPromise().then(res => 
       {
          // location.reload();
-         console.log("The response is:" + res); 
+         console.log("The response is:", res); 
          this.openToast(child.fname + " removed successfully!", "primary");
          return res;
       }).catch(err => 
@@ -121,7 +121,7 @@ export class ChildrenDashboardComponent implements OnInit
         return res;
       },
       error=>{
-        console.log("Error has occured with API: " + error);
+        console.log("Error has occured with API: ", error);
         return error;
       }
     )

@@ -20,6 +20,10 @@ export class API{
     return this.http.post('http://localhost:8080/addActivity',activity);
   }
 
+  removeActivity(id : String): Observable<any> {
+    return this.http.post('http://localhost:8080/removeActivity', id);
+  }
+
   getSchedule(id : string): Observable<any> {
     return this.http.post('http://localhost:8080/getSchedule',id);
   }

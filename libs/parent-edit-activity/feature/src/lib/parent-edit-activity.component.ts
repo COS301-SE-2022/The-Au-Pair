@@ -302,6 +302,11 @@ export class ParentEditActivityComponent implements OnInit {
     });
   }
 
+  sayHi()
+  {
+    console.log("Hi");
+  }
+
   //Pop-up if activity is successfully updates
   async openToast()
   {
@@ -400,8 +405,16 @@ export class ParentEditActivityComponent implements OnInit {
 
   removeActivity()
   {
-    console.log("Removing activity.");
-    
+    this.serv.removeActivity(this.activityDetails.id).toPromise().then(
+      res=>{
+        console.log("The response is:", res);
+        this.returnToSchedule();
+      },
+      error=>{
+        console.log("Error has occured with API: ", error);
+        return error;
+      }
+    ); 
   }
   //------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 }
