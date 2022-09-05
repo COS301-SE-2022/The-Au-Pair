@@ -1,11 +1,10 @@
 import { TestBed } from '@angular/core/testing';
 import { Router, RouterModule } from '@angular/router';
-import { StoredCallback } from '@capacitor/core/types/definitions-internal';
 import { NgxsModule, Store } from '@ngxs/store';
 import { AppState } from '../../../ngxs/state';
 import { AuthGuard } from './auth-guard';
 import { APP_BASE_HREF } from '@angular/common';
-import { SetLoggedIn } from 'libs/shared/ngxs/actions';
+import { SetLoggedIn } from '../../../ngxs/actions';
 
 describe('AuthGuard', () => {
   let guard: AuthGuard;
