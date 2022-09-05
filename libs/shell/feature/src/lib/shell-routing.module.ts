@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
+import { AuthGuard } from "../../../../shared/services/auth/auth-guard";
 
 const routes: Routes = [
   {
@@ -8,6 +9,7 @@ const routes: Routes = [
       import('@the-au-pair/schedule/feature').then(
         (m) => m.ScheduleFeatureModule
       ),
+    canLoad : [AuthGuard]
   },
   {
     path: '',
