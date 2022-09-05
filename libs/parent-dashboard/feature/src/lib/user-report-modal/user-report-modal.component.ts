@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ModalController, NavParams, ToastController } from '@ionic/angular';
-import { auPair } from '../../../../../shared/interfaces/interfaces';
+import { Report } from '../../../../../shared/interfaces/interfaces';
 import { API } from '../../../../../shared/api/api.service';
 import { Store } from '@ngxs/store';
 
@@ -12,8 +12,15 @@ import { Store } from '@ngxs/store';
 export class UserReportModalComponent implements OnInit {
   parentID = "";
   auPairId = "";
+
+    reportDetails: Report = {
+    id: "",
+    issuerId: "",
+    auPairId: "",
+    desc: ""
+  }
+
   public navParams = new NavParams;
-  description! : string;
   
   constructor(private serv: API, private modalCtrl : ModalController ,public toastCtrl: ToastController, private store: Store) {}
 
@@ -35,8 +42,24 @@ export class UserReportModalComponent implements OnInit {
     this.modalCtrl.dismiss();
   }
 
-  getReport(formData : any){
-    this.description = formData.desc;
+  async reportUser(formData : any){ 
+    this.reportDetails.auPairId = this.auPairId;
+    this.reportDetails.issuerId = this.parentID;
+    this.reportDetails.desc = formData.desc;
+
+    await this.serv.addReport(this.reportDetails)
+    .toPromise()
+      .then( 
+        res=>{
+          this.closeModal();
+          this.openToast();
+          return res;
+      },
+      error => {
+        console.log("Error has occured with API: " + error);
+        return error;
+      }
+    )
   }
 
   async openToast()
