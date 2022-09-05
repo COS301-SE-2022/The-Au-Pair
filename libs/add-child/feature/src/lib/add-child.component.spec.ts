@@ -62,6 +62,8 @@ describe('AddChildComponent', () => {
       aupair: ''
     };
 
+    component.allChildren = [expectedValue];  
+    
     jest.spyOn(component,"getChildValues");
 
     await component.getChildValues(populatedForm);
@@ -70,7 +72,18 @@ describe('AddChildComponent', () => {
   })
 
   it('should call addChild function if the form contains valid details', async ()=>{
+    const tempChild: Child = {
+      id: "",
+      fname: "",
+      sname: "",
+      allergies: "",
+      diet: "",
+      parent: "",
+      aupair: ''
+    };
+
     jest.spyOn(component,"addChild");
+    component.allChildren = [tempChild];
     await component.getChildValues(populatedForm);
     expect(component.addChild).toHaveBeenCalled();
   })
@@ -89,6 +102,8 @@ describe('AddChildComponent', () => {
       aupair: ''
     };
 
+    component.allChildren = [expectedValue];
+
     jest.spyOn(component,"getChildValues");
 
     await component.getChildValues(invalidSA_ID);
@@ -106,6 +121,8 @@ describe('AddChildComponent', () => {
       parent: "",
       aupair: ''
     };
+
+    component.allChildren = [expectedValue];
 
     jest.spyOn(component,"getChildValues");
 
@@ -126,6 +143,8 @@ describe('AddChildComponent', () => {
       aupair: ''
     };
 
+    component.allChildren = [expectedValue];
+
     jest.spyOn(component,"getChildValues");
 
     await component.getChildValues(emptyFirstName);
@@ -143,6 +162,8 @@ describe('AddChildComponent', () => {
       parent: "",
       aupair: ''
     };
+
+    component.allChildren = [expectedValue];
 
     jest.spyOn(component,"getChildValues");
 
@@ -163,6 +184,8 @@ describe('AddChildComponent', () => {
       aupair: ''
     };
 
+    component.allChildren = [expectedValue];
+
     jest.spyOn(component,"getChildValues");
 
     await component.getChildValues(emptyAllergies);
@@ -182,6 +205,7 @@ describe('AddChildComponent', () => {
       aupair: ''
     };
 
+    component.allChildren = [expectedValue];
     jest.spyOn(component,"getChildValues");
     await component.getChildValues(emptyDiet);
     expect(component.childDetails).toEqual(expectedValue);

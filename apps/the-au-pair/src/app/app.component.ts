@@ -44,7 +44,8 @@ export class AppComponent implements OnInit {
     bio: "",
     experience: "",
     currentLong: 0.0,
-    currentLat: 0.0
+    currentLat: 0.0,
+    terminateDate: "",
   }
 
   notificationToSend: Notification = {
@@ -220,8 +221,9 @@ export class AppComponent implements OnInit {
           for(let i = 1; i < filteredActs.length; i++){
             if(!this.activityHasFinished(filteredActs[i])){
               this.upcomingActivity = filteredActs[i];
-              break;
               updated = true;
+              break;
+              
             }
           }
 

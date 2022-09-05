@@ -5,34 +5,44 @@
         <form #childDetailsForm="ngForm" (ngSubmit)="getChildValues(childDetailsForm.value)" class = "form-details">
 
           <!-- Child ID -->
-          <label id="labelID" for="childID">Child ID</label>
-          <input type="text" ngModel name="childID"placeholder="Child ID">
-          <p id="childIDError" class="error" style="display: none;">Error in field</p>
+          <div>
+            <label id="labelID" for="childID">Child ID</label>
+            <input type="text" ngModel name="childID"placeholder="Child ID">
+            <p id="childIDError" class="error" style="display: none;">Error in field</p>  
+          </div>
 
           <!-- Child First Name -->
-          <label id="firstName" for="childName">Child Name</label>
-          <input type="text" ngModel name="childName"placeholder="Child Name">
-          <p id="childNameError" class="error" style="display: none;">Error in field</p>
+          <div>
+            <label id="firstName" for="childName">Child Name</label>
+            <input type="text" ngModel name="childName"placeholder="Child Name">
+            <p id="childNameError" class="error" style="display: none;">Error in field</p>
+          </div>
 
           <!-- Surname -->
-          <label id="surname" for="surname">Surname</label>
-          <input type="text" ngModel name="surname" placeholder="Surname"> 
-          <p id="surnameError" class="error" style="display: none;">Error in field</p>
+          <div>
+            <label id="surname" for="surname">Surname</label>
+            <input type="text" ngModel name="surname" placeholder="Surname"> 
+            <p id="surnameError" class="error" style="display: none;">Error in field</p>
+          </div>
 
           <!-- Allergies -->
-          <label id="allergies" for="Allergies">Allergies</label>
-          <textarea name="Allergies" ngModel></textarea>
-          <p id="allergiesError" class="error" style="display: none;">Error in field</p>
+          <div>
+            <label id="allergies" for="Allergies">Allergies</label>
+            <textarea name="Allergies" ngModel></textarea>
+            <p id="allergiesError" class="error" style="display: none;">Error in field</p>
+          </div>
 
           <!-- Dietery requirements -->
-          <label id="diet" for="diet">Dietery requirements</label>
-          <textarea name="diet" ngModel></textarea>
-          <p id="dietError" class="error" style="display: none;">Error in field</p>
+          <div>
+            <label id="diet" for="diet">Dietery requirements</label>
+            <textarea name="diet" ngModel></textarea>
+            <p id="dietError" class="error" style="display: none;">Error in field</p>
+          </div>
 
           <!-- Submit -->
           <div class="buttons">
             <input class = "addChild" type="submit" value="Add child">
-            <input class = "cancel" value="Cancel" (click)="returnToChildrenDashboard()">
+            <input class = "cancel" value="Return" (click)="returnToChildrenDashboard()">
           </div>
           
         </form>

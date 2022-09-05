@@ -3,6 +3,7 @@ export interface Activity{
     name: string;
     description: string;
     location: string;
+    boundary: number;
     timeStart: string;
     timeEnd: string;
     budget: number;
@@ -58,6 +59,7 @@ export interface Activity{
     experience: string;
     currentLong: number;
     currentLat: number;
+    terminateDate: string;
   }
 
   export interface User{
