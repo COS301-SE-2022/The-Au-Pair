@@ -96,7 +96,6 @@ ion-card {
     color: var(--ion-color-danger);
 }
 
-
 .icon-edit{
     top: 12px;
     color: white;
@@ -194,14 +193,16 @@ ion-card {
         margin-top:0;
         top: 4px;
     }
+
     .action {
         height: 146px;
-        // width: 160px;
         width: 100%;
     }
+
     .icon-edit{
         top: 6px;
     }
+
     .action-tag {
         height: 45px;
         font-size: 18px;
@@ -211,44 +212,6 @@ ion-card {
         width: 96px;
     }
 }
-
-// @media (max-width: 810px) {
-//     .children-div {
-//         grid-template-columns: repeat(1, 1fr);
-//     }
-//     .child-name {
-//         border-radius: 16px 16px 0px 0px;
-//     }
-//     .edit-details{
-//         border-radius: 0px 0px 16px 16px !important;
-//     }
-//     .actions-div {
-//         grid-template-columns: repeat(2, 1fr);
-//         gap: 10px;
-//         height: 320px;
-//     }
-//     .welcome-heading {
-//         font-size: 32px;
-//     }
-//     .actions-heading {
-//         font-size: 24px;
-//     }
-//     .edit{
-//         font-size: 20px;
-//     }
-//     .action {
-//         height: 146px;
-//         width: 100%;
-//     }
-//     .action-tag {
-//         height: 45px;
-//         font-size: 18px;
-//     }
-//     .action-icon {
-//         height: 96px;
-//         width: 96px;
-//     }
-// }
 
 @media (max-width: 1240px) {
    .action-tag{

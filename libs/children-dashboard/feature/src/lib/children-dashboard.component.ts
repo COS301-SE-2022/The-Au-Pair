@@ -47,7 +47,7 @@ export class ChildrenDashboardComponent implements OnInit
   }
 
   //Checking the number of children (max=4)
-  checkNumChildren()
+  checkNumChildren() : boolean
   {
     if(this.children !== undefined)
     {
@@ -55,9 +55,10 @@ export class ChildrenDashboardComponent implements OnInit
       {
         //Show toast with an error
         this.openToast("The maximum number of children is 4", "danger");
+        return false;
       }
     }
-    
+    return true;
   }
 
   //Pop-up if child is successfully updates
