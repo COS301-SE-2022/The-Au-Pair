@@ -20,6 +20,14 @@ export class API{
     return this.http.post('http://localhost:8080/addActivity',activity);
   }
 
+  removeActivity(id : String): Observable<any> {
+    return this.http.post('http://localhost:8080/removeActivity', id);
+  }
+
+  removeManyActivities(activities : Activity[]): Observable<any> {
+    return this.http.post('http://localhost:8080/removeManyActivities', activities);
+  }
+
   getSchedule(id : string): Observable<any> {
     return this.http.post('http://localhost:8080/getSchedule',id);
   }
@@ -70,6 +78,10 @@ export class API{
 
   updateChild(child : Child) :Observable<any> {
     return this.http.post('http://localhost:8080/updateChild',child);
+  }
+
+  removeChild(id: String): Observable<any> {
+    return this.http.post('http://localhost:8080/removeChild', id);
   }
 
   getDateMinutes(id : string, date : string): Observable<any> {

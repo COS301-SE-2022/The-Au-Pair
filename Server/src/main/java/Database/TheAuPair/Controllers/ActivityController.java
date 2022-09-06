@@ -37,6 +37,20 @@ public class ActivityController
     this.as.updateActivity(a);
   }
 
+  @PostMapping("/removeActivity")
+  @CrossOrigin(origins = "http://localhost:4200")
+  public void removeActivity(@RequestBody String id)
+  {
+    this.as.removeActivity(id);
+  }
+
+  @PostMapping("/removeManyActivities")
+  @CrossOrigin(origins = "http://localhost:4200")
+  public void removeManyActivities(@RequestBody Activity[] activities)
+  {
+    this.as.removeManyActivities(activities);
+  }
+
   @PostMapping("/getSchedule")
   @CrossOrigin(origins = "http://localhost:4200")
   public List<Activity> getSchedule(@RequestBody String id)
