@@ -21,3 +21,8 @@ export class SetFcmToken{
 export class Reset{
     static readonly type = '[AppState] Reset Store';
 }
+
+export class SetLoggedIn{
+    static readonly type = '[User] set loggedIn';
+    constructor(public payload: boolean) {}
+}
