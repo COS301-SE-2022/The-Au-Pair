@@ -11,79 +11,79 @@ export class API{
   constructor(private http: HttpClient) {}
 
   getActivity(id : String): Observable<any> {
-    return this.http.post(this.apiURI+"getActivity",id);
+    return this.http.post(this.apiURI+"/getActivity",id);
   }
 
   editActivity(activity : Activity): Observable<any> {
-    return this.http.post(this.apiURI+"editActivity",activity);
+    return this.http.post(this.apiURI+"/editActivity",activity);
   }
   
   addActivity(activity : Activity): Observable<any> {
-    return this.http.post(this.apiURI+"addActivity",activity);
+    return this.http.post(this.apiURI+"/addActivity",activity);
   }
 
   removeActivity(id : String): Observable<any> {
-    return this.http.post(this.apiURI+"removeActivity", id);
+    return this.http.post(this.apiURI+"/removeActivity", id);
   }
 
   removeManyActivities(activities : Activity[]): Observable<any> {
-    return this.http.post(this.apiURI+"removeManyActivities", activities);
+    return this.http.post(this.apiURI+"/removeManyActivities", activities);
   }
 
   getSchedule(id : string): Observable<any> {
-    return this.http.post(this.apiURI+"getSchedule",id);
+    return this.http.post(this.apiURI+"/getSchedule",id);
   }
 
   getAuPairSchedule(children : string []): Observable<any> {
-    return this.http.post(this.apiURI+"getAuPairSchedule",children);
+    return this.http.post(this.apiURI+"/getAuPairSchedule",children);
   }
 
   getUser(id : string): Observable<any> {
-    return this.http.post(this.apiURI+"getUser",id);
+    return this.http.post(this.apiURI+"/getUser",id);
   }
 
   editUser(user : User): Observable<any> {
-    return this.http.post(this.apiURI+"editUser",user);
+    return this.http.post(this.apiURI+"/editUser",user);
   }
 
   getParent(id : string): Observable<any> {
-    return this.http.post(this.apiURI+"getParent",id);
+    return this.http.post(this.apiURI+"/getParent",id);
   }
 
   editParent(parent : Parent): Observable<any> {
-    return this.http.post(this.apiURI+"editParent",parent);
+    return this.http.post(this.apiURI+"/editParent",parent);
   }
 
   getMedAid(id : string): Observable<any> {
-    return this.http.post(this.apiURI+"getMedAid",id);
+    return this.http.post(this.apiURI+"/getMedAid",id);
   }
 
   editMedAid(medAid : medAid): Observable<any> {
-    return this.http.post(this.apiURI+"editMedAid",medAid);
+    return this.http.post(this.apiURI+"/editMedAid",medAid);
   }
 
   getAuPair(id : string): Observable<any> {
-    return this.http.post(this.apiURI+"getAuPair",id);
+    return this.http.post(this.apiURI+"/getAuPair",id);
   }
 
   editAuPair(aupair : auPair): Observable<any> {
-    return this.http.post(this.apiURI+"editAuPair",aupair);
+    return this.http.post(this.apiURI+"/editAuPair",aupair);
   }
 
   getChildren(id : String): Observable<any> {
-    return this.http.post(this.apiURI+"getChildren",id);
+    return this.http.post(this.apiURI+"/getChildren",id);
   }
 
   addChild(child : Child): Observable<any> {
-    return this.http.post(this.apiURI+"addChild",child);
+    return this.http.post(this.apiURI+"/addChild",child);
   }
 
   updateChild(child : Child) :Observable<any> {
-    return this.http.post(this.apiURI+"updateChild",child);
+    return this.http.post(this.apiURI+"/updateChild",child);
   }
 
   removeChild(id: String): Observable<any> {
-    return this.http.post(this.apiURI+"removeChild", id);
+    return this.http.post(this.apiURI+"/removeChild", id);
   }
 
   getDateMinutes(id : string, date : string): Observable<any> {
@@ -143,27 +143,27 @@ export class API{
   }
 
   register(user : User): Observable<any>  {
-    return this.http.post(this.apiURI+"register",user, {responseType: 'text'})
+    return this.http.post(this.apiURI+"/register",user, {responseType: 'text'})
   }
 
   addParent(parent : Parent): Observable<any> {
-    return this.http.post(this.apiURI+"addParent",parent);
+    return this.http.post(this.apiURI+"/addParent",parent);
   }
 
   addAuPair(aupair : auPair): Observable<any> {
-    return this.http.post(this.apiURI+"addAuPair",aupair);
+    return this.http.post(this.apiURI+"/addAuPair",aupair);
   }
 
   addContract(contract : Contract): Observable<any> {
-    return this.http.post(this.apiURI+"addContract",contract);
+    return this.http.post(this.apiURI+"/addContract",contract);
   }
 
   getContract(id : String): Observable<any> {
-    return this.http.post(this.apiURI+"getContract",id);
+    return this.http.post(this.apiURI+"/getContract",id);
   }
 
   removeContract(id : string): Observable<any> {
-    return this.http.post(this.apiURI+"removeContract",id);
+    return this.http.post(this.apiURI+"/removeContract",id);
   }
 
   getContractbyIDs(parentID : String, auPairID : String): Observable<any> {
@@ -171,7 +171,7 @@ export class API{
       "parentID" : parentID,
       "auPairID" : auPairID
     }
-    return this.http.post(this.apiURI+"getContractbyIDs", ids);
+    return this.http.post(this.apiURI+"/getContractbyIDs", ids);
   }
 
   login(email : string, password : string): Observable<any> {
@@ -179,25 +179,25 @@ export class API{
       "email" : email,
       "password" : password
     } 
-    return this.http.post(this.apiURI+"login",details);
+    return this.http.post(this.apiURI+"/login",details);
   }
 
   getAllAuPairs()
   {
-    return this.http.get(this.apiURI+"getAllAuPairs");
+    return this.http.get(this.apiURI+"/getAllAuPairs");
   }
 
   getAllContracts()
   {
-    return this.http.get(this.apiURI+"getAllContracts");
+    return this.http.get(this.apiURI+"/getAllContracts");
   }
   
   getApplicants(): Observable<any> {
-    return this.http.get(this.apiURI+"getApplicants");
+    return this.http.get(this.apiURI+"/getApplicants");
   }
 
   removeAuPair(id : string): Observable<any> {
-    return this.http.post(this.apiURI+"removeAuPair",id);
+    return this.http.post(this.apiURI+"/removeAuPair",id);
   }
 
   resolveApplication(id : string, resolution : boolean): Observable<any> {
@@ -221,36 +221,36 @@ export class API{
         }
       );
     }
-    return this.http.post(this.apiURI+"resolveApplication",decision);
+    return this.http.post(this.apiURI+"/resolveApplication",decision);
   }
 
   getNotificationsByParentId(id : string): Observable<any> {
-    return this.http.post(this.apiURI+"getNotifcationsByParentId",id);
+    return this.http.post(this.apiURI+"/getNotifcationsByParentId",id);
   }
 
   getNotificationsByAuPairId(id : string): Observable<any> {
-    return this.http.post(this.apiURI+"getNotifcationsByAuPairId",id);
+    return this.http.post(this.apiURI+"/getNotifcationsByAuPairId",id);
   }
 
   logNotification(notification : Notification): Observable<any> {
-    return this.http.post(this.apiURI+"logNotification",notification);
+    return this.http.post(this.apiURI+"/logNotification",notification);
   }
 
   getAllReports(): Observable<any> 
   {
-    return this.http.get(this.apiURI+"getAllReports");
+    return this.http.get(this.apiURI+"/getAllReports");
   }
   
   getReportsForAuPair(id : string): Observable<any> {
-    return this.http.post(this.apiURI+"getReportsForAuPair", id);
+    return this.http.post(this.apiURI+"/getReportsForAuPair", id);
   }
 
   deleteReport(id : string): Observable<any> {
-    return this.http.post(this.apiURI+"deleteReport",id);
+    return this.http.post(this.apiURI+"/deleteReport",id);
   }
 
   addReport(report : Report): Observable<any> {
-    return this.http.post(this.apiURI+"addReport",report);
+    return this.http.post(this.apiURI+"/addReport",report);
   }
   
 }
