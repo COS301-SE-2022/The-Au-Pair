@@ -8,7 +8,7 @@
         <div class="button-container" >
             <a href = 'tel:{{ employerPhone }}'><ion-icon name="call" class = 'call-icon'></ion-icon></a>
             <a href = 'sms:{{ employerPhone }}'><ion-icon name="chatbubble-ellipses" class = 'message-icon'></ion-icon></a>
-            <ion-icon class="report-icon" name="alert-circle" (click)="openReportModal(this.currentAuPair.id)"></ion-icon>
+            <ion-icon class="report-icon" name="alert-circle" (click)="openReportModal()"></ion-icon>
             <div *ngIf="this.employerId !== ''"><ion-icon class="terminate-contract" name="person-remove" (click)="presentAlert()"></ion-icon></div>
         </div>
         <div class="child-status">

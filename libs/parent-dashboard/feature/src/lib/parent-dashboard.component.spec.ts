@@ -66,7 +66,7 @@ describe('ParentProfileComponent', () => {
 
   it('should,open the report modal when called', async ()=>{
     jest.spyOn(component,"openReportModal");
-    component.openReportModal("dxzv6chgn5zp19ezfiqn7fxf");
+    component.openReportModal();
     expect(await component.openReportModal).toReturn();
   });
 
@@ -174,8 +174,8 @@ describe('UserReportModalComponent', () => {
 
     await component.reportUser({desc : "test"});
       
-    expect(component.reportDetails.auPairId).toEqual("321");
-    expect(component.reportDetails.issuerId).toEqual("123");
+    expect(component.reportDetails.reportIssuerId).toEqual("123");
+    expect(component.reportDetails.reportedUserId).toEqual("321");
     expect(component.reportDetails.desc).toEqual("test");
     expect(addRep).toHaveBeenCalled();
     expect(toast).toHaveBeenCalled();

@@ -15,8 +15,8 @@ export class UserReportModalComponent implements OnInit {
 
     reportDetails: Report = {
     id: "",
-    issuerId: "",
-    auPairId: "",
+    reportIssuerId: "",
+    reportedUserId: "",
     desc: ""
   }
 
@@ -43,8 +43,8 @@ export class UserReportModalComponent implements OnInit {
   }
 
   async reportUser(formData : any){ 
-    this.reportDetails.auPairId = this.parentID;
-    this.reportDetails.issuerId = this.auPairId;
+    this.reportDetails.reportIssuerId = this.auPairId;
+    this.reportDetails.reportedUserId = this.parentID;
     this.reportDetails.desc = formData.desc;
 
     await this.serv.addReport(this.reportDetails)

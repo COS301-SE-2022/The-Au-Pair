@@ -70,12 +70,9 @@ export class AuPairDashboardComponent implements OnInit {
   
   constructor(private serv: API, private modalCtrl : ModalController, private store: Store, public router: Router, public toastCtrl: ToastController, private alertController: AlertController) {}
 
-  async openReportModal(actId : string) {
+  async openReportModal() {
     const modal = await this.modalCtrl.create({
-      component: UserReportModalComponent,
-      componentProps :{
-        activityId : actId
-      }
+      component: UserReportModalComponent
     });
     await modal.present();
   }

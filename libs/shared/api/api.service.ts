@@ -227,7 +227,7 @@ export class API{
     return this.http.get('http://localhost:8080/getAllReports');
   }
   
-  getReportsForAuPair(id : string): Observable<any> {
+  getReportsForUser(id : string): Observable<any> {
     return this.http.post('http://localhost:8080/getReportsForAuPair', id);
   }
 

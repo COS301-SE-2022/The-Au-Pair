@@ -10,7 +10,7 @@
                     <a href = 'tel:{{this.auPairDetails.number}}'><ion-icon name="call" class = 'call-icon'></ion-icon></a>
                     <a href = 'sms:{{this.auPairDetails.number}}'><ion-icon name="chatbubble-ellipses" class = 'message-icon'></ion-icon></a>
                     <ion-icon class="rating-icon" name="star" (click)="openModal(this.userDetails.id)"></ion-icon>
-                    <ion-icon class="report-icon" name="alert-circle" (click)="openReportModal(this.userDetails.id)"></ion-icon>
+                    <ion-icon class="report-icon" name="alert-circle" (click)="openReportModal()"></ion-icon>
                     <div *ngIf="this.parentDetails.auPair !== ''"><ion-icon class="terminate-contract" name="person-remove" (click)="presentAlert()"></ion-icon></div>
                 </div>
                 <ng-template #noaupair>

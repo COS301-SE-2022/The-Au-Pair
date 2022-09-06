@@ -107,12 +107,9 @@ export class ParentDashboardComponent implements OnInit{
     await modal.present();
   }
 
-  async openReportModal(actId : string) {
+  async openReportModal() {
     const modal = await this.modalCtrl.create({
-      component: UserReportModalComponent,
-      componentProps :{
-        activityId : actId
-      }
+      component: UserReportModalComponent
     });
     await modal.present();
   }

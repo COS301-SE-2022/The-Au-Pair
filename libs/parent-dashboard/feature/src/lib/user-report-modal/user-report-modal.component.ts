@@ -14,10 +14,10 @@ export class UserReportModalComponent implements OnInit {
   auPairId = "";
 
     reportDetails: Report = {
-    id: "",
-    issuerId: "",
-    auPairId: "",
-    desc: ""
+      id: "",
+      reportIssuerId: "",
+      reportedUserId: "",
+      desc: ""
   }
 
   public navParams = new NavParams;
@@ -43,8 +43,8 @@ export class UserReportModalComponent implements OnInit {
   }
 
   async reportUser(formData : any){ 
-    this.reportDetails.auPairId = this.auPairId;
-    this.reportDetails.issuerId = this.parentID;
+    this.reportDetails.reportIssuerId = this.parentID;
+    this.reportDetails.reportedUserId = this.auPairId;
     this.reportDetails.desc = formData.desc;
 
     await this.serv.addReport(this.reportDetails)
