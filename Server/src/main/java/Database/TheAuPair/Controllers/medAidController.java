@@ -6,7 +6,6 @@ import Database.TheAuPair.Services.medAidService;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@CrossOrigin(origins = "*")
 public class medAidController
 {
   private medAidService ms;
@@ -17,12 +16,14 @@ public class medAidController
   }
 
   @PostMapping("/getMedAid")
+  @CrossOrigin(origins = "http://localhost:4200")
   public medAid getMedAid(@RequestBody String id)
   {
     return this.ms.getMedAid(id);
   }
 
   @PostMapping("/editMedAid")
+  @CrossOrigin(origins = "http://localhost:4200")
   public void editMedAid(@RequestBody medAid m)
   {
     this.ms.updateMedAid(m);
