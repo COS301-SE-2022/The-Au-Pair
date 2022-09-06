@@ -19,6 +19,6 @@ import { FormsModule } from '@angular/forms';
   ],
   declarations: [ParentDashboardComponent, AuPairRatingModalComponent, UserReportModalComponent],
   providers: [API],
-  entryComponents: [AuPairRatingModalComponent],
+  entryComponents: [AuPairRatingModalComponent, UserReportModalComponent],
 })
 export class ParentDashboardFeatureModule {}
