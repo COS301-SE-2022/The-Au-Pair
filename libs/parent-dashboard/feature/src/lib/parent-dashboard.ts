@@ -7,7 +7,6 @@ import { ModalController, ToastController } from '@ionic/angular';
 import { Store } from '@ngxs/store';
 import { Router } from '@angular/router';
 import { AlertController } from '@ionic/angular';
-import { Handler } from 'leaflet';
 
 @Component({
   selector: 'the-au-pair-parent-dashboard',
