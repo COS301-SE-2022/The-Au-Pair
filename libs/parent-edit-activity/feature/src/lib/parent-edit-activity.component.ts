@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { API } from '../../../../shared/api/api.service';
-import { ToastController } from '@ionic/angular';
+import { ToastController, AlertController } from '@ionic/angular';
 import { Activity, Child } from '../../../../shared/interfaces/interfaces';
 import { HttpClient } from '@angular/common/http';
 import { Store } from '@ngxs/store';
@@ -53,7 +53,7 @@ export class ParentEditActivityComponent implements OnInit {
   /**Functions*/
 
   //Constructor
-  constructor(private serv: API, private router: Router, public toastCtrl: ToastController, private http : HttpClient, private store: Store) 
+  constructor(private serv: API, private router: Router, public toastCtrl: ToastController, private http : HttpClient, private store: Store, private alertController: AlertController) 
   {
     const navigation = this.router.getCurrentNavigation();
     if(navigation !== null)
@@ -302,6 +302,11 @@ export class ParentEditActivityComponent implements OnInit {
     });
   }
 
+  sayHi()
+  {
+    console.log("Hi");
+  }
+
   //Pop-up if activity is successfully updates
   async openToast()
   {
@@ -313,6 +318,26 @@ export class ParentEditActivityComponent implements OnInit {
       cssClass: 'toastPopUp'
     });
     await toast.present();
+  }
+
+  async presentAlert() {
+    const alert = await this.alertController.create({
+      header: 'Are you sure you want to delete this activity?',
+      cssClass: 'custom-alert',
+      buttons: [
+        {
+          text: 'No',
+          cssClass: 'alert-button-cancel',
+        },
+        {
+          text: 'Yes',
+          cssClass: 'alert-button-confirm',
+          handler: () => { this.removeActivity(); }
+        }
+      ]
+    });
+
+    await alert.present();
   }
 
   //------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -376,6 +401,20 @@ export class ParentEditActivityComponent implements OnInit {
         console.log("Error has occured with API: " + error);
       }
     )
+  }
+
+  removeActivity()
+  {
+    this.serv.removeActivity(this.activityDetails.id).toPromise().then(
+      res=>{
+        console.log("The response is:", res);
+        this.returnToSchedule();
+      },
+      error=>{
+        console.log("Error has occured with API: ", error);
+        return error;
+      }
+    ); 
   }
   //------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 }

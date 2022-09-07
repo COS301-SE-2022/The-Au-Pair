@@ -95,6 +95,9 @@
       ],
       "@the-au-pair/shared/components/long-field": [
         "libs/shared/components/long-field/src/index.ts"
+      ],
+      "@the-au-pair/shared/services/auth": [
+        "libs/shared/services/auth/src/index.ts"
       ]
     }
   },
