@@ -21,6 +21,7 @@ export class UserReportModalComponent implements OnInit {
   }
 
   public navParams = new NavParams;
+  public sending = false;
   
   constructor(private serv: API, private modalCtrl : ModalController ,public toastCtrl: ToastController, private store: Store) {}
 
@@ -43,6 +44,13 @@ export class UserReportModalComponent implements OnInit {
   }
 
   async reportUser(formData : any){ 
+    if(formData.desc == "") {
+      this.openToast("Please add a description");
+      return;
+    }
+    
+    this.sending = true;
+
     this.reportDetails.reportIssuerId = this.auPairId;
     this.reportDetails.reportedUserId = this.parentID;
     this.reportDetails.desc = formData.desc;
@@ -52,7 +60,7 @@ export class UserReportModalComponent implements OnInit {
       .then( 
         res=>{
           this.closeModal();
-          this.openToast();
+          this.openToast("Report sent!");
           return res;
       },
       error => {
@@ -62,10 +70,10 @@ export class UserReportModalComponent implements OnInit {
     )
   }
 
-  async openToast()
+  async openToast(message: string)
   {
     const toast = await this.toastCtrl.create({
-      message: 'Report sent!',
+      message: message,
       duration: 4000,
       position: 'top',
       color: 'primary',

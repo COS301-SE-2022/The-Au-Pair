@@ -131,13 +131,13 @@ describe('UserReportModalComponent', () => {
     expect(component.reportDetails.reportedUserId).toEqual("321");
     expect(component.reportDetails.desc).toEqual("test");
     expect(addRep).toHaveBeenCalled();
-    expect(toast).toHaveBeenCalled();
+    expect(toast).toHaveBeenCalledWith("Report sent!");
     expect(component.closeModal).toHaveBeenCalled();
   });
 
   it('should, open a toast when openToast is called', async ()=>{
     jest.spyOn(component,"openToast");
-    component.openToast();
+    component.openToast("test");
     expect(await component.openToast).toReturn();
   });
 

@@ -17,7 +17,7 @@
             </ion-row>
             <ion-row class="submit-row">
                 <ion-col size="12" class="ion-text-center">
-                    <input type="submit" form="reportForm" type="submit" class="submit" value="Report Au Pair"/>
+                    <input type="submit" form="reportForm" type="submit" [ngClass]="(this.sending===false) ? 'submit' : 'disabled-submit' " [disabled]="sending" value="Report Au Pair"/>                    
                 </ion-col>
             </ion-row> 
         </form>    

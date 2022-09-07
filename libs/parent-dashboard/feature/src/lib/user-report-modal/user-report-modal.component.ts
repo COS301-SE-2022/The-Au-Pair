@@ -12,15 +12,16 @@ import { Store } from '@ngxs/store';
 export class UserReportModalComponent implements OnInit {
   parentID = "";
   auPairId = "";
-
-    reportDetails: Report = {
-      id: "",
-      reportIssuerId: "",
-      reportedUserId: "",
-      desc: ""
+  
+  reportDetails: Report = {
+    id: "",
+    reportIssuerId: "",
+    reportedUserId: "",
+    desc: ""
   }
-
+  
   public navParams = new NavParams;
+  public sending = false;
   
   constructor(private serv: API, private modalCtrl : ModalController ,public toastCtrl: ToastController, private store: Store) {}
 
@@ -43,6 +44,13 @@ export class UserReportModalComponent implements OnInit {
   }
 
   async reportUser(formData : any){ 
+    if(formData.desc == "") {
+      this.openToast("Please add a description");
+      return;
+    }
+    
+    this.sending = true;
+
     this.reportDetails.reportIssuerId = this.parentID;
     this.reportDetails.reportedUserId = this.auPairId;
     this.reportDetails.desc = formData.desc;
@@ -52,20 +60,22 @@ export class UserReportModalComponent implements OnInit {
       .then( 
         res=>{
           this.closeModal();
-          this.openToast();
+          this.openToast("Report sent!");
+          this.sending = false;
           return res;
       },
       error => {
         console.log("Error has occured with API: " + error);
+        this.sending = false;
         return error;
       }
     )
   }
 
-  async openToast()
+  async openToast(message: string)
   {
     const toast = await this.toastCtrl.create({
-      message: 'Report sent!',
+      message: message,
       duration: 4000,
       position: 'top',
       color: 'primary',

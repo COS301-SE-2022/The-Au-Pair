@@ -19,7 +19,7 @@ public class ReportController {
     return this.repServ.getAllReports();
   }
 
-  @PostMapping("/getReportsForAuPair")
+  @PostMapping("/getReportsForUser")
   public List<Report> getReportsForUser(@RequestBody String id)
   {
       return this.repServ.getReportsForUser(id);
