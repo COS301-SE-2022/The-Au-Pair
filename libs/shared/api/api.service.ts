@@ -242,7 +242,7 @@ export class API{
   }
   
   getReportsForUser(id : string): Observable<any> {
-    return this.http.post(this.apiURI+'/getReportsForAuPair', id);
+    return this.http.post(this.apiURI+'/getReportsForUser', id);
   }
 
   deleteReport(id : string): Observable<any> {
