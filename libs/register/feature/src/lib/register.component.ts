@@ -18,6 +18,7 @@ export class RegisterComponent {
   public medError: boolean;
   public bioError: boolean;
   public experienceError: boolean;
+  public registering: boolean;
   public formValid = false;
   
   parentChosen = true;
@@ -136,6 +137,7 @@ export class RegisterComponent {
     this.bioError = false;
     this.experienceError = false;
     this.maleChosen = true;
+    this.registering = false;
   }
 
   async registerUser() 
@@ -147,6 +149,8 @@ export class RegisterComponent {
     this.notSamePasswords = false;
     this.bioError = false;
     this.experienceError = false;
+
+    this.registering = true;
 
     let formError = false;
 
@@ -244,6 +248,26 @@ export class RegisterComponent {
           this.parentDetails.id = this.userDetails.id;
           this.parentDetails.medID = this.parentRegisterDetailsForm.value.medAid;
 
+          if(this.maleChosen) {
+            this.userDetails.gender = "male";
+          }
+          else {
+            this.userDetails.gender = "female";
+          }
+          
+          this.userDetails.number = this.parentRegisterDetailsForm.value.phone;
+          this.userDetails.password = this.parentRegisterDetailsForm.value.pass;
+
+          if(this.parentChosen)
+          {
+            this.userDetails.type = 1;
+            this.userDetails.registered = true;
+          }
+          else
+          {
+            this.userDetails.type = 2;
+          }
+
           await this.serv.addParent(this.parentDetails)
           .toPromise()
           .then(
@@ -283,6 +307,7 @@ export class RegisterComponent {
         this.openToast("Account already exists with email : " + application);
       }
     }
+    this.registering = false;
   }
 
   async openToast(message: string)
