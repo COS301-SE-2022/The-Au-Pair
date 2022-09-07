@@ -39,8 +39,8 @@ export class AdminReportsComponent implements OnInit {
     this.getReports();
   }
 
-  getReports() {
-    this.serv.getAllReports().toPromise().then(res => {
+  async getReports() {
+    await this.serv.getAllReports().toPromise().then(res => {
       this.reports = res;
 
       for(let i = 0; i < this.reports.length; i++) {
@@ -74,8 +74,8 @@ export class AdminReportsComponent implements OnInit {
     });
   }
 
-  dismiss(reportId : any) {
-    this.serv.deleteReport(reportId.id).toPromise().then(res => {
+  async dismiss(reportId : any) {
+    await this.serv.deleteReport(reportId.id).toPromise().then(res => {
       window.location.reload();
     }).catch(err => {
       console.log(err);
