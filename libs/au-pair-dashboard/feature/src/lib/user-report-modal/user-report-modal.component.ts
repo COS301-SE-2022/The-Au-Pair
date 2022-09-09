@@ -50,7 +50,6 @@ export class UserReportModalComponent implements OnInit {
     }
     
     this.sending = true;
-
     this.reportDetails.reportIssuerId = this.auPairId;
     this.reportDetails.reportedUserId = this.parentID;
     this.reportDetails.desc = formData.desc;
