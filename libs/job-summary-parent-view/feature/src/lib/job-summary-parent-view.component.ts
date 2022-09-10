@@ -2,7 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { API } from '../../../../shared/api/api.service';
 import { Store } from '@ngxs/store';
 import { DatePipe } from '@angular/common';
-import { Child, Parent, User } from 'libs/shared/interfaces/interfaces';
+import { Child, Contract, Parent, User } from 'libs/shared/interfaces/interfaces';
+import { Router } from '@angular/router';
+import { ToastController } from '@ionic/angular';
 
 @Component({
   selector: 'the-au-pair-job-summary-parent-view',
@@ -13,7 +15,9 @@ export class JobSummaryParentViewComponent implements OnInit {
 
 /* eslint-disable @typescript-eslint/no-explicit-any */
   parentID = "";
+  auPairID = "";
   childrenArr: Child[] = [];
+  flag!: boolean;
 
   days = [
     "Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"
@@ -41,6 +45,12 @@ export class JobSummaryParentViewComponent implements OnInit {
     diet: "",
     parent: "",
     aupair: "",
+  }
+
+  contractDetails: Contract= {
+    parentID: "",
+    auPairID: "",
+    timestamp: "",
   }
 
   parentDetails: Parent = {
@@ -71,9 +81,19 @@ export class JobSummaryParentViewComponent implements OnInit {
     banned: "",
   }
 
-  constructor(private serv: API, private store: Store) {}
+  constructor(private serv: API, private store: Store, private router: Router, public toastCtrl: ToastController)
+  {
+    const navigation = this.router.getCurrentNavigation();
+    if(navigation !== null)
+      if(navigation.extras !== null)
+      { 
+        this.auPairID = navigation.extras.state?.['id'];
+      }
+  }
 
   async ngOnInit(): Promise<void> {
+    console.log("This au pair ID is: ", this.auPairID);
+    
     this.parentID = this.store.snapshot().user.id;
     this.getActivities();
 
@@ -169,5 +189,81 @@ export class JobSummaryParentViewComponent implements OnInit {
         }
       });
     });
+  }
+
+  async sendHireRequests()
+  {
+    this.flag = false;
+    const ts = new Date();
+
+    this.contractDetails.parentID = this.parentID;
+    this.contractDetails.auPairID = this.auPairID;
+
+    const minutes = String(ts.getMinutes()).padStart(2, '0');
+
+    this.contractDetails.timestamp = ts.getFullYear() + "/" + (ts.getMonth() + 1) + "/" + ts.getDate() + " - " + ts.getHours() + ":" + minutes;
+
+    await this.serv.getContractbyIDs(this.contractDetails.parentID, this.contractDetails.auPairID)
+    .toPromise()
+    .then(
+      res => {
+        console.log("The response is:" + res);
+        
+        if(res === null)
+        {
+          this.flag = false;
+        }
+        else
+        {
+          this.flag = true;
+        }
+      },
+      error => {
+        console.log("Error has occured with API: " + error);
+      }
+    )
+    
+    if(this.flag === false)
+    {
+      this.sucToast();
+      this.serv.addContract(this.contractDetails)
+      .toPromise()
+      .then(
+        res => {
+          console.log("The response is:" + res);
+        },
+        error => {
+          console.log("Error has occured with API: " + error);
+        }
+      )
+    }
+    else
+    {
+      this.errToast();
+    }
+    this.router.navigate(['/explore']);
+  }
+
+  async errToast()
+  {
+    const toast = await this.toastCtrl.create({
+      message: 'You have already requested to hire this Au Pair.',
+      duration: 2000,
+      position: 'top',
+      cssClass: 'toastPopUp'
+    });
+    await toast.present();
+  }
+
+  async sucToast()
+  {
+    const toast = await this.toastCtrl.create({
+      message: 'Request sent successfully!',
+      duration: 2000,
+      position: 'top',
+      color: 'primary',
+      cssClass: 'toastPopUp'
+    });
+    await toast.present();
   }
 }

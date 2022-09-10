@@ -4,6 +4,8 @@ import { auPair, Contract, User } from '../../../../../shared/interfaces/interfa
 import { API } from '../../../../../shared/api/api.service';
 import { Store } from '@ngxs/store';
 import { min } from 'rxjs';
+import { Router } from '@angular/router';
+
 
 @Component({
   selector: 'the-au-pair-expand-modal',
@@ -60,7 +62,7 @@ export class ExpandModalComponent implements OnInit {
     timestamp: "",
   }
   
-  constructor(private serv: API, private modalCtrl : ModalController ,public toastCtrl: ToastController, private store: Store) {}
+  constructor(private serv: API, private modalCtrl : ModalController ,public toastCtrl: ToastController, private store: Store, private router: Router) {}
 
   ngOnInit(): void {
     this.parentID = this.store.snapshot().user.id;
@@ -140,14 +142,9 @@ export class ExpandModalComponent implements OnInit {
   async sendHireRequests(auPairID : string)
   {
     this.flag = false;
-    const ts = new Date();
 
     this.contractDetails.parentID = this.parentID;
     this.contractDetails.auPairID = auPairID;
-
-    const minutes = String(ts.getMinutes()).padStart(2, '0');
-
-    this.contractDetails.timestamp = ts.getFullYear() + "/" + (ts.getMonth() + 1) + "/" + ts.getDate() + " - " + ts.getHours() + ":" + minutes;
 
     await this.serv.getContractbyIDs(this.contractDetails.parentID, this.contractDetails.auPairID)
     .toPromise()
@@ -157,36 +154,21 @@ export class ExpandModalComponent implements OnInit {
         
         if(res === null)
         {
-          this.flag = false;
+          this.router.navigate(['/job-summary-parent-view'],{
+            state: {id: auPairID}
+          });
         }
         else
         {
-          this.flag = true;
+          this.errToast();
         }
       },
       error => {
         console.log("Error has occured with API: " + error);
       }
     )
-    
-    if(this.flag === false)
-    {
-      this.sucToast();
-      this.serv.addContract(this.contractDetails)
-      .toPromise()
-      .then(
-        res => {
-          console.log("The response is:" + res);
-        },
-        error => {
-          console.log("Error has occured with API: " + error);
-        }
-      )
-    }
-    else
-    {
-      this.errToast();
-    }
+
+    this.closeModal();
   }
   
   getAge(dateString : string) {
