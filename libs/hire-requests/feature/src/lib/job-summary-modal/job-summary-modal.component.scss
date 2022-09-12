@@ -205,6 +205,112 @@
     height: 20px;
 }
 
+.title{
+    font-weight: bold;
+    font-size: 24px;
+}
+
+.close{
+    cursor: pointer;
+    float: right;
+    width: 30px;
+    height: 30px;
+}
+
+.num{
+    margin-top: 50px;
+}
+
+.card-bar-graph{
+    border-radius: 16px;
+    height: 500px;
+    background-color: white;
+    font-size: var(--heading-size);
+    margin: auto;
+    width: 85%;
+}
+
+.bar-graph {
+    width: 100%;
+    height: 450px;
+    position: relative;
+    display: grid;
+    grid-template-columns: 0.3fr repeat(7, 1fr);
+    align-items: center;
+    justify-items: center;
+    font-size: var(--heading-size);
+    bottom: 0px;
+    margin-left: 40px;
+}
+  
+.day-wrapper { 
+    height: 100%;
+    vertical-align: bottom;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+}
+  
+ion-icon {
+    pointer-events :none;
+}
+
+.day {
+    width: 10%;
+    background-color: var(--ion-color-secondary);
+    position: absolute;
+    bottom: 50px;
+    border-radius: 10px;
+    color: white;
+}
+
+.label {
+    position: absolute;
+    bottom: 0;
+    height: 50px;
+    font-size: 24px;
+    font-weight: bold;
+}
+
+#lifestyles{
+    position: absolute;
+    width: 344px;
+    height: 325px;
+    left: -79px;
+    top: -5px;
+    opacity: 0.04;
+    z-index: -10;
+}
+
+.hour-ranges{
+    font-size: 15px;
+}
+
+.tooltip-graph{
+    width: 20px;
+    height: 20px;
+    margin-top: 8px;
+}
+
+.hovertext:before {
+    content: attr(data-hover);
+    visibility: hidden;
+    opacity: 0;
+    width: max-content;
+    background-color: black;
+    color: #fff;
+    text-align: center;
+    border-radius: 5px;
+    padding: 5px 5px;
+    transition: opacity 1s ease-in-out;
+  
+    position: absolute;
+    z-index: 1;
+    left: 0;
+    top: 110%;
+  }
+  
+
 @media (max-width: 642px) {
     .parent-profile-div{
         margin-top: 13px;

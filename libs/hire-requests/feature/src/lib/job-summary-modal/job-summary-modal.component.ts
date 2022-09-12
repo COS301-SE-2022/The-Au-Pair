@@ -3,7 +3,6 @@ import { ModalController, NavParams, ToastController } from '@ionic/angular';
 import { auPair, Child, Contract, Parent, User } from '../../../../../shared/interfaces/interfaces';
 import { API } from '../../../../../shared/api/api.service';
 import { Store } from '@ngxs/store';
-import { min } from 'rxjs';
 import { Router } from '@angular/router';
 
 @Component({
@@ -17,6 +16,14 @@ export class JobSummaryModalComponent implements OnInit {
   contractID: string = this.navParams.get('contractID');
   auPairID = "";
   childrenArr: Child[] = [];
+
+  days = [
+    "Mon","Tue","Wed","Thu","Fri","Sat","Sun"
+  ];
+
+  shiftHours: number[] = [];
+  shiftRangeMin: string[] = [];
+  shiftRangeMax: string[] = [];
 
   auPairChildren: string[] = [];
 
@@ -73,6 +80,8 @@ export class JobSummaryModalComponent implements OnInit {
     banned: "",
   }
 
+  activities: any;
+
   constructor(private serv: API, private modalCtrl : ModalController, private store: Store, private router: Router, public toastCtrl: ToastController) {}
 
   async ngOnInit(): Promise<void> {
@@ -124,6 +133,8 @@ export class JobSummaryModalComponent implements OnInit {
         },
         error =>{console.log("Error has occured with API: " + error);}
       )
+
+    this.populateGraph();
   }
 
   closeModal()
@@ -286,5 +297,58 @@ export class JobSummaryModalComponent implements OnInit {
         return error;
       }
     )
+  }
+
+  async populateGraph()
+  {   
+    let actCount = 0;
+    let minTime = "23:59";
+    let maxTime = "00:00";
+
+    if("13:00" > "11:00")
+    {
+      console.log("YES");
+      
+    }
+
+    let actDays = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"];
+
+    await this.serv.getAuPairSchedule(this.parentDetails.children).toPromise()
+    .then(
+      res=>{
+        this.activities = res;      
+      },
+      error=>{
+        console.log("Error has occured with API: " + error);
+      }
+    )
+
+    for(let i = 0; i < actDays.length; i++)
+    {
+      actCount = 0;
+      minTime = "23:59";
+      maxTime = "00:00";
+
+      this.activities.forEach((act: {timeStart: any; day: any; timeEnd: any;}) => 
+      {
+        if(act.day === actDays[i])
+        {
+          actCount++;
+          
+          if(act.timeStart <= minTime)
+          {
+            minTime = act.timeStart;
+          }
+
+          if(act.timeEnd >= maxTime)
+          {
+            maxTime = act.timeEnd;
+          }
+        }
+      });
+      this.shiftHours[i] = actCount;
+      this.shiftRangeMin[i] = minTime;
+      this.shiftRangeMax[i] = maxTime;
+    }    
   }
 }
