@@ -31,6 +31,7 @@ public class TheAuPairApplication implements CommandLineRunner
   private final ReportController rc;
   private final ContractController ctc;
   private final NotificationsController nc;
+  private final EmailController ec;
 
   @Autowired
   public TheAuPairApplication(UserRepository ur, ParentRepository pr, medAidRepository mr, ChildRepository cr, ActivityRepository ar, auPairRepository apr, hoursLoggedRepository hlr, ReportRepository rr, NotificationsRepository nr, ContractRepository ctr)
@@ -56,6 +57,7 @@ public class TheAuPairApplication implements CommandLineRunner
     rc = new ReportController(this.rr);
     ctc = new ContractController(this.ctr);
     nc = new NotificationsController(this.nr);
+    ec = new EmailController();
   }
 
   public static void main(String[] args)
