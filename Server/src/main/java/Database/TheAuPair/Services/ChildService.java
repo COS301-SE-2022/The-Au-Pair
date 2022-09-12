@@ -33,4 +33,9 @@ public class ChildService
   {
     cr.save(c);
   }
+
+  public void removeChild(String id)
+  {
+    cr.deleteById(id);
+  }
 }

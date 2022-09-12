@@ -20,7 +20,7 @@
     <br />
     <a href="https://drive.google.com/file/d/1NaXnfLn3lmfEGlzSfiJ8SzEfEWv57wFE/view?usp=sharing"><strong>CheemsChaps-Demo 3</strong></a> | 
     <a href="https://docs.google.com/document/d/1kCEYDX8cWRBNyEANp6VYXPSW7PHgUMOl1XVQNcb5Iss/edit?usp=sharing"><strong>SRS Document 3</strong></a> |
-    <a href="https://github.com/COS301-SE-2022/The-Au-Pair/projects/1"><strong>Projet Board</strong></a> 
+    <a href="https://github.com/COS301-SE-2022/The-Au-Pair/projects/1"><strong>Project Board</strong></a> 
   </p>
   
   <br />
@@ -125,7 +125,7 @@
 
 ### Cheems Chaps - The Au Pair
 
-The Au Pair is a platform used to give control to parents. The Au Pair will assist them in finding and interactng with suitable Au Pairs who will be looking after their children. It will allow parents to minimize efforts to find Au Pair’s, provide schedules for their children, and review their activities and behavior through feedback.
+The Au Pair is an Ionic cross-platform application that serves as an all in one management platform whereby parents and suitable au pairs can find eah other, set-up employment, manage, and coordinate how the au pairs and parents interact, to keep track of children’s needs, schedules, financials, and live locations. 
 
 The Au Pair is a project created for the University of Pretoria's COS301 module. It was created by the Cheems Chaps team with members <a href="#daniel-azmanov">Daniel Azmanov</a>, <a href="#ruben-brits">Ruben Brits</a>, <a href="#kyle-pottinger">Kyle Pottinger</a>, <a href="#reece-stephenson">Reece Stephenson</a> and <a href="#seyuran-pillay">Seyuran Pillay</a>
 <p align="right">(<a href="#top">back to top</a>)</p>

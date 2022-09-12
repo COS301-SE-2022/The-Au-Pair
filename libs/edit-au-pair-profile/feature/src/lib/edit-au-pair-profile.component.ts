@@ -14,6 +14,8 @@ export class EditAuPairProfileComponent implements OnInit {
   
   aupairID = "";
   hasErr = false;
+  sameFlag = false;
+  errFlag = true;
 
   location = "";
   long = 0;
@@ -54,7 +56,8 @@ export class EditAuPairProfileComponent implements OnInit {
     bio: "",
     experience: "",
     currentLong: 0.0,
-    currentLat: 0.0
+    currentLat: 0.0,
+    terminateDate: "",
   }
 
   constructor(private serv: API, private http: HttpClient, public toastCtrl: ToastController, private store: Store){}
@@ -103,6 +106,7 @@ export class EditAuPairProfileComponent implements OnInit {
         this.auPairDetails.experience = res.experience;
         this.auPairDetails.currentLong = res.currentLong;
         this.auPairDetails.currentLat = res.currentLat;
+        this.auPairDetails.terminateDate = res.terminateDate;
       },
       error=>{console.log("Error has occured with API: " + error);}
     )
@@ -171,11 +175,17 @@ export class EditAuPairProfileComponent implements OnInit {
             }
           }
         })
-        if(!flag)
+        if(val.address === this.userDetails.address)
+        {
+          dom.style.display = "none";
+          this.sameFlag = true;
+        }
+        else if(!flag)
         {
           dom.innerHTML = "Please select a valid location from the suggested below.";
           dom.style.display = "block";
           flag = false;
+          this.errFlag = false;
         }
         else
         {
@@ -245,17 +255,34 @@ export class EditAuPairProfileComponent implements OnInit {
       console.log("You cannot have any empty fields.");
     }
     else
-    {
-      this.userDetails.email = val.email;
-      this.userDetails.number = val.phone;
-      this.userDetails.address = val.address;
-      this.userDetails.latitude = this.lat;
-      this.userDetails.longitude = this.long;
-      this.userDetails.suburb = this.suburb;
-      this.auPairDetails.payRate = val.payRate;
-      this.auPairDetails.bio = val.bio;
-      this.auPairDetails.experience = val.experience;
-      this.editDetails(this.userDetails, this.auPairDetails);
+    {     
+      if(this.errFlag === false)
+      {
+        this.errToast("Please select a valid location from the suggested below.");
+      }
+      else if(this.sameFlag === true)
+      {
+        this.userDetails.email = val.email;
+        this.userDetails.number = val.phone;
+        this.userDetails.address = val.address;
+        this.auPairDetails.payRate = val.payRate;
+        this.auPairDetails.bio = val.bio;
+        this.auPairDetails.experience = val.experience;
+        this.editDetails(this.userDetails, this.auPairDetails);
+      }
+      else
+      {
+        this.userDetails.email = val.email;
+        this.userDetails.number = val.phone;
+        this.userDetails.address = val.address;
+        this.userDetails.latitude = this.lat;
+        this.userDetails.longitude = this.long;
+        this.userDetails.suburb = this.suburb;
+        this.auPairDetails.payRate = val.payRate;
+        this.auPairDetails.bio = val.bio;
+        this.auPairDetails.experience = val.experience;
+        this.editDetails(this.userDetails, this.auPairDetails);
+      }
     }
   }
 
@@ -266,7 +293,7 @@ export class EditAuPairProfileComponent implements OnInit {
 
     if(this.hasErr)
     {
-      this.errToast();
+      this.errToast("Unable to update profile.");
     }
     else
     {
@@ -315,10 +342,10 @@ export class EditAuPairProfileComponent implements OnInit {
     await toast.present();
   }
 
-  async errToast()
+  async errToast(mes : string)
   {
     const toast = await this.toastCtrl.create({
-      message: 'Unable to update profile!',
+      message: mes,
       duration: 4000,
       position: 'top',
       cssClass: 'toastPopUp'

@@ -14,6 +14,8 @@ export class EditParentProfileComponent implements OnInit{
   
   parentID = "";
   hasErr = false;
+  sameFlag = false;
+  errFlag = true;
 
   location = "";
   long = 0;
@@ -191,11 +193,17 @@ export class EditParentProfileComponent implements OnInit{
             }
           }
         })
-        if(!flag)
+        if(val.address === this.userDetails.address)
+        {
+          dom.style.display = "none";
+          this.sameFlag = true;
+        }
+        else if(!flag)
         {
           dom.innerHTML = "Please select a valid location from the suggested below.";
           dom.style.display = "block";
           flag = false;
+          this.errFlag = false;
         }
         else
         {
@@ -298,18 +306,37 @@ export class EditParentProfileComponent implements OnInit{
     }
     else
     {
-      this.userDetails.email = val.email;
-      this.userDetails.number = val.phone;
-      this.userDetails.address = val.address;
-      this.userDetails.latitude = this.lat;
-      this.userDetails.longitude = this.long;
-      this.userDetails.suburb = this.suburb;
-      this.medAidDetails.name = val.medicalAidMM;
-      this.medAidDetails.plan = val.medicalAidPlan;
-      this.medAidDetails.provider = val.medicalAidProvider;
-      this.medAidDetails.mID = val.medicalAidNo;
-      this.medAidDetails.sname = val.medicalAidMS;
-      this.editDetails(this.userDetails, this.medAidDetails);
+      if(this.errFlag === false)
+      {
+        this.errToast("Please select a valid location from the suggested below.");
+      }
+      else if(this.sameFlag === true)
+      {
+        this.userDetails.email = val.email;
+        this.userDetails.number = val.phone;
+        this.userDetails.address = val.address;
+        this.medAidDetails.name = val.medicalAidMM;
+        this.medAidDetails.plan = val.medicalAidPlan;
+        this.medAidDetails.provider = val.medicalAidProvider;
+        this.medAidDetails.mID = val.medicalAidNo;
+        this.medAidDetails.sname = val.medicalAidMS;
+        this.editDetails(this.userDetails, this.medAidDetails);
+      }
+      else
+      {
+        this.userDetails.email = val.email;
+        this.userDetails.number = val.phone;
+        this.userDetails.address = val.address;
+        this.userDetails.latitude = this.lat;
+        this.userDetails.longitude = this.long;
+        this.userDetails.suburb = this.suburb;
+        this.medAidDetails.name = val.medicalAidMM;
+        this.medAidDetails.plan = val.medicalAidPlan;
+        this.medAidDetails.provider = val.medicalAidProvider;
+        this.medAidDetails.mID = val.medicalAidNo;
+        this.medAidDetails.sname = val.medicalAidMS;
+        this.editDetails(this.userDetails, this.medAidDetails);
+      }
     }
   }
 
@@ -378,10 +405,10 @@ export class EditParentProfileComponent implements OnInit{
     await toast.present();
   }
 
-  async errToast()
+  async errToast(mes : string)
   {
     const toast = await this.toastCtrl.create({
-      message: 'Unable to update profile!',
+      message: mes,
       duration: 4000,
       position: 'top',
       cssClass: 'toastPopUp'
