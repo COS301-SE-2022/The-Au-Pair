@@ -239,8 +239,8 @@ export class API{
     return this.http.get(environment.apiURI+"/getAllReports");
   }
   
-  getReportsForAuPair(id : string): Observable<any> {
-    return this.http.post(environment.apiURI+"/getReportsForAuPair", id);
+  getReportsForUser(id : string): Observable<any> {
+    return this.http.post(environment.apiURI+'/getReportsForUser', id);
   }
 
   deleteReport(id : string): Observable<any> {
