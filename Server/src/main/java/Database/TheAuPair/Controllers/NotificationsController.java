@@ -3,9 +3,6 @@ package Database.TheAuPair.Controllers;
 import Database.TheAuPair.Models.Notification;
 import Database.TheAuPair.Repositories.NotificationsRepository;
 import Database.TheAuPair.Services.NotificationsService;
-
-import org.springframework.http.ResponseEntity;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import java.util.List;
 

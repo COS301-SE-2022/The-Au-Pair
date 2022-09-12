@@ -4,16 +4,16 @@ import java.io.IOException;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RestController;
 import com.sendgrid.Response;
-
-import org.springframework.stereotype.Controller;
-
 import Database.TheAuPair.Models.EmailRequest;
 import Database.TheAuPair.Services.EmailService;
 
-@Controller
+@RestController
+@CrossOrigin(origins = "*")
 public class EmailController{
 
     @Autowired

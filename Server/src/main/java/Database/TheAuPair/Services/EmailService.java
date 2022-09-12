@@ -16,20 +16,23 @@ public class EmailService {
 
  public Response sendEmail(EmailRequest emailRequest) throws IOException 
  {
-    Mail mail = new Mail(new Email("theaupair.help@gmail.com"),
-                                  emailRequest.getSubject(),
-                                  new Email(emailRequest.getTo()),
-                                  new Content("text/plain", emailRequest.getBody()));
+  //Building the email
+    Email from = new Email("theaupair.help@gmail.com");
+    String subject = emailRequest.getSubject();  
+    Email to = new Email(emailRequest.getTo());
+    Content content = new Content("text/plain", emailRequest.getBody());
 
-    mail.setReplyTo(new Email("theaupair.help@gmail.com"));
+    Mail mail = new Mail(from,subject,to,content);
+    mail.setReplyTo(from);
+
     Request request = new Request();
     Response response = null;
+
     try {
       request.setMethod(Method.POST);
       request.setEndpoint("mail/send");
       request.setBody(mail.build());
-
-      this.sendGridClient.api(request);
+      response = this.sendGridClient.api(request);
     } catch (IOException ex) {
       System.out.println(ex.getMessage());
     }
