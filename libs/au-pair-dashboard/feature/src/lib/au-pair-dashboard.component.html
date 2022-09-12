@@ -4,10 +4,12 @@
     <p class="welcome-heading">Welcome {{this.aupairName}}</p>
     <div *ngIf="employerId !== ''" class="children-div-wrapper">
       <ion-card class="children-div">
-        <div class="employer-name"><span class="bold-text">Employer:</span> {{ employerName }} {{ employerSurname }}
-          <a href = 'tel:{{ employerPhone }}'><ion-icon name="call" class = 'call-icon'></ion-icon></a>
-          <a href = 'sms:{{ employerPhone }}'><ion-icon name="chatbubble-ellipses" class = 'message-icon'></ion-icon></a>
-          <div *ngIf="this.employerId !== ''"><ion-icon class="terminate-contract" name="person-remove" (click)="presentAlert()"></ion-icon></div>
+        <div class="employer-name"><span class="bold-text">Employer:</span> {{ employerName }} {{ employerSurname }} </div>
+        <div class="button-container" >
+            <a href = 'tel:{{ employerPhone }}'><ion-icon name="call" class = 'call-icon'></ion-icon></a>
+            <a href = 'sms:{{ employerPhone }}'><ion-icon name="chatbubble-ellipses" class = 'message-icon'></ion-icon></a>
+            <ion-icon class="report-icon" name="alert-circle" (click)="openReportModal()"></ion-icon>
+            <div *ngIf="this.employerId !== ''"><ion-icon class="terminate-contract" name="person-remove" (click)="presentAlert()"></ion-icon></div>
         </div>
         <div class="child-status">
           <span class="bold-text">Children: </span>

@@ -1,13 +1,26 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { HttpClientTestingModule } from "@angular/common/http/testing";
 import { RouterTestingModule} from '@angular/router/testing';
+import { FormsModule } from '@angular/forms';
 import { AuPairDashboardComponent } from './au-pair-dashboard.component';
 import { API } from '../../../../shared/api/api.service';
 import { NavbarModule } from '@the-au-pair/shared/components/navbar';
-import { IonicModule } from '@ionic/angular';
+import { IonicModule, ModalController, ToastController } from '@ionic/angular';
 import { CommonModule } from '@angular/common';
-import { NgxsModule } from '@ngxs/store';
+import { NgxsModule, Store } from '@ngxs/store';
 import { AppState } from '../../../../shared/ngxs/state';
+import { of } from 'rxjs';
+import { SetId } from '../../../../../libs/shared/ngxs/actions';
+import { UserReportModalComponent } from './user-report-modal/user-report-modal.component';
+
+const apiMock = {
+  getAuPair() {
+    return of({})
+  },
+  addReport() {
+    return of({})
+  }
+}
 
 describe('AuPairDashboardComponent', () => {
   let component: AuPairDashboardComponent;
@@ -31,6 +44,12 @@ describe('AuPairDashboardComponent', () => {
     expect(component).toBeTruthy();
   });
 
+  it('should,open the report modal when called', async ()=>{
+    jest.spyOn(component,"openReportModal");
+    component.openReportModal();
+    expect(await component.openReportModal).toReturn();
+  });
+
   it('should create a string of todays date', () => {
     jest.spyOn(component, "getToday");
 
@@ -43,5 +62,88 @@ describe('AuPairDashboardComponent', () => {
     
     const str = component.getCurrentTime();
     expect(str).toMatch(/^((0[0-9])|(1[0-9])|(2[0-4])):((0[0-9])|([1-6]\d))$/);
+  });
+});
+
+describe('UserReportModalComponent', () => {
+  let component: UserReportModalComponent;
+  let fixture: ComponentFixture<UserReportModalComponent>;
+  let store: Store;
+
+  beforeEach(async () => {
+    await TestBed.configureTestingModule({
+      declarations: [UserReportModalComponent],
+      imports: [IonicModule, CommonModule,HttpClientTestingModule,NavbarModule, RouterTestingModule, FormsModule,NgxsModule.forRoot([AppState])],
+      providers: [
+      {
+        provide:API, useValue:apiMock
+      }, 
+      ToastController, 
+      ModalController]
+    }).compileComponents();
+
+    store = TestBed.inject(Store);
+  });
+
+  beforeEach(() => {
+    fixture = TestBed.createComponent(UserReportModalComponent);
+    component = fixture.componentInstance;
+    fixture.detectChanges();
+  });
+
+  it('should create', () => {
+    expect(component).toBeTruthy();
+  });
+
+  it('should set the parentID and auPairId on init', async () => {
+    store.dispatch(new SetId("123"));
+    jest.spyOn(apiMock, 'getAuPair').mockImplementation(()=>of(
+      {
+        employer : "321",
+      }
+    ));
+
+    await component.ngOnInit();
+    expect(component.auPairId).toEqual("123");  
+    expect(component.parentID).toEqual("321");
+  });
+
+  it('should send the report to the API', async () => {
+    store.dispatch(new SetId("123"));
+    jest.spyOn(apiMock, 'getAuPair').mockImplementation(()=>of(
+      {
+        employer : "321",
+      }
+    ));
+
+    await component.ngOnInit();
+    
+    const addRep = jest.spyOn(apiMock, 'addReport');
+    jest.spyOn(component,"closeModal");
+    const toast = jest.spyOn(component, 'openToast');
+    addRep.mockImplementation(()=>of(
+      true
+    ));
+
+    await component.reportUser({desc : "test"});
+      
+    expect(component.reportDetails.reportIssuerId).toEqual("123");
+    expect(component.reportDetails.reportedUserId).toEqual("321");
+    expect(component.reportDetails.desc).toEqual("test");
+    expect(addRep).toHaveBeenCalled();
+    expect(toast).toHaveBeenCalledWith("Report sent!");
+    expect(component.closeModal).toHaveBeenCalled();
+  });
+
+  it('should, open a toast when openToast is called', async ()=>{
+    jest.spyOn(component,"openToast");
+    component.openToast("test");
+    expect(await component.openToast).toReturn();
+  });
+
+  it('should,close the modal when closeModal is called', async ()=>{
+    jest.spyOn(component,"closeModal");
+    component.closeModal();
+    expect(await component.closeModal).toReturn();
   });
 });
