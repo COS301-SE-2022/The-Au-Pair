@@ -49,7 +49,7 @@ ion-menu::part(backdrop) {
 }
 
 .explore-header{
-    background-color: #69A88D;
+    background-color: var(--ion-color-primary);
     height: 58px;
 }
 
@@ -226,7 +226,7 @@ ion-card {
     align-items: center;
     justify-content: center;
     display: flex;
-    background-color: #69A88D;
+    background-color: var(--ion-color-primary);
     border-radius: 0px 0px 16px 16px;
     cursor: pointer;
 }

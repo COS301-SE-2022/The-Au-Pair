@@ -11,6 +11,7 @@
                 <div class="edit-details">
                     <p class='edit' (click)="navigateEdit(child)">Edit details</p>
                     <ion-col><ion-icon class="icon-edit" name="pencil-outline" (click)="navigateEdit(child)"></ion-icon></ion-col>
+                    <ion-col><ion-icon class="remove-child" name="person-remove" (click)="presentAlert(child)"></ion-icon></ion-col>
                 </div>
             </ion-card>
         </div>
@@ -19,7 +20,11 @@
 
         <div class="actions-div-wrapper">
             <div class='actions-div'>
-                <div class='action' id="addChild" routerLink="/add-child">
+                <div class='action' *ngIf="this.children.length === 4" style="opacity:0.4" (click)="checkNumChildren()" id="addChild">
+                    <ion-icon name="people-circle-outline" class='action-icon '></ion-icon>
+                    <div class='action-tag '>Add A Child</div>
+                </div>
+                <div class='action' *ngIf="this.children.length < 4" id="addChild" routerLink="/add-child">
                     <ion-icon name="people-circle-outline" class='action-icon '></ion-icon>
                     <div class='action-tag '>Add A Child</div>
                 </div>

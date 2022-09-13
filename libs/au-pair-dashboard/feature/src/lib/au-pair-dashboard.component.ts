@@ -3,8 +3,9 @@ import { Store } from '@ngxs/store';
 import { API } from '../../../../shared/api/api.service'
 import { auPair, Child, HoursLogged, Parent } from '../../../../shared/interfaces/interfaces';
 import { Router } from '@angular/router';
-import { ToastController } from '@ionic/angular';
+import { ModalController, ToastController } from '@ionic/angular';
 import { AlertController } from '@ionic/angular';
+import { UserReportModalComponent } from './user-report-modal/user-report-modal.component';
 
 @Component({
   selector: 'the-au-pair-au-pair-dashboard',
@@ -67,7 +68,14 @@ export class AuPairDashboardComponent implements OnInit {
     auPair: "",
   }
   
-  constructor(private serv: API, private store: Store, public router: Router, public toastCtrl: ToastController, private alertController: AlertController) {}
+  constructor(private serv: API, private modalCtrl : ModalController, private store: Store, public router: Router, public toastCtrl: ToastController, private alertController: AlertController) {}
+
+  async openReportModal() {
+    const modal = await this.modalCtrl.create({
+      component: UserReportModalComponent
+    });
+    await modal.present();
+  }
 
   async ngOnInit(): Promise<void> {
     this.aupairID = this.store.snapshot().user.id;

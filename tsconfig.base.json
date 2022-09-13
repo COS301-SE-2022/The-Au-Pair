@@ -98,6 +98,9 @@
       "@the-au-pair/shell/feature": ["libs/shell/feature/src/index.ts"],
       "@the-au-pair/track-au-pair/feature": [
         "libs/track-au-pair/feature/src/index.ts"
+      ],
+      "@the-au-pair/shared/services/auth": [
+        "libs/shared/services/auth/src/index.ts"
       ]
     }
   },

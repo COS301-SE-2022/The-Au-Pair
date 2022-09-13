@@ -3,6 +3,7 @@ export interface Activity{
     name: string;
     description: string;
     location: string;
+    boundary: number;
     timeStart: string;
     timeEnd: string;
     budget: number;
@@ -110,8 +111,8 @@ export interface Activity{
   
   export interface Report{
     id: string;
-    issuerId: string;
-    auPairId: string;
+    reportIssuerId: string;
+    reportedUserId: string;
     desc: string;
   }
   

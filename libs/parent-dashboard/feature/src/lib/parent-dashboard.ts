@@ -2,11 +2,11 @@ import { Component, OnInit } from '@angular/core';
 import { API } from '../../../../shared/api/api.service';
 import { auPair, Child, Parent, User } from '../../../../shared/interfaces/interfaces';
 import { AuPairRatingModalComponent } from './au-pair-rating-modal/au-pair-rating-modal.component';
+import { UserReportModalComponent } from './user-report-modal/user-report-modal.component';
 import { ModalController, ToastController } from '@ionic/angular';
 import { Store } from '@ngxs/store';
 import { Router } from '@angular/router';
 import { AlertController } from '@ionic/angular';
-import { Handler } from 'leaflet';
 
 @Component({
   selector: 'the-au-pair-parent-dashboard',
@@ -96,6 +96,14 @@ export class ParentDashboardComponent implements OnInit{
   }
 
   constructor(private serv: API, private modalCtrl : ModalController, private store: Store, public toastCtrl: ToastController, public router: Router, private alertController: AlertController){}
+
+
+  async openReportModal() {
+    const modal = await this.modalCtrl.create({
+      component: UserReportModalComponent
+    });
+    await modal.present();
+  }
 
   async ngOnInit()
   {

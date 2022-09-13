@@ -136,7 +136,7 @@ ion-card{
 input[type=text], select{
   width: max(10vw,135px);
   height: 35px;
-  background: #F9F9F9;
+  background: var(--ion-color-light-white);
   box-shadow: 1px 2px 5px rgba(0, 0, 0, 0.13);
   border-style: none;
   border-radius: 4px;
