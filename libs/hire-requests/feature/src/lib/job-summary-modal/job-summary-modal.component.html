@@ -1,6 +1,5 @@
 <ion-content [fullscreen]="true">
     <div class = "parent-profile-div">
-        <ion-col size="1" class="ion-text-center"><ion-icon class="icon close" name="close-circle-outline" (click)="closeModal()"></ion-icon></ion-col>
         <h1 class='job-summary-title'>Job Summary</h1>
         <h3 class='parent-name'>{{this.userDetails.fname}} {{this.userDetails.sname}}</h3>
             <div class='profile-picture-wrapper'>
@@ -60,7 +59,6 @@
                   <div *ngIf="shiftHours[day] !== 0" class="hour-ranges">{{ shiftRangeMin[day] }}<br>-<br>{{ shiftRangeMax[day] }}</div>
                 </div>
               </div>
-              <img id="lifestyles" src="assets/images/lifestyles.png">
           </ion-card>
         <h1 class='job-summary-title'>Terms Of Employment:</h1>
         <div class="terms-container">

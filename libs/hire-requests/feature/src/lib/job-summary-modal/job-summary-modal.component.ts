@@ -137,11 +137,6 @@ export class JobSummaryModalComponent implements OnInit {
     this.populateGraph();
   }
 
-  closeModal()
-  {
-    this.modalCtrl.dismiss();
-  }
-
   async sucToast()
   {
     const toast = await this.toastCtrl.create({
@@ -305,12 +300,6 @@ export class JobSummaryModalComponent implements OnInit {
     let minTime = "23:59";
     let maxTime = "00:00";
 
-    if("13:00" > "11:00")
-    {
-      console.log("YES");
-      
-    }
-
     let actDays = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"];
 
     await this.serv.getAuPairSchedule(this.parentDetails.children).toPromise()
@@ -350,5 +339,10 @@ export class JobSummaryModalComponent implements OnInit {
       this.shiftRangeMin[i] = minTime;
       this.shiftRangeMax[i] = maxTime;
     }    
+  }
+
+  closeModal()
+  {
+    this.modalCtrl.dismiss();
   }
 }

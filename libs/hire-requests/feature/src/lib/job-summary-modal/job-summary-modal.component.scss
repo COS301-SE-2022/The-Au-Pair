@@ -9,7 +9,7 @@
 }
 
 .parent-name {
-    font-size: 2.4vw;
+    font-size: 30px;
     padding-top: 2%;
     margin-bottom: 2%;
     color: black;
@@ -210,7 +210,7 @@
     font-size: 24px;
 }
 
-.close{
+.icon-close{
     cursor: pointer;
     float: right;
     width: 30px;
@@ -235,12 +235,12 @@
     height: 450px;
     position: relative;
     display: grid;
-    grid-template-columns: 0.3fr repeat(7, 1fr);
+    grid-template-columns: 1fr repeat(7, 1fr);
     align-items: center;
     justify-items: center;
     font-size: var(--heading-size);
     bottom: 0px;
-    margin-left: 40px;
+    margin-left: 35px;
 }
   
 .day-wrapper { 
@@ -272,49 +272,18 @@ ion-icon {
     font-weight: bold;
 }
 
-#lifestyles{
-    position: absolute;
-    width: 344px;
-    height: 325px;
-    left: -79px;
-    top: -5px;
-    opacity: 0.04;
-    z-index: -10;
-}
-
 .hour-ranges{
     font-size: 15px;
 }
-
-.tooltip-graph{
-    width: 20px;
-    height: 20px;
-    margin-top: 8px;
-}
-
-.hovertext:before {
-    content: attr(data-hover);
-    visibility: hidden;
-    opacity: 0;
-    width: max-content;
-    background-color: black;
-    color: #fff;
-    text-align: center;
-    border-radius: 5px;
-    padding: 5px 5px;
-    transition: opacity 1s ease-in-out;
-  
-    position: absolute;
-    z-index: 1;
-    left: 0;
-    top: 110%;
-  }
-  
 
 @media (max-width: 642px) {
     .parent-profile-div{
         margin-top: 13px;
         width: 90%;
+    }
+
+    .bar-graph {
+        margin-left: 20px;
     }
 
     .job-summary-title{
@@ -350,6 +319,14 @@ ion-icon {
 
     .details-div{
         width: 95%;
+    }
+
+    .label{
+        font-size: 18px;
+    }
+
+    .hour-ranges{
+        font-size: 12px;
     }
 }
 
