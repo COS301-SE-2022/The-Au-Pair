@@ -48,6 +48,8 @@ export class ParentAddActivityComponent implements OnInit{
   //Populate the activityDetails object from form input
   async getActivityValues(val : any)
   {  
+    console.log(val);
+    
     //FORM ERROR CHECKING
     let emptyInput = false;
     let dom = document.getElementById("actNameError");

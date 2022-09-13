@@ -69,6 +69,7 @@
           <div>
             <label id="childLabel" for="Child">Select a child</label>
             <select ngModel name="childId" id="childId">
+              <option disabled selected value>Select a child</option>
               <option *ngFor="let child of allChildren" value="{{child.id}}">{{child.fname}}</option>
             </select>
             <p id="childError" class="error" style="display: none;">Error in field</p>
@@ -81,12 +82,6 @@
           </div>
         </form>
     </div>
-
-    <!-- <ejs-maps id='rn-container' [layers]='layers'>
-      <e-layers id="mapLayers">
-        <e-layer [urlTemplate]= 'urlTemplate'></e-layer>
-      </e-layers>
-    </ejs-maps> -->
     <img id="active-2" src="assets/images/active.png">
     <img id="active" src="assets/images/active-2.png">
     <img id="lifestyles" src="assets/images/lifestyles.png">

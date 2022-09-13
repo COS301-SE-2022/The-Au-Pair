@@ -56,6 +56,8 @@ export class ScheduleComponent implements OnInit{
       });
       this.selectedChildName = this.children[0].name;
       this.getActivities(this.children[0].id);
+      this.selectedChild.name = this.children[0].name;
+      this.selectedChild.id = this.children[0].id;
     });
   }
 
@@ -74,6 +76,15 @@ export class ScheduleComponent implements OnInit{
       error=>{console.log("Error has occured with API: " + error);}
     )
   }
+
+  //Clear schedule for child
+  clearSchedule(id : string)
+  {
+    console.log("CHild to delete activities for: ", id);
+    
+  }
+
+  //Navigation methods
 
   navigateEdit(id : string)
   { 

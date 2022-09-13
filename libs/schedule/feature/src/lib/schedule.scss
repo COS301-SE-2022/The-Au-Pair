@@ -12,6 +12,25 @@
   background-color: #d2e2db !important;
 }
 
+ion-icon {
+  pointer-events :none;
+}
+
+.trash-bin{
+  cursor: pointer;
+  margin-bottom: -7px;
+  margin-left: 15px;
+  color: var(--ion-color-danger-tint);
+  font-size: 25px;
+}
+
+#clear-schedule{
+  display: relative;
+  justify-content: center;
+  vertical-align: center;
+  cursor: pointer;
+}
+
 @media (min-width: 480px) {
     .heading{
     font-size: 24px;
@@ -131,6 +150,25 @@ ion-card{
 .filter{
   color : var(--ion-color-dark);
   margin-bottom: 1.5rem;
+}
+
+.clear{
+  cursor: pointer;
+  text-align: center;
+  justify-content: center;
+  margin-left: 10px;
+
+  width: 195px !important;
+  height: 35px;
+  font-style: normal;
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 19px;
+  color: var(--ion-color-primary);
+  background-color: transparent !important;
+  border: 2px solid var(--ion-color-primary) !important;
+  border-radius: 10px;
+  margin-top: 20px;
 }
 
 input[type=text], select{
