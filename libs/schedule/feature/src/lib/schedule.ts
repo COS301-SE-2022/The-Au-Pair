@@ -5,6 +5,7 @@ import { Router } from '@angular/router';
 import { Store } from '@ngxs/store';
 import { Activity } from '../../../../shared/interfaces/interfaces';
 import { NgModel } from '@angular/forms';
+import { AlertController, ToastController } from '@ionic/angular';
 
 @Component({
   selector: 'the-au-pair-schedule',
@@ -27,7 +28,7 @@ export class ScheduleComponent implements OnInit{
   curDay =  this.getCurDay(this.days);
   activities: Activity[] = [];
 
-  constructor(private serv: API, private router: Router, private store: Store) {}
+  constructor(private serv: API, private router: Router, private store: Store, private alertController: AlertController, public toastCtrl: ToastController) {}
 
   ngOnInit(): void {
       this.parentID = this.store.snapshot().user.id;
@@ -78,10 +79,25 @@ export class ScheduleComponent implements OnInit{
   }
 
   //Clear schedule for child
-  clearSchedule(id : string)
-  {
-    console.log("CHild to delete activities for: ", id);
-    
+  //Alert to confirm clearing childs schedule
+  async presentAlert(childName: string, childId: string) {
+    const alert = await this.alertController.create({
+      header: 'Are you sure you want to clear ' + childName + '\'s schedule? This will permanently delete all associated activities.',
+      cssClass: 'custom-alert',
+      buttons: [
+        {
+          text: 'No',
+          cssClass: 'alert-button-cancel',
+        },
+        {
+          text: 'Yes',
+          cssClass: 'alert-button-confirm',
+          // handler: () => { this.removeActivity(); }
+        }
+      ]
+    });
+
+    await alert.present();
   }
 
   //Navigation methods

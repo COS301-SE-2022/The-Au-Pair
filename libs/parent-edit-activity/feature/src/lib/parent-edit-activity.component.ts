@@ -302,11 +302,6 @@ export class ParentEditActivityComponent implements OnInit {
     });
   }
 
-  sayHi()
-  {
-    console.log("Hi");
-  }
-
   //Pop-up if activity is successfully updates
   async openToast()
   {

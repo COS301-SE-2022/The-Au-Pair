@@ -8,8 +8,8 @@
       <select (change)="getSelectedChild()" [(ngModel)]="selectedChildName">
         <option  *ngFor="let child of children" [value]="child.name">{{child.name}}</option>
       </select>
-    <span id="clear-schedule" title="Clear schedule" (click)="clearSchedule(selectedChild.name)">
-      <ion-icon class="trash-bin" name="trash-bin" (click)="clearSchedule(selectedChild.name)"></ion-icon>
+    <span id="clear-schedule" title="Clear schedule" (click)="presentAlert(selectedChild.name, selectedChild.id)">
+      <ion-icon class="trash-bin" name="trash-bin" (click)="presentAlert(selectedChild.name, selectedChild.id)"></ion-icon>
     </span>
   </div>
   <div id="schedule-grid-desktop">
