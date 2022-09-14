@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
+@CrossOrigin(origins = "*")
 public class NotificationsController
 {
   private NotificationsService ns;
@@ -17,21 +18,18 @@ public class NotificationsController
   }
 
   @PostMapping("/getNotifcationsByAuPairId")
-  @CrossOrigin(origins = "http://localhost:4200")
   public List<Notification> getNotifcationsByAuPairId(@RequestBody String id)
   {
     return this.ns.getNotifcationsByAuPairId(id);
   }
 
   @PostMapping("/getNotifcationsByParentId")
-  @CrossOrigin(origins = "http://localhost:4200")
   public List<Notification> getNotifcationsByParentId(@RequestBody String id)
   {
     return this.ns.getNotifcationsByParentId(id);
   }
 
   @PostMapping("/logNotification")
-  @CrossOrigin(origins = "http://localhost:4200")
   public void logNotification(@RequestBody Notification n)
   {
     this.ns.logNotification(n);

@@ -111,8 +111,8 @@ export interface Activity{
   
   export interface Report{
     id: string;
-    issuerId: string;
-    auPairId: string;
+    reportIssuerId: string;
+    reportedUserId: string;
     desc: string;
   }
   
