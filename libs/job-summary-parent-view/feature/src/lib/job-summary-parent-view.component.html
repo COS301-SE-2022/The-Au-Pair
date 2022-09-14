@@ -57,7 +57,7 @@
               <ion-col>
                 <div class="day ion-text-center">
                   <h2 class="heading">{{ days[day] }}</h2>
-                  <ion-card class="day-card" id="{{ day }}" [class.active] = "day === curDay">
+                  <ion-card class="day-card" id="{{ day }}">
                     <div *ngFor="let item of childActivities; let l = count">
                       <div class="card" *ngIf="item.dayofweek === days[day]" >
                         <ion-row  class="ion-align-items-center .ion-justify-content-between">
@@ -67,6 +67,7 @@
                         </ion-row>
                       </div>
                     </div>
+                    <div *ngIf="shiftHours[day] === 0">THERE ARE NO SCHEDULED ACTIVITIES FOR THIS DAY</div>
                   </ion-card> 
                 </div>
               </ion-col>

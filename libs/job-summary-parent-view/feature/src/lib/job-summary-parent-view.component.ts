@@ -23,6 +23,8 @@ export class JobSummaryParentViewComponent implements OnInit {
     "Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"
   ]
 
+  shiftHours: number[] = [];
+
   curDay =  this.getCurDay(this.days);
   auPairChildren: string[] = [];
   activities: any;
@@ -146,6 +148,8 @@ export class JobSummaryParentViewComponent implements OnInit {
         },
         error =>{console.log("Error has occured with API: " + error);}
       )
+
+      this.getNoActivities();
   }
 
   getCurDay(days : string[]) : number {
@@ -265,5 +269,36 @@ export class JobSummaryParentViewComponent implements OnInit {
       cssClass: 'toastPopUp'
     });
     await toast.present();
+  }
+
+  async getNoActivities()
+  {   
+    let actCount = 0;
+
+    let actDays = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"];
+
+    await this.serv.getAuPairSchedule(this.parentDetails.children).toPromise()
+    .then(
+      res=>{
+        this.activities = res;      
+      },
+      error=>{
+        console.log("Error has occured with API: " + error);
+      }
+    )
+
+    for(let i = 0; i < actDays.length; i++)
+    {
+      actCount = 0;
+
+      this.activities.forEach((act: {timeStart: any; day: any; timeEnd: any;}) => 
+      {
+        if(act.day === actDays[i])
+        {
+          actCount++;
+        }
+      });
+      this.shiftHours[i] = actCount;
+    }    
   }
 }

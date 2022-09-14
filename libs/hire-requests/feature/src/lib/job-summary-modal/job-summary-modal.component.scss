@@ -135,39 +135,6 @@
     margin-bottom: auto;
 }
 
-.change-button{
-    padding: 10px 22px;
-    gap: 10px;
-    border: 2px solid var(--ion-color-secondary);
-    border-radius: 10px;
-    background-color: #69A88DB2;
-    margin: auto;
-    display: block;
-    margin-top: 25px;
-}
-
-.change-button-schedule{
-    padding: 10px 22px;
-    gap: 10px;
-    border: 2px solid var(--ion-color-secondary);
-    border-radius: 10px;
-    background-color: #69A88DB2;
-    margin: auto;
-    display: block;
-    margin-top: 25px;
-}
-
-.hire-button{
-    padding: 10px 22px;
-    gap: 10px;
-    border: 2px solid var(--ion-color-secondary);
-    border-radius: 10px;
-    background-color: #69A88DB2;
-    margin: auto;
-    display: block;
-    margin-top: 25px;
-}
-
 .terms-container{
     margin-left: 20px;
     margin-right: 20px;
@@ -182,7 +149,7 @@
 .accept-button{
     padding: 10px 22px;
     gap: 10px;
-    border: 2px solid var(--ion-color-dark);
+    border: 2px solid var(--ion-background-color);
     border-radius: 10px;
     background-color: var(--ion-color-primary);
     margin: auto;
@@ -193,7 +160,7 @@
 .reject-button{
     padding: 10px 22px;
     gap: 10px;
-    border: 2px solid var(--ion-color-dark);
+    border: 2px solid var(--ion-background-color);
     border-radius: 10px;
     background-color: var(--ion-color-danger);
     margin: auto;

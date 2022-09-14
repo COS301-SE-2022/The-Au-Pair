@@ -140,34 +140,37 @@
 .change-button{
     padding: 10px 22px;
     gap: 10px;
-    border: 2px solid var(--ion-color-dark);
+    border: 2px solid var(--ion-background-color);
     border-radius: 10px;
-    background-color: #69A88DB2;
+    background-color: transparent;
     margin: auto;
     display: block;
     margin-top: 25px;
+    color: var(--ion-background-color);
 }
 
 .change-button-schedule{
     padding: 10px 22px;
     gap: 10px;
-    border: 2px solid var(--ion-color-dark);
+    border: 2px solid var(--ion-background-color);
     border-radius: 10px;
-    background-color: #69A88DB2;
+    background-color: transparent;
     margin: auto;
     display: block;
     margin-top: 25px;
+    color: var(--ion-background-color);
 }
 
 .hire-button{
     padding: 10px 22px;
     gap: 10px;
-    border: 2px solid var(--ion-color-dark);
+    border: 2px solid var(--ion-background-color);
     border-radius: 10px;
-    background-color: #69A88DB2;
+    background-color: transparent;
     margin: auto;
     display: block;
     margin-top: 25px;
+    color: var(--ion-background-color);
 }
 
 #active-2{
@@ -311,17 +314,13 @@
     font-weight: bold;
     font-size: 24px;
 }
-  
-.active {
-    background-color: #d2e2db !important;
-}
 
 .mobile-container {
     padding-left: 15px;
 }
   
 .day-card {
-    background-color: #E6E6E6;
+    background-color: #d2e2db;
     height: 75vh;
     padding-top: 45px;
     box-shadow: none;
