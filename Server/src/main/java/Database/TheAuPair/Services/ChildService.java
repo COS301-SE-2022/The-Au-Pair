@@ -26,6 +26,21 @@ public class ChildService
 
   public void addChild(Child c)
   {
+    String id = "";
+    boolean valid = false;
+    while (!valid)
+    {
+      id = generateID();
+      valid = true;
+      for (Child child : cr.findAll())
+      {
+        if (child.getId().equals(id))
+        {
+          valid = false;
+        }
+      }
+    }
+    c.setId(id);
     cr.save(c);
   }
 
@@ -37,5 +52,19 @@ public class ChildService
   public void removeChild(String id)
   {
     cr.deleteById(id);
+  }
+
+  public String generateID()
+  {
+    String AlphaNumericString = "0123456789"+"abcdefghijklmnopqrstuvxyz";
+    StringBuilder sb = new StringBuilder(24);
+
+    for (int i = 0; i < 24; i++)
+    {
+      int index = (int)(AlphaNumericString.length() * Math.random());
+      sb.append(AlphaNumericString.charAt(index));
+    }
+
+    return sb.toString();
   }
 }
