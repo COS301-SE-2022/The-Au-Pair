@@ -51,36 +51,9 @@ export class AddChildComponent implements OnInit
       //Error check the fields for invalid input
       //Child ID Field
       let emptyInput = false;
-      let invalidInput = false;
-      let dom = document.getElementById("childIDError");
-      if(val.childID === "")
-      {
-        emptyInput = true;
-        if(dom != null)
-        {
-          dom.innerHTML = "Child ID field is empty.";
-          dom.style.display = "block";
-        }
-      }
-      else if(!this.SA_ID.test(val.childID))
-      {
-        if(dom != null)
-        {
-          dom.innerHTML = "Invalid South African ID number.";
-          dom.style.display = "block";
-          invalidInput = true;
-        }
-      }
-      else
-      {
-        if(dom != null)
-        {
-          dom.style.display = "none";
-        }
-      }
 
       //Child name field
-      dom = document.getElementById("childNameError");
+      let dom = document.getElementById("childNameError");
       if(val.childName === "")
       {
         emptyInput = true;
@@ -157,16 +130,10 @@ export class AddChildComponent implements OnInit
       {
         console.log("You cannot add an child with empty fields.");
       }
-      else if(invalidInput == true)
-      {
-        console.log("Entered South African is invalidID");
-      }
       else
-      {
-        let idNum = val.childID.replaceAll(' ', '');
-        idNum = val.childID.replaceAll('-', '');
-        
-        this.childDetails.id = idNum;
+      {       
+        //ID number is generated in child service
+        this.childDetails.id = "";
         this.childDetails.fname = val.childName;
         this.childDetails.sname= val.surname;
         this.childDetails.allergies= val.Allergies;

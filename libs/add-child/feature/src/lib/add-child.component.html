@@ -3,14 +3,6 @@
     <h2>Add A child</h2>
     <div class="childrenDetails">
         <form #childDetailsForm="ngForm" (ngSubmit)="getChildValues(childDetailsForm.value)" class = "form-details">
-
-          <!-- Child ID -->
-          <div>
-            <label id="labelID" for="childID">Child ID</label>
-            <input type="text" ngModel name="childID"placeholder="Child ID">
-            <p id="childIDError" class="error" style="display: none;">Error in field</p>  
-          </div>
-
           <!-- Child First Name -->
           <div>
             <label id="firstName" for="childName">Child Name</label>
