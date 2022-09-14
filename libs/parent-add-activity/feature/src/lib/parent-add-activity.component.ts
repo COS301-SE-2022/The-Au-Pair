@@ -330,12 +330,6 @@ export class ParentAddActivityComponent implements OnInit{
     await toast.present();
   }
 
-  //Remove used timeslots
-  removeUsedTimeslots()
-  {
-    
-  }
-
   //Service calls
   addActivity(act:Activity){
     this.serv.addActivity(act).toPromise().then(
