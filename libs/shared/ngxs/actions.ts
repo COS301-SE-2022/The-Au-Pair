@@ -31,3 +31,7 @@ export class SetAuPair{
     static readonly type = '[Parent] set auPair';
     constructor(public payload: string) {}
 }
+export class SetLoggedIn{
+    static readonly type = '[User] set loggedIn';
+    constructor(public payload: boolean) {}
+}

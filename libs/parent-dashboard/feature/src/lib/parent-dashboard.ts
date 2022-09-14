@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { API } from '../../../../shared/api/api.service';
 import { auPair, Child, Parent, User } from '../../../../shared/interfaces/interfaces';
 import { AuPairRatingModalComponent } from './au-pair-rating-modal/au-pair-rating-modal.component';
+import { UserReportModalComponent } from './user-report-modal/user-report-modal.component';
 import { ModalController, ToastController } from '@ionic/angular';
 import { Store } from '@ngxs/store';
 import { Router } from '@angular/router';
@@ -16,8 +17,19 @@ import { SetAuPair, SetChildren } from '../../../../shared/ngxs/actions';
 export class ParentDashboardComponent implements OnInit{ 
   children: Child[] = [];
   parentID = "";
+  umPoorID = "";
 
   handlerMessage!: boolean;
+
+  childDetails: Child ={
+    id: "",
+    fname: "",
+    sname: "",
+    allergies: "",
+    diet: "",
+    parent: "",
+    aupair: "",
+  }
 
   parentDetails: Parent = {
     id: "",
@@ -79,7 +91,8 @@ export class ParentDashboardComponent implements OnInit{
     bio: "",
     experience: "",
     currentLong: 0.0,
-    currentLat: 0.0
+    currentLat: 0.0,
+    terminateDate: "",
   }
 
   constructor(private serv: API, private modalCtrl : ModalController, private store: Store, public toastCtrl: ToastController, public router: Router, private alertController: AlertController){}
@@ -94,9 +107,31 @@ export class ParentDashboardComponent implements OnInit{
     await modal.present();
   }
 
+  async openReportModal() {
+    const modal = await this.modalCtrl.create({
+      component: UserReportModalComponent
+    });
+    await modal.present();
+  }
+
   async ngOnInit()
   {
     this.parentID = this.store.snapshot().user.id;
+    
+    await this.getParentDetails();
+    
+    this.umPoorID = this.parentDetails.auPair;
+    
+
+    if(this.umPoorID != "")
+    {
+      await this.getAuPairDetails();
+
+      if(this.currentAuPair.terminateDate != '')
+      {
+        await this.checkResignation();
+      }
+    }
 
     await this.serv.getUser(this.parentID).toPromise()
     .then( 
@@ -248,11 +283,36 @@ export class ParentDashboardComponent implements OnInit{
     }
   }
 
+  async checkResignation()
+  {
+    await this.getParentDetails();
+    await this.getAuPairDetails();        
+        
+    const then  = new Date(this.currentAuPair.terminateDate);
+    const now = new Date();
+
+    const msBetweenDates = Math.abs(then.getTime() - now.getTime());
+
+    let daysBetweenDates = msBetweenDates / (24 * 60 * 60 * 1000);
+
+    daysBetweenDates = Math.ceil(daysBetweenDates);
+
+    console.log(daysBetweenDates);
+    
+
+    if(daysBetweenDates >= 14)
+    {
+      this.terminateAuPair();
+    }
+  }
+
   async terminateAuPair()
   {
     await this.getAuPairDetails();
     await this.getParentDetails();
+    await this.removeChildrenAuPair();
 
+    this.currentAuPair.terminateDate = "";
     this.currentAuPair.employer = "";
     this.parentDetails.auPair = "";
 
@@ -264,7 +324,7 @@ export class ParentDashboardComponent implements OnInit{
 
   async getAuPairDetails()
   {
-    await this.serv.getAuPair(this.parentDetails.auPair)
+    await this.serv.getAuPair(this.umPoorID)
     .toPromise()
       .then(
       res=>{
@@ -279,6 +339,7 @@ export class ParentDashboardComponent implements OnInit{
         this.currentAuPair.experience = res.experience;
         this.currentAuPair.currentLong = res.currentLong;
         this.currentAuPair.currentLat = res.currentLat;
+        this.currentAuPair.terminateDate = res.terminateDate;
       },
       error=>{console.log("Error has occured with API: " + error);}
     )
@@ -300,6 +361,31 @@ export class ParentDashboardComponent implements OnInit{
       }
     )
   }
+
+ async removeChildrenAuPair()
+ {
+    await this.serv.getChildren(this.parentID)
+    .toPromise()
+    .then(
+      res=>{        
+        for(let i = 0; i < res.length; i++)
+        {
+          this.childDetails.id = res[i].id;
+          this.childDetails.fname = res[i].fname;
+          this.childDetails.sname = res[i].sname;
+          this.childDetails.allergies = res[i].allergies;
+          this.childDetails.diet = res[i].diet;
+          this.childDetails.parent = res[i].parent;
+          this.childDetails.aupair = "";
+
+          this.updateChild(this.childDetails);
+        }
+      },
+      error => {
+        console.log("Error has occured with API: " + error);
+      }
+    ) 
+ }
 
   async updateAuPair(){
     await this.serv.editAuPair(this.currentAuPair).toPromise()
@@ -327,6 +413,20 @@ export class ParentDashboardComponent implements OnInit{
         return error;
       }
     );
+  }
+
+  async updateChild(child : Child){
+    await this.serv.updateChild(child).toPromise()
+    .then(
+      res=>{
+        console.log("The response is:" + res);
+        return res;
+      },
+      error=>{
+        console.log("Error has occured with API: " + error);
+        return error;
+      }
+    )
   }
 
   async presentAlert() {

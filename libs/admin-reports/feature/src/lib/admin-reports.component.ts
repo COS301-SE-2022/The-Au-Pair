@@ -33,20 +33,18 @@ export class AdminReportsComponent implements OnInit {
     fcmToken: "",
   }
 
-  
-
   constructor(private serv: API) {}
 
   ngOnInit(): void {
     this.getReports();
   }
 
-  getReports() {
-    this.serv.getAllReports().toPromise().then(res => {
+  async getReports() {
+    await this.serv.getAllReports().toPromise().then(res => {
       this.reports = res;
 
       for(let i = 0; i < this.reports.length; i++) {
-        this.serv.getUser(this.reports[i].auPairId).toPromise().then(dat => {
+        this.serv.getUser(this.reports[i].reportedUserId).toPromise().then(dat => {
           
           this.reports[i].fname = dat.fname;
           this.reports[i].sname = dat.sname;
@@ -76,19 +74,8 @@ export class AdminReportsComponent implements OnInit {
     });
   }
 
-  getAuPair(id : string) {
-    let outp = null;
-    this.serv.getAuPair(id).toPromise().then(res => {
-      outp = res;
-    }).catch(err => {
-      console.log(err);
-    });
-    
-    return outp;
-  }
-
-  dismiss(reportId : any) {
-    this.serv.deleteReport(reportId.id).toPromise().then(res => {
+  async dismiss(reportId : any) {
+    await this.serv.deleteReport(reportId.id).toPromise().then(res => {
       window.location.reload();
     }).catch(err => {
       console.log(err);
@@ -96,7 +83,7 @@ export class AdminReportsComponent implements OnInit {
   }
 
   warn(customReport : any) {
-    this.userDetails.id = customReport.auPairId;
+    this.userDetails.id = customReport.reportedUserId;
     this.userDetails.fname = customReport.fname;
     this.userDetails.sname = customReport.sname;
     this.userDetails.email = customReport.email;
@@ -137,7 +124,7 @@ export class AdminReportsComponent implements OnInit {
 
   ban(customReport : any) {
     
-    this.userDetails.id = customReport.auPairId;
+    this.userDetails.id = customReport.reportedUserId;
     this.userDetails.fname = customReport.fname;
     this.userDetails.sname = customReport.sname;
     this.userDetails.email = customReport.email;
@@ -171,7 +158,5 @@ export class AdminReportsComponent implements OnInit {
     // To make sure that the user id doesn't somehow stay afterwards
     this.userDetails.id = "";
   }
-
-
-
+  
 }

@@ -18,21 +18,28 @@
           </datalist>
           <p id="locError" class="error" style="display: none;">Error in field</p>
 
+          <!-- Activity boundary radius -->
+          <input type="text" ngModel name="boundary" placeholder="Distance allowed away from location (km)"> 
+          <p id="boundaryError" class="error" style="display: none;">Please ensure this is a number e.g. 5.2</p>
+
           <!-- Day -->
-          <label for="day" style="left: -149px !important;">Choose a day</label>
-          <select ngModel name="dayOfWeek" id="selectedDay">
-            <option value="Monday">Monday</option>
-            <option value="Tuesday">Tuesday</option>
-            <option value="Wednesday">Wednesday</option>
-            <option value="Thursday">Thursday</option>
-            <option value="Friday">Friday</option>
-            <option value="Saturday">Saturday</option>
-            <option value="Sunday">Sunday</option>
-          </select>
-          <p id="dayError" class="error" style="display: none;">Error in field</p>
+          <div>
+            <label id="dayLabel" for="day">Choose a day</label>
+            <select ngModel name="dayOfWeek" id="selectedDay">
+              <option value="Monday">Monday</option>
+              <option value="Tuesday">Tuesday</option>
+              <option value="Wednesday">Wednesday</option>
+              <option value="Thursday">Thursday</option>
+              <option value="Friday">Friday</option>
+              <option value="Saturday">Saturday</option>
+              <option value="Sunday">Sunday</option>
+            </select>
+            <p id="dayError" class="error" style="display: none;">Error in field</p>
+          </div>
 
           <!-- Time-slot -->
-          <label for="times">Choose a timeslot</label>
+          <div>
+            <label id="timeslotLabel" for="times">Choose a timeslot</label>
             <select ngModel name="timeSlot" id="selectedTime">
               <option value="05:00-06:00">05:00-06:00</option>
               <option value="06:00-07:00">06:00-07:00</option>
@@ -52,20 +59,26 @@
               <option value="20:00-21:00">20:00-21:00</option>
             </select>
           <p id="timeError" class="error" style="display: none;">Error in field</p>
+          </div>
 
           <!-- Budget -->
-          <input type="text" ngModel name="budget" placeholder="Budget"> 
-          <p id="budgetError" class="error" style="display: none;">Error in field</p>
+          <input type="text" ngModel name="budget" placeholder="Budget (R)"> 
+          <p id="budgetError" class="error" style="display: none;">Please ensure this is a number e.g. 500.50</p>
 
           <!-- Selected a child -->
-          <label for="Child" style="left: -149px !important;">Select a child</label>
-          <select ngModel name="childId" id="childId">
-            <option *ngFor="let child of allChildren" value="{{child.id}}">{{child.fname}}</option>
-          </select>
-          <p id="childError" class="error" style="display: none;">Error in field</p>
+          <div>
+            <label id="childLabel" for="Child">Select a child</label>
+            <select ngModel name="childId" id="childId">
+              <option *ngFor="let child of allChildren" value="{{child.id}}">{{child.fname}}</option>
+            </select>
+            <p id="childError" class="error" style="display: none;">Error in field</p>
+          </div>
 
           <!-- Submit -->
-          <input class = "addActivity" type="submit" value="Add Activity">
+          <div class="buttons">
+            <input class = "addActivity" type="submit" value="Add Activity">
+            <input class = "return" value="Return" routerLink="/parent-dashboard">
+          </div>
         </form>
     </div>
 

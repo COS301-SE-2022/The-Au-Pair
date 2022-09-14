@@ -47,11 +47,10 @@ h2{
     text-align: right;
 }
 
-// Button styling
+// Form input styling
 .activity-details input{
-    width: 411px;
     height: 62px;
-    background: #F9F9F9;
+    background: var(--ion-color-light-white);
     box-shadow: 1px 2px 5px rgba(0, 0, 0, 0.13);
     border-style: none;
     border-radius: 10px;
@@ -71,9 +70,10 @@ label{
 }
 
 input[type=text], select{
-    width: 411px;
+    max-width: 411px !important;
+    min-width: 411px !important;
     height: 62px;
-    background: #F9F9F9;
+    background: var(--ion-color-light-white);
     box-shadow: 1px 2px 5px rgba(0, 0, 0, 0.13);
     border-style: none;
     border-radius: 10px;
@@ -93,14 +93,76 @@ input:focus{
     outline:none;
 }
 
+.buttons{
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 15px;
+    width: 411px;
+    height: auto;
+    text-align: center;
+    margin-bottom: 100px;
+}
+
 .addActivity{
+    width: 195px !important;
     font-style: normal;
     font-weight: 700;
     font-size: 16px;
     line-height: 19px;
     color: white;
-    background-color: #69A88D !important;
+    background-color: var(--ion-color-primary) !important;
     margin-top: 20px;
+}
+
+.return{
+    cursor: pointer;
+    text-align: center;
+    flex-direction: row;
+    justify-content: center;
+    padding: 10px 22px;
+    margin-left: 3px;
+
+    width: 195px !important;
+    height: 60px;
+    left: 973px;
+    top: 980px;
+    font-style: normal;
+    font-weight: 700;
+    font-size: 16px;
+    line-height: 19px;
+    color: var(--ion-color-primary);
+    background-color: transparent !important;
+    border: 2px solid var(--ion-color-primary) !important;
+    border-radius: 10px;
+    margin-top: 20px;
+}
+
+//Label stylings
+#dayLabel{
+    position: inherit;
+    text-align: left;
+    align-self: left;
+    margin-left: 5px;
+    margin-bottom: -30px;
+    margin-top: 30px;
+}
+
+#timeslotLabel{
+    position: inherit;
+    text-align: left;
+    align-self: left;
+    margin-left: 5px;
+    margin-bottom: -30px;
+    margin-top: 30px;
+}
+
+#childLabel{
+    position: inherit;
+    text-align: left;
+    align-self: left;
+    margin-left: 5px;
+    margin-bottom: -30px;
+    margin-top: 30px;
 }
 
 //Errors styling
@@ -142,4 +204,35 @@ input:focus{
     top: -5px;
     opacity: 0.04;
     z-index: -10;
+}
+
+@media (max-width: 440px) {
+
+    input[type=text], select{
+        min-width: 0 !important;
+    }
+
+    .activity-details input{
+        width: 90vw;
+    }
+    .activity-details textarea{
+        width: 90vw;
+    }
+    .activity-details select{
+        width: 90vw;
+    }
+
+    .buttons{
+        gap: 5px;
+        width: 90vw;
+    }
+
+    .addActivity{
+        width: 44vw !important;
+    }
+
+    .return{
+        width: 44vw !important;
+    }
+
 }

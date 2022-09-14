@@ -1,5 +1,5 @@
 import { Action, Selector, State, StateContext } from '@ngxs/store';
-import { SetId , SetType, SetFcmToken, SetName, Reset, SetChildren, SetAuPair } from './actions';
+import { SetId , SetType, SetFcmToken, SetName, Reset, SetChildren, SetAuPair, SetLoggedIn } from './actions';
 import { Injectable } from '@angular/core';
 import { map, Observable, of } from 'rxjs';
 export interface AppStateModel{
@@ -9,6 +9,7 @@ export interface AppStateModel{
     children: [];
     auPair: string;
     fcmToken: string;
+    loggedIn: boolean;
 }
 
 @State<AppStateModel>({
@@ -19,7 +20,8 @@ export interface AppStateModel{
         name: '',
         children: [],
         auPair: '',
-        fcmToken: ''
+        fcmToken: '',
+        loggedIn : false
     },
 })
 
@@ -34,6 +36,16 @@ export class AppState{
     @Selector()
     static getID(state : AppStateModel) {
         return state.id;
+    }
+
+    @Action(SetLoggedIn)
+    setLoggedIn({ patchState }: StateContext<AppStateModel>, { payload }: SetLoggedIn) {
+        patchState({loggedIn: payload});
+    }
+    
+    @Selector()
+    static getLoggedIn(state : AppStateModel) {
+        return state.loggedIn;
     }
 
     @Action(SetName)
@@ -71,7 +83,7 @@ export class AppState{
         return of(ctx.getState())
         .pipe(
         map(currentState => {
-            ctx.patchState({type: -1, id: "", name: "", fcmToken: ""});
+            ctx.patchState({type: -1, id: "", name: "", fcmToken: "", loggedIn: false});
             return currentState;
         })
         );

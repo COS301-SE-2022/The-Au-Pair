@@ -16,10 +16,10 @@ public class ReportService {
     return  reports;
   }
 
-  public List<Report> getReportsForAuPair(String id)
+  public List<Report> getReportsForUser(String id)
   {
-    List<Report> auPairReports =  repRepo.findUsingAuPairId(id);
-    return auPairReports;
+    List<Report> userReports =  repRepo.findReportedUserId(id);
+    return userReports;
   }
 
   public void deleteReport(String id) {
