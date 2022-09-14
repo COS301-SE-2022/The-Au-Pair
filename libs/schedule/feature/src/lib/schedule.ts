@@ -92,13 +92,30 @@ export class ScheduleComponent implements OnInit{
         {
           text: 'Yes',
           cssClass: 'alert-button-confirm',
-          // handler: () => { this.removeActivity(); }
+          handler: () => { this.removeAllActivities(); }
         }
       ]
     });
 
     await alert.present();
   }
+
+  //Clearing the schedule for the child.
+  async removeAllActivities()
+  {
+    await this.serv.removeManyActivities(this.activities).toPromise().then(
+      res=>{
+        console.log("The response is: ", res);
+        location.reload();
+        return res;
+      }).catch(
+      error=>{
+        console.log("Error has occured with API: ", error);
+        return error;
+      }
+    )
+  }
+
 
   //Navigation methods
 
