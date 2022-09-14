@@ -83,5 +83,4 @@ jobs:
         run: |
           touch secrets.properties
           echo SENDGRID_API_KEY=${{ secrets.SENDGRID_API_KEY }} >> secrets.properties
-          echo spring.data.mongodb.uri=${{ secrets.MONGODB_URI }} >> secrets.properties
-          
+          echo spring.data.mongodb.uri=${{ secrets.MONGODB_URI }} >> secrets.properties    
