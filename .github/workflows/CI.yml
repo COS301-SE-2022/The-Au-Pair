@@ -81,9 +81,9 @@ jobs:
       
       - name: Generate secrets file with api keys
         run: |
-          touch Server/src/main/resources/secrets.properties
-          echo SENDGRID_API_KEY=${{ secrets.SENDGRID_API_KEY }} >> Server/src/main/resources/secrets.properties
-          echo spring.data.mongodb.uri=${{ secrets.MONGODB_URI }} >> Server/src/main/resources/secrets.properties 
+          touch ./Server/src/main/resources/secrets.properties
+          echo SENDGRID_API_KEY=${{ secrets.SENDGRID_API_KEY }} >> ./Server/src/main/resources/secrets.properties
+          echo spring.data.mongodb.uri=${{ secrets.MONGODB_URI }} >> ./Server/src/main/resources/secrets.properties 
 
       - uses: actions/checkout@v1
       - name: Set up JDK
