@@ -82,7 +82,7 @@ jobs:
       #Generate secrets.properties file in Server/src/main/resources for environment variables
       - name: Generate secrets.properties file
         run: |
-          cd /home/runner/work/The-Au-Pair/The-Au-Pair/Server/src/main/resources && touch secrets.properties
+          cd home/runner/work/The-Au-Pair/The-Au-Pair/Server/src/main/resources && touch secrets.properties
           echo "SENDGRID_API_KEY=${{ secrets.SENDGRID_API_KEY }}" >> secrets.properties
           echo "spring.data.mongodb.uri=${{ secrets.MONGODB_URI }}" >> secrets.properties
 
