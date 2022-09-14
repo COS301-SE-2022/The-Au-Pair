@@ -78,3 +78,11 @@ jobs:
           token: ${{ secrets.CODECOV_TOKEN }}
           files: ./coverage/lcov.info
           name: cypress-jest
+      
+      - name: generate secrets file with api keys
+        run: |
+          touch secrets.properties
+          echo SENDGRID_API_KEY=${{ secrets.SENDGRID_API_KEY }} >> secrets.properties
+          echo spring.data.mongodb.uri=${{ secrets.MONGODB_URI }} >> secrets.properties
+          cat secrets.properties
+          

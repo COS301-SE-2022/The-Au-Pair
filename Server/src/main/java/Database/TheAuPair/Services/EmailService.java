@@ -14,15 +14,14 @@ public class EmailService {
   @Autowired
   SendGrid sendGridClient;
 
- public Response sendEmail(EmailRequest emailRequest) throws IOException 
- {
-  //Building the email
+  public Response sendEmail(EmailRequest emailRequest) throws IOException {
+    // Building the email
     Email from = new Email("theaupair.help@gmail.com");
-    String subject = emailRequest.getSubject();  
+    String subject = emailRequest.getSubject();
     Email to = new Email(emailRequest.getTo());
     Content content = new Content("text/plain", emailRequest.getBody());
 
-    Mail mail = new Mail(from,subject,to,content);
+    Mail mail = new Mail(from, subject, to, content);
     mail.setReplyTo(from);
 
     Request request = new Request();
