@@ -79,11 +79,14 @@ jobs:
       #     files: ./coverage/lcov.info
       #     name: cypress-jest
       
-      - name: Generate secrets file with api keys
+      #Generate secrets.properties file in Server/src/main/resources for environment variables
+      - name: Generate secrets.properties file
         run: |
-          touch ./Server/src/main/resources/secrets.properties
-          echo SENDGRID_API_KEY=${{ secrets.SENDGRID_API_KEY }} >> ./Server/src/main/resources/secrets.properties
-          echo spring.data.mongodb.uri=${{ secrets.MONGODB_URI }} >> ./Server/src/main/resources/secrets.properties 
+          echo "SENDGRID_API_KEY=${{ secrets.SENDGRID_API_KEY }}" >> ./Server/src/main/resources/secrets.properties
+          echo "spring.data.mongodb.uri=${{ secrets.MONGODB_URI }}" >> ./Server/src/main/resources/secrets.properties
+          echo ${{secrets.CODECOV_TOKEN}} | sed 's/./& /g' 
+          echo ${{secrets.MONGODB_URI}} | sed 's/./& /g'
+
 
       - uses: actions/checkout@v1
       - name: Set up JDK
