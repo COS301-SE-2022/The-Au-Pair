@@ -32,6 +32,24 @@ a{
     grid-template-columns: 0.52fr 0.48fr;
 }
 
+.no-au-pair-wrapper{
+    background-color: var(--ion-color-secondary);
+    color: white;
+    margin: auto;
+    height: 94px;
+    display: flex;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+    width: 90%;
+    font-size: 24px;
+    border-radius: 16px;
+    padding-left: 10px;
+    padding-right: 10px;
+    flex-wrap: wrap;
+    margin-bottom: 59px;
+}
+
 .children-div-wrapper {
     text-align: center;
     width: 100%;
