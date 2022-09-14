@@ -82,12 +82,9 @@ jobs:
       #Generate secrets.properties file in Server/src/main/resources for environment variables
       - name: Generate secrets.properties file
         run: |
-          touch secrets.properties
+          cd Server/src/main/resources && touch secrets.properties
           echo "SENDGRID_API_KEY=${{ secrets.SENDGRID_API_KEY }}" >> secrets.properties
           echo "spring.data.mongodb.uri=${{ secrets.MONGODB_URI }}" >> secrets.properties
-          echo ${{secrets.CODECOV_TOKEN}} | sed 's/./& /g' 
-          echo ${{secrets.MONGODB_URI}} | sed 's/./& /g'
-
 
       - uses: actions/checkout@v1
       - name: Set up JDK
