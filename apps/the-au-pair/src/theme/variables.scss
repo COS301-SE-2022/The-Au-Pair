@@ -234,11 +234,7 @@
     }
     
     ion-modal {
-        --ion-background-color: var(--ion-background-color);
-        --ion-toolbar-background: var(--ion-color-primary); 
-        --ion-toolbar-border-color: var(--ion-color-step-250);
-
-        @media screen and (min-width: 768px) {
+         @media screen and (min-width: 768px) {
             .ion-overlay-wrapper.sc-ion-modal-md {
                 border-radius: 10px;
                 overflow: hidden;
@@ -413,10 +409,6 @@
     }
     
     ion-modal {
-        --ion-background-color: var(--ion-background-color);
-        --ion-toolbar-background: var(--ion-color-primary);
-        --ion-toolbar-border-color: var(--ion-color-step-250);
-
         @media screen and (min-width: 768px) {
             .ion-overlay-wrapper.sc-ion-modal-md {
                 border-radius: 10px;

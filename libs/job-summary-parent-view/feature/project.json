@@ -1,0 +1,26 @@
+{
+  "projectType": "library",
+  "root": "libs/job-summary-parent-view/feature",
+  "sourceRoot": "libs/job-summary-parent-view/feature/src",
+  "prefix": "the-au-pair",
+  "targets": {
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["coverage/libs/job-summary-parent-view/feature"],
+      "options": {
+        "jestConfig": "libs/job-summary-parent-view/feature/jest.config.js",
+        "passWithNoTests": true
+      }
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "options": {
+        "lintFilePatterns": [
+          "libs/job-summary-parent-view/feature/src/**/*.ts",
+          "libs/job-summary-parent-view/feature/src/**/*.html"
+        ]
+      }
+    }
+  },
+  "tags": []
+}

@@ -97,15 +97,6 @@ export class ParentDashboardComponent implements OnInit{
 
   constructor(private serv: API, private modalCtrl : ModalController, private store: Store, public toastCtrl: ToastController, public router: Router, private alertController: AlertController){}
 
-  async openModal(actId : string) {
-    const modal = await this.modalCtrl.create({
-      component: AuPairRatingModalComponent,
-      componentProps :{
-        activityId : actId
-      }
-    });
-    await modal.present();
-  }
 
   async openReportModal() {
     const modal = await this.modalCtrl.create({
@@ -206,6 +197,16 @@ export class ParentDashboardComponent implements OnInit{
     this.getChildren();
   }
 
+  async openModal(actId : string) {
+    const modal = await this.modalCtrl.create({
+      component: AuPairRatingModalComponent,
+      componentProps :{
+        activityId : actId
+      }
+    });
+    await modal.present();
+  }
+
   async getChildren(){
     this.serv.getChildren(this.parentID).subscribe(
       res=>{
@@ -284,10 +285,7 @@ export class ParentDashboardComponent implements OnInit{
   }
 
   async checkResignation()
-  {
-    await this.getParentDetails();
-    await this.getAuPairDetails();        
-        
+  {         
     const then  = new Date(this.currentAuPair.terminateDate);
     const now = new Date();
 
@@ -295,10 +293,7 @@ export class ParentDashboardComponent implements OnInit{
 
     let daysBetweenDates = msBetweenDates / (24 * 60 * 60 * 1000);
 
-    daysBetweenDates = Math.ceil(daysBetweenDates);
-
-    console.log(daysBetweenDates);
-    
+    daysBetweenDates = Math.ceil(daysBetweenDates);    
 
     if(daysBetweenDates >= 14)
     {
@@ -308,8 +303,6 @@ export class ParentDashboardComponent implements OnInit{
 
   async terminateAuPair()
   {
-    await this.getAuPairDetails();
-    await this.getParentDetails();
     await this.removeChildrenAuPair();
 
     this.currentAuPair.terminateDate = "";

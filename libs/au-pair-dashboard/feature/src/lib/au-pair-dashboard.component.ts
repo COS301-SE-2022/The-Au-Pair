@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngxs/store';
 import { API } from '../../../../shared/api/api.service'
 import { auPair, Child, HoursLogged, Parent } from '../../../../shared/interfaces/interfaces';
@@ -229,6 +229,16 @@ export class AuPairDashboardComponent implements OnInit {
     else
     {
       this.openToast('You are already employed');
+    }
+  }
+
+  async checkHasEmployerSummary(){
+    if (this.employerId !== ''){
+      this.router.navigate(['/job-summary-au-pair-view']);
+    }
+    else
+    {
+      this.openToast('You need to be employed to view your job summary');
     }
   }
 
