@@ -232,11 +232,17 @@
         --ion-item-background: #000000;
         --ion-card-background: #1c1c1d;
     }
-    .ios ion-modal {
-        --ion-background-color: var(--ion-color-step-100);
-        --ion-toolbar-background: var(--ion-color-step-150);
-        --ion-toolbar-border-color: var(--ion-color-step-250);
+    
+    ion-modal {
+         @media screen and (min-width: 768px) {
+            .ion-overlay-wrapper.sc-ion-modal-md {
+                border-radius: 10px;
+                overflow: hidden;
+                background-color: rgba(0,0,0,0);
+            }
+        }
     }
+    
     /*
    * Material Design Dark Theme
    * -------------------------------------------
@@ -401,10 +407,15 @@
         --ion-item-background: #000000;
         --ion-card-background: #1c1c1d;
     }
-    .ios ion-modal {
-        --ion-background-color: var(--ion-color-step-100);
-        --ion-toolbar-background: var(--ion-color-step-150);
-        --ion-toolbar-border-color: var(--ion-color-step-250);
+    
+    ion-modal {
+        @media screen and (min-width: 768px) {
+            .ion-overlay-wrapper.sc-ion-modal-md {
+                border-radius: 10px;
+                overflow: hidden;
+                background-color: rgba(0,0,0,0);
+            }
+        }
     }
     /*
    * Material Design Dark Theme

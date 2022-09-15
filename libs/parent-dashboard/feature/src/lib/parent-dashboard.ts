@@ -2,19 +2,19 @@ import { Component, OnInit } from '@angular/core';
 import { API } from '../../../../shared/api/api.service';
 import { auPair, Child, Parent, User } from '../../../../shared/interfaces/interfaces';
 import { AuPairRatingModalComponent } from './au-pair-rating-modal/au-pair-rating-modal.component';
+import { UserReportModalComponent } from './user-report-modal/user-report-modal.component';
 import { ModalController, ToastController } from '@ionic/angular';
 import { Store } from '@ngxs/store';
 import { Router } from '@angular/router';
 import { AlertController } from '@ionic/angular';
-import { Handler } from 'leaflet';
+import { SetAuPair, SetChildren } from '../../../../shared/ngxs/actions';
 
 @Component({
   selector: 'the-au-pair-parent-dashboard',
   templateUrl: 'parent-dashboard.html',
   styleUrls: ['parent-dashboard.scss'],
 })
-export class ParentDashboardComponent implements OnInit{
-
+export class ParentDashboardComponent implements OnInit{ 
   children: Child[] = [];
   parentID = "";
   umPoorID = "";
@@ -97,12 +97,10 @@ export class ParentDashboardComponent implements OnInit{
 
   constructor(private serv: API, private modalCtrl : ModalController, private store: Store, public toastCtrl: ToastController, public router: Router, private alertController: AlertController){}
 
-  async openModal(actId : string) {
+
+  async openReportModal() {
     const modal = await this.modalCtrl.create({
-      component: AuPairRatingModalComponent,
-      componentProps :{
-        activityId : actId
-      }
+      component: UserReportModalComponent
     });
     await modal.present();
   }
@@ -158,6 +156,12 @@ export class ParentDashboardComponent implements OnInit{
           this.parentDetails.children = res.children;
           this.parentDetails.medID = res.medID;
           this.parentDetails.auPair = res.auPair;
+
+          //setting the state
+          this.store.dispatch(new SetChildren(res.children));
+          this.store.dispatch(new SetAuPair(res.auPair));
+          console.log("Setting store for parent");
+          console.log( this.store.snapshot())
       },
       error => {
         console.log("Error has occured with API: " + error);
@@ -191,6 +195,16 @@ export class ParentDashboardComponent implements OnInit{
     }
 
     this.getChildren();
+  }
+
+  async openModal(actId : string) {
+    const modal = await this.modalCtrl.create({
+      component: AuPairRatingModalComponent,
+      componentProps :{
+        activityId : actId
+      }
+    });
+    await modal.present();
   }
 
   async getChildren(){
@@ -271,10 +285,7 @@ export class ParentDashboardComponent implements OnInit{
   }
 
   async checkResignation()
-  {
-    await this.getParentDetails();
-    await this.getAuPairDetails();        
-        
+  {         
     const then  = new Date(this.currentAuPair.terminateDate);
     const now = new Date();
 
@@ -282,10 +293,7 @@ export class ParentDashboardComponent implements OnInit{
 
     let daysBetweenDates = msBetweenDates / (24 * 60 * 60 * 1000);
 
-    daysBetweenDates = Math.ceil(daysBetweenDates);
-
-    console.log(daysBetweenDates);
-    
+    daysBetweenDates = Math.ceil(daysBetweenDates);    
 
     if(daysBetweenDates >= 14)
     {
@@ -295,8 +303,6 @@ export class ParentDashboardComponent implements OnInit{
 
   async terminateAuPair()
   {
-    await this.getAuPairDetails();
-    await this.getParentDetails();
     await this.removeChildrenAuPair();
 
     this.currentAuPair.terminateDate = "";

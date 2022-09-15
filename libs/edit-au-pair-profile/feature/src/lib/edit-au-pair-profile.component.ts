@@ -4,6 +4,7 @@ import { User, auPair } from '../../../../shared/interfaces/interfaces';
 import { ToastController } from '@ionic/angular';
 import { Store } from '@ngxs/store';
 import { HttpClient } from '@angular/common/http';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'the-au-pair-edit-au-pair-profile',
@@ -60,7 +61,7 @@ export class EditAuPairProfileComponent implements OnInit {
     terminateDate: "",
   }
 
-  constructor(private serv: API, private http: HttpClient, public toastCtrl: ToastController, private store: Store){}
+  constructor(private serv: API, private http: HttpClient, public toastCtrl: ToastController, private store: Store, public router: Router){}
 
   ngOnInit(): void
   {
@@ -300,6 +301,7 @@ export class EditAuPairProfileComponent implements OnInit {
       this.openToast();
     }
     
+    this.router.navigate(['/au-pair-dashboard']);
   }
 
   editUser(user:User){    

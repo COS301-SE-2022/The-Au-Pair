@@ -19,10 +19,10 @@ public class ReportController {
     return this.repServ.getAllReports();
   }
 
-  @PostMapping("/getReportsForAuPair")
-  public List<Report> getReportsForAuPair(@RequestBody String id)
+  @PostMapping("/getReportsForUser")
+  public List<Report> getReportsForUser(@RequestBody String id)
   {
-      return this.repServ.getReportsForAuPair(id);
+      return this.repServ.getReportsForUser(id);
   }
 
   @PostMapping("/deleteReport")

@@ -4,6 +4,7 @@ import { User, medAid, Parent } from '../../../../shared/interfaces/interfaces';
 import { ToastController } from '@ionic/angular';
 import { Store } from '@ngxs/store';
 import { HttpClient } from '@angular/common/http';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'the-au-pair-edit-parent-profile',
@@ -61,7 +62,7 @@ export class EditParentProfileComponent implements OnInit{
     auPair: "",
   }
 
-  constructor(private serv: API, private http: HttpClient, public toastCtrl: ToastController, private store: Store){}
+  constructor(private serv: API, private http: HttpClient, public toastCtrl: ToastController, private store: Store, public router: Router){}
 
   ngOnInit(): void
   {
@@ -346,6 +347,8 @@ export class EditParentProfileComponent implements OnInit{
     await this.editMedAid(medAid);    
 
     this.openToast();
+
+    this.router.navigate(['/parent-dashboard']);
   }
 
   async editUser(user:User){    

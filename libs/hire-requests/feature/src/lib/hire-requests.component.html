@@ -14,8 +14,7 @@
                     </ion-col>
                     <ion-col size="5">                    
                         <div class="action-buttons">
-                            <button class="accept-button" (click)="acceptRequest(c.id, c.parentID)">Accept</button>
-                            <button class="reject-button" (click)="rejectRequest(c.id)">Reject</button>
+                            <button class="view-button" (click)="openModal(c.parentID, c.id)">View</button>
                         </div>
                     </ion-col> 
                     <ion-col size="2">

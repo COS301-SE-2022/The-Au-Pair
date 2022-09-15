@@ -127,12 +127,12 @@ export class ExploreComponent implements OnInit {
 
   openMenu()
   {
-    this.menuController.toggle('start');
+    this.menuController.toggle('end');
   }
 
   closeMenu()
   {
-    this.menuController.close('start');
+    this.menuController.close('end');
   }
 
   async payRateFilter(formData: any)
