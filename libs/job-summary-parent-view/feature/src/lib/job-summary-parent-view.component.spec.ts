@@ -5,10 +5,11 @@ import { HttpClientTestingModule } from "@angular/common/http/testing";
 import { NavbarModule } from '@the-au-pair/shared/components/navbar';
 import { RouterTestingModule} from '@angular/router/testing';
 import { API } from '../../../../shared/api/api.service';
-import { By } from '@angular/platform-browser';
 import { NgxsModule } from '@ngxs/store';
 import { AppState } from '../../../../shared/ngxs/state';
 import { JobSummaryParentViewComponent } from './job-summary-parent-view.component';
+import { CommonModule } from '@angular/common';
+
 
 describe('JobSummaryParentViewComponent', () => {
   let component: JobSummaryParentViewComponent;
@@ -17,6 +18,8 @@ describe('JobSummaryParentViewComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [JobSummaryParentViewComponent],
+      imports: [IonicModule, CommonModule,HttpClientTestingModule,NavbarModule, RouterTestingModule, FormsModule, NgxsModule.forRoot([AppState])],
+      providers: [API]
     }).compileComponents();
   });
 

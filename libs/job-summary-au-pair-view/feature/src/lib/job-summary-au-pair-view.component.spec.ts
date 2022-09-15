@@ -3,6 +3,7 @@ import { FormsModule } from '@angular/forms';
 import { IonicModule } from '@ionic/angular';
 import { HttpClientTestingModule } from "@angular/common/http/testing";
 import { NavbarModule } from '@the-au-pair/shared/components/navbar';
+import { CommonModule } from '@angular/common';
 import { RouterTestingModule} from '@angular/router/testing';
 import { API } from '../../../../shared/api/api.service';
 import { By } from '@angular/platform-browser';
@@ -17,6 +18,8 @@ describe('JobSummaryAuPairViewComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [JobSummaryAuPairViewComponent],
+      imports: [IonicModule, CommonModule,HttpClientTestingModule,NavbarModule, RouterTestingModule, FormsModule, NgxsModule.forRoot([AppState])],
+      providers: [API]
     }).compileComponents();
   });
 
