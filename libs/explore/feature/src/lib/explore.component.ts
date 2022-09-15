@@ -338,4 +338,10 @@ export class ExploreComponent implements OnInit {
 
     return age;
   }
+
+  resetFilters()
+  {
+    this.AuPairArray.splice(0);
+    this.restoredAuPairArray.forEach(val => this.AuPairArray.push(Object.assign({}, val)));
+  }
 }
