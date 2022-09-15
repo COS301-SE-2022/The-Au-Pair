@@ -6,6 +6,7 @@ import { Store } from '@ngxs/store';
 import { Activity } from '../../../../shared/interfaces/interfaces';
 import { NgModel } from '@angular/forms';
 import { AlertController, ToastController } from '@ionic/angular';
+import { SetCurrentActivity } from '../../../../shared/ngxs/actions';
 
 @Component({
   selector: 'the-au-pair-schedule',
@@ -121,6 +122,9 @@ export class ScheduleComponent implements OnInit{
 
   navigateEdit(id : string)
   { 
+    //Setting the current activity in the store so can refrsh while editing
+    this.store.dispatch(new SetCurrentActivity(id));
+
     //Route to the edit-activity page and parse the ActivityID of the selected Activity 
     this.router.navigate(['/edit-activity'],{
       state: {id: id}

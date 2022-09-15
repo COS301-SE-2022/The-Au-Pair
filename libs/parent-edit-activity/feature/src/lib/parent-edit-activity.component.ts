@@ -55,12 +55,13 @@ export class ParentEditActivityComponent implements OnInit {
   //Constructor
   constructor(private serv: API, private router: Router, public toastCtrl: ToastController, private http : HttpClient, private store: Store, private alertController: AlertController) 
   {
-    const navigation = this.router.getCurrentNavigation();
-    if(navigation !== null)
-      if(navigation.extras !== null)
-      { 
-        this.activityDetails.id = navigation.extras.state?.['id'];
-      }
+    this.activityDetails.id=this.store.snapshot().user.currentActivity;
+    // const navigation = this.router.getCurrentNavigation();
+    // if(navigation !== null)
+    //   if(navigation.extras !== null)
+    //   { 
+    //     this.activityDetails.id = navigation.extras.state?.['id'];
+    //   }
   }
 
   ngOnInit(): void

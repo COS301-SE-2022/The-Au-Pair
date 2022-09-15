@@ -13,6 +13,11 @@ export class SetType{
     constructor(public payload: number) {}
 }
 
+export class SetCurrentActivity{
+    static readonly type = '[User] set type';
+    constructor(public payload: string) {}
+}
+
 export class SetFcmToken{
     static readonly type = '[User] set fcmToken';
     constructor(public payload: string) {}

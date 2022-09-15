@@ -1,5 +1,5 @@
 import { Action, Selector, State, StateContext } from '@ngxs/store';
-import { SetId , SetType, SetFcmToken, SetName, Reset, SetLoggedIn } from './actions';
+import { SetId , SetType, SetFcmToken, SetName, Reset, SetLoggedIn, SetCurrentActivity } from './actions';
 import { Injectable } from '@angular/core';
 import { map, Observable, of } from 'rxjs';
 export interface AppStateModel{
@@ -8,6 +8,7 @@ export interface AppStateModel{
     type: number;
     fcmToken: string;
     loggedIn: boolean;
+    currentActivity: string;
 }
 
 @State<AppStateModel>({
@@ -17,7 +18,8 @@ export interface AppStateModel{
         type: -1,
         name: '',
         fcmToken: '',
-        loggedIn : false
+        loggedIn : false,
+        currentActivity : ''
     },
 })
 
@@ -74,12 +76,22 @@ export class AppState{
         return state.fcmToken;
     }
 
+    @Action(SetCurrentActivity)
+    setCurrentActivity({ patchState }: StateContext<AppStateModel>, { payload }: SetCurrentActivity) {
+        patchState({currentActivity: payload});
+    }
+
+    @Selector()
+    static getCurrentActivity(state : AppStateModel) {
+        return state.currentActivity;
+    }
+
     @Action(Reset)
     reset(ctx: StateContext<AppStateModel>): Observable<AppStateModel> {
         return of(ctx.getState())
         .pipe(
         map(currentState => {
-            ctx.patchState({type: -1, id: "", name: "", fcmToken: "", loggedIn: false});
+            ctx.patchState({type: -1, id: "", name: "", fcmToken: "", loggedIn: false, currentActivity: ""});
             return currentState;
         })
         );
