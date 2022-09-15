@@ -1,8 +1,8 @@
 <ion-header [translucent]="true">
     <ion-toolbar mode="ios" class="navbar">
-      <ion-buttons slot="start" *ngIf="isHome">
-        <button (click)="back()" class="back-button"><ion-icon name="arrow-back-circle-outline"></ion-icon></button>
-      </ion-buttons>
+      <ion-buttons  menu="nav" slot="start">
+          <button class="back-button" menuToggle><ion-icon id="nav" name="menu-outline" (click)="menuOpen()"></ion-icon></button>
+        </ion-buttons>
       <ion-buttons slot="start" class="start-buttons">
         <ion-button (click)="dash()">Dashboard</ion-button>
         <ion-button (click)="reports()" [hidden]="this.type!==0">Reports</ion-button>
@@ -15,4 +15,94 @@
       </ion-buttons>
       <ion-title><h1 class="text-white ion-text-center">The Au Pair</h1></ion-title>
     </ion-toolbar>
+
+    
 </ion-header>
+<ion-menu menuId="user" content-id="menu-wrapper" class="menu">
+  <ion-header class="menu-header">
+          <ion-toolbar translucent>
+              <ion-title class="ion-text-center">The Au Pair</ion-title>
+          </ion-toolbar>
+      </ion-header>
+  <ion-content id="menu-wrapper">
+
+    <ion-card (click)="dash()" class="menu-item" >
+      <ion-row>
+        <ion-col size="2">
+          <ion-icon class="menu-item-icon" name="home-outline"></ion-icon>
+        </ion-col>
+        <ion-col  class="menu-item-text" size="10">
+          <ion-text color="light">
+            Dashboard
+          </ion-text>
+        </ion-col>
+      </ion-row>
+    </ion-card>
+
+    <ion-card [ngClass]="{'greyed' : hasAuPair}" (click)="explore()" [hidden]="this.type!==1" class="menu-item">
+      <ion-row>
+        <ion-col size="2">
+          <ion-icon class="menu-item-icon" name="people-outline"></ion-icon>
+        </ion-col>
+        <ion-col  class="menu-item-text" size="10">
+          <ion-text color="light">
+            Explore Au Pairs
+          </ion-text>
+        </ion-col>
+      </ion-row>
+    </ion-card>
+
+    <ion-card [hidden]="this.type!==1 && this.type!==2" class="menu-item">
+      <ion-row>
+        <ion-col size="2">
+          <ion-icon class="menu-item-icon" name="document-outline"></ion-icon>
+        </ion-col>
+        <ion-col  class="menu-item-text" size="10">
+          <ion-text color="light">
+            Manage Contract
+          </ion-text>
+        </ion-col>
+      </ion-row>
+    </ion-card>
+
+    <ion-card (click)="profile()" class="menu-item">
+      <ion-row>
+        <ion-col size="2">
+          <ion-icon class="menu-item-icon" name="happy-outline"></ion-icon>
+        </ion-col>
+        <ion-col  class="menu-item-text" size="10">
+          <ion-text color="light">
+            My Profile
+          </ion-text>
+        </ion-col>
+      </ion-row>
+    </ion-card>
+
+    <ion-card (click)="notifications()" class="menu-item">
+      <ion-row>
+        <ion-col size="2">
+          <ion-icon class="menu-item-icon" name="notifications-outline"></ion-icon>
+        </ion-col>
+        <ion-col  class="menu-item-text" size="10">
+          <ion-text color="light">
+            Notifications
+          </ion-text>
+        </ion-col>
+      </ion-row>
+    </ion-card>
+
+    <ion-card (click)="logout()" class="menu-item">
+      <ion-row>
+        <ion-col size="2">
+          <ion-icon class="menu-item-icon" name="exit-outline"></ion-icon>
+        </ion-col>
+        <ion-col  class="menu-item-text" size="10">
+          <ion-text color="light">
+            Logout
+          </ion-text>
+        </ion-col>
+      </ion-row>
+    </ion-card>
+
+  </ion-content>
+</ion-menu>

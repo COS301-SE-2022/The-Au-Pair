@@ -49,13 +49,9 @@
 }
 
 .submit-row{
-    margin-top: 30vh;
-}
-
-@media (max-width: 768px){
-    .submit-row{
-        margin-top: 55vh;
-    }
+    position: absolute;
+    width: 100%;
+    bottom: 40px;
 }
 
 ion-range{
