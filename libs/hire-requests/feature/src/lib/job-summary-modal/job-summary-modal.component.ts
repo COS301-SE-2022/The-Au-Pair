@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ModalController, NavParams, ToastController } from '@ionic/angular';
-import { auPair, Child, Contract, Parent, User } from '../../../../../shared/interfaces/interfaces';
+import { auPair, Child, Parent, User } from '../../../../../shared/interfaces/interfaces';
 import { API } from '../../../../../shared/api/api.service';
 import { Store } from '@ngxs/store';
 import { Router } from '@angular/router';
@@ -300,7 +300,7 @@ export class JobSummaryModalComponent implements OnInit {
     let minTime = "23:59";
     let maxTime = "00:00";
 
-    let actDays = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"];
+    const actDays = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"];
 
     await this.serv.getAuPairSchedule(this.parentDetails.children).toPromise()
     .then(

@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { API } from '../../../../shared/api/api.service';
 import { Store } from '@ngxs/store';
 import { DatePipe } from '@angular/common';
-import { Child, Contract, Parent, User } from 'libs/shared/interfaces/interfaces';
+import { Child, Contract, Parent, User } from '../../../../shared/interfaces/interfaces';
 import { Router } from '@angular/router';
 import { ToastController } from '@ionic/angular';
 
@@ -275,7 +275,7 @@ export class JobSummaryParentViewComponent implements OnInit {
   {   
     let actCount = 0;
 
-    let actDays = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"];
+    const actDays = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"];
 
     await this.serv.getAuPairSchedule(this.parentDetails.children).toPromise()
     .then(

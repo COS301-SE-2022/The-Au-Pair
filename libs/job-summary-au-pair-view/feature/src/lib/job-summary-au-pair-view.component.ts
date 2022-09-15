@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { API } from '../../../../shared/api/api.service';
 import { Store } from '@ngxs/store';
-import { auPair, Child, Parent, User } from 'libs/shared/interfaces/interfaces';
+import { auPair, Child, Parent, User } from '../../../../shared/interfaces/interfaces';
 
 @Component({
   selector: 'the-au-pair-job-summary-au-pair-view',
