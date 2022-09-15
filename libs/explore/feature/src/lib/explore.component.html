@@ -78,6 +78,19 @@
 
             <div class="filter-card">
                 <div class="payrate-sliders">
+                    <form id="ageForm" #ageForm="ngForm" (ngSubmit)="ageFilter(ageForm.value)">
+                        <h1 class="slider-headings">Age:</h1>
+                        <ion-range class="location-slider" pin [min]="18" [max]="65" pin color="light" value="23"
+                            ngModel name="max_age" step="1">
+                            <ion-label class="slider-icons" slot="start">Max:</ion-label>
+                        </ion-range>
+                        <input type="submit" class="filter-submit-button" id="change" value="APPLY" />
+                    </form>
+                </div>
+            </div>
+
+            <div class="filter-card">
+                <div class="payrate-sliders">
                     <form id="payRateForm" #payRateForm="ngForm" (ngSubmit)="payRateFilter(payRateForm.value)">
                         <h1 class="slider-headings">Pay Rate (R):</h1>
                         <ion-range class="location-slider" pin [min]="10" [max]="1000" pin color="light" value="23"

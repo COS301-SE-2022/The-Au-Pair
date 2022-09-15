@@ -25,6 +25,8 @@ export class ExploreComponent implements OnInit {
   minDistance! : number;
   maxDistance! : number;
 
+  maxAge! : number;
+
   eucDistance! : number;
 
   auPairs : any;
@@ -139,7 +141,6 @@ export class ExploreComponent implements OnInit {
   {
     this.AuPairArray.splice(0);
     this.restoredAuPairArray.forEach(val => this.AuPairArray.push(Object.assign({}, val)));
-    
 
     if(formData.min_payrate === undefined)
     {
@@ -185,6 +186,42 @@ export class ExploreComponent implements OnInit {
       });
     }
     
+    this.closeMenu();
+  }
+
+  ageFilter(formData : any)
+  {
+    this.AuPairArray.splice(0);
+    this.restoredAuPairArray.forEach(val => this.AuPairArray.push(Object.assign({}, val)));
+
+    if(formData.max_age === undefined)
+    {
+      this.maxAge = 18;
+    }
+    else
+    {
+      this.maxAge = formData.max_age;
+    }
+
+    this.AuPairArray.sort((obj1, obj2) => {
+    
+      if(this.getAge(obj1.birth) > this.getAge(obj2.birth))
+      {
+        return 1;
+      }
+
+      if(this.getAge(obj1.birth) < this.getAge(obj2.birth))
+      {
+        return -1;
+      }
+
+      return 0;
+    });
+
+    this.AuPairArray = this.AuPairArray.filter((element) => {
+      return this.getAge(element.birth) <= this.maxAge;
+    });
+
     this.closeMenu();
   }
 
