@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngxs/store';
 import { API } from '../../../../shared/api/api.service'
 import { auPair, Child, HoursLogged, Parent } from '../../../../shared/interfaces/interfaces';

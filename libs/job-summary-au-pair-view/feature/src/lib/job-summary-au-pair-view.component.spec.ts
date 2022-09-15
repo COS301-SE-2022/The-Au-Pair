@@ -6,7 +6,6 @@ import { NavbarModule } from '@the-au-pair/shared/components/navbar';
 import { CommonModule } from '@angular/common';
 import { RouterTestingModule} from '@angular/router/testing';
 import { API } from '../../../../shared/api/api.service';
-import { By } from '@angular/platform-browser';
 import { NgxsModule } from '@ngxs/store';
 import { AppState } from '../../../../shared/ngxs/state';
 import { JobSummaryAuPairViewComponent } from './job-summary-au-pair-view.component';

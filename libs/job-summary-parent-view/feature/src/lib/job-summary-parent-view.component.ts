@@ -93,9 +93,7 @@ export class JobSummaryParentViewComponent implements OnInit {
       }
   }
 
-  async ngOnInit(): Promise<void> {
-    console.log("This au pair ID is: ", this.auPairID);
-    
+  async ngOnInit(): Promise<void> {    
     this.parentID = this.store.snapshot().user.id;
     this.getActivities();
 
@@ -159,7 +157,6 @@ export class JobSummaryParentViewComponent implements OnInit {
   }
 
   async getActivities(){
-    console.log("getActivities");
     this.serv.getChildren(this.parentID).subscribe(
       res => {
         this.children = res;
