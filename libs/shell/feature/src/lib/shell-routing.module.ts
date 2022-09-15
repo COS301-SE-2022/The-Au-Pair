@@ -13,7 +13,7 @@ const routes: Routes = [
   },
   {
     path: '',
-    redirectTo: 'login-page',
+    redirectTo: 'landing-page',
     pathMatch: 'full',
   },
   {
@@ -200,8 +200,15 @@ const routes: Routes = [
     canLoad: [AuthGuard],
   },
   {
+    path: 'landing-page',
+    loadChildren: () =>
+      import('@the-au-pair/landing-page/feature').then(
+        (m) => m.LandingPageFeatureModule
+      ),
+  },
+  {
     path: '**',
-    redirectTo: 'login-page',
+    redirectTo: 'landing-page',
   },
 ];
 
