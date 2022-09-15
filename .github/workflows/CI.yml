@@ -82,7 +82,7 @@ jobs:
       #Generate secrets.properties file in Server/src/main/resources for environment variables
       - name: Generate secrets.properties file
         run: |
-          ls -R
+          ls -R -a
 
       # - uses: actions/checkout@v1
       # - name: Set up JDK
