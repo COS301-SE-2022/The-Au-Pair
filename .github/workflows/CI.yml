@@ -82,16 +82,17 @@ jobs:
       #Generate secrets.properties file in Server/src/main/resources for environment variables
       - name: Generate secrets.properties file
         run: |
-          ls && cd Server/src/main/resources && touch secrets.properties
-          echo "SENDGRID_API_KEY=${{ secrets.SENDGRID_API_KEY }}" >> secrets.properties
-          echo "spring.data.mongodb.uri=${{ secrets.MONGODB_URI }}" >> secrets.properties
+          cd home/runner/work/The-Au-Pair/The-Au-Pair/Server
+          ls
+          cd src/main/resources
+          ls
 
-      - uses: actions/checkout@v1
-      - name: Set up JDK
-        uses: actions/setup-java@v1
-        with:
-          java-version: '17'
+      # - uses: actions/checkout@v1
+      # - name: Set up JDK
+      #   uses: actions/setup-java@v1
+      #   with:
+      #     java-version: '17'
 
-      - name: Run tests
-        run: cd Server && mvn test
+      # - name: Run tests
+      #   run: cd Server && mvn test
 
