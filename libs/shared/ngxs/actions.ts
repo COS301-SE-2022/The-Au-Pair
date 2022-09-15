@@ -14,7 +14,7 @@ export class SetType{
 }
 
 export class SetCurrentActivity{
-    static readonly type = '[User] set type';
+    static readonly type = '[User] set currentActivity';
     constructor(public payload: string) {}
 }
 
