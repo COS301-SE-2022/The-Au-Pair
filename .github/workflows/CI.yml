@@ -82,10 +82,11 @@ jobs:
       #Generate secrets.properties file in Server/src/main/resources for environment variables
       - name: Generate secrets.properties file
         run: |
-          cd home/runner/work/The-Au-Pair/The-Au-Pair/Server
-          ls
+          pwd
+          cd ./home/runner/work/The-Au-Pair/The-Au-Pair/Server
+          pwd
           cd src/main/resources
-          ls
+          pwd
 
       # - uses: actions/checkout@v1
       # - name: Set up JDK
