@@ -126,16 +126,19 @@ export class ScheduleComponent implements OnInit{
     this.store.dispatch(new SetCurrentActivity(id));
 
     //Route to the edit-activity page and parse the ActivityID of the selected Activity 
-    this.router.navigate(['/edit-activity'],{
-      state: {id: id}
+    this.router.navigate(['/edit-activity']).then(()=>{
+      location.reload();
     });
   }
 
   navigateViewActivity(id : string)
   { 
+    //Setting the current activity in the store so can refrsh while editing
+    this.store.dispatch(new SetCurrentActivity(id));
+
     //Route to the edit-activity page and parse the ActivityID of the selected Activity 
-    this.router.navigate(['/view-activity'],{
-      state: {id: id}
+    this.router.navigate(['/view-activity']).then(()=>{
+      location.reload();
     });
   }
 }
