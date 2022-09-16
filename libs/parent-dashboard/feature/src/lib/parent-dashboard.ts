@@ -196,9 +196,6 @@ export class ParentDashboardComponent implements OnInit{
         await this.checkResignation();
       }
     }
-
-    console.log("RATINGS", this.currentAuPair.rating);
-    
   }
 
   async openModal(actId : string) {
