@@ -37,6 +37,8 @@ export class ParentRatingModalComponent implements OnInit {
         console.log("Error has occured with API: " + error);
       }
     )
+
+    this.getParentDetails();
   }
 
   async getParentDetails()
@@ -57,8 +59,14 @@ export class ParentRatingModalComponent implements OnInit {
     )
   }
 
-  async getDescription(formData : any){
-    await this.getParentDetails();
+  async getDescription(formData : any){   
+    this.getParentDetails();
+
+    console.log(this.parentDetails);
+    
+
+    console.log(formData.behaviour);
+    
 
     if(formData.behaviour > 5 || formData.behaviour < 1 || isNaN(+formData.behaviour))
     {
@@ -69,7 +77,7 @@ export class ParentRatingModalComponent implements OnInit {
       this.parentRating = formData.behaviour;
     }
     
-    // this.parentDetails.rating.push(this.parentRating);  
+    this.parentDetails.rating.push(this.parentRating);  
     this.submitRating();
   }
 
