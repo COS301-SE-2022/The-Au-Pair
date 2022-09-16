@@ -199,37 +199,51 @@ export class AddChildComponent implements OnInit
   //Service calls
   addChild(child: Child)
   {
-    this.serv.getParent(this.childDetails.parent).subscribe(
-      res=>{
-        this.parent.id = res.id;
-        this.parent.children = res.children;
-        this.parent.medID = res.medID;
-        this.parent.auPair = res.auPair;
-        this.parent.children.push(child.id);
-
-        //Update the parent object to contain the new child ID
-        this.serv.editParent(this.parent).subscribe(
-          res=>{
-            console.log("The response is:" + res); 
-          },
-          error=>{
-            console.log("Error has occured with API: " + error);
-          }
-        );
+    //Getting a new unique ID for the child
+    this.serv.generateID().subscribe(    
+      res=>
+      {
+        console.log("AGHGAHGAHAGHAGHAGHAGHAGHGHAGHGH: ",  res);
+        // this.childDetails.id=res;
       },
       error=>{
-        console.log("Error has occured with API: " + error);
+        console.log("Error:", error);
       }
-    )
+    );
 
-    this.serv.addChild(child).subscribe(
-      res=>{
-        console.log("The response is:" + res); 
-        this.openToast();
-      },
-      error=>{
-        console.log("Error has occured with API: " + error);
-      }
-    )
+    // this.serv.getParent(this.childDetails.parent).subscribe(
+    //   res=>{
+    //     this.parent.id = res.id;
+    //     this.parent.children = res.children;
+    //     this.parent.medID = res.medID;
+    //     this.parent.auPair = res.auPair;
+    //     this.parent.children.push(child.id);
+    //     console.log(this.parent.children);
+        
+
+    //     //Update the parent object to contain the new child ID
+    //     // this.serv.editParent(this.parent).subscribe(
+    //     //   res=>{
+    //     //     console.log("The response is:" + res); 
+    //     //   },
+    //     //   error=>{
+    //     //     console.log("Error has occured with API: " + error);
+    //     //   }
+    //     // );
+    //   },
+    //   error=>{
+    //     console.log("Error has occured with API: " + error);
+    //   }
+    // )
+
+    // this.serv.addChild(child).subscribe(
+    //   res=>{
+    //     console.log("The response is:" + res); 
+    //     this.openToast();
+    //   },
+    //   error=>{
+    //     console.log("Error has occured with API: " + error);
+    //   }
+    // )
   }
 }

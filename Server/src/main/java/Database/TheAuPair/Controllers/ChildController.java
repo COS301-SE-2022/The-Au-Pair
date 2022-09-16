@@ -40,4 +40,10 @@ public class ChildController
   {
     this.cs.removeChild(id);
   }
+
+  @GetMapping("/generateID")
+  public String generateID()
+  {
+    return this.cs.getUniqueID();
+  }
 }

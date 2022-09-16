@@ -84,6 +84,11 @@ export class API{
     return this.http.post(environment.apiURI+"/removeChild", id);
   }
 
+  generateID(): Observable<any>
+  {
+    return this.http.get(environment.apiURI+"/generateID");
+  }
+
   getDateMinutes(id : string, date : string): Observable<any> {
     var out = {
       "id" : id,

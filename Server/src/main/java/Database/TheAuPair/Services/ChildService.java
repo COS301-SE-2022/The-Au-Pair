@@ -26,21 +26,6 @@ public class ChildService
 
   public void addChild(Child c)
   {
-    String id = "";
-    boolean valid = false;
-    while (!valid)
-    {
-      id = generateID();
-      valid = true;
-      for (Child child : cr.findAll())
-      {
-        if (child.getId().equals(id))
-        {
-          valid = false;
-        }
-      }
-    }
-    c.setId(id);
     cr.save(c);
   }
 
@@ -52,6 +37,26 @@ public class ChildService
   public void removeChild(String id)
   {
     cr.deleteById(id);
+  }
+
+  public String getUniqueID()
+  {
+    return "OH My God";
+    // String id = "";
+    // boolean valid = false;
+    // while (!valid)
+    // {
+    //   id = generateID();
+    //   valid = true;
+    //   for (Child child : cr.findAll())
+    //   {
+    //     if (child.getId().equals(id))
+    //     {
+    //       valid = false;
+    //     }
+    //   }
+    // }
+    // return id;
   }
 
   public String generateID()
