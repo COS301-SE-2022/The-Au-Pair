@@ -1,0 +1,29 @@
+<div class="modal-body">
+    <div class="heading ">
+        <ion-row>
+            <ion-col size="11" class="ion-text-center act">Parent Rating</ion-col>
+            <ion-col size="1" class="ion-text-center"><ion-icon class="icon close" name="close-circle-outline" (click)="closeModal()"></ion-icon></ion-col>
+        </ion-row>
+    </div>
+    <div class="content">
+        <form id="ratingForm" #ratingForm="ngForm"  (ngSubmit)="getDescription(ratingForm.value)">
+        <ion-row class="slider-row">
+            <ion-col size="4" class="ion-text-center behaviour">
+                Rating:
+            </ion-col>
+            <ion-col size="7" class="ion-text-end slider">
+                    <ion-range min="1" max="5" pin color="secondary" value="23" ngModel name="behaviour">
+                        <ion-icon slot="start" name="sad-outline"></ion-icon>
+                        <ion-icon slot="end" name="happy-outline"></ion-icon>
+                    </ion-range>
+            </ion-col>
+            <ion-col size="1"></ion-col>
+        </ion-row>
+        <ion-row class="submit-row">
+            <ion-col size="12" class="ion-text-center">
+                <input type="submit" form="ratingForm" type="submit" class="submit" value="Submit Rating"/>
+            </ion-col>
+        </ion-row> 
+    </form>    
+    </div>
+</div>
