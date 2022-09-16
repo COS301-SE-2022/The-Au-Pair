@@ -1,0 +1,110 @@
+.header {
+  font-family: Roboto;
+  font-style: normal;
+  font-weight: 700;
+  font-size: 42px;
+  line-height: 56px;
+  text-transform: capitalize;
+  color: var(--ion-color-dark);
+}
+
+.notifications-wrapper {
+  padding: 2em;
+}
+
+.notification-item {
+  height: 70px;
+  width: 100%;
+  margin-inline: 0px !important;
+  margin-bottom: 2em;
+  border-radius: 10px;
+  background-color: var(--ion-color-light-white);
+}
+
+.notification-item.activity {
+  box-shadow: 0 2px 6px 0 var(--ion-color-primary), 0 6px 20px 0;
+}
+
+.notification-item.work {
+  box-shadow: 0 2px 6px 0 var(--ion-color-dark), 0 6px 20px 0;
+}
+
+.notification-item.fetch {
+  box-shadow: 0 2px 6px 0 var(--ion-color-champagne), 0 6px 20px 0;
+}
+
+.profile {
+  border-radius: 50%;
+  height: 50px;
+  width: 60px;
+}
+
+.wrapper {
+  height: 100%;
+  display: flex;
+}
+
+.img {
+  height: 100%;
+  width: max(5%, 75px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-left: 10px;
+}
+
+.notification-content {
+  width: 100%;
+  height: 100%;
+  display: table-cell;
+  margin-left: 1em;
+}
+
+.heading {
+  height: 40%;
+  display: flex;
+  align-items: flex-end;
+  color: var(--ion-color-dark);
+  font-size: 16px;
+  font-weight: bold;
+}
+
+.details {
+  height: 60%;
+  align-items: center;
+  display: flex;
+  font-size: 16px;
+  color: var(--ion-color-dark);
+}
+
+.time {
+  height: 100%;
+  width: 15%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--ion-color-dark);
+  font-size: 14px;
+  font-weight: bold;
+  margin-right: 1em;
+  white-space: nowrap;
+}
+
+.timeColour{
+  color: var(--ion-color-primary);
+  margin-left: 5px;
+}
+
+@media (max-width: 572px) {
+  .heading {
+    font-size: 12px;
+  }
+
+  .time {
+    font-size: 10px;
+  }
+
+  .details {
+    font-size: 12px;
+  }
+}

@@ -8,7 +8,7 @@
 
 .call-icon{
     padding-right: 10px;
-    padding-top: 11px;
+    float: left;
     width: 35px;
     height: 35px;
     -webkit-transform: scaleX(-1);
@@ -19,11 +19,47 @@
 
 .message-icon{
     padding-left: 10px;
-    float: right;
+    float: left;
     width: 35px;
     height: 35px;
     cursor: pointer; 
     color: white;   
+}
+
+.report-icon{
+    padding-left: 10px;
+    float: left;
+    width: 35px;
+    height: 35px;
+    cursor: pointer;
+    color: white;
+}
+
+.terminate-contract{
+    padding-left: 10px;
+    float: left;
+    width: 35px;
+    height: 35px;
+    color: var(--ion-color-danger);
+    cursor: pointer;   
+    padding-right: 10px;
+}
+
+.au-pair-name {
+    background-color: var(--ion-color-secondary);
+    color: white;
+    margin: auto;
+    height: 94px;
+    display: flex;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+    width: 90%;
+    font-size: 24px;
+    border-radius: 16px;
+    padding-left: 10px;
+    padding-right: 10px;
+    flex-wrap: wrap;
 }
 
 .actions-heading {
@@ -50,12 +86,25 @@ ion-card {
     width: 90%;
     height: 94px;
     display: grid;
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: 0.28fr 0.22fr 0.5fr;
     align-items: center;
     justify-items: center;
     margin: auto;
     font-size: 24px;
     margin-bottom: 60px;
+}
+
+.button-container {
+    width: 200px;
+    flex-basis: 200px;
+    background-color: var(--ion-color-primary);
+    height: 100%;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    width: 100%;
+    font-size: 24px;
+    padding-left: 10px;
 }
 
 .employer-name {
@@ -65,7 +114,7 @@ ion-card {
     height: 100%;
     display: flex;
     text-align: center;
-    justify-content: center;
+    justify-content: flex-end;
     align-items: center;
     width: 100%;
     font-size: 24px;
@@ -151,7 +200,7 @@ ion-card {
     width: 90%;
     height: 100%;
     display: grid;
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: repeat(4, 1fr);
     justify-items: center;
     align-items: center;
     margin: auto;
@@ -173,7 +222,7 @@ ion-card {
     text-align: center;
     justify-content: center;
     align-items: center;
-    width: 50%;
+    width: 75%;
     font-size: 24px;
     border-radius: 16px;
     cursor: pointer;
@@ -200,16 +249,6 @@ ion-card {
 }
 
 @media (max-width: 642px) {
-    .children-div {
-        grid-template-columns: repeat(1, 1fr);
-    }
-    .employer-name {
-        border-radius: 16px 16px 0px 0px;
-    }
-
-    .child- {
-        border-radius: 0px 0px 16px 16px;
-    }
     .child-au-pair {
         border-radius: 0px 0px 16px 16px;
         border-left: 0px;
@@ -240,20 +279,6 @@ ion-card {
 }
 
 @media (max-width: 810px) {
-    .children-div {
-        grid-template-columns: repeat(1, 1fr);
-    }
-
-    .employer-name {
-        border-radius: 16px 16px 0px 0px;
-    }
-    .child-status {
-        border-radius: 0px 0px 16px 16px;
-    }
-    .child-au-pair {
-        border-radius: 0px 0px 16px 16px;
-        border-left: 0px;
-    }
     .actions-div {
         grid-template-columns: repeat(2, 1fr);
         gap: 10px;
@@ -278,6 +303,26 @@ ion-card {
         width: 96px;
     }
 }
+
+@media (max-width: 1150px) {
+    .children-div {
+        grid-template-columns: repeat(1, 1fr);
+        height: 150px;
+    }
+
+    .button-container {
+        justify-content: center;
+    }
+
+    .employer-name {
+        border-radius: 16px 16px 0px 0px;
+        justify-content: center;
+    }
+
+    .child-status {
+        border-radius: 0px 0px 16px 16px;
+    }
+ }
 
 @media (max-width: 1240px) {
    .action-tag{

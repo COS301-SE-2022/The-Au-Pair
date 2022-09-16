@@ -7,6 +7,8 @@ import { HttpClientTestingModule } from "@angular/common/http/testing";
 import { NavbarModule } from '@the-au-pair/shared/components/navbar';
 import { RouterTestingModule } from "@angular/router/testing";
 import { EditAuPairProfileComponent } from './edit-au-pair-profile.component';
+import { NgxsModule } from '@ngxs/store';
+import { AppState } from '../../../../shared/ngxs/state';
 
 describe('EditAuPairProfileComponent', () => {
   let component: EditAuPairProfileComponent;
@@ -24,10 +26,10 @@ describe('EditAuPairProfileComponent', () => {
   const emptyExperience = {email: "testemail@gmail.com", phone: "0832422323", address: "123 Valid Street", payRate: "", bio: "test bio", experience: ""}
 
   // Invalid User
-  const invalidUser = {id: "invalidId", fname: "Kyle", sname: "Pottinger", email: "testemail@gmail.com", address: "123 Valid Street", registered: false, type: 0, password: "test", number: "0832422323", salt: "mrs"}
+  const invalidUser = {id: "invalidId", fname: "Kyle", sname: "Pottinger", email: "testemail@gmail.com", address: "123 Valid Street", registered: false, type: 0, password: "test", number: "0832422323", salt: "mrs", latitude: 20, longitude: 20, suburb: 'Midrand', gender: "male",fcmToken : "", birth: "01/01/2001", banned: "", warnings: 0}
 
   // Invalid Au Pair
-  const invalidAuPair = {id: "invalidId", rating: 5, onShift: false, employer: "David", costIncurred: 100, distTraveled: 300, payRate: 50, bio: "test bio", experience: "test experience"}
+  const invalidAuPair = {id: "invalidId", rating: 5, onShift: false, employer: "David", costIncurred: 100, distTraveled: 300, payRate: 50, bio: "test bio", experience: "test experience", currentLong: 0.0,  currentLat: 0.0, terminateDate: ""}
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
@@ -37,6 +39,7 @@ describe('EditAuPairProfileComponent', () => {
         HttpClientTestingModule,
         NavbarModule,
         RouterTestingModule,
+        NgxsModule.forRoot([AppState])
     ],
     providers: [API]
     }).compileComponents();
@@ -83,13 +86,21 @@ describe('EditAuPairProfileComponent', () => {
       id: "",
       fname: "",
       sname: "",
-      email: "testemail@gmail.com",
-      address: "123 Valid Street",
+      email: "",
+      address: "",
       registered: false,
       type: 0,
       password: "",
-      number: "0832422323",
+      number: "",
       salt: "",
+      latitude: 0, 
+      longitude: 0, 
+      suburb: "", 
+      gender: "",      
+      fcmToken : "",
+      birth: "",
+      banned: "",
+      warnings: 0,
     };
 
     const expectedAuPairValue: auPair = {
@@ -99,9 +110,12 @@ describe('EditAuPairProfileComponent', () => {
       employer: "",
       costIncurred: 0,
       distTraveled: 0,
-      payRate: 50,
-      bio: "test bio",
-      experience: "test experience",
+      payRate: 0,
+      bio: "",
+      experience: "",
+      currentLong: 0.0,
+      currentLat: 0.0,
+      terminateDate: ""
     };
 
     jest.spyOn(component,"getUserDetails");
@@ -127,6 +141,14 @@ describe('EditAuPairProfileComponent', () => {
       password: "",
       number: "",
       salt: "",
+      latitude: 0, 
+      longitude: 0, 
+      suburb: "", 
+      gender: "", 
+      fcmToken : "",
+      birth: "",
+      banned: "",
+      warnings: 0,
     };
 
     const expectedAuPairValue: auPair = {
@@ -139,6 +161,9 @@ describe('EditAuPairProfileComponent', () => {
       payRate: 0,
       bio: "",
       experience: "",
+      currentLong: 0.0,
+      currentLat: 0.0,
+      terminateDate: ""
     };
 
     jest.spyOn(component,"getUserDetails");
@@ -162,6 +187,14 @@ describe('EditAuPairProfileComponent', () => {
       password: "",
       number: "",
       salt: "",
+      latitude: 0, 
+      longitude: 0, 
+      suburb: "", 
+      gender: "",       
+      fcmToken : "",
+      birth: "",
+      banned: "",
+      warnings: 0,
     };
 
     const expectedAuPairValue: auPair = {
@@ -174,6 +207,9 @@ describe('EditAuPairProfileComponent', () => {
       payRate: 0,
       bio: "",
       experience: "",
+      currentLong: 0.0,
+      currentLat: 0.0,
+      terminateDate: ""
     };
 
     jest.spyOn(component,"getUserDetails");
@@ -197,6 +233,14 @@ describe('EditAuPairProfileComponent', () => {
       password: "",
       number: "",
       salt: "",
+      latitude: 0, 
+      longitude: 0, 
+      suburb: "", 
+      gender: "", 
+      fcmToken : "",
+      birth: "",
+      banned: "",
+      warnings: 0,
     };
 
     const expectedAuPairValue: auPair = {
@@ -209,6 +253,9 @@ describe('EditAuPairProfileComponent', () => {
       payRate: 0,
       bio: "",
       experience: "",
+      currentLong: 0.0,
+      currentLat: 0.0,
+      terminateDate: ""
     };
 
     jest.spyOn(component,"getUserDetails");
@@ -232,6 +279,14 @@ describe('EditAuPairProfileComponent', () => {
       password: "",
       number: "",
       salt: "",
+      latitude: 0, 
+      longitude: 0, 
+      suburb: "", 
+      gender: "", 
+      fcmToken : "",
+      birth: "",
+      banned: "",
+      warnings: 0,
     };
 
     const expectedAuPairValue: auPair = {
@@ -244,6 +299,9 @@ describe('EditAuPairProfileComponent', () => {
       payRate: 0,
       bio: "",
       experience: "",
+      currentLong: 0.0,
+      currentLat: 0.0,
+      terminateDate: ""
     };
 
     jest.spyOn(component,"getUserDetails");
@@ -267,6 +325,14 @@ describe('EditAuPairProfileComponent', () => {
       password: "",
       number: "",
       salt: "",
+      latitude: 0, 
+      longitude: 0, 
+      suburb: "", 
+      gender: "", 
+      fcmToken : "",
+      birth: "",
+      banned: "",
+      warnings: 0,
     };
 
     const expectedAuPairValue: auPair = {
@@ -279,6 +345,9 @@ describe('EditAuPairProfileComponent', () => {
       payRate: 0,
       bio: "",
       experience: "",
+      currentLong: 0.0,
+      currentLat: 0.0,
+      terminateDate: ""
     };
 
     jest.spyOn(component,"getUserDetails");
@@ -302,6 +371,14 @@ describe('EditAuPairProfileComponent', () => {
       password: "",
       number: "",
       salt: "",
+      latitude: 0, 
+      longitude: 0, 
+      suburb: "", 
+      gender: "", 
+      fcmToken : "",
+      birth: "",
+      banned: "",
+      warnings: 0,
     };
 
     const expectedAuPairValue: auPair = {
@@ -314,6 +391,9 @@ describe('EditAuPairProfileComponent', () => {
       payRate: 0,
       bio: "",
       experience: "",
+      currentLong: 0.0,
+      currentLat: 0.0,
+      terminateDate: ""
     };
 
     jest.spyOn(component,"getUserDetails");

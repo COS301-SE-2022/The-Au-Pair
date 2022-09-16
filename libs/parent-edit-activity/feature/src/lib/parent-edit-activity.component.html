@@ -3,40 +3,58 @@
     <h2>Edit Activity</h2>
     <div class="activity-details">
         <form id="actForm" #activityForm="ngForm" (ngSubmit)="getActivityValues(activityForm.value)" class = "form-details">
+
           <!-- Activity Name -->
-          <label for="actNameText" style="left: -145px !important;">Activity Name</label>
-          <input id="actNameText" type="text" ngModel="{{this.activityDetails.name}}" name="activityName">
-          <p id="actNameError" class="error" style="display: none;">Error in field</p>
+          <div>
+            <label id="activityLabel" for="actNameText" >Activity Name</label>
+            <input id="actNameText" type="text" ngModel="{{this.activityDetails.name}}" name="activityName">
+            <p id="actNameError" class="error" style="display: none;">Error in field</p>
+          </div>
 
           <!-- Description -->
-          <label for="description" style="left: -155px !important;">Description</label>
-          <textarea id="descriptionText" type="text"  ngModel="{{this.activityDetails.description}}" name="description"></textarea>
-          <!-- <input type="text" ngModel name="description" placeholder="Description">  -->
-          <p id="descripError" class="error" style="display: none;">Error in field</p>
+          <div>
+            <label id="descriptionLabel" for="description" >Description</label>
+            <textarea id="descriptionText" type="text"  ngModel="{{this.activityDetails.description}}" name="description"></textarea>
+            <p id="descripError" class="error" style="display: none;">Error in field</p>
+          </div>
 
           <!-- Location -->
-          <label for="location" style="left: -165px !important;">Location</label>
-          <input [(ngModel)]="location" (input)="getLocations()" list="locations" type="text" name="location" placeholder="Location"/>
-          <datalist id="locations">
-            <option *ngFor="let location of potentialLocations" value="{{location}}">
-          </datalist>
-          <p id="locError" class="error" style="display: none;">Error in field</p>
+          <div>
+            <label id="locationLabel" for="location" >Location</label>
+            <input [(ngModel)]="location" (input)="getLocations()" list="locations" type="text" name="location" placeholder="Location"/>
+            <datalist id="locations">
+              <option *ngFor="let location of potentialLocations" value="{{location}}">
+            </datalist>
+            <p id="locError" class="error" style="display: none;">Error in field</p>
+          </div>
+          
+
+          <!-- Boundary -->
+          <div>
+            <label id="boundaryLabel" for="boundaryText" >Boundary (Km)</label>
+            <input id="boundaryText" type="text" ngModel="{{this.activityDetails.boundary}}" name="boundary">
+            <p id="boundaryError" class="error" style="display: none;">Error in field</p>
+          </div>
+    
 
           <!-- Day -->
-          <label for="day" style="left: -149px !important;">Choose a day</label>
-          <select ngModel="{{this.activityDetails.day}}" name="dayOfWeek" id="selectedDay">
-            <option value="Monday">Monday</option>
-            <option value="Tuesday">Tuesday</option>
-            <option value="Wednesday">Wednesday</option>
-            <option value="Thursday">Thursday</option>
-            <option value="Friday">Friday</option>
-            <option value="Saturday">Saturday</option>
-            <option value="Sunday">Sunday</option>
-          </select>
-          <p id="dayError" class="error" style="display: none;">Error in field</p>
+          <div>
+            <label id="dayLabel" for="day" >Choose a day</label>
+            <select ngModel="{{this.activityDetails.day}}" name="dayOfWeek" id="selectedDay">
+              <option value="Monday">Monday</option>
+              <option value="Tuesday">Tuesday</option>
+              <option value="Wednesday">Wednesday</option>
+              <option value="Thursday">Thursday</option>
+              <option value="Friday">Friday</option>
+              <option value="Saturday">Saturday</option>
+              <option value="Sunday">Sunday</option>
+            </select>
+            <p id="dayError" class="error" style="display: none;">Error in field</p>
+          </div>
 
           <!-- Time-slot -->
-          <label for="times">Choose a timeslot</label>
+          <div>
+            <label id="timeslotLabel" for="times">Choose a timeslot</label>
             <select ngModel="{{this.timeslot}}" name="timeSlot" id="selectedTime">
                 <option value="00:00-01:00">00:00-01:00</option>
                 <option value="01:00-02:00">01:00-02:00</option>
@@ -63,24 +81,33 @@
                 <option value="22:00-23:00">22:00-23:00</option>
                 <option value="23:00-24:00">23:00-24:00</option>
             </select>
-          <p id="timeError" class="error" style="display: none;">Error in field</p>
+            <p id="timeError" class="error" style="display: none;">Error in field</p>
+          </div>
 
           <!-- Budget -->
-          <label for="budget" style="left: -169px !important;">Budget</label>
-          <input id="budgetText" type="text" ngModel="{{this.activityDetails.budget}}" name="budget" placeholder="Budget"> 
-          <p id="budgetError" class="error" style="display: none;">Error in field</p>
+          <div>
+            <label id="budgetLabel" for="budget" >Budget (R)</label>
+            <input id="budgetText" type="text" ngModel="{{this.activityDetails.budget}}" name="budget" placeholder="Budget"> 
+            <p id="budgetError" class="error" style="display: none;">Error in field</p>
+          </div>
 
           <!-- Selected a child -->
-          <label for="Child" style="left: -149px !important;">Select a child</label>
-          <select ngModel="{{this.activityDetails.child}}" name="childId" id="childId">
-            <option *ngFor="let childids of allChildren" value="{{childids}}">{{childids}}</option>
-          </select>
-          <p id="childError" class="error" style="display: none;">Error in field</p>
+          <div>
+            <label id="childLabel" for="Child">Select a child</label>
+            <select ngModel="{{this.activityDetails.child}}" name="childId" id="childId">
+              <option value="{{this.activityDetails.child}}" selected>{{this.currentChild.fname}}</option>
+              <option *ngFor="let childids of allChildren" value="{{childids}}">{{childids.fname}}</option>
+            </select>
+            <p id="childError" class="error" style="display: none;">Error in field</p>
+          </div>
 
           <!-- Submit -->
           <div class="buttons">
             <input class = "updateActivity" type="submit" value="Update Activity">
             <input class = "cancel" value="Return" (click)="returnToSchedule()" routerLink="/schedule">
+          </div>
+          <div class="deletion">
+            <input class = "delete-activity" value="Delete" (click)="presentAlert()">
           </div>
           
         </form>

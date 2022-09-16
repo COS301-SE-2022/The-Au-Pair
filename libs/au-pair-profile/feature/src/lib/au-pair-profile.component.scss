@@ -39,22 +39,23 @@
 }
 
 .profile-picture-wrapper{
-    width: 62%;
-    height: 40%;
+    width: 166px;
+    height: 166px;
     background-color: rgba($color: #032927BF, $alpha: 0.75);
-    border-radius: 16px;
-    align-items: center;
-    justify-items: center;
-    text-align: center;
-    left: 9%;
+    border-radius: 50%;
     margin: auto;
-    display: block;
-    margin-bottom: 40px;
+    display: flex;
+    align-items: center;
+    text-align: center;
+    justify-content: center;
+    margin-top: 20px;
+    margin-bottom: 25px;
 }
 
 .profile-picture {
-    width: 80%;
-    height: 100%;
+    width: 140px;
+    height: 140px;
+    border-radius: 50%;
 }
 
 .parent-info-small{
@@ -63,7 +64,7 @@
     display:flex;
     font-family: Roboto;
     align-items: center;
-    color: var(--ion-color-tertiary);
+    color: black;
     margin-bottom: 12px;
     box-shadow: 1px 2px 5px rgba(0, 0, 0, 0.13);
     border-radius: 6px;
@@ -75,7 +76,7 @@
     display:flex;
     margin-top: 10px;
     font-family: Roboto;
-    color: #79BA9E;
+    color: black;
     margin-bottom: 12px;
     box-shadow: 1px 2px 5px rgba(0, 0, 0, 0.13);
     border-radius: 6px;
@@ -117,7 +118,7 @@
     margin-top: 25px;
 }
 
-#active-2{
+#background-image-1{
     position: absolute;
     width: 160px;
     height: 160px;
@@ -126,7 +127,7 @@
     z-index: -10;
 }
 
-#active{
+#background-image-2{
     position: absolute;
     width: 130px;
     height: 130px;
@@ -136,7 +137,7 @@
     z-index: -10;
 }
 
-#lifestyles{
+#background-image-3{
     position: absolute;
     width: 280px;
     height: 280px;
@@ -148,11 +149,11 @@
 }
 
 @media (max-width: 642px) {
-    #active{
+    #background-image-2{
         right: 15px;
     }
     
-    #lifestyles{
+    #background-image-3{
         display: none;
     }
 
@@ -186,15 +187,11 @@
 
 @media (max-width: 810px) {
     
-    #active{
+    #background-image-2{
         right: 35px;
     }
     
-    #lifestyles{
-        display: none;
-    }
-    
-    #lifestyles{
+    #background-image-3{
         display: none;
     }
 
@@ -226,8 +223,8 @@
     }
 }
 
-@media (max-width: 1240px) {
-    .empty-div{
-        width: 0%;
+@media (max-width: 1000px) {
+    #background-image-3{
+        display: none;
     }
 }

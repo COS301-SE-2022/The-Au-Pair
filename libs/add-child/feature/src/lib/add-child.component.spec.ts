@@ -7,6 +7,8 @@ import { NavbarModule } from '@the-au-pair/shared/components/navbar';
 import { API } from '../../../../shared/api/api.service';
 import { IonicModule } from '@ionic/angular';
 import { Child } from '../../../../shared/interfaces/interfaces';
+import { NgxsModule } from '@ngxs/store';
+import { AppState } from '../../../../shared/ngxs/state';
 
 describe('AddChildComponent', () => {
   let component: AddChildComponent;
@@ -30,7 +32,8 @@ describe('AddChildComponent', () => {
         IonicModule,
         HttpClientTestingModule,
         NavbarModule,
-        RouterTestingModule
+        RouterTestingModule,
+        NgxsModule.forRoot([AppState])
     ],
     providers: [API]
     }).compileComponents();
@@ -50,14 +53,17 @@ describe('AddChildComponent', () => {
   /**Populated form fields form testing**/
   it('should, given valid input from the form, update the activityDetails variable', async ()=>{
     const expectedValue: Child = {
-      id: "0101011234098", 
-      fname: "name", 
-      sname: "surname", 
-      allergies: "none", 
-      diet: "none", 
-      parent: "4561237814867"
+      id: "0101011234098",
+      fname: "name",
+      sname: "surname",
+      allergies: "none",
+      diet: "none",
+      parent: "",
+      aupair: ''
     };
 
+    component.allChildren = [expectedValue];  
+    
     jest.spyOn(component,"getChildValues");
 
     await component.getChildValues(populatedForm);
@@ -66,7 +72,18 @@ describe('AddChildComponent', () => {
   })
 
   it('should call addChild function if the form contains valid details', async ()=>{
+    const tempChild: Child = {
+      id: "",
+      fname: "",
+      sname: "",
+      allergies: "",
+      diet: "",
+      parent: "",
+      aupair: ''
+    };
+
     jest.spyOn(component,"addChild");
+    component.allChildren = [tempChild];
     await component.getChildValues(populatedForm);
     expect(component.addChild).toHaveBeenCalled();
   })
@@ -76,13 +93,16 @@ describe('AddChildComponent', () => {
 
   it('should, given a form with invalid South African ID, NOT poplate the activityDetails variable', async ()=>{
     const expectedValue: Child = {
-      id: "", 
-      fname: "", 
-      sname: "", 
-      allergies: "", 
-      diet: "", 
-      parent: ""
+      id: "",
+      fname: "",
+      sname: "",
+      allergies: "",
+      diet: "",
+      parent: "",
+      aupair: ''
     };
+
+    component.allChildren = [expectedValue];
 
     jest.spyOn(component,"getChildValues");
 
@@ -93,13 +113,16 @@ describe('AddChildComponent', () => {
 
   it('should, given a form with no childID, NOT poplate the activityDetails variable', async ()=>{
     const expectedValue: Child = {
-      id: "", 
-      fname: "", 
-      sname: "", 
-      allergies: "", 
-      diet: "", 
-      parent: ""
+      id: "",
+      fname: "",
+      sname: "",
+      allergies: "",
+      diet: "",
+      parent: "",
+      aupair: ''
     };
+
+    component.allChildren = [expectedValue];
 
     jest.spyOn(component,"getChildValues");
 
@@ -111,13 +134,16 @@ describe('AddChildComponent', () => {
 
   it('should, given a form with no first name, NOT poplate the activityDetails variable', async ()=>{
     const expectedValue: Child = {
-      id: "", 
-      fname: "", 
-      sname: "", 
-      allergies: "", 
-      diet: "", 
-      parent: ""
+      id: "",
+      fname: "",
+      sname: "",
+      allergies: "",
+      diet: "",
+      parent: "",
+      aupair: ''
     };
+
+    component.allChildren = [expectedValue];
 
     jest.spyOn(component,"getChildValues");
 
@@ -128,13 +154,16 @@ describe('AddChildComponent', () => {
 
   it('should, given a form with no Surname, NOT poplate the activityDetails variable', async ()=>{
     const expectedValue: Child = {
-      id: "", 
-      fname: "", 
-      sname: "", 
-      allergies: "", 
-      diet: "", 
-      parent: ""
+      id: "",
+      fname: "",
+      sname: "",
+      allergies: "",
+      diet: "",
+      parent: "",
+      aupair: ''
     };
+
+    component.allChildren = [expectedValue];
 
     jest.spyOn(component,"getChildValues");
 
@@ -146,13 +175,16 @@ describe('AddChildComponent', () => {
 
   it('should, given a form with no allergies entered, NOT poplate the activityDetails variable', async ()=>{
     const expectedValue: Child = {
-      id: "", 
-      fname: "", 
-      sname: "", 
-      allergies: "", 
-      diet: "", 
-      parent: ""
+      id: "",
+      fname: "",
+      sname: "",
+      allergies: "",
+      diet: "",
+      parent: "",
+      aupair: ''
     };
+
+    component.allChildren = [expectedValue];
 
     jest.spyOn(component,"getChildValues");
 
@@ -164,14 +196,16 @@ describe('AddChildComponent', () => {
 
   it('should, given a form with no diet, NOT poplate the activityDetails variable', async ()=>{
     const expectedValue: Child = {
-      id: "", 
-      fname: "", 
-      sname: "", 
-      allergies: "", 
-      diet: "", 
-      parent: ""
+      id: "",
+      fname: "",
+      sname: "",
+      allergies: "",
+      diet: "",
+      parent: "",
+      aupair: ''
     };
 
+    component.allChildren = [expectedValue];
     jest.spyOn(component,"getChildValues");
     await component.getChildValues(emptyDiet);
     expect(component.childDetails).toEqual(expectedValue);

@@ -3,9 +3,11 @@ package Database.TheAuPair.Controllers;
 import Database.TheAuPair.Models.auPair;
 import Database.TheAuPair.Repositories.auPairRepository;
 import Database.TheAuPair.Services.auPairService;
+import java.util.List;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
+@CrossOrigin(origins = "*")
 public class auPairController
 {
   private auPairService aps;
@@ -16,29 +18,30 @@ public class auPairController
   }
 
   @PostMapping("/getAuPair")
-  @CrossOrigin(origins = "http://localhost:4200")
   public auPair getAuPair(@RequestBody String id)
   {
-    auPair ap =  aps.getAuPair(id);
-    return ap;
+    return this.aps.getAuPair(id);
   }
 
   @PostMapping("/editAuPair")
-  @CrossOrigin(origins = "http://localhost:4200")
   public void editAuPair(@RequestBody auPair p)
   {
     this.aps.updateAuPair(p);
   }
 
+  @GetMapping("/getAllAuPairs")
+  public List<auPair> getAllAuPairs()
+  {
+    return this.aps.getAllAuPairs();
+  }
+
   @PostMapping("/removeAuPair")
-  @CrossOrigin(origins = "http://localhost:4200")
   public void removeAuPair(@RequestBody String id)
   {
     this.aps.deleteAuPair(id);
   }
 
   @PostMapping("/addAuPair")
-  @CrossOrigin(origins = "http://localhost:4200")
   public void addAuPair(@RequestBody auPair a)
   {
     this.aps.addAuPair(a);

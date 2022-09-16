@@ -29,7 +29,8 @@ ion-content {
 
 .form-details {
     position: relative;
-    width: 411px;
+    max-width: 411px;
+    width: 100%;
     height: 20rem;
 }
 
@@ -38,6 +39,7 @@ ion-content {
     display: flex;
     justify-content: center;
     align-items: center;
+    padding: 0 20px 0 20px;
     top: 170px;
 }
 
@@ -54,6 +56,18 @@ ion-content {
     color: black;
 }
 
+.mfSelector input{
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 62px;
+    background: var(--ion-color-light-white);
+    box-shadow: 1px 2px 5px rgba(0, 0, 0, 0.13);
+    border-style: none;
+    border-radius: 10px;
+    padding-top: 60px;
+}
+
 .selector{
     background-color: var(--ion-color-grey);
     padding: 0;
@@ -65,7 +79,18 @@ ion-content {
     border-radius: 10px;
 }
 
-.selector .parent, .selector .aupair{ 
+.mfSelector{
+    background-color: var(--ion-color-grey);
+    margin-top: 70px;
+    width:100%;
+    display:flex; 
+    flex-direction:row;
+    justify-content: center;
+    border-radius: 10px;
+}
+
+
+.selector .parent, .selector .aupair, .mfSelector .male, .mfSelector .female{ 
     transition: 200ms ease-in;
     font-style: normal;
     font-weight: 600;
@@ -78,11 +103,11 @@ ion-content {
     flex-grow:1;
 }
 
-.selector .chosen {
+.selector .chosen, .mfSelector .chosen {
     background-color: var(--ion-color-light-white);
 }
 
-.selector .notchosen {
+.selector .notchosen, .mfSelector .notchosen {
     background: none;
     color: white;
 }
@@ -104,6 +129,15 @@ ion-content {
     font-size: 16px;
     line-height: 19px;
     background-color: var(--ion-color-primary) !important;
+    margin-top: 20px;
+}
+
+.disabled-registerUser{ 
+    font-style: normal;
+    font-weight: 700;
+    font-size: 16px;
+    line-height: 19px;
+    background-color: var(--ion-color-grey) !important;
     margin-top: 20px;
 }
 
@@ -143,14 +177,4 @@ ion-content {
     top: -5px;
     opacity: 0.04;
     z-index: -10;
-}
-
-.error{
-    display: none;
-    position: relative;
-    display: block;
-    text-align: center;
-    margin: 0;
-    top: 27px;
-    color: red;
 }

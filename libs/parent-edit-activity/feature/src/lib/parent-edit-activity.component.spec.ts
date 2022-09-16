@@ -7,6 +7,8 @@ import { Activity } from '../../../../shared/interfaces/interfaces';
 import { HttpClientTestingModule } from "@angular/common/http/testing";
 import { NavbarModule } from '@the-au-pair/shared/components/navbar';
 import {RouterTestingModule} from "@angular/router/testing";
+import { NgxsModule } from '@ngxs/store';
+import { AppState } from '../../../../shared/ngxs/state';
 
 describe('ParentEditActivityComponent', () => {
   let component: ParentEditActivityComponent;
@@ -16,16 +18,16 @@ describe('ParentEditActivityComponent', () => {
   const populatedForm = {activityName: "AI", description: "AI Lesson", location: "UP", dayOfWeek: "Wednesday", timeSlot: "13:00-14:00", budget: "0", childId:"8675945310542"};
 
   //Inavlid forms
-  const emptyActName = {activityName: "", description: "AI Lesson", location: "UP", dayOfWeek: "Wednesday", timeSlot: "13:00-14:00", budget: "0", childId:"8675945310542"};
-  const emptyDescription = {activityName: "AI", description: "", location: "UP", dayOfWeek: "Wednesday", timeSlot: "13:00-14:00", budget: "0", childId:"8675945310542"};
-  const emptyLocation = {activityName: "AI", description: "AI Lesson", location: "", dayOfWeek: "Wednesday", timeSlot: "13:00-14:00", budget: "0", childId:"8675945310542"};
-  const emptyDay = {activityName: "AI", description: "AI Lesson", location: "UP", dayOfWeek: "", timeSlot: "13:00-14:00", budget: "0", childId:"8675945310542"};
-  const emptyTime = {activityName: "AI", description: "AI Lesson", location: "UP", dayOfWeek: "Wednesday", timeSlot: "", budget: "0", childId:"8675945310542"};
-  const emptyBudget = {activityName: "AI", description: "AI Lesson", location: "UP", dayOfWeek: "Wednesday", timeSlot: "13:00-14:00", budget: "", childId:"8675945310542"};
-  const emptyChild = {activityName: "AI", description: "AI Lesson", location: "UP", dayOfWeek: "Wednesday", timeSlot: "13:00-14:00", budget: "0", childId:""};
+  const emptyActName = {activityName: "", description: "AI Lesson", location: "UP", boundary: 5, dayOfWeek: "Wednesday", timeSlot: "13:00-14:00", budget: "0", childId:"8675945310542"};
+  const emptyDescription = {activityName: "AI", description: "", location: "UP", boundary: 5, dayOfWeek: "Wednesday", timeSlot: "13:00-14:00", budget: "0", childId:"8675945310542"};
+  const emptyLocation = {activityName: "AI", description: "AI Lesson", location: "", boundary: 5, dayOfWeek: "Wednesday", timeSlot: "13:00-14:00", budget: "0", childId:"8675945310542"};
+  const emptyDay = {activityName: "AI", description: "AI Lesson", location: "UP", boundary: 5, dayOfWeek: "", timeSlot: "13:00-14:00", budget: "0", childId:"8675945310542"};
+  const emptyTime = {activityName: "AI", description: "AI Lesson", location: "UP", boundary: 5, dayOfWeek: "Wednesday", timeSlot: "", budget: "0", childId:"8675945310542"};
+  const emptyBudget = {activityName: "AI", description: "AI Lesson", location: "UP", boundary: 5, dayOfWeek: "Wednesday", timeSlot: "13:00-14:00", budget: "", childId:"8675945310542"};
+  const emptyChild = {activityName: "AI", description: "AI Lesson", location: "UP", boundary: 5, dayOfWeek: "Wednesday", timeSlot: "13:00-14:00", budget: "0", childId:""};
 
   //Invalid activity to be updated
-  const invalidActivity = {id: "invalidId", name: "AI", description: "AI Lesson", location: "UP", timeStart:"13:00", timeEnd: "14:00",  budget: 0.0 ,comment: "", behavior: 0, day: "Wednesday", child:"8675945310542"};
+  const invalidActivity = {id: "invalidId", name: "AI", description: "AI Lesson", location: "UP", boundary: 5, timeStart:"13:00", timeEnd: "14:00",  budget: 0.0 ,comment: "", behavior: 0, day: "Wednesday", child:"8675945310542"};
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
@@ -35,6 +37,7 @@ describe('ParentEditActivityComponent', () => {
         HttpClientTestingModule,
         NavbarModule,
         RouterTestingModule,
+        NgxsModule.forRoot([AppState])
     ],
     providers: [API]
     }).compileComponents();
@@ -65,7 +68,8 @@ describe('ParentEditActivityComponent', () => {
       id: "",
       name: "",
       description: "",
-      location:"",
+      location: "",
+      boundary: 0.0,
       timeStart: "",
       timeEnd: "",
       budget: 0.0,
@@ -87,7 +91,8 @@ describe('ParentEditActivityComponent', () => {
       id: "",
       name: "",
       description: "",
-      location:"",
+      location: "",
+      boundary: 0.0,
       timeStart: "",
       timeEnd: "",
       budget: 0.0,
@@ -109,7 +114,8 @@ describe('ParentEditActivityComponent', () => {
       id: "",
       name: "",
       description: "",
-      location:"",
+      location: "",
+      boundary: 0.0,
       timeStart: "",
       timeEnd: "",
       budget: 0.0,
@@ -131,7 +137,8 @@ describe('ParentEditActivityComponent', () => {
       id: "",
       name: "",
       description: "",
-      location:"",
+      location: "",
+      boundary: 0.0,
       timeStart: "",
       timeEnd: "",
       budget: 0.0,
@@ -153,7 +160,8 @@ describe('ParentEditActivityComponent', () => {
       id: "",
       name: "",
       description: "",
-      location:"",
+      location: "",
+      boundary: 0.0,
       timeStart: "",
       timeEnd: "",
       budget: 0.0,
@@ -175,7 +183,8 @@ describe('ParentEditActivityComponent', () => {
       id: "",
       name: "",
       description: "",
-      location:"",
+      location: "",
+      boundary: 0.0,
       timeStart: "",
       timeEnd: "",
       budget: 0.0,
@@ -197,7 +206,8 @@ describe('ParentEditActivityComponent', () => {
       id: "",
       name: "",
       description: "",
-      location:"",
+      location: "",
+      boundary: 0.0,
       timeStart: "",
       timeEnd: "",
       budget: 0.0,

@@ -47,7 +47,7 @@
   grid-template-columns: repeat(7,minmax(198px,1fr));
   width: 95%;
   margin-inline: auto;
-  
+  margin-bottom: 20px;
 }
 
 @media (max-width: 1475px) {
@@ -126,4 +126,28 @@ ion-card{
   font-size: 14px;
   letter-spacing: 0.05px;
   color: white;
+}
+
+.filter{
+  color : var(--ion-color-dark);
+  margin-bottom: 1.5rem;
+}
+
+input[type=text], select{
+  width: max(10vw,135px);
+  height: 35px;
+  background: var(--ion-color-light-white);
+  box-shadow: 1px 2px 5px rgba(0, 0, 0, 0.13);
+  border-style: none;
+  border-radius: 4px;
+  margin-top: 40px;
+  padding-left: 10px;
+  padding-right: 30px;
+  color: black;
+  font-family: Roboto;
+}
+
+#scheduleText{
+  margin-right: 0.5rem;
+  font-size: 18px;
 }

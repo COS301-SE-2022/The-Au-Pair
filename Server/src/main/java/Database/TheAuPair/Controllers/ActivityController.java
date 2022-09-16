@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
+@CrossOrigin(origins = "*")
 public class ActivityController
 {
   private ActivityService as;
@@ -17,40 +18,44 @@ public class ActivityController
   }
 
   @PostMapping("/getActivity")
-  @CrossOrigin(origins = "http://localhost:4200")
   public Activity getActivity(@RequestBody String id)
   {
-    Activity a =  as.getActivity(id);
-    return a;
+    return this.as.getActivity(id);
   }
 
   @PostMapping("/addActivity")
-  @CrossOrigin(origins = "http://localhost:4200")
   public void addActivity(@RequestBody Activity a)
   {
     this.as.addActivity(a);
   }
 
   @PostMapping("/editActivity")
-  @CrossOrigin(origins = "http://localhost:4200")
   public void editActivity(@RequestBody Activity a)
   {
     this.as.updateActivity(a);
   }
 
+  @PostMapping("/removeActivity")
+  public void removeActivity(@RequestBody String id)
+  {
+    this.as.removeActivity(id);
+  }
+
+  @PostMapping("/removeManyActivities")
+  public void removeManyActivities(@RequestBody Activity[] activities)
+  {
+    this.as.removeManyActivities(activities);
+  }
+
   @PostMapping("/getSchedule")
-  @CrossOrigin(origins = "http://localhost:4200")
   public List<Activity> getSchedule(@RequestBody String id)
   {
-    List<Activity> a =  as.getSchedule(id);
-    return a;
+    return this.as.getSchedule(id);
   }
 
   @PostMapping("/getAuPairSchedule")
-  @CrossOrigin(origins = "http://localhost:4200")
   public List<Activity> getAuPairSchedule(@RequestBody String [] children)
   {
-    List<Activity> a =  as.getAuPairSchedule(children);
-    return a;
+    return this.as.getAuPairSchedule(children);
   }
 }

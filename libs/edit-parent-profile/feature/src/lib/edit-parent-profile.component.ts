@@ -2,6 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { API } from '../../../../shared/api/api.service';
 import { User, medAid, Parent } from '../../../../shared/interfaces/interfaces';
 import { ToastController } from '@ionic/angular';
+import { Store } from '@ngxs/store';
+import { HttpClient } from '@angular/common/http';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'the-au-pair-edit-parent-profile',
@@ -10,7 +13,17 @@ import { ToastController } from '@ionic/angular';
 })
 export class EditParentProfileComponent implements OnInit{
   
+  parentID = "";
   hasErr = false;
+  sameFlag = false;
+  errFlag = true;
+
+  location = "";
+  long = 0;
+  lat = 0;
+  suburb = "";
+
+  potentialLocations : any[] = [];
 
   userDetails: User = {
     id: "",
@@ -23,6 +36,14 @@ export class EditParentProfileComponent implements OnInit{
     password: "",
     number: "",
     salt: "",
+    latitude: 0,
+    longitude: 0,
+    suburb: "",
+    gender: "",
+    fcmToken : "",
+    birth: "",
+    warnings: 0,
+    banned: "",
   }
 
   medAidDetails: medAid = {
@@ -41,17 +62,20 @@ export class EditParentProfileComponent implements OnInit{
     auPair: "",
   }
 
-  constructor(private serv: API, public toastCtrl: ToastController){}
+  constructor(private serv: API, private http: HttpClient, public toastCtrl: ToastController, private store: Store, public router: Router){}
 
   ngOnInit(): void
   {
+    this.parentID = this.store.snapshot().user.id;
     this.getUserDetails()
   }
 
   async getUserDetails()
   {
     /* User Details */
-    await this.serv.getUser("4561237814867").subscribe(
+    await this.serv.getUser(this.parentID)
+    .toPromise()
+    .then(
       res=>{
         this.userDetails.id = res.id;
         this.userDetails.fname = res.fname;
@@ -63,10 +87,36 @@ export class EditParentProfileComponent implements OnInit{
         this.userDetails.password = res.password;
         this.userDetails.number = res.number;
         this.userDetails.salt = res.salt;
+        this.userDetails.latitude = res.latitude;
+        this.userDetails.longitude = res.longitude;
+        this.userDetails.suburb = res.suburb;
+        this.userDetails.gender = res.gender;
+        this.userDetails.birth = res.birth;
+        this.userDetails.warnings = res.warnings;
+        this.userDetails.banned = res.banned;
       },
-      error=>{console.log("Error has occured with API: " + error);}
+      error => {
+        console.log("Error has occured with API: " + error);
+      }
     )
-    await this.serv.getMedAid("7534286951").subscribe(
+
+    await this.serv.getParent(this.parentID)
+    .toPromise()
+    .then(
+      res => {
+        this.parent.id = res.id;
+        this.parent.children = res.children;
+        this.parent.medID = res.medID;
+        this.parent.auPair = res.auPair;
+      },
+      error => {
+        console.log("Error has occured with API: " + error);
+      }
+    )  
+
+    await this.serv.getMedAid(this.parent.medID)
+    .toPromise()
+    .then(
       res=>{
         this.medAidDetails.id = res.id;
         this.medAidDetails.plan = res.plan;
@@ -75,7 +125,9 @@ export class EditParentProfileComponent implements OnInit{
         this.medAidDetails.mID = res.mID;
         this.medAidDetails.provider = res.provider;
       },
-      error=>{console.log("Error has occured with API: " + error);}
+      error => {
+        console.log("Error has occured with API: " + error);
+      }
     )
   };
 
@@ -129,7 +181,43 @@ export class EditParentProfileComponent implements OnInit{
     {
       if(dom != null)
       {
-        dom.style.display = "none";
+        //Check that the selected location is from the API
+        let flag = false;
+        this.getLocations()
+        this.potentialLocations.forEach((element) => {
+          if(dom != null)
+          {
+            if(element.display_name == this.location)
+            {
+              flag = true;
+              return;
+            }
+          }
+        })
+        if(val.address === this.userDetails.address)
+        {
+          dom.style.display = "none";
+          this.sameFlag = true;
+        }
+        else if(!flag)
+        {
+          dom.innerHTML = "Please select a valid location from the suggested below.";
+          dom.style.display = "block";
+          flag = false;
+          this.errFlag = false;
+        }
+        else
+        {
+          dom.style.display = "none";
+          this.potentialLocations.forEach((element) => {
+            if(element.display_name == this.location)
+            {
+              this.long = parseFloat(element.lon);
+              this.lat = parseFloat(element.lat);
+              this.suburb = element.address.suburb;
+            }
+          })
+        }
       }
     }
     dom = document.getElementById("medAidMMError");
@@ -219,36 +307,54 @@ export class EditParentProfileComponent implements OnInit{
     }
     else
     {
-      this.userDetails.email = val.email;
-      this.userDetails.number = val.phone;
-      this.userDetails.address = val.address;
-      this.medAidDetails.name = val.medicalAidMM;
-      this.medAidDetails.plan = val.medicalAidPlan;
-      this.medAidDetails.provider = val.medicalAidProvider;
-      this.medAidDetails.mID = val.medicalAidNo;
-      this.medAidDetails.sname = val.medicalAidMS;
-      this.editDetails(this.userDetails, this.medAidDetails);
+      if(this.errFlag === false)
+      {
+        this.errToast("Please select a valid location from the suggested below.");
+      }
+      else if(this.sameFlag === true)
+      {
+        this.userDetails.email = val.email;
+        this.userDetails.number = val.phone;
+        this.userDetails.address = val.address;
+        this.medAidDetails.name = val.medicalAidMM;
+        this.medAidDetails.plan = val.medicalAidPlan;
+        this.medAidDetails.provider = val.medicalAidProvider;
+        this.medAidDetails.mID = val.medicalAidNo;
+        this.medAidDetails.sname = val.medicalAidMS;
+        this.editDetails(this.userDetails, this.medAidDetails);
+      }
+      else
+      {
+        this.userDetails.email = val.email;
+        this.userDetails.number = val.phone;
+        this.userDetails.address = val.address;
+        this.userDetails.latitude = this.lat;
+        this.userDetails.longitude = this.long;
+        this.userDetails.suburb = this.suburb;
+        this.medAidDetails.name = val.medicalAidMM;
+        this.medAidDetails.plan = val.medicalAidPlan;
+        this.medAidDetails.provider = val.medicalAidProvider;
+        this.medAidDetails.mID = val.medicalAidNo;
+        this.medAidDetails.sname = val.medicalAidMS;
+        this.editDetails(this.userDetails, this.medAidDetails);
+      }
     }
   }
 
   async editDetails(user:User, medAid:medAid)
-  {
+  {    
     await this.editUser(user);
     await this.editMedAid(medAid);    
 
-    if(this.hasErr)
-    {
-      this.errToast();
-    }
-    else
-    {
-      this.openToast();
-    }
-    
+    this.openToast();
+
+    this.router.navigate(['/parent-dashboard']);
   }
 
-  editUser(user:User){    
-    this.serv.editUser(user).subscribe(
+  async editUser(user:User){    
+    await this.serv.editUser(user)
+    .toPromise()
+    .then(
       res=>{
         console.log("The response is:" + res); 
         return res;
@@ -261,29 +367,23 @@ export class EditParentProfileComponent implements OnInit{
     )
   };
 
-  editMedAid(medAid:medAid){
-    this.serv.getParent("4561237814867").subscribe(
-      res=>{
-        this.parent.id = res.id;
-        this.parent.children = res.children;
-        this.parent.medID = medAid.mID;
-        this.parent.auPair = res.auPair;
-        
-        //Update the parent object to contain the new child ID
-        this.serv.editParent(this.parent).subscribe(
-          res=>{
-            console.log("The response is:" + res); 
-          },
-          error=>{
-            console.log("Error has occured with API: " + error);
-          }
-        );
+  async editMedAid(medAid:medAid)
+  {
+    this.parent.medID = medAid.mID;
+    await this.serv.editParent(this.parent)
+    .toPromise()
+    .then(
+      res => {
+        console.log("The response is:" + res); 
       },
       error=>{
         console.log("Error has occured with API: " + error);
       }
     )
-    this.serv.editMedAid(medAid).subscribe(
+
+    await this.serv.editMedAid(medAid)
+    .toPromise()
+    .then(
       res=>{
         console.log("The response is:" + res); 
         return res;
@@ -308,14 +408,49 @@ export class EditParentProfileComponent implements OnInit{
     await toast.present();
   }
 
-  async errToast()
+  async errToast(mes : string)
   {
     const toast = await this.toastCtrl.create({
-      message: 'Unable to update profile!',
+      message: mes,
       duration: 4000,
       position: 'top',
       cssClass: 'toastPopUp'
     });
     await toast.present();
+  }
+
+  async getLocations()
+  {
+    const loc = this.location;
+    
+    //Building the API query according to what is in the location input field
+    const locationParam = loc.replace(' ', '+');
+    const params = locationParam + '&limit=4&format=json&polygon_geojson=1&addressdetails=1';
+
+    //Make the API call
+    await this.http.get('https://nominatim.openstreetmap.org/search?q='+params)
+    .toPromise()
+    .then(data=>{ // Success
+      //Populate potential Locations Array
+      const json_data = JSON.stringify(data);
+      const res = JSON.parse(json_data);
+
+      //Jump out if no results returned
+      if(json_data === "{}")
+      {
+        return;
+      }
+  
+      //Add returned data to the array
+      const len = res.length;
+      for (let j = 0; j < len && j<4; j++) 
+      {      
+        this.potentialLocations.push(res[j]);
+      }
+      
+    })
+    .catch(error=>{ // Failure
+      console.log(error);
+    });
   }
 }

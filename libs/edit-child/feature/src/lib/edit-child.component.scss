@@ -50,7 +50,7 @@ h2{
 .childrenDetails input{
     width: 411px;
     height: 62px;
-    background: #F9F9F9;
+    background: var(--ion-color-light-white);
     box-shadow: 1px 2px 5px rgba(0, 0, 0, 0.13);
     border-style: none;
     border-radius: 10px;
@@ -61,7 +61,7 @@ h2{
     resize: none;
     width: 411px;
     height: 169px;
-    background: #F9F9F9;
+    background: var(--ion-color-light-white);
     box-shadow: 1px 2px 5px rgba(0, 0, 0, 0.13);
     border-style: none;
     border-radius: 10px;
@@ -85,7 +85,7 @@ label{
 input[type=text], select{
     width: 411px;
     height: 62px;
-    background: #F9F9F9;
+    background: var(--ion-color-light-white);
     box-shadow: 1px 2px 5px rgba(0, 0, 0, 0.13);
     border-style: none;
     border-radius: 10px;
@@ -165,19 +165,44 @@ textarea:focus{
 
 //Labels for input
 #labelID{
-    left: -169px !important;
+    position: inherit;
+    text-align: left;
+    align-self: left;
+    margin-left: 5px;
+    margin-bottom: -30px;
+    margin-top: 30px;
 }
 #firstName{
-    left: -156px !important;
+    position: inherit;
+    text-align: left;
+    align-self: left;
+    margin-left: 5px;
+    margin-bottom: -30px;
+    margin-top: 30px;
 }
 #surname{
-    left: -165px !important;
+    position: inherit;
+    text-align: left;
+    align-self: left;
+    margin-left: 5px;
+    margin-bottom: -30px;
+    margin-top: 30px;
 }
 #allergies{
-    left: -165px !important;
+    position: inherit;
+    text-align: left;
+    align-self: left;
+    margin-left: 5px;
+    margin-bottom: -30px;
+    margin-top: 30px;
 }
 #diet{
-    left: -120px !important;
+    position: inherit;
+    text-align: left;
+    align-self: left;
+    margin-left: 5px;
+    margin-bottom: -30px;
+    margin-top: 30px;
 }
 
 
@@ -210,4 +235,24 @@ textarea:focus{
     top: -5px;
     opacity: 0.04;
     z-index: -10;
+}
+
+@media (max-width: 440px) {
+
+    .childrenDetails input{
+        width: 90vw !important;
+    }
+
+    .childrenDetails select{
+        width: 90vw;
+    }
+
+    .childrenDetails textarea{
+        width: 90vw;
+    }
+
+    .buttons{
+        grid-template-columns: repeat(1, 1fr);
+        width: 90vw;
+    }
 }

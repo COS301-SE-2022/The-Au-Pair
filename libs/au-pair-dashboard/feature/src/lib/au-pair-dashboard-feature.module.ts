@@ -3,12 +3,21 @@ import { CommonModule } from '@angular/common';
 import { AuPairDashboardComponent } from './au-pair-dashboard.component';
 import { AuPairDashboardRoutingModule } from './au-pair-dashboard-routing.module';
 import { IonicModule } from '@ionic/angular';
-import { AuPairNavbarModule } from '@the-au-pair/shared/components/aupair-navbar';
+import { NavbarModule } from '@the-au-pair/shared/components/navbar';
 import { API } from '../../../../../libs/shared/api/api.service';
+import { UserReportModalComponent } from './user-report-modal/user-report-modal.component';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
-  imports: [CommonModule,AuPairDashboardRoutingModule,IonicModule,AuPairNavbarModule],
+  imports: [
+    CommonModule,
+    AuPairDashboardRoutingModule,
+    IonicModule,
+    NavbarModule,
+    FormsModule,
+  ],
   providers: [API],
-  declarations: [AuPairDashboardComponent],
+  declarations: [AuPairDashboardComponent, UserReportModalComponent],
+  entryComponents: [UserReportModalComponent],
 })
 export class AuPairDashboardFeatureModule {}
