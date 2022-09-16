@@ -300,4 +300,19 @@ export class JobSummaryParentViewComponent implements OnInit {
       this.shiftHours[i] = actCount;
     }    
   }
+
+  getAverage(ratings : number[])
+  {
+    let total = 0;
+    for(let i = 0; i < ratings.length; i++)
+    {
+      total += ratings[i];
+    }
+
+    let avg = total/ratings.length;
+
+    var ret = (Math.round(avg * 100) / 100).toFixed(1);
+
+    return ret;
+  }
 }

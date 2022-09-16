@@ -26,6 +26,11 @@
                     <p class="parent-text-info" style="text-transform:capitalize">{{this.userDetails.gender}}</p>
                 </div>
             </div>
+            <div class="parent-info-large">
+                <div class="parent-text">Rating: </div>
+                <p *ngIf="this.parentDetails.rating !== []" class="parent-text-info">{{this.getAverage(this.parentDetails.rating)}}/5</p>
+                <p *ngIf="this.parentDetails.rating === []" class="parent-text-info">Not yet rated</p>
+            </div>
         </div>
         <h3 class='profile-name'>Children</h3>
         <div class = 'details-div' *ngFor="let c of childrenArr; let last = last">
