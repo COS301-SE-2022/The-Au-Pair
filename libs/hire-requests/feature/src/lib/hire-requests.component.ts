@@ -57,6 +57,7 @@ export class HireRequestsComponent implements OnInit {
     children: [],
     medID: "",
     auPair: "",
+    rating: []
   }
 
   constructor(private serv: API, private modalCtrl : ModalController, public toastCtrl: ToastController, private store: Store, private router: Router) {}

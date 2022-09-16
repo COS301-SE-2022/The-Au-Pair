@@ -52,7 +52,8 @@ export class RegisterComponent {
     id: '',
     children: [],
     medID: '',
-    auPair: ''
+    auPair: '',
+    rating: []
   }
 
   aupairDetails: auPair ={

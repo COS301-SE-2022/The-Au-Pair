@@ -37,6 +37,7 @@ export class ParentProfileComponent implements OnInit {
     children: [],
     medID: "",
     auPair: "",
+    rating: []
   }
 
   medAidDetails: medAid = {
@@ -92,6 +93,7 @@ export class ParentProfileComponent implements OnInit {
         this.parentDetails.children = res.children;
         this.parentDetails.medID = res.medID;
         this.parentDetails.auPair = res.auPair;
+        this.parentDetails.rating = res.rating;
       },
       error=>{console.log("Error has occured with API: " + error);}
     )

@@ -36,6 +36,7 @@ export class ParentDashboardComponent implements OnInit{
     children: [],
     medID: "",
     auPair: "",
+    rating: []
   }
 
   userDetails: User = {
@@ -141,6 +142,7 @@ export class ParentDashboardComponent implements OnInit{
           this.parentDetails.children = res.children;
           this.parentDetails.medID = res.medID;
           this.parentDetails.auPair = res.auPair;
+          this.parentDetails.rating = res.rating;
 
           //setting the state
           this.store.dispatch(new SetChildren(res.children));
@@ -353,6 +355,7 @@ export class ParentDashboardComponent implements OnInit{
           this.parentDetails.children = res.children;
           this.parentDetails.medID = res.medID;
           this.parentDetails.auPair = res.auPair;
+          this.parentDetails.rating = res.rating;
       },
       error => {
         console.log("Error has occured with API: " + error);

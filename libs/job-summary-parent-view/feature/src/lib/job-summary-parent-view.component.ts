@@ -60,6 +60,7 @@ export class JobSummaryParentViewComponent implements OnInit {
     children: [],
     medID: "",
     auPair: "",
+    rating: []
   }
 
   userDetails: User = {
@@ -130,6 +131,7 @@ export class JobSummaryParentViewComponent implements OnInit {
           this.parentDetails.children = res.children;
           this.parentDetails.medID = res.medID;
           this.parentDetails.auPair = res.auPair;
+          this.parentDetails.rating = res.rating;
       },
       error => {
         console.log("Error has occured with API: " + error);

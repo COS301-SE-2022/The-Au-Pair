@@ -67,6 +67,7 @@ export class AuPairDashboardComponent implements OnInit {
     children: [],
     medID: "",
     auPair: "",
+    rating: []
   }
   
   constructor(private serv: API, private modalCtrl : ModalController, private store: Store, public router: Router, public toastCtrl: ToastController, private alertController: AlertController) {}
@@ -369,6 +370,7 @@ export class AuPairDashboardComponent implements OnInit {
           this.parentDetails.children = res.children;
           this.parentDetails.medID = res.medID;
           this.parentDetails.auPair = res.auPair;
+          this.parentDetails.rating = res.rating;
       },
       error => {
         console.log("Error has occured with API: " + error);

@@ -60,6 +60,7 @@ export class EditParentProfileComponent implements OnInit{
     children: [],
     medID: "",
     auPair: "",
+    rating: []
   }
 
   constructor(private serv: API, private http: HttpClient, public toastCtrl: ToastController, private store: Store, public router: Router){}
@@ -108,6 +109,7 @@ export class EditParentProfileComponent implements OnInit{
         this.parent.children = res.children;
         this.parent.medID = res.medID;
         this.parent.auPair = res.auPair;
+        this.parent.rating = res.rating;
       },
       error => {
         console.log("Error has occured with API: " + error);

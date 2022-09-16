@@ -45,6 +45,7 @@ export interface Activity{
     children: string [];
     medID: string;
     auPair: string;
+    rating: number [];
   }
 
   export interface auPair{
