@@ -2,9 +2,11 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { LandingPageComponent } from './landing-page.component';
 import { LandingPageComponentRoutingModule } from './landing-page-routing.module';
+import { NavbarModule } from '@the-au-pair/shared/components/navbar';
+import { IonicModule } from '@ionic/angular';
 
 @NgModule({
-  imports: [CommonModule, LandingPageComponentRoutingModule],
+  imports: [CommonModule, LandingPageComponentRoutingModule, NavbarModule, IonicModule],
   declarations: [LandingPageComponent],
 })
 export class LandingPageFeatureModule {}

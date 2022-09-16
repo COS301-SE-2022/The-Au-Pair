@@ -6,4 +6,18 @@ import { Component } from '@angular/core';
   styleUrls: ['./landing-page.component.scss'],
 })
 export class LandingPageComponent {
+
+  scrollToParent() {
+    document.getElementById('section-parent')?.scrollIntoView({
+      behavior: 'smooth',
+      block: 'start'
+    });
+  }
+
+  scrollToAuPair() {
+    document.getElementById('section-au-pair')?.scrollIntoView({
+      behavior: 'smooth',
+      block: 'start'
+    });
+  }
 }

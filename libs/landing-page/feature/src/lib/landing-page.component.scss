@@ -1,0 +1,168 @@
+ion-content {
+    scroll-snap-type: y mandatory;
+}
+
+section {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#logo {
+    padding-top: 30px;
+    width: 200px;
+    vertical-align: middle;
+    justify-self: center;
+    left: 50%;
+}
+
+p {
+    max-width: 1000px;
+    width: 85%;
+    vertical-align: middle;
+    font-size: 20px;
+    color: var(--ion-color-dark);
+    text-align: center;
+    font-family: TitanOne;
+}
+
+.heading {
+    width: 100%;
+    font-size: 48px;
+    text-align: center;
+    font-family: TitanOne;
+    margin: 0;    
+}
+
+.image-buttons {
+    max-width: 700px;
+    position: relative;
+    justify-content: center;
+    width: 90%;
+}
+
+.buttons {
+    position: absolute;
+    display: inline-flex;
+    justify-content: center;
+    top: 20px;
+    gap: 200px;
+    left: 50%;
+    translate: (-50%);
+}
+
+#happy-family {
+    padding-top: 30px;
+    width: 100%;
+}
+
+
+button{
+    top: 0;
+    left: 0;
+    width: 150px;
+    height: 62px;
+    box-shadow: 1px 2px 5px rgba(0, 0, 0, 0.13);
+    border-style: none;
+    border-radius: 10px;
+    color: white;
+
+    font-style: normal;
+    font-weight: 700;
+    font-size: 16px;
+    z-index: 10;
+}
+
+#parentSelect {
+    background: var(--ion-color-tertiary);
+}
+
+#auPairSelect {
+    background: var(--ion-color-secondary);
+}
+
+#parentSelect:active, #auPairSelect:active{
+    background-color: var(--ion-color-grey);
+}
+
+#section-welcome {
+    scroll-snap-align: start;
+    height: 100vh;
+    text-align: center;
+}
+
+#section-parent p {
+    color: var(--ion-color-dark);
+}
+
+#section-au-pair p {
+    color: white;
+}
+
+#section-parent .signUp {
+    background-color: var(--ion-color-secondary);
+}
+
+#section-au-pair .signUp {
+    background-color: var(--ion-color-primary);
+}
+
+#section-parent {
+    scroll-snap-align: start;
+    height: 100vh;
+    background-color: var(--ion-color-primary);
+    padding: 150px 0 50px 0;
+    padding-top: 100px;
+    text-align: center;
+}
+
+#section-au-pair {
+    scroll-snap-align: start;
+    height: 100vh;
+    background-color: var(--ion-color-forest);
+    padding: 150px 0 50px 0;
+    text-align: center;
+}
+
+.parent-wave {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    overflow: hidden;
+    line-height: 0;
+}
+
+.parent-wave svg {
+    position: relative;
+    display: block;
+    width: calc(100% + 1.3px);
+    height: 65px;
+    transform: rotateY(180deg);
+}
+
+.parent-wave .shape-fill {
+    fill: var(--ion-background-color);
+}
+
+.au-pair-wave {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    overflow: hidden;
+    line-height: 0;
+    transform: rotate(180deg);
+}
+
+.au-pair-wave svg {
+    position: relative;
+    display: block;
+    width: calc(100% + 1.3px);
+    height: 60px;
+}
+
+.au-pair-wave .shape-fill {
+    fill: var(--ion-color-primary);
+}

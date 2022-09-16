@@ -1,1 +1,37 @@
-<p>landing-page works!</p>
+<the-au-pair-navbar></the-au-pair-navbar>
+<ion-content [fullscreen]="true">
+    <section id="section-welcome">
+        <img id="logo" src="assets/images/logo.svg" alt="the-au-pair-logo">
+        <p class='heading'>Need an Au Pair?</p>
+        <p>The Au Pair is a cross-platform application that serves as an all in one management System for parents and au pairs. coordinate how au pairs and parents interact with each other.</p>
+        <div class="image-buttons">
+            <div class="buttons">
+                <button id="parentSelect" (click)="scrollToParent()">I am a parent</button>
+                <button id="auPairSelect" (click)="scrollToAuPair()">I am an Au Pair</button>
+            </div>
+            <img id="happy-family" src="assets/images/happy-people.svg" alt="child-running">
+        </div>
+    </section>
+
+    <section id="section-parent">
+        <div class="parent-wave">
+            <svg data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120" preserveAspectRatio="none">
+                <path d="M321.39,56.44c58-10.79,114.16-30.13,172-41.86,82.39-16.72,168.19-17.73,250.45-.39C823.78,31,906.67,72,985.66,92.83c70.05,18.48,146.53,26.09,214.34,3V0H0V27.35A600.21,600.21,0,0,0,321.39,56.44Z" class="shape-fill"></path>
+            </svg>
+        </div>
+        <p class='heading'>The Au Pair is the Management Tool You Need</p>
+        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Doloribus accusantium, unde impedit quidem optio nostrum iusto porro dignissimos repellat veniam in molestiae debitis ducimus! Cum numquam cumque repudiandae aspernatur nulla!</p>
+        <button class="signUp">Sign Me Up!</button>
+    </section>
+
+    <section id="section-au-pair">
+        <div class="au-pair-wave">
+            <svg data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120" preserveAspectRatio="none">
+                <path d="M985.66,92.83C906.67,72,823.78,31,743.84,14.19c-82.26-17.34-168.06-16.33-250.45.39-57.84,11.73-114,31.07-172,41.86A600.21,600.21,0,0,1,0,27.35V120H1200V95.8C1132.19,118.92,1055.71,111.31,985.66,92.83Z" class="shape-fill"></path>
+            </svg>
+        </div>
+        <p class='heading'>The Au Pair can help you find a job ASAP</p>
+        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Doloribus accusantium, unde impedit quidem optio nostrum iusto porro dignissimos repellat veniam in molestiae debitis ducimus! Cum numquam cumque repudiandae aspernatur nulla!</p>
+        <button class="signUp">Sign Me Up!</button>
+    </section>
+</ion-content>
