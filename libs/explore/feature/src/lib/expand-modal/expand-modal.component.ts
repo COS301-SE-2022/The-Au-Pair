@@ -182,4 +182,19 @@ export class ExpandModalComponent implements OnInit {
 
     return age;
   }
+
+  getAverage(ratings : number[])
+  {
+    let total = 0;
+    for(let i = 0; i < ratings.length; i++)
+    {
+      total += ratings[i];
+    }
+
+    let avg = total/ratings.length;
+
+    (Math.round(avg * 100) / 100).toFixed(1);
+
+    return avg;
+  }
 }

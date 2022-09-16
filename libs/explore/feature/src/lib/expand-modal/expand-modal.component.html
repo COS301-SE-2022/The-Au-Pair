@@ -33,7 +33,7 @@
                 </div>
                 <div class="details-div">
                     <div class="details-title">Rating: </div>
-                    <div *ngIf="this.auPairDetails.rating !== []" class="user-details">{{this.auPairDetails.rating}} / 5</div>
+                    <div *ngIf="this.auPairDetails.rating !== []" class="user-details">{{this.getAverage(this.auPairDetails.rating)}} / 5</div>
                     <div *ngIf="this.auPairDetails.rating === []" class="user-details">Not yet rated</div>
                   </div>
             </div>

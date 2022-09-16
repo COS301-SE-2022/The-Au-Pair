@@ -55,7 +55,7 @@ export class AuPairRatingModalComponent implements OnInit {
   getDescription(formData : any){
     this.getAuPairDetails();
 
-    if(isNaN(+formData.behaviour))
+    if(formData.behaviour > 5 || formData.behaviour < 1 || isNaN(+formData.behaviour))
     {
       this.auPairRating = 1;
     }

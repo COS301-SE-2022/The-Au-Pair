@@ -305,6 +305,8 @@ export class ParentDashboardComponent implements OnInit{
 
   async terminateAuPair()
   {
+    await this.getAuPairDetails();
+
     await console.log(this.currentAuPair.rating);
 
     this.currentAuPair.terminateDate = "";

@@ -96,7 +96,7 @@ export class ExploreComponent implements OnInit {
 
           const auPairDetails = {
             id: ap.id,
-            rating: ap.rating,
+            rating: this.getAverage(ap.rating),
             payRate: ap.payRate,
             fname: res.fname,
             sname: res.sname,
@@ -345,5 +345,20 @@ export class ExploreComponent implements OnInit {
   {
     this.AuPairArray.splice(0);
     this.restoredAuPairArray.forEach(val => this.AuPairArray.push(Object.assign({}, val)));
+  }
+
+  getAverage(ratings : number[])
+  {
+    let total = 0;
+    for(let i = 0; i < ratings.length; i++)
+    {
+      total += ratings[i];
+    }
+
+    let avg = total/ratings.length;
+
+    (Math.round(avg * 100) / 100).toFixed(1);
+
+    return avg;
   }
 }

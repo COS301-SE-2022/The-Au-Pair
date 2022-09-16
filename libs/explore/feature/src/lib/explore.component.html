@@ -42,10 +42,10 @@
                         <div class="au-pair-details">
                             <div class="detail-title">Pay Rate: </div>R{{this.ap.payRate}} per hour
                         </div>
-                        <div *ngIf="this.ap.rating !== 0" class="au-pair-details">
+                        <div *ngIf="this.ap.rating !== []" class="au-pair-details">
                             <div class="detail-title">Rating: </div> {{this.ap.rating}} / 5
                         </div>
-                        <div *ngIf="this.ap.rating === 0" class="au-pair-details">
+                        <div *ngIf="this.ap.rating === []" class="au-pair-details">
                             <div class="detail-title">Rating: </div> Not yet rated
                         </div>
                         <div class="au-pair-details">
