@@ -17,7 +17,7 @@ export class AuPairRatingModalComponent implements OnInit {
 
   currentAuPair: auPair = {
     id: "",
-    rating: 0,
+    rating: [],
     onShift: false,
     employer: "",
     costIncurred: 0,
@@ -54,8 +54,17 @@ export class AuPairRatingModalComponent implements OnInit {
 
   getDescription(formData : any){
     this.getAuPairDetails();
-    this.auPairRating = formData.behaviour;
-    this.currentAuPair.rating = this.auPairRating;  
+
+    if(isNaN(+formData.behaviour))
+    {
+      this.auPairRating = 1;
+    }
+    else
+    {
+      this.auPairRating = formData.behaviour;
+    }
+    
+    this.currentAuPair.rating.push(this.auPairRating);  
     this.submitRating();
   }
 
@@ -116,5 +125,6 @@ export class AuPairRatingModalComponent implements OnInit {
         return error;
       }
     );
-  }
+    console.log(this.currentAuPair.rating);
+  } 
 }

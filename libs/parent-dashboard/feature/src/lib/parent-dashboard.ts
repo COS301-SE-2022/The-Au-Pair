@@ -82,7 +82,7 @@ export class ParentDashboardComponent implements OnInit{
 
   currentAuPair: auPair = {
     id: "",
-    rating: 0,
+    rating: [],
     onShift: false,
     employer: "",
     costIncurred: 0,
@@ -108,21 +108,6 @@ export class ParentDashboardComponent implements OnInit{
   async ngOnInit()
   {
     this.parentID = this.store.snapshot().user.id;
-    
-    await this.getParentDetails();
-    
-    this.umPoorID = this.parentDetails.auPair;
-    
-
-    if(this.umPoorID != "")
-    {
-      await this.getAuPairDetails();
-
-      if(this.currentAuPair.terminateDate != '')
-      {
-        await this.checkResignation();
-      }
-    }
 
     await this.serv.getUser(this.parentID).toPromise()
     .then( 
@@ -179,7 +164,8 @@ export class ParentDashboardComponent implements OnInit{
           this.auPairDetails.sname = res.sname;
           this.auPairDetails.email = res.email;
           this.auPairDetails.address = res.address;
-          this.auPairDetails.number = res.number;this.userDetails.salt = res.salt;
+          this.auPairDetails.number = res.number;
+          this.userDetails.salt = res.salt;
           this.userDetails.latitude = res.latitude;
           this.userDetails.longitude = res.longitude;
           this.userDetails.suburb = res.suburb;
@@ -194,7 +180,23 @@ export class ParentDashboardComponent implements OnInit{
       )
     }
 
-    this.getChildren();
+    await this.getChildren();
+
+    this.umPoorID = this.parentDetails.auPair;
+    
+
+    if(this.umPoorID != "")
+    {
+      await this.getAuPairDetails();
+
+      if(this.currentAuPair.terminateDate != '')
+      {
+        await this.checkResignation();
+      }
+    }
+
+    console.log("RATINGS", this.currentAuPair.rating);
+    
   }
 
   async openModal(actId : string) {
@@ -303,7 +305,7 @@ export class ParentDashboardComponent implements OnInit{
 
   async terminateAuPair()
   {
-    await this.removeChildrenAuPair();
+    await console.log(this.currentAuPair.rating);
 
     this.currentAuPair.terminateDate = "";
     this.currentAuPair.employer = "";
@@ -311,8 +313,9 @@ export class ParentDashboardComponent implements OnInit{
 
     await this.updateAuPair();
     await this.updateParent();
+    await this.removeChildrenAuPair();
 
-    location.reload();
+    // location.reload();
   }
 
   async getAuPairDetails()

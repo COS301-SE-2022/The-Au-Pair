@@ -49,7 +49,7 @@ export interface Activity{
 
   export interface auPair{
     id: string;
-    rating: number;
+    rating: number [];
     onShift: boolean;
     employer: string;
     costIncurred: number;
@@ -81,16 +81,6 @@ export interface Activity{
     birth: string;
     warnings: number;
     banned: string;
-  }
-
-  export interface auPair{
-    id: string;
-    rating: number;
-    payRate: number;
-    distTraveled: number;
-    costIncurred: number;
-    onShift: boolean;
-    employer: string;
   }
 
   export interface Contract{

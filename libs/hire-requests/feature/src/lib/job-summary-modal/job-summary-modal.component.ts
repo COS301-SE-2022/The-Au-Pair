@@ -29,7 +29,7 @@ export class JobSummaryModalComponent implements OnInit {
 
   currentAuPair: auPair = {
     id: "",
-    rating: 0,
+    rating: [],
     onShift: false,
     employer: "",
     costIncurred: 0,

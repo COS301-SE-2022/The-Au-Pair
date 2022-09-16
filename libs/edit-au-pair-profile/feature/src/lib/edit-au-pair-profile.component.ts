@@ -48,7 +48,7 @@ export class EditAuPairProfileComponent implements OnInit {
 
   auPairDetails: auPair = {
     id: "",
-    rating: 0,
+    rating: [],
     onShift: false,
     employer: "",
     costIncurred: 0,

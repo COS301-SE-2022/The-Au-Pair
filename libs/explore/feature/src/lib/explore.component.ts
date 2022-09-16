@@ -32,7 +32,7 @@ export class ExploreComponent implements OnInit {
   auPairs : any;
   auPairDetails : any = {
     id: "",
-    rating: 0,
+    rating: [],
     payRate: 0,
     fname: "",
     sname: "",
@@ -92,6 +92,8 @@ export class ExploreComponent implements OnInit {
         res=>{
           const eucdistance = this.calculateEucDistance(res.latitude, res.longitude);
           
+          console.log(ap.rating);
+
           const auPairDetails = {
             id: ap.id,
             rating: ap.rating,
