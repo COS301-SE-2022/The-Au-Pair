@@ -193,8 +193,8 @@ export class ExpandModalComponent implements OnInit {
 
     let avg = total/ratings.length;
 
-    (Math.round(avg * 100) / 100).toFixed(1);
+    var ret = (Math.round(avg * 100) / 100).toFixed(1);
 
-    return avg;
+    return ret;
   }
 }
