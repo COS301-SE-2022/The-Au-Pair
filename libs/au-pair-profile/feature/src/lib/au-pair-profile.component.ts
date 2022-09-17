@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { User, auPair } from '../../../../shared/interfaces/interfaces';
 import { API } from '../../../../shared/api/api.service';
 import { Store } from '@ngxs/store';
-import { retry } from 'rxjs';
 
 @Component({
   selector: 'the-au-pair-au-pair-profile',
@@ -113,7 +112,7 @@ export class AuPairProfileComponent implements OnInit {
 
     const avg = total/ratings.length;
 
-    let ret = (Math.round(avg * 100) / 100).toFixed(1);
+    const ret = (Math.round(avg * 100) / 100).toFixed(1);
 
     return ret;
   }

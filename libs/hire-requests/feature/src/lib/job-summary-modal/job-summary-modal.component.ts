@@ -358,7 +358,7 @@ export class JobSummaryModalComponent implements OnInit {
 
     const avg = total/ratings.length;
 
-    let ret = (Math.round(avg * 100) / 100).toFixed(1);
+    const ret = (Math.round(avg * 100) / 100).toFixed(1);
 
     return ret;
   }
