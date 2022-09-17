@@ -121,9 +121,9 @@ export class ParentProfileComponent implements OnInit {
       total += ratings[i];
     }
 
-    var avg = total/ratings.length;
+    const avg = total/ratings.length;
 
-    var ret = (Math.round(avg * 100) / 100).toFixed(1);
+    let ret = (Math.round(avg * 100) / 100).toFixed(1);
 
     return ret;
   }

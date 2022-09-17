@@ -144,7 +144,7 @@ export class ExploreComponent implements OnInit {
     this.AuPairArray.splice(0);
     this.restoredAuPairArray.forEach(val => this.AuPairArray.push(Object.assign({}, val)));
 
-    if(formData.min_payrate === undefined)
+    if(formData.min_payrate === undefined || formData.min_payrate === '')
     {
       this.minPayrate = 10;
     }
@@ -153,7 +153,7 @@ export class ExploreComponent implements OnInit {
       this.minPayrate = formData.min_payrate;
     }
     
-    if(formData.max_payrate === undefined)
+    if(formData.max_payrate === undefined || formData.max_payrate === '')
     {
       this.maxPayrate = 10;
     }
@@ -161,6 +161,8 @@ export class ExploreComponent implements OnInit {
     {
       this.maxPayrate = formData.max_payrate;
     }
+
+    console.log(this.minPayrate);
 
     if(this.minPayrate > this.maxPayrate)
     {
@@ -184,7 +186,7 @@ export class ExploreComponent implements OnInit {
       });
   
       this.AuPairArray = this.AuPairArray.filter((element) => {
-        return element.payRate > this.minPayrate && element.payRate < this.maxPayrate;
+        return element.payRate >= this.minPayrate && element.payRate <= this.maxPayrate;
       });
     }
     
@@ -196,7 +198,7 @@ export class ExploreComponent implements OnInit {
     this.AuPairArray.splice(0);
     this.restoredAuPairArray.forEach(val => this.AuPairArray.push(Object.assign({}, val)));
 
-    if(formData.max_age === undefined)
+    if(formData.max_age === undefined || formData.max_age === '')
     {
       this.maxAge = 18;
     }
@@ -232,7 +234,7 @@ export class ExploreComponent implements OnInit {
     this.AuPairArray.splice(0);
     this.restoredAuPairArray.forEach(val => this.AuPairArray.push(Object.assign({}, val)));
     
-    if(formData.max_distance === undefined)
+    if(formData.max_distance === undefined || formData.max_distance === '')
     {
       this.maxDistance = 10;
     }
