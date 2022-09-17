@@ -18,13 +18,14 @@ section {
 }
 
 p {
-    max-width: 1000px;
+    max-width: 800px;
     width: 85%;
     vertical-align: middle;
     font-size: 20px;
     color: var(--ion-color-dark);
     text-align: center;
-    font-family: TitanOne;
+    font-family: Roboto;
+    font-weight: bold;
 }
 
 .heading {
@@ -113,7 +114,6 @@ button{
     height: 100vh;
     background-color: var(--ion-color-primary);
     padding: 150px 0 50px 0;
-    padding-top: 100px;
     text-align: center;
 }
 

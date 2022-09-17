@@ -20,8 +20,8 @@
             </svg>
         </div>
         <p class='heading'>The Au Pair is the Management Tool You Need</p>
-        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Doloribus accusantium, unde impedit quidem optio nostrum iusto porro dignissimos repellat veniam in molestiae debitis ducimus! Cum numquam cumque repudiandae aspernatur nulla!</p>
-        <button class="signUp">Sign Me Up!</button>
+        <p>Employ Au Pairs, manage schedules, view financial information, and see live locations. We have everything you need for Au Pairs to take care of your children.</p>
+        <button class="signUp" routerLink="/register-page" [queryParams]="{ parentPressed : 'true' }">Sign Me Up!</button>
     </section>
 
     <section id="section-au-pair">
@@ -31,7 +31,7 @@
             </svg>
         </div>
         <p class='heading'>The Au Pair can help you find a job ASAP</p>
-        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Doloribus accusantium, unde impedit quidem optio nostrum iusto porro dignissimos repellat veniam in molestiae debitis ducimus! Cum numquam cumque repudiandae aspernatur nulla!</p>
-        <button class="signUp">Sign Me Up!</button>
+        <p>Create a digital resume, view schedules, view financial information and show parents your live location. We have the best tools to help you on your au pairing journey.</p>
+        <button class="signUp"  routerLink="/register-page" [queryParams]="{ parentPressed : 'false' }">Sign Me Up!</button>
     </section>
 </ion-content>

@@ -4,6 +4,8 @@ import { ToastController } from '@ionic/angular';
 import { HttpClient } from '@angular/common/http';
 import { User, auPair, Parent } from '../../../../shared/interfaces/interfaces';
 import { API } from '../../../../shared/api/api.service';
+import { ActivatedRoute } from '@angular/router';
+import { map } from 'rxjs';
 
 @Component({
   selector: 'the-au-pair-register',
@@ -20,8 +22,14 @@ export class RegisterComponent {
   public experienceError: boolean;
   public registering: boolean;
   public formValid = false;
-  
-  parentChosen = true;
+  public parentChosen;
+
+  sub = this.route.queryParamMap.subscribe(
+    params => {
+      this.parentChosen = params.get('parentPressed') === 'true' || params.get('parentPressed') == null  ?  true : false;
+    }
+  );
+
   public maleChosen: boolean;
   long = 0;
   lat = 0;
@@ -71,7 +79,7 @@ export class RegisterComponent {
   }
 
 
-  constructor(public formBuilder: FormBuilder, public toastCtrl: ToastController, private http: HttpClient, private serv: API) 
+  constructor(private route : ActivatedRoute, public formBuilder: FormBuilder, public toastCtrl: ToastController, private http: HttpClient, private serv: API) 
   {
     this.parentRegisterDetailsForm = formBuilder.group({
       name: ['', Validators.compose([Validators.maxLength(30), Validators.pattern('^[a-zA-Z ,\'-]+$'), Validators.required])],
@@ -86,6 +94,7 @@ export class RegisterComponent {
       pass : ['', Validators.compose([Validators.maxLength(20), Validators.pattern('^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$'), Validators.required])],
       confPass : ['', Validators.compose([Validators.maxLength(30), Validators.pattern('^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$'), Validators.required])],
     });
+    this.parentChosen = true;
 
     this.parentRegisterDetailsForm.valueChanges.subscribe(() => {
       this.formValid = this.parentRegisterDetailsForm.valid;
