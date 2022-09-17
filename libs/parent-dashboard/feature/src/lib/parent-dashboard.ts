@@ -315,8 +315,6 @@ export class ParentDashboardComponent implements OnInit{
     await this.updateAuPair();
     await this.updateParent();
     await this.removeChildrenAuPair();
-
-    // location.reload();
   }
 
   async getAuPairDetails()
