@@ -60,12 +60,13 @@ export class RegisterComponent {
     id: '',
     children: [],
     medID: '',
-    auPair: ''
+    auPair: '',
+    rating: []
   }
 
   aupairDetails: auPair ={
     id: '',
-    rating: 0,
+    rating: [],
     onShift: false,
     employer: '',
     costIncurred: 0,

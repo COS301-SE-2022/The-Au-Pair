@@ -56,6 +56,12 @@
       "@the-au-pair/landing-page/feature": [
         "libs/landing-page/feature/src/index.ts"
       ],
+      "@the-au-pair/job-summary-au-pair-view/feature": [
+        "libs/job-summary-au-pair-view/feature/src/index.ts"
+      ],
+      "@the-au-pair/job-summary-parent-view/feature": [
+        "libs/job-summary-parent-view/feature/src/index.ts"
+      ],
       "@the-au-pair/login/feature": ["libs/login/feature/src/index.ts"],
       "@the-au-pair/notifications-feature": [
         "libs/notifications/feature/src/index.ts"

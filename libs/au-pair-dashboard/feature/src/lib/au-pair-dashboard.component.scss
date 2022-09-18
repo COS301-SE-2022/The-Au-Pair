@@ -17,6 +17,15 @@
     color: white;
 }
 
+.rating-icon{
+    padding-left: 10px;
+    float: left;
+    width: 35px;
+    height: 35px;
+    cursor: pointer;    
+    color: white;
+}
+
 .message-icon{
     padding-left: 10px;
     float: left;
@@ -200,7 +209,7 @@ ion-card {
     width: 90%;
     height: 100%;
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(4, 1fr);
     justify-items: center;
     align-items: center;
     margin: auto;

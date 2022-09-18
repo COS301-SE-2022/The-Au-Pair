@@ -7,14 +7,14 @@ import { ModalController, ToastController } from '@ionic/angular';
 import { Store } from '@ngxs/store';
 import { Router } from '@angular/router';
 import { AlertController } from '@ionic/angular';
+import { SetAuPair, SetChildren } from '../../../../shared/ngxs/actions';
 
 @Component({
   selector: 'the-au-pair-parent-dashboard',
   templateUrl: 'parent-dashboard.html',
   styleUrls: ['parent-dashboard.scss'],
 })
-export class ParentDashboardComponent implements OnInit{
-
+export class ParentDashboardComponent implements OnInit{ 
   children: Child[] = [];
   parentID = "";
   umPoorID = "";
@@ -36,6 +36,7 @@ export class ParentDashboardComponent implements OnInit{
     children: [],
     medID: "",
     auPair: "",
+    rating: []
   }
 
   userDetails: User = {
@@ -82,7 +83,7 @@ export class ParentDashboardComponent implements OnInit{
 
   currentAuPair: auPair = {
     id: "",
-    rating: 0,
+    rating: [],
     onShift: false,
     employer: "",
     costIncurred: 0,
@@ -97,15 +98,6 @@ export class ParentDashboardComponent implements OnInit{
 
   constructor(private serv: API, private modalCtrl : ModalController, private store: Store, public toastCtrl: ToastController, public router: Router, private alertController: AlertController){}
 
-  async openModal(actId : string) {
-    const modal = await this.modalCtrl.create({
-      component: AuPairRatingModalComponent,
-      componentProps :{
-        activityId : actId
-      }
-    });
-    await modal.present();
-  }
 
   async openReportModal() {
     const modal = await this.modalCtrl.create({
@@ -117,21 +109,6 @@ export class ParentDashboardComponent implements OnInit{
   async ngOnInit()
   {
     this.parentID = this.store.snapshot().user.id;
-    
-    await this.getParentDetails();
-    
-    this.umPoorID = this.parentDetails.auPair;
-    
-
-    if(this.umPoorID != "")
-    {
-      await this.getAuPairDetails();
-
-      if(this.currentAuPair.terminateDate != '')
-      {
-        await this.checkResignation();
-      }
-    }
 
     await this.serv.getUser(this.parentID).toPromise()
     .then( 
@@ -165,6 +142,13 @@ export class ParentDashboardComponent implements OnInit{
           this.parentDetails.children = res.children;
           this.parentDetails.medID = res.medID;
           this.parentDetails.auPair = res.auPair;
+          this.parentDetails.rating = res.rating;
+
+          //setting the state
+          this.store.dispatch(new SetChildren(res.children));
+          this.store.dispatch(new SetAuPair(res.auPair));
+          console.log("Setting store for parent");
+          console.log( this.store.snapshot())
       },
       error => {
         console.log("Error has occured with API: " + error);
@@ -182,7 +166,8 @@ export class ParentDashboardComponent implements OnInit{
           this.auPairDetails.sname = res.sname;
           this.auPairDetails.email = res.email;
           this.auPairDetails.address = res.address;
-          this.auPairDetails.number = res.number;this.userDetails.salt = res.salt;
+          this.auPairDetails.number = res.number;
+          this.userDetails.salt = res.salt;
           this.userDetails.latitude = res.latitude;
           this.userDetails.longitude = res.longitude;
           this.userDetails.suburb = res.suburb;
@@ -197,7 +182,30 @@ export class ParentDashboardComponent implements OnInit{
       )
     }
 
-    this.getChildren();
+    await this.getChildren();
+
+    this.umPoorID = this.parentDetails.auPair;
+    
+
+    if(this.umPoorID != "")
+    {
+      await this.getAuPairDetails();
+
+      if(this.currentAuPair.terminateDate != '')
+      {
+        await this.checkResignation();
+      }
+    }
+  }
+
+  async openModal(actId : string) {
+    const modal = await this.modalCtrl.create({
+      component: AuPairRatingModalComponent,
+      componentProps :{
+        activityId : actId
+      }
+    });
+    await modal.present();
   }
 
   async getChildren(){
@@ -278,10 +286,7 @@ export class ParentDashboardComponent implements OnInit{
   }
 
   async checkResignation()
-  {
-    await this.getParentDetails();
-    await this.getAuPairDetails();        
-        
+  {         
     const then  = new Date(this.currentAuPair.terminateDate);
     const now = new Date();
 
@@ -289,10 +294,7 @@ export class ParentDashboardComponent implements OnInit{
 
     let daysBetweenDates = msBetweenDates / (24 * 60 * 60 * 1000);
 
-    daysBetweenDates = Math.ceil(daysBetweenDates);
-
-    console.log(daysBetweenDates);
-    
+    daysBetweenDates = Math.ceil(daysBetweenDates);    
 
     if(daysBetweenDates >= 14)
     {
@@ -303,8 +305,8 @@ export class ParentDashboardComponent implements OnInit{
   async terminateAuPair()
   {
     await this.getAuPairDetails();
-    await this.getParentDetails();
-    await this.removeChildrenAuPair();
+
+    await console.log(this.currentAuPair.rating);
 
     this.currentAuPair.terminateDate = "";
     this.currentAuPair.employer = "";
@@ -312,8 +314,7 @@ export class ParentDashboardComponent implements OnInit{
 
     await this.updateAuPair();
     await this.updateParent();
-
-    location.reload();
+    await this.removeChildrenAuPair();
   }
 
   async getAuPairDetails()
@@ -349,6 +350,7 @@ export class ParentDashboardComponent implements OnInit{
           this.parentDetails.children = res.children;
           this.parentDetails.medID = res.medID;
           this.parentDetails.auPair = res.auPair;
+          this.parentDetails.rating = res.rating;
       },
       error => {
         console.log("Error has occured with API: " + error);

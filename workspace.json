@@ -17,6 +17,8 @@
     "forgot-password-feature": "libs/forgot-password/feature",
     "hire-requests-feature": "libs/hire-requests/feature",
     "landing-page-feature": "libs/landing-page/feature",
+    "job-summary-au-pair-view-feature": "libs/job-summary-au-pair-view/feature",
+    "job-summary-parent-view-feature": "libs/job-summary-parent-view/feature",
     "login-feature": "libs/login/feature",
     "notifications-feature": "libs/notifications/feature",
     "parent-add-activity-feature": "libs/parent-add-activity/feature",

@@ -200,6 +200,22 @@ const routes: Routes = [
     canLoad: [AuthGuard],
   },
   {
+    path: 'job-summary-parent-view',
+    loadChildren: () =>
+    import('@the-au-pair/job-summary-parent-view/feature').then(
+      (m) => m.JobSummaryParentViewFeatureModule
+    ),
+    canLoad: [AuthGuard],
+  },
+  {
+    path: 'job-summary-au-pair-view',
+    loadChildren: () =>
+    import('@the-au-pair/job-summary-au-pair-view/feature').then(
+      (m) => m.JobSummaryAuPairViewFeatureModule
+    ),
+    canLoad: [AuthGuard],
+  },
+  {
     path: 'landing-page',
     loadChildren: () =>
       import('@the-au-pair/landing-page/feature').then(

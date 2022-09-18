@@ -7,6 +7,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import java.util.ArrayList;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @SpringBootTest
@@ -16,19 +17,19 @@ public class ReportRepositoryTests
   private ReportRepository rr;
 
   String id;
-  Report expectedReport;
+  ArrayList<Report> expectedList;
 
   @BeforeEach
   public void setup()
   {
-    expectedReport = new Report("","","","");
+    expectedList = new ArrayList<Report>();
     id = "7542108615984";
   }
 
   @Test
   @DisplayName("Test if report object is returned")
-  public void testGetReportById()
+  public void testGetReportByUserId()
   {
-    assertEquals(rr.findUsingId(id).getClass(),expectedReport.getClass());
+    assertEquals(rr.findReportedUserId(id).getClass(),expectedList.getClass());
   }
 }
