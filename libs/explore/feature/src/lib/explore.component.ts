@@ -347,6 +347,8 @@ export class ExploreComponent implements OnInit {
   {
     this.AuPairArray.splice(0);
     this.restoredAuPairArray.forEach(val => this.AuPairArray.push(Object.assign({}, val)));
+
+    this.closeMenu();
   }
 
   getAverage(ratings : number[])

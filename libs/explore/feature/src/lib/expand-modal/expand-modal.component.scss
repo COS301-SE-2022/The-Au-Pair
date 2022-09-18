@@ -29,7 +29,7 @@
 }
 
 .profile-name {
-    font-size: 3.6vw;
+    font-size: 36px;
     padding-top: 2%;
     margin-bottom: 2%;
     color: var(--ion-color-dark);
@@ -108,4 +108,15 @@
     margin: auto;
     display: block;
     margin-top: 25px;
+}
+
+@media(max-width: 375px)
+{
+    .details-title{
+        font-size: 12px !important;
+    }
+
+    .user-details{
+        font-size: 12px !important;
+    }
 }
