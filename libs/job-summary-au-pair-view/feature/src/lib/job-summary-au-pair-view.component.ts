@@ -17,7 +17,7 @@ export class JobSummaryAuPairViewComponent implements OnInit {
 
   currentAuPair: auPair = {
     id: "",
-    rating: 0,
+    rating: [],
     onShift: false,
     employer: "",
     costIncurred: 0,
@@ -45,6 +45,7 @@ export class JobSummaryAuPairViewComponent implements OnInit {
     children: [],
     medID: "",
     auPair: "",
+    rating: []
   }
 
   userDetails: User = {
@@ -101,6 +102,7 @@ export class JobSummaryAuPairViewComponent implements OnInit {
           this.parentDetails.children = res.children;
           this.parentDetails.medID = res.medID;
           this.parentDetails.auPair = res.auPair;
+          this.parentDetails.rating = res.rating;
       },
       error => {
         console.log("Error has occured with API: " + error);
@@ -139,6 +141,21 @@ export class JobSummaryAuPairViewComponent implements OnInit {
         },
         error =>{console.log("Error has occured with API: " + error);}
       )
-  }    
+  }
+
+  getAverage(ratings : number[])
+  {
+    let total = 0;
+    for(let i = 0; i < ratings.length; i++)
+    {
+      total += ratings[i];
+    }
+
+    const avg = total/ratings.length;
+
+    const ret = (Math.round(avg * 100) / 100).toFixed(1);
+
+    return ret;
+  }
 }
 

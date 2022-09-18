@@ -7,6 +7,7 @@ import { NavbarModule } from '@the-au-pair/shared/components/navbar';
 import { API } from '../../../../../libs/shared/api/api.service';
 import { UserReportModalComponent } from './user-report-modal/user-report-modal.component';
 import { FormsModule } from '@angular/forms';
+import { ParentRatingModalComponent } from './parent-rating-modal/parent-rating-modal.component';
 
 @NgModule({
   imports: [
@@ -17,7 +18,11 @@ import { FormsModule } from '@angular/forms';
     FormsModule,
   ],
   providers: [API],
-  declarations: [AuPairDashboardComponent, UserReportModalComponent],
+  declarations: [
+    AuPairDashboardComponent,
+    UserReportModalComponent,
+    ParentRatingModalComponent,
+  ],
   entryComponents: [UserReportModalComponent],
 })
 export class AuPairDashboardFeatureModule {}

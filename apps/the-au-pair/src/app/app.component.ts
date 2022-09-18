@@ -29,13 +29,14 @@ export class AppComponent implements OnInit {
     children: [],
     medID: "",
     auPair: "",
+    rating: []
   }
 
 
   //Au Pair object to update their current position
   auPairDetails: auPair = {
     id: "",
-    rating: 0,
+    rating: [],
     onShift: false,
     employer: "",
     costIncurred: 0,

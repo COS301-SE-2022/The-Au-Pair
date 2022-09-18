@@ -6,6 +6,7 @@ import { Router } from '@angular/router';
 import { ModalController, ToastController } from '@ionic/angular';
 import { AlertController } from '@ionic/angular';
 import { UserReportModalComponent } from './user-report-modal/user-report-modal.component';
+import { ParentRatingModalComponent } from './parent-rating-modal/parent-rating-modal.component';
 
 @Component({
   selector: 'the-au-pair-au-pair-dashboard',
@@ -38,7 +39,7 @@ export class AuPairDashboardComponent implements OnInit {
 
   currentAuPair: auPair = {
     id: "",
-    rating: 0,
+    rating: [],
     onShift: false,
     employer: "",
     costIncurred: 0,
@@ -66,6 +67,7 @@ export class AuPairDashboardComponent implements OnInit {
     children: [],
     medID: "",
     auPair: "",
+    rating: []
   }
   
   constructor(private serv: API, private modalCtrl : ModalController, private store: Store, public router: Router, public toastCtrl: ToastController, private alertController: AlertController) {}
@@ -73,6 +75,16 @@ export class AuPairDashboardComponent implements OnInit {
   async openReportModal() {
     const modal = await this.modalCtrl.create({
       component: UserReportModalComponent
+    });
+    await modal.present();
+  }
+
+  async openModal(actId : string) {
+    const modal = await this.modalCtrl.create({
+      component: ParentRatingModalComponent,
+      componentProps :{
+        activityId : actId
+      }
     });
     await modal.present();
   }
@@ -358,6 +370,7 @@ export class AuPairDashboardComponent implements OnInit {
           this.parentDetails.children = res.children;
           this.parentDetails.medID = res.medID;
           this.parentDetails.auPair = res.auPair;
+          this.parentDetails.rating = res.rating;
       },
       error => {
         console.log("Error has occured with API: " + error);
