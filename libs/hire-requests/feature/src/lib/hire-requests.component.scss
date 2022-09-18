@@ -55,7 +55,7 @@
 }
 
 .request-content{
-    margin-left: 25px;
+    margin-left: 15px;
     margin-top: 10px;
 }
 
@@ -92,29 +92,24 @@
 
 @media (max-width:560px) {
     .heading{
-        font-size: 12px;
+        font-size: 15px;
     }
 
     .time{
-        font-size: 7px;
+        font-size: 10px;
     }
 
     .details{
-        font-size: 12px;
+        font-size: 13px !important;
     }
 
-    .accept-button{
-        padding: 7px 7px;
-
-    }
-    
-    .reject-button{
+    .view-button{
         padding: 7px 7px;
     }
 
     .profile{
-        height: 50px;
-        width: 50px;
+        height: 40px;
+        width: 40px;
         margin-left: 0px;
         margin-right: 0px;
     }
@@ -125,5 +120,9 @@
 
     .details{
         font-size: 10px;
+    }
+
+    .header{
+        font-size: 32px !important;
     }
 }

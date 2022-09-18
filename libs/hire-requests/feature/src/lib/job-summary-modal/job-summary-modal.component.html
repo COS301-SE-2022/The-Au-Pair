@@ -1,7 +1,7 @@
 <ion-content [fullscreen]="true">
     <div class = "parent-profile-div">
         <h1 class='job-summary-title'>Job Summary</h1>
-        <h3 class='parent-name'>{{this.userDetails.fname}} {{this.userDetails.sname}}</h3>
+        <h3 class='children-name'>{{this.userDetails.fname}} {{this.userDetails.sname}}</h3>
             <div class='profile-picture-wrapper'>
                 <img class="profile-picture" src="assets/images/placeholder-profile.jpg" alt="">
             </div>
@@ -52,7 +52,7 @@
                 </div>
             </div>
         </div>
-        <h3 class='profile-name'>Schedule</h3>
+        <h3 class='job-summary-title'>Schedule</h3>
         <ion-card color="light" class="card-bar-graph">
             <ion-card-header class="title" style="float:left"> Hours Required 
                 <span title="The below graph shows the amount of hours required by the parent for each day and the time frame for the hours of work required."><ion-icon name="help-circle-outline" class="tooltip-graph"></ion-icon></span>

@@ -1,5 +1,5 @@
 .job-summary-title{
-    font-size: 3.6vw;
+    font-size: 46px;
     padding-top: 2%;
     margin-bottom: 2%;
     color: white;
@@ -9,7 +9,7 @@
 }
 
 .parent-name {
-    font-size: 30px;
+    font-size: 38px;
     padding-top: 2%;
     margin-bottom: 2%;
     color: black;
@@ -19,7 +19,7 @@
 }
 
 .profile-name {
-    font-size: 2.4vw;
+    font-size: 34px;
     padding-top: 2%;
     margin-bottom: 2%;
     color: white;
@@ -30,7 +30,6 @@
 
 .children-name{
     font-size: 1.8vw;
-    padding-top: 2%;
     margin-bottom: 2%;
     color: black;
     text-align: center;
@@ -40,8 +39,7 @@
 
 .parent-profile-div{
     width: 100%;
-    margin-left: auto;
-    margin-right: auto;
+    margin: auto;
     background-color: #69A88DB2;
     border-radius: 16px;
 }
@@ -243,12 +241,35 @@ ion-icon {
     font-size: 15px;
 }
 
-@media (max-width: 642px) {
-    .parent-profile-div{
-        margin-top: 13px;
-        width: 90%;
+@media(max-width: 375px)
+{
+    .parent-text{
+        width: 35% !important;
+        font-size: 12px !important;
     }
 
+    .parent-text-info{
+        font-size: 12px !important;
+    }
+
+    .children-name{
+        font-size: 30px !important;
+    }
+
+    .card-bar-graph{
+        width: 95%;
+    }
+
+    .label{
+        font-size: 14px !important;
+    }
+
+    .day{
+        font-size: 18px !important;
+    }
+}
+
+@media (max-width: 642px) {
     .bar-graph {
         margin-left: 20px;
     }
@@ -266,18 +287,17 @@ ion-icon {
     }
 
     .children-name{
-        font-size: 24px;
-        padding-top: 15px;
+        font-size: 30px;
         padding-bottom: 15px;
     }
 
     .parent-text{
         width: 30%;
-        font-size: 15px;
+        font-size: 18px;
     }
 
     .parent-text-info{
-        font-size: 15px;
+        font-size: 18px;
     }
 
     .parent-text-info2{
@@ -298,11 +318,6 @@ ion-icon {
 }
 
 @media (max-width: 810px) {
-    .parent-profile-div{
-        margin-top: 13px;
-        width: 90%;
-    }
-
     .job-summary-title{
         font-size: 36px;
         padding-top: 15px;
@@ -317,17 +332,16 @@ ion-icon {
 
     .children-name{
         font-size: 24px;
-        padding-top: 15px;
         padding-bottom: 15px;
     }
 
     .parent-text{
         width: 30%;
-        font-size: 15px;
+        font-size: 18px;
     }
 
     .parent-text-info{
-        font-size: 15px;
+        font-size: 18px;
     }
 
     .parent-text-info2{
@@ -336,11 +350,5 @@ ion-icon {
 
     .details-div{
         width: 85%;
-    }
-}
-
-@media (max-width: 1000px) {
-    .parent-profile-div{
-        width: 90%;
     }
 }

@@ -5,14 +5,14 @@
         <div class="requests-wrapper">
             <ion-card class="request-item" *ngFor="let c of ContractArray; let last = last">
                 <div class="wrapper">
-                    <ion-col size = "5" class="ion-content-end info">
+                    <ion-col size = "8" class="ion-content-end info">
                         <img class="profile" src="assets/images/placeholder-profile.jpg" alt="">
                         <div class="request-content ion-text-start">
                             <div class="heading">{{c.parentName}} {{c.parentSurname}}</div>
                             <div class="details">has sent you a hire request</div>
                         </div>
                     </ion-col>
-                    <ion-col size="5">                    
+                    <ion-col size="2">                    
                         <div class="action-buttons">
                             <button class="view-button" (click)="openModal(c.parentID, c.id)">View</button>
                         </div>
