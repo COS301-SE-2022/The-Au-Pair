@@ -197,53 +197,55 @@ export class AddChildComponent implements OnInit
   }
 
   //Service calls
-  addChild(child: Child)
+  async addChild(child: Child)
   {
-    //Getting a new unique ID for the child
-    this.serv.generateID().subscribe(    
+    let generatedChildID = "";
+    //Add the child to the Children collection
+    await this.serv.addChild(child).toPromise().then(
       res=>
       {
-        console.log("AGHGAHGAHAGHAGHAGHAGHAGHGHAGHGH: ",  res);
-        // this.childDetails.id=res;
-      },
+        const returnedChild = JSON.parse(res);
+        generatedChildID = returnedChild.id;
+        this.openToast();
+      }).catch(
       error=>{
-        console.log("Error:", error);
+        console.log("Error has occured with API: " + error);
       }
     );
 
-    // this.serv.getParent(this.childDetails.parent).subscribe(
-    //   res=>{
-    //     this.parent.id = res.id;
-    //     this.parent.children = res.children;
-    //     this.parent.medID = res.medID;
-    //     this.parent.auPair = res.auPair;
-    //     this.parent.children.push(child.id);
-    //     console.log(this.parent.children);
-        
+    // Set the childs ID in the parents document
+    await this.serv.getParent(this.childDetails.parent)
+    .toPromise()
+    .then(
+      async res=>
+      {
+        this.parent.id = res.id;
+        this.parent.children = res.children;
+        this.parent.medID = res.medID;
+        this.parent.auPair = res.auPair;
+        this.parent.children.push(generatedChildID);
 
-    //     //Update the parent object to contain the new child ID
-    //     // this.serv.editParent(this.parent).subscribe(
-    //     //   res=>{
-    //     //     console.log("The response is:" + res); 
-    //     //   },
-    //     //   error=>{
-    //     //     console.log("Error has occured with API: " + error);
-    //     //   }
-    //     // );
-    //   },
-    //   error=>{
-    //     console.log("Error has occured with API: " + error);
-    //   }
-    // )
+        // Update the parent object to contain the new child ID
+        await this.serv.editParent(this.parent)
+        .toPromise()
+        .then(
+          res=>
+          {
+            console.log("The response is:" + res); 
+          })
+        .catch(
+          error=>
+          {
+            console.log("Error has occured with API: " + error);
+          }
+        );
 
-    // this.serv.addChild(child).subscribe(
-    //   res=>{
-    //     console.log("The response is:" + res); 
-    //     this.openToast();
-    //   },
-    //   error=>{
-    //     console.log("Error has occured with API: " + error);
-    //   }
-    // )
+      })
+    .catch(
+      error=>
+      {
+        console.log("Error has occured with API: " + error);
+      }
+    );
   }
 }

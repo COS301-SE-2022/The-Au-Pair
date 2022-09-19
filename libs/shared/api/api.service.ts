@@ -73,7 +73,7 @@ export class API{
   }
 
   addChild(child : Child): Observable<any> {
-    return this.http.post(environment.apiURI+"/addChild",child);
+    return this.http.post(environment.apiURI+"/addChild",child, {responseType: "text"});
   }
 
   updateChild(child : Child) :Observable<any> {
@@ -82,11 +82,6 @@ export class API{
 
   removeChild(id: String): Observable<any> {
     return this.http.post(environment.apiURI+"/removeChild", id);
-  }
-
-  generateID(): Observable<any>
-  {
-    return this.http.get(environment.apiURI+"/generateID");
   }
 
   getDateMinutes(id : string, date : string): Observable<any> {
