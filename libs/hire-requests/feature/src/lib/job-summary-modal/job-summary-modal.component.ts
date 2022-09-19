@@ -29,7 +29,7 @@ export class JobSummaryModalComponent implements OnInit {
 
   currentAuPair: auPair = {
     id: "",
-    rating: 0,
+    rating: [],
     onShift: false,
     employer: "",
     costIncurred: 0,
@@ -57,6 +57,7 @@ export class JobSummaryModalComponent implements OnInit {
     children: [],
     medID: "",
     auPair: "",
+    rating: []
   }
 
   userDetails: User = {
@@ -95,6 +96,7 @@ export class JobSummaryModalComponent implements OnInit {
           this.parentDetails.children = res.children;
           this.parentDetails.medID = res.medID;
           this.parentDetails.auPair = res.auPair;
+          this.parentDetails.rating = res.rating;
       },
       error => {
         console.log("Error has occured with API: " + error);
@@ -344,5 +346,20 @@ export class JobSummaryModalComponent implements OnInit {
   closeModal()
   {
     this.modalCtrl.dismiss();
+  }
+
+  getAverage(ratings : number[])
+  {
+    let total = 0;
+    for(let i = 0; i < ratings.length; i++)
+    {
+      total += ratings[i];
+    }
+
+    const avg = total/ratings.length;
+
+    const ret = (Math.round(avg * 100) / 100).toFixed(1);
+
+    return ret;
   }
 }

@@ -1,5 +1,5 @@
 package Database.TheAuPair.Models;
-
+import java.util.Arrays;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.Field;
@@ -11,7 +11,7 @@ public class auPair
   private String id;
 
   @Field("rating")
-  private double rating;
+  private double rating[];
   @Field("payRate")
   private double payRate;
   @Field("distTraveled")
@@ -33,10 +33,10 @@ public class auPair
   @Field("terminateDate")
   private String terminateDate;
 
-  public auPair(String id, double rating, double payRate, double distTraveled, double costIncurred, boolean onShift, String employer, String bio, String experience, double currentLong, double currentLat, String terminateDate )
+  public auPair(String id, double[] rating, double payRate, double distTraveled, double costIncurred, boolean onShift, String employer, String bio, String experience, double currentLong, double currentLat, String terminateDate )
   {
     this.id = id;
-    this.rating = rating;
+    this.rating = Arrays.copyOf(rating, rating.length);
     this.payRate = payRate;
     this.distTraveled = distTraveled;
     this.costIncurred = costIncurred;
@@ -59,12 +59,12 @@ public class auPair
     this.id = id;
   }
 
-  public double getRating()
+  public double[] getRating()
   {
     return rating;
   }
 
-  public void setRating(double rating)
+  public void setRating(double[] rating)
   {
     this.rating = rating;
   }
@@ -174,7 +174,7 @@ public class auPair
   {
     return "auPair{" +
       "id='" + id + '\'' +
-      ", rating=" + rating +
+      ", rating=" + Arrays.toString(rating) +
       ", payRate=" + payRate +
       ", distTraveled=" + distTraveled +
       ", costIncurred=" + costIncurred +

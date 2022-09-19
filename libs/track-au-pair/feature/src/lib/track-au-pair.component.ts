@@ -53,11 +53,12 @@ export class TrackAuPairComponent implements OnInit
     children: [],
     medID: "",
     auPair: "",
+    rating: []
   }
 
   auPairDetails: auPair = {
     id: "",
-    rating: 0,
+    rating: [],
     onShift: false,
     employer: "",
     costIncurred: 0,

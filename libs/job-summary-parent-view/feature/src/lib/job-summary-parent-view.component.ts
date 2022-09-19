@@ -60,6 +60,7 @@ export class JobSummaryParentViewComponent implements OnInit {
     children: [],
     medID: "",
     auPair: "",
+    rating: []
   }
 
   userDetails: User = {
@@ -130,6 +131,7 @@ export class JobSummaryParentViewComponent implements OnInit {
           this.parentDetails.children = res.children;
           this.parentDetails.medID = res.medID;
           this.parentDetails.auPair = res.auPair;
+          this.parentDetails.rating = res.rating;
       },
       error => {
         console.log("Error has occured with API: " + error);
@@ -297,5 +299,20 @@ export class JobSummaryParentViewComponent implements OnInit {
       });
       this.shiftHours[i] = actCount;
     }    
+  }
+
+  getAverage(ratings : number[])
+  {
+    let total = 0;
+    for(let i = 0; i < ratings.length; i++)
+    {
+      total += ratings[i];
+    }
+
+    const avg = total/ratings.length;
+
+    const ret = (Math.round(avg * 100) / 100).toFixed(1);
+
+    return ret;
   }
 }
