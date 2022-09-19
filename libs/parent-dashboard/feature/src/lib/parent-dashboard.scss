@@ -62,6 +62,10 @@ ion-card {
     box-shadow: none;
 }
 
+ion-icon {
+    pointer-events: none;
+}
+
 .children-div {
     width: 90%;
     height: 94px;

@@ -96,9 +96,9 @@ export class JobSummaryParentViewComponent implements OnInit {
 
   async ngOnInit(): Promise<void> {    
     this.parentID = this.store.snapshot().user.id;
+
     this.getActivities();
 
-    
     await this.serv.getUser(this.parentID).toPromise()
     .then( 
       res=>{
@@ -196,6 +196,11 @@ export class JobSummaryParentViewComponent implements OnInit {
 
   async sendHireRequests()
   {
+    if(this.auPairID == "")
+    {
+      this.router.navigate(['/explore']);
+    }
+
     this.flag = false;
     const ts = new Date();
 
