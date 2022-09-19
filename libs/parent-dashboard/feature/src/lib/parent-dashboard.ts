@@ -147,8 +147,6 @@ export class ParentDashboardComponent implements OnInit{
           //setting the state
           this.store.dispatch(new SetChildren(res.children));
           this.store.dispatch(new SetAuPair(res.auPair));
-          console.log("Setting store for parent");
-          console.log( this.store.snapshot())
       },
       error => {
         console.log("Error has occured with API: " + error);
@@ -305,8 +303,6 @@ export class ParentDashboardComponent implements OnInit{
   async terminateAuPair()
   {
     await this.getAuPairDetails();
-
-    await console.log(this.currentAuPair.rating);
 
     this.currentAuPair.terminateDate = "";
     this.currentAuPair.employer = "";

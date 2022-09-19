@@ -123,6 +123,11 @@ export class ParentProfileComponent implements OnInit {
 
     const avg = total/ratings.length;
 
+    if((avg % 1) == 0)
+    {
+      return avg;
+    }
+    
     const ret = (Math.round(avg * 100) / 100).toFixed(1);
 
     return ret;

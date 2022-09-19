@@ -125,6 +125,5 @@ export class AuPairRatingModalComponent implements OnInit {
         return error;
       }
     );
-    console.log(this.currentAuPair.rating);
   } 
 }

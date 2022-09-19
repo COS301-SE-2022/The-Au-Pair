@@ -167,7 +167,6 @@ export class JobSummaryModalComponent implements OnInit {
 
     this.serv.removeContract(this.contractID).subscribe(
       res=>{
-        console.log(res);
         this.router.navigate(['/au-pair-dashboard']).then(()=>{
         window.location.reload();
         });
@@ -182,7 +181,6 @@ export class JobSummaryModalComponent implements OnInit {
   {
     await this.serv.removeContract(this.contractID).subscribe(
       res=>{
-        console.log(res);
         location.reload();
       },
       error=>{console.log("Error has occured with API: " + error);}
@@ -357,6 +355,11 @@ export class JobSummaryModalComponent implements OnInit {
     }
 
     const avg = total/ratings.length;
+
+    if((avg % 1) == 0)
+    {
+      return avg;
+    }
 
     const ret = (Math.round(avg * 100) / 100).toFixed(1);
 

@@ -305,7 +305,7 @@ export class EditParentProfileComponent implements OnInit{
     
     if(emptyInput == true)
     {
-      console.log("You cannot have any empty fields.");
+      this.errToast("You cannot have any empty fields.");
     }
     else
     {

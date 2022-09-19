@@ -75,9 +75,7 @@ export class ExploreComponent implements OnInit {
   async getAuPairs()
   {
     await this.serv.getAllAuPairs().subscribe(
-      res=>{
-        console.log(res);
-        
+      res=>{        
         this.auPairs = res;
         this.setAuPairArray();
       },
@@ -92,8 +90,6 @@ export class ExploreComponent implements OnInit {
         res=>{
           const eucdistance = this.calculateEucDistance(res.latitude, res.longitude);
           
-          console.log(ap.rating);
-
           const auPairDetails = {
             id: ap.id,
             rating: this.getAverage(ap.rating),
@@ -161,8 +157,6 @@ export class ExploreComponent implements OnInit {
     {
       this.maxPayrate = formData.max_payrate;
     }
-
-    console.log(this.minPayrate);
 
     if(this.minPayrate > this.maxPayrate)
     {
@@ -360,6 +354,11 @@ export class ExploreComponent implements OnInit {
     }
 
     const avg = total/ratings.length;
+
+    if((avg % 1) == 0)
+    {
+      return avg;
+    }
 
     const ret = (Math.round(avg * 100) / 100).toFixed(1);
 
