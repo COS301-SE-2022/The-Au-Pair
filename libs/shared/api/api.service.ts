@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { Activity , Child , medAid , Parent  , User, HoursLogged, auPair, Notification, Report, Contract} from '../interfaces/interfaces';
+import { Activity , Child , medAid , Parent  , User, HoursLogged, auPair, Notification, Report, Contract, Email} from '../interfaces/interfaces';
 import { environment } from '../../../apps/the-au-pair/src/environments/environment';
 @Injectable()
 export class API{
@@ -249,6 +249,10 @@ export class API{
 
   addReport(report : Report): Observable<any> {
     return this.http.post(environment.apiURI+"/addReport",report);
+  }
+
+  sendEmail(email : Email): Observable<any> {
+    return this.http.post(environment.apiURI+"/sendEmail",email);
   }
   
 }

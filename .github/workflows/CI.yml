@@ -13,79 +13,70 @@ on:
         required: false
         type: string
 jobs:
+  variables:
+    SG_API_KEY: ${{ secrets.SENDGRID_API_KEY }}
   build:
     name: Pipeline
     runs-on: ubuntu-latest
     steps:
        
-      # - name: Checkout develop
-      #   uses: actions/checkout@v2
-      #   with:
-      #     fetch-depth: 0
-
-      # - name: Derive appropriate SHAs for base and head for `nx affected` commands
-      #   uses: nrwl/nx-set-shas@v2
-      #   with:
-      #     main-branch-name: 'develop'
-
-      # - name: Use Node.js 16
-      #   uses: actions/setup-node@v2
-      #   with:
-      #     node-version: '16'
-
-      # - name: Install node
-      #   run: npm install --legacy-peer-deps
-
-      # - name: Lint test affected
-      #   if: inputs.type == 'affected'
-      #   run: npx nx affected:lint --base=${{ env.NX_BASE }} --head=${{ env.NX_HEAD }}
-
-      # - name: Build test affected
-      #   if: inputs.type == 'affected'
-      #   run: npx nx affected:build --base=${{ env.NX_BASE }} --head=${{ env.NX_HEAD }}
-
-      # - name: Unit test affected
-      #   if: inputs.type == 'affected'
-      #   run: npx nx affected:test --base=${{ env.NX_BASE }} --head=${{ env.NX_HEAD }}
-
-      # - name: E2E test affected
-      #   if: inputs.type == 'affected'
-      #   run: npx nx affected:e2e --base=${{ env.NX_BASE }} --head=${{ env.NX_HEAD }}
-
-      # - name: Full Lint test
-      #   if: inputs.test == 'full' || inputs.test == 'lint'
-      #   run: npx nx run-many --target=lint --all --skip-nx-cache --parallel
-    
-      # - name: Full Build test 
-      #   if: inputs.test == 'full' || inputs.test == 'build' 
-      #   run: npx nx run-many --target=build --all --skip-nx-cache --parallel
-    
-      # - name: Full Unit test 
-      #   if: inputs.test == 'full' || inputs.test == 'unit'
-      #   run: npx nx run-many --target=test --all --skip-nx-cache --parallel --coverage
-    
-      # - name: Full E2E test 
-      #   if: inputs.test == 'full' || inputs.test == 'e2e'
-      #   run: npx nx run-many --target=e2e --all --skip-nx-cache --parallel --coverage
-
-      # - name: merge coverage reports
-      #   if: inputs.test == 'full'
-      #   run: node ./tools/scripts/merge-report.js
-
-      # - uses: codecov/codecov-action@v2
-      #   if: inputs.test == 'full' 
-      #   with:
-      #     token: ${{ secrets.CODECOV_TOKEN }}
-      #     files: ./coverage/lcov.info
-      #     name: cypress-jest
-    
-
-      - uses: actions/checkout@v1
-      - name: Set up JDK
-        uses: actions/setup-java@v1
+      - name: Checkout develop
+        uses: actions/checkout@v2
         with:
-          java-version: '17'
+          fetch-depth: 0
 
-      - name: Run tests
-        run: cd Server && mvn spring-boot:test -Dspring-boot.run.arguments=--SENDGRID_API_KEY=${{ SENDGRID_API_KEY }}
+      - name: Derive appropriate SHAs for base and head for `nx affected` commands
+        uses: nrwl/nx-set-shas@v2
+        with:
+          main-branch-name: 'develop'
 
+      - name: Use Node.js 16
+        uses: actions/setup-node@v2
+        with:
+          node-version: '16'
+
+      - name: Install node
+        run: npm install --legacy-peer-deps
+
+      - name: Lint test affected
+        if: inputs.type == 'affected'
+        run: npx nx affected:lint --base=${{ env.NX_BASE }} --head=${{ env.NX_HEAD }}
+
+      - name: Build test affected
+        if: inputs.type == 'affected'
+        run: npx nx affected:build --base=${{ env.NX_BASE }} --head=${{ env.NX_HEAD }}
+
+      - name: Unit test affected
+        if: inputs.type == 'affected'
+        run: npx nx affected:test --base=${{ env.NX_BASE }} --head=${{ env.NX_HEAD }}
+
+      - name: E2E test affected
+        if: inputs.type == 'affected'
+        run: npx nx affected:e2e --base=${{ env.NX_BASE }} --head=${{ env.NX_HEAD }}
+
+      - name: Full Lint test
+        if: inputs.test == 'full' || inputs.test == 'lint'
+        run: npx nx run-many --target=lint --all --skip-nx-cache --parallel
+    
+      - name: Full Build test 
+        if: inputs.test == 'full' || inputs.test == 'build' 
+        run: npx nx run-many --target=build --all --skip-nx-cache --parallel
+    
+      - name: Full Unit test 
+        if: inputs.test == 'full' || inputs.test == 'unit'
+        run: npx nx run-many --target=test --all --skip-nx-cache --parallel --coverage
+    
+      - name: Full E2E test 
+        if: inputs.test == 'full' || inputs.test == 'e2e'
+        run: npx nx run-many --target=e2e --all --skip-nx-cache --parallel --coverage
+
+      - name: merge coverage reports
+        if: inputs.test == 'full'
+        run: node ./tools/scripts/merge-report.js
+
+      - uses: codecov/codecov-action@v2
+        if: inputs.test == 'full' 
+        with:
+          token: ${{ secrets.CODECOV_TOKEN }}
+          files: ./coverage/lcov.info
+          name: cypress-jest

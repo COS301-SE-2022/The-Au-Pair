@@ -116,3 +116,8 @@ export interface Activity{
     desc: string;
   }
   
+  export interface Email{
+    to: string;
+    subject: string;
+    body: string;
+  }
