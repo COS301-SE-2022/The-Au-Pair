@@ -13,8 +13,6 @@ on:
         required: false
         type: string
 jobs:
-  variables:
-    SG_API_KEY: ${{ secrets.SENDGRID_API_KEY }}
   build:
     name: Pipeline
     runs-on: ubuntu-latest
