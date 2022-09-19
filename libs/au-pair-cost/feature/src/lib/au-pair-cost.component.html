@@ -7,7 +7,7 @@
         <div [hidden]="this.type!==1" class="au-pair-name">Au Pair: {{ auPairName }}</div>
         <div class="hourly-rate">Hourly Rate: {{ hourlyRate }} Rands/Hour</div>
         <div class="total-hours">Total Hours: {{ totalHours }}</div>
-        <div class="total-remuneration">Total Remuneration: R{{ totalRemuneration }}</div>
+        <div class="total-remuneration">Total Remuneration: R{{ totalRemuneration }} <ion-icon class="add-cost" name="person-remove" (click)="openExtraCostsModal()"></ion-icon></div>
       </ion-card>
     </div>
 

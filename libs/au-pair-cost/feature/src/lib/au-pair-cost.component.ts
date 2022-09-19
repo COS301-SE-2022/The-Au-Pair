@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngxs/store';
 import { API } from '../../../../shared/api/api.service'
+import { ModalController } from '@ionic/angular';
+import { ExtraCostsModalComponent } from './extra-costs-modal/extra-costs-modal.component';
 
 @Component({
   selector: 'the-au-pair-au-pair-cost',
@@ -10,7 +12,14 @@ import { API } from '../../../../shared/api/api.service'
 })
 export class AuPairCostComponent implements OnInit {
 
-  constructor(private api:API, private store: Store) { }
+  constructor(private api:API, private store: Store, private modalCtrl : ModalController) { }
+
+  async openExtraCostsModal() {
+    const modal = await this.modalCtrl.create({
+      component: ExtraCostsModalComponent
+    });
+    await modal.present();
+  }
 
   type = -1;
   parentID = "";
