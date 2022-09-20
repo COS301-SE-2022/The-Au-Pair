@@ -32,9 +32,6 @@ export class AddChildComponent implements OnInit
 
   allChildren: any;
 
-  //Regex for south african ID number
-  SA_ID = new RegExp(/(((\d{2}((0[13578]|1[02])(0[1-9]|[12]\d|3[01])|(0[13456789]|1[012])(0[1-9]|[12]\d|30)|02(0[1-9]|1\d|2[0-8])))|([02468][048]|[13579][26])0229))(( |-)(\d{4})( |-)(\d{3})|(\d{7}))/);
-
   //Constructor
   constructor(private serv: API, public router: Router, public toastCtrl: ToastController, private store: Store) {}
 
@@ -45,6 +42,8 @@ export class AddChildComponent implements OnInit
   //Function to retrieve the child's details
   async getChildValues(val: any)
   {    
+    console.log(val);
+    
     //Max number of children for each user is 4
     if(this.allChildren.length < 4)
     {
@@ -140,7 +139,7 @@ export class AddChildComponent implements OnInit
         this.childDetails.diet= val.diet;
         this.childDetails.parent= this.store.snapshot().user.id;
         this.childDetails.aupair= this.parent.auPair;
-        this.addChild(this.childDetails);
+        // this.addChild(this.childDetails);
       }
     }
     else
