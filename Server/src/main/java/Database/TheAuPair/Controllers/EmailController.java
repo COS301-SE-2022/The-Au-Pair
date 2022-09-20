@@ -1,6 +1,7 @@
 package Database.TheAuPair.Controllers;
 
 import java.io.IOException;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import com.sendgrid.Response;
@@ -14,7 +15,11 @@ import com.sendgrid.helpers.mail.objects.*;
 @RestController
 @CrossOrigin(origins = "*")
 public class EmailController{
+  //ignore the warning of the unused variable, still needs to be instantiated
     private final SendGridConfigProperties sendGridConfig;
+
+    @Value("${sendgrid.api-key}")
+    private String sendgridApiKey;
     
     public EmailController(SendGridConfigProperties sendGridConfig) {
         this.sendGridConfig = sendGridConfig;
@@ -30,9 +35,19 @@ public class EmailController{
         }
     }
 
+    //Adding this endpoint to test if the env variable is being read
+    @GetMapping("/getEnv")
+    public String getEnv() {
+        try {
+          return sendgridApiKey;
+        } catch (Exception e) {
+          return "ENV var not found!";
+        }
+    }
+
     public Response send(EmailRequest emailRequest) throws IOException {
         //initialize sendgrid
-        SendGrid sendGridClient = new SendGrid(sendGridConfig.apiKey());
+        SendGrid sendGridClient = new SendGrid(sendgridApiKey);
 
         // Building the email
         Email from = new Email("theaupair.help@gmail.com");
