@@ -74,6 +74,14 @@ export class JobSummaryAuPairViewComponent implements OnInit {
   async ngOnInit(): Promise<void> {
     this.auPairID = this.store.snapshot().user.id;
     
+    await this.getAuPairDetails();
+    await this.getParentDetails();
+    await this.getUserDetails();
+    await this.getChildrenDetails();
+  }
+
+  async getAuPairDetails()
+  {
     await this.serv.getAuPair(this.auPairID)
     .toPromise()
       .then(
@@ -93,7 +101,10 @@ export class JobSummaryAuPairViewComponent implements OnInit {
       },
       error=>{console.log("Error has occured with API: " + error);}
     )
+  }
 
+  async getParentDetails()
+  {
     await this.serv.getParent(this.currentAuPair.employer)
     .toPromise()
       .then( 
@@ -108,7 +119,10 @@ export class JobSummaryAuPairViewComponent implements OnInit {
         console.log("Error has occured with API: " + error);
       }
     )
+  }
 
+  async getUserDetails()
+  {
     await this.serv.getUser(this.parentDetails.id).toPromise()
     .then( 
       res=>{
@@ -131,16 +145,19 @@ export class JobSummaryAuPairViewComponent implements OnInit {
         console.log("Error has occured with API: " + error);
       }
     )
-    
+  }
+
+  async getChildrenDetails()
+  {
     await this.serv.getChildren(this.parentDetails.id).subscribe(
-        res=>{
-          let i = 0;
-          res.forEach((element: Child) => {
-            this.childrenArr[i++] = element;
-          });
-        },
-        error =>{console.log("Error has occured with API: " + error);}
-      )
+      res=>{
+        let i = 0;
+        res.forEach((element: Child) => {
+          this.childrenArr[i++] = element;
+        });
+      },
+      error =>{console.log("Error has occured with API: " + error);}
+    )
   }
 
   getAverage(ratings : number[])
@@ -152,6 +169,11 @@ export class JobSummaryAuPairViewComponent implements OnInit {
     }
 
     const avg = total/ratings.length;
+
+    if(avg < 1 || avg > 5)
+    {
+      return 0;
+    }
 
     if((avg % 1) == 0)
     {
