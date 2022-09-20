@@ -14,9 +14,8 @@ import com.sendgrid.helpers.mail.objects.*;
 @RestController
 @CrossOrigin(origins = "*")
 public class EmailController{
-
     private final SendGridConfigProperties sendGridConfig;
-
+    
     public EmailController(SendGridConfigProperties sendGridConfig) {
         this.sendGridConfig = sendGridConfig;
     }
