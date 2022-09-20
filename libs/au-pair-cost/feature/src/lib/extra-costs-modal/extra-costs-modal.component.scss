@@ -17,6 +17,38 @@
     cursor: pointer;
 }
 
+input {
+    width: 80%;
+    height: 50px;
+    background: var(--ion-color-light-white);
+    box-shadow: 1px 2px 5px rgba(0, 0, 0, 0.13);
+    border-style: none;
+    border-radius: 10px;
+    padding-left: 20px;
+}
+
+ion-row {
+    padding-top: 10px;
+}
+
+.heading ion-row {
+    padding-top: 0;
+}
+
+select {
+    width: 80%;
+    height: 50px;
+    box-shadow: 1px 2px 5px rgba(0, 0, 0, 0.13);
+    border-style: none;
+    border-radius: 10px;
+    padding-left: 20px;
+}
+
+.metric {
+    height: 100%;
+    padding-top: 20px;
+}
+
 .content{
     margin-top: 20px;
     font-size: 18px;
@@ -54,4 +86,17 @@ ion-range{
 
 input:focus{
     outline:none;
+}
+
+textarea:focus{
+    outline:none;
+}
+
+textarea{
+    background-color: white;
+    border-radius: 16px;
+    color:black;
+    resize: none;
+    border: none;
+    padding: 15px;
 }

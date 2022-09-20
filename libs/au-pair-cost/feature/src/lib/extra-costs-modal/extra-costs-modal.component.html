@@ -6,20 +6,71 @@
         </ion-row>
     </div>
     <div class="content">
-        <!-- <form id="reportForm" #reportForm="ngForm"  (ngSubmit)="reportUser(reportForm.value)">
-            <ion-row class="slider-row">
+        <form [formGroup]="costsForm" (ngSubmit)="addCost()">
+            <ion-row>
                 <ion-col size="4" class="ion-text-center">
-                    Reason for Report:
+                    Cost Type:
                 </ion-col>
-                <ion-col size="8" class="ion-text-start">
-                    <textarea name="desc" class="descInp" ngModel></textarea>
+                <ion-col offset="1" size="7" class="ion-text-start">
+                    <select name="costType" #costType id="costType" formControlName="type">
+                        <option value="Other">Other</option>
+                        <option value="Fuel">Fuel</option>
+                        <option value="Overtime">Overtime</option>
+                    </select>
+                </ion-col>
+            </ion-row>
+            <ion-row>
+                <ion-col size="4" class="ion-text-center">
+                    Description:
+                </ion-col>
+                <ion-col offset="1" size="7" class="ion-text-start">
+                    <input type="text" name="description" formControlName="desc"> 
+                </ion-col>  
+            </ion-row>
+            <ion-row *ngIf="costsForm.controls['type'].value=='Fuel'">
+                <ion-col size="4" class="ion-text-center">
+                    Fuel Type:
+                </ion-col>
+                <ion-col offset="1" size="7" class="ion-text-start">
+                    <select name="costType" formControlName="fuelType">
+                        <option value="95-Unleaded" selected>95 Unleaded</option>
+                        <option value="93-Unleaded">93 Unleaded</option>
+                        <option value="Diesel">Diesel</option>
+                    </select>
+                </ion-col>  
+            </ion-row>
+            <ion-row *ngIf="costsForm.controls['type'].value=='Fuel'">
+                <ion-col size="4" class="ion-text-center">
+                    Distance:
+                </ion-col>
+                <ion-col offset="1" size="7" class="ion-text-start">
+                    <input type="text" ngModel name="distance" formControlName="distance"> km
+                </ion-col>  
+            </ion-row>
+            <ion-row *ngIf="costsForm.controls['type'].value=='Overtime'">
+                <ion-col size="4" class="ion-text-center">
+                    Hours:
+                </ion-col>
+                <ion-col offset="1" size="7" class="ion-text-start">
+                    <input type="text" ngModel name="hours" formControlName="hours">
+                </ion-col>  
+            </ion-row>
+            <ion-row>
+                <ion-col size="4" class="ion-text-center">
+                    Amount:
+                </ion-col>
+                <ion-col size="1" class="ion-text-end metric">
+                    R
+                </ion-col>  
+                <ion-col size="7" class="ion-text-start">
+                    <input type="text" ngModel name="amount"> 
                 </ion-col>  
             </ion-row>
             <ion-row class="submit-row">
                 <ion-col size="12" class="ion-text-center">
-                    <input type="submit" form="reportForm" type="submit" [ngClass]="(this.sending===false) ? 'submit' : 'disabled-submit' " [disabled]="sending" value="Report Parent"/>
+                    <input type="submit" form="costsForm" type="submit" [ngClass]="(this.sending===false) ? 'submit' : 'disabled-submit' " [disabled]="sending" value="Add Cost"/>
                 </ion-col>
             </ion-row> 
-        </form>     -->
+        </form>    
     </div>
 </div>
