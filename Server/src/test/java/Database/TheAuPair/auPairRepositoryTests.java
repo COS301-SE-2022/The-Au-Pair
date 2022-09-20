@@ -22,7 +22,8 @@ public class auPairRepositoryTests
   @BeforeEach
   public void setup()
   {
-    expectedAuPair = new auPair("",0,0,0,0,true,"","","", 43.0,43.0,"");
+    double [] r = new double[2];
+    expectedAuPair = new auPair("",r,0,0,0,true,"","","", 43.0,43.0,"");
     id = "7542108615984";
   }
 

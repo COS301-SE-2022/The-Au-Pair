@@ -2,7 +2,6 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { NavbarComponent } from './navbar.component';
 import { RouterTestingModule } from  "@angular/router/testing";
 import { IonicModule } from '@ionic/angular';
-import { By } from '@angular/platform-browser';
 import { NgxsModule } from '@ngxs/store';
 import { AppState } from '../../../../../shared/ngxs/state';
 

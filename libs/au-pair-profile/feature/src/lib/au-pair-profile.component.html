@@ -26,7 +26,12 @@
                 <div class="parent-info-small">
                   <div class="parent-text">Pay rate: </div>
                   <p class="parent-text-info">R{{this.auPairDetails.payRate}} per hour</p>
-              </div>
+                </div>
+                <div class="parent-info-small">
+                    <div class="parent-text">Rating: </div>
+                    <p *ngIf="this.auPairDetails.rating !== []" class="parent-text-info">{{this.getAverage(this.auPairDetails.rating)}}/5</p>
+                    <p *ngIf="this.auPairDetails.rating === []" class="parent-text-info">Not yet rated</p>
+                  </div>
             </div>
             <div class = 'large-profile-details-div'>
                 <div class="parent-info-large">

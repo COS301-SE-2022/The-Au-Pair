@@ -27,7 +27,8 @@ export class EditChildComponent implements OnInit {
     id: "",
     children: [],
     medID: "",
-    auPair: ""
+    auPair: "",
+    rating: []
   }
 
   //Regex for south african ID number

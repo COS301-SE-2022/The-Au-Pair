@@ -8,6 +8,7 @@
         <div class="button-container" >
             <a href = 'tel:{{ employerPhone }}'><ion-icon name="call" class = 'call-icon'></ion-icon></a>
             <a href = 'sms:{{ employerPhone }}'><ion-icon name="chatbubble-ellipses" class = 'message-icon'></ion-icon></a>
+            <ion-icon class="rating-icon" name="star" (click)="openModal(employerId)"></ion-icon>
             <ion-icon class="report-icon" name="alert-circle" (click)="openReportModal()"></ion-icon>
             <div *ngIf="this.employerId !== ''"><ion-icon class="terminate-contract" name="person-remove" (click)="presentAlert()"></ion-icon></div>
         </div>
@@ -46,6 +47,14 @@
         <div *ngIf="employerId === ''" id="cost" class="action" (click)="checkHasEmployerEmployedRequests()">
           <ion-icon name="mail-outline" class="action-icon"></ion-icon>
           <div class="action-tag">Hire Requests</div>
+        </div>
+        <div *ngIf="employerId !== ''" class='action' id="childDash" (click)="checkHasEmployerSummary()">
+          <ion-icon name="document-text-outline" class='action-icon '></ion-icon>
+          <div class='action-tag '>Job Summary</div>
+        </div>
+        <div *ngIf="employerId === ''" style="opacity : 0.4;" class='action' id="childDash" (click)="checkHasEmployerSummary()">
+          <ion-icon name="document-text-outline" class='action-icon '></ion-icon>
+          <div class='action-tag '>Job Summary</div>
         </div>
         <div id="cost" class="action" routerLink="/au-pair-cost">
           <ion-icon name="cash-outline" class="action-icon"></ion-icon>
