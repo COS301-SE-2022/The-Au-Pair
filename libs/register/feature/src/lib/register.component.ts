@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ToastController } from '@ionic/angular';
 import { HttpClient } from '@angular/common/http';
-import { User, auPair, Parent } from '../../../../shared/interfaces/interfaces';
+import { User, auPair, Parent, Email } from '../../../../shared/interfaces/interfaces';
 import { API } from '../../../../shared/api/api.service';
 
 @Component({
@@ -20,6 +20,7 @@ export class RegisterComponent {
   public experienceError: boolean;
   public registering: boolean;
   public formValid = false;
+  public emailSent = false;
   
   parentChosen = true;
   public maleChosen: boolean;
@@ -46,6 +47,12 @@ export class RegisterComponent {
     birth: "",
     warnings: 0,
     banned: "",
+  }
+
+  emailRequest: Email ={
+    to: '',
+    subject: '',
+    body: '',
   }
 
   parentDetails: Parent ={
@@ -272,7 +279,8 @@ export class RegisterComponent {
           await this.serv.addParent(this.parentDetails)
           .toPromise()
           .then(
-            res => {
+            async res => {
+              await this.sendParentEmail();
               console.log("The response is:" + res);
             },
             error => {
@@ -290,7 +298,8 @@ export class RegisterComponent {
           this.serv.addAuPair(this.aupairDetails)
           .toPromise()
           .then(
-            res => {
+            async res => {
+              await this.sendAuPairEmail();
               console.log("The response is:" + res);
             },
             error => {
@@ -388,6 +397,38 @@ export class RegisterComponent {
     {
       return month + "/" + day + "/20" + year;
     }
+  }
+
+  async sendParentEmail(){
+    this.emailRequest.to = this.userDetails.email;
+    this.emailRequest.subject = "Welcome to The Au Pair!";
+    this.emailRequest.body = "Thank you for registering with The Au Pair. We hope you find the perfect" + 
+                                " au pair for your child. Please take some time to add all the necessary" +
+                                " details of your children to ensure a great experience! \n\n" + "Regards, \n" + "The Au Pair Team";
+    await this.serv.sendEmail(this.emailRequest).toPromise().then(
+      res => {
+        console.log("Email sent " + res );
+        this.emailSent = true;
+      },
+      error => {
+        console.log("Email not sent, Error has occured with API: " + error);
+      });
+  }
+
+  async sendAuPairEmail(){
+    this.emailRequest.to = this.userDetails.email;
+    this.emailRequest.subject = "Welcome to The Au Pair!";
+    this.emailRequest.body = "Thank you for registering with The Au Pair.\n\n" +
+                              "Please note that your account as an Au Pair is being approved by our hard working admin team."+
+                              "You should receive an email soon confirming your application status!\n\n" + "Regards, \n" + "The Au Pair Team";
+    await this.serv.sendEmail(this.emailRequest).toPromise().then(
+      res => {
+        console.log("Email sent " + res );
+        this.emailSent = true;
+      },
+      error => {
+        console.log("Email not sent, Error has occured with API: " + error);
+      });
   }
   
 }
