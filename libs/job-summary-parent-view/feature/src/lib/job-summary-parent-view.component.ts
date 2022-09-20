@@ -97,8 +97,33 @@ export class JobSummaryParentViewComponent implements OnInit {
   async ngOnInit(): Promise<void> {    
     this.parentID = this.store.snapshot().user.id;
 
-    this.getActivities();
+    await this.getActivities();
+    await this.getUserDetails();
+    await this.getParentDetails();
+    await this.getChildrenDetails();
+    this.getNoActivities();
+  }
 
+  async getActivities(){
+    this.serv.getChildren(this.parentID).subscribe(
+      res => {
+          this.children = res;
+          this.children.forEach((element: { id: string; }) => {
+          this.auPairChildren.push(element.id);
+        });
+        this.serv.getAuPairSchedule(this.auPairChildren).subscribe(
+          res=>{
+            this.activities = res;
+            this.setChildActivity();
+          }
+        );
+      },
+      error => { console.log("Error has occured with API: " + error); },
+    );
+  }
+
+  async getUserDetails()
+  {
     await this.serv.getUser(this.parentID).toPromise()
     .then( 
       res=>{
@@ -121,7 +146,10 @@ export class JobSummaryParentViewComponent implements OnInit {
         console.log("Error has occured with API: " + error);
       }
     )
-    
+  }
+
+  async getParentDetails()
+  {
     await this.serv.getParent(this.parentID)
     .toPromise()
       .then( 
@@ -137,43 +165,19 @@ export class JobSummaryParentViewComponent implements OnInit {
         console.log("Error has occured with API: " + error);
       }
     )
+  }
 
-    
+  async getChildrenDetails()
+  {
     await this.serv.getChildren(this.parentID).subscribe(
-        res=>{
-          let i = 0;
-          res.forEach((element: Child) => {
-            this.childrenArr[i++] = element;
-          });
-        },
-        error =>{console.log("Error has occured with API: " + error);}
-      )
-
-      this.getNoActivities();
-  }
-
-  getCurDay(days : string[]) : number {
-    const pipe = new DatePipe('en-US');
-    const dateStr = pipe.transform(Date.now(),'EEEE');
-    return days.findIndex(x => x === dateStr);
-  }
-
-  async getActivities(){
-    this.serv.getChildren(this.parentID).subscribe(
-      res => {
-        this.children = res;
-        this.children.forEach((element: { id: string; }) => {
-          this.auPairChildren.push(element.id);
+      res=>{
+        let i = 0;
+        res.forEach((element: Child) => {
+          this.childrenArr[i++] = element;
         });
-        this.serv.getAuPairSchedule(this.auPairChildren).subscribe(
-          res=>{
-            this.activities = res;
-            this.setChildActivity();
-          }
-        );
       },
-      error => { console.log("Error has occured with API: " + error); },
-    );
+      error =>{console.log("Error has occured with API: " + error);}
+    )
   }
 
   setChildActivity(){
@@ -233,7 +237,7 @@ export class JobSummaryParentViewComponent implements OnInit {
     
     if(this.flag === false)
     {
-      this.sucToast();
+      this.createToast('Request sent successfully!');
       this.serv.addContract(this.contractDetails)
       .toPromise()
       .then(
@@ -247,26 +251,15 @@ export class JobSummaryParentViewComponent implements OnInit {
     }
     else
     {
-      this.errToast();
+      this.createToast('You have already requested to hire this Au Pair.');
     }
     this.router.navigate(['/explore']);
   }
 
-  async errToast()
+  async createToast(message : string)
   {
     const toast = await this.toastCtrl.create({
-      message: 'You have already requested to hire this Au Pair.',
-      duration: 2000,
-      position: 'top',
-      cssClass: 'toastPopUp'
-    });
-    await toast.present();
-  }
-
-  async sucToast()
-  {
-    const toast = await this.toastCtrl.create({
-      message: 'Request sent successfully!',
+      message: message,
       duration: 2000,
       position: 'top',
       color: 'primary',
@@ -324,5 +317,11 @@ export class JobSummaryParentViewComponent implements OnInit {
     const ret = (Math.round(avg * 100) / 100).toFixed(1);
 
     return ret;
+  }
+
+  getCurDay(days : string[]) : number {
+    const pipe = new DatePipe('en-US');
+    const dateStr = pipe.transform(Date.now(),'EEEE');
+    return days.findIndex(x => x === dateStr);
   }
 }
