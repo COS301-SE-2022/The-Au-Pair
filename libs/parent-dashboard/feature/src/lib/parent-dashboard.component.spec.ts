@@ -14,6 +14,7 @@ import { of } from 'rxjs';
 import { SetId } from '../../../../../libs/shared/ngxs/actions';
 import { UserReportModalComponent } from './user-report-modal/user-report-modal.component';
 import { AuPairRatingModalComponent } from './au-pair-rating-modal/au-pair-rating-modal.component';
+import { auPair } from 'libs/shared/interfaces/interfaces';
 
 const apiMock = {
   getParent() {
@@ -21,6 +22,12 @@ const apiMock = {
   },
   addReport() {
     return of({})
+  },
+  getAuPair() {
+    return of()
+  },
+  editAuPair() {
+    return of()
   }
 }
 
@@ -80,13 +87,21 @@ describe('ParentProfileComponent', () => {
 describe('AuPairRatingModalComponent', () => {
   let component: AuPairRatingModalComponent;
   let fixture: ComponentFixture<AuPairRatingModalComponent>;
+  let store: Store;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [AuPairRatingModalComponent],
       imports: [IonicModule, CommonModule,HttpClientTestingModule,NavbarModule, RouterTestingModule, FormsModule,NgxsModule.forRoot([AppState])],
-      providers: [API,ModalController]
+      providers: [
+      {
+        provide:API, useValue:apiMock
+      }, 
+      ToastController, 
+      ModalController]
     }).compileComponents();
+
+    store = TestBed.inject(Store);
   });
 
   beforeEach(() => {
@@ -98,6 +113,35 @@ describe('AuPairRatingModalComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
+  it('should set the parentID and auPairId on init', async () => {
+    store.dispatch(new SetId("123"));
+    jest.spyOn(apiMock, 'getParent').mockImplementation(()=>of(
+      {
+        auPair : "321",
+      }
+    ));
+
+    await component.ngOnInit();
+    expect(component.parentID).toEqual("123");
+    expect(component.auPairId).toEqual("321");  
+  });
+
+  it('should, return the parents details from the api call', async () => {
+    store.dispatch(new SetId("0101015077086"));
+    jest.spyOn(apiMock, 'getParent').mockImplementation(()=>of(
+      {
+        id: "0101015077086",
+        children: [],
+        medID: "",
+        auPair: "",
+        rating: [5]
+      }
+    ));
+
+    await component.ngOnInit();
+    expect(component.parentID).toEqual("0101015077086");
+  })
 
   it('should, open a toast when openToast is called', async ()=>{
     jest.spyOn(component,"openToast");
