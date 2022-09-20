@@ -27,6 +27,9 @@ const apiMock = {
   },
   addAuPair() {
     return of({})
+  },
+  sendEmail() {
+    return of({})
   }
 }
 
