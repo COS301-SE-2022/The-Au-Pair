@@ -20,6 +20,7 @@ export class ChildrenDashboardComponent implements OnInit
     children: [],
     medID: "",
     auPair: "",
+    rating: []
   }
   activities: Activity[] = [];
 

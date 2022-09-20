@@ -36,6 +36,7 @@ export class ParentDashboardComponent implements OnInit{
     children: [],
     medID: "",
     auPair: "",
+    rating: []
   }
 
   userDetails: User = {
@@ -82,7 +83,7 @@ export class ParentDashboardComponent implements OnInit{
 
   currentAuPair: auPair = {
     id: "",
-    rating: 0,
+    rating: [],
     onShift: false,
     employer: "",
     costIncurred: 0,
@@ -108,21 +109,6 @@ export class ParentDashboardComponent implements OnInit{
   async ngOnInit()
   {
     this.parentID = this.store.snapshot().user.id;
-    
-    await this.getParentDetails();
-    
-    this.umPoorID = this.parentDetails.auPair;
-    
-
-    if(this.umPoorID != "")
-    {
-      await this.getAuPairDetails();
-
-      if(this.currentAuPair.terminateDate != '')
-      {
-        await this.checkResignation();
-      }
-    }
 
     await this.serv.getUser(this.parentID).toPromise()
     .then( 
@@ -156,6 +142,7 @@ export class ParentDashboardComponent implements OnInit{
           this.parentDetails.children = res.children;
           this.parentDetails.medID = res.medID;
           this.parentDetails.auPair = res.auPair;
+          this.parentDetails.rating = res.rating;
 
           //setting the state
           this.store.dispatch(new SetChildren(res.children));
@@ -179,7 +166,8 @@ export class ParentDashboardComponent implements OnInit{
           this.auPairDetails.sname = res.sname;
           this.auPairDetails.email = res.email;
           this.auPairDetails.address = res.address;
-          this.auPairDetails.number = res.number;this.userDetails.salt = res.salt;
+          this.auPairDetails.number = res.number;
+          this.userDetails.salt = res.salt;
           this.userDetails.latitude = res.latitude;
           this.userDetails.longitude = res.longitude;
           this.userDetails.suburb = res.suburb;
@@ -194,7 +182,20 @@ export class ParentDashboardComponent implements OnInit{
       )
     }
 
-    this.getChildren();
+    await this.getChildren();
+
+    this.umPoorID = this.parentDetails.auPair;
+    
+
+    if(this.umPoorID != "")
+    {
+      await this.getAuPairDetails();
+
+      if(this.currentAuPair.terminateDate != '')
+      {
+        await this.checkResignation();
+      }
+    }
   }
 
   async openModal(actId : string) {
@@ -303,7 +304,9 @@ export class ParentDashboardComponent implements OnInit{
 
   async terminateAuPair()
   {
-    await this.removeChildrenAuPair();
+    await this.getAuPairDetails();
+
+    await console.log(this.currentAuPair.rating);
 
     this.currentAuPair.terminateDate = "";
     this.currentAuPair.employer = "";
@@ -311,8 +314,7 @@ export class ParentDashboardComponent implements OnInit{
 
     await this.updateAuPair();
     await this.updateParent();
-
-    location.reload();
+    await this.removeChildrenAuPair();
   }
 
   async getAuPairDetails()
@@ -348,6 +350,7 @@ export class ParentDashboardComponent implements OnInit{
           this.parentDetails.children = res.children;
           this.parentDetails.medID = res.medID;
           this.parentDetails.auPair = res.auPair;
+          this.parentDetails.rating = res.rating;
       },
       error => {
         console.log("Error has occured with API: " + error);

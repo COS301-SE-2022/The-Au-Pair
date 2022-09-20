@@ -83,6 +83,18 @@ ion-menu::part(backdrop) {
     cursor: pointer;
 }
 
+.reset-button{
+    padding: 10px 22px;
+    gap: 10px;
+    border: 2px solid var(--ion-color-coral-tint);
+    border-radius: 10px;
+    background-color: var(--ion-color-coral-tint);
+    margin: auto;
+    display: block;
+    margin-top: 25px;
+    width: 90%;
+}
+
 ion-range::part(pin) {
     transform: translate3d(0px, -25px, 0px) scale(1);
   }
@@ -128,10 +140,6 @@ ion-range::part(pin) {
     background-color: #69A88DB2;
     margin-top: 8px;
     margin-bottom: 8px;
-}
-
-.payrate-sliders{
-    margin-right: 20px;
 }
 
 .au-pair-card-div-wrapper {

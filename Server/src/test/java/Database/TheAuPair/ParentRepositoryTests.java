@@ -20,7 +20,8 @@ public class ParentRepositoryTests
   public void setup()
   {
     String [] c = new String[2];
-    expectedParent = new Parent("",c,"","");
+    double [] r = new double[2];
+    expectedParent = new Parent("",c,"","", r);
     id = "4561237814867";
   }
 

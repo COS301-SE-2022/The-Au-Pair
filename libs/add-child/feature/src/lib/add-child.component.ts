@@ -27,7 +27,8 @@ export class AddChildComponent implements OnInit
     id: "",
     children: [],
     medID: "",
-    auPair: ""
+    auPair: "",
+    rating: []
   }
 
   allChildren: any;
@@ -223,6 +224,7 @@ export class AddChildComponent implements OnInit
         this.parent.medID = res.medID;
         this.parent.auPair = res.auPair;
         this.parent.children.push(generatedChildID);
+        this.parent.rating = res.rating;
 
         // Update the parent object to contain the new child ID
         await this.serv.editParent(this.parent)

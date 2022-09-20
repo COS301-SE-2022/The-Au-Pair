@@ -3,7 +3,6 @@ import { ModalController, NavParams, ToastController } from '@ionic/angular';
 import { auPair, Contract, User } from '../../../../../shared/interfaces/interfaces';
 import { API } from '../../../../../shared/api/api.service';
 import { Store } from '@ngxs/store';
-import { min } from 'rxjs';
 import { Router } from '@angular/router';
 
 
@@ -22,7 +21,7 @@ export class ExpandModalComponent implements OnInit {
 
   auPairDetails: auPair = {
     id: "",
-    rating: 0,
+    rating: [],
     onShift: false,
     employer: "",
     costIncurred: 0,
@@ -181,5 +180,20 @@ export class ExpandModalComponent implements OnInit {
     }
 
     return age;
+  }
+
+  getAverage(ratings : number[])
+  {
+    let total = 0;
+    for(let i = 0; i < ratings.length; i++)
+    {
+      total += ratings[i];
+    }
+
+    const avg = total/ratings.length;
+
+    const ret = (Math.round(avg * 100) / 100).toFixed(1);
+
+    return ret;
   }
 }
