@@ -12,6 +12,9 @@ import { Store } from '@ngxs/store';
 })
 export class EditChildComponent implements OnInit {
 
+  //All chidlren
+  children: Child[] = [];
+
   //Child model
   childDetails: Child = {
     id: "",
@@ -32,23 +35,15 @@ export class EditChildComponent implements OnInit {
     rating: []
   }
 
-  //Regex for south african ID number
-  SA_ID = new RegExp(/(((\d{2}((0[13578]|1[02])(0[1-9]|[12]\d|3[01])|(0[13456789]|1[012])(0[1-9]|[12]\d|30)|02(0[1-9]|1\d|2[0-8])))|([02468][048]|[13579][26])0229))(( |-)(\d{4})( |-)(\d{3})|(\d{7}))/);
-
   constructor(private serv: API, public router: Router, public toastCtrl: ToastController, private store: Store)
   {
-    const navigation = this.router.getCurrentNavigation();
-    if(navigation !== null)
-      if(navigation.extras !== null)
-      { 
-        this.childDetails = navigation.extras.state?.['child'];
-      }
+    this.childDetails.id=this.store.snapshot().user.currentChild;
   }
 
   ngOnInit(): void 
   {
-    console.log();
-    
+    this.getChild();
+    console.log("Children:", this.children);
   }
 
   async getChildValues(val: any)
@@ -58,36 +53,9 @@ export class EditChildComponent implements OnInit {
 
     //Child ID Field
     let emptyInput = false;
-    let invalidInput = false;
-    let dom = document.getElementById("childIDError");
-    if(val.childID === "")
-    {
-      emptyInput = true;
-      if(dom != null)
-      {
-        dom.innerHTML = "Child ID field is empty.";
-        dom.style.display = "block";
-      }
-    }
-    else if(!this.SA_ID.test(val.childID))
-    {
-      if(dom != null)
-      {
-        dom.innerHTML = "Invalid South African ID number.";
-        dom.style.display = "block";
-        invalidInput = true;
-      }
-    }
-    else
-    {
-      if(dom != null)
-      {
-        dom.style.display = "none";
-      }
-    }
 
     //Child name field
-    dom = document.getElementById("childNameError");
+    let dom = document.getElementById("childNameError");
     if(val.childName === "")
     {
       emptyInput = true;
@@ -113,6 +81,24 @@ export class EditChildComponent implements OnInit {
       if(dom != null)
       {
         dom.innerHTML = "Surname field is empty";
+        dom.style.display = "block";
+      }
+    }else
+    {
+      if(dom != null)
+      {
+        dom.style.display = "none";
+      }
+    }
+
+    //Date of birth field
+    dom = document.getElementById("dateOfBirthError");
+    if(val.dateOfBirth === "")
+    { 
+      emptyInput = true;
+      if(dom != null)
+      {
+        dom.innerHTML = "Date of birth field is empty";
         dom.style.display = "block";
       }
     }else
@@ -164,10 +150,6 @@ export class EditChildComponent implements OnInit {
     {
       console.log("You cannot add an child with empty fields.");
     }
-    else if(invalidInput == true)
-    {
-      console.log("Entered South African is invalidID");
-    }
     else
     {
       let idNum = val.childID.replaceAll(' ', '');
@@ -176,6 +158,7 @@ export class EditChildComponent implements OnInit {
       this.childDetails.id = idNum;
       this.childDetails.fname = val.childName;
       this.childDetails.sname= val.surname;
+      this.childDetails.dob = val.dob;
       this.childDetails.allergies= val.Allergies;
       this.childDetails.diet= val.diet;
       this.childDetails.parent= this.store.snapshot().user.id;
@@ -216,4 +199,23 @@ export class EditChildComponent implements OnInit {
       }
     )
   };
+
+  async getChild()
+  {
+
+    await this.serv.getChildren(this.store.snapshot().user.id).toPromise().then(
+      async res=>
+      {
+        await res.forEach( (c: Child) => {
+          if(c.id == this.childDetails.id)
+          {
+            this.childDetails = c;
+          }
+        }); 
+      }).catch(
+      error=>{
+        console.log("Error has occured with API: " + error);
+      }
+    );
+  }
 }

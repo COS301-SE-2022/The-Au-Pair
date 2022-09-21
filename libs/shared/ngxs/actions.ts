@@ -18,6 +18,11 @@ export class SetCurrentActivity{
     constructor(public payload: string) {}
 }
 
+export class SetCurrentChild{
+    static readonly type = '[User] set currentChild';
+    constructor(public payload: string) {}
+}
+
 export class SetFcmToken{
     static readonly type = '[User] set fcmToken';
     constructor(public payload: string) {}

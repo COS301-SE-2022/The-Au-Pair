@@ -4,6 +4,7 @@ import { API } from '../../../../shared/api/api.service';
 import { Router } from '@angular/router';
 import { Store } from '@ngxs/store';
 import { ToastController, AlertController } from '@ionic/angular';
+import { SetCurrentChild } from '../../../../shared/ngxs/actions';
 
 @Component({
   selector: 'the-au-pair-children-dashboard',
@@ -179,6 +180,7 @@ export class ChildrenDashboardComponent implements OnInit
 
   navigateEdit(child : Child)
   { 
+    this.store.dispatch(new SetCurrentChild(child.id));
     //Route to the edit-activity page and parse the ActivityID of the selected Activity 
     this.router.navigate(['/edit-child'],{
       state: {child: child}

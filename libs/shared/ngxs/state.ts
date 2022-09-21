@@ -1,5 +1,5 @@
 import { Action, Selector, State, StateContext } from '@ngxs/store';
-import { SetId , SetType, SetFcmToken, SetName, Reset, SetChildren, SetAuPair, SetLoggedIn, SetCurrentActivity } from './actions';
+import { SetId , SetType, SetFcmToken, SetName, Reset, SetChildren, SetAuPair, SetLoggedIn, SetCurrentActivity, SetCurrentChild } from './actions';
 import { Injectable } from '@angular/core';
 import { map, Observable, of } from 'rxjs';
 export interface AppStateModel{
@@ -11,6 +11,7 @@ export interface AppStateModel{
     fcmToken: string;
     loggedIn: boolean;
     currentActivity: string;
+    currentChild: string;
 }
 
 @State<AppStateModel>({
@@ -23,7 +24,8 @@ export interface AppStateModel{
         auPair: '',
         fcmToken: '',
         loggedIn : false,
-        currentActivity : ''
+        currentActivity : '', /* For editing activities */
+        currentChild: '', /* For editing children details */
     },
 })
 
@@ -88,6 +90,16 @@ export class AppState{
     @Selector()
     static getCurrentActivity(state : AppStateModel) {
         return state.currentActivity;
+    }
+
+    @Action(SetCurrentChild)
+    SetCurrentChild({ patchState }: StateContext<AppStateModel>, { payload }: SetCurrentChild) {
+        patchState({currentChild: payload});
+    }
+
+    @Selector()
+    static getCurrentChild(state : AppStateModel) {
+        return state.currentChild;
     }
 
     @Action(Reset)
