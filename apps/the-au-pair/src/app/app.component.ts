@@ -350,7 +350,7 @@ export class AppComponent implements OnInit {
   //Navbar functions
   dash(type=this.store.snapshot().user.type)
   {
-    if(type)
+    if(type == 0)
     {
       this.router.navigate(['/admin-console']);
       this.menuClose();
@@ -372,19 +372,19 @@ export class AppComponent implements OnInit {
     this.menuClose();
   }
 
-  profile()
+  profile(type=this.store.snapshot().user.type )
   {
     console.log("Coming into profile function")
-    if(this.store.snapshot().user.type == 0)
+    if(type == 0)
     {
       // this.router.navigate(['/admin-profile']);
     }
-    else if(this.store.snapshot().user.type == 1)
+    else if(type == 1)
     {
       this.router.navigate(['/parent-profile']);
       this.menuClose();
     }
-    else if(this.store.snapshot().user.type == 2)
+    else if(type == 2)
     {
       this.router.navigate(['/au-pair-profile']);
       this.menuClose();
@@ -393,7 +393,7 @@ export class AppComponent implements OnInit {
 
   menuOpen()
   {
-    this.menController.enable(true);
+    this.menController.open('start');
   }
 
   menuClose()
@@ -408,9 +408,9 @@ export class AppComponent implements OnInit {
     this.menuClose();
   }
 
-  reports() 
+  reports(type=this.store.snapshot().user.type) 
   {
-    if(this.store.snapshot().user.type == 0)
+    if(type == 0)
     {
       this.router.navigate(['/admin-reports']);
       this.menuClose();
