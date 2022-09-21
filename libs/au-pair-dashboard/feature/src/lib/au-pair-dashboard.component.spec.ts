@@ -204,10 +204,4 @@ describe('ParentRatingModalComponent', () => {
     jest.spyOn(component,"submitRating");
     expect(await component.submitRating()).toEqual(expectedValue);
   })
-
-  it('should, call submitRating function if the form contains valid details', async ()=>{
-    jest.spyOn(component,"submitRating");
-    await component.getDescription(validForm);
-    expect(component.submitRating).toHaveBeenCalled();
-  })
 });
