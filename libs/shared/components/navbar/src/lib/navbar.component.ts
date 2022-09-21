@@ -20,6 +20,7 @@ export class NavbarComponent implements OnInit
 
   ngOnInit() 
   {
+    console.log("inside navbar init");
     this.type = this.store.snapshot().user.type;
     this.hasAuPair = this.store.snapshot().user.auPair != "";
     this.kids = this.store.snapshot().user.children.length;
@@ -47,6 +48,7 @@ export class NavbarComponent implements OnInit
 
   profile()
   {
+    console.log("Coming into profile function")
     if(this.type == 0)
     {
       // this.router.navigate(['/admin-profile']);
@@ -65,7 +67,10 @@ export class NavbarComponent implements OnInit
   {
     console.log("menu open");
     console.log(this.menController.isEnabled());
+    this.menController.enable(true);
+    console.log(this.menController.isEnabled());
     this.menController.open('start')
+    this.menController.enable(true);
   }
 
   menuClose()

@@ -333,4 +333,8 @@ export class AppComponent implements OnInit {
       }
     )
   }
+
+  ruben(){
+    console.log("ruben");
+  }
 }

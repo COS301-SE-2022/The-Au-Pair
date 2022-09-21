@@ -1,3 +1,25 @@
 <ion-app>
     <ion-router-outlet></ion-router-outlet>
+    <ion-fab class="fab-content" horizontal="start" vertical="top" slot="fixed" edge>
+        <ion-fab-button class="fab-button-menu">
+          <ion-icon name="menu"></ion-icon>
+        </ion-fab-button>
+        <ion-fab-list>
+          <ion-button color="light" class="fab-button ion-text-start">
+            <ion-icon class="fab-icon" name="home" (click)="ruben()"></ion-icon>Dashboard
+          </ion-button>
+          <ion-button color="light" class="fab-button-2">
+            <ion-icon class="fab-icon" name="document"></ion-icon>
+            Manage contract
+          </ion-button>
+          <ion-button color="light" class="fab-button-2">
+            <ion-icon class="fab-icon" name="notifications"></ion-icon>
+            Notifications
+          </ion-button>
+          <ion-button color="light" class="fab-button-2 text-left">
+            <ion-icon class="fab-icon" name="exit"></ion-icon>
+            Logout
+          </ion-button>
+        </ion-fab-list>
+      </ion-fab>
 </ion-app>
