@@ -88,6 +88,7 @@ export class AppComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.menController.swipeGesture(false);
     //Only update coordinates if you are an au pair
     setInterval(() => {
       this.userID = this.store.snapshot().user.id;

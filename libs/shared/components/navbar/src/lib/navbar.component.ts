@@ -64,12 +64,7 @@ export class NavbarComponent implements OnInit
 
   menuOpen()
   {
-    console.log("menu open");
-    console.log(this.menController.isEnabled());
-    this.menController.enable(true);
-    console.log(this.menController.isEnabled());
     this.menController.open('start')
-    this.menController.enable(true);
   }
 
   menuClose()

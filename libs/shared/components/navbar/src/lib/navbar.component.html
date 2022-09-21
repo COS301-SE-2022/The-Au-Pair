@@ -1,6 +1,8 @@
 <ion-header [translucent]="true">
     <ion-toolbar mode="ios" class="navbar">
-
+      <ion-buttons  menu="nav" slot="start">
+        <button class="back-button" menuToggle><ion-icon id="nav" name="menu-outline" (click)="menuOpen()"></ion-icon></button>
+      </ion-buttons>
       <ion-buttons slot="start" class="start-buttons">
         <ion-button (click)="dash()">Dashboard</ion-button>
         <ion-button (click)="reports()" [hidden]="this.type!==0">Reports</ion-button>
@@ -13,6 +15,4 @@
       </ion-buttons>
       <ion-title><h1 class="text-white ion-text-center">The Au Pair</h1></ion-title>
     </ion-toolbar>
-
-    
 </ion-header>
