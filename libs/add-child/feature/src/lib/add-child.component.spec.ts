@@ -52,13 +52,14 @@ describe('AddChildComponent', () => {
    //------------------------------------------------------------------------------------------------------------------------------------------------------------------------
   /**Populated form fields form testing**/
   it('should, given valid input from the form, update the activityDetails variable', async ()=>{
+    // childName: "name", surname: "surname", dob:"2015-10-10", Allergies: "none", diet: "none"
     const expectedValue: Child = {
       id: "",
-      fname: "",
-      sname: "",
-      dob: "",
-      allergies: "",
-      diet: "",
+      fname: "name",
+      sname: "surname",
+      dob: "2015-10-10",
+      allergies: "none",
+      diet: "none",
       parent: "",
       aupair: "",
     };
@@ -92,29 +93,6 @@ describe('AddChildComponent', () => {
 
   //------------------------------------------------------------------------------------------------------------------------------------------------------------------------
   /**Invalid fields form testing**/
-
-  it('should, given a form with no childID, NOT poplate the activityDetails variable', async ()=>{
-    const expectedValue: Child = {
-      id: "",
-      fname: "",
-      sname: "",
-      dob: "",
-      allergies: "",
-      diet: "",
-      parent: "",
-      aupair: "",
-    };
-
-    component.allChildren = [expectedValue];
-
-    jest.spyOn(component,"getChildValues");
-
-    await component.getChildValues(emptyID);
-
-    expect(component.childDetails).toEqual(expectedValue);
-  })
-
-
   it('should, given a form with no first name, NOT poplate the activityDetails variable', async ()=>{
     const expectedValue: Child = {
       id: "",

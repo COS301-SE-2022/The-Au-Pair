@@ -155,6 +155,7 @@ export class AddChildComponent implements OnInit
         this.childDetails.id = "";
         this.childDetails.fname = val.childName;
         this.childDetails.sname= val.surname;
+        this.childDetails.dob = val.dob;
         this.childDetails.allergies= val.Allergies;
         this.childDetails.diet= val.diet;
         this.childDetails.parent= this.store.snapshot().user.id;
