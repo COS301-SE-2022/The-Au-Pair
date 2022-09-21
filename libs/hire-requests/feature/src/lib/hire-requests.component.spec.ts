@@ -31,6 +31,15 @@ const apiMock = {
   },
   forEach() {
     return of({})
+  },
+  editAuPair() {
+    return of({})
+  },
+  editParent() {
+    return of({})
+  },
+  removeContract() {
+    return of({})
   }
 }
 
@@ -305,4 +314,17 @@ describe('JobSummaryModal', () => {
 
     await component.ngOnInit();
   })
+
+  it('should, call sucToast if the request is accepted', async ()=>{
+    jest.spyOn(component,"sucToast");
+    await component.acceptRequest();
+    expect(component.sucToast).toHaveBeenCalled();
+  })
+
+  it('should, call closeModal if the request is accepted', async ()=>{
+    jest.spyOn(component,"closeModal");
+    await component.acceptRequest();
+    expect(component.closeModal).toHaveBeenCalled();
+  })
+
 });
