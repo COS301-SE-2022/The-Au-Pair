@@ -58,7 +58,6 @@ p {
     width: 100%;
 }
 
-
 button:not(.backBtn, .nextBtn){
     top: 0;
     left: 0;
@@ -161,14 +160,14 @@ button:not(.backBtn, .nextBtn){
 #section-parent {
     scroll-snap-align: start;
     background-color: var(--ion-color-primary);
-    padding: 90px 0 150px 0;
+    padding: 100px 0 150px 0;
     text-align: center;
 }
 
 #section-au-pair {
     scroll-snap-align: start;
     background-color: var(--ion-color-forest);
-    padding: 90px 0 150px 0;
+    padding: 100px 0 150px 0;
     text-align: center;
 }
 

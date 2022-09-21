@@ -14,12 +14,12 @@ export class LandingPageComponent{
   @ViewChild('auPairSwiper') auPairSwiper: any;
 
   constructor() {}
-  ngOnInit(): void {
-  }
+  
+  ngOnInit(): void {}
 
   ngAfterViewInit(): void {
-    this.parentSwiper.swiperRef.autoplay.start();
-    this.auPairSwiper.swiperRef.autoplay.start();
+    this.parentSwiper?.swiperRef?.autoplay.start();
+    this.auPairSwiper?.swiperRef?.autoplay.start();
   }
 
   slideOpts = {

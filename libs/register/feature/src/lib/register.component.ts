@@ -5,7 +5,6 @@ import { HttpClient } from '@angular/common/http';
 import { User, auPair, Parent, Email } from '../../../../shared/interfaces/interfaces';
 import { API } from '../../../../shared/api/api.service';
 import { ActivatedRoute } from '@angular/router';
-import { map } from 'rxjs';
 
 @Component({
   selector: 'the-au-pair-register',
@@ -23,8 +22,6 @@ export class RegisterComponent {
   public registering: boolean;
   public formValid = false;
   public emailSent = false;
-  
-  parentChosen = true;
   public parentChosen;
 
   sub = this.route.queryParamMap.subscribe(

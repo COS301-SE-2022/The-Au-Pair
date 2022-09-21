@@ -4,14 +4,15 @@
           <button class="back-button" menuToggle><ion-icon id="nav" name="menu-outline" (click)="menuOpen()"></ion-icon></button>
         </ion-buttons>
       <ion-buttons slot="start" class="start-buttons">
-        <ion-button (click)="dash()">Dashboard</ion-button>
-        <ion-button (click)="reports()" [hidden]="this.type!==0">Reports</ion-button>
-        <ion-button href="https://github.com/COS301-SE-2022/The-Au-Pair">About</ion-button>
+        <ion-button (click)="dash()" [hidden]="!this.loggedIn">Dashboard</ion-button>
+        <ion-button (click)="reports()" [hidden]="this.type!==0 || !this.loggedIn">Reports</ion-button>
+        <ion-button href="https://github.com/COS301-SE-2022/The-Au-Pair">GitHub</ion-button>
       </ion-buttons>
       <ion-buttons slot="end" class="end-buttons">
-        <ion-button (click)="logout()"class="logout-button">Logout</ion-button>
-        <ion-button (click)="profile()" id="profile"><ion-icon name="person-circle-outline"></ion-icon></ion-button>
-        <ion-button (click)="notifications()"><ion-icon name="notifications-circle-outline"></ion-icon></ion-button>
+        <ion-button (click)="logout()" class="log-in-out-button" [hidden]="!this.loggedIn">Logout</ion-button>
+        <ion-button (click)="login()" class="log-in-out-button" [hidden]="this.loggedIn">Login</ion-button>
+        <ion-button (click)="profile()" id="profile"><ion-icon name="person-circle-outline" [hidden]="!this.loggedIn"></ion-icon></ion-button>
+        <ion-button (click)="notifications()"><ion-icon name="notifications-circle-outline" [hidden]="!this.loggedIn"></ion-icon></ion-button>
       </ion-buttons>
       <ion-title><h1 class="text-white ion-text-center">The Au Pair</h1></ion-title>
     </ion-toolbar>
