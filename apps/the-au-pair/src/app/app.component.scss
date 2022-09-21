@@ -1,23 +1,57 @@
-.fab-button{
-    margin-top: 35px;    
-    width: 35vw;
-    font-size: 12px !important;
-    align-items: flex-start;
+ ion-menu{
+    --min-width: 60%;
+    --max-width: 60%;
+    backdrop-filter: blur(5px);
+    --max-height: 100%;
+}
+
+ion-title{
+    font-size: 20px;
+    font-weight: 500;
+    color: var(--ion-color-light);
+    font-family: TitanOne;
+    padding: 0px;
+}
+
+.menu-item{
+    padding: 10px;
+    background-color: var(--ion-color-secondary);
+    border-radius: 20px;
+    font-size: 14px;
+    font-family: Roboto;
+    z-index: 1000;
+}
+
+.menu-item.greyed{
+    opacity: 0.4;
+}
+
+.menu-item:hover{
+    cursor: pointer;
+}
+
+ion-col, ion-text{
     display: flex;
+    vertical-align: middle;
+    padding-top: 4px ;
 }
 
-.fab-button-menu{
-    margin-top: 35px; 
-       
+.menu-item-icon{
+    color : var(--ion-color-light);
+    height: 25px;
+    width: 25px;
 }
 
-.fab-button-2{
-    width: 35vw;
-    font-size: 12px !important;
+ion-content{
+    --background: var(--ion-color-primary);
+}
+
+ion-menu::part(backdrop) {
+    background-color: transparent;
+    display: none;
     
 }
 
-.fab-icon{
-    margin-right: 10px;
+.menu-wrapper{
+    margin-bottom: 40px;
 }
-
