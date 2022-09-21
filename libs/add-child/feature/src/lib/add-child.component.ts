@@ -89,6 +89,24 @@ export class AddChildComponent implements OnInit
         }
       }
 
+      //Date of birth field
+      dom = document.getElementById("dateOfBirthError");
+      if(val.dateOfBirth === "")
+      { 
+        emptyInput = true;
+        if(dom != null)
+        {
+          dom.innerHTML = "Date of birth field is empty";
+          dom.style.display = "block";
+        }
+      }else
+      {
+        if(dom != null)
+        {
+          dom.style.display = "none";
+        }
+      }
+
       //Allergies field
       dom = document.getElementById("allergiesError");
       if(val.Allergies === "")
@@ -114,7 +132,7 @@ export class AddChildComponent implements OnInit
         emptyInput = true;
         if(dom != null)
         {
-          dom.innerHTML = "Diet field is empty";
+          dom.innerHTML = "Diet field is incomplete";
           dom.style.display = "block";
         }
       }else
@@ -131,7 +149,7 @@ export class AddChildComponent implements OnInit
         console.log("You cannot add an child with empty fields.");
       }
       else
-      {       
+      {     
         //ID number is generated in child service
         this.childDetails.id = "";
         this.childDetails.fname = val.childName;
