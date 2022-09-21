@@ -254,5 +254,8 @@ export class API{
   sendEmail(email : Email): Observable<any> {
     return this.http.post(environment.apiURI+"/sendEmail",email);
   }
-  
+
+  getCurrentFuelPrices(): Observable<any> {
+    return this.http.get(environment.apiURI+"/getCurrentFuelPrices");
+  }
 }
