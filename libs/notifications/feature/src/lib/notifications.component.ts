@@ -15,7 +15,6 @@ export class ParentNotificationsComponent implements OnInit {
   constructor(private api: API, private store : Store) {}
 
   ngOnInit() {
-    console.log("inside notifications init");
     this.userType = this.store.snapshot().user.type;
     this.userId = this.store.snapshot().user.id;
     console.log(this.userId);

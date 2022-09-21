@@ -108,7 +108,6 @@ export class ParentDashboardComponent implements OnInit{
 
   async ngOnInit()
   {
-    console.log("inside parent dashboard init");
     this.parentID = this.store.snapshot().user.id;
 
     await this.serv.getUser(this.parentID).toPromise()
