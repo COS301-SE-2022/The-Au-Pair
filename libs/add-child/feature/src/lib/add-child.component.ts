@@ -17,6 +17,7 @@ export class AddChildComponent implements OnInit
     id: "",
     fname: "",
     sname: "",
+    dob: "",
     allergies: "",
     diet: "",
     parent: "",
