@@ -36,13 +36,14 @@ export class ParentEditActivityComponent implements OnInit {
   };
 
   currentChild : Child = {
-    id:"",
-    fname :"",
-    sname:"",
-    allergies:"",
-    diet : "",
-    parent:"",
-    aupair:""
+    id: "",
+    fname: "",
+    sname: "",
+    dob: "",
+    allergies: "",
+    diet: "",
+    parent: "",
+    aupair: ''
   };
 
   timeslot = "";
