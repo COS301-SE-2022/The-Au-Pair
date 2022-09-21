@@ -43,9 +43,7 @@ export class AddChildComponent implements OnInit
 
   //Function to retrieve the child's details
   async getChildValues(val: any)
-  {    
-    console.log(val);
-    
+  {        
     //Max number of children for each user is 4
     if(this.allChildren.length < 4)
     {
@@ -155,12 +153,13 @@ export class AddChildComponent implements OnInit
         this.childDetails.id = "";
         this.childDetails.fname = val.childName;
         this.childDetails.sname= val.surname;
-        this.childDetails.dob = val.dob;
+        this.childDetails.dob = val.dateOfBirth;
         this.childDetails.allergies= val.Allergies;
         this.childDetails.diet= val.diet;
         this.childDetails.parent= this.store.snapshot().user.id;
         this.childDetails.aupair= this.parent.auPair;
-        // this.addChild(this.childDetails);
+        console.log("Child to add:", this.childDetails);
+        this.addChild(this.childDetails);
       }
     }
     else
