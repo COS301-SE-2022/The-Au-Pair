@@ -12,6 +12,7 @@ import { AppState } from '../../../../shared/ngxs/state';
 import { of } from 'rxjs';
 import { SetId } from '../../../../../libs/shared/ngxs/actions';
 import { UserReportModalComponent } from './user-report-modal/user-report-modal.component';
+import { ParentRatingModalComponent } from './parent-rating-modal/parent-rating-modal.component';
 
 const apiMock = {
   getAuPair() {
@@ -19,6 +20,12 @@ const apiMock = {
   },
   addReport() {
     return of({})
+  },
+  getParent() {
+    return of()
+  },
+  editParent() {
+    return of()
   }
 }
 
@@ -146,4 +153,61 @@ describe('UserReportModalComponent', () => {
     component.closeModal();
     expect(await component.closeModal).toReturn();
   });
+});
+
+describe('ParentRatingModalComponent', () => {
+  let component: ParentRatingModalComponent;
+  let fixture: ComponentFixture<ParentRatingModalComponent>;
+  let store: Store;
+
+  const validForm = {rating: [5]}
+
+  beforeEach(async () => {
+    await TestBed.configureTestingModule({
+      declarations: [ParentRatingModalComponent],
+      imports: [IonicModule, CommonModule,HttpClientTestingModule,NavbarModule, RouterTestingModule, FormsModule,NgxsModule.forRoot([AppState])],
+      providers: [
+      {
+        provide:API, useValue:apiMock
+      }, 
+      ToastController, 
+      ModalController]
+    }).compileComponents();
+
+    store = TestBed.inject(Store);
+  });
+
+  beforeEach(() => {
+    fixture = TestBed.createComponent(ParentRatingModalComponent);
+    component = fixture.componentInstance;
+    fixture.detectChanges();
+  });
+
+  it('should create', () => {
+    expect(component).toBeTruthy();
+  });
+
+  it('should, open a toast when openToast is called', async ()=>{
+    jest.spyOn(component,"openToast");
+    component.openToast();
+    expect(await component.openToast).toReturn();
+  });
+
+  it('should, close the modal when closeModal is called', async ()=>{
+    jest.spyOn(component,"closeModal");
+    component.closeModal();
+    expect(await component.closeModal).toReturn();
+  });
+
+  it('should, when editAuPair() is called with an invalid auPair ID, return an error from the API', async ()=>{
+    const expectedValue = undefined;
+    jest.spyOn(component,"submitRating");
+    expect(await component.submitRating()).toEqual(expectedValue);
+  })
+
+  it('should, call submitRating function if the form contains valid details', async ()=>{
+    jest.spyOn(component,"submitRating");
+    await component.getDescription(validForm);
+    expect(component.submitRating).toHaveBeenCalled();
+  })
 });

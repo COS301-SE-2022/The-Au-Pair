@@ -10,9 +10,7 @@ import { Store } from '@ngxs/store';
   styleUrls: ['./parent-rating-modal.component.scss'],
 })
 export class ParentRatingModalComponent implements OnInit {
-  public navParams = new NavParams;
-  parentID: string = this.navParams.get('parentId');
-  
+  parentID = "";  
   auPairID = "";
   parentRating! : number;
 
@@ -28,14 +26,28 @@ export class ParentRatingModalComponent implements OnInit {
 
   async ngOnInit() {
     this.auPairID = this.store.snapshot().user.id;
-    console.log(this.parentID);
-    
-    this.getParentDetails();
+
+    await this.getParentID();
+    await this.getParentDetails();
+  }
+
+  async getParentID()
+  {
+    await this.serv.getAuPair(this.auPairID).toPromise()
+    .then(
+      res=>{
+        this.parentID = res.employer;        
+    },
+    error => {
+      console.log("Error has occured with API: " + error);
+    }
+  )
   }
 
   async getParentDetails()
   {
-    await this.serv.getParent(this.parentID).subscribe( 
+    await this.serv.getParent(this.parentID).toPromise()
+    .then( 
         res=>{
           this.parentDetails = res;
       },
@@ -46,6 +58,7 @@ export class ParentRatingModalComponent implements OnInit {
   }
 
   async getDescription(formData : any){   
+    await this.getParentID();
     await this.getParentDetails();   
 
     if(formData.behaviour > 5 || formData.behaviour < 1 || isNaN(+formData.behaviour))

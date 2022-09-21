@@ -79,16 +79,6 @@ export class AuPairDashboardComponent implements OnInit {
     await modal.present();
   }
 
-  async openModal(parentId : string) {
-    const modal = await this.modalCtrl.create({
-      component: ParentRatingModalComponent,
-      componentProps :{
-        parentId : parentId
-      }
-    });
-    await modal.present();
-  }
-
   async ngOnInit(): Promise<void> {
     this.aupairID = this.store.snapshot().user.id;
     this.aupairName = this.store.snapshot().user.name;
@@ -116,6 +106,16 @@ export class AuPairDashboardComponent implements OnInit {
         console.log("Error has occured with API: " + error);
       }
     )
+  }
+
+  async openModal(parentId : string) {
+    const modal = await this.modalCtrl.create({
+      component: ParentRatingModalComponent,
+      componentProps :{
+        parentId : parentId
+      }
+    });
+    await modal.present();
   }
 
   logSwitch() {
