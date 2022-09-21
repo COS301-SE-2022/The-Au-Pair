@@ -112,4 +112,14 @@ export interface Activity{
     subject: string;
     body: string;
   }
+
+  export interface UserCosts{
+    id: string;
+    type: string;
+    description: string;
+    contributerId: string;
+    date: string;
+    metric: number;
+    amount: number;
+  }
   
