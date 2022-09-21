@@ -23,8 +23,6 @@ export class AppComponent implements OnInit {
 
   //navbar variables
   isHome = (this.router.url == "/parent-dashboard" || this.router.url == "/au-pair-dashboard");
-  hasAuPair = false;
-  kids = -1;
 
   days = [
     "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"
@@ -73,7 +71,7 @@ export class AppComponent implements OnInit {
     private router : Router,
     private serv: API,
     private geolocation: Geolocation,
-    private store: Store,
+    public store: Store,
     private httpClient: HttpClient) {
     //Initialise parentID for logged in user
     this.userID = this.store.snapshot().user.id;
@@ -350,19 +348,19 @@ export class AppComponent implements OnInit {
   }
 
   //Navbar functions
-  dash()
+  dash(type=this.store.snapshot().user.type)
   {
-    if(this.store.snapshot().user.type == 0)
+    if(type)
     {
       this.router.navigate(['/admin-console']);
       this.menuClose();
     }
-    else if(this.store.snapshot().user.type == 1)
+    else if(type == 1)
     {
       this.router.navigate(['/parent-dashboard']);
       this.menuClose();
     }
-    else if(this.store.snapshot().user.type == 2)
+    else if(type == 2)
     {
       this.router.navigate(['/au-pair-dashboard']);
       this.menuClose();
@@ -420,11 +418,11 @@ export class AppComponent implements OnInit {
   }
 
   explore(){
-    if (this.kids < 1){
+    if (this.store.snapshot().user.children.length < 1){
       this.openToast('You need to have children added to your profile in order to hire an Au Pair');
       this.menuClose();
     }
-    else if(this.hasAuPair)
+    else if(this.store.snapshot().user.auPair != "")
     {
       this.openToast('You already have an Au Pair employed');
       this.menuClose();

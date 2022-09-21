@@ -10,8 +10,10 @@ import { NavbarModule } from '@the-au-pair/shared/components/navbar';
 import { RouterTestingModule} from '@angular/router/testing';
 import { NgxsModule } from '@ngxs/store';
 import { AppState } from '../../../../libs/shared/ngxs/state';
+import { Router } from '@angular/router';
 
 describe('AppComponent', () => {
+  let component: AppComponent;
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [AppComponent],
@@ -25,7 +27,14 @@ describe('AppComponent', () => {
        providers:[API, Geolocation],
       schemas: [CUSTOM_ELEMENTS_SCHEMA],
     }).compileComponents();
-  }));
+  })
+  );
+
+  beforeEach(() => {
+    const fixture = TestBed.createComponent(AppComponent);
+    component = fixture.componentInstance;
+    fixture.detectChanges();
+  });
 
   it('should create the app', () => {
     const fixture = TestBed.createComponent(AppComponent);
@@ -33,4 +42,13 @@ describe('AppComponent', () => {
     expect(app).toBeTruthy();
   });
   // TODO: add more tests!
+
+  //test when user type is 0 that router navigates to admin-console
+  it('should navigate to admin-console when user type is 0', () => {
+    const router = TestBed.inject(Router);
+    const spy = jest.spyOn(router, 'navigate');
+    component.dash(0);
+    expect(spy).toHaveBeenCalledWith(['/admin-console']);
+  });
+
 });

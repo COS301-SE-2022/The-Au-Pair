@@ -47,7 +47,6 @@ export class NavbarComponent implements OnInit
 
   profile()
   {
-    console.log("Coming into profile function")
     if(this.type == 0)
     {
       // this.router.navigate(['/admin-profile']);
