@@ -22,7 +22,6 @@ export class AppComponent implements OnInit {
   upcomingActivity: any;
 
   //navbar variables
-  type = -1;
   isHome = (this.router.url == "/parent-dashboard" || this.router.url == "/au-pair-dashboard");
   hasAuPair = false;
   kids = -1;
@@ -352,49 +351,49 @@ export class AppComponent implements OnInit {
   //Navbar functions
   dash()
   {
-    console.log("Dash");
-    if(this.type == 0)
+    if(this.store.snapshot().user.type == 0)
     {
       this.router.navigate(['/admin-console']);
+      this.menuClose();
     }
-    else if(this.type == 1)
+    else if(this.store.snapshot().user.type == 1)
     {
       this.router.navigate(['/parent-dashboard']);
+      this.menuClose();
     }
-    else if(this.type == 2)
+    else if(this.store.snapshot().user.type == 2)
     {
       this.router.navigate(['/au-pair-dashboard']);
+      this.menuClose();
     }
   }
 
   notifications(){
     this.router.navigate(['/notifications']);
+    this.menuClose();
   }
 
   profile()
   {
     console.log("Coming into profile function")
-    if(this.type == 0)
+    if(this.store.snapshot().user.type == 0)
     {
       // this.router.navigate(['/admin-profile']);
     }
-    else if(this.type == 1)
+    else if(this.store.snapshot().user.type == 1)
     {
       this.router.navigate(['/parent-profile']);
+      this.menuClose();
     }
-    else if(this.type == 2)
+    else if(this.store.snapshot().user.type == 2)
     {
       this.router.navigate(['/au-pair-profile']);
+      this.menuClose();
     }
   }
 
   menuOpen()
   {
-    console.log("menu open");
-    console.log(this.menController.isEnabled());
-    this.menController.enable(true);
-    console.log(this.menController.isEnabled());
-    this.menController.open('start')
     this.menController.enable(true);
   }
 
@@ -407,27 +406,32 @@ export class AppComponent implements OnInit {
   {
     this.store.dispatch(new Reset());
     this.router.navigate(['/login-page']);
+    this.menuClose();
   }
 
   reports() 
   {
-    if(this.type == 0)
+    if(this.store.snapshot().user.type == 0)
     {
       this.router.navigate(['/admin-reports']);
+      this.menuClose();
     }
   }
 
   explore(){
     if (this.kids < 1){
       this.openToast('You need to have children added to your profile in order to hire an Au Pair');
+      this.menuClose();
     }
     else if(this.hasAuPair)
     {
       this.openToast('You already have an Au Pair employed');
+      this.menuClose();
     }
     else
     {
       this.router.navigate(['/explore']);
+      this.menuClose();
     }
   }
 
