@@ -42,8 +42,8 @@ jobs:
           aws_secret_key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           
           use_existing_version_if_available: false
-          application_name: The-Au-Pair
-          environment_name: Theaupair-env
+          application_name: TheAuPair
+          environment_name: Theaupair-env-1
           version_label: ${{github.SHA}}
           region: us-east-1
           deployment_package: The-Au-Pair-0.0.1-SNAPSHOT.jar 
