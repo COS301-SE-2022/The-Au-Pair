@@ -79,11 +79,11 @@ export class AuPairDashboardComponent implements OnInit {
     await modal.present();
   }
 
-  async openModal(actId : string) {
+  async openModal(parentId : string) {
     const modal = await this.modalCtrl.create({
       component: ParentRatingModalComponent,
       componentProps :{
-        activityId : actId
+        parentId : parentId
       }
     });
     await modal.present();

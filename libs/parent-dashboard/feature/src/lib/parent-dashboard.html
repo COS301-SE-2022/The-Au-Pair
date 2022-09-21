@@ -8,7 +8,7 @@
                 <div class="button-container">
                     <a title="Call Au Pair" href = 'tel:{{this.auPairDetails.number}}'><ion-icon name="call" class = 'call-icon'></ion-icon></a>
                     <a title="Message Au Pair" href = 'sms:{{this.auPairDetails.number}}'><ion-icon name="chatbubble-ellipses" class = 'message-icon'></ion-icon></a>
-                    <button title="Rate Au Pair" style="all: unset; cursor: pointer;" (click)="openModal(this.userDetails.id)"><ion-icon class="rating-icon" name="star"></ion-icon></button>
+                    <button title="Rate Au Pair" style="all: unset; cursor: pointer;" (click)="openModal(this.parentDetails.auPair)"><ion-icon class="rating-icon" name="star"></ion-icon></button>
                     <button title="Report Au Pair" style="all: unset; cursor: pointer;" (click)="openReportModal()"><ion-icon class="report-icon" name="alert-circle"></ion-icon></button>
                     <button title="Terminate Employment" style="all: unset; cursor: pointer;" *ngIf="this.parentDetails.auPair !== ''"  (click)="presentAlert()"><ion-icon class="terminate-contract" name="person-remove"></ion-icon></button>
                 </div>

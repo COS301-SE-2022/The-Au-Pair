@@ -25,6 +25,12 @@ const apiMock = {
   },
   getParent() {
     return of({})
+  },
+  getChildren() {
+    return of({})
+  },
+  forEach() {
+    return of({})
   }
 }
 
@@ -203,5 +209,100 @@ describe('JobSummaryModal', () => {
     jest.spyOn(component, "getAverage").mockReturnValue(0);
     const average = await component.getAverage([0, -5, 6]);
     expect(average).toEqual(expectedRating);
+  })
+
+  it('should, return the users details from the api call', async () => {
+    store.dispatch(new SetId("0101015077086"));
+    jest.spyOn(apiMock, 'getUser').mockImplementation(()=>of(
+      {
+        id: "0101015077086",
+        fname: "TestFN",
+        sname: "TestSN",
+        email: "test@gmail.com",
+        address: "Test 123",
+        registered: true,
+        type: 2,
+        password: "TestPassword",
+        number: "0833332222",
+        salt: "testsaltyes",
+        latitude: 30,
+        longitude: 30,
+        suburb: "Midrand",
+        gender: "male",
+        fcmToken : "testFCMtoken",
+        birth: "05/07/2004",
+        warnings: 0,
+        banned: "",
+      }
+    ));
+
+    await component.ngOnInit();
+    expect(component.auPairID).toEqual("0101015077086");
+  })
+
+  it('should, return the au pairs details from the api call', async () => {
+    store.dispatch(new SetId("0101015077086"));
+    jest.spyOn(apiMock, 'getAuPair').mockImplementation(()=>of(
+      {
+        id: "0101015077086",
+        rating: [5],
+        onShift: true,
+        employer: "",
+        costIncurred: 0,
+        distTraveled: 0,
+        payRate: 0,
+        bio: "Test Bio",
+        experience: "Test Experience",
+        currentLong: 0.0,
+        currentLat : 0.0,
+        terminateDate: "",
+      }
+    ));
+
+    await component.ngOnInit();
+    expect(component.auPairID).toEqual("0101015077086");
+  })
+
+  it('should, return the parent users details from the api call', async () => {
+    store.dispatch(new SetId("0101015077086"));
+    jest.spyOn(apiMock, 'getUser').mockImplementation(()=>of(
+      {
+        id: "0101015077086",
+        fname: "TestFN",
+        sname: "TestSN",
+        email: "test@gmail.com",
+        address: "Test 123",
+        registered: true,
+        type: 1,
+        password: "TestPassword",
+        number: "0833332222",
+        salt: "testsaltyes",
+        latitude: 30,
+        longitude: 30,
+        suburb: "Midrand",
+        gender: "male",
+        fcmToken : "testFCMtoken",
+        birth: "05/07/2004",
+        warnings: 0,
+        banned: "",
+      }
+    ));
+
+    await component.ngOnInit();
+  })
+
+  it('should, return the parents details from the api call', async () => {
+    store.dispatch(new SetId("0101015077086"));
+    jest.spyOn(apiMock, 'getParent').mockImplementation(()=>of(
+      {
+        id: "0101015077086",
+        children: [],
+        medID: "",
+        auPair: "",
+        rating: [5]
+      }
+    ));
+
+    await component.ngOnInit();
   })
 });

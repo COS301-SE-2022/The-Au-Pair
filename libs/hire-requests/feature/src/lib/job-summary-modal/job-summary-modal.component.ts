@@ -126,10 +126,11 @@ export class JobSummaryModalComponent implements OnInit {
     await this.serv.getChildren(this.parentID).toPromise()
     .then( 
       res=>{
-        let i = 0;
-        res.forEach((element: Child) => {
-          this.childrenArr[i++] = element;
-        });
+        // let i = 0;
+        // res.forEach((element: Child) => {
+        //   this.childrenArr[i++] = element;
+        // });
+        this.childrenArr = res;
       },
       error =>{console.log("Error has occured with API: " + error);}
     )

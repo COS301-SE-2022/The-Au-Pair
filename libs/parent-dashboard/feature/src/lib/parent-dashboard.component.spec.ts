@@ -89,6 +89,8 @@ describe('AuPairRatingModalComponent', () => {
   let fixture: ComponentFixture<AuPairRatingModalComponent>;
   let store: Store;
 
+  const validForm = {rating: [5]}
+
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [AuPairRatingModalComponent],
@@ -114,35 +116,6 @@ describe('AuPairRatingModalComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  it('should set the parentID and auPairId on init', async () => {
-    store.dispatch(new SetId("123"));
-    jest.spyOn(apiMock, 'getParent').mockImplementation(()=>of(
-      {
-        auPair : "321",
-      }
-    ));
-
-    await component.ngOnInit();
-    expect(component.parentID).toEqual("123");
-    expect(component.auPairId).toEqual("321");  
-  });
-
-  it('should, return the parents details from the api call', async () => {
-    store.dispatch(new SetId("0101015077086"));
-    jest.spyOn(apiMock, 'getParent').mockImplementation(()=>of(
-      {
-        id: "0101015077086",
-        children: [],
-        medID: "",
-        auPair: "",
-        rating: [5]
-      }
-    ));
-
-    await component.ngOnInit();
-    expect(component.parentID).toEqual("0101015077086");
-  })
-
   it('should, open a toast when openToast is called', async ()=>{
     jest.spyOn(component,"openToast");
     component.openToast();
@@ -154,6 +127,18 @@ describe('AuPairRatingModalComponent', () => {
     component.closeModal();
     expect(await component.closeModal).toReturn();
   });
+
+  it('should, when editAuPair() is called with an invalid auPair ID, return an error from the API', async ()=>{
+    const expectedValue = undefined;
+    jest.spyOn(component,"submitRating");
+    expect(await component.submitRating()).toEqual(expectedValue);
+  })
+
+  it('should, call submitRating function if the form contains valid details', async ()=>{
+    jest.spyOn(component,"submitRating");
+    await component.getDescription(validForm);
+    expect(component.submitRating).toHaveBeenCalled();
+  })
 });
 
 describe('UserReportModalComponent', () => {
