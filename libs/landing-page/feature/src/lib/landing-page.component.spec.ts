@@ -1,7 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { LandingPageComponent } from './landing-page.component';
 import { NavbarModule } from '@the-au-pair/shared/components/navbar';
-import { NgxsModule, Store } from '@ngxs/store';
+import { NgxsModule } from '@ngxs/store';
 import { AppState } from '../../../../shared/ngxs/state';
 import { RouterTestingModule} from '@angular/router/testing';
 

@@ -10,23 +10,19 @@ SwiperCore.use([Autoplay]);
 })
 export class LandingPageComponent{
 
-  @ViewChild('parentSwiper') parentSwiper: any;
-  @ViewChild('auPairSwiper') auPairSwiper: any;
-
-  constructor() {}
-  
-  ngOnInit(): void {}
-
-  ngAfterViewInit(): void {
-    this.parentSwiper?.swiperRef?.autoplay.start();
-    this.auPairSwiper?.swiperRef?.autoplay.start();
-  }
-
   slideOpts = {
     speed: 400,
     loop: true,
     spaceBetween: 20,
   };
+  
+  @ViewChild('parentSwiper') parentSwiper: any;
+  @ViewChild('auPairSwiper') auPairSwiper: any;
+  
+  ngAfterViewInit(): void {
+    this.parentSwiper?.swiperRef?.autoplay.start();
+    this.auPairSwiper?.swiperRef?.autoplay.start();
+  }
 
   scrollToParent() {
     document.getElementById('section-parent')?.scrollIntoView({
