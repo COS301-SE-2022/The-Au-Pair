@@ -7,12 +7,20 @@ import { HttpClientTestingModule } from "@angular/common/http/testing";
 import { NavbarModule } from '@the-au-pair/shared/components/navbar';
 import {RouterTestingModule} from "@angular/router/testing";
 import { EditParentProfileComponent } from './edit-parent-profile.component';
-import { NgxsModule } from '@ngxs/store';
+import { NgxsModule, Store } from '@ngxs/store';
 import { AppState } from '../../../../shared/ngxs/state';
+import { of } from 'rxjs';
+import { SetId } from '../../../../../libs/shared/ngxs/actions';
 
+const apiMock = {
+  getUser(){
+    return of({})
+  }
+}
 describe('EditParentProfileComponent', () => {
   let component: EditParentProfileComponent;
   let fixture: ComponentFixture<EditParentProfileComponent>;
+  let store: Store;
 
   // A valid form of correct values
   const validForm = {email: "testemail@gmail.com", phone: "0832422323", address: "123 Valid Street", medicalAidMM: "Kyle", medicalAidMS: "Pottinger", medicalAidNo: "7534286951", medicalAidProvider: "Discovery", medicalAidPlan: "Full"}
@@ -36,6 +44,12 @@ describe('EditParentProfileComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [EditParentProfileComponent],
+    }).compileComponents();
+  });
+
+  beforeEach(async () => {
+    await TestBed.configureTestingModule({
+      declarations: [EditParentProfileComponent],
       imports: [FormsModule,
         IonicModule,
         HttpClientTestingModule,
@@ -43,14 +57,14 @@ describe('EditParentProfileComponent', () => {
         RouterTestingModule,
         NgxsModule.forRoot([AppState])
     ],
-    providers: [API]
+    providers:[
+      {
+        provide:API, useValue:apiMock
+      }
+    ]
     }).compileComponents();
-  });
 
-  beforeEach(async () => {
-    await TestBed.configureTestingModule({
-      declarations: [EditParentProfileComponent],
-    }).compileComponents();
+    store = TestBed.inject(Store);
   });
 
   beforeEach(() => {
@@ -66,25 +80,25 @@ describe('EditParentProfileComponent', () => {
   //------------------------------------------------------------------------------------------------------------------------------------------------------------------------
   /**Populated form fields form testing**/
   it('should, given valid input from the form, update the userDetails and medAidDetails variable', async ()=>{
-    const expectedUserValue: User = {
-      id: "",
-      fname: "",
-      sname: "",
-      email: "",
-      address: "",
-      registered: false,
-      type: 0,
-      password: "",
-      number: "",
-      salt: "",
-      latitude: 0, 
-      longitude: 0, 
-      suburb: "", 
-      gender: "", 
-      birth: "",
-      fcmToken:"",
-      banned: "",
-      warnings: 0,
+    const expectedUserValue: any = {
+      id: undefined,
+      fname: undefined,
+      sname: undefined,
+      email: undefined,
+      address: undefined,
+      registered: undefined,
+      type: undefined,
+      password: undefined,
+      number: undefined,
+      salt: undefined,
+      latitude: undefined, 
+      longitude: undefined, 
+      suburb: undefined, 
+      gender: undefined,      
+      fcmToken : "",
+      birth: undefined,
+      banned: undefined,
+      warnings: undefined,
     };
 
     const expectedMedAidValue: medAid = {
@@ -108,25 +122,25 @@ describe('EditParentProfileComponent', () => {
   //------------------------------------------------------------------------------------------------------------------------------------------------------------------------
   /**Empty fields form testing**/
   it('should, given a form with no email, NOT poplate the userDetails or medAidDetails variable', async ()=>{
-    const expectedUserValue: User = {
-      id: "",
-      fname: "",
-      sname: "",
-      email: "",
-      address: "",
-      registered: false,
-      type: 0,
-      password: "",
-      number: "",
-      salt: "",
-      latitude: 0, 
-      longitude: 0, 
-      suburb: "", 
-      gender: "", 
-      birth: "",
-      fcmToken: "",
-      banned: "",
-      warnings: 0,
+    const expectedUserValue: any = {
+      id: undefined,
+      fname: undefined,
+      sname: undefined,
+      email: undefined,
+      address: undefined,
+      registered: undefined,
+      type: undefined,
+      password: undefined,
+      number: undefined,
+      salt: undefined,
+      latitude: undefined, 
+      longitude: undefined, 
+      suburb: undefined, 
+      gender: undefined,      
+      fcmToken : "",
+      birth: undefined,
+      banned: undefined,
+      warnings: undefined,
     };
 
     const expectedMedAidValue: medAid = {
@@ -148,25 +162,25 @@ describe('EditParentProfileComponent', () => {
   })
 
   it('should, given a form with no phone number, NOT poplate the userDetails or medAidDetails variable', async ()=>{
-    const expectedUserValue: User = {
-      id: "",
-      fname: "",
-      sname: "",
-      email: "",
-      address: "",
-      registered: false,
-      type: 0,
-      password: "",
-      number: "",
-      salt: "",
-      latitude: 0, 
-      longitude: 0, 
-      suburb: "", 
-      gender: "", 
-      birth: "",
-      fcmToken:"",
-      banned: "",
-      warnings: 0,
+    const expectedUserValue: any = {
+      id: undefined,
+      fname: undefined,
+      sname: undefined,
+      email: undefined,
+      address: undefined,
+      registered: undefined,
+      type: undefined,
+      password: undefined,
+      number: undefined,
+      salt: undefined,
+      latitude: undefined, 
+      longitude: undefined, 
+      suburb: undefined, 
+      gender: undefined,      
+      fcmToken : "",
+      birth: undefined,
+      banned: undefined,
+      warnings: undefined,
     };
 
     const expectedMedAidValue: medAid = {
@@ -188,25 +202,25 @@ describe('EditParentProfileComponent', () => {
   })
 
   it('should, given a form with no address, NOT poplate the userDetails or medAidDetails variable', async ()=>{
-    const expectedUserValue: User = {
-      id: "",
-      fname: "",
-      sname: "",
-      email: "",
-      address: "",
-      registered: false,
-      type: 0,
-      password: "",
-      number: "",
-      salt: "",
-      latitude: 0, 
-      longitude: 0, 
-      suburb: "", 
-      gender: "", 
-      birth: "",
-      fcmToken: "",
-      banned: "",
-      warnings: 0,
+    const expectedUserValue: any = {
+      id: undefined,
+      fname: undefined,
+      sname: undefined,
+      email: undefined,
+      address: undefined,
+      registered: undefined,
+      type: undefined,
+      password: undefined,
+      number: undefined,
+      salt: undefined,
+      latitude: undefined, 
+      longitude: undefined, 
+      suburb: undefined, 
+      gender: undefined,      
+      fcmToken : "",
+      birth: undefined,
+      banned: undefined,
+      warnings: undefined,
     };
 
     const expectedMedAidValue: medAid = {
@@ -228,25 +242,25 @@ describe('EditParentProfileComponent', () => {
   })
 
   it('should, given a form with no medicalAidMM, NOT poplate the userDetails or medAidDetails variable', async ()=>{
-    const expectedUserValue: User = {
-      id: "",
-      fname: "",
-      sname: "",
-      email: "",
-      address: "",
-      registered: false,
-      type: 0,
-      password: "",
-      number: "",
-      salt: "",
-      latitude: 0, 
-      longitude: 0, 
-      suburb: "", 
-      gender: "", 
-      birth: "",
-      fcmToken:"",
-      banned: "",
-      warnings: 0,
+    const expectedUserValue: any = {
+      id: undefined,
+      fname: undefined,
+      sname: undefined,
+      email: undefined,
+      address: undefined,
+      registered: undefined,
+      type: undefined,
+      password: undefined,
+      number: undefined,
+      salt: undefined,
+      latitude: undefined, 
+      longitude: undefined, 
+      suburb: undefined, 
+      gender: undefined,      
+      fcmToken : "",
+      birth: undefined,
+      banned: undefined,
+      warnings: undefined,
     };
 
     const expectedMedAidValue: medAid = {
@@ -268,25 +282,25 @@ describe('EditParentProfileComponent', () => {
   })
 
   it('should, given a form with no medicalAidMS, NOT poplate the userDetails or medAidDetails variable', async ()=>{
-    const expectedUserValue: User = {
-      id: "",
-      fname: "",
-      sname: "",
-      email: "",
-      address: "",
-      registered: false,
-      type: 0,
-      password: "",
-      number: "",
-      salt: "",
-      latitude: 0, 
-      longitude: 0, 
-      suburb: "", 
-      gender: "", 
-      birth: "",
-      fcmToken: "",
-      banned: "",
-      warnings: 0,
+    const expectedUserValue: any = {
+      id: undefined,
+      fname: undefined,
+      sname: undefined,
+      email: undefined,
+      address: undefined,
+      registered: undefined,
+      type: undefined,
+      password: undefined,
+      number: undefined,
+      salt: undefined,
+      latitude: undefined, 
+      longitude: undefined, 
+      suburb: undefined, 
+      gender: undefined,      
+      fcmToken : "",
+      birth: undefined,
+      banned: undefined,
+      warnings: undefined,
     };
 
     const expectedMedAidValue: medAid = {
@@ -308,25 +322,25 @@ describe('EditParentProfileComponent', () => {
   })
 
   it('should, given a form with no medicalAiNo, NOT poplate the userDetails or medAidDetails variable', async ()=>{
-    const expectedUserValue: User = {
-      id: "",
-      fname: "",
-      sname: "",
-      email: "",
-      address: "",
-      registered: false,
-      type: 0,
-      password: "",
-      number: "",
-      salt: "",
-      latitude: 0, 
-      longitude: 0, 
-      suburb: "", 
-      gender: "", 
-      birth: "",
-      fcmToken: "",
-      banned: "",
-      warnings: 0,
+    const expectedUserValue: any = {
+      id: undefined,
+      fname: undefined,
+      sname: undefined,
+      email: undefined,
+      address: undefined,
+      registered: undefined,
+      type: undefined,
+      password: undefined,
+      number: undefined,
+      salt: undefined,
+      latitude: undefined, 
+      longitude: undefined, 
+      suburb: undefined, 
+      gender: undefined,      
+      fcmToken : "",
+      birth: undefined,
+      banned: undefined,
+      warnings: undefined,
     };
 
     const expectedMedAidValue: medAid = {
@@ -348,25 +362,25 @@ describe('EditParentProfileComponent', () => {
   })
 
   it('should, given a form with no medicalAidProvider, NOT poplate the userDetails or medAidDetails variable', async ()=>{
-    const expectedUserValue: User = {
-      id: "",
-      fname: "",
-      sname: "",
-      email: "",
-      address: "",
-      registered: false,
-      type: 0,
-      password: "",
-      number: "",
-      salt: "",
-      latitude: 0, 
-      longitude: 0, 
-      suburb: "", 
-      gender: "", 
-      birth: "",
-      fcmToken: "",
-      banned: "",
-      warnings: 0,
+    const expectedUserValue: any = {
+      id: undefined,
+      fname: undefined,
+      sname: undefined,
+      email: undefined,
+      address: undefined,
+      registered: undefined,
+      type: undefined,
+      password: undefined,
+      number: undefined,
+      salt: undefined,
+      latitude: undefined, 
+      longitude: undefined, 
+      suburb: undefined, 
+      gender: undefined,      
+      fcmToken : "",
+      birth: undefined,
+      banned: undefined,
+      warnings: undefined,
     };
 
     const expectedMedAidValue: medAid = {
@@ -388,25 +402,25 @@ describe('EditParentProfileComponent', () => {
   })
 
   it('should, given a form with no medicalAidPlan, NOT poplate the userDetails or medAidDetails variable', async ()=>{
-    const expectedUserValue: User = {
-      id: "",
-      fname: "",
-      sname: "",
-      email: "",
-      address: "",
-      registered: false,
-      type: 0,
-      password: "",
-      number: "",
-      salt: "",
-      latitude: 0, 
-      longitude: 0, 
-      suburb: "", 
-      gender: "", 
-      birth: "",
-      fcmToken: "",
-      banned: "",
-      warnings: 0,
+    const expectedUserValue: any = {
+      id: undefined,
+      fname: undefined,
+      sname: undefined,
+      email: undefined,
+      address: undefined,
+      registered: undefined,
+      type: undefined,
+      password: undefined,
+      number: undefined,
+      salt: undefined,
+      latitude: undefined, 
+      longitude: undefined, 
+      suburb: undefined, 
+      gender: undefined,      
+      fcmToken : "",
+      birth: undefined,
+      banned: undefined,
+      warnings: undefined,
     };
 
     const expectedMedAidValue: medAid = {
@@ -427,4 +441,33 @@ describe('EditParentProfileComponent', () => {
     expect(component.medAidDetails).toEqual(expectedMedAidValue);
   })
   //------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+  it('should, return the users details from the api call', async () => {
+    store.dispatch(new SetId("0101015077086"));
+    jest.spyOn(apiMock, 'getUser').mockImplementation(()=>of(
+      {
+        id: "0101015077086",
+        fname: "TestFN",
+        sname: "TestSN",
+        email: "test@gmail.com",
+        address: "Test 123",
+        registered: true,
+        type: 2,
+        password: "TestPassword",
+        number: "0833332222",
+        salt: "testsaltyes",
+        latitude: 30,
+        longitude: 30,
+        suburb: "Midrand",
+        gender: "male",
+        fcmToken : "testFCMtoken",
+        birth: "05/07/2004",
+        warnings: 0,
+        banned: "",
+      }
+    ));
+
+    await component.ngOnInit();
+    expect(component.parentID).toEqual("0101015077086");
+  })
 });
