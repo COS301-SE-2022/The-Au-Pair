@@ -56,6 +56,7 @@ export class AuPairDashboardComponent implements OnInit {
     id: "",
     fname: "",
     sname: "",
+    dob: "",
     allergies: "",
     diet: "",
     parent: "",
