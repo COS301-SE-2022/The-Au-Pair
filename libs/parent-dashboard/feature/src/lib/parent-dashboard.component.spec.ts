@@ -15,6 +15,7 @@ import { SetId } from '../../../../../libs/shared/ngxs/actions';
 import { UserReportModalComponent } from './user-report-modal/user-report-modal.component';
 import { AuPairRatingModalComponent } from './au-pair-rating-modal/au-pair-rating-modal.component';
 import { auPair } from 'libs/shared/interfaces/interfaces';
+import { Router } from '@angular/router';
 
 const apiMock = {
   getParent() {
@@ -28,12 +29,18 @@ const apiMock = {
   },
   editAuPair() {
     return of()
+  },
+  getUser () {
+    return of({})
   }
 }
 
 describe('ParentProfileComponent', () => {
   let component: ParentDashboardComponent;
   let fixture: ComponentFixture<ParentDashboardComponent>;
+  let store: Store;
+  let router: Router;
+
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
@@ -53,6 +60,9 @@ describe('ParentProfileComponent', () => {
        ],
        providers:[API, ModalController]
     }).compileComponents();
+
+    store = TestBed.inject(Store);
+    router = TestBed.inject(Router);
   });
 
   beforeEach(() => {
@@ -77,10 +87,52 @@ describe('ParentProfileComponent', () => {
     expect(await component.openReportModal).toReturn();
   });
 
+  it('should, open the toast when called', async ()=>{
+    jest.spyOn(component,"openToast");
+    component.openToast("Test");
+    expect(await component.openToast).toReturn();
+  });
+
   it('should, have a redirect to the children dashboard page', () => {
     const href = fixture.debugElement.query(By.css('#childDash')).nativeElement
     .getAttribute('routerLink');
     expect(href).toEqual('/children-dashboard'); 
+  });
+
+  it('should, open the toast if there are no children', async () => {
+    const toastSpy = jest.spyOn(component, 'openToast');
+    await component.checkHasChildren();
+    expect(toastSpy).toHaveBeenCalledWith("You have no children to assign activities to");
+  });
+
+  it('should, open the toast if there is no schedule', async () => {
+    const toastSpy = jest.spyOn(component, 'openToast');
+    await component.checkHasChildrenSchedule();
+    expect(toastSpy).toHaveBeenCalledWith("You have no childrens' schedules to view");
+  });
+
+  it('should, open the toast if there is no schedule', async () => {
+    const toastSpy = jest.spyOn(component, 'openToast');
+    await component.checkHasChildrenSchedule();
+    expect(toastSpy).toHaveBeenCalledWith("You have no childrens' schedules to view");
+  });
+
+  it('should, open the toast if there is no au pair costs', async () => {
+    const toastSpy = jest.spyOn(component, 'openToast');
+    await component.checkHasEmployer();
+    expect(toastSpy).toHaveBeenCalledWith("You do not have an Au Pair Employed");
+  });
+
+  it('should, open the toast if there is no au pair to track', async () => {
+    const toastSpy = jest.spyOn(component, 'openToast');
+    await component.checkHasEmployerTrack();
+    expect(toastSpy).toHaveBeenCalledWith("You do not have an Au Pair Employed");
+  });
+
+  it('should, present the alert when called', async ()=>{
+    jest.spyOn(component,"presentAlert");
+    component.presentAlert();
+    expect(await component.presentAlert).toReturn();
   });
 });
 
