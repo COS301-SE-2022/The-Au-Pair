@@ -7,7 +7,7 @@ h1{
     margin-top: 10px !important;
 }
 
-.logout-button{
+.log-in-out-button{
     border: 2px solid white;
     background-color: transparent;
     color: var(--ion-color-primary);
@@ -20,6 +20,10 @@ h1{
     margin-left: 30px;
     margin-top: 5px;
     margin-bottom: 7px;
+}
+
+.login-landing {
+    display: none;
 }
 
 .end-buttons{
@@ -37,6 +41,17 @@ h1{
 
     .back-button{
         display: flex !important;
+    }
+
+    .login-landing {
+        display: flex;
+    }
+
+    .log-in-out-button {
+        width: 60px;
+        height: 30px;
+        padding: 0;
+        font-size: 10px !important;
     }
 }
 

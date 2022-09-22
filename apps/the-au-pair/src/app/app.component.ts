@@ -2,8 +2,11 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { API } from '../../../../libs/shared/api/api.service';
 import { Geolocation } from '@awesome-cordova-plugins/geolocation/ngx';
-import { Activity, auPair, Parent, Notification } from '../../../../libs/shared/interfaces/interfaces';
+import { Activity, auPair, Parent, Notification, Child } from '../../../../libs/shared/interfaces/interfaces';
 import { Store } from '@ngxs/store';
+import { Router } from '@angular/router';
+import { MenuController, ToastController } from '@ionic/angular';
+import { Reset } from '../../../../libs/shared/ngxs/actions';
 
 @Component({
   selector: 'the-au-pair-root',
@@ -16,11 +19,28 @@ export class AppComponent implements OnInit {
   userType = 0;
   userFcmToken = "";
   activitydays: number[] = [];
-  upcomingActivity: any;
+
+  //navbar variables
+  isHome = (this.router.url == "/parent-dashboard" || this.router.url == "/au-pair-dashboard");
 
   days = [
     "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"
   ]
+
+  upcomingActivity: Activity = {
+    id: '',
+    name: '',
+    description: '',
+    location: '',
+    boundary: 0,
+    timeStart: '',
+    timeEnd: '',
+    budget: 0,
+    comment: '',
+    behavior: 0,
+    day: '',
+    child: '',
+  }
 
   activities: Activity[] = [];
 
@@ -60,7 +80,13 @@ export class AppComponent implements OnInit {
   }
 
 
-  constructor(private serv: API, private geolocation: Geolocation, private store: Store, private httpClient: HttpClient) {
+  constructor(private menController : MenuController,
+    public toastCtrl: ToastController,
+    private router : Router,
+    private serv: API,
+    private geolocation: Geolocation,
+    public store: Store,
+    private httpClient: HttpClient) {
     //Initialise parentID for logged in user
     this.userID = this.store.snapshot().user.id;
     this.userType = this.store.snapshot().user.type;
@@ -74,6 +100,7 @@ export class AppComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.menController.swipeGesture(false);
     //Only update coordinates if you are an au pair
     setInterval(() => {
       this.userID = this.store.snapshot().user.id;
@@ -133,6 +160,7 @@ export class AppComponent implements OnInit {
           }
 
           this.httpClient.post('https://fcm.googleapis.com/fcm/send', postData, { headers: requestHeaders }).subscribe(data => {
+            console.log("data receieved: " + data);
           }, error => {
             console.log(error);
           });
@@ -152,9 +180,9 @@ export class AppComponent implements OnInit {
 
   async getAcitivities(id: string) {
     await this.serv.getChildren(id).toPromise().then(res => {
-      res.forEach((element: any) => {
+      res.forEach((element: Child) => {
         this.serv.getSchedule(element.id).toPromise().then(res => {
-          res.forEach((element: any) => {
+          res.forEach((element: Activity) => {
             if (this.activities.find(x => x.id == element.id) == undefined) {
               this.activities.push(element);
             }
@@ -210,10 +238,10 @@ export class AppComponent implements OnInit {
     if (this.activitydays.includes(currentDay)) {
       const act = this.activities.find(x => Number(x.day) == currentDay);
       //check hour first
-      const hasPassed = this.activityHasFinished(act);
+      const hasPassed = this.activityHasFinished(act as Activity);
 
       if (!hasPassed) {
-        this.upcomingActivity = act;
+        this.upcomingActivity = act as Activity;
       }
       else {
         if (this.activities.filter(x => Number(x.day) == currentDay).length > 1){
@@ -230,19 +258,19 @@ export class AppComponent implements OnInit {
 
           if(!updated){
             const nextAct = this.activities.find(x => Number(x.day) > currentDay);
-            this.upcomingActivity = nextAct;
+            this.upcomingActivity = nextAct as Activity;
           }
         }
         else {
           const nextAct = this.activities.find(x => Number(x.day) > currentDay);
-          this.upcomingActivity = nextAct;
+          this.upcomingActivity = nextAct as Activity;
         }
       }
     }
     else {
       //find next activity within the week
       const nextAct = this.activities.find(x => Number(x.day) > currentDay);
-      this.upcomingActivity = nextAct;
+      this.upcomingActivity = nextAct as Activity;
 
       if (this.upcomingActivity == undefined) {
         this.upcomingActivity = this.activities[0];
@@ -275,7 +303,7 @@ export class AppComponent implements OnInit {
     this.setNotification();
   }
 
-  activityHasFinished(act : any) : boolean{
+  activityHasFinished(act : Activity) : boolean{
     let hasPassed = false;
     const current = new Date();
       if (current.getHours() > Number(act?.timeStart.slice(0, 2))) {
@@ -313,11 +341,10 @@ export class AppComponent implements OnInit {
       //Only update if coordinates have changed
       if(flag)
       this.updateAuPair(this.auPairDetails);
-    }).catch((error: any) => 
+    }).catch((error) => 
     {
       console.log('Error getting location', error);
     });
-
 
   }
 
@@ -332,5 +359,103 @@ export class AppComponent implements OnInit {
         return error;
       }
     )
+  }
+
+  //Navbar functions
+  dash(type=this.store.snapshot().user.type)
+  {
+    if(type == 0)
+    {
+      this.router.navigate(['/admin-console']);
+      this.menuClose();
+    }
+    else if(type == 1)
+    {
+      this.router.navigate(['/parent-dashboard']);
+      this.menuClose();
+    }
+    else if(type == 2)
+    {
+      this.router.navigate(['/au-pair-dashboard']);
+      this.menuClose();
+    }
+  }
+
+  notifications(){
+    this.router.navigate(['/notifications']);
+    this.menuClose();
+  }
+
+  profile(type=this.store.snapshot().user.type )
+  {
+    console.log("Coming into profile function")
+    if(type == 0)
+    {
+      // this.router.navigate(['/admin-profile']);
+    }
+    else if(type == 1)
+    {
+      this.router.navigate(['/parent-profile']);
+      this.menuClose();
+    }
+    else if(type == 2)
+    {
+      this.router.navigate(['/au-pair-profile']);
+      this.menuClose();
+    }
+  }
+
+  menuOpen()
+  {
+    this.menController.open('start');
+  }
+
+  menuClose()
+  {
+    this.menController.close('start');
+  }
+
+  logout()
+  {
+    this.store.dispatch(new Reset());
+    this.router.navigate(['/login-page']);
+    this.menuClose();
+  }
+
+  reports(type=this.store.snapshot().user.type) 
+  {
+    if(type == 0)
+    {
+      this.router.navigate(['/admin-reports']);
+      this.menuClose();
+    }
+  }
+
+  explore(){
+    if (this.store.snapshot().user.children.length < 1){
+      this.openToast('You need to have children added to your profile in order to hire an Au Pair');
+      this.menuClose();
+    }
+    else if(this.store.snapshot().user.auPair != "")
+    {
+      this.openToast('You already have an Au Pair employed');
+      this.menuClose();
+    }
+    else
+    {
+      this.router.navigate(['/explore']);
+      this.menuClose();
+    }
+  }
+
+  async openToast(message: string)
+  {
+    const toast = await this.toastCtrl.create({
+      message: message,
+      duration: 1500,
+      position: 'top',
+      cssClass: 'toastPopUp'
+    });
+    await toast.present();
   }
 }
