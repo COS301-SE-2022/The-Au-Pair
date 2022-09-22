@@ -75,8 +75,7 @@ export class HireRequestsComponent implements OnInit {
       res=>{
         this.contracts = res;
         this.setContractArray()
-      },
-      error=>{console.log("Error has occured with API: " + error);}
+      }
     )
   }
 
@@ -108,46 +107,15 @@ export class HireRequestsComponent implements OnInit {
                       {
                         this.ContractArray.push(contractDetails);
                       }
-                    },
-                    error=>{console.log("Error has occured with API: " + error);}
+                    }
                   )
                 }
-                },
-                error=>{console.log("Error has occured with API: " + error);}
+              }
             )
           }
-        },
-        error=>{console.log("Error has occured with API: " + error);}
+        }
       )
     });
-  }
-  
-  async errToast()
-  {
-    const toast = await this.toastCtrl.create({
-      message: 'Request has been rejected.',
-      duration: 1000,
-      position: 'top',
-      cssClass: 'toastPopUp'
-    });
-    await toast.present();
-  }
-
-  async sucToast()
-  {
-    const toast = await this.toastCtrl.create({
-      message: 'Request has been accepted!',
-      duration: 1000,
-      position: 'top',
-      color: 'primary',
-      cssClass: 'toastPopUp'
-    });
-    await toast.present();
-  }
-
-  closeModal()
-  {
-    this.modalCtrl.dismiss();
   }
 
   async openModal(parentID : string, contractID : string) {

@@ -271,6 +271,12 @@ ion-card {
     height: 20px;
 }
 
+@media (max-width: 330px) {
+    .explore-heading{
+        font-size: 22px !important;
+    }
+}
+
 @media (max-width: 400px) {
     .explore-heading{
         font-size: 26px;
@@ -310,5 +316,10 @@ ion-card {
     .name{
         font-size: 20px;
         margin-top: 8px;
+    }
+
+    .expand-arrow{
+        width: 15px;
+        height: 15px;
     }
 }

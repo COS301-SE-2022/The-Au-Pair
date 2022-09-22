@@ -111,45 +111,18 @@ export class ParentDashboardComponent implements OnInit{
   {
     this.parentID = this.store.snapshot().user.id;
 
-    await this.serv.getUser(this.parentID).toPromise()
-    .then( 
-      res=>{
-        this.userDetails.id = res.id;
-        this.userDetails.fname = res.fname;
-        this.userDetails.sname = res.sname;
-        this.userDetails.email = res.email;
-        this.userDetails.address = res.address;
-        this.userDetails.number = res.number;
-        this.userDetails.salt = res.salt;
-        this.userDetails.latitude = res.latitude;
-        this.userDetails.longitude = res.longitude;
-        this.userDetails.suburb = res.suburb;
-        this.userDetails.gender = res.gender;
-        this.userDetails.birth = res.birth;
-        this.userDetails.warnings = res.warnings;
-        this.userDetails.banned = res.banned;
-      },
-      error => {
-        console.log("Error has occured with API: " + error);
-      }
-    )
+    await this.getUserDetails(this.parentID);
     
     await this.serv.getParent(this.parentID)
     .toPromise()
       .then( 
-        res=>{
-          this.parentDetails.id = res.id;      
+        res=>{      
           this.parentID = res.id;
-          this.parentDetails.children = res.children;
-          this.parentDetails.medID = res.medID;
-          this.parentDetails.auPair = res.auPair;
-          this.parentDetails.rating = res.rating;
+          this.parentDetails = res;
 
           //setting the state
           this.store.dispatch(new SetChildren(res.children));
           this.store.dispatch(new SetAuPair(res.auPair));
-          console.log("Setting store for parent");
-          console.log( this.store.snapshot())
       },
       error => {
         console.log("Error has occured with API: " + error);
@@ -162,20 +135,7 @@ export class ParentDashboardComponent implements OnInit{
       .toPromise()
       .then(
         res => {
-          this.auPairDetails.id = res.id;
-          this.auPairDetails.fname = res.fname;
-          this.auPairDetails.sname = res.sname;
-          this.auPairDetails.email = res.email;
-          this.auPairDetails.address = res.address;
-          this.auPairDetails.number = res.number;
-          this.userDetails.salt = res.salt;
-          this.userDetails.latitude = res.latitude;
-          this.userDetails.longitude = res.longitude;
-          this.userDetails.suburb = res.suburb;
-          this.userDetails.gender = res.gender;
-          this.userDetails.birth = res.birth;
-          this.userDetails.warnings = res.warnings;
-          this.userDetails.banned = res.banned;
+          this.auPairDetails = res;
         },
         error => { 
           console.log("Error has occured with API: " + error);
@@ -199,11 +159,24 @@ export class ParentDashboardComponent implements OnInit{
     }
   }
 
-  async openModal(actId : string) {
+  async getUserDetails(userID : string)
+  {
+    await this.serv.getUser(userID).toPromise()
+    .then( 
+      res=>{
+        this.userDetails = res;
+      },
+      error => {
+        console.log("Error has occured with API: " + error);
+      }
+    )
+  }
+
+  async openModal(auPairId : string) {
     const modal = await this.modalCtrl.create({
       component: AuPairRatingModalComponent,
       componentProps :{
-        activityId : actId
+        auPairId : auPairId
       }
     });
     await modal.present();
@@ -307,8 +280,6 @@ export class ParentDashboardComponent implements OnInit{
   {
     await this.getAuPairDetails();
 
-    await console.log(this.currentAuPair.rating);
-
     this.currentAuPair.terminateDate = "";
     this.currentAuPair.employer = "";
     this.parentDetails.auPair = "";
@@ -324,18 +295,7 @@ export class ParentDashboardComponent implements OnInit{
     .toPromise()
       .then(
       res=>{
-        this.currentAuPair.id = res.id;
-        this.currentAuPair.rating = res.rating;
-        this.currentAuPair.onShift = res.onShift;
-        this.currentAuPair.employer = res.employer;
-        this.currentAuPair.costIncurred = res.costIncurred;
-        this.currentAuPair.distTraveled = res.distTraveled;
-        this.currentAuPair.payRate = res.payRate;
-        this.currentAuPair.bio = res.bio;
-        this.currentAuPair.experience = res.experience;
-        this.currentAuPair.currentLong = res.currentLong;
-        this.currentAuPair.currentLat = res.currentLat;
-        this.currentAuPair.terminateDate = res.terminateDate;
+        this.currentAuPair = res;
       },
       error=>{console.log("Error has occured with API: " + error);}
     )
@@ -347,11 +307,7 @@ export class ParentDashboardComponent implements OnInit{
     .toPromise()
       .then( 
         res=>{
-          this.parentDetails.id = res.id;      
-          this.parentDetails.children = res.children;
-          this.parentDetails.medID = res.medID;
-          this.parentDetails.auPair = res.auPair;
-          this.parentDetails.rating = res.rating;
+          this.parentDetails = res;
       },
       error => {
         console.log("Error has occured with API: " + error);
@@ -373,6 +329,7 @@ export class ParentDashboardComponent implements OnInit{
           this.childDetails.allergies = res[i].allergies;
           this.childDetails.diet = res[i].diet;
           this.childDetails.parent = res[i].parent;
+          this.childDetails.dob = res[i].dob;
           this.childDetails.aupair = "";
 
           this.updateChild(this.childDetails);

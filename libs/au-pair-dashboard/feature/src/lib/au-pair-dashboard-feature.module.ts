@@ -23,6 +23,6 @@ import { ParentRatingModalComponent } from './parent-rating-modal/parent-rating-
     UserReportModalComponent,
     ParentRatingModalComponent,
   ],
-  entryComponents: [UserReportModalComponent],
+  entryComponents: [ParentRatingModalComponent, UserReportModalComponent],
 })
 export class AuPairDashboardFeatureModule {}

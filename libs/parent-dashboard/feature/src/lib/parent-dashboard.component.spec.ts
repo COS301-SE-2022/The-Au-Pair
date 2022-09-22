@@ -14,6 +14,7 @@ import { of } from 'rxjs';
 import { SetId } from '../../../../../libs/shared/ngxs/actions';
 import { UserReportModalComponent } from './user-report-modal/user-report-modal.component';
 import { AuPairRatingModalComponent } from './au-pair-rating-modal/au-pair-rating-modal.component';
+import { Router } from '@angular/router';
 
 const apiMock = {
   getParent() {
@@ -21,12 +22,24 @@ const apiMock = {
   },
   addReport() {
     return of({})
+  },
+  getAuPair() {
+    return of()
+  },
+  editAuPair() {
+    return of()
+  },
+  getUser () {
+    return of({})
   }
 }
 
 describe('ParentProfileComponent', () => {
   let component: ParentDashboardComponent;
   let fixture: ComponentFixture<ParentDashboardComponent>;
+  let store: Store;
+  let router: Router;
+
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
@@ -46,6 +59,9 @@ describe('ParentProfileComponent', () => {
        ],
        providers:[API, ModalController]
     }).compileComponents();
+
+    store = TestBed.inject(Store);
+    router = TestBed.inject(Router);
   });
 
   beforeEach(() => {
@@ -70,23 +86,75 @@ describe('ParentProfileComponent', () => {
     expect(await component.openReportModal).toReturn();
   });
 
+  it('should, open the toast when called', async ()=>{
+    jest.spyOn(component,"openToast");
+    component.openToast("Test");
+    expect(await component.openToast).toReturn();
+  });
+
   it('should, have a redirect to the children dashboard page', () => {
     const href = fixture.debugElement.query(By.css('#childDash')).nativeElement
     .getAttribute('routerLink');
     expect(href).toEqual('/children-dashboard'); 
+  });
+
+  it('should, open the toast if there are no children', async () => {
+    const toastSpy = jest.spyOn(component, 'openToast');
+    await component.checkHasChildren();
+    expect(toastSpy).toHaveBeenCalledWith("You have no children to assign activities to");
+  });
+
+  it('should, open the toast if there is no schedule', async () => {
+    const toastSpy = jest.spyOn(component, 'openToast');
+    await component.checkHasChildrenSchedule();
+    expect(toastSpy).toHaveBeenCalledWith("You have no childrens' schedules to view");
+  });
+
+  it('should, open the toast if there is no schedule', async () => {
+    const toastSpy = jest.spyOn(component, 'openToast');
+    await component.checkHasChildrenSchedule();
+    expect(toastSpy).toHaveBeenCalledWith("You have no childrens' schedules to view");
+  });
+
+  it('should, open the toast if there is no au pair costs', async () => {
+    const toastSpy = jest.spyOn(component, 'openToast');
+    await component.checkHasEmployer();
+    expect(toastSpy).toHaveBeenCalledWith("You do not have an Au Pair Employed");
+  });
+
+  it('should, open the toast if there is no au pair to track', async () => {
+    const toastSpy = jest.spyOn(component, 'openToast');
+    await component.checkHasEmployerTrack();
+    expect(toastSpy).toHaveBeenCalledWith("You do not have an Au Pair Employed");
+  });
+
+  it('should, present the alert when called', async ()=>{
+    jest.spyOn(component,"presentAlert");
+    component.presentAlert();
+    expect(await component.presentAlert).toReturn();
   });
 });
 
 describe('AuPairRatingModalComponent', () => {
   let component: AuPairRatingModalComponent;
   let fixture: ComponentFixture<AuPairRatingModalComponent>;
+  let store: Store;
+
+  const validForm = {rating: [5]}
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [AuPairRatingModalComponent],
       imports: [IonicModule, CommonModule,HttpClientTestingModule,NavbarModule, RouterTestingModule, FormsModule,NgxsModule.forRoot([AppState])],
-      providers: [API,ModalController]
+      providers: [
+      {
+        provide:API, useValue:apiMock
+      }, 
+      ToastController, 
+      ModalController]
     }).compileComponents();
+
+    store = TestBed.inject(Store);
   });
 
   beforeEach(() => {
@@ -110,6 +178,18 @@ describe('AuPairRatingModalComponent', () => {
     component.closeModal();
     expect(await component.closeModal).toReturn();
   });
+
+  it('should, when editAuPair() is called with an invalid auPair ID, return an error from the API', async ()=>{
+    const expectedValue = undefined;
+    jest.spyOn(component,"submitRating");
+    expect(await component.submitRating()).toEqual(expectedValue);
+  })
+
+  it('should, call submitRating function if the form contains valid details', async ()=>{
+    jest.spyOn(component,"submitRating");
+    await component.getDescription(validForm);
+    expect(component.submitRating).toHaveBeenCalled();
+  })
 });
 
 describe('UserReportModalComponent', () => {
