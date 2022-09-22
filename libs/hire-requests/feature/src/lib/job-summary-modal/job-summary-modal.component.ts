@@ -170,7 +170,7 @@ export class JobSummaryModalComponent implements OnInit {
       res=>{
         console.log(res);
         this.router.navigate(['/au-pair-dashboard']).then(()=>{
-        window.location.reload();
+        location.reload();
         });
       },
       error=>{console.log("Error has occured with API: " + error);}

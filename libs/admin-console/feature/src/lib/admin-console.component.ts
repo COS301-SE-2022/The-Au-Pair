@@ -41,7 +41,7 @@ export class AdminConsoleComponent implements OnInit{
   async resolve(userId : string, choice : boolean) {
     await this.serv.resolveApplication(userId,choice).toPromise().then(res => {
       console.log("The response is "+res);
-      window.location.reload();
+      location.reload();
       return choice;
     }).catch(err => {
       console.log(err);

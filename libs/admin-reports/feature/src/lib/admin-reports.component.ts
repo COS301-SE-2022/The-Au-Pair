@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { User } from '../../../../shared/interfaces/interfaces';
+import { Email, Parent, User } from '../../../../shared/interfaces/interfaces';
 import { API } from "../../../../shared/api/api.service";
 
 @Component({
@@ -31,6 +31,20 @@ export class AdminReportsComponent implements OnInit {
     warnings: 0,
     banned: "",
     fcmToken: "",
+  }
+
+  emailRequest: Email ={
+    to: '',
+    subject: '',
+    body: '',
+  }
+
+  auPairEmployer : Parent = {
+    id: "",
+    children : [],
+    medID: "",
+    auPair: "",
+    rating: []
   }
 
   constructor(private serv: API) {}
@@ -76,7 +90,7 @@ export class AdminReportsComponent implements OnInit {
 
   async dismiss(reportId : any) {
     await this.serv.deleteReport(reportId.id).toPromise().then(res => {
-      window.location.reload();
+      location.reload();
     }).catch(err => {
       console.log(err);
     });
@@ -107,13 +121,15 @@ export class AdminReportsComponent implements OnInit {
     }
 
     this.serv.editUser(this.userDetails).toPromise().then(res => {
-      window.location.reload();
+      location.reload();
+      console.log(res);
     }).catch(err => {
       console.log(err);
     });
 
     this.serv.deleteReport(customReport.id).toPromise().then(res => {
-      window.location.reload();
+      location.reload();
+      console.log(res);
     }).catch(err => {
       console.log(err);
     });
@@ -143,20 +159,41 @@ export class AdminReportsComponent implements OnInit {
     this.userDetails.warnings = customReport.warnings;
     this.userDetails.banned = "Due to violation of community guidelines";
 
-    this.serv.editUser(this.userDetails).toPromise().then(res => {
-      window.location.reload();
+    // this.serv.editUser(this.userDetails).toPromise().then(res => {
+    //   location.reload();
+    // }).catch(err => {
+    //   console.log(err);
+    // });
+
+    // //setup email to ban user
+    // this.emailRequest.to = this.userDetails.email;
+    // this.emailRequest.subject = "Au Pair Account Banned";
+    // this.emailRequest.body = "Your account has been banned due to violation of community guidelines. Please contact us for more information.";
+    // this.serv.sendEmail(this.emailRequest).toPromise().then(
+    //   res => {
+    //     return res;
+    //   },
+    //   error => {
+    //     console.log("Email not sent, Error has occured with API: " + error);
+    // });
+
+    //email matching au pair employer that au pair has been banned
+    console.log(this.userDetails)
+    this.serv.getAuPairEmployer(this.userDetails.id).toPromise().then(res => {
+      this.auPairEmployer = res;
+      console.log(this.auPairEmployer);
     }).catch(err => {
       console.log(err);
     });
 
-    this.serv.deleteReport(customReport.id).toPromise().then(res => {
-      window.location.reload();
-    }).catch(err => {
-      console.log(err);
-    });
+    // this.serv.deleteReport(customReport.id).toPromise().then(res => {
+    //   location.reload();
+    // }).catch(err => {
+    //   console.log(err);
+    // });
 
-    // To make sure that the user id doesn't somehow stay afterwards
-    this.userDetails.id = "";
+    // // To make sure that the user id doesn't somehow stay afterwards
+    // this.userDetails.id = "";
   }
   
 }

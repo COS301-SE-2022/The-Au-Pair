@@ -19,18 +19,24 @@ public class ParentController
   @PostMapping("/getParent")
   public Parent getParent(@RequestBody String id)
   {
-      return this.ps.getParent(id);
+    return this.ps.getParent(id);
   }
 
   @PostMapping("/editParent")
   public void editParent(@RequestBody Parent p)
   {
-      this.ps.updateParent(p);
+    this.ps.updateParent(p);
   }
 
   @PostMapping("/addParent")
   public void addParent(@RequestBody Parent p)
   {
-      this.ps.addParent(p);
+    this.ps.addParent(p);
+  }
+
+  @PostMapping("/getAuPairEmployer")
+  public Parent getAuPairEmployer(@RequestParam String id)
+  {
+    return this.ps.getAuPairEmployer(id);
   }
 }

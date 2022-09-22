@@ -308,6 +308,7 @@ export class RegisterComponent {
           .then(
             async res => {
               await this.sendAuPairEmail();
+              await this.sendAdminEmail();
               console.log("The response is:" + res);
             },
             error => {
@@ -437,6 +438,14 @@ export class RegisterComponent {
       error => {
         console.log("Email not sent, Error has occured with API: " + error);
       });
+  }
+
+  async sendAdminEmail(){
+    this.emailRequest.to = "cheemschaps@gmail.com";
+    this.emailRequest.subject = "New Au Pair Sign Up";
+    this.emailRequest.body = "A new Au Pair has signed up!\n\n Please log into the admin console to review their application."+
+                             " Remember to be thorough when applicants are rejected and give advice on what they an improve. \n\n" +
+                            "Regards,\n The Au Pair Team" 
   }
   
 }

@@ -254,5 +254,9 @@ export class API{
   sendEmail(email : Email): Observable<any> {
     return this.http.post(environment.apiURI+"/sendEmail",email);
   }
+
+  getAuPairEmployer(id : string): Observable<any> {
+    return this.http.post(environment.apiURI+"/getAuPairEmployer",id);
+  }
   
 }
