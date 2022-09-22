@@ -17,6 +17,7 @@ export class AddChildComponent implements OnInit
     id: "",
     fname: "",
     sname: "",
+    dob: "",
     allergies: "",
     diet: "",
     parent: "",
@@ -33,9 +34,6 @@ export class AddChildComponent implements OnInit
 
   allChildren: any;
 
-  //Regex for south african ID number
-  SA_ID = new RegExp(/(((\d{2}((0[13578]|1[02])(0[1-9]|[12]\d|3[01])|(0[13456789]|1[012])(0[1-9]|[12]\d|30)|02(0[1-9]|1\d|2[0-8])))|([02468][048]|[13579][26])0229))(( |-)(\d{4})( |-)(\d{3})|(\d{7}))/);
-
   //Constructor
   constructor(private serv: API, public router: Router, public toastCtrl: ToastController, private store: Store) {}
 
@@ -45,43 +43,16 @@ export class AddChildComponent implements OnInit
 
   //Function to retrieve the child's details
   async getChildValues(val: any)
-  {    
+  {        
     //Max number of children for each user is 4
     if(this.allChildren.length < 4)
     {
       //Error check the fields for invalid input
       //Child ID Field
       let emptyInput = false;
-      let invalidInput = false;
-      let dom = document.getElementById("childIDError");
-      if(val.childID === "")
-      {
-        emptyInput = true;
-        if(dom != null)
-        {
-          dom.innerHTML = "Child ID field is empty.";
-          dom.style.display = "block";
-        }
-      }
-      else if(!this.SA_ID.test(val.childID))
-      {
-        if(dom != null)
-        {
-          dom.innerHTML = "Invalid South African ID number.";
-          dom.style.display = "block";
-          invalidInput = true;
-        }
-      }
-      else
-      {
-        if(dom != null)
-        {
-          dom.style.display = "none";
-        }
-      }
 
       //Child name field
-      dom = document.getElementById("childNameError");
+      let dom = document.getElementById("childNameError");
       if(val.childName === "")
       {
         emptyInput = true;
@@ -117,6 +88,24 @@ export class AddChildComponent implements OnInit
         }
       }
 
+      //Date of birth field
+      dom = document.getElementById("dateOfBirthError");
+      if(val.dateOfBirth === "")
+      { 
+        emptyInput = true;
+        if(dom != null)
+        {
+          dom.innerHTML = "Date of birth field is empty";
+          dom.style.display = "block";
+        }
+      }else
+      {
+        if(dom != null)
+        {
+          dom.style.display = "none";
+        }
+      }
+
       //Allergies field
       dom = document.getElementById("allergiesError");
       if(val.Allergies === "")
@@ -142,7 +131,7 @@ export class AddChildComponent implements OnInit
         emptyInput = true;
         if(dom != null)
         {
-          dom.innerHTML = "Diet field is empty";
+          dom.innerHTML = "Diet field is incomplete";
           dom.style.display = "block";
         }
       }else
@@ -158,18 +147,13 @@ export class AddChildComponent implements OnInit
       {
         console.log("You cannot add an child with empty fields.");
       }
-      else if(invalidInput == true)
-      {
-        console.log("Entered South African is invalidID");
-      }
       else
-      {
-        let idNum = val.childID.replaceAll(' ', '');
-        idNum = val.childID.replaceAll('-', '');
-        
-        this.childDetails.id = idNum;
+      {     
+        //ID number is generated in child service
+        this.childDetails.id = "";
         this.childDetails.fname = val.childName;
         this.childDetails.sname= val.surname;
+        this.childDetails.dob = val.dateOfBirth;
         this.childDetails.allergies= val.Allergies;
         this.childDetails.diet= val.diet;
         this.childDetails.parent= this.store.snapshot().user.id;
@@ -231,40 +215,56 @@ export class AddChildComponent implements OnInit
   }
 
   //Service calls
-  addChild(child: Child)
+  async addChild(child: Child)
   {
-    this.serv.getParent(this.childDetails.parent).subscribe(
-      res=>{
+    let generatedChildID = "";
+    //Add the child to the Children collection
+    await this.serv.addChild(child).toPromise().then(
+      res=>
+      {
+        const returnedChild = JSON.parse(res);
+        generatedChildID = returnedChild.id;
+        this.openToast();
+      }).catch(
+      error=>{
+        console.log("Error has occured with API: " + error);
+      }
+    );
+
+    // Set the childs ID in the parents document
+    await this.serv.getParent(this.childDetails.parent)
+    .toPromise()
+    .then(
+      async res=>
+      {
         this.parent.id = res.id;
         this.parent.children = res.children;
         this.parent.medID = res.medID;
         this.parent.auPair = res.auPair;
-        this.parent.children.push(child.id);
+        this.parent.children.push(generatedChildID);
         this.parent.rating = res.rating;
 
-        //Update the parent object to contain the new child ID
-        this.serv.editParent(this.parent).subscribe(
-          res=>{
+        // Update the parent object to contain the new child ID
+        await this.serv.editParent(this.parent)
+        .toPromise()
+        .then(
+          res=>
+          {
             console.log("The response is:" + res); 
-          },
-          error=>{
+          })
+        .catch(
+          error=>
+          {
             console.log("Error has occured with API: " + error);
           }
         );
-      },
-      error=>{
-        console.log("Error has occured with API: " + error);
-      }
-    )
 
-    this.serv.addChild(child).subscribe(
-      res=>{
-        console.log("The response is:" + res); 
-        this.openToast();
-      },
-      error=>{
+      })
+    .catch(
+      error=>
+      {
         console.log("Error has occured with API: " + error);
       }
-    )
+    );
   }
 }

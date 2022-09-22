@@ -24,9 +24,9 @@ public class ChildController
   }
 
   @PostMapping("/addChild")
-  public void addChild(@RequestBody Child c)
+  public Child addChild(@RequestBody Child c)
   {
-    this.cs.addChild(c);
+    return this.cs.addChild(c);
   }
 
   @PostMapping("/updateChild")

@@ -46,10 +46,11 @@ export class JobSummaryModalComponent implements OnInit {
     id: "",
     fname: "",
     sname: "",
+    dob: "",
     allergies: "",
     diet: "",
     parent: "",
-    aupair: "",
+    aupair: ''
   }
 
   parentDetails: Parent = {

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { Store } from '@ngxs/store';
 import { API } from '../../../../shared/api/api.service';
 import { Activity } from '../../../../shared/interfaces/interfaces';
 
@@ -29,15 +30,9 @@ export class ParentViewActivityComponent implements OnInit
     child: "",
   };
   timeslot = "";
-  constructor(private serv: API, private router: Router)
+  constructor(private serv: API, private router: Router, private store: Store)
   {
-    //Receive activity ID from schedule page
-    const navigation = this.router.getCurrentNavigation();
-    if(navigation !== null)
-      if(navigation.extras !== null)
-      { 
-        this.activityDetails.id = navigation.extras.state?.['id'];
-      }
+    this.activityDetails.id=this.store.snapshot().user.currentActivity;
   }
 
   ngOnInit(): void

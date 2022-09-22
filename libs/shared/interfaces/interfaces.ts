@@ -17,6 +17,7 @@ export interface Activity{
     id: string;
     fname: string;
     sname: string;
+    dob: string;
     allergies: string;
     diet: string;
     parent: string;

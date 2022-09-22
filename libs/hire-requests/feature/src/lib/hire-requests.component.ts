@@ -19,10 +19,11 @@ export class HireRequestsComponent implements OnInit {
     id: "",
     fname: "",
     sname: "",
+    dob: "",
     allergies: "",
     diet: "",
     parent: "",
-    aupair: "",
+    aupair: ''
   }
   
   contractDetails : any = {
