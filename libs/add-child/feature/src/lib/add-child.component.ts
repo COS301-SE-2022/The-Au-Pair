@@ -158,7 +158,6 @@ export class AddChildComponent implements OnInit
         this.childDetails.diet= val.diet;
         this.childDetails.parent= this.store.snapshot().user.id;
         this.childDetails.aupair= this.parent.auPair;
-        console.log("Child to add:", this.childDetails);
         this.addChild(this.childDetails);
       }
     }

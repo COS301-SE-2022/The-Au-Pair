@@ -66,7 +66,7 @@ public class ChildService
       int index = (int)(AlphaNumericString.length() * Math.random());
       sb.append(AlphaNumericString.charAt(index));
     }
-
-    return sb.toString();
+    String finalID = (sb.toString()).substring(0,13);
+    return finalID;
   }
 }

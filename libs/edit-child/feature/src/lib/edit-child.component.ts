@@ -4,6 +4,7 @@ import { API } from '../../../../shared/api/api.service';
 import { ToastController } from '@ionic/angular';
 import { Child, Parent } from '../../../../shared/interfaces/interfaces';
 import { Store } from '@ngxs/store';
+import { SetCurrentChild } from '../../../../../libs/shared/ngxs/actions';
 
 @Component({
   selector: 'the-au-pair-edit-child',
@@ -43,7 +44,7 @@ export class EditChildComponent implements OnInit {
   ngOnInit(): void 
   {
     this.getChild();
-    console.log("Children:", this.children);
+    this.getParent();
   }
 
   async getChildValues(val: any)
@@ -151,14 +152,10 @@ export class EditChildComponent implements OnInit {
       console.log("You cannot add an child with empty fields.");
     }
     else
-    {
-      let idNum = val.childID.replaceAll(' ', '');
-      idNum = val.childID.replaceAll('-', '');
-      
-      this.childDetails.id = idNum;
+    { 
       this.childDetails.fname = val.childName;
       this.childDetails.sname= val.surname;
-      this.childDetails.dob = val.dob;
+      this.childDetails.dob = val.dateOfBirth;
       this.childDetails.allergies= val.Allergies;
       this.childDetails.diet= val.diet;
       this.childDetails.parent= this.store.snapshot().user.id;
@@ -182,10 +179,13 @@ export class EditChildComponent implements OnInit {
 
   returnToChildrenDashboard()
   {
-    this.router.navigate(['/children-dashboard']);
+    this.store.dispatch(new SetCurrentChild(""));
+    this.router.navigate(['/children-dashboard']).then(()=>{
+      location.reload();
+    });
   }
 
-  updateChild(child : Child){
+  updateChild(child : Child){    
     this.serv.updateChild(child).subscribe(
       res=>{
         // location.reload();
@@ -210,12 +210,26 @@ export class EditChildComponent implements OnInit {
           if(c.id == this.childDetails.id)
           {
             this.childDetails = c;
-          }
+          }          
         }); 
+        console.log("the absolit foiund child: ", this.childDetails);
       }).catch(
       error=>{
         console.log("Error has occured with API: " + error);
       }
     );
+  }
+
+  async getParent()
+  {
+    this.serv.getParent(this.store.snapshot().user.id).subscribe(
+      res => {
+        console.log("The response is:" + res);
+        this.parent = res;
+        console.log(this.parent);
+
+      },
+      error => { console.log("Error has occured with API: " + error); }
+    )
   }
 }
