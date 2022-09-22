@@ -59,14 +59,13 @@ public class ChildService
   public String generateID()
   {
     String AlphaNumericString = "0123456789"+"abcdefghijklmnopqrstuvxyz";
-    StringBuilder sb = new StringBuilder(24);
+    StringBuilder sb = new StringBuilder(13);
 
-    for (int i = 0; i < 24; i++)
+    for (int i = 0; i < 13; i++)
     {
       int index = (int)(AlphaNumericString.length() * Math.random());
       sb.append(AlphaNumericString.charAt(index));
     }
-    String finalID = (sb.toString()).substring(0,13);
-    return finalID;
+    return sb.toString();
   }
 }

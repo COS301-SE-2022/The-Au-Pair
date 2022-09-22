@@ -15,15 +15,14 @@ describe('AddChildComponent', () => {
   let fixture: ComponentFixture<AddChildComponent>;
 
   //Valid form
-  const populatedForm = {childName: "name", surname: "surname", dob:"2015-10-10", Allergies: "none", diet: "none"};
+  const populatedForm = {childName: "name", surname: "surname", dateOfBirth:"2015-10-10", Allergies: "none", diet: "none"};
 
   //Invalid forms
-  const emptyID = {childName: "name", surname: "surname", dob:"2015-10-10",  Allergies: "none", diet: "none"};
-  const emptyFirstName = {childName: "", surname: "surname", dob:"2015-10-10",  Allergies: "none", diet: "none"};
-  const emptySurname = {childName: "name", surname: "", dob:"2015-10-10", Allergies: "none", diet: "none"};
-  const emptyAllergies = {childName: "name", surname: "surname", dob:"2015-10-10",  Allergies: "", diet: "none"};
-  const emptyDiet = {childName: "name", surname: "surname", dob:"2015-10-10",  Allergies: "none", diet: ""};
-  const emptyDob = {childName: "name", surname: "surname", dob:"",  Allergies: "none", diet: ""};
+  const emptyFirstName = {childName: "", surname: "surname", dateOfBirth:"2015-10-10",  Allergies: "none", diet: "none"};
+  const emptySurname = {childName: "name", surname: "", dateOfBirth:"2015-10-10", Allergies: "none", diet: "none"};
+  const emptyAllergies = {childName: "name", surname: "surname", dateOfBirth:"2015-10-10",  Allergies: "", diet: "none"};
+  const emptyDiet = {childName: "name", surname: "surname", dateOfBirth:"2015-10-10",  Allergies: "none", diet: ""};
+  const emptyDob = {childName: "name", surname: "surname", dateOfBirth:"",  Allergies: "none", diet: ""};
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({

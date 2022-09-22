@@ -105,10 +105,10 @@ export class ChildrenDashboardComponent implements OnInit
     //Service call to delete child
     await this.serv.removeChild(child.id).toPromise().then(res => 
       {
-         // location.reload();
-         console.log("The response is:", res); 
-         this.openToast(child.fname + " removed successfully!", "primary");
-         return res;
+        this.openToast(child.fname + " removed successfully!", "primary");
+        location.reload();
+        console.log("The response is:", res); 
+        return res;
       }).catch(err => 
         {
           console.log(err);

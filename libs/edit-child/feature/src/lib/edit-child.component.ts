@@ -51,12 +51,28 @@ export class EditChildComponent implements OnInit {
   {
 
     //Error check the fields for invalid input
-
-    //Child ID Field
     let emptyInput = false;
+    //Child ID Field
+    let dom = document.getElementById("childIDError");
+    if(val.childID === "")
+    {
+      emptyInput = true;
+      if(dom != null)
+      {
+        dom.innerHTML = "Child ID field is empty.";
+        dom.style.display = "block";
+      }
+    }
+    else
+    {
+      if(dom != null)
+      {
+        dom.style.display = "none";
+      }
+    }
 
     //Child name field
-    let dom = document.getElementById("childNameError");
+    dom = document.getElementById("childNameError");
     if(val.childName === "")
     {
       emptyInput = true;
@@ -153,6 +169,7 @@ export class EditChildComponent implements OnInit {
     }
     else
     { 
+      this.childDetails.id = val.childID;
       this.childDetails.fname = val.childName;
       this.childDetails.sname= val.surname;
       this.childDetails.dob = val.dateOfBirth;
