@@ -23,6 +23,9 @@ export class EditParentProfileComponent implements OnInit{
   lat = 0;
   suburb = "";
 
+  isInput = false;
+  isEmpty = false;
+
   potentialLocations : any[] = [];
 
   userDetails: User = {
@@ -137,6 +140,8 @@ export class EditParentProfileComponent implements OnInit{
   {  
     //FORM ERROR CHECKING
     let emptyInput = false;
+    this.isInput = false;
+    this.isEmpty = false;
     let dom = document.getElementById("emailError");
     if(val.email === "")
     {
@@ -225,87 +230,61 @@ export class EditParentProfileComponent implements OnInit{
     dom = document.getElementById("medAidMMError");
     if(val.medicalAidMM === "")
     {
-      emptyInput = true;
-      if(dom != null)
-      {
-        dom.innerHTML = "Main Member Name is empty";
-        dom.style.display = "block";
-      }
-    }else
+      console.log("Here 1");
+      this.isEmpty = true;
+    }
+    else
     {
-      if(dom != null)
-      {
-        dom.style.display = "none";
-      }
+      this.isInput = true
     }
     dom = document.getElementById("medAidMSError");
     if(val.medicalAidMS === "")
     {
-      emptyInput = true;
-      if(dom != null)
-      {
-        dom.innerHTML = "Main Member Surname is empty";
-        dom.style.display = "block";
-      }
-    }else
+      console.log("Here 2");
+      this.isEmpty = true;
+    }
+    else
     {
-      if(dom != null)
-      {
-        dom.style.display = "none";
-      }
+      this.isInput = true
     }
     dom = document.getElementById("medAidNoError");
     if(val.medicalAidNo === "")
     {
-      emptyInput = true;
-      if(dom != null)
-      {
-        dom.innerHTML = "Medical Aid Number is empty";
-        dom.style.display = "block";
-      }
-    }else
+      console.log("Here 3");
+      this.isEmpty = true;
+    }
+    else
     {
-      if(dom != null)
-      {
-        dom.style.display = "none";
-      }
+      this.isInput = true
     }
     dom = document.getElementById("medAidProviderError");
     if(val.medicalAidProvider === "")
     {
-      emptyInput = true;
-      if(dom != null)
-      {
-        dom.innerHTML = "Medical Aid Provider is empty";
-        dom.style.display = "block";
-      }
-    }else
+      console.log("Here 4");
+      this.isEmpty = true;
+    }
+    else
     {
-      if(dom != null)
-      {
-        dom.style.display = "none";
-      }
+      this.isInput = true
     }
     dom = document.getElementById("medAidPlanError");
     if(val.medicalAidPlan === "")
     {
-      emptyInput = true;
-      if(dom != null)
-      {
-        dom.innerHTML = "Medical Aid Plan is empty";
-        dom.style.display = "block";
-      }
-    }else
+      console.log("Here 5");
+      this.isEmpty = true;
+    }
+    else
     {
-      if(dom != null)
-      {
-        dom.style.display = "none";
-      }
+      this.isInput = true
     }
     
     if(emptyInput == true)
     {
       this.errToast("You cannot have any empty fields.");
+    }
+    else if(this.isEmpty == true && this.isInput == true)
+    {
+      this.errToast("There are missing fields for your medical aid details.");
     }
     else
     {
@@ -371,17 +350,17 @@ export class EditParentProfileComponent implements OnInit{
 
   async editMedAid(medAid:medAid)
   {
-    this.parent.medID = medAid.mID;
-    await this.serv.editParent(this.parent)
-    .toPromise()
-    .then(
-      res => {
-        console.log("The response is:" + res); 
-      },
-      error=>{
-        console.log("Error has occured with API: " + error);
-      }
-    )
+    // this.parent.medID = medAid.mID;
+    // await this.serv.editParent(this.parent)
+    // .toPromise()
+    // .then(
+    //   res => {
+    //     console.log("The response is:" + res); 
+    //   },
+    //   error=>{
+    //     console.log("Error has occured with API: " + error);
+    //   }
+    // )
 
     await this.serv.editMedAid(medAid)
     .toPromise()
