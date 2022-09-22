@@ -1,7 +1,10 @@
 <ion-header [translucent]="true">
     <ion-toolbar mode="ios" class="navbar">
-      <ion-buttons  menu="nav" slot="start">
-        <button class="back-button" menuToggle><ion-icon id="nav" name="menu-outline" (click)="menuOpen()"></ion-icon></button>
+      <ion-buttons  menu="nav" slot="start" [hidden]="!this.loggedIn">
+        <button class="back-button" menuToggle ><ion-icon id="nav" name="menu-outline" (click)="menuOpen()"></ion-icon></button>
+      </ion-buttons>
+      <ion-buttons slot="end" class="login-landing">
+        <ion-button (click)="login()" class="log-in-out-button" [hidden]="this.loggedIn">Login</ion-button>
       </ion-buttons>
       <ion-buttons slot="start" class="start-buttons">
         <ion-button (click)="dash()" [hidden]="!this.loggedIn">Dashboard</ion-button>

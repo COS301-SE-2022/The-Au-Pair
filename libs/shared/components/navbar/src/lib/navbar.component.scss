@@ -22,6 +22,10 @@ h1{
     margin-bottom: 7px;
 }
 
+.login-landing {
+    display: none;
+}
+
 .end-buttons{
     margin-right: 0.3vw;
 }
@@ -37,6 +41,17 @@ h1{
 
     .back-button{
         display: flex !important;
+    }
+
+    .login-landing {
+        display: flex;
+    }
+
+    .log-in-out-button {
+        width: 60px;
+        height: 30px;
+        padding: 0;
+        font-size: 10px !important;
     }
 }
 
