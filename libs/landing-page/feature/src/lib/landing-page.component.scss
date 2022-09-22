@@ -1,0 +1,251 @@
+ion-content {
+    scroll-snap-type: y mandatory;
+}
+
+section {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#logo {
+    padding-top: 30px;
+    width: 200px;
+    vertical-align: middle;
+    justify-self: center;
+    left: 50%;
+}
+
+p {
+    max-width: 800px;
+    width: 85%;
+    vertical-align: middle;
+    font-size: 20px;
+    color: var(--ion-color-dark);
+    text-align: center;
+    font-family: Roboto;
+    font-weight: bold;
+}
+
+.heading {
+    width: 100%;
+    font-size: 48px;
+    text-align: center;
+    font-family: TitanOne;
+    margin: 0;    
+}
+
+.image-buttons {
+    max-width: 700px;
+    position: relative;
+    justify-content: center;
+    width: 90%;
+}
+
+.buttons {
+    position: absolute;
+    display: inline-flex;
+    justify-content: center;
+    top: 20px;
+    gap: 12vw;
+    left: 50%;
+    translate: (-50%);
+}
+
+#happy-family {
+    padding-top: 30px;
+    width: 100%;
+}
+
+button:not(.backBtn, .nextBtn){
+    top: 0;
+    left: 0;
+    width: 150px;
+    height: 62px;
+    box-shadow: 1px 2px 5px rgba(0, 0, 0, 0.13);
+    border-style: none;
+    border-radius: 10px;
+    color: white;
+
+    font-style: normal;
+    font-weight: 700;
+    font-size: 16px;
+    z-index: 10;
+}
+
+.desktop {
+    display: block;
+}
+
+.mobile {
+    display: none;
+}
+
+.carousel {
+    padding-top: 2vh;
+    align-items: center;
+    display:inline-flex;
+    column-gap: 4em;
+} 
+
+.swiper {
+    max-width: 95vh;
+    width: 90vw;
+}
+
+.backBtn, .nextBtn {
+    width: 3vw;
+    height: 3vw;
+}
+
+.backBtn {
+    background: none;
+    color: white;
+ }
+ 
+ .nextBtn {
+    background: none;
+    color: white;
+ }
+
+ .backBtn {
+    background: none;
+    color: white;
+ }
+ 
+ ion-icon{
+    width: 100%;
+    height: 100%;
+ }
+
+#parentSelect {
+    background: var(--ion-color-tertiary);
+}
+
+#auPairSelect {
+    background: var(--ion-color-secondary);
+}
+
+#parentSelect:active, #auPairSelect:active{
+    background-color: var(--ion-color-grey);
+}
+
+#section-welcome {
+    scroll-snap-align: start;
+    text-align: center;
+    padding-bottom: 100px;
+}
+
+#section-parent p {
+    color: var(--ion-color-dark);
+}
+
+#section-au-pair p {
+    color: white;
+}
+
+.signUp {
+    margin-top: 4vh;
+}
+
+#section-parent .signUp {
+    background-color: var(--ion-color-secondary);
+}
+
+#section-au-pair .signUp {
+    background-color: var(--ion-color-primary);
+}
+
+#section-parent {
+    scroll-snap-align: start;
+    background-color: var(--ion-color-primary);
+    padding: 100px 0 150px 0;
+    text-align: center;
+}
+
+#section-au-pair {
+    scroll-snap-align: start;
+    background-color: var(--ion-color-forest);
+    padding: 100px 0 150px 0;
+    text-align: center;
+}
+
+.welcome-wave {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    overflow: hidden;
+    line-height: 0;
+    transform: rotate(180deg);
+}
+
+.welcome-wave svg {
+    position: relative;
+    display: block;
+    width: calc(100% + 1.3px);
+    height: 60px;
+}
+
+.welcome-wave .shape-fill {
+    fill: var(--ion-color-primary);
+}
+
+.au-pair-wave {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    overflow: hidden;
+    line-height: 0;
+}
+
+.au-pair-wave svg {
+    position: relative;
+    display: block;
+    width: calc(100% + 1.3px);
+    height: 68px;
+    transform: rotateY(180deg);
+}
+
+.au-pair-wave .shape-fill {
+    fill: var(--ion-color-forest);
+}
+
+@media screen and (max-width: 900px) {
+    .backBtn, .nextBtn {
+        display: none;
+    }    
+
+    .swiper {
+        max-width: 1200px;
+        width: 85vw;
+    }
+}
+
+@media screen and (max-width: 645px) { 
+
+    button:not(.backBtn, .nextBtn){
+        width: 30vw;
+        max-width: 150px;
+        height: 62px;
+    }
+
+    .swiper {
+        max-width: 1200px;
+        width: 85vw;
+    }
+
+    .desktop {
+        display: none;
+    }
+    
+    .mobile {
+        display: block;
+    }
+
+    .swiper {
+        width: 70vw;
+    }
+}

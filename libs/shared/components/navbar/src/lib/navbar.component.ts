@@ -15,6 +15,7 @@ export class NavbarComponent implements OnInit
   isHome = (this.router.url == "/parent-dashboard" || this.router.url == "/au-pair-dashboard");
   hasAuPair = false;
   kids = -1;
+  loggedIn = false;
 
   constructor(private router : Router,private store: Store, private menController : MenuController, public toastCtrl: ToastController){}
 
@@ -23,6 +24,7 @@ export class NavbarComponent implements OnInit
     this.type = this.store.snapshot().user.type;
     this.hasAuPair = this.store.snapshot().user.auPair != "";
     this.kids = this.store.snapshot().user.children.length;
+    this.loggedIn = this.store.snapshot().user.loggedIn;
   }
 
   dash()
@@ -74,6 +76,11 @@ export class NavbarComponent implements OnInit
   logout()
   {
     this.store.dispatch(new Reset());
+    this.router.navigate(['/login-page']);
+  }
+
+  login()
+  {
     this.router.navigate(['/login-page']);
   }
 
