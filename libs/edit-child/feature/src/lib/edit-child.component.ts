@@ -229,7 +229,6 @@ export class EditChildComponent implements OnInit {
             this.childDetails = c;
           }          
         }); 
-        console.log("the absolit foiund child: ", this.childDetails);
       }).catch(
       error=>{
         console.log("Error has occured with API: " + error);
