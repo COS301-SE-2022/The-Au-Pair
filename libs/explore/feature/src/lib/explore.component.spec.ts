@@ -24,7 +24,6 @@ const apiMock = {
 describe('ExploreComponent', () => {
   let component: ExploreComponent;
   let fixture: ComponentFixture<ExploreComponent>;
-  let store: Store;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
@@ -42,8 +41,6 @@ describe('ExploreComponent', () => {
         }
       ]
     }).compileComponents();
-
-    store = TestBed.inject(Store);
   });
 
   beforeEach(() => {

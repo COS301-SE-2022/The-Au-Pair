@@ -333,5 +333,4 @@ describe('JobSummaryModal', () => {
     const age = await component.getAge('05/07/2004');
     expect(age).toEqual(expectedAge);
   })
-
 });

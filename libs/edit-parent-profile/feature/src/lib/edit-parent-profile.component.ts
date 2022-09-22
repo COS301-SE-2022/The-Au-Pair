@@ -230,7 +230,6 @@ export class EditParentProfileComponent implements OnInit{
     dom = document.getElementById("medAidMMError");
     if(val.medicalAidMM === "")
     {
-      console.log("Here 1");
       this.isEmpty = true;
     }
     else
@@ -240,7 +239,6 @@ export class EditParentProfileComponent implements OnInit{
     dom = document.getElementById("medAidMSError");
     if(val.medicalAidMS === "")
     {
-      console.log("Here 2");
       this.isEmpty = true;
     }
     else
@@ -250,7 +248,6 @@ export class EditParentProfileComponent implements OnInit{
     dom = document.getElementById("medAidNoError");
     if(val.medicalAidNo === "")
     {
-      console.log("Here 3");
       this.isEmpty = true;
     }
     else
@@ -260,7 +257,6 @@ export class EditParentProfileComponent implements OnInit{
     dom = document.getElementById("medAidProviderError");
     if(val.medicalAidProvider === "")
     {
-      console.log("Here 4");
       this.isEmpty = true;
     }
     else
@@ -270,7 +266,6 @@ export class EditParentProfileComponent implements OnInit{
     dom = document.getElementById("medAidPlanError");
     if(val.medicalAidPlan === "")
     {
-      console.log("Here 5");
       this.isEmpty = true;
     }
     else
@@ -350,18 +345,6 @@ export class EditParentProfileComponent implements OnInit{
 
   async editMedAid(medAid:medAid)
   {
-    // this.parent.medID = medAid.mID;
-    // await this.serv.editParent(this.parent)
-    // .toPromise()
-    // .then(
-    //   res => {
-    //     console.log("The response is:" + res); 
-    //   },
-    //   error=>{
-    //     console.log("Error has occured with API: " + error);
-    //   }
-    // )
-
     await this.serv.editMedAid(medAid)
     .toPromise()
     .then(

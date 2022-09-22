@@ -158,9 +158,6 @@ describe('UserReportModalComponent', () => {
 describe('ParentRatingModalComponent', () => {
   let component: ParentRatingModalComponent;
   let fixture: ComponentFixture<ParentRatingModalComponent>;
-  let store: Store;
-
-  const validForm = {rating: [5]}
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
@@ -173,8 +170,6 @@ describe('ParentRatingModalComponent', () => {
       ToastController, 
       ModalController]
     }).compileComponents();
-
-    store = TestBed.inject(Store);
   });
 
   beforeEach(() => {
