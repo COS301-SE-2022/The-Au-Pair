@@ -10,7 +10,7 @@ import { EditAuPairProfileComponent } from './edit-au-pair-profile.component';
 import { NgxsModule, Store } from '@ngxs/store';
 import { AppState } from '../../../../shared/ngxs/state';
 import { of } from 'rxjs';
-import { SetId } from 'libs/shared/ngxs/actions';
+import { SetId } from '../../../../../libs/shared/ngxs/actions';
 
 const apiMock = {
   getUser(){

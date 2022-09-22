@@ -10,8 +10,7 @@ import { NgxsModule, Store } from '@ngxs/store';
 import { AppState } from '../../../../shared/ngxs/state';
 import { JobSummaryAuPairViewComponent } from './job-summary-au-pair-view.component';
 import { of } from 'rxjs';
-import { SetId } from 'libs/shared/ngxs/actions';
-
+import { SetId } from '../../../../../libs/shared/ngxs/actions';
 
 const apiMock = {
   getUser(){

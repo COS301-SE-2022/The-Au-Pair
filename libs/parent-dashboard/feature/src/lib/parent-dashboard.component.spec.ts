@@ -14,7 +14,6 @@ import { of } from 'rxjs';
 import { SetId } from '../../../../../libs/shared/ngxs/actions';
 import { UserReportModalComponent } from './user-report-modal/user-report-modal.component';
 import { AuPairRatingModalComponent } from './au-pair-rating-modal/au-pair-rating-modal.component';
-import { auPair } from 'libs/shared/interfaces/interfaces';
 import { Router } from '@angular/router';
 
 const apiMock = {

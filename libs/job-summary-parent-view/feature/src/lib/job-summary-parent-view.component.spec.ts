@@ -10,7 +10,7 @@ import { AppState } from '../../../../shared/ngxs/state';
 import { JobSummaryParentViewComponent } from './job-summary-parent-view.component';
 import { CommonModule } from '@angular/common';
 import { of } from 'rxjs';
-import { SetId } from 'libs/shared/ngxs/actions';
+import { SetId } from '../../../../../libs/shared/ngxs/actions';
 import { Router } from '@angular/router';
 import { ExploreFeatureModule } from '@the-au-pair/explore/feature';
 

@@ -9,7 +9,7 @@ import { API } from '../../../../shared/api/api.service';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { RouterTestingModule} from '@angular/router/testing';
 import { of } from 'rxjs';
-import { SetId } from 'libs/shared/ngxs/actions';
+import { SetId } from '../../../../../libs/shared/ngxs/actions';
 import { JobSummaryModalComponent } from './job-summary-modal/job-summary-modal.component';
 import { CommonModule } from '@angular/common';
 
