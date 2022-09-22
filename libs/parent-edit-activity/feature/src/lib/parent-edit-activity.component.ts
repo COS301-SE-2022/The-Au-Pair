@@ -36,13 +36,14 @@ export class ParentEditActivityComponent implements OnInit {
   };
 
   currentChild : Child = {
-    id:"",
-    fname :"",
-    sname:"",
-    allergies:"",
-    diet : "",
-    parent:"",
-    aupair:""
+    id: "",
+    fname: "",
+    sname: "",
+    dob: "",
+    allergies: "",
+    diet: "",
+    parent: "",
+    aupair: ''
   };
 
   timeslot = "";
@@ -55,18 +56,12 @@ export class ParentEditActivityComponent implements OnInit {
   //Constructor
   constructor(private serv: API, private router: Router, public toastCtrl: ToastController, private http : HttpClient, private store: Store, private alertController: AlertController) 
   {
-    const navigation = this.router.getCurrentNavigation();
-    if(navigation !== null)
-      if(navigation.extras !== null)
-      { 
-        this.activityDetails.id = navigation.extras.state?.['id'];
-      }
+    this.activityDetails.id=this.store.snapshot().user.currentActivity;
   }
 
   ngOnInit(): void
   {    
     this.getActivityDetails();
-    this.getChildrenDetails();
   }
 
   //From HTML Form
@@ -297,14 +292,7 @@ export class ParentEditActivityComponent implements OnInit {
 
   returnToSchedule()
   {
-    this.router.navigate(['/schedule']).then(()=>{
-      window.location.reload();
-    });
-  }
-
-  sayHi()
-  {
-    console.log("Hi");
+    this.router.navigate(['/schedule']);
   }
 
   //Pop-up if activity is successfully updates
@@ -345,7 +333,7 @@ export class ParentEditActivityComponent implements OnInit {
   getActivityDetails()
   { 
     this.serv.getActivity(this.activityDetails.id).subscribe(
-      res=>{
+      async res=>{
         console.log("The response is:" + res); 
         
         this.activityDetails.id = res.id;
@@ -361,6 +349,7 @@ export class ParentEditActivityComponent implements OnInit {
         this.activityDetails.budget = res.budget;
         this.activityDetails.child = res.child;
         this.timeslot = res.timeStart + "-" + res.timeEnd
+        await this.getChildrenDetails();
       },
       error=>{console.log("Error has occured with API: " + error);}
     )
@@ -381,7 +370,7 @@ export class ParentEditActivityComponent implements OnInit {
     )
   };
 
-  getChildrenDetails()
+  async getChildrenDetails()
   {
     this.serv.getChildren(this.store.snapshot().user.id).toPromise().then(
       res=>{

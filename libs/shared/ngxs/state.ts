@@ -1,5 +1,5 @@
 import { Action, Selector, State, StateContext } from '@ngxs/store';
-import { SetId , SetType, SetFcmToken, SetName, Reset, SetChildren, SetAuPair, SetLoggedIn } from './actions';
+import { SetId , SetType, SetFcmToken, SetName, Reset, SetChildren, SetAuPair, SetLoggedIn, SetCurrentActivity, SetCurrentChild } from './actions';
 import { Injectable } from '@angular/core';
 import { map, Observable, of } from 'rxjs';
 export interface AppStateModel{
@@ -10,6 +10,8 @@ export interface AppStateModel{
     auPair: string;
     fcmToken: string;
     loggedIn: boolean;
+    currentActivity: string;
+    currentChild: string;
 }
 
 @State<AppStateModel>({
@@ -21,7 +23,9 @@ export interface AppStateModel{
         children: [],
         auPair: '',
         fcmToken: '',
-        loggedIn : false
+        loggedIn : false,
+        currentActivity : '', /* For editing activities */
+        currentChild: '', /* For editing children details */
     },
 })
 
@@ -78,12 +82,32 @@ export class AppState{
         return state.fcmToken;
     }
 
+    @Action(SetCurrentActivity)
+    setCurrentActivity({ patchState }: StateContext<AppStateModel>, { payload }: SetCurrentActivity) {
+        patchState({currentActivity: payload});
+    }
+
+    @Selector()
+    static getCurrentActivity(state : AppStateModel) {
+        return state.currentActivity;
+    }
+
+    @Action(SetCurrentChild)
+    SetCurrentChild({ patchState }: StateContext<AppStateModel>, { payload }: SetCurrentChild) {
+        patchState({currentChild: payload});
+    }
+
+    @Selector()
+    static getCurrentChild(state : AppStateModel) {
+        return state.currentChild;
+    }
+
     @Action(Reset)
     reset(ctx: StateContext<AppStateModel>): Observable<AppStateModel> {
         return of(ctx.getState())
         .pipe(
         map(currentState => {
-            ctx.patchState({type: -1, id: "", name: "", fcmToken: "", loggedIn: false, children: [], auPair: ""});
+            ctx.patchState({type: -1, id: "", name: "", fcmToken: "", loggedIn: false, currentActivity: "", currentChild: "" ,children: [], auPair: ""});
             return currentState;
         })
         );

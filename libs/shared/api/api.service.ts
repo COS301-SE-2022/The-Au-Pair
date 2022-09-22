@@ -73,7 +73,7 @@ export class API{
   }
 
   addChild(child : Child): Observable<any> {
-    return this.http.post(environment.apiURI+"/addChild",child);
+    return this.http.post(environment.apiURI+"/addChild",child, {responseType: "text"});
   }
 
   updateChild(child : Child) :Observable<any> {

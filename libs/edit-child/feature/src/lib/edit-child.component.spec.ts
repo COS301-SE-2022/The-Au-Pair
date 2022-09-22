@@ -15,15 +15,14 @@ describe('EditChildComponent', () => {
   let fixture: ComponentFixture<EditChildComponent>;
 
   //Valid form
-  const populatedForm = {childID: "0101011234098", childName: "name", surname: "surname", Allergies: "none", diet: "none"};
+  const populatedForm = {childID: "0101011234098", childName: "name", surname: "surname", dateOfBirth:"2015-10-10", Allergies: "none", diet: "none"};
 
   //Invalid forms
-  const invalidSA_ID = {childID: "99999911234098", childName: "name", surname: "surname", Allergies: "none", diet: "none"};
-  const emptyID = {childID: "", childName: "name", surname: "surname", Allergies: "none", diet: "none"};
-  const emptyFirstName = {childID: "0101011234098", childName: "", surname: "surname", Allergies: "none", diet: "none"};
-  const emptySurname = {childID: "0101011234098", childName: "name", surname: "", Allergies: "none", diet: "none"};
-  const emptyAllergies = {childID: "0101011234098", childName: "name", surname: "surname", Allergies: "", diet: "none"};
-  const emptyDiet = {childID: "0101011234098", childName: "name", surname: "surname", Allergies: "none", diet: ""};
+  const emptyID = {childID: "", childName: "name", surname: "surname", dateOfBirth:"2015-10-10", Allergies: "none", diet: "none"};
+  const emptyFirstName = {childID: "0101011234098", childName: "", surname: "surname", dateOfBirth:"2015-10-10", Allergies: "none", diet: "none"};
+  const emptySurname = {childID: "0101011234098", childName: "name", surname: "", dateOfBirth:"2015-10-10", Allergies: "none", diet: "none"};
+  const emptyAllergies = {childID: "0101011234098", childName: "name", surname: "surname", dateOfBirth:"2015-10-10", Allergies: "", diet: "none"};
+  const emptyDiet = {childID: "0101011234098", childName: "name", surname: "surname", dateOfBirth:"2015-10-10", Allergies: "none", diet: ""};
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
@@ -57,6 +56,7 @@ describe('EditChildComponent', () => {
       id: "0101011234098",
       fname: "name",
       sname: "surname",
+      dob: "2015-10-10",
       allergies: "none",
       diet: "none",
       parent: "",
@@ -79,29 +79,12 @@ describe('EditChildComponent', () => {
   //------------------------------------------------------------------------------------------------------------------------------------------------------------------------
   /**Invalid fields form testing**/
 
-  it('should, given a form with invalid South African ID, NOT poplate the activityDetails variable', async ()=>{
-    const expectedValue: Child = {
-      id: "",
-      fname: "",
-      sname: "",
-      allergies: "",
-      diet: "",
-      parent: "",
-      aupair: ''
-    };
-
-    jest.spyOn(component,"getChildValues");
-
-    await component.getChildValues(invalidSA_ID);
-
-    expect(component.childDetails).toEqual(expectedValue);
-  })
-
   it('should, given a form with no childID, NOT poplate the activityDetails variable', async ()=>{
     const expectedValue: Child = {
       id: "",
       fname: "",
       sname: "",
+      dob: "",
       allergies: "",
       diet: "",
       parent: "",
@@ -121,6 +104,7 @@ describe('EditChildComponent', () => {
       id: "",
       fname: "",
       sname: "",
+      dob: "",
       allergies: "",
       diet: "",
       parent: "",
@@ -139,6 +123,7 @@ describe('EditChildComponent', () => {
       id: "",
       fname: "",
       sname: "",
+      dob: "",
       allergies: "",
       diet: "",
       parent: "",
@@ -158,6 +143,7 @@ describe('EditChildComponent', () => {
       id: "",
       fname: "",
       sname: "",
+      dob: "",
       allergies: "",
       diet: "",
       parent: "",
@@ -177,6 +163,7 @@ describe('EditChildComponent', () => {
       id: "",
       fname: "",
       sname: "",
+      dob: "",
       allergies: "",
       diet: "",
       parent: "",
