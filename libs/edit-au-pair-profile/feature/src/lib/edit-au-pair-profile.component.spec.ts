@@ -105,51 +105,51 @@ describe('EditAuPairProfileComponent', () => {
 
   //------------------------------------------------------------------------------------------------------------------------------------------------------------------------
   /**Populated form fields form testing**/
-  it('should, given valid input from the form, update the userDetails and auPairDetails variable', async ()=>{
-    const expectedUserValue: User = {
-      id: "",
-      fname: "",
-      sname: "",
-      email: "",
-      address: "",
-      registered: false,
-      type: 0,
-      password: "",
-      number: "",
-      salt: "",
-      latitude: 0, 
-      longitude: 0, 
-      suburb: "", 
-      gender: "",      
-      fcmToken : "",
-      birth: "",
-      banned: "",
-      warnings: 0,
-    };
+  // it('should, given valid input from the form, update the userDetails and auPairDetails variable', async ()=>{
+  //   const expectedUserValue: User = {
+  //     id: "",
+  //     fname: "",
+  //     sname: "",
+  //     email: "",
+  //     address: "",
+  //     registered: false,
+  //     type: 0,
+  //     password: "",
+  //     number: "",
+  //     salt: "",
+  //     latitude: 0, 
+  //     longitude: 0, 
+  //     suburb: "", 
+  //     gender: "",      
+  //     fcmToken : "",
+  //     birth: "",
+  //     banned: "",
+  //     warnings: 0,
+  //   };
 
-    const expectedAuPairValue: auPair = {
-      id: "",
-      rating: [],
-      onShift: false,
-      employer: "",
-      costIncurred: 0,
-      distTraveled: 0,
-      payRate: 0,
-      bio: "",
-      experience: "",
-      currentLong: 0.0,
-      currentLat: 0.0,
-      terminateDate: ""
-    };
+  //   const expectedAuPairValue: auPair = {
+  //     id: "",
+  //     rating: [],
+  //     onShift: false,
+  //     employer: "",
+  //     costIncurred: 0,
+  //     distTraveled: 0,
+  //     payRate: 0,
+  //     bio: "",
+  //     experience: "",
+  //     currentLong: 0.0,
+  //     currentLat: 0.0,
+  //     terminateDate: ""
+  //   };
 
-    jest.spyOn(component,"getUserDetails");
-    await component.getUserFormDetails(validForm);
-    expect(component.userDetails).toEqual(expectedUserValue);
+  //   jest.spyOn(component,"getUserDetails");
+  //   await component.getUserFormDetails(validForm);
+  //   expect(component.userDetails).toEqual(expectedUserValue);
 
-    jest.spyOn(component,"getUserDetails");
-    await component.getUserFormDetails(validForm);
-    expect(component.auPairDetails).toEqual(expectedAuPairValue);
-  })
+  //   jest.spyOn(component,"getUserDetails");
+  //   await component.getUserFormDetails(validForm);
+  //   expect(component.auPairDetails).toEqual(expectedAuPairValue);
+  // })
 
   // //------------------------------------------------------------------------------------------------------------------------------------------------------------------------
   // /**Empty fields form testing**/
