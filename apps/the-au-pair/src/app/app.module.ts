@@ -6,7 +6,7 @@ import { AppComponent } from './app.component';
 import { HttpClientModule } from '@angular/common/http';
 import { API } from '../../../../libs/shared/api/api.service';
 import { Geolocation } from '@awesome-cordova-plugins/geolocation/ngx';
-import { APP_BASE_HREF } from "@angular/common";
+import { APP_BASE_HREF, CommonModule } from "@angular/common";
 
 @NgModule({
   declarations: [AppComponent],
@@ -16,6 +16,7 @@ import { APP_BASE_HREF } from "@angular/common";
     ShellModule, 
     HttpClientModule, 
     NavbarModule,
+    CommonModule
   ],
   bootstrap: [AppComponent],
   providers: [

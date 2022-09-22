@@ -63,8 +63,6 @@ export class NavbarComponent implements OnInit
 
   menuOpen()
   {
-    console.log("menu open");
-    console.log(this.menController.isEnabled());
     this.menController.open('start')
   }
 
@@ -84,20 +82,6 @@ export class NavbarComponent implements OnInit
     if(this.type == 0)
     {
       this.router.navigate(['/admin-reports']);
-    }
-  }
-
-  explore(){
-    if (this.kids < 1){
-      this.openToast('You need to have children added to your profile in order to hire an Au Pair');
-    }
-    else if(this.hasAuPair)
-    {
-      this.openToast('You already have an Au Pair employed');
-    }
-    else
-    {
-      this.router.navigate(['/explore']);
     }
   }
 
