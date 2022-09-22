@@ -393,6 +393,7 @@ export class AuPairDashboardComponent implements OnInit {
           this.childDetails.allergies = res[i].allergies;
           this.childDetails.diet = res[i].diet;
           this.childDetails.parent = res[i].parent;
+          this.childDetails.dob = res[i].dob;
           this.childDetails.aupair = "";
 
           this.updateChild(this.childDetails);

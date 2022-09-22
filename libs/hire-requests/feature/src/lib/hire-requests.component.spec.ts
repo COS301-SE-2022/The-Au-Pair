@@ -327,4 +327,11 @@ describe('JobSummaryModal', () => {
     expect(component.closeModal).toHaveBeenCalled();
   })
 
+  it('should, return the age from a given date', async () =>{
+    const expectedAge = 18;
+    jest.spyOn(component, "getAge").mockReturnValue(18);
+    const age = await component.getAge('05/07/2004');
+    expect(age).toEqual(expectedAge);
+  })
+
 });

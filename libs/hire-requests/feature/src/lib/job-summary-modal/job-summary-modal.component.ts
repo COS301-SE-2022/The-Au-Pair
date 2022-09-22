@@ -236,6 +236,7 @@ export class JobSummaryModalComponent implements OnInit {
            this.childDetails.allergies = res[i].allergies;
            this.childDetails.diet = res[i].diet;
            this.childDetails.parent = res[i].parent;
+           this.childDetails.dob = res[i].dob;
            this.childDetails.aupair = this.auPairID;
  
            this.updateChild(this.childDetails);
@@ -364,5 +365,17 @@ export class JobSummaryModalComponent implements OnInit {
     const ret = (Math.round(avg * 100) / 100).toFixed(1);
 
     return ret;
+  }
+
+  getAge(dateString : string) {
+    const today = new Date();
+    const birthDate = new Date(dateString);
+    let age = today.getFullYear() - birthDate.getFullYear();
+    const m = today.getMonth() - birthDate.getMonth();
+    if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate())) {
+        age--;
+    }
+
+    return age;
   }
 }
