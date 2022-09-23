@@ -95,16 +95,41 @@ export class ScheduleComponent implements OnInit{
     this.activities.splice(0);
 
     //Get activities for all children
-    this.children.forEach(element => {
-      this.serv.getSchedule(element.id).subscribe(
+    for (let i = 0; i < this.children.length; i++)
+     {
+      const child = this.children[i];
+      await this.serv.getSchedule(child.id).toPromise().then(
         res=>{
           res.forEach(( act : Activity) => {
-            this.activities.push(act);            
+            this.activities.push(act);  
           });
-        },
-        error=>{console.log("Error has occured with API: " + error);}
-      )
-    });
+        }).catch(
+          error=>
+          {
+            console.log("Error has occured with API: " + error);
+          }
+        );
+    }
+    this.orderActivities()
+  }
+
+  //Order activities by time
+  async orderActivities()
+  {    
+    //Filter
+    for (let i = 0; i < this.activities.length-1; i++) 
+    {
+      
+      for (let j = 1; j < this.activities.length; j++) 
+      { 
+        if(this.activities[i].timeStart> this.activities[j].timeStart)  
+        {
+          const temp = this.activities[i];
+          this.activities[i] = this.activities[j];
+          this.activities[j] = temp;
+        }
+      }
+    }
   }
 
   //Clear schedule for child
