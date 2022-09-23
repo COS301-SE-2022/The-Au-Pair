@@ -21,6 +21,9 @@ export class JobSummaryModalComponent implements OnInit {
     "Mon","Tue","Wed","Thu","Fri","Sat","Sun"
   ];
 
+  children : any;
+  childActivities : any[] = [];
+
   shiftHours: number[] = [];
   shiftRangeMin: string[] = [];
   shiftRangeMax: string[] = [];
@@ -92,8 +95,77 @@ export class JobSummaryModalComponent implements OnInit {
     await this.getParentDetails(this.parentID);
     await this.getUserDetails();
     await this.getChildrenDetails();
+    await this.getActivities();
+  }
 
-    this.populateGraph();
+  async getActivities(){
+    await this.serv.getChildren(this.parentID).subscribe(
+      res => {
+          this.children = res;
+          this.children.forEach((element: { id: string; }) => {
+          this.auPairChildren.push(element.id);
+        });
+        this.serv.getAuPairSchedule(this.auPairChildren).subscribe(
+          res=>{
+            this.activities = res;
+            this.setChildActivity();
+          }
+        );
+      },
+      error => { console.log("Error has occured with API: " + error); },
+    );
+  }
+
+  setChildActivity(){    
+    this.children.forEach((child: { id: any; fname: any; }) => {
+      this.activities.forEach((act: { childId: any; child: any; name: any; id: any; timeStart: any; day: any; }) => {
+        if(child.id === act.child){
+          const childActivity = {
+            childName : child.fname,
+            childId : act.child,
+            activityName : act.name,
+            activityId : act.id,
+            time : act.timeStart,
+            dayofweek : act.day,
+          }
+          this.childActivities.push(childActivity);
+        }
+      });
+    });
+
+    let actCount = 0;
+    let minTime = "23:59";
+    let maxTime = "00:00";
+
+    const actDays = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"];
+
+    for(let i = 0; i < actDays.length; i++)
+    {
+      actCount = 0;
+      minTime = "23:59";
+      maxTime = "00:00";
+
+      this.activities.forEach((act: {timeStart: any; day: any; timeEnd: any;}) => 
+      {
+        if(act.day === actDays[i])
+        {
+          actCount++;
+          
+          if(act.timeStart <= minTime)
+          {
+            minTime = act.timeStart;
+          }
+
+          if(act.timeEnd >= maxTime)
+          {
+            maxTime = act.timeEnd;
+          }
+        }
+      });
+      this.shiftHours[i] = actCount;
+      this.shiftRangeMin[i] = minTime;
+      this.shiftRangeMax[i] = maxTime;
+    }  
   }
 
   async getUserDetails()
@@ -288,53 +360,6 @@ export class JobSummaryModalComponent implements OnInit {
         return error;
       }
     )
-  }
-
-  async populateGraph()
-  {   
-    let actCount = 0;
-    let minTime = "23:59";
-    let maxTime = "00:00";
-
-    const actDays = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"];
-
-    await this.serv.getAuPairSchedule(this.parentDetails.children).toPromise()
-    .then(
-      res=>{
-        this.activities = res;      
-      },
-      error=>{
-        console.log("Error has occured with API: " + error);
-      }
-    )
-
-    for(let i = 0; i < actDays.length; i++)
-    {
-      actCount = 0;
-      minTime = "23:59";
-      maxTime = "00:00";
-
-      this.activities.forEach((act: {timeStart: any; day: any; timeEnd: any;}) => 
-      {
-        if(act.day === actDays[i])
-        {
-          actCount++;
-          
-          if(act.timeStart <= minTime)
-          {
-            minTime = act.timeStart;
-          }
-
-          if(act.timeEnd >= maxTime)
-          {
-            maxTime = act.timeEnd;
-          }
-        }
-      });
-      this.shiftHours[i] = actCount;
-      this.shiftRangeMin[i] = minTime;
-      this.shiftRangeMax[i] = maxTime;
-    }    
   }
 
   closeModal()

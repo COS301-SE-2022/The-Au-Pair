@@ -102,11 +102,10 @@ export class JobSummaryParentViewComponent implements OnInit {
     await this.getUserDetails();
     await this.getParentDetails();
     await this.getChildrenDetails();
-    this.getNoActivities();
   }
 
   async getActivities(){
-    this.serv.getChildren(this.parentID).subscribe(
+    await this.serv.getChildren(this.parentID).subscribe(
       res => {
           this.children = res;
           this.children.forEach((element: { id: string; }) => {
@@ -181,7 +180,7 @@ export class JobSummaryParentViewComponent implements OnInit {
     )
   }
 
-  setChildActivity(){
+  setChildActivity(){    
     this.children.forEach((child: { id: any; fname: any; }) => {
       this.activities.forEach((act: { childId: any; child: any; name: any; id: any; timeStart: any; day: any; }) => {
         if(child.id === act.child){
@@ -197,6 +196,23 @@ export class JobSummaryParentViewComponent implements OnInit {
         }
       });
     });
+
+    let actCount = 0;
+
+    const actDays = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"];
+
+    for(let i = 0; i < actDays.length; i++)
+    {
+      actCount = 0;
+      for(let j = 0; j < this.childActivities.length; j++)
+      {  
+        if(this.childActivities[j].dayofweek === actDays[i])
+        {
+          actCount++;
+        }
+      };
+      this.shiftHours[i] = actCount;
+    } 
   }
 
   async sendHireRequests()
@@ -267,37 +283,6 @@ export class JobSummaryParentViewComponent implements OnInit {
       cssClass: 'toastPopUp'
     });
     await toast.present();
-  }
-
-  async getNoActivities()
-  {   
-    let actCount = 0;
-
-    const actDays = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"];
-
-    await this.serv.getAuPairSchedule(this.parentDetails.children).toPromise()
-    .then(
-      res=>{
-        this.activities = res;      
-      },
-      error=>{
-        console.log("Error has occured with API: " + error);
-      }
-    )
-
-    for(let i = 0; i < actDays.length; i++)
-    {
-      actCount = 0;
-
-      this.activities.forEach((act: {timeStart: any; day: any; timeEnd: any;}) => 
-      {
-        if(act.day === actDays[i])
-        {
-          actCount++;
-        }
-      });
-      this.shiftHours[i] = actCount;
-    }    
   }
 
   getAverage(ratings : number[])

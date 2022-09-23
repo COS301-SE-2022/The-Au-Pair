@@ -321,10 +321,17 @@ export class AppComponent implements OnInit {
   async getCurrentAuPairDetails() {
     const res = await this.serv.getAuPair(this.userID).toPromise()
     this.auPairDetails.id = res.id;
+    this.auPairDetails.rating = res.rating;
     this.auPairDetails.onShift = res.onShift;
     this.auPairDetails.employer = res.employer;
+    this.auPairDetails.costIncurred = res.costIncurred;
+    this.auPairDetails.distTraveled = res.distTraveled;
+    this.auPairDetails.payRate = res.payRate;
+    this.auPairDetails.bio = res.bio;
+    this.auPairDetails.experience = res.experience;
     this.auPairDetails.currentLong = res.currentLong;
     this.auPairDetails.currentLat = res.currentLat;
+    this.auPairDetails.terminateDate = res.terminateDate;
   };
 
   async updateCoordinates() {
