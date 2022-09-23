@@ -1,5 +1,5 @@
 import { Action, Selector, State, StateContext } from '@ngxs/store';
-import { SetId , SetType, SetFcmToken, SetName, Reset, SetChildren, SetAuPair, SetLoggedIn, SetCurrentActivity, SetCurrentChild } from './actions';
+import { SetId , SetType, SetFcmToken, SetName, Reset, SetChildren, SetAuPair, SetLoggedIn, SetCurrentActivity, SetCurrentChild, SetEmail } from './actions';
 import { Injectable } from '@angular/core';
 import { map, Observable, of } from 'rxjs';
 export interface AppStateModel{
@@ -12,6 +12,7 @@ export interface AppStateModel{
     loggedIn: boolean;
     currentActivity: string;
     currentChild: string;
+    email: string;
 }
 
 @State<AppStateModel>({
@@ -26,6 +27,7 @@ export interface AppStateModel{
         loggedIn : false,
         currentActivity : '', /* For editing activities */
         currentChild: '', /* For editing children details */
+        email: '', /* For sending emails to logged in user */
     },
 })
 
@@ -107,7 +109,18 @@ export class AppState{
         return of(ctx.getState())
         .pipe(
         map(currentState => {
-            ctx.patchState({type: -1, id: "", name: "", fcmToken: "", loggedIn: false, currentActivity: "", currentChild: "" ,children: [], auPair: ""});
+            ctx.patchState({
+                type: -1,
+                id: "",
+                name: "",
+                fcmToken: "",
+                loggedIn: false,
+                currentActivity: "",
+                currentChild: "",
+                children: [],
+                auPair: "",
+                email: "",
+            });
             return currentState;
         })
         );
@@ -131,5 +144,15 @@ export class AppState{
     @Selector()
     static getAuPair(state : AppStateModel) {
         return state.auPair;
+    }
+
+    @Action(SetEmail)
+    setEmail({ patchState }: StateContext<AppStateModel>, { payload }: SetEmail) {
+        patchState({email: payload});
+    }
+    
+    @Selector()
+    static getEmail(state : AppStateModel) {
+        return state.email;
     }
 }

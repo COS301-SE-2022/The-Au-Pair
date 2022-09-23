@@ -4,7 +4,7 @@ import { ToastController } from '@ionic/angular';
 import { Router } from '@angular/router';
 import { API } from '../../../../shared/api/api.service';
 import { Store } from '@ngxs/store';
-import { SetFcmToken, SetId , SetType, SetName, Reset, SetLoggedIn } from '../../../../shared/ngxs/actions';
+import { SetFcmToken, SetId , SetType, SetName, Reset, SetLoggedIn, SetEmail } from '../../../../shared/ngxs/actions';
 import {
   ActionPerformed,
   PushNotificationSchema,
@@ -154,6 +154,7 @@ export class LoginComponent implements OnInit {
         this.store.dispatch(new SetType(type));
         this.store.dispatch(new SetFcmToken(this.fcmToken));
         this.store.dispatch(new SetName(name));
+        this.store.dispatch(new SetEmail(this.loginDetailsForm.value.email));
 
         //set loggedIn to true
         this.store.dispatch(new SetLoggedIn(true));
