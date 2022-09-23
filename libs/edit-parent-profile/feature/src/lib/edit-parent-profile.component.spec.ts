@@ -15,6 +15,18 @@ import { SetId } from '../../../../../libs/shared/ngxs/actions';
 const apiMock = {
   getUser(){
     return of({})
+  },
+  getParent(){
+    return of({})
+  },
+  getMedAid(){
+    return of({})
+  },
+  editUser(){
+    return of({})
+  },
+  editMedAid(){
+    return of({})
   }
 }
 describe('EditParentProfileComponent', () => {
@@ -101,13 +113,13 @@ describe('EditParentProfileComponent', () => {
       warnings: undefined,
     };
 
-    const expectedMedAidValue: medAid = {
-      id: "",
-      plan: "",
-      name: "",
-      sname: "",
-      mID: "",
-      provider: "",
+    const expectedMedAidValue: any = {
+      id: undefined,
+      plan: undefined,
+      name: undefined,
+      sname: undefined,
+      mID: undefined,
+      provider: undefined,
     };
 
     jest.spyOn(component,"getUserDetails");
@@ -143,13 +155,13 @@ describe('EditParentProfileComponent', () => {
       warnings: undefined,
     };
 
-    const expectedMedAidValue: medAid = {
-      id: "",
-      plan: "",
-      name: "",
-      sname: "",
-      mID: "",
-      provider: "",
+    const expectedMedAidValue: any = {
+      id: undefined,
+      plan: undefined,
+      name: undefined,
+      sname: undefined,
+      mID: undefined,
+      provider: undefined,
     };
 
     jest.spyOn(component,"getUserDetails");
@@ -183,13 +195,13 @@ describe('EditParentProfileComponent', () => {
       warnings: undefined,
     };
 
-    const expectedMedAidValue: medAid = {
-      id: "",
-      plan: "",
-      name: "",
-      sname: "",
-      mID: "",
-      provider: "",
+    const expectedMedAidValue: any = {
+      id: undefined,
+      plan: undefined,
+      name: undefined,
+      sname: undefined,
+      mID: undefined,
+      provider: undefined,
     };
 
     jest.spyOn(component,"getUserDetails");
@@ -223,13 +235,13 @@ describe('EditParentProfileComponent', () => {
       warnings: undefined,
     };
 
-    const expectedMedAidValue: medAid = {
-      id: "",
-      plan: "",
-      name: "",
-      sname: "",
-      mID: "",
-      provider: "",
+    const expectedMedAidValue: any = {
+      id: undefined,
+      plan: undefined,
+      name: undefined,
+      sname: undefined,
+      mID: undefined,
+      provider: undefined,
     };
 
     jest.spyOn(component,"getUserDetails");
@@ -263,13 +275,13 @@ describe('EditParentProfileComponent', () => {
       warnings: undefined,
     };
 
-    const expectedMedAidValue: medAid = {
-      id: "",
-      plan: "",
-      name: "",
-      sname: "",
-      mID: "",
-      provider: "",
+    const expectedMedAidValue: any = {
+      id: undefined,
+      plan: undefined,
+      name: undefined,
+      sname: undefined,
+      mID: undefined,
+      provider: undefined,
     };
 
     jest.spyOn(component,"getUserDetails");
@@ -303,13 +315,13 @@ describe('EditParentProfileComponent', () => {
       warnings: undefined,
     };
 
-    const expectedMedAidValue: medAid = {
-      id: "",
-      plan: "",
-      name: "",
-      sname: "",
-      mID: "",
-      provider: "",
+    const expectedMedAidValue: any = {
+      id: undefined,
+      plan: undefined,
+      name: undefined,
+      sname: undefined,
+      mID: undefined,
+      provider: undefined,
     };
 
     jest.spyOn(component,"getUserDetails");
@@ -343,13 +355,13 @@ describe('EditParentProfileComponent', () => {
       warnings: undefined,
     };
 
-    const expectedMedAidValue: medAid = {
-      id: "",
-      plan: "",
-      name: "",
-      sname: "",
-      mID: "",
-      provider: "",
+    const expectedMedAidValue: any = {
+      id: undefined,
+      plan: undefined,
+      name: undefined,
+      sname: undefined,
+      mID: undefined,
+      provider: undefined,
     };
 
     jest.spyOn(component,"getUserDetails");
@@ -383,13 +395,13 @@ describe('EditParentProfileComponent', () => {
       warnings: undefined,
     };
 
-    const expectedMedAidValue: medAid = {
-      id: "",
-      plan: "",
-      name: "",
-      sname: "",
-      mID: "",
-      provider: "",
+    const expectedMedAidValue: any = {
+      id: undefined,
+      plan: undefined,
+      name: undefined,
+      sname: undefined,
+      mID: undefined,
+      provider: undefined,
     };
 
     jest.spyOn(component,"getUserDetails");
@@ -423,13 +435,13 @@ describe('EditParentProfileComponent', () => {
       warnings: undefined,
     };
 
-    const expectedMedAidValue: medAid = {
-      id: "",
-      plan: "",
-      name: "",
-      sname: "",
-      mID: "",
-      provider: "",
+    const expectedMedAidValue: any = {
+      id: undefined,
+      plan: undefined,
+      name: undefined,
+      sname: undefined,
+      mID: undefined,
+      provider: undefined,
     };
 
     jest.spyOn(component,"getUserDetails");
@@ -469,5 +481,118 @@ describe('EditParentProfileComponent', () => {
 
     await component.ngOnInit();
     expect(component.parentID).toEqual("0101015077086");
+  })
+
+  it('should, return the parents details from the api call', async () => {
+    store.dispatch(new SetId("0101015077086"));
+    jest.spyOn(apiMock, 'getParent').mockImplementation(()=>of(
+      {
+        id: "0101015077086",
+        children: [],
+        medID: "",
+        auPair: "",
+        rating: [5]
+      }
+    ));
+
+    await component.ngOnInit();
+    expect(component.parentID).toEqual("0101015077086");
+  })
+
+  it('should, return the parents details from the api call', async () => {
+    store.dispatch(new SetId("0101015077086"));
+    jest.spyOn(apiMock, 'getMedAid').mockImplementation(()=>of(
+      {
+        id: "0101015077086",
+        plan: "Full",
+        name: "TestFN",
+        sname: "TestSN",
+        mID: "0101015077087",
+        provider: "Test Provider",
+      }
+    ));
+
+    await component.ngOnInit();
+    expect(component.parentID).toEqual("0101015077086");
+  })
+
+  it('should, open a toast when openToast is called', async ()=>{
+    jest.spyOn(component,"openToast");
+    component.openToast();
+    expect(await component.openToast).toReturn();
+  });
+
+  it('should, call editUser function if the form contains valid details', async ()=>{
+    jest.spyOn(component,"editUser");
+
+    const UserValue: User = {
+      id: "",
+      fname: "",
+      sname: "",
+      email: "",
+      address: "",
+      registered: false,
+      type: 0,
+      password: "",
+      number: "",
+      salt: "",
+      latitude: 0,
+      longitude: 0,
+      suburb: "",
+      gender: "",
+      fcmToken : "",
+      birth: "",
+      banned: "",
+      warnings: 0,
+    };
+
+    const MedAidValue: medAid = {
+      id: "",
+      plan: "",
+      name: "",
+      sname: "",
+      mID: "",
+      provider: "",
+    };
+
+    await component.editDetails(UserValue, MedAidValue);
+    expect(component.editUser).toHaveBeenCalled();
+  })
+
+  it('should, call editMedAid function if the form contains valid details', async ()=>{
+    jest.spyOn(component,"editMedAid");
+
+    const UserValue: User = {
+      id: "",
+      fname: "",
+      sname: "",
+      email: "",
+      address: "",
+      registered: false,
+      type: 0,
+      password: "",
+      number: "",
+      salt: "",
+      latitude: 0,
+      longitude: 0,
+      suburb: "",
+      gender: "",
+      fcmToken : "",
+      birth: "",
+      banned: "",
+      warnings: 0,
+    };
+
+    const MedAidValue: medAid = {
+      id: "",
+      plan: "",
+      name: "",
+      sname: "",
+      mID: "",
+      provider: "",
+    };
+
+    await component.editDetails(UserValue, MedAidValue);
+    expect(component.editMedAid).toHaveBeenCalled();
   })
 });

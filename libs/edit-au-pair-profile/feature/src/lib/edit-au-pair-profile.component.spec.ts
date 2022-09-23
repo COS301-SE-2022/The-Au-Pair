@@ -481,5 +481,11 @@ describe('EditAuPairProfileComponent', () => {
     await component.ngOnInit();
     expect(component.aupairID).toEqual("0101015077086");
   })
+
+  it('should, open a toast when openToast is called', async ()=>{
+    jest.spyOn(component,"openToast");
+    component.openToast();
+    expect(await component.openToast).toReturn();
+  });
 });
 
