@@ -4,7 +4,7 @@ import { ToastController } from '@ionic/angular';
 import { HttpClient } from '@angular/common/http';
 import { User, auPair, Parent, Email } from '../../../../shared/interfaces/interfaces';
 import { API } from '../../../../shared/api/api.service';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'the-au-pair-register',
@@ -85,8 +85,7 @@ export class RegisterComponent {
     terminateDate: "",
   }
 
-
-  constructor(private route : ActivatedRoute, public formBuilder: FormBuilder, public toastCtrl: ToastController, private http: HttpClient, private serv: API) 
+  constructor(private route : ActivatedRoute, public router: Router, public formBuilder: FormBuilder, public toastCtrl: ToastController, private http: HttpClient, private serv: API) 
   {
     this.parentRegisterDetailsForm = formBuilder.group({
       name: ['', Validators.compose([Validators.maxLength(30), Validators.pattern('^[a-zA-Z ,\'-]+$'), Validators.required])],
@@ -131,7 +130,7 @@ export class RegisterComponent {
       }
       else
       {
-          this.verifyLocation(this.parentRegisterDetailsForm.value.location);
+          //this.verifyLocation(this.parentRegisterDetailsForm.value.location);
 
           if (this.locationError)
           {
@@ -250,7 +249,7 @@ export class RegisterComponent {
           application = res;
         },
         error => {
-          console.log("Error has occured with API: " + error);
+          console.log(error);
         }
       )
 
@@ -287,6 +286,7 @@ export class RegisterComponent {
           .then(
             async res => {
               await this.sendParentEmail();
+              this.router.navigate(['/login-page']);
               console.log("The response is:" + res);
             },
             error => {
@@ -307,6 +307,7 @@ export class RegisterComponent {
             async res => {
               await this.sendAuPairEmail();
               await this.sendAdminEmail();
+              this.router.navigate(['/login-page']);
               console.log("The response is:" + res);
             },
             error => {
@@ -319,6 +320,9 @@ export class RegisterComponent {
       {
         this.openToast("Email or ID has been banned : " + application);
       }
+      else if (application == "ID"){
+        this.openToast("ID already in use!");
+      }
       else
       {
         this.openToast("Account already exists with email : " + application);
@@ -326,7 +330,7 @@ export class RegisterComponent {
     }
     this.registering = false;
   }
-
+ 
   async openToast(message: string)
   {
     const toast = await this.toastCtrl.create({
@@ -345,7 +349,7 @@ export class RegisterComponent {
 
     const locationParam = loc.replace(' ', '+');
     const params = locationParam + '&limit=4&format=json&polygon_geojson=1&addressdetails=1';
-
+    
     //Make the API call
     await this.http.get('https://nominatim.openstreetmap.org/search?q='+params)
     .toPromise()

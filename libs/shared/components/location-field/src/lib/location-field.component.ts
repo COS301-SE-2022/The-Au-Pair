@@ -119,4 +119,8 @@ export class LocationFieldComponent implements ControlValueAccessor {
     }
     return false;
   }
+
+  radioChecked(event: any){
+    this.value = event.target.value;
+  }
 }
