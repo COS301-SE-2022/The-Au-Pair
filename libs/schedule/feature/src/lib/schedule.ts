@@ -35,17 +35,28 @@ export class ScheduleComponent implements OnInit{
       this.getParentChildren();
   }
 
-  getSelectedChild(){
-    this.children.forEach(element => {
-      if(element.name == this.selectedChildName){
-        this.selectedChild.name = element.name;
-        this.selectedChild.id = element.id;
-      }
-    });
-    this.getActivities(this.selectedChild.id)
+  getSelectedChild()
+  { 
+    console.log("In here:", this.selectedChildName);
+    if(this.selectedChildName == "All Children")
+    {
+      this.getAllActivities();
+    }
+    else
+    {
+      this.children.forEach(element => {
+        if(element.name == this.selectedChildName){
+          this.selectedChild.name = element.name;
+          this.selectedChild.id = element.id;
+        }
+      });
+      this.getActivities(this.selectedChild.id)
+    }
   }
 
-  getParentChildren(){
+  getParentChildren()
+  {
+    //Push an option for view of all children
     this.serv.getChildren(this.parentID).toPromise().then(
       res => {
       res.forEach((element: any) => {
@@ -76,6 +87,24 @@ export class ScheduleComponent implements OnInit{
       },
       error=>{console.log("Error has occured with API: " + error);}
     )
+  }
+
+  async getAllActivities()
+  {
+    //clear all existing activities
+    this.activities.splice(0);
+
+    //Get activities for all children
+    this.children.forEach(element => {
+      this.serv.getSchedule(element.id).subscribe(
+        res=>{
+          res.forEach(( act : Activity) => {
+            this.activities.push(act);            
+          });
+        },
+        error=>{console.log("Error has occured with API: " + error);}
+      )
+    });
   }
 
   //Clear schedule for child
@@ -114,6 +143,12 @@ export class ScheduleComponent implements OnInit{
         return error;
       }
     )
+  }
+
+  doSomething()
+  {
+    console.log("In here");
+    
   }
 
 

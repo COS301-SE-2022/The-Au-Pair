@@ -59,7 +59,6 @@ export class AuPairScheduleComponent implements OnInit {
   }
 
   async getActivities(){
-    console.log("getActivities");
     this.serv.getChildren(this.aupairID).subscribe(
       res => {
         this.children = res;
