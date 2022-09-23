@@ -35,7 +35,7 @@ public class ParentController
   }
 
   @PostMapping("/getAuPairEmployer")
-  public Parent getAuPairEmployer(@RequestParam String id)
+  public Parent getAuPairEmployer(@RequestBody String id)
   {
     return this.ps.getAuPairEmployer(id);
   }
