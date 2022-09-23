@@ -15,6 +15,7 @@ import { SetId } from '../../../../../libs/shared/ngxs/actions';
 import { UserReportModalComponent } from './user-report-modal/user-report-modal.component';
 import { AuPairRatingModalComponent } from './au-pair-rating-modal/au-pair-rating-modal.component';
 import { Router } from '@angular/router';
+import { auPair } from 'libs/shared/interfaces/interfaces';
 
 const apiMock = {
   getParent() {
@@ -133,6 +134,81 @@ describe('ParentProfileComponent', () => {
     component.presentAlert();
     expect(await component.presentAlert).toReturn();
   });
+
+  it('should, terminate the employment if 2 weeks have passed since resignation', async () => {
+    const auPair1: auPair = {
+      id: "0192835611234",
+      rating: [1],
+      onShift: false,
+      employer: "0192835611235",
+      costIncurred: 0,
+      distTraveled: 0,
+      payRate: 0,
+      bio: "",
+      experience: "",
+      currentLong: 0.0,
+      currentLat: 0.0,
+      terminateDate: "2022-6-23",
+    }
+
+    jest.spyOn(component, "terminateAuPair");
+
+    component.currentAuPair = auPair1;
+
+    await component.checkResignation();
+
+    expect(component.terminateAuPair).toHaveBeenCalled();
+  })
+
+  it('should, not terminate the employment if no terminate date is set', async () => {
+    const auPair1: auPair = {
+      id: "0192835611234",
+      rating: [1],
+      onShift: false,
+      employer: "0192835611235",
+      costIncurred: 0,
+      distTraveled: 0,
+      payRate: 0,
+      bio: "",
+      experience: "",
+      currentLong: 0.0,
+      currentLat: 0.0,
+      terminateDate: "",
+    }
+
+    jest.spyOn(component, "terminateAuPair");
+
+    component.currentAuPair = auPair1;
+
+    await component.checkResignation();
+
+    expect(component.terminateAuPair).toBeCalledTimes(0);
+  })
+
+  it('should, not terminate the employment if terminate date is within 2 weeks of resignation', async () => {
+    const auPair1: auPair = {
+      id: "0192835611234",
+      rating: [1],
+      onShift: false,
+      employer: "0192835611235",
+      costIncurred: 0,
+      distTraveled: 0,
+      payRate: 0,
+      bio: "",
+      experience: "",
+      currentLong: 0.0,
+      currentLat: 0.0,
+      terminateDate: "2022-9-23",
+    }
+
+    jest.spyOn(component, "terminateAuPair");
+
+    component.currentAuPair = auPair1;
+
+    await component.checkResignation();
+
+    expect(component.terminateAuPair).toBeCalledTimes(0);
+  })
 });
 
 describe('AuPairRatingModalComponent', () => {

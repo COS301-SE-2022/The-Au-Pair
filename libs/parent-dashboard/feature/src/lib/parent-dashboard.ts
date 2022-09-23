@@ -396,10 +396,7 @@ export class ParentDashboardComponent implements OnInit{
           text: 'Yes',
           cssClass: 'alert-button-confirm',
           handler: () => { this.terminateAuPair(); }
-        }
-      ]
-    });
-
+        }]});
     await alert.present();
   }
 }
