@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { ToastController } from '@ionic/angular';
+import { ToastController, LoadingController } from '@ionic/angular';
 import { Router } from '@angular/router';
 import { API } from '../../../../shared/api/api.service';
 import { Store } from '@ngxs/store';
@@ -30,7 +30,7 @@ export class LoginComponent implements OnInit {
   
   fcmToken = '';
 
-  constructor(public formBuilder: FormBuilder, public toastCtrl: ToastController, private serv: API, private store: Store, public httpClient: HttpClient, public router: Router) {
+  constructor(public formBuilder: FormBuilder, public toastCtrl: ToastController, private serv: API, private store: Store, public httpClient: HttpClient, public router: Router,public loadingController: LoadingController) {
     this.loginDetailsForm = formBuilder.group({
       email : ['', Validators.compose([Validators.maxLength(30), Validators.required])],
       pass : ['', Validators.compose([Validators.maxLength(20), Validators.required])],
@@ -149,33 +149,34 @@ export class LoginComponent implements OnInit {
       )
       else
       {
-        this.errState = false;
-        this.store.dispatch(new SetId(id));
-        this.store.dispatch(new SetType(type));
-        this.store.dispatch(new SetFcmToken(this.fcmToken));
-        this.store.dispatch(new SetName(name));
-        this.store.dispatch(new SetEmail(this.loginDetailsForm.value.email));
+        this.presentLoadingWithOptions();
+        // this.errState = false;
+        // this.store.dispatch(new SetId(id));
+        // this.store.dispatch(new SetType(type));
+        // this.store.dispatch(new SetFcmToken(this.fcmToken));
+        // this.store.dispatch(new SetName(name));
+        // this.store.dispatch(new SetEmail(this.loginDetailsForm.value.email));
 
-        //set loggedIn to true
-        this.store.dispatch(new SetLoggedIn(true));
+        // //set loggedIn to true
+        // this.store.dispatch(new SetLoggedIn(true));
 
-        if(type == 0)
-        {
-          this.router.navigate(['/admin-console']);
-        }
-        if(type == 1)
-        {
-          this.router.navigate(['/parent-dashboard']).then(() => {
-            //document.location.reload()
-          });
-        }
-        else if(type == 2)
-        {
-          this.router.navigate(['/au-pair-dashboard']).then( () =>{
-            document.location.reload();
-          }
-          );
-        }
+        // if(type == 0)
+        // {
+        //   this.router.navigate(['/admin-console']);
+        // }
+        // if(type == 1)
+        // {
+        //   this.router.navigate(['/parent-dashboard']).then(() => {
+        //     //document.location.reload()
+        //   });
+        // }
+        // else if(type == 2)
+        // {
+        //   this.router.navigate(['/au-pair-dashboard']).then( () =>{
+        //     document.location.reload();
+        //   }
+        //   );
+        // }
       }
       this.loggingIn = false;
     }
@@ -191,5 +192,15 @@ export class LoginComponent implements OnInit {
       cssClass: 'toastPopUp'
     });
     await toast.present();
+  }
+
+  async presentLoadingWithOptions() {
+    const loading = await this.loadingController.create({
+      spinner: 'circular',
+      duration: 40000,
+      translucent: true,
+      cssClass: 'loader-bg'
+    });
+    return await loading.present();
   }
 }
