@@ -1,8 +1,10 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { DatePipe } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { ModalController } from '@ionic/angular';
 import { Store } from '@ngxs/store';
+import { SetCurrentActivity } from '../../../../../libs/shared/ngxs/actions';
 import { API } from '../../../../shared/api/api.service';
 import { ScheduleModalComponent } from './schedule-modal/schedule-modal.component';
 
@@ -33,7 +35,7 @@ export class AuPairScheduleComponent implements OnInit {
   }
   childActivities : any[] = [];
 
-  constructor(private serv: API, private modalCtrl : ModalController, private store: Store) {}
+  constructor(private serv: API, private router: Router, private modalCtrl : ModalController, private store: Store) {}
 
   async openModal(actId : string) {
     const modal = await this.modalCtrl.create({
@@ -90,6 +92,17 @@ export class AuPairScheduleComponent implements OnInit {
           this.childActivities.push(childActivity);
         }
       });
+    });
+  }
+
+  navigateViewActivity(id : string)
+  { 
+    //Setting the current activity in the store so can refrsh while editing
+    this.store.dispatch(new SetCurrentActivity(id));
+
+    //Route to the edit-activity page and parse the ActivityID of the selected Activity 
+    this.router.navigate(['/view-activity']).then(()=>{
+      location.reload();
     });
   }
 }

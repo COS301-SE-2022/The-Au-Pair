@@ -4,7 +4,6 @@ import { API } from '../../../../shared/api/api.service';
 import { Router } from '@angular/router';
 import { Store } from '@ngxs/store';
 import { Activity } from '../../../../shared/interfaces/interfaces';
-import { NgModel } from '@angular/forms';
 import { AlertController, ToastController } from '@ionic/angular';
 import { SetCurrentActivity } from '../../../../shared/ngxs/actions';
 
