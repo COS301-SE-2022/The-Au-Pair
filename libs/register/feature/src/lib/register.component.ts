@@ -158,16 +158,14 @@ export class RegisterComponent {
 
   async registerUser() 
   {
+    //setting registering flag to true to disable button
+    this.registering = true;
     this.medError = false;
     this.locationError = false;
-
     this.submitAttempt = true;
     this.notSamePasswords = false;
     this.bioError = false;
     this.experienceError = false;
-
-    this.registering = true;
-
     let formError = false;
 
     if(this.parentChosen)

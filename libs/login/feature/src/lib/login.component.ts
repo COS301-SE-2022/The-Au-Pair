@@ -149,34 +149,37 @@ export class LoginComponent implements OnInit {
       )
       else
       {
-        this.presentLoadingWithOptions();
-        // this.errState = false;
-        // this.store.dispatch(new SetId(id));
-        // this.store.dispatch(new SetType(type));
-        // this.store.dispatch(new SetFcmToken(this.fcmToken));
-        // this.store.dispatch(new SetName(name));
-        // this.store.dispatch(new SetEmail(this.loginDetailsForm.value.email));
+        //this.presentLoadingWithOptions();
+        this.errState = false;
+        this.store.dispatch(new SetId(id));
+        this.store.dispatch(new SetType(type));
+        this.store.dispatch(new SetFcmToken(this.fcmToken));
+        this.store.dispatch(new SetName(name));
+        this.store.dispatch(new SetEmail(this.loginDetailsForm.value.email));
 
-        // //set loggedIn to true
-        // this.store.dispatch(new SetLoggedIn(true));
+        //set loggedIn to true
+        this.store.dispatch(new SetLoggedIn(true));
 
-        // if(type == 0)
-        // {
-        //   this.router.navigate(['/admin-console']);
-        // }
-        // if(type == 1)
-        // {
-        //   this.router.navigate(['/parent-dashboard']).then(() => {
-        //     //document.location.reload()
-        //   });
-        // }
-        // else if(type == 2)
-        // {
-        //   this.router.navigate(['/au-pair-dashboard']).then( () =>{
-        //     document.location.reload();
-        //   }
-        //   );
-        // }
+        if(type == 0)
+        {
+          this.router.navigate(['/admin-console']);
+          this.loggingIn = false;
+        }
+        if(type == 1)
+        {
+          this.router.navigate(['/parent-dashboard']).then(() => {
+            location.reload();
+            this.loggingIn = false;
+          });
+        }
+        else if(type == 2)
+        {
+          this.router.navigate(['/au-pair-dashboard']).then( () =>{
+            location.reload();
+            this.loggingIn = false;
+          }
+          );
+        }
       }
       this.loggingIn = false;
     }
