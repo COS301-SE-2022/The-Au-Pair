@@ -487,5 +487,48 @@ describe('EditAuPairProfileComponent', () => {
     component.openToast();
     expect(await component.openToast).toReturn();
   });
+
+  it('should, call editUser function if the form contains valid details', async ()=>{
+    jest.spyOn(component,"editUser");
+
+    const UserValue: User = {
+      id: "",
+      fname: "",
+      sname: "",
+      email: "",
+      address: "",
+      registered: false,
+      type: 0,
+      password: "",
+      number: "",
+      salt: "",
+      latitude: 0,
+      longitude: 0,
+      suburb: "",
+      gender: "",
+      fcmToken : "",
+      birth: "",
+      banned: "",
+      warnings: 0,
+    };
+
+    const AuPairValue: auPair = {
+      id: "",
+      rating: [],
+      onShift: false,
+      employer: "",
+      costIncurred: 0,
+      distTraveled: 0,
+      payRate: 0,
+      bio: "",
+      experience: "",
+      currentLong: 0,
+      currentLat: 0,
+      terminateDate: "",
+    };
+
+    await component.editDetails(UserValue, AuPairValue);
+    expect(component.editUser).toHaveBeenCalled();
+  })
 });
 
