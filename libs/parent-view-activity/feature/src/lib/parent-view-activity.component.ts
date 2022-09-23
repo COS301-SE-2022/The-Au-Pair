@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Store } from '@ngxs/store';
 import { API } from '../../../../shared/api/api.service';
-import { Activity } from '../../../../shared/interfaces/interfaces';
+import { Activity, Child } from '../../../../shared/interfaces/interfaces';
 
 @Component({
   selector: 'the-au-pair-parent-view-activity',
@@ -29,6 +29,10 @@ export class ParentViewActivityComponent implements OnInit
     day: "",
     child: "",
   };
+
+  //Child name associated with ID
+  selectedChild="";
+
   timeslot = "";
   constructor(private serv: API, private router: Router, private store: Store)
   {
@@ -38,6 +42,7 @@ export class ParentViewActivityComponent implements OnInit
   ngOnInit(): void
   {
     this.getActivityDetails();
+    this.getChildren();
   }
 
   //------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -65,11 +70,37 @@ export class ParentViewActivityComponent implements OnInit
     )
   };
 
+
+  getChildren()
+  {
+    this.serv.getChildren(this.store.snapshot().user.id).toPromise().then(
+      res=>{
+          res.forEach((c : Child) => {
+            if(c.id == this.activityDetails.child)
+            { 
+              this.selectedChild = c.fname;
+            }
+          });
+      },
+      error=>{
+        console.log("Error has occured with API: " + error);
+      }
+    )
+  }
+
   //------------------------------------------------------------------------------------------------------------------------------------------------------------------------
   /**Navigation**/
 
   returnToSchedule()
   {
-    this.router.navigate(['/schedule']);
+    //Route depending on logged in user
+    if(this.store.snapshot().user.type == 1)
+    {
+      this.router.navigate(['/schedule']);
+    }
+    else if(this.store.snapshot().user.type == 2)
+    {
+      this.router.navigate(['/au-pair-schedule']);
+    }
   }
 }

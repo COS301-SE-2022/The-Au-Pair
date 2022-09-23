@@ -35,7 +35,7 @@
                   <ion-col class="content">{{ item.childName }}</ion-col>
                   <ion-col class="content">{{ item.childName }}</ion-col>
                   <ion-col class="content">{{ item.time }}</ion-col>
-                  <ion-col><ion-icon class="icon edit" name="location-outline"></ion-icon></ion-col>
+                  <ion-col><ion-icon class="icon edit" name="eye" (click)="navigateViewActivity(item.activityId)"></ion-icon></ion-col>
                   <ion-col><ion-icon class="icon edit" name="chatbox-outline" (click)="openModal(item.activityId)"></ion-icon></ion-col>
                 </ion-row>
               </div>
