@@ -119,6 +119,7 @@ export interface Activity{
     type: string;
     description: string;
     contributerId: string;
+    otherPartyId: string;
     date: string;
     metric: number;
     amount: number;

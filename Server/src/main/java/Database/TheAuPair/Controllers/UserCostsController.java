@@ -23,9 +23,9 @@ public class UserCostsController {
   @PostMapping("/getCostsForUser")
   public List<UserCosts> getCostsForUser(@RequestBody String uId) { return this.ucs.getCostsForUser(uId); }
 
-  @PostMapping("/getMonthCostsForUser")
-  public List<UserCosts> getMonthCostsForUser(@RequestBody Map<String, String> details) {
-    return this.ucs.getMonthCostsForUser(details.get("uId"), details.get("date"));
+  @PostMapping("/getCurrentMonthCostsForJob")
+  public List<UserCosts> getCurrentMonthCostsForJob(@RequestBody Map<String, String> details) {
+    return this.ucs.getCurrentMonthCostsForJob(details.get("contributerId"), details.get("otherPartyId"));
   }
 
   @PostMapping("/addUserCost")

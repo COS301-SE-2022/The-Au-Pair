@@ -100,3 +100,19 @@ textarea{
     border: none;
     padding: 15px;
 }
+
+.disabled-amount {
+    background: var(--ion-color-grey);
+    opacity: 0.5;
+    cursor: default;
+}
+
+.error{
+    padding-top: 5px;
+    display: none;
+    position: relative;
+    display: block;
+    text-align: left;
+    margin: 0;
+    color: red;
+}

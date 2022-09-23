@@ -1,6 +1,7 @@
 package Database.TheAuPair.Repositories;
 
 import Database.TheAuPair.Models.UserCosts;
+import Database.TheAuPair.Models.hoursLogged;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.mongodb.repository.MongoRepository;
 import org.springframework.stereotype.Repository;
@@ -15,4 +16,7 @@ public interface UserCostsRepository extends MongoRepository<UserCosts, String> 
 
   @Query("{contributerId: '?0'}")
   List<UserCosts> findAllByUserId(String id, Sort sort);
+
+  @Query("{ $and:[{ 'contributerId': ?0 },{ 'otherPartyId': ?1 }] }")
+  List<UserCosts> findAllByContributerAndOther(String contributerId, String otherPartyId, Sort sort);
 }

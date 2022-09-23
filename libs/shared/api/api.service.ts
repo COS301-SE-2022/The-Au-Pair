@@ -271,19 +271,19 @@ export class API{
     return this.http.post(environment.apiURI+"/getCostsForUser",userId);
   }
 
-  getMonthCostsForUser(userId : string, date : string): Observable<any> {
+  getCurrentMonthCostsForJob(contributerId : string, otherPartyId : string): Observable<any> {
     var details = {
-      "uId" : userId,
-      "date" : date
+      "contributerId" : contributerId,
+      "otherPartyId" : otherPartyId
     } 
-    return this.http.post(environment.apiURI+"/getMonthCostsForUser",details);
+    return this.http.post(environment.apiURI+"/getCurrentMonthCostsForJob",details);
   }
 
   addUserCost(userCost: UserCosts): Observable<any> {
     return this.http.post(environment.apiURI+"/addUserCost",userCost);
   }
 
-  removeUserCost(id : string): Observable<any> {
+  removeUserCost(id : string): Observable<any> {  
     return this.http.post(environment.apiURI+"/removeUserCost",id);
   }
 }

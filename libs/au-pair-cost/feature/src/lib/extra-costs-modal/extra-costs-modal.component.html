@@ -19,12 +19,13 @@
                     </select>
                 </ion-col>
             </ion-row>
-            <ion-row>
+            <ion-row *ngIf="costsForm.controls['type'].value!='Fuel'">
                 <ion-col size="4" class="ion-text-center">
                     Description:
                 </ion-col>
                 <ion-col offset="1" size="7" class="ion-text-start">
                     <input type="text" name="description" formControlName="desc"> 
+                    <p id="descriptionError" class="error" style="display: none;">Description may not be empty</p>
                 </ion-col>  
             </ion-row>
             <ion-row *ngIf="costsForm.controls['type'].value=='Fuel'">
@@ -44,7 +45,17 @@
                     Distance:
                 </ion-col>
                 <ion-col offset="1" size="7" class="ion-text-start">
-                    <input type="text" ngModel name="distance" formControlName="distance"> km
+                    <input type="text" name="distance" formControlName="distance"> km
+                    <p id="distanceError" class="error" style="display: none;">Distance must be a number</p>
+                </ion-col>  
+            </ion-row>
+            <ion-row *ngIf="costsForm.controls['type'].value=='Fuel'">
+                <ion-col size="4" class="ion-text-center">
+                    Kilometres per litre:
+                </ion-col>
+                <ion-col offset="1" size="7" class="ion-text-start">
+                    <input type="text" name="kml" formControlName="kml"> km/l
+                    <p id="kmlError" class="error" style="display: none;">KM/L must be a number</p>
                 </ion-col>  
             </ion-row>
             <ion-row *ngIf="costsForm.controls['type'].value=='Overtime'">
@@ -52,7 +63,8 @@
                     Hours:
                 </ion-col>
                 <ion-col offset="1" size="7" class="ion-text-start">
-                    <input type="text" ngModel name="hours" formControlName="hours">
+                    <input type="text" name="hours" formControlName="hours">
+                    <p id="hoursError" class="error" style="display: none;">Hours must be a number</p>
                 </ion-col>  
             </ion-row>
             <ion-row>
@@ -63,12 +75,13 @@
                     R
                 </ion-col>  
                 <ion-col size="7" class="ion-text-start">
-                    <input type="text" ngModel name="amount"> 
+                    <input type="text" [ngClass]="{'disabled-amount' : !this.amountEditable}" [disabled]="!amountEditable" formControlName="amount"> 
+                    <p id="amountError" class="error" style="display: none;">Amount must be a number</p>
                 </ion-col>  
             </ion-row>
             <ion-row class="submit-row">
                 <ion-col size="12" class="ion-text-center">
-                    <input type="submit" form="costsForm" type="submit" [ngClass]="(this.sending===false) ? 'submit' : 'disabled-submit' " [disabled]="sending" value="Add Cost"/>
+                    <input type="submit" [ngClass]="(this.sending===false) ? 'submit' : 'disabled-submit' " [disabled]="sending" value="Add Cost"/>
                 </ion-col>
             </ion-row> 
         </form>    

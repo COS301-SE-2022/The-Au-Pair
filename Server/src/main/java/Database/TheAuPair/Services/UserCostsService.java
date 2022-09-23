@@ -4,7 +4,11 @@ import Database.TheAuPair.Models.UserCosts;
 import Database.TheAuPair.Repositories.UserCostsRepository;
 import org.springframework.data.domain.Sort;
 
+import java.time.ZoneId;
 import java.util.ArrayList;
+import java.util.Date;
+import java.time.Month;
+import java.time.LocalDate;
 import java.util.List;
 
 public class UserCostsService {
@@ -29,18 +33,21 @@ public class UserCostsService {
     return costs;
   }
 
-  public List<UserCosts> getMonthCostsForUser(String uId, String date)
+  public List<UserCosts> getCurrentMonthCostsForJob(String auPairId, String parentId)
   {
-    List<UserCosts> userCosts = costRepo.findAllByUserId(uId, Sort.by(Sort.Direction.DESC, "date"));
-    List<UserCosts> foundCosts = new ArrayList<UserCosts>();
+    Date date = new Date();
+    LocalDate localDate = date.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+    String month = "" + localDate.getMonthValue();
+    String year = "" + localDate.getYear();
 
-    String[] inDateArray = date.split("/");
+    List<UserCosts> userCosts = costRepo.findAllByContributerAndOther(auPairId, parentId, Sort.by(Sort.Direction.DESC, "date"));
+    List<UserCosts> foundCosts = new ArrayList<UserCosts>();
 
     for (UserCosts cost : userCosts)
     {
       String [] dateString = cost.getDate().split("/");
 
-      if (dateString[1].equals(inDateArray[1]) && dateString[2].equals(inDateArray[2])) {
+      if (dateString[1].equals(month) && dateString[2].equals(year)) {
         foundCosts.add(cost);
       }
       else {

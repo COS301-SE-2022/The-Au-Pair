@@ -18,6 +18,9 @@ public class UserCosts {
   @Field ("contributerId")
   private String contributerId;
 
+  @Field ("otherPartyId")
+  private String otherPartyId;
+
   @Field ("date")
   private String date;
 
@@ -27,10 +30,11 @@ public class UserCosts {
   @Field ("amount")
   private double amount;
 
-  public UserCosts(String id, String type, String description, String contributerId, String date, double metric, double amount) {
+  public UserCosts(String id, String type, String description, String contributerId, String otherPartyId, String date, double metric, double amount) {
     this.id = id;
     this.type = type;
     this.description = description;
+    this.otherPartyId = otherPartyId;
     this.contributerId = contributerId;
     this.date = date;
     this.metric = metric;
@@ -69,6 +73,10 @@ public class UserCosts {
     this.contributerId = contributerId;
   }
 
+  public String getOtherPartyId() { return otherPartyId; }
+
+  public void setOtherPartyId(String otherPartyId) { this.otherPartyId = otherPartyId; }
+
   public String getDate() {
     return date;
   }
@@ -100,6 +108,7 @@ public class UserCosts {
       ", type='" + type + '\'' +
       ", description='" + description + '\'' +
       ", contributerId='" + contributerId + '\'' +
+      ", otherPartyId='" + otherPartyId + '\'' +
       ", date='" + date + '\'' +
       ", metric=" + metric +
       ", amount=" + amount +
