@@ -163,6 +163,11 @@ export class JobSummaryAuPairViewComponent implements OnInit {
 
   getAverage(ratings : number[])
   {
+    if(ratings.length == 0)
+    {
+      return 0;
+    }
+    
     let total = 0;
     for(let i = 0; i < ratings.length; i++)
     {

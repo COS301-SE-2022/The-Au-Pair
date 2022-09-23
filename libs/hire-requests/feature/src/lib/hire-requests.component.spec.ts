@@ -201,21 +201,18 @@ describe('JobSummaryModal', () => {
 
   it('should, calculate an average rating of the au pair from their rating array given a valid array', async () =>{
     const expectedRating = 4;
-    jest.spyOn(component, "getAverage").mockReturnValue(4);
     const average = await component.getAverage([3,5]);
     expect(average).toEqual(expectedRating);
   })
 
   it('should, return zero rating array given an empty array', async () =>{
     const expectedRating = 0;
-    jest.spyOn(component, "getAverage").mockReturnValue(0);
     const average = await component.getAverage([]);
     expect(average).toEqual(expectedRating);
   })
 
   it('should, return zero rating array given an invalid array', async () =>{
     const expectedRating = 0;
-    jest.spyOn(component, "getAverage").mockReturnValue(0);
     const average = await component.getAverage([0, -5, 6]);
     expect(average).toEqual(expectedRating);
   })
@@ -329,7 +326,6 @@ describe('JobSummaryModal', () => {
 
   it('should, return the age from a given date', async () =>{
     const expectedAge = 18;
-    jest.spyOn(component, "getAge").mockReturnValue(18);
     const age = await component.getAge('05/07/2004');
     expect(age).toEqual(expectedAge);
   })
