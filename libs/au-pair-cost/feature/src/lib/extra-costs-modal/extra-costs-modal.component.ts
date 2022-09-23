@@ -13,6 +13,7 @@ import { UserCosts } from 'libs/shared/interfaces/interfaces';
 export class ExtraCostsModalComponent implements OnInit {
   auPairId = "";
   parentID = "";
+  type = -1;
 
   fuelPrices = {
     "diesel": 24.15,
@@ -48,40 +49,71 @@ export class ExtraCostsModalComponent implements OnInit {
     });
 
     this.costsForm.valueChanges.subscribe(() => {
+
       if(this.costsForm.value.type == 'Fuel') {
-        // this.costsForm.controls['amount'].disable();
         this.amountEditable = false;
+
+        if(!(isNaN(parseFloat(this.costsForm.value.distance)) || this.costsForm.value.distance == "" || !this.costsForm.controls['distance'].valid) && !(isNaN(parseFloat(this.costsForm.value.kml)) || this.costsForm.value.kml == "" || !this.costsForm.controls['kml'].valid)) {
+          var fuelPrice = 0;
+          switch(this.costsForm.value.fuelType) {
+            case '95-Unleaded':
+              fuelPrice = this.fuelPrices['petrol-95'];
+            break;
+  
+            case '93-Unleaded':
+              fuelPrice = this.fuelPrices['petrol-93'];
+            break;
+  
+            case 'Diesel':
+              fuelPrice = this.fuelPrices['diesel'];
+            break;
+          }
+  
+          var newAmount = (parseFloat(this.costsForm.value.distance) / parseFloat(this.costsForm.value.kml)) * fuelPrice;
+
+          this.costsForm.controls['amount'].setValue(newAmount.toFixed(2));
+        }
       }
       else {
-        // this.costsForm.controls['amount'].enable();
         this.amountEditable = true;
       }
 
-      if(this.costsForm.value.type == 'Fuel' && !(isNaN(parseFloat(this.costsForm.value.distance)) || this.costsForm.value.distance == "" || !this.costsForm.controls['distance'].valid) && !(isNaN(parseFloat(this.costsForm.value.kml)) || this.costsForm.value.kml == "" || !this.costsForm.controls['kml'].valid)) {
-        var fuelPrice = 0;
-        switch(this.costsForm.value.fuelType) {
-          case '95-Unleaded':
-            fuelPrice = this.fuelPrices['petrol-95'];
-          break;
-
-          case '93-Unleaded':
-            fuelPrice = this.fuelPrices['petrol-93'];
-          break;
-
-          case 'Diesel':
-            fuelPrice = this.fuelPrices['diesel'];
-          break;
-        }
-
-        var newAmount = (parseFloat(this.costsForm.value.distance) / parseFloat(this.costsForm.value.kml)) * fuelPrice;
-
-        this.costsForm.controls['amount'].setValue(newAmount);
+      if(this.costsForm.value.type == 'Overtime') {
+        this.amountEditable = false;
+        // var remuneration = (parseFloat(this.costsForm.value.hours) / parseFloat(this.costsForm.value.kml)) * fuelPrice;
+  
+        // this.costsForm.controls['amount'].setValue(newAmount);
+      }
+      else {
+        this.amountEditable = true;
       }
     });
   }
 
   async ngOnInit() {
-    this.auPairId = this.store.snapshot().user.id;
+    this.type = this.store.snapshot().user.type;
+
+    if(this.store.snapshot().user.type === 2) 
+    {
+      this.auPairId = this.store.snapshot().user.id;
+    }
+    else if (this.store.snapshot().user.type === 1) 
+    {
+      this.parentID = this.store.snapshot().user.id;
+      await this.serv.getParent(this.parentID)
+      .toPromise()
+      .then(
+        data => {
+          this.auPairId = data.auPair;
+        }
+      )
+      .catch(
+        error => {
+          console.log("Error has occured with API: " + error);
+        }
+      )
+    }
+
     await this.serv.getAuPair(this.auPairId)
     .toPromise()
       .then( 
@@ -100,12 +132,18 @@ export class ExtraCostsModalComponent implements OnInit {
     this.modalCtrl.dismiss();
   }
 
+  padDateTo2Digits(num : number) {
+    return num.toString().padStart(2, '0');
+  }
+
   sendCostData(type: string, desc: string, metric: number, amount: number) {
+    var today = new Date();
+    
     this.costDetails.type = type;
     this.costDetails.description = desc;
     this.costDetails.contributerId = this.auPairId;
     this.costDetails.otherPartyId = this.parentID;
-    this.costDetails.date = new Date().toISOString();
+    this.costDetails.date = this.padDateTo2Digits(today.getDate()) + "/" + this.padDateTo2Digits((today.getMonth() + 1)) + "/" + today.getFullYear();
     this.costDetails.metric = metric;
     this.costDetails.amount = amount;
 
@@ -138,6 +176,7 @@ export class ExtraCostsModalComponent implements OnInit {
     let hoursError = document.getElementById("hoursError");
     let amountError = document.getElementById("amountError");
 
+    // Description errors
     if(this.costsForm.value.type != 'Fuel' && this.costsForm.value.desc == "" )
     {
       if(descError != null)
@@ -155,6 +194,7 @@ export class ExtraCostsModalComponent implements OnInit {
       }
     }
 
+    // Distance and kilometer per liter errors
     if(this.costsForm.value.type == 'Fuel' && (isNaN(parseFloat(this.costsForm.value.distance)) || this.costsForm.value.distance == "" || !this.costsForm.controls['distance'].valid)) {
       if(distError != null)
       {
@@ -164,9 +204,9 @@ export class ExtraCostsModalComponent implements OnInit {
       }
     }
     else if(this.costsForm.value.type == 'Fuel' && (isNaN(parseFloat(this.costsForm.value.kml)) || this.costsForm.value.kml == "" || !this.costsForm.controls['kml'].valid)) {
-      if(distError != null)
+      if(kmlError != null)
       {
-        distError.style.display = "block";
+        kmlError.style.display = "block";
         this.sending = false;
         return;
       }
@@ -177,9 +217,13 @@ export class ExtraCostsModalComponent implements OnInit {
         distError.style.display = "none";
       }
 
-      // this.sendCostData(this.costsForm.value.type, this.costsForm.value.desc, parseFloat(this.costsForm.value.distance), );
+      if(kmlError != null)
+      {
+        kmlError.style.display = "none";
+      }
     }
 
+    // Overtime errors
     if(this.costsForm.value.type == 'Overtime' && (isNaN(parseFloat(this.costsForm.value.hours)) || this.costsForm.value.hours == "" || !this.costsForm.controls['hours'].valid)) {
       if(hoursError != null)
       {
@@ -194,8 +238,6 @@ export class ExtraCostsModalComponent implements OnInit {
       {
         hoursError.style.display = "none";
       }
-
-          // this.sendCostData(this.costsForm.value.type, this.costsForm.value.desc, parseFloat(this.costsForm.value.hours), );
     }
 
     if(this.costsForm.value.type == 'Other' && (isNaN(parseFloat(this.costsForm.value.amount)) || this.costsForm.value.amount == "" || !this.costsForm.controls['amount'].valid)) {
@@ -212,10 +254,42 @@ export class ExtraCostsModalComponent implements OnInit {
       {
         amountError.style.display = "none";
       }
-          // this.sendCostData(this.costsForm.value.type, this.costsForm.value.desc, 0, amountError);
+    }
+
+    switch (this.costsForm.value.type) {
+      case 'Fuel':
+        var fuelPrice = 0;
+        switch(this.costsForm.value.fuelType) {
+          case '95-Unleaded':
+            fuelPrice = this.fuelPrices['petrol-95'];
+          break;
+
+          case '93-Unleaded':
+            fuelPrice = this.fuelPrices['petrol-93'];
+          break;
+
+          case 'Diesel':
+            fuelPrice = this.fuelPrices['diesel'];
+          break;
+        }
+
+        this.sendCostData(this.costsForm.value.type, "Travelled " + this.costsForm.value.distance + "kms with fuel costing R" + fuelPrice + " per litre", parseFloat(this.costsForm.value.distance), parseFloat(this.costsForm.value.amount));
+        this.openToast("Fuel cost added successfully");
+        break;
+
+      case 'Overtime':
+        this.sendCostData(this.costsForm.value.type, this.costsForm.value.desc, parseFloat(this.costsForm.value.hours), parseFloat(this.costsForm.value.amount));
+        this.openToast("Overtime added successfully");
+      break;
+
+      case 'Other':
+        this.sendCostData(this.costsForm.value.type, this.costsForm.value.desc, 0, parseFloat(this.costsForm.value.amount));
+        this.openToast("Extra cost added successfully");
+      break;
     }
 
     this.sending = false;
+    this.closeModal();
   }
 
   async getCurrentFuelPrice() {
@@ -229,8 +303,6 @@ export class ExtraCostsModalComponent implements OnInit {
     .toPromise()
       .then( 
         res=>{
-          console.log(res);
-
           this.fuelPrices['diesel'] = (res.diesel[0].value)/100;
           this.fuelPrices['petrol-95'] = (res.petrol[0].value)/100;
           this.fuelPrices['petrol-93'] = (res.petrol[1].value)/100;
