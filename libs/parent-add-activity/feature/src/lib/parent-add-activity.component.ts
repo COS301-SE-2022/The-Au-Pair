@@ -1,6 +1,6 @@
 import { Component, OnInit} from '@angular/core';
 import { API } from '../../../../shared/api/api.service';
-import { Activity, Child } from '../../../../shared/interfaces/interfaces';
+import { Activity, Child, Email } from '../../../../shared/interfaces/interfaces';
 import { HttpClient } from '@angular/common/http';
 import { Store } from '@ngxs/store';
 import { ToastController } from '@ionic/angular';
@@ -12,6 +12,7 @@ import { ToastController } from '@ionic/angular';
 })
 export class ParentAddActivityComponent implements OnInit{
   parentID = "";
+  childName = "";
 
   //Activity Model
   activityDetails: Activity = {
@@ -65,6 +66,12 @@ export class ParentAddActivityComponent implements OnInit{
     "23:00-24:00",
     "24:00-00:00",
   ];
+
+  emailRequest : Email = {
+    to: "",
+    subject: "",
+    body: "",
+  }
 
   //Constructor
   constructor(private serv: API, private http: HttpClient, private store: Store, public toastCtrl: ToastController) {}
@@ -330,9 +337,30 @@ export class ParentAddActivityComponent implements OnInit{
 
   //Service calls
   addActivity(act:Activity){
+    this.allChildren.forEach(child => {
+      if(child.id == act.child){
+        this.childName = child.fname;
+      }
+    });
+
     this.serv.addActivity(act).toPromise().then(
       res=>{
         console.log("The response is:" + res); 
+        //send email to parent about newly added activity
+        this.emailRequest.to = this.store.snapshot().user.email;
+        this.emailRequest.subject = "New Activity Added";
+        this.emailRequest.body = "You have succesfully added a new activity for " + this.childName + ". The activity will apear on your child's schedule that can be viewed on the app." + 
+                                 "If any changes need to be made to the activity, you can edit the activity on the schedule page as well!\n\nKind Regards,\nThe Au Pair Team";
+        this.serv.sendEmail(this.emailRequest).toPromise().then(
+          res=>{
+            console.log(res);
+          }
+        ).catch(
+          err=>{
+            console.log(err);
+          }
+        );
+
         this.openToast();
       },
       error=>{
