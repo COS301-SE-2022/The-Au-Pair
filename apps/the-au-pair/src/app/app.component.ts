@@ -7,6 +7,7 @@ import { Store } from '@ngxs/store';
 import { Router } from '@angular/router';
 import { MenuController, ToastController } from '@ionic/angular';
 import { Reset } from '../../../../libs/shared/ngxs/actions';
+import { DatePipe } from '@angular/common';
 
 @Component({
   selector: 'the-au-pair-root',
@@ -43,6 +44,7 @@ export class AppComponent implements OnInit {
   }
 
   activities: Activity[] = [];
+  currentActivities: Activity[] = [];
 
   parentDetails: Parent = {
     id: "",
@@ -101,7 +103,10 @@ export class AppComponent implements OnInit {
 
   ngOnInit(): void {
     this.menController.swipeGesture(false);
-    //Only update coordinates if you are an au pair
+    /**
+     * Updating au pair coordinates when on shift
+     */
+
     setInterval(() => {
       this.userID = this.store.snapshot().user.id;
       this.userType = this.store.snapshot().user.type;
@@ -111,8 +116,11 @@ export class AppComponent implements OnInit {
           this.updateCoordinates();
         }
       }
-    }, 10000);
+    }, 6000);
 
+    /**
+     * Monitoring for upcoming activities
+     */
     const monInt = setInterval(() => {
       this.userID = this.store.snapshot().user.id;
       this.userType = this.store.snapshot().user.type;
@@ -123,6 +131,9 @@ export class AppComponent implements OnInit {
     }, 6000);
   }
 
+  /**
+   * Notifications funtionality
+   */
   monitorActivities() {
     //if parent, get childrens id's
     if (this.userType == 1) {
@@ -317,6 +328,15 @@ export class AppComponent implements OnInit {
       }
     return hasPassed;
   }
+  
+  notifications(){
+    this.router.navigate(['/notifications']);
+    this.menuClose();
+  }
+
+  /**
+   * Live location tracking functionality
+   */
 
   async getCurrentAuPairDetails() {
     const res = await this.serv.getAuPair(this.userID).toPromise()
@@ -327,8 +347,9 @@ export class AppComponent implements OnInit {
     this.auPairDetails.currentLat = res.currentLat;
   };
 
-  async updateCoordinates() {
-    let flag = false;
+  async updateCoordinates() 
+  { 
+    let flag = false; //CHANGE THIS BACK TO FALSEEEEEEEEEEEEEEEEEEEEEEEE
     await this.geolocation.getCurrentPosition().then((resp: { coords: { longitude: number; latitude: number; }; }) => {
       //Check if auPair has actually moved
       if (this.auPairDetails.currentLong != resp.coords.longitude || this.auPairDetails.currentLat != resp.coords.latitude)
@@ -340,7 +361,7 @@ export class AppComponent implements OnInit {
       
       //Only update if coordinates have changed
       if(flag)
-      this.updateAuPair(this.auPairDetails);
+        this.updateAuPair(this.auPairDetails);
     }).catch((error) => 
     {
       console.log('Error getting location', error);
@@ -348,8 +369,9 @@ export class AppComponent implements OnInit {
 
   }
 
-  updateAuPair(aupair: auPair) {
-    //Save new auPair object in the database
+  async updateAuPair(aupair: auPair) 
+  { 
+    //Save new auPair object in the database with updated coordinates
     this.serv.editAuPair(aupair).subscribe(
       res => {
         return res;
@@ -359,9 +381,97 @@ export class AppComponent implements OnInit {
         return error;
       }
     )
+
+    /**
+     * Check if au pair is out of boundary
+     */
+
+    //Get all children for the au pair
+    let allChildren: Child[] = [];
+    await this.serv.getChildren(aupair.employer).toPromise().then(
+    res => 
+    {
+      allChildren = res;
+    }).catch(err => {console.log(err);});
+    
+    //Get all activities for the children
+    this.currentActivities.splice(0);
+    for (let i = 0; i < allChildren.length; i++) 
+    {
+      const child = allChildren[i];
+      await this.serv.getSchedule(child.id).toPromise().then(
+        res=>
+        {
+          res.forEach(( act : Activity) => 
+          {
+            this.currentActivities.push(act);  
+          });
+        }).catch(
+          error=>
+          {
+            console.log("Error has occured with API: " + error);
+          }
+        );
+    }
+
+    /**
+     * Find activities that are happening now
+     * Loop thorugh all activities and find if the current time is in the timeslot, 
+     * and check that the au pair is still within that activities boundary.
+     */
+    
+    for (let j = 0; j < this.currentActivities.length; j++)
+    {
+      //Getting the activities start time
+      const act = this.currentActivities[j];
+      const actTime = act.timeStart.substring(0,2);
+      
+      //Getting the current Time
+      const time = new Date();
+      const pipe = new DatePipe('en-US');
+      const currentDay = pipe.transform(Date.now(),'EEEE');
+      const currentHour = time.toLocaleString('en-US', { hour: 'numeric', hour12: false });
+
+      //If the activity is currently happening, monitor the boundary
+      if(actTime === currentHour && act.day.toLowerCase() == currentDay?.toLowerCase())
+      {
+        const boundary = act.boundary;
+        const longAct = 0;//Change to be act.long
+        const latAct = 0;//Change to be act.lat
+        const longCoord = aupair.currentLong;
+        const latCoord = aupair.currentLat;
+        
+        const distance = this.calculateEucDistance(latAct, longAct, latCoord, longCoord);
+        if(distance>boundary)
+        {
+          //Notify parent
+          
+        }
+      }
+      
+    }
   }
 
-  //Navbar functions
+  calculateEucDistance(actX : number, actY : number, aupairX : number, aupairY : number)
+  {
+    const x1 = (actX * Math.PI) / 180;
+    const y1 = (actY * Math.PI) / 180;
+    const x2 = (aupairX * Math.PI) / 180;
+    const y2 = (aupairY * Math.PI) / 180;
+
+    const dlong = y1 - y2;
+    const dlat = x1 - x2;
+
+    let distanceKM = Math.pow(Math.sin(dlat / 2), 2) + Math.cos(x2) * Math.cos(x1) * Math.pow(Math.sin(dlong / 2), 2);
+    distanceKM = 2 * Math.asin(Math.sqrt(distanceKM));
+    distanceKM = distanceKM * 6371;
+    return distanceKM;
+  }
+
+  /**
+   * Navbar functionality
+   */
+
   dash(type=this.store.snapshot().user.type)
   {
     if(type == 0)
@@ -379,11 +489,6 @@ export class AppComponent implements OnInit {
       this.router.navigate(['/au-pair-dashboard']);
       this.menuClose();
     }
-  }
-
-  notifications(){
-    this.router.navigate(['/notifications']);
-    this.menuClose();
   }
 
   profile(type=this.store.snapshot().user.type )
