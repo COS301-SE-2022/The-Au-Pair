@@ -13,6 +13,7 @@ import { UserCosts } from 'libs/shared/interfaces/interfaces';
 export class ExtraCostsModalComponent implements OnInit {
   auPairId = "";
   parentID = "";
+  payRate = 0;
   type = -1;
 
   fuelPrices = {
@@ -119,6 +120,7 @@ export class ExtraCostsModalComponent implements OnInit {
       .then( 
         res=>{
           this.parentID = res.employer;
+          this.payRate = res.payRate;
       },
       error => {
         console.log("Error has occured with API: " + error);

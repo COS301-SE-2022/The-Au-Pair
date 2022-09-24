@@ -40,6 +40,9 @@ public class UserCostsService {
     String month = "" + localDate.getMonthValue();
     String year = "" + localDate.getYear();
 
+    if (month.length() == 1)
+      month = "0" + month;
+
     List<UserCosts> userCosts = costRepo.findAllByContributerAndOther(auPairId, parentId, Sort.by(Sort.Direction.DESC, "date"));
     List<UserCosts> foundCosts = new ArrayList<UserCosts>();
 

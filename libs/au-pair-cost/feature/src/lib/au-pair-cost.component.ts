@@ -21,6 +21,7 @@ export class AuPairCostComponent implements OnInit {
     await modal.present();
   }
 
+  costList : any [] = [];
   type = -1;
   parentID = "";
   aupairID = "";
@@ -98,6 +99,8 @@ export class AuPairCostComponent implements OnInit {
 
     this.api.getAuPair(this.aupairID).subscribe( 
       data => { 
+        console.log(data);
+
         this.hourlyRate = data.payRate;
         this.travelCost = data.distTraveled;
         this.activityCost = data.costIncurred;
@@ -106,10 +109,21 @@ export class AuPairCostComponent implements OnInit {
         this.totalCost = Number(this.totalCost.toFixed(3))
         this.totalRemuneration = (this.hourlyRate*this.totalHours) + this.totalCost; 
         this.totalRemuneration = Number(this.totalRemuneration.toFixed(3));
+
         this.calculatePie(this.otherCost, this.activityCost, this.totalCost);
         this.populateDaysCost();
         this.dateRange = this.dateRangeToString(7);
         this.pieSplit = "conic-gradient(var(--ion-color-primary)" + this.otherDeg + "deg, var(--ion-color-secondary) 0 "+ this.activityDeg +"deg, var(--ion-color-champagne) 0)";
+      },
+      error => {
+        console.log("Error has occured with API: " + error);
+      }
+    )
+
+    this.api.getCurrentMonthCostsForJob(this.aupairID, this.parentID).subscribe(
+      data => { 
+        this.costList = data;
+        console.log(data);
       },
       error => {
         console.log("Error has occured with API: " + error);

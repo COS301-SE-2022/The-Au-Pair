@@ -84,7 +84,6 @@ ion-card-header{
 }
 
 .add-cost {
-//  float: right;
   text-align: right;
   padding-left: 2vw;
   cursor: pointer;
@@ -103,12 +102,16 @@ ion-card-header{
   grid-template-columns: minmax(800px,0.6fr) minmax(500px,0.4fr);
 }
 
-.card-bar-graph, .card-pie-graph {
+.card-bar-graph, .card-pie-graph, .card-costs-list {
   border-radius: 16px;
   height: 517px;
   background-color: white;
   font-size: var(--heading-size);
   margin: 0;
+}
+
+.card-costs-list {
+  grid-column: 1 / -1;
 }
 
 .au-pair-name{
@@ -259,6 +262,55 @@ ion-card-header{
   margin: 0 0 30px 20px;
 }
 
+.card-costs-list p {
+  font-size: 16px;
+}
+
+.card-costs-list ion-grid {
+  padding: 20px 50px 0 50px;
+}
+
+.headings {
+  font-weight: bold;
+  font-size: 16px;
+  color: white;
+  background-color: var(--ion-color-secondary);
+}
+
+.col {
+  // background-color:lightgrey;
+}
+
+.col {
+  border: solid 1px grey;
+  border-bottom-style: none;
+  border-right-style: none;
+}
+
+.row:last-child .col, .row:last-child .ico {
+  border-bottom: solid 1px grey;
+}
+
+ion-icon {
+  cursor: pointer;
+}
+
+.ico {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: solid 1px grey;
+  border-bottom-style: none;
+  border-right-style: none;
+  border-left-style: none;
+}
+
+.ico:last-child {
+  border: solid 1px grey;
+  border-bottom-style: none;
+  border-left-style: none;
+}
+
 
 @media (max-width : 768px) {
   .summary-div {
@@ -350,11 +402,11 @@ ion-card-header{
   }
 }
 
-@media (max-width: 1460px) {
-  .graphs-grid{
-    overflow-x: scroll;
-  }
-}
+// @media (max-width: 1460px) {
+//   .graphs-grid{
+//     overflow-x: scroll;
+//   }
+// }
 
 ::-webkit-scrollbar {
   width: 10px;

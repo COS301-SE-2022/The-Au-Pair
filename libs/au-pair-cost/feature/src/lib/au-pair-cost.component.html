@@ -70,6 +70,72 @@
           </div>
         </ion-card-content>
       </ion-card>
+
+      <ion-card color="light" class="card-costs-list">
+        <ion-card-header class="title"> Monthly Expense Details</ion-card-header>
+        <ion-grid>
+          <ion-row class="headings">
+            <ion-col size="2">
+              <p>
+                Type
+              </p>
+            </ion-col>
+
+            <ion-col size="4">
+              <p>
+                Description
+              </p>
+            </ion-col>
+
+            <ion-col size="3">
+              <p>
+                Date
+              </p>
+            </ion-col>
+
+            <ion-col size="3">
+              <p>
+                Total
+              </p>
+            </ion-col>
+          </ion-row>
+
+          <ion-row  *ngFor="let cost of costList" class="row">
+            <ion-col size="2" class="col">
+              <p>
+                {{cost.type}}
+              </p>
+            </ion-col>
+
+            <ion-col size="4" class="col">
+              <p>
+                {{cost.description}}
+              </p>
+            </ion-col>
+
+            <ion-col size="3" class="col">
+              <p>
+                {{cost.date}}
+              </p>
+            </ion-col>
+
+            <ion-col size="2" class="col">
+              <p>
+                R{{cost.amount}}
+              </p>
+            </ion-col>
+
+            <ion-col size="0.5" class="ico">
+              <ion-icon name="download-outline"></ion-icon>            
+            </ion-col>
+
+            <ion-col size="0.5" class="ico">
+              <ion-icon name="remove-circle-outline" color="danger"></ion-icon>
+            </ion-col>
+          </ion-row>
+
+        </ion-grid>
+      </ion-card>
     </div>
   </div>
 </ion-content>
