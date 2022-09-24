@@ -6,10 +6,10 @@
         <ion-icon class="error" [hidden]="!showError || spinnerActive" name="close"></ion-icon>
         <div class="errorType"><p [hidden]="!showError">{{ errorContent }}</p></div> 
         
-        <ion-radio-group (ionChange)="radioChecked($event)">
+        <ion-radio-group (ionChange)="radioChecked($event)" mode="md">
                 <ion-item *ngFor="let location of potentialLocations" >
-                  <ion-label class="ionLabel">{{location}}</ion-label>
-                  <ion-radio class="ionRadio" slot="end" color="primary" value="{{location}}"></ion-radio>
+                        <ion-label class="ionLabel">{{location}}</ion-label>
+                        <ion-radio class="ionRadio" slot="end" color="primary" value="{{location}}"></ion-radio>
                 </ion-item>
         </ion-radio-group>
 </div>
