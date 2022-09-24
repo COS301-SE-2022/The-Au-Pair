@@ -7,7 +7,8 @@
             <the-au-pair-password-field labelContent="Password" [errorContent]="errStatement" [showError]="errState" formControlName="pass"></the-au-pair-password-field>
             
             <div class="buttons">
-                <input [ngClass]="(this.loggingIn===false) ? 'loginUser' : 'disabled-loginUser' " [disabled]="loggingIn" value="Login" type="submit">
+                <input [hidden]="this.loggingIn" [ngClass]="(this.loggingIn===false) ? 'loginUser' : 'disabled-loginUser' " [disabled]="loggingIn" value="Login" type="submit">
+                <button [hidden]="!this.loggingIn" class="spinner-button"><ion-spinner name="circular"></ion-spinner></button>
             </div>
 
             <div class="clickables">

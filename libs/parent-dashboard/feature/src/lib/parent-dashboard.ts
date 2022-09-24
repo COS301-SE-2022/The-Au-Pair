@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { API } from '../../../../shared/api/api.service';
-import { auPair, Child, Parent, User } from '../../../../shared/interfaces/interfaces';
+import { auPair, Child, Email, Parent, User } from '../../../../shared/interfaces/interfaces';
 import { AuPairRatingModalComponent } from './au-pair-rating-modal/au-pair-rating-modal.component';
 import { UserReportModalComponent } from './user-report-modal/user-report-modal.component';
 import { ModalController, ToastController } from '@ionic/angular';
@@ -30,6 +30,12 @@ export class ParentDashboardComponent implements OnInit{
     diet: "",
     parent: "",
     aupair: ''
+  }
+
+  emailRequest : Email = {
+    to: "",
+    subject: "",
+    body: "",
   }
 
   parentDetails: Parent = {
@@ -287,6 +293,19 @@ export class ParentDashboardComponent implements OnInit{
     await this.updateAuPair();
     await this.updateParent();
     await this.removeChildrenAuPair();
+
+    this.emailRequest.to = this.auPairDetails.email;
+    this.emailRequest.subject = "Au Pair Contract Termination";
+    this.emailRequest.body = "Unfortunately your employer has terminated your contract.\nYour profile will appear on our explore page again for new parent to make use of your services.\n\n" +
+                            "Regards,\nThe Au Pair Team";
+    this.serv.sendEmail(this.emailRequest).toPromise().then(
+      res => {
+        console.log(res);
+      },
+      error => {
+        console.log(error);
+      }
+    );
   }
 
   async getAuPairDetails()

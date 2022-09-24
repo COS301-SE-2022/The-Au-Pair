@@ -10,4 +10,8 @@ public interface ParentRepository extends MongoRepository<Parent, String>
 {
   @Query("{ '_id': ?0 }")
   Parent findUsingId(String id);
+
+  //find auPair
+  @Query("{ 'auPair': ?0 }")
+  Parent findAuPair(String id);
 }

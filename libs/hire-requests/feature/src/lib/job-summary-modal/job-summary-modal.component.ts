@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ModalController, NavParams, ToastController } from '@ionic/angular';
-import { auPair, Child, Parent, User } from '../../../../../shared/interfaces/interfaces';
+import { auPair, Child, Email, Parent, User } from '../../../../../shared/interfaces/interfaces';
 import { API } from '../../../../../shared/api/api.service';
 import { Store } from '@ngxs/store';
 import { Router } from '@angular/router';
@@ -84,6 +84,12 @@ export class JobSummaryModalComponent implements OnInit {
 
   activities: any;
 
+  emailRequest : Email = {
+    to: "",
+    subject: "",
+    body: "",
+  }
+
   constructor(private serv: API, private modalCtrl : ModalController, private store: Store, private router: Router, public toastCtrl: ToastController) {}
 
   async ngOnInit(): Promise<void> {
@@ -160,9 +166,24 @@ export class JobSummaryModalComponent implements OnInit {
     await this.updateParent();
 
     this.serv.removeContract(this.contractID).subscribe(
-      res=>{
+      async res=>{
+        console.log(res);
+        //send email to parent to notify them that the request has been accepted
+        this.emailRequest.to = this.userDetails.email;
+        this.emailRequest.subject = "Au Pair Hire Request Accepted";
+        this.emailRequest.body = this.store.snapshot().user.name + " has accepted your request to be your au pair. You should be able to see them on your dashboard once you log into the application again." +
+                                                                   "\n\nRegards,\nThe Au Pair Team";
+
+        await this.serv.sendEmail(this.emailRequest).toPromise().then(
+          res=>{
+            console.log(res);
+          },
+          error => {
+            console.log("Error has occured with API: " + error);
+          }
+        );
         this.router.navigate(['/au-pair-dashboard']).then(()=>{
-        window.location.reload();
+        location.reload();
         });
       },
       error=>{console.log("Error has occured with API: " + error);}
@@ -174,7 +195,21 @@ export class JobSummaryModalComponent implements OnInit {
   async rejectRequest()
   {
     await this.serv.removeContract(this.contractID).subscribe(
-      res=>{
+      async res=>{
+        console.log(res);
+        this.emailRequest.to = this.userDetails.email;
+        this.emailRequest.subject = "Au Pair Hire Request Rejected";
+        this.emailRequest.body = this.store.snapshot().user.name + " has rejected your request to be your au pair. Feel free to explore more au pairs on our app's explore page!" +
+                                                                   "\n\nRegards,\nThe Au Pair Team";
+
+        await this.serv.sendEmail(this.emailRequest).toPromise().then(
+          res=>{
+            console.log(res);
+          },
+          error => {
+            console.log("Error has occured with API: " + error);
+          }
+        );
         location.reload();
       },
       error=>{console.log("Error has occured with API: " + error);}
