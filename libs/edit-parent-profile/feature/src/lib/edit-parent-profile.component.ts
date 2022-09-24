@@ -427,7 +427,7 @@ export class EditParentProfileComponent implements OnInit{
     
     //Building the API query according to what is in the location input field
     const locationParam = loc.replace(' ', '+');
-    const params = locationParam + '&limit=4&format=json&polygon_geojson=1&addressdetails=1';
+    const params = locationParam + '&limit=5&format=json&polygon_geojson=1&addressdetails=1';
 
     //Make the API call
     await this.http.get('https://nominatim.openstreetmap.org/search?q='+params)
@@ -442,10 +442,12 @@ export class EditParentProfileComponent implements OnInit{
       {
         return;
       }
-  
+
+      this.potentialLocations.splice(0);
+      
       //Add returned data to the array
       const len = res.length;
-      for (let j = 0; j < len && j<4; j++) 
+      for (let j = 0; j < len && j<5; j++) 
       {      
         this.potentialLocations.push(res[j]);
       }
@@ -454,5 +456,9 @@ export class EditParentProfileComponent implements OnInit{
     .catch(error=>{ // Failure
       console.log(error);
     });
+  }
+
+  radioChecked(event: any){
+    this.location = event.target.value;
   }
 }
