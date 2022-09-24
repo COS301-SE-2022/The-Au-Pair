@@ -210,7 +210,7 @@ export class AddChildComponent implements OnInit
   returnToChildrenDashboard()
   {
     this.router.navigate(['/children-dashboard']).then(()=>{
-      window.location.reload();
+      location.reload();
     });
   }
 

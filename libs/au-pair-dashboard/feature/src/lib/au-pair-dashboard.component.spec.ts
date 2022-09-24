@@ -26,7 +26,10 @@ const apiMock = {
   },
   editParent() {
     return of()
-  }
+  },
+  sendEmail() {
+    return of({})
+  },
 }
 
 describe('AuPairDashboardComponent', () => {

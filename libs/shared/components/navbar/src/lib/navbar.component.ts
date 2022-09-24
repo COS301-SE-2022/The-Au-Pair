@@ -25,6 +25,10 @@ export class NavbarComponent implements OnInit
     this.hasAuPair = this.store.snapshot().user.auPair != "";
     this.kids = this.store.snapshot().user.children.length;
     this.loggedIn = this.store.snapshot().user.loggedIn;
+    if (this.router.url == "/landing-page"){
+      this.loggedIn = false;
+      this.store.dispatch(new Reset());
+    }
   }
 
   dash()

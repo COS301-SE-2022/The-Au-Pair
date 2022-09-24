@@ -37,7 +37,8 @@
             <the-au-pair-password-field labelContent="Confirm Password" errorContent="Passwords do not match" [showError]="notSamePasswords" formControlName="confPass"></the-au-pair-password-field>
 
             <div class="buttons">
-                <input [ngClass]="(this.registering===false) ? 'registerUser' : 'disabled-registerUser' " [disabled]="registering" type="submit" value="Register">
+                <input [hidden]="this.registering" [ngClass]="(this.registering===false) ? 'registerUser' : 'disabled-registerUser' " [disabled]="registering" type="submit" value="Register">
+                <button [hidden]="!this.registering" class="spinner-button"><ion-spinner name="circular"></ion-spinner></button>
             </div>
 
             <div class="clickables">
