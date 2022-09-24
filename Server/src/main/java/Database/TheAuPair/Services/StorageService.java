@@ -1,6 +1,7 @@
 package Database.TheAuPair.Services;
 
 import com.amazonaws.services.s3.AmazonS3;
+import com.amazonaws.services.s3.model.PutObjectResult;
 import com.amazonaws.services.s3.model.S3Object;
 import com.amazonaws.services.s3.model.S3ObjectInputStream;
 import com.amazonaws.util.IOUtils;
@@ -20,6 +21,21 @@ public class StorageService
   public StorageService(AmazonS3 s3)
   {
     this.s3 = s3;
+  }
+
+  public String uploadFile(MultipartFile file)
+  {
+    String originalFilename = file.getOriginalFilename();
+    try
+    {
+      File file1 = convertMultiPartToFile(file);
+      PutObjectResult putObjectResult = s3.putObject(bucketName, originalFilename, file1);
+      return putObjectResult.getContentMd5();
+    }
+    catch (IOException e)
+    {
+      throw  new RuntimeException(e);
+    }
   }
 
   public byte[] downloadFile(String fileName)
