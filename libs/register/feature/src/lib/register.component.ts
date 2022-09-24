@@ -130,8 +130,6 @@ export class RegisterComponent {
       }
       else
       {
-          //this.verifyLocation(this.parentRegisterDetailsForm.value.location);
-
           if (this.locationError)
           {
             this.formValid = false;
