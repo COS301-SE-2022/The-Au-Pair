@@ -75,11 +75,7 @@ export class ExtraCostsModalComponent implements OnInit {
           this.costsForm.controls['amount'].setValue(newAmount.toFixed(2));
         }
       }
-      else {
-        this.amountEditable = true;
-      }
-
-      if(this.costsForm.value.type == 'Overtime') {
+      else if(this.costsForm.value.type == 'Overtime') {
         this.amountEditable = false;
 
         if(!(isNaN(parseFloat(this.costsForm.value.hours)) || this.costsForm.value.hours == "")) {
@@ -124,8 +120,6 @@ export class ExtraCostsModalComponent implements OnInit {
         res=>{
           this.parentID = res.employer;
           this.payRate = res.payRate;
-
-          console.log(this.payRate);
       },
       error => {
         console.log("Error has occured with API: " + error);
@@ -189,9 +183,9 @@ export class ExtraCostsModalComponent implements OnInit {
       if(descError != null)
       {
         descError.style.display = "block";
-        this.sending = false;
-        return;
       }
+      this.sending = false;
+      return;
     }
     else
     {
@@ -206,17 +200,17 @@ export class ExtraCostsModalComponent implements OnInit {
       if(distError != null)
       {
         distError.style.display = "block";
-        this.sending = false;
-        return;
       }
+      this.sending = false;
+      return;
     }
     else if(this.costsForm.value.type == 'Fuel' && (isNaN(parseFloat(this.costsForm.value.kml)) || this.costsForm.value.kml == "" || !this.costsForm.controls['kml'].valid)) {
       if(kmlError != null)
       {
         kmlError.style.display = "block";
-        this.sending = false;
-        return;
       }
+      this.sending = false;
+      return;
     }
     else {
       if(distError != null)
@@ -235,9 +229,9 @@ export class ExtraCostsModalComponent implements OnInit {
       if(hoursError != null)
       {
         hoursError.style.display = "block";
-        this.sending = false;
-        return;
       }
+      this.sending = false;
+      return;
     }
     else
     {
@@ -251,9 +245,9 @@ export class ExtraCostsModalComponent implements OnInit {
       if(amountError != null)
       {
         amountError.style.display = "block";
-        this.sending = false;
-        return;
       }
+      this.sending = false;
+      return;
     }
     else
     {
