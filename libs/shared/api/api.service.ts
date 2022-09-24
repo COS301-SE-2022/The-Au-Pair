@@ -264,4 +264,8 @@ export class API{
     });
     return this.http.request(newRequest);
   }
+
+  getFile(file : string): Observable<any> {
+    return this.http.post(environment.apiURI+"/getFile",file,{responseType: 'blob'});
+  }
 }
