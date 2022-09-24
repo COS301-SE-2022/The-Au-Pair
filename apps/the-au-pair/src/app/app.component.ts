@@ -8,6 +8,7 @@ import { Router } from '@angular/router';
 import { MenuController, ToastController } from '@ionic/angular';
 import { Reset } from '../../../../libs/shared/ngxs/actions';
 import { DatePipe } from '@angular/common';
+import { lazyLoadGroupCollapse } from '@syncfusion/ej2-angular-grids';
 
 @Component({
   selector: 'the-au-pair-root',
@@ -111,7 +112,7 @@ export class AppComponent implements OnInit {
       this.userID = this.store.snapshot().user.id;
       this.userType = this.store.snapshot().user.type;
       if (this.userType == 2 && this.userID != '') {
-        if (this.auPairDetails.onShift == true) {
+        if (this.auPairDetails.employer != "") {          
           this.getCurrentAuPairDetails();
           this.updateCoordinates();
         }
@@ -141,7 +142,7 @@ export class AppComponent implements OnInit {
     }
 
     //if au pair, get parent id
-    if (this.userType == 2) {
+    if (this.userType == 2 && this.auPairDetails.employer != "") {
       this.serv.getAuPair(this.userID).toPromise().then(res => {
         this.getAcitivities(res.employer)
       }).catch(err => {
@@ -349,7 +350,7 @@ export class AppComponent implements OnInit {
 
   async updateCoordinates() 
   { 
-    let flag = false; //CHANGE THIS BACK TO FALSEEEEEEEEEEEEEEEEEEEEEEEE
+    let flag = true; //CHANGE THIS BACK TO FALSEEEEEEEEEEEEEEEEEEEEEEEE
     await this.geolocation.getCurrentPosition().then((resp: { coords: { longitude: number; latitude: number; }; }) => {
       //Check if auPair has actually moved
       if (this.auPairDetails.currentLong != resp.coords.longitude || this.auPairDetails.currentLat != resp.coords.latitude)
@@ -371,17 +372,6 @@ export class AppComponent implements OnInit {
 
   async updateAuPair(aupair: auPair) 
   { 
-    //Save new auPair object in the database with updated coordinates
-    this.serv.editAuPair(aupair).subscribe(
-      res => {
-        return res;
-      },
-      error => {
-        console.log("Error has occured with API: " + error);
-        return error;
-      }
-    )
-
     /**
      * Check if au pair is out of boundary
      */
@@ -414,23 +404,33 @@ export class AppComponent implements OnInit {
         );
     }
 
+    //Check if the au pair should still be on shift
+
     /**
      * Find activities that are happening now
      * Loop thorugh all activities and find if the current time is in the timeslot, 
      * and check that the au pair is still within that activities boundary.
      */
-    
+
+    const daysActivities: Activity[] = [];
+
+    //Getting the current Time
+    const time = new Date();
+    const pipe = new DatePipe('en-US');
+    const currentDay = pipe.transform(Date.now(),'EEEE');
+    const currentHour = time.toLocaleString('en-US', { hour: 'numeric', hour12: false });
+
     for (let j = 0; j < this.currentActivities.length; j++)
     {
       //Getting the activities start time
       const act = this.currentActivities[j];
       const actTime = act.timeStart.substring(0,2);
-      
-      //Getting the current Time
-      const time = new Date();
-      const pipe = new DatePipe('en-US');
-      const currentDay = pipe.transform(Date.now(),'EEEE');
-      const currentHour = time.toLocaleString('en-US', { hour: 'numeric', hour12: false });
+
+      //Getting all the activities for the current day
+      if(act.day.toLowerCase() == currentDay?.toLowerCase())
+      {
+        daysActivities.push(act);
+      }
 
       //If the activity is currently happening, monitor the boundary
       if(actTime === currentHour && act.day.toLowerCase() == currentDay?.toLowerCase())
@@ -445,11 +445,48 @@ export class AppComponent implements OnInit {
         if(distance>boundary)
         {
           //Notify parent
-          
+
         }
       }
-      
     }
+
+    //Checking if the au pair should be on shift or not
+    let startTime = 24;
+    let endTime = 0;
+    for (let k = 0; k < daysActivities.length; k++) 
+    {
+      const act = daysActivities[k];
+      const actStartTime = parseInt(act.timeStart.substring(0,2));
+      const actEndTime = parseInt(act.timeEnd.substring(0,2));
+
+      //Finding the earliest activity's start
+      if(actStartTime < startTime)
+        startTime = actStartTime
+
+      //Finding the latest activity end
+      if(actEndTime > endTime)
+        endTime = actEndTime
+    }
+    
+    if(!isNaN(parseInt(currentHour)) && parseInt(currentHour)>=endTime)
+    {
+      aupair.onShift = false;
+    }
+    else if(!isNaN(parseInt(currentHour)) && parseInt(currentHour)>=startTime && parseInt(currentHour)<endTime)
+    {
+      aupair.onShift = true;
+    }
+
+    //Save new auPair object in the database with updated coordinates
+    this.serv.editAuPair(aupair).subscribe(
+      res => {
+        return res;
+      },
+      error => {
+        console.log("Error has occured with API: " + error);
+        return error;
+      }
+    )
   }
 
   calculateEucDistance(actX : number, actY : number, aupairX : number, aupairY : number)

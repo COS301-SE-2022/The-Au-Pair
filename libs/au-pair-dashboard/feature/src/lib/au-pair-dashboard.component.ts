@@ -188,7 +188,9 @@ export class AuPairDashboardComponent implements OnInit {
       }
     )
 
-    this.serv.getUser(this.employer).subscribe(
+    if(this.employer != "")
+    {
+       this.serv.getUser(this.employer).subscribe(
       res=>{
           this.employerName = res.fname;
           this.employerSurname = res.sname;
@@ -197,7 +199,9 @@ export class AuPairDashboardComponent implements OnInit {
           this.getChildren();
       },
       error=>{console.log("Error has occured with API: " + error);}
-    )
+      )
+    }
+   
   }
 
   async getChildren(){
