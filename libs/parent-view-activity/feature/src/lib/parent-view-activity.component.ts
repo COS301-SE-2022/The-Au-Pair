@@ -42,8 +42,6 @@ export class ParentViewActivityComponent implements OnInit
   async ngOnInit(): Promise<void>
   {
     this.getActivityDetails();
-    console.log("Selected child is: ", this.selectedChild, " and ", this.activityDetails);
-    
   }
 
   //------------------------------------------------------------------------------------------------------------------------------------------------------------------------

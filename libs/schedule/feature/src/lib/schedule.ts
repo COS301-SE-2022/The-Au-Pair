@@ -37,7 +37,6 @@ export class ScheduleComponent implements OnInit{
 
   getSelectedChild()
   { 
-    console.log("In here:", this.selectedChildName);
     if(this.selectedChildName == "All Children")
     {
       this.getAllActivities();
@@ -169,13 +168,6 @@ export class ScheduleComponent implements OnInit{
       }
     )
   }
-
-  doSomething()
-  {
-    console.log("In here");
-    
-  }
-
 
   //Navigation methods
 

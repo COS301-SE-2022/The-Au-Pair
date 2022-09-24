@@ -65,6 +65,14 @@
                 <input id="behaviourText" type="text" value="{{this.activityDetails.behavior}}" readonly name="behaviour">    
             </div>
 
+            <!-- Images of the children -->
+            <div>
+                <p>Image of activity</p>
+                <div class="activity-image">
+                    <img id="activity-image-container" src="assets/images/no-image.png">
+                </div>
+            </div>
+
             <!-- Submit -->
             <div class="buttons">
                 <input class = "cancel" value="Return To Schedule" (click)="returnToSchedule()" routerLink="/schedule">
