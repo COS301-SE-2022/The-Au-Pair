@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpEvent, HttpRequest } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Activity , Child , medAid , Parent  , User, HoursLogged, auPair, Notification, Report, Contract, Email} from '../interfaces/interfaces';
 import { environment } from '../../../apps/the-au-pair/src/environments/environment';
