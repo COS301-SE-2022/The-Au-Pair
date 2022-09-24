@@ -14,6 +14,40 @@ import { AlertController } from '@ionic/angular';
 })
 export class AuPairCostComponent implements OnInit {
 
+  costList : any [] = [];
+  type = -1;
+  parentID = "";
+  aupairID = "";
+  days = [
+    "Mon","Tue","Wed","Thu","Fri","Sat","Sun"
+  ];
+
+  months = [
+    "January","February","March","April","May","June","July","August","September","October","November","December"
+  ];
+
+  dayHoursWorked = [
+    0, 0, 0, 0, 0, 0 ,0
+  ];
+
+  auPairName = "";
+  employerName = "";
+  hourlyRate = 0;
+  totalHours = 0;
+  totalRemuneration = 0;
+
+  travelCost = 0;
+  activityCost = 0;
+  otherCost = 180;
+  totalCost = 0;
+
+  otherDeg = 0;
+  activityDeg = 0;
+
+  dateRange = "";
+
+  pieSplit = "";
+
   constructor(private api:API, private store: Store, private modalCtrl : ModalController, private alertController : AlertController) { }
 
   async openExtraCostsModal() {
@@ -54,40 +88,6 @@ export class AuPairCostComponent implements OnInit {
 
     await modal.present();
   }
-
-  costList : any [] = [];
-  type = -1;
-  parentID = "";
-  aupairID = "";
-  days = [
-    "Mon","Tue","Wed","Thu","Fri","Sat","Sun"
-  ];
-
-  months = [
-    "January","February","March","April","May","June","July","August","September","October","November","December"
-  ];
-
-  dayHoursWorked = [
-    0, 0, 0, 0, 0, 0 ,0
-  ];
-
-  auPairName = "";
-  employerName = "";
-  hourlyRate = 0;
-  totalHours = 0;
-  totalRemuneration = 0;
-
-  travelCost = 0;
-  activityCost = 0;
-  otherCost = 180;
-  totalCost = 0;
-
-  otherDeg = 0;
-  activityDeg = 0;
-
-  dateRange = "";
-
-  pieSplit = "";
 
   async ngOnInit() {
     

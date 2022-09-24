@@ -3,7 +3,7 @@ import { ModalController, NavParams, ToastController } from '@ionic/angular';
 import { API } from '../../../../../shared/api/api.service';
 import { Store } from '@ngxs/store';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { UserCosts } from 'libs/shared/interfaces/interfaces';
+import { UserCosts } from '../../../../../shared/interfaces/interfaces';
 
 @Component({
   selector: 'the-au-pair-extra-costs-modal',
@@ -55,7 +55,7 @@ export class ExtraCostsModalComponent implements OnInit {
         this.amountEditable = false;
 
         if(!(isNaN(parseFloat(this.costsForm.value.distance)) || this.costsForm.value.distance == "" || !this.costsForm.controls['distance'].valid) && !(isNaN(parseFloat(this.costsForm.value.kml)) || this.costsForm.value.kml == "" || !this.costsForm.controls['kml'].valid)) {
-          var fuelPrice = 0;
+          let fuelPrice = 0;
           switch(this.costsForm.value.fuelType) {
             case '95-Unleaded':
               fuelPrice = this.fuelPrices['petrol-95'];
@@ -70,7 +70,7 @@ export class ExtraCostsModalComponent implements OnInit {
             break;
           }
   
-          var newAmount = (parseFloat(this.costsForm.value.distance) / parseFloat(this.costsForm.value.kml)) * fuelPrice;
+          const newAmount = (parseFloat(this.costsForm.value.distance) / parseFloat(this.costsForm.value.kml)) * fuelPrice;
 
           this.costsForm.controls['amount'].setValue(newAmount.toFixed(2));
         }
@@ -79,7 +79,7 @@ export class ExtraCostsModalComponent implements OnInit {
         this.amountEditable = false;
 
         if(!(isNaN(parseFloat(this.costsForm.value.hours)) || this.costsForm.value.hours == "")) {
-          var remuneration = parseFloat(this.costsForm.value.hours) * this.payRate;
+          const remuneration = parseFloat(this.costsForm.value.hours) * this.payRate;
 
           this.costsForm.controls['amount'].setValue(remuneration);
         }
@@ -138,7 +138,7 @@ export class ExtraCostsModalComponent implements OnInit {
   }
 
   sendCostData(type: string, desc: string, metric: number, amount: number) {
-    var today = new Date();
+    const today = new Date();
     
     this.costDetails.type = type;
     this.costDetails.description = desc;
@@ -171,11 +171,11 @@ export class ExtraCostsModalComponent implements OnInit {
   addCost() {
     this.sending = true;
 
-    let descError = document.getElementById("descriptionError");
-    let distError = document.getElementById("distanceError");
-    let kmlError = document.getElementById("kmlError");
-    let hoursError = document.getElementById("hoursError");
-    let amountError = document.getElementById("amountError");
+    const descError = document.getElementById("descriptionError");
+    const distError = document.getElementById("distanceError");
+    const kmlError = document.getElementById("kmlError");
+    const hoursError = document.getElementById("hoursError");
+    const amountError = document.getElementById("amountError");
 
     // Description errors
     if(this.costsForm.value.type != 'Fuel' && this.costsForm.value.desc == "" )
@@ -257,9 +257,9 @@ export class ExtraCostsModalComponent implements OnInit {
       }
     }
 
+    let fuelPrice = 0;
     switch (this.costsForm.value.type) {
       case 'Fuel':
-        var fuelPrice = 0;
         switch(this.costsForm.value.fuelType) {
           case '95-Unleaded':
             fuelPrice = this.fuelPrices['petrol-95'];

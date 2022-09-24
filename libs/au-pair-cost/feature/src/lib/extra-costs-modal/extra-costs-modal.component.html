@@ -19,7 +19,7 @@
                     </select>
                 </ion-col>
             </ion-row>
-            <ion-row *ngIf="costsForm.controls['type'].value!='Fuel'">
+            <ion-row *ngIf="costsForm.controls['type'].value!=='Fuel'">
                 <ion-col size="4" class="ion-text-center">
                     Description:
                 </ion-col>
@@ -28,7 +28,7 @@
                     <p id="descriptionError" class="error" style="display: none;">Description may not be empty</p>
                 </ion-col>  
             </ion-row>
-            <ion-row *ngIf="costsForm.controls['type'].value=='Fuel'">
+            <ion-row *ngIf="costsForm.controls['type'].value==='Fuel'">
                 <ion-col size="4" class="ion-text-center">
                     Fuel Type:
                 </ion-col>
@@ -40,7 +40,7 @@
                     </select>
                 </ion-col>  
             </ion-row>
-            <ion-row *ngIf="costsForm.controls['type'].value=='Fuel'">
+            <ion-row *ngIf="costsForm.controls['type'].value==='Fuel'">
                 <ion-col size="4" class="ion-text-center">
                     Distance:
                 </ion-col>
@@ -49,7 +49,7 @@
                     <p id="distanceError" class="error" style="display: none;">Distance must be a number</p>
                 </ion-col>  
             </ion-row>
-            <ion-row *ngIf="costsForm.controls['type'].value=='Fuel'">
+            <ion-row *ngIf="costsForm.controls['type'].value==='Fuel'">
                 <ion-col size="4" class="ion-text-center">
                     Kilometres per litre:
                 </ion-col>
@@ -58,7 +58,7 @@
                     <p id="kmlError" class="error" style="display: none;">KM/L must be a number</p>
                 </ion-col>  
             </ion-row>
-            <ion-row *ngIf="costsForm.controls['type'].value=='Overtime'">
+            <ion-row *ngIf="costsForm.controls['type'].value==='Overtime'">
                 <ion-col size="4" class="ion-text-center">
                     Hours:
                 </ion-col>

@@ -3,7 +3,7 @@ import { ModalController, NavParams, ToastController } from '@ionic/angular';
 import { API } from '../../../../../shared/api/api.service';
 import { Store } from '@ngxs/store';
 import { FormBuilder, FormControl } from '@angular/forms';
-import { auPair } from 'libs/shared/interfaces/interfaces';
+import { auPair } from '../../../../../shared/interfaces/interfaces';
 
 @Component({
   selector: 'the-au-pair-edit-rate-modal',
@@ -75,7 +75,7 @@ export class EditRateModalComponent implements OnInit {
   updateRate(){
     this.sending = true;
 
-    let payError = document.getElementById("payRateError");
+    const payError = document.getElementById("payRateError");
 
     if(isNaN(parseFloat(this.payRateInput.value)) || this.payRateInput.value == "") {
       if(payError != null)
