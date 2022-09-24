@@ -353,6 +353,7 @@ export class AuPairDashboardComponent implements OnInit {
 
     this.currentAuPair.terminateDate = "";
     this.currentAuPair.employer = "";
+    this.currentAuPair.onShift = false;
     this.parentDetails.auPair = "";
 
     await this.updateAuPair();
