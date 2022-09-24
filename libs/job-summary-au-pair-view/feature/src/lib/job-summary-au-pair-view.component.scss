@@ -211,96 +211,6 @@
     height: 20px;
 }
 
-@media (max-width: 642px) {
-    .parent-profile-div{
-        margin-top: 13px;
-        width: 90%;
-    }
-
-    .job-summary-title{
-        font-size: 36px;
-        padding-top: 15px;
-        padding-bottom: 15px;
-    }
-
-    .profile-name{
-        font-size: 30px;
-        padding-top: 15px;
-        padding-bottom: 15px;
-    }
-
-    .children-name{
-        font-size: 24px;
-        padding-top: 15px;
-        padding-bottom: 15px;
-    }
-
-    .parent-text{
-        width: 30%;
-        font-size: 15px;
-    }
-
-    .parent-text-info{
-        font-size: 15px;
-    }
-
-    .parent-text-info2{
-        padding-top: 5px;
-    }
-
-    .details-div{
-        width: 95%;
-    }
-}
-
-@media (max-width: 810px) {
-    .parent-profile-div{
-        margin-top: 13px;
-        width: 90%;
-    }
-
-    .job-summary-title{
-        font-size: 36px;
-        padding-top: 15px;
-        padding-bottom: 15px;
-    }
-
-    .profile-name{
-        font-size: 30px;
-        padding-top: 15px;
-        padding-bottom: 15px;
-    }
-
-    .children-name{
-        font-size: 24px;
-        padding-top: 15px;
-        padding-bottom: 15px;
-    }
-
-    .parent-text{
-        width: 30%;
-        font-size: 15px;
-    }
-
-    .parent-text-info{
-        font-size: 15px;
-    }
-
-    .parent-text-info2{
-        padding-top: 5px;
-    }
-
-    .details-div{
-        width: 85%;
-    }
-}
-
-@media (max-width: 1000px) {
-    .parent-profile-div{
-        width: 90%;
-    }
-}
-    
 .text-white {
     font-size: 36px;
     color: white;
@@ -383,4 +293,105 @@ ion-card {
     letter-spacing: 0.05px;
     color: white;
 }
+
+@media(max-width: 375px)
+{
+    .parent-text{
+        width: 35% !important;
+        font-size: 12px !important;
+    }
+
+    .parent-text-info{
+        font-size: 12px !important;
+    }
+
+    .children-name{
+        font-size: 30px !important;
+    }
+}
   
+@media (max-width: 642px) {
+    .parent-profile-div{
+        width: 100%;
+    }
+
+    .job-summary-title{
+        font-size: 36px;
+        padding-top: 15px;
+    }
+
+    .profile-name{
+        font-size: 30px;
+        padding-top: 15px;
+    }
+
+    .children-name{
+        font-size: 24px;
+        padding-top: 15px;
+    }
+
+    .parent-text{
+        width: 30%;
+        font-size: 15px;
+    }
+
+    .parent-text-info{
+        font-size: 15px;
+    }
+
+    .parent-text-info2{
+        padding-top: 5px;
+    }
+
+    .details-div{
+        width: 95%;
+    }
+}
+
+@media (max-width: 810px) {
+    .parent-profile-div{
+        width: 100%;
+    }
+
+    .job-summary-title{
+        font-size: 36px;
+        padding-top: 15px;
+
+    }
+
+    .profile-name{
+        font-size: 30px;
+        padding-top: 15px;
+    }
+
+    .children-name{
+        font-size: 24px;
+        padding-top: 15px;
+    }
+
+    .parent-text{
+        width: 30%;
+        font-size: 15px;
+    }
+
+    .parent-text-info{
+        font-size: 15px;
+    }
+
+    .parent-text-info2{
+        padding-top: 5px;
+    }
+
+    .details-div{
+        width: 85%;
+    }
+}
+
+@media (max-width: 1000px) {
+    .parent-profile-div{
+        margin-top: 0px;
+        margin-bottom: 0px;
+        border-radius: 0px;
+        width: 100%;
+    }
+}

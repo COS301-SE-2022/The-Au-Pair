@@ -65,8 +65,14 @@ ion-button{
     position: relative;
     top: 60px;
     font-size: 20px;
-    width: 420px;
+    width: 45%;
     margin: auto;
+}
+
+@media (max-width: 800px){
+    .toastPopUp{
+        width: 70%;
+    }
 }
 
 ion-alert.custom-alert {
@@ -94,4 +100,13 @@ border-radius: 4px;
             }
         }
     }
+}
+
+.loader-bg{
+    color: var(--ion-color-primary);
+}
+
+.loading-wrapper.sc-ion-loading-md{
+    border-radius: 16px !important;
+    background-color: var(--ion-color-secondary);
 }

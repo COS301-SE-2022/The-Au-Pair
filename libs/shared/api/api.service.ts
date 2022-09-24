@@ -286,4 +286,9 @@ export class API{
   removeUserCost(id : string): Observable<any> {  
     return this.http.post(environment.apiURI+"/removeUserCost",id);
   }
+
+  getAuPairEmployer(id : string): Observable<any> {
+    return this.http.post(environment.apiURI+"/getAuPairEmployer",id);
+  }
+  
 }

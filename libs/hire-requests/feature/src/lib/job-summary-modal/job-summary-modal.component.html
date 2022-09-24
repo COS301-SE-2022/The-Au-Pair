@@ -1,7 +1,7 @@
 <ion-content [fullscreen]="true">
     <div class = "parent-profile-div">
         <h1 class='job-summary-title'>Job Summary</h1>
-        <h3 class='parent-name'>{{this.userDetails.fname}} {{this.userDetails.sname}}</h3>
+        <h3 class='children-name'>{{this.userDetails.fname}} {{this.userDetails.sname}}</h3>
             <div class='profile-picture-wrapper'>
                 <img class="profile-picture" src="assets/images/placeholder-profile.jpg" alt="">
             </div>
@@ -38,7 +38,7 @@
             <div class = "small-profile-details-div">
                 <div class="parent-info-small">
                     <div class="parent-text">Age: </div>
-                    <p class="parent-text-info"></p>
+                    <p class="parent-text-info">{{getAge(c.dob)}}</p>
                 </div>
             </div>
             <div class = 'large-profile-details-div'>
@@ -52,7 +52,7 @@
                 </div>
             </div>
         </div>
-        <h3 class='profile-name'>Schedule</h3>
+        <h3 class='job-summary-title'>Schedule</h3>
         <ion-card color="light" class="card-bar-graph">
             <ion-card-header class="title" style="float:left"> Hours Required 
                 <span title="The below graph shows the amount of hours required by the parent for each day and the time frame for the hours of work required."><ion-icon name="help-circle-outline" class="tooltip-graph"></ion-icon></span>
@@ -68,11 +68,11 @@
         <h1 class='job-summary-title'>Terms Of Employment:</h1>
         <div class="terms-container">
             <ul>
-                <li>By sending the hire request you agree to letting the respective Au Pair viewing certain information about your profile, including: Your name, contact details, your childrens names, and the hours they will be required to be on shift.
-                <li>By sending the hire request you agree to the terms that an au pair may resign at any time. You will be notified when they resign and will have the ability to terminate the employment early, otherwise the employment will terminate after 14 days of the resignation.</li>
-                <li>By sending the hire request, you agree to the Au Pair's payrate and are willing to comply with the pay they request for the number of hours you request.</li>
-                <li>By sending the hire request, you agree that the respective Au Pair will only be required to work for the hours you have created on the schedule and any extra hours will need to be discussed with the Au Pair.</li>
-                <li>If you agree with all the above terms and have confirmed your details above, please press the "Hire" button bellow.</li>
+                <li>By accepting this hire request you agree to letting the respective Parent viewing certain information about your profile, including: Your name, contact details, pay rate, and your location when you are on shift with the child.</li>
+                <li>By accepting this hire request you agree to the terms that parent may terminate your employment at any time. You will be able tp resign at any time. By resigning, the parent will be notified that the employment will be terminated in 14 days, before that time, the parent can choose to terminate employment early.</li>
+                <li>By accepting this hire request, you confirm that your current details, including payrate, are correct.</li>
+                <li>By accepting this hire request, you agree to work for number of hours specified in the schedule and realise that more hours could be added. These hours however must be discussed with the parent when they want to add more activities to the schedule.</li>
+                <li>If you agree with all the above terms and have confirmed your details, please press the "Accept" button bellow. Otherwise, press the "Reject" button.</li>
               </ul> 
         </div>
         <div class="spacer"></div>

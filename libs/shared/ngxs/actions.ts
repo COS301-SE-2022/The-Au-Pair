@@ -45,3 +45,8 @@ export class SetLoggedIn{
     static readonly type = '[User] set loggedIn';
     constructor(public payload: boolean) {}
 }
+
+export class SetEmail{
+    static readonly type = '[User] set email';
+    constructor(public payload: string) {}
+}

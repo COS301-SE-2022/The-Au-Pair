@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ModalController, NavParams, ToastController } from '@ionic/angular';
-import { auPair, Child, Parent, User } from '../../../../../shared/interfaces/interfaces';
+import { auPair, Child, Email, Parent, User } from '../../../../../shared/interfaces/interfaces';
 import { API } from '../../../../../shared/api/api.service';
 import { Store } from '@ngxs/store';
 import { Router } from '@angular/router';
@@ -84,26 +84,26 @@ export class JobSummaryModalComponent implements OnInit {
 
   activities: any;
 
+  emailRequest : Email = {
+    to: "",
+    subject: "",
+    body: "",
+  }
+
   constructor(private serv: API, private modalCtrl : ModalController, private store: Store, private router: Router, public toastCtrl: ToastController) {}
 
   async ngOnInit(): Promise<void> {
     this.auPairID = this.store.snapshot().user.id;
 
-    await this.serv.getParent(this.parentID)
-    .toPromise()
-      .then( 
-        res=>{
-          this.parentDetails.id = res.id;      
-          this.parentDetails.children = res.children;
-          this.parentDetails.medID = res.medID;
-          this.parentDetails.auPair = res.auPair;
-          this.parentDetails.rating = res.rating;
-      },
-      error => {
-        console.log("Error has occured with API: " + error);
-      }
-    )
+    await this.getParentDetails(this.parentID);
+    await this.getUserDetails();
+    await this.getChildrenDetails();
 
+    this.populateGraph();
+  }
+
+  async getUserDetails()
+  {
     await this.serv.getUser(this.parentID).toPromise()
     .then( 
       res=>{
@@ -126,18 +126,17 @@ export class JobSummaryModalComponent implements OnInit {
         console.log("Error has occured with API: " + error);
       }
     )
-    
-    await this.serv.getChildren(this.parentID).subscribe(
-        res=>{
-          let i = 0;
-          res.forEach((element: Child) => {
-            this.childrenArr[i++] = element;
-          });
-        },
-        error =>{console.log("Error has occured with API: " + error);}
-      )
+  }
 
-    this.populateGraph();
+  async getChildrenDetails()
+  {
+    await this.serv.getChildren(this.parentID).toPromise()
+    .then( 
+      res=>{
+        this.childrenArr = res;
+      },
+      error =>{console.log("Error has occured with API: " + error);}
+    )
   }
 
   async sucToast()
@@ -167,10 +166,24 @@ export class JobSummaryModalComponent implements OnInit {
     await this.updateParent();
 
     this.serv.removeContract(this.contractID).subscribe(
-      res=>{
+      async res=>{
         console.log(res);
+        //send email to parent to notify them that the request has been accepted
+        this.emailRequest.to = this.userDetails.email;
+        this.emailRequest.subject = "Au Pair Hire Request Accepted";
+        this.emailRequest.body = this.store.snapshot().user.name + " has accepted your request to be your au pair. You should be able to see them on your dashboard once you log into the application again." +
+                                                                   "\n\nRegards,\nThe Au Pair Team";
+
+        await this.serv.sendEmail(this.emailRequest).toPromise().then(
+          res=>{
+            console.log(res);
+          },
+          error => {
+            console.log("Error has occured with API: " + error);
+          }
+        );
         this.router.navigate(['/au-pair-dashboard']).then(()=>{
-        window.location.reload();
+        location.reload();
         });
       },
       error=>{console.log("Error has occured with API: " + error);}
@@ -182,8 +195,21 @@ export class JobSummaryModalComponent implements OnInit {
   async rejectRequest()
   {
     await this.serv.removeContract(this.contractID).subscribe(
-      res=>{
+      async res=>{
         console.log(res);
+        this.emailRequest.to = this.userDetails.email;
+        this.emailRequest.subject = "Au Pair Hire Request Rejected";
+        this.emailRequest.body = this.store.snapshot().user.name + " has rejected your request to be your au pair. Feel free to explore more au pairs on our app's explore page!" +
+                                                                   "\n\nRegards,\nThe Au Pair Team";
+
+        await this.serv.sendEmail(this.emailRequest).toPromise().then(
+          res=>{
+            console.log(res);
+          },
+          error => {
+            console.log("Error has occured with API: " + error);
+          }
+        );
         location.reload();
       },
       error=>{console.log("Error has occured with API: " + error);}
@@ -223,6 +249,7 @@ export class JobSummaryModalComponent implements OnInit {
           this.parentDetails.children = res.children;
           this.parentDetails.medID = res.medID;
           this.parentDetails.auPair = res.auPair;
+          this.parentDetails.rating = res.rating;
       },
       error => {
         console.log("Error has occured with API: " + error);
@@ -244,6 +271,7 @@ export class JobSummaryModalComponent implements OnInit {
            this.childDetails.allergies = res[i].allergies;
            this.childDetails.diet = res[i].diet;
            this.childDetails.parent = res[i].parent;
+           this.childDetails.dob = res[i].dob;
            this.childDetails.aupair = this.auPairID;
  
            this.updateChild(this.childDetails);
@@ -359,8 +387,30 @@ export class JobSummaryModalComponent implements OnInit {
 
     const avg = total/ratings.length;
 
+    if(avg < 1 || avg > 5)
+    {
+      return 0;
+    }
+
+    if((avg % 1) == 0)
+    {
+      return avg;
+    }
+
     const ret = (Math.round(avg * 100) / 100).toFixed(1);
 
     return ret;
+  }
+
+  getAge(dateString : string) {
+    const today = new Date();
+    const birthDate = new Date(dateString);
+    let age = today.getFullYear() - birthDate.getFullYear();
+    const m = today.getMonth() - birthDate.getMonth();
+    if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate())) {
+        age--;
+    }
+
+    return age;
   }
 }

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ModalController, NavParams, ToastController } from '@ionic/angular';
+import { ModalController, ToastController } from '@ionic/angular';
 import { Parent } from '../../../../../shared/interfaces/interfaces';
 import { API } from '../../../../../shared/api/api.service';
 import { Store } from '@ngxs/store';
@@ -10,9 +10,8 @@ import { Store } from '@ngxs/store';
   styleUrls: ['./parent-rating-modal.component.scss'],
 })
 export class ParentRatingModalComponent implements OnInit {
-  parentID = "";
+  parentID = "";  
   auPairID = "";
-  public navParams = new NavParams;
   parentRating! : number;
 
   parentDetails: Parent = {
@@ -27,31 +26,30 @@ export class ParentRatingModalComponent implements OnInit {
 
   async ngOnInit() {
     this.auPairID = this.store.snapshot().user.id;
-    await this.serv.getAuPair(this.auPairID)
-    .toPromise()
-      .then( 
-        res=>{
-          this.parentID = res.employer;
-      },
-      error => {
-        console.log("Error has occured with API: " + error);
-      }
-    )
 
-    this.getParentDetails();
+    await this.getParentID();
+    await this.getParentDetails();
+  }
+
+  async getParentID()
+  {
+    await this.serv.getAuPair(this.auPairID).toPromise()
+    .then(
+      res=>{
+        this.parentID = res.employer;        
+    },
+    error => {
+      console.log("Error has occured with API: " + error);
+    }
+  )
   }
 
   async getParentDetails()
   {
-    await this.serv.getParent(this.parentID)
-    .toPromise()
-      .then( 
+    await this.serv.getParent(this.parentID).toPromise()
+    .then( 
         res=>{
-          this.parentDetails.id = res.id;      
-          this.parentDetails.children = res.children;
-          this.parentDetails.medID = res.medID;
-          this.parentDetails.auPair = res.auPair;
-          this.parentDetails.rating = res.rating;
+          this.parentDetails = res;
       },
       error => {
         console.log("Error has occured with API: " + error);
@@ -60,13 +58,8 @@ export class ParentRatingModalComponent implements OnInit {
   }
 
   async getDescription(formData : any){   
-    this.getParentDetails();
-
-    console.log(this.parentDetails);
-    
-
-    console.log(formData.behaviour);
-    
+    await this.getParentID();
+    await this.getParentDetails();   
 
     if(formData.behaviour > 5 || formData.behaviour < 1 || isNaN(+formData.behaviour))
     {
@@ -79,6 +72,21 @@ export class ParentRatingModalComponent implements OnInit {
     
     this.parentDetails.rating.push(this.parentRating);  
     this.submitRating();
+  }
+
+  submitRating(){
+    this.serv.editParent(this.parentDetails).subscribe(
+      res=>{
+        console.log("The response is:" + res);
+        this.closeModal();
+        this.openToast();
+        return res;
+      },
+      error=>{
+        console.log("Error has occured with API: " + error);
+        return error;
+      }
+    );
   }
 
   async openToast()
@@ -96,22 +104,4 @@ export class ParentRatingModalComponent implements OnInit {
   closeModal(){
     this.modalCtrl.dismiss();
   }
-
-  submitRating(){
-    this.serv.editParent(this.parentDetails).subscribe(
-      res=>{
-        console.log("The response is:" + res);
-        this.closeModal();
-        this.openToast();
-        return res;
-      },
-      error=>{
-        console.log("Error has occured with API: " + error);
-        return error;
-      }
-    );
-
-    console.log(this.parentDetails);
-  } 
 }
-

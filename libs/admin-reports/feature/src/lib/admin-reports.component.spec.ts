@@ -42,6 +42,12 @@ const apiMock = {
   },
   editUser() {
     return of({})
+  },
+  sendEmail() {
+    return of({})
+  },
+  getAuPairEmployer() {
+    return of({})
   }
 }
 

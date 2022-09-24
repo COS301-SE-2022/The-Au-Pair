@@ -27,4 +27,10 @@ public class ParentService
   {
     pr.save(p);
   }
+
+  public Parent getAuPairEmployer(String id)
+  {
+    Parent p = pr.findAuPair(id);
+    return p;
+  }
 }

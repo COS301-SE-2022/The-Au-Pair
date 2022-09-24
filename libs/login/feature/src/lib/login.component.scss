@@ -143,3 +143,29 @@ ion-content {
     opacity: 0.04;
     z-index: -10;
 }
+
+.buttons button{
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 62px;
+    background: var(--ion-color-light-white);
+    box-shadow: 1px 2px 5px rgba(0, 0, 0, 0.13);
+    border-style: none;
+    border-radius: 10px;
+    margin-top: 40px;
+    color: black;
+}
+
+button{
+    font-style: normal;
+    font-weight: 700;
+    font-size: 16px;
+    line-height: 19px;
+    background-color: var(--ion-color-primary) !important;
+    margin-top: 20px;
+}
+
+ion-spinner{
+    color: var(--ion-color-light);
+}

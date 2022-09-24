@@ -146,6 +146,17 @@ input:focus{
     outline:none;
 }
 
+@media(max-width: 375px)
+{
+    .details-title{
+        font-size: 12px !important;
+    }
+
+    .user-details{
+        font-size: 12px !important;
+    }
+}
+
 @media (max-width: 642px) {
     
     #background-image-2{
@@ -214,4 +225,52 @@ input:focus{
     .profile-details-div{
         width: 75%;
     }
+}
+
+.ionLabel{
+    color:var(--ion-color-dark)!important;
+}
+
+ion-radio-group{
+    max-width: 411px;
+    min-width: 411px;
+}
+
+.fl{
+    display: flex;
+    justify-content: space-between;
+    height: 45px;
+}
+
+.address-label{
+    margin-left: 10px;
+    margin-bottom: 10px;
+    margin-top: 10px;
+}
+
+.details-div.address-details{
+    display: block !important;
+    padding-bottom: 10px;
+    padding-right: 10px;
+}
+
+.address-field{
+    
+    margin-top: 10px;
+}
+
+input{
+    padding-left: 10px;
+    border: 2px solid var(--ion-color-secondary) !important;
+    padding-top: 5px;
+    padding-bottom: 5px;
+}
+
+.fl.larger{
+    height: 150px !important;
+}
+
+textarea{
+    border: 2px solid var(--ion-color-secondary) !important;
+    padding-left: 12px;
 }
