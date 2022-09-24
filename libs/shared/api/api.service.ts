@@ -254,5 +254,14 @@ export class API{
   sendEmail(email : Email): Observable<any> {
     return this.http.post(environment.apiURI+"/sendEmail",email);
   }
-  
+
+  storeFile(file : File, filename : string): Observable<any> {
+    const data: FormData = new FormData();
+    data.append('file', file, filename);
+    const newRequest = new HttpRequest('POST', environment.apiURI+"/uploadFile", data, {
+      reportProgress: true,
+      responseType: 'text'
+    });
+    return this.http.request(newRequest);
+  }
 }
