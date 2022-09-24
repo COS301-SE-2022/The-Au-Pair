@@ -7,26 +7,52 @@
         </div>
         <form id = "profForm" #profileForm = "ngForm" (ngSubmit) = "getUserFormDetails(profileForm.value)">
             <div class = "profile-details-div">
-                <div class="details-div">
-                    <div class="details-title">Email: </div>
-                    <input type = 'text' name = "email" class="user-details" ngModel = '{{this.userDetails.email}}' placeholder="Email Address">
-                    <p id="emailError" class="error" style="display: none;">Error in field</p>
+                <div class="details-div address-details">
+                    <div>
+                        <div class="fl">
+                            <div class="address-label">
+                                <div>Email: </div>
+                            </div>
+                            <div class="address-field"> 
+                                <input type = 'text' name = "email" class="user-details" ngModel = '{{this.userDetails.email}}' placeholder="Email Address">
+                                <p id="emailError" class="error" style="display: none;">Error in field</p>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                <div class="details-div">
-                    <div class="details-title">Phone: </div>
-                    <input type = 'text' name = "phone" class="user-details" ngModel = '{{this.userDetails.number}}' placeholder="Phone Number">
-                    <p id="phoneError" class="error" style="display: none;">Error in field</p>
+                <div class="details-div address-details">
+                    <div>
+                        <div class="fl">
+                            <div class="address-label">
+                                <div>Phone: </div>
+                            </div>
+                            <div class="address-field"> 
+                                <input type = 'text' name = "phone" class="user-details" ngModel = '{{this.userDetails.number}}' placeholder="Phone Number">
+                                <p id="phoneError" class="error" style="display: none;">Error in field</p>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                <div class="details-div">
-                    <div class="details-title">Address: </div>
-                    <input [(ngModel)]="location" (input)="getLocations()" list="locations" type = 'text' name = "address" class="user-details" ngModel = '{{this.userDetails.address}}' placeholder="Address">
-                    <ion-radio-group (ionChange)="radioChecked($event)" mode="md">
-                        <ion-item *ngFor="let location of potentialLocations" >
-                          <ion-label class="ionLabel">{{location.display_name}}</ion-label>
-                          <ion-radio class="ionRadio" slot="end" color="primary" value="{{location.display_name}}"></ion-radio>
-                        </ion-item>
-                      </ion-radio-group>
-                    <p id="addressError" class="error" style="display: none;">Error in field</p>
+                <div class="details-div address-details">
+                    <div>
+                        <div class="fl">
+                            <div class="address-label">
+                                <div>Address: </div>
+                            </div>
+                            <div class="address-field"> 
+                                <input [(ngModel)]="location" (input)="getLocations()" autocomplete="off" list="locations" type = 'text' name = "address" class="user-details location-input" ngModel = '{{this.userDetails.address}}' placeholder="Address">
+                                <p id="addressError" class="error" style="display: none;">Error in field</p>
+                            </div>
+                        </div>
+                        <div>
+                            <ion-radio-group (ionChange)="radioChecked($event)" mode="md">
+                                <ion-item *ngFor="let location of potentialLocations" >
+                                  <ion-label class="ionLabel">{{location.display_name}}</ion-label>
+                                  <ion-radio class="ionRadio" slot="end" color="primary" value="{{location.display_name}}"></ion-radio>
+                                </ion-item>
+                              </ion-radio-group>
+                        </div>
+                    </div>
                 </div>
                 <div class="details-div-large">
                     <div class="medAid-details-div">Medical Aid: </div>
