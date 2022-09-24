@@ -81,9 +81,12 @@ export class ExtraCostsModalComponent implements OnInit {
 
       if(this.costsForm.value.type == 'Overtime') {
         this.amountEditable = false;
-        // var remuneration = (parseFloat(this.costsForm.value.hours) / parseFloat(this.costsForm.value.kml)) * fuelPrice;
-  
-        // this.costsForm.controls['amount'].setValue(newAmount);
+
+        if(!(isNaN(parseFloat(this.costsForm.value.hours)) || this.costsForm.value.hours == "")) {
+          var remuneration = parseFloat(this.costsForm.value.hours) * this.payRate;
+
+          this.costsForm.controls['amount'].setValue(remuneration);
+        }
       }
       else {
         this.amountEditable = true;
@@ -121,6 +124,8 @@ export class ExtraCostsModalComponent implements OnInit {
         res=>{
           this.parentID = res.employer;
           this.payRate = res.payRate;
+
+          console.log(this.payRate);
       },
       error => {
         console.log("Error has occured with API: " + error);

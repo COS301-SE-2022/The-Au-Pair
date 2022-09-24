@@ -83,10 +83,15 @@ ion-card-header{
   border-bottom: none;
 }
 
-.add-cost {
+.edit-rate {
   text-align: right;
   padding-left: 2vw;
-  cursor: pointer;
+  margin: 20px;
+}
+
+.add-cost {
+  padding: 0;
+  top: 0;
 }
 
 .ion-padding {
@@ -267,7 +272,7 @@ ion-card-header{
 }
 
 .card-costs-list ion-grid {
-  padding: 20px 50px 0 50px;
+  padding: 60px 50px 0 50px;
 }
 
 .headings {
@@ -275,10 +280,6 @@ ion-card-header{
   font-size: 16px;
   color: white;
   background-color: var(--ion-color-secondary);
-}
-
-.col {
-  // background-color:lightgrey;
 }
 
 .col {
