@@ -27,6 +27,8 @@ export class ParentEditActivityComponent implements OnInit {
   location: "",
   timeStart: "",
   boundary: 0.0,
+  longitude: 0.0,
+  latitude: 0.0,
   timeEnd: "",
   budget: 0.0,
   comment: "",

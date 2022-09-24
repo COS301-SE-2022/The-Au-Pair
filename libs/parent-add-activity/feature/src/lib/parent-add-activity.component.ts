@@ -21,6 +21,8 @@ export class ParentAddActivityComponent implements OnInit{
     description: "",
     location: "",
     boundary: 0.0,
+    longitude: 0.0,
+    latitude: 0.0,
     timeStart: "",
     timeEnd: "",
     budget: 0.0,
