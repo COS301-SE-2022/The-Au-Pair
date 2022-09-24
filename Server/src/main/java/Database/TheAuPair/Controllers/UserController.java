@@ -53,4 +53,11 @@ public class UserController
   {
     this.us.resolveApplication(decision.get("id"), decision.get("resolution"));
   }
+
+  //add a ping endpoint for testing
+  @GetMapping("/ping")
+  public String ping()
+  {
+    return "pong";
+  }
 }

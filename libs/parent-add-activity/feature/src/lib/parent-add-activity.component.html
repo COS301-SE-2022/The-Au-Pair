@@ -12,10 +12,13 @@
           <p id="descripError" class="error" style="display: none;">Error in field</p>
 
           <!-- Location -->
-          <input [(ngModel)]="location" (input)="getLocations()" list="locations" type="text" name="location" placeholder="Location"/>
-          <datalist id="locations">
-            <option *ngFor="let location of potentialLocations" value="{{location}}">
-          </datalist>
+          <input [(ngModel)]="location" autocomplete="off"  (input)="getLocations()" list="locations" type="text" name="location" placeholder="Location"/>
+          <ion-radio-group (ionChange)="radioChecked($event)" mode="md">
+            <ion-item *ngFor="let location of potentialLocations" >
+              <ion-label class="ionLabel">{{location}}</ion-label>
+              <ion-radio class="ionRadio" slot="end" color="primary" value="{{location}}"></ion-radio>
+            </ion-item>
+          </ion-radio-group>
           <p id="locError" class="error" style="display: none;">Error in field</p>
 
           <!-- Activity boundary radius -->

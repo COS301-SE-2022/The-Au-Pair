@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ModalController, NavParams, ToastController } from '@ionic/angular';
-import { Report } from '../../../../../shared/interfaces/interfaces';
+import { Email, Report } from '../../../../../shared/interfaces/interfaces';
 import { API } from '../../../../../shared/api/api.service';
 import { Store } from '@ngxs/store';
 
@@ -18,6 +18,12 @@ export class UserReportModalComponent implements OnInit {
     reportIssuerId: "",
     reportedUserId: "",
     desc: ""
+  }
+
+  emailRequest: Email ={
+    to: '',
+    subject: '',
+    body: '',
   }
 
   public navParams = new NavParams;
@@ -60,6 +66,21 @@ export class UserReportModalComponent implements OnInit {
         res=>{
           this.closeModal();
           this.openToast("Report sent!");
+
+          //send report confirmation email to au pair
+          this.emailRequest.to = this.store.snapshot().user.email;
+          this.emailRequest.subject = "Report Submitted succesfully";
+          this.emailRequest.body = "We have received your report of your employer.\nWe will look into the report and issue a warning if deemed necessary by our admin team. " +
+                                   "Please make sure if any further issues arise that you log another report.\n\nRegards,\nThe Au Pair Team";
+          //send email to au pair
+          this.serv.sendEmail(this.emailRequest).toPromise().then(
+            res => {
+              return res;
+            },
+            error => {
+              console.log(error);
+            }
+          );
           return res;
       },
       error => {

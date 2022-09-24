@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngxs/store';
 import { API } from '../../../../shared/api/api.service'
-import { auPair, Child, HoursLogged, Parent } from '../../../../shared/interfaces/interfaces';
+import { auPair, Child, Email, HoursLogged, Parent } from '../../../../shared/interfaces/interfaces';
 import { Router } from '@angular/router';
 import { ModalController, ToastController } from '@ionic/angular';
 import { AlertController } from '@ionic/angular';
@@ -25,6 +25,7 @@ export class AuPairDashboardComponent implements OnInit {
   employerId = '';
   employerPhone! : string;
   children: Child[] = [];
+  employerEmail= "";
 
   alreadyLogging = false;
   logID = "";
@@ -69,6 +70,12 @@ export class AuPairDashboardComponent implements OnInit {
     medID: "",
     auPair: "",
     rating: []
+  }
+
+  emailRequest : Email = {
+    to: "",
+    subject: "",
+    body: "",
   }
   
   constructor(private serv: API, private modalCtrl : ModalController, private store: Store, public router: Router, public toastCtrl: ToastController, private alertController: AlertController) {}
@@ -196,6 +203,7 @@ export class AuPairDashboardComponent implements OnInit {
           this.employerSurname = res.sname;
           this.employerId = res.id;
           this.employerPhone = res.number;
+          this.employerEmail = res.email;
           this.getChildren();
       },
       error=>{console.log("Error has occured with API: " + error);}
@@ -291,6 +299,20 @@ export class AuPairDashboardComponent implements OnInit {
     this.currentAuPair.terminateDate = td;
 
     await this.updateAuPair();
+
+    //send email to employer
+    this.emailRequest.to = this.employerEmail;
+    this.emailRequest.subject = "Au Pair Resignation";
+    this.emailRequest.body = "Your Au Pair has unfortunatley resigned.\nAccording to our terms and conditions, the au pair will still be employed to you for 2 more weeks." +
+                             "If you are fine with terminating the contract earlier, please speak to your au pair directly.\n\nKind Regards,\nThe Au Pair Team";
+    this.serv.sendEmail(this.emailRequest).toPromise().then(
+      res => {
+        console.log(res);
+      },
+      error => {
+        console.log("Error has occured with API: " + error);
+      }
+    );
   }
 
   async getAuPairDetails()
@@ -361,6 +383,19 @@ export class AuPairDashboardComponent implements OnInit {
 
     await this.updateAuPair();
     await this.updateParent();
+
+    //send email to employer
+    this.emailRequest.to = this.employerEmail;
+    this.emailRequest.subject = "Au Pair Resignation";
+    this.emailRequest.body = "The 2 weeek period has passed and your au pair has been terminated.\n\nKind Regards,\nThe Au Pair Team";
+    this.serv.sendEmail(this.emailRequest).toPromise().then(
+      res => {
+        console.log(res);
+      },
+      error => {
+        console.log("Error has occured with API: " + error);
+      }
+    );
 
     location.reload();
   }
