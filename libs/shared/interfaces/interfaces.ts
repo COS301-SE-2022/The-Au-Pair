@@ -4,6 +4,8 @@ export interface Activity{
     description: string;
     location: string;
     boundary: number;
+    longitude: number;
+    latitude: number;
     timeStart: string;
     timeEnd: string;
     budget: number;
