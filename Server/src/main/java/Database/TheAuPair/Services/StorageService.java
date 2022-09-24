@@ -5,7 +5,10 @@ import com.amazonaws.services.s3.model.S3Object;
 import com.amazonaws.services.s3.model.S3ObjectInputStream;
 import com.amazonaws.util.IOUtils;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
 
 public class StorageService
@@ -33,5 +36,14 @@ public class StorageService
       e.printStackTrace();
     }
     return null;
+  }
+
+  private File convertMultiPartToFile(MultipartFile file ) throws IOException
+  {
+    File convFile = new File( file.getOriginalFilename() );
+    FileOutputStream fos = new FileOutputStream( convFile );
+    fos.write( file.getBytes() );
+    fos.close();
+    return convFile;
   }
 }
