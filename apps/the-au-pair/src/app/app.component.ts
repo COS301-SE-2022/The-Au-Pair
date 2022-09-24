@@ -352,7 +352,7 @@ export class AppComponent implements OnInit {
 
   async updateCoordinates() 
   { 
-    let flag = true; //CHANGE THIS BACK TO FALSEEEEEEEEEEEEEEEEEEEEEEEE
+    let flag = false; //CHANGE THIS BACK TO FALSEEEEEEEEEEEEEEEEEEEEEEEE
     await this.geolocation.getCurrentPosition().then((resp: { coords: { longitude: number; latitude: number; }; }) => {
       //Check if auPair has actually moved
       if (this.auPairDetails.currentLong != resp.coords.longitude || this.auPairDetails.currentLat != resp.coords.latitude)
@@ -438,8 +438,8 @@ export class AppComponent implements OnInit {
       if(actTime === currentHour && act.day.toLowerCase() == currentDay?.toLowerCase())
       {
         const boundary = act.boundary;
-        const longAct = 0;//Change to be act.long
-        const latAct = 0;//Change to be act.lat
+        const longAct = act.longitude;
+        const latAct = act.latitude;
         const longCoord = aupair.currentLong;
         const latCoord = aupair.currentLat;
         
