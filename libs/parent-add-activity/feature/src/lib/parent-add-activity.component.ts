@@ -314,7 +314,9 @@ export class ParentAddActivityComponent implements OnInit{
       const len = res.length;
       for (let j = 0; j < len && j<5; j++) 
       { 
-        this.potentialLocations.push(res[j].display_name);
+        if (this.potentialLocations.includes(res[j].display_name) === false){
+          this.potentialLocations.push(res[j].display_name); 
+        }
       }
     })
     .catch(error=>{ // Failure

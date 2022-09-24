@@ -448,8 +448,10 @@ export class EditParentProfileComponent implements OnInit{
       //Add returned data to the array
       const len = res.length;
       for (let j = 0; j < len && j<5; j++) 
-      {      
-        this.potentialLocations.push(res[j]);
+      {  
+        if (this.potentialLocations.includes(res[j].display_name) === false){
+          this.potentialLocations.push(res[j]); 
+        }   
       }
       
     })

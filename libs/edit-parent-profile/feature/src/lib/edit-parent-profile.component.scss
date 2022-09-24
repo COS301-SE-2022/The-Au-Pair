@@ -268,7 +268,7 @@ ion-radio-group{
 .fl{
     display: flex;
     justify-content: space-between;
-    height: 35px;
+    height: 45px;
 }
 
 .address-label{
@@ -288,6 +288,8 @@ ion-radio-group{
     margin-top: 10px;
 }
 
-input.user-details.location.input{
-    padding-left: 15px;
+input{
+    padding-left: 10px;
+    padding-top: 5px;
+    padding-bottom: 5px;
 }

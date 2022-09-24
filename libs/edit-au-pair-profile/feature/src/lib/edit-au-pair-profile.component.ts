@@ -376,17 +376,25 @@ export class EditAuPairProfileComponent implements OnInit {
       {
         return;
       }
-  
+      
+      this.potentialLocations.splice(0);
+
       //Add returned data to the array
       const len = res.length;
       for (let j = 0; j < len && j<4; j++) 
       {      
-        this.potentialLocations.push(res[j]);
+        if (this.potentialLocations.includes(res[j].display_name) === false){
+          this.potentialLocations.push(res[j]); 
+        }  
       }
       
     })
     .catch(error=>{ // Failure
       console.log(error);
     });
+  }
+
+  radioChecked(event: any){
+    this.location = event.target.value;
   }
 }
