@@ -95,21 +95,15 @@ export class JobSummaryModalComponent implements OnInit {
   async ngOnInit(): Promise<void> {
     this.auPairID = this.store.snapshot().user.id;
 
-    await this.serv.getParent(this.parentID)
-    .toPromise()
-      .then( 
-        res=>{
-          this.parentDetails.id = res.id;      
-          this.parentDetails.children = res.children;
-          this.parentDetails.medID = res.medID;
-          this.parentDetails.auPair = res.auPair;
-          this.parentDetails.rating = res.rating;
-      },
-      error => {
-        console.log("Error has occured with API: " + error);
-      }
-    )
+    await this.getParentDetails(this.parentID);
+    await this.getUserDetails();
+    await this.getChildrenDetails();
 
+    this.populateGraph();
+  }
+
+  async getUserDetails()
+  {
     await this.serv.getUser(this.parentID).toPromise()
     .then( 
       res=>{
@@ -132,18 +126,17 @@ export class JobSummaryModalComponent implements OnInit {
         console.log("Error has occured with API: " + error);
       }
     )
-    
-    await this.serv.getChildren(this.parentID).subscribe(
-        res=>{
-          let i = 0;
-          res.forEach((element: Child) => {
-            this.childrenArr[i++] = element;
-          });
-        },
-        error =>{console.log("Error has occured with API: " + error);}
-      )
+  }
 
-    this.populateGraph();
+  async getChildrenDetails()
+  {
+    await this.serv.getChildren(this.parentID).toPromise()
+    .then( 
+      res=>{
+        this.childrenArr = res;
+      },
+      error =>{console.log("Error has occured with API: " + error);}
+    )
   }
 
   async sucToast()
@@ -256,6 +249,7 @@ export class JobSummaryModalComponent implements OnInit {
           this.parentDetails.children = res.children;
           this.parentDetails.medID = res.medID;
           this.parentDetails.auPair = res.auPair;
+          this.parentDetails.rating = res.rating;
       },
       error => {
         console.log("Error has occured with API: " + error);
@@ -277,6 +271,7 @@ export class JobSummaryModalComponent implements OnInit {
            this.childDetails.allergies = res[i].allergies;
            this.childDetails.diet = res[i].diet;
            this.childDetails.parent = res[i].parent;
+           this.childDetails.dob = res[i].dob;
            this.childDetails.aupair = this.auPairID;
  
            this.updateChild(this.childDetails);
@@ -392,8 +387,30 @@ export class JobSummaryModalComponent implements OnInit {
 
     const avg = total/ratings.length;
 
+    if(avg < 1 || avg > 5)
+    {
+      return 0;
+    }
+
+    if((avg % 1) == 0)
+    {
+      return avg;
+    }
+
     const ret = (Math.round(avg * 100) / 100).toFixed(1);
 
     return ret;
+  }
+
+  getAge(dateString : string) {
+    const today = new Date();
+    const birthDate = new Date(dateString);
+    let age = today.getFullYear() - birthDate.getFullYear();
+    const m = today.getMonth() - birthDate.getMonth();
+    if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate())) {
+        age--;
+    }
+
+    return age;
   }
 }

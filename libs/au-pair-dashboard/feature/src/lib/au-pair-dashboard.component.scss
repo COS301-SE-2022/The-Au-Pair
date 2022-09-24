@@ -35,6 +35,10 @@
     color: white;   
 }
 
+ion-icon {
+    pointer-events: none;
+}
+
 .report-icon{
     padding-left: 10px;
     float: left;

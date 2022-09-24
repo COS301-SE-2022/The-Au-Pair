@@ -148,6 +148,21 @@
     z-index: -10;
 }
 
+@media(max-width: 375px)
+{
+    .parent-text{
+        font-size: 12px !important;
+    }
+
+    .parent-text-info{
+        font-size: 12px !important;
+    }
+
+    .parent-text-info2{
+        font-size: 12px !important;
+    }
+}
+
 @media (max-width: 642px) {
     #background-image-2{
         right: 15px;

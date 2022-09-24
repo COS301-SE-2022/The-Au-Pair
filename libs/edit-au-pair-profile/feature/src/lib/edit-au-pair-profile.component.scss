@@ -146,6 +146,17 @@ input:focus{
     outline:none;
 }
 
+@media(max-width: 375px)
+{
+    .details-title{
+        font-size: 12px !important;
+    }
+
+    .user-details{
+        font-size: 12px !important;
+    }
+}
+
 @media (max-width: 642px) {
     
     #background-image-2{

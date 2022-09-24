@@ -6,11 +6,11 @@
       <ion-card class="children-div">
         <div class="employer-name"><span class="bold-text">Employer:</span> {{ employerName }} {{ employerSurname }} </div>
         <div class="button-container" >
-            <a href = 'tel:{{ employerPhone }}'><ion-icon name="call" class = 'call-icon'></ion-icon></a>
-            <a href = 'sms:{{ employerPhone }}'><ion-icon name="chatbubble-ellipses" class = 'message-icon'></ion-icon></a>
-            <ion-icon class="rating-icon" name="star" (click)="openModal(employerId)"></ion-icon>
-            <ion-icon class="report-icon" name="alert-circle" (click)="openReportModal()"></ion-icon>
-            <div *ngIf="this.employerId !== ''"><ion-icon class="terminate-contract" name="person-remove" (click)="presentAlert()"></ion-icon></div>
+            <a title="Call Parent" href = 'tel:{{ employerPhone }}'><ion-icon name="call" class = 'call-icon'></ion-icon></a>
+            <a title="Message Parent" href = 'sms:{{ employerPhone }}'><ion-icon name="chatbubble-ellipses" class = 'message-icon'></ion-icon></a>
+            <button title="Rate Parent" style="all: unset; cursor: pointer;" (click)="openModal(this.currentAuPair.employer)"><ion-icon class="rating-icon" name="star"></ion-icon></button>
+            <button title="Report Parent" style="all: unset; cursor: pointer;" (click)="openReportModal()"><ion-icon class="report-icon" name="alert-circle"></ion-icon></button>
+            <button title="Resign" style="all: unset; cursor: pointer;" *ngIf="this.employerId !== ''" (click)="presentAlert()"><ion-icon class="terminate-contract" name="person-remove"></ion-icon></button>
         </div>
         <div class="child-status">
           <span class="bold-text">Children: </span>
