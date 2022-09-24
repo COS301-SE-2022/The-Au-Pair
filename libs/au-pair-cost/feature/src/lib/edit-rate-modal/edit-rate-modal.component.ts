@@ -94,9 +94,6 @@ export class EditRateModalComponent implements OnInit {
     }
 
     this.AuPair.payRate = this.payRateInput.value;
-
-    console.log(this.AuPair.payRate);
-
     this.serv.editAuPair(this.AuPair)
     .toPromise()
       .then( 

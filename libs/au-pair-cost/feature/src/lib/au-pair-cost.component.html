@@ -3,7 +3,7 @@
   <div class="ion-padding">
     <div class="summary-div-wrapper">
       <ion-card class='summary-div'>
-        <div [hidden]="this.type!==2" class="au-pair-name">Employer: {{ auPairName }}</div>
+        <div [hidden]="this.type!==2" class="au-pair-name">Employer: {{ employerName }}</div>
         <div [hidden]="this.type!==1" class="au-pair-name">Au Pair: {{ auPairName }}</div>
         <div class="hourly-rate">Hourly Rate: {{ hourlyRate }} Rands/Hour <ion-icon [hidden]="this.type!==2" class="edit-rate" name="create-outline" (click)="openEditRateModal()"></ion-icon></div>
         <div class="total-hours">Total Hours: {{ totalHours }}</div>

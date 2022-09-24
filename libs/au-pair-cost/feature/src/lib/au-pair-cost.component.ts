@@ -20,6 +20,18 @@ export class AuPairCostComponent implements OnInit {
     const modal = await this.modalCtrl.create({
       component: ExtraCostsModalComponent
     });
+
+    modal.onDidDismiss().then((data) => {
+      this.api.getCurrentMonthCostsForJob(this.aupairID, this.parentID).subscribe(
+        data => { 
+          this.costList = data;
+        },
+        error => {
+          console.log("Error has occured with API: " + error);
+        }
+      )
+    });
+
     await modal.present();
   }
 
@@ -27,6 +39,19 @@ export class AuPairCostComponent implements OnInit {
     const modal = await this.modalCtrl.create({
       component: EditRateModalComponent
     });
+
+    modal.onDidDismiss().then((data) => {
+      this.api.getAuPair(this.aupairID).toPromise()
+      .then(
+      data => {
+        this.hourlyRate = data.payRate;
+      },
+      error => {
+        console.log("Error has occured with API: " + error);
+      }
+    )
+    });
+
     await modal.present();
   }
 
@@ -47,6 +72,7 @@ export class AuPairCostComponent implements OnInit {
   ];
 
   auPairName = "";
+  employerName = "";
   hourlyRate = 0;
   totalHours = 0;
   totalRemuneration = 0;
@@ -109,8 +135,6 @@ export class AuPairCostComponent implements OnInit {
     await this.api.getAuPair(this.aupairID).toPromise()
     .then(
       data => {
-        console.log(data);
-
         this.parentID = data.employer;
         this.hourlyRate = data.payRate;
         this.travelCost = data.distTraveled;
@@ -131,10 +155,21 @@ export class AuPairCostComponent implements OnInit {
       }
     )
 
+    if(this.store.snapshot().user.type === 2) 
+    {
+      this.api.getUser(this.parentID).subscribe( 
+        data => { 
+          this.employerName = data.fname
+        },
+        error => {
+          console.log("Error has occured with API: " + error);
+        }
+      )
+    }
+
     this.api.getCurrentMonthCostsForJob(this.aupairID, this.parentID).subscribe(
       data => { 
         this.costList = data;
-        console.log(data);
       },
       error => {
         console.log("Error has occured with API: " + error);
