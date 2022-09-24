@@ -39,17 +39,18 @@ export class ParentViewActivityComponent implements OnInit
     this.activityDetails.id=this.store.snapshot().user.currentActivity;
   }
 
-  ngOnInit(): void
+  async ngOnInit(): Promise<void>
   {
     this.getActivityDetails();
-    this.getChildren();
+    console.log("Selected child is: ", this.selectedChild, " and ", this.activityDetails);
+    
   }
 
   //------------------------------------------------------------------------------------------------------------------------------------------------------------------------
   /**Service calls**/
-  getActivityDetails()
+  async getActivityDetails()
   { 
-    this.serv.getActivity(this.activityDetails.id).subscribe(
+    await this.serv.getActivity(this.activityDetails.id).toPromise().then(
       res=>{
         console.log("The response is:" + res); 
         this.activityDetails.id = res.id;
@@ -65,28 +66,22 @@ export class ParentViewActivityComponent implements OnInit
         this.activityDetails.budget = res.budget;
         this.activityDetails.child = res.child;
         this.timeslot = res.timeStart + "-" + res.timeEnd
-      },
+      }).catch(
       error=>{console.log("Error has occured with API: " + error);}
-    )
-  };
+    );
 
-
-  getChildren()
-  {
-    this.serv.getChildren(this.store.snapshot().user.id).toPromise().then(
-      res=>{
-          res.forEach((c : Child) => {
+    await this.serv.getChildren(this.store.snapshot().user.id).toPromise().then(
+      async res=>{
+          await res.forEach((c : Child) => {
             if(c.id == this.activityDetails.child)
-            { 
               this.selectedChild = c.fname;
-            }
           });
-      },
+      }).catch(
       error=>{
         console.log("Error has occured with API: " + error);
       }
-    )
-  }
+    );
+  };
 
   //------------------------------------------------------------------------------------------------------------------------------------------------------------------------
   /**Navigation**/
