@@ -15,7 +15,7 @@ import { SetId } from '../../../../../libs/shared/ngxs/actions';
 import { UserReportModalComponent } from './user-report-modal/user-report-modal.component';
 import { AuPairRatingModalComponent } from './au-pair-rating-modal/au-pair-rating-modal.component';
 import { Router } from '@angular/router';
-import { auPair } from 'libs/shared/interfaces/interfaces';
+import { auPair } from '../../../../../libs/shared/interfaces/interfaces';
 
 const apiMock = {
   getParent() {
