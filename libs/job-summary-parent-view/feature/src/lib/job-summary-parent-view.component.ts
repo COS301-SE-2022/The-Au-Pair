@@ -2,9 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { API } from '../../../../shared/api/api.service';
 import { Store } from '@ngxs/store';
 import { DatePipe } from '@angular/common';
-import { Child, Contract, Email, Parent, User } from '../../../../shared/interfaces/interfaces';
+import { Child, Contract, Parent, User, Notification, Email } from '../../../../shared/interfaces/interfaces';
 import { Router } from '@angular/router';
 import { ToastController } from '@ionic/angular';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 @Component({
   selector: 'the-au-pair-job-summary-parent-view',
@@ -16,8 +17,11 @@ export class JobSummaryParentViewComponent implements OnInit {
 /* eslint-disable @typescript-eslint/no-explicit-any */
   parentID = "";
   auPairID = "";
+  userFcmToken = "";
   childrenArr: Child[] = [];
   flag!: boolean;
+
+
 
   days = [
     "Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"
@@ -85,6 +89,16 @@ export class JobSummaryParentViewComponent implements OnInit {
     banned: "",
   }
 
+  notificationToSend: Notification = {
+    id: "",
+    auPairId: "",
+    parentId: "",
+    title: "",
+    body: "",
+    date: "",
+    time: "",
+  }
+
   emailRequest: Email ={
     to: "",
     subject: "",
@@ -93,7 +107,7 @@ export class JobSummaryParentViewComponent implements OnInit {
 
   auPairEmail = "";
 
-  constructor(private serv: API, private store: Store, private router: Router, public toastCtrl: ToastController)
+  constructor(private serv: API, private store: Store, private router: Router, public toastCtrl: ToastController, private httpClient: HttpClient)
   {
     const navigation = this.router.getCurrentNavigation();
     if(navigation !== null)
@@ -110,11 +124,10 @@ export class JobSummaryParentViewComponent implements OnInit {
     await this.getUserDetails();
     await this.getParentDetails();
     await this.getChildrenDetails();
-    this.getNoActivities();
   }
 
   async getActivities(){
-    this.serv.getChildren(this.parentID).subscribe(
+    await this.serv.getChildren(this.parentID).subscribe(
       res => {
           this.children = res;
           this.children.forEach((element: { id: string; }) => {
@@ -189,7 +202,7 @@ export class JobSummaryParentViewComponent implements OnInit {
     )
   }
 
-  setChildActivity(){
+  setChildActivity(){    
     this.children.forEach((child: { id: any; fname: any; }) => {
       this.activities.forEach((act: { childId: any; child: any; name: any; id: any; timeStart: any; day: any; }) => {
         if(child.id === act.child){
@@ -205,6 +218,23 @@ export class JobSummaryParentViewComponent implements OnInit {
         }
       });
     });
+
+    let actCount = 0;
+
+    const actDays = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"];
+
+    for(let i = 0; i < actDays.length; i++)
+    {
+      actCount = 0;
+      for(let j = 0; j < this.childActivities.length; j++)
+      {  
+        if(this.childActivities[j].dayofweek === actDays[i])
+        {
+          actCount++;
+        }
+      };
+      this.shiftHours[i] = actCount;
+    } 
   }
 
   async sendHireRequests()
@@ -250,7 +280,7 @@ export class JobSummaryParentViewComponent implements OnInit {
       this.serv.addContract(this.contractDetails)
       .toPromise()
       .then(
-        res => {
+        async res => {
             //get au pair by id
             this.serv.getUser(this.auPairID).toPromise().then(
               res => {
@@ -270,7 +300,47 @@ export class JobSummaryParentViewComponent implements OnInit {
               error => {
                 console.log("Error has occured with API: " + error);
               });
+
+            await this.serv.getFCMToken(this.auPairID).toPromise().then(res => {
+              this.userFcmToken = res;
+            }).catch(err => {
+              console.log(err);
+            });
+    
+            if (this.userFcmToken != "") {
+              console.log(this.userFcmToken);
+              const requestHeaders = new HttpHeaders().set('Authorization', 'key=AAAAlhtqIdQ:APA91bFlcYmdaqt5D_jodyiVQG8B1mkca2xGh6XKeMuTGtxQ6XKhSY0rdLnc0WrXDsV99grFamp3k0EVHRUJmUG9ULcxf-VSITFgwwaeNvrUq48q0Hn1GLxmZ3GBAYdCBzPFIRdbMxi9');
+              const postData = {
+                "to": this.userFcmToken,
+                "notification": {
+                  "title": "New Hire Request",
+                  "body": "You have received a new hire request from " + this.userDetails.fname + " " + this.userDetails.sname,
+                }
+              }
+    
+              this.httpClient.post('https://fcm.googleapis.com/fcm/send', postData, { headers: requestHeaders }).subscribe(data => {
+                console.log("data receieved: " + data);
+              }, error => {
+                console.log(error);
+              });
+            }
           console.log(res);
+
+          const current = new Date();
+          const minutes = String(current.getMinutes()).padStart(2, '0');
+
+          this.notificationToSend.auPairId = this.auPairID;
+          this.notificationToSend.parentId = "";
+          this.notificationToSend.title = "New Hire Request";
+          this.notificationToSend.body = "You have received a new hire request from " + this.userDetails.fname + " " + this.userDetails.sname;
+          this.notificationToSend.date = current.getFullYear() + "-" + (current.getMonth() + 1) + "-" + current.getDate();
+          this.notificationToSend.time = current.getHours() + ":" + minutes;
+
+          this.serv.logNotification(this.notificationToSend).toPromise().then(res => {
+            console.log(res);
+          }, err => {
+            console.log(err);
+          });
         },
         error => {
           console.log("Error has occured with API: " + error);
@@ -296,39 +366,13 @@ export class JobSummaryParentViewComponent implements OnInit {
     await toast.present();
   }
 
-  async getNoActivities()
-  {   
-    let actCount = 0;
-
-    const actDays = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"];
-
-    await this.serv.getAuPairSchedule(this.parentDetails.children).toPromise()
-    .then(
-      res=>{
-        this.activities = res;      
-      },
-      error=>{
-        console.log("Error has occured with API: " + error);
-      }
-    )
-
-    for(let i = 0; i < actDays.length; i++)
-    {
-      actCount = 0;
-
-      this.activities.forEach((act: {timeStart: any; day: any; timeEnd: any;}) => 
-      {
-        if(act.day === actDays[i])
-        {
-          actCount++;
-        }
-      });
-      this.shiftHours[i] = actCount;
-    }    
-  }
-
   getAverage(ratings : number[])
   {
+    if(ratings.length == 0)
+    {
+      return 0;
+    }
+    
     let total = 0;
     for(let i = 0; i < ratings.length; i++)
     {
@@ -369,4 +413,6 @@ export class JobSummaryParentViewComponent implements OnInit {
 
     return age;
   }
+
+
 }

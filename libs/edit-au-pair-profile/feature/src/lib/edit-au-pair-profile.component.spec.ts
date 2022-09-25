@@ -105,329 +105,336 @@ describe('EditAuPairProfileComponent', () => {
 
   //------------------------------------------------------------------------------------------------------------------------------------------------------------------------
   /**Populated form fields form testing**/
-  // it('should, given valid input from the form, update the userDetails and auPairDetails variable', async ()=>{
-  //   const expectedUserValue: User = {
-  //     id: "",
-  //     fname: "",
-  //     sname: "",
-  //     email: "",
-  //     address: "",
-  //     registered: false,
-  //     type: 0,
-  //     password: "",
-  //     number: "",
-  //     salt: "",
-  //     latitude: 0, 
-  //     longitude: 0, 
-  //     suburb: "", 
-  //     gender: "",      
-  //     fcmToken : "",
-  //     birth: "",
-  //     banned: "",
-  //     warnings: 0,
-  //   };
+  it('should, given valid input from the form, update the userDetails and auPairDetails variable', async ()=>{
+    const expectedUserValue: any = {
+      id: undefined,
+      fname: undefined,
+      sname: undefined,
+      email: undefined,
+      address: undefined,
+      registered: undefined,
+      type: undefined,
+      password: undefined,
+      number: undefined,
+      salt: undefined,
+      latitude: undefined, 
+      longitude: undefined, 
+      suburb: undefined, 
+      gender: undefined,      
+      fcmToken : "",
+      birth: undefined,
+      banned: undefined,
+      warnings: undefined,
+    };
 
-  //   const expectedAuPairValue: auPair = {
-  //     id: "",
-  //     rating: [],
-  //     onShift: false,
-  //     employer: "",
-  //     costIncurred: 0,
-  //     distTraveled: 0,
-  //     payRate: 0,
-  //     bio: "",
-  //     experience: "",
-  //     currentLong: 0.0,
-  //     currentLat: 0.0,
-  //     terminateDate: ""
-  //   };
+    const expectedAuPairValue: any = {
+      id: undefined,
+      rating: undefined,
+      onShift: undefined,
+      employer: undefined,
+      costIncurred: undefined,
+      distTraveled: undefined,
+      payRate: undefined,
+      bio: undefined,
+      experience: undefined,
+      currentLong: undefined,
+      currentLat: undefined,
+      alreadyOutOfBounds: false,
+      terminateDate: undefined,
+    };
 
-  //   jest.spyOn(component,"getUserDetails");
-  //   await component.getUserFormDetails(validForm);
-  //   expect(component.userDetails).toEqual(expectedUserValue);
+    jest.spyOn(component,"getUserDetails");
+    await component.getUserFormDetails(validForm);
+    expect(component.userDetails).toEqual(expectedUserValue);
 
-  //   jest.spyOn(component,"getUserDetails");
-  //   await component.getUserFormDetails(validForm);
-  //   expect(component.auPairDetails).toEqual(expectedAuPairValue);
-  // })
+    jest.spyOn(component,"getUserDetails");
+    await component.getUserFormDetails(validForm);
+    expect(component.auPairDetails).toEqual(expectedAuPairValue);
+  })
 
-  // //------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-  // /**Empty fields form testing**/
-  // it('should, given a form with no email, NOT poplate the userDetails or auPairDetails variable', async ()=>{
-  //   const expectedUserValue: User = {
-  //     id: "",
-  //     fname: "",
-  //     sname: "",
-  //     email: "",
-  //     address: "",
-  //     registered: false,
-  //     type: 0,
-  //     password: "",
-  //     number: "",
-  //     salt: "",
-  //     latitude: 0, 
-  //     longitude: 0, 
-  //     suburb: "", 
-  //     gender: "", 
-  //     fcmToken : "",
-  //     birth: "",
-  //     banned: "",
-  //     warnings: 0,
-  //   };
+  //------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+  /**Empty fields form testing**/
+  it('should, given a form with no email, NOT poplate the userDetails or auPairDetails variable', async ()=>{
+    const expectedUserValue: any = {
+      id: undefined,
+      fname: undefined,
+      sname: undefined,
+      email: undefined,
+      address: undefined,
+      registered: undefined,
+      type: undefined,
+      password: undefined,
+      number: undefined,
+      salt: undefined,
+      latitude: undefined, 
+      longitude: undefined, 
+      suburb: undefined, 
+      gender: undefined,      
+      fcmToken : "",
+      birth: undefined,
+      banned: undefined,
+      warnings: undefined,
+    };
 
-  //   const expectedAuPairValue: auPair = {
-  //     id: "",
-  //     rating: [],
-  //     onShift: false,
-  //     employer: "",
-  //     costIncurred: 0,
-  //     distTraveled: 0,
-  //     payRate: 0,
-  //     bio: "",
-  //     experience: "",
-  //     currentLong: 0.0,
-  //     currentLat: 0.0,
-  //     terminateDate: ""
-  //   };
+    const expectedAuPairValue: any = {
+      id: undefined,
+      rating: undefined,
+      onShift: undefined,
+      employer: undefined,
+      costIncurred: undefined,
+      distTraveled: undefined,
+      payRate: undefined,
+      bio: undefined,
+      experience: undefined,
+      currentLong: undefined,
+      currentLat: undefined,
+      alreadyOutOfBounds: false,
+      terminateDate: undefined,
+    };
 
-  //   jest.spyOn(component,"getUserDetails");
-  //   await component.getUserFormDetails(emptyEmail);
-  //   expect(component.userDetails).toEqual(expectedUserValue);
+    jest.spyOn(component,"getUserDetails");
+    await component.getUserFormDetails(emptyEmail);
+    expect(component.userDetails).toEqual(expectedUserValue);
 
-  //   jest.spyOn(component,"getUserDetails");
-  //   await component.getUserFormDetails(emptyEmail);
-  //   expect(component.auPairDetails).toEqual(expectedAuPairValue);
-  // })
+    jest.spyOn(component,"getUserDetails");
+    await component.getUserFormDetails(emptyEmail);
+    expect(component.auPairDetails).toEqual(expectedAuPairValue);
+  })
 
-  // it('should, given a form with no phone number, NOT poplate the userDetails or auPairDetails variable', async ()=>{
-  //   const expectedUserValue: User = {
-  //     id: "",
-  //     fname: "",
-  //     sname: "",
-  //     email: "",
-  //     address: "",
-  //     registered: false,
-  //     type: 0,
-  //     password: "",
-  //     number: "",
-  //     salt: "",
-  //     latitude: 0, 
-  //     longitude: 0, 
-  //     suburb: "", 
-  //     gender: "",       
-  //     fcmToken : "",
-  //     birth: "",
-  //     banned: "",
-  //     warnings: 0,
-  //   };
+  it('should, given a form with no phone number, NOT poplate the userDetails or auPairDetails variable', async ()=>{
+    const expectedUserValue: any = {
+      id: undefined,
+      fname: undefined,
+      sname: undefined,
+      email: undefined,
+      address: undefined,
+      registered: undefined,
+      type: undefined,
+      password: undefined,
+      number: undefined,
+      salt: undefined,
+      latitude: undefined, 
+      longitude: undefined, 
+      suburb: undefined, 
+      gender: undefined,      
+      fcmToken : "",
+      birth: undefined,
+      banned: undefined,
+      warnings: undefined,
+    };
 
-  //   const expectedAuPairValue: auPair = {
-  //     id: "",
-  //     rating: [],
-  //     onShift: false,
-  //     employer: "",
-  //     costIncurred: 0,
-  //     distTraveled: 0,
-  //     payRate: 0,
-  //     bio: "",
-  //     experience: "",
-  //     currentLong: 0.0,
-  //     currentLat: 0.0,
-  //     terminateDate: ""
-  //   };
+    const expectedAuPairValue: any = {
+      id: undefined,
+      rating: undefined,
+      onShift: undefined,
+      employer: undefined,
+      costIncurred: undefined,
+      distTraveled: undefined,
+      payRate: undefined,
+      bio: undefined,
+      experience: undefined,
+      currentLong: undefined,
+      currentLat: undefined,
+      alreadyOutOfBounds: false,
+      terminateDate: undefined,
+    };
 
-  //   jest.spyOn(component,"getUserDetails");
-  //   await component.getUserFormDetails(emptyPhone);
-  //   expect(component.userDetails).toEqual(expectedUserValue);
+    jest.spyOn(component,"getUserDetails");
+    await component.getUserFormDetails(emptyPhone);
+    expect(component.userDetails).toEqual(expectedUserValue);
 
-  //   jest.spyOn(component,"getUserDetails");
-  //   await component.getUserFormDetails(emptyPhone);
-  //   expect(component.auPairDetails).toEqual(expectedAuPairValue);
-  // })
+    jest.spyOn(component,"getUserDetails");
+    await component.getUserFormDetails(emptyPhone);
+    expect(component.auPairDetails).toEqual(expectedAuPairValue);
+  })
 
-  // it('should, given a form with no address, NOT poplate the userDetails or auPairDetails variable', async ()=>{
-  //   const expectedUserValue: User = {
-  //     id: "",
-  //     fname: "",
-  //     sname: "",
-  //     email: "",
-  //     address: "",
-  //     registered: false,
-  //     type: 0,
-  //     password: "",
-  //     number: "",
-  //     salt: "",
-  //     latitude: 0, 
-  //     longitude: 0, 
-  //     suburb: "", 
-  //     gender: "", 
-  //     fcmToken : "",
-  //     birth: "",
-  //     banned: "",
-  //     warnings: 0,
-  //   };
+  it('should, given a form with no address, NOT poplate the userDetails or auPairDetails variable', async ()=>{
+    const expectedUserValue: any = {
+      id: undefined,
+      fname: undefined,
+      sname: undefined,
+      email: undefined,
+      address: undefined,
+      registered: undefined,
+      type: undefined,
+      password: undefined,
+      number: undefined,
+      salt: undefined,
+      latitude: undefined, 
+      longitude: undefined, 
+      suburb: undefined, 
+      gender: undefined,      
+      fcmToken : "",
+      birth: undefined,
+      banned: undefined,
+      warnings: undefined,
+    };
 
-  //   const expectedAuPairValue: auPair = {
-  //     id: "",
-  //     rating: [],
-  //     onShift: false,
-  //     employer: "",
-  //     costIncurred: 0,
-  //     distTraveled: 0,
-  //     payRate: 0,
-  //     bio: "",
-  //     experience: "",
-  //     currentLong: 0.0,
-  //     currentLat: 0.0,
-  //     terminateDate: ""
-  //   };
+    const expectedAuPairValue: any = {
+      id: undefined,
+      rating: undefined,
+      onShift: undefined,
+      employer: undefined,
+      costIncurred: undefined,
+      distTraveled: undefined,
+      payRate: undefined,
+      bio: undefined,
+      experience: undefined,
+      currentLong: undefined,
+      currentLat: undefined,
+      alreadyOutOfBounds: false,
+      terminateDate: undefined,
+    };
 
-  //   jest.spyOn(component,"getUserDetails");
-  //   await component.getUserFormDetails(emptyAddress);
-  //   expect(component.userDetails).toEqual(expectedUserValue);
+    jest.spyOn(component,"getUserDetails");
+    await component.getUserFormDetails(emptyAddress);
+    expect(component.userDetails).toEqual(expectedUserValue);
 
-  //   jest.spyOn(component,"getUserDetails");
-  //   await component.getUserFormDetails(emptyAddress);
-  //   expect(component.auPairDetails).toEqual(expectedAuPairValue);
-  // })
+    jest.spyOn(component,"getUserDetails");
+    await component.getUserFormDetails(emptyAddress);
+    expect(component.auPairDetails).toEqual(expectedAuPairValue);
+  })
 
-  // it('should, given a form with no payRate, NOT poplate the userDetails or auPairDetails variable', async ()=>{
-  //   const expectedUserValue: User = {
-  //     id: "",
-  //     fname: "",
-  //     sname: "",
-  //     email: "",
-  //     address: "",
-  //     registered: false,
-  //     type: 0,
-  //     password: "",
-  //     number: "",
-  //     salt: "",
-  //     latitude: 0, 
-  //     longitude: 0, 
-  //     suburb: "", 
-  //     gender: "", 
-  //     fcmToken : "",
-  //     birth: "",
-  //     banned: "",
-  //     warnings: 0,
-  //   };
+  it('should, given a form with no payRate, NOT poplate the userDetails or auPairDetails variable', async ()=>{
+    const expectedUserValue: any = {
+      id: undefined,
+      fname: undefined,
+      sname: undefined,
+      email: undefined,
+      address: undefined,
+      registered: undefined,
+      type: undefined,
+      password: undefined,
+      number: undefined,
+      salt: undefined,
+      latitude: undefined, 
+      longitude: undefined, 
+      suburb: undefined, 
+      gender: undefined,      
+      fcmToken : "",
+      birth: undefined,
+      banned: undefined,
+      warnings: undefined,
+    };
 
-  //   const expectedAuPairValue: auPair = {
-  //     id: "",
-  //     rating: [],
-  //     onShift: false,
-  //     employer: "",
-  //     costIncurred: 0,
-  //     distTraveled: 0,
-  //     payRate: 0,
-  //     bio: "",
-  //     experience: "",
-  //     currentLong: 0.0,
-  //     currentLat: 0.0,
-  //     terminateDate: ""
-  //   };
+    const expectedAuPairValue: any = {
+      id: undefined,
+      rating: undefined,
+      onShift: undefined,
+      employer: undefined,
+      costIncurred: undefined,
+      distTraveled: undefined,
+      payRate: undefined,
+      bio: undefined,
+      experience: undefined,
+      currentLong: undefined,
+      currentLat: undefined,
+      alreadyOutOfBounds: false,
+      terminateDate: undefined,
+    };
 
-  //   jest.spyOn(component,"getUserDetails");
-  //   await component.getUserFormDetails(emptyPayRate);
-  //   expect(component.userDetails).toEqual(expectedUserValue);
+    jest.spyOn(component,"getUserDetails");
+    await component.getUserFormDetails(emptyPayRate);
+    expect(component.userDetails).toEqual(expectedUserValue);
 
-  //   jest.spyOn(component,"getUserDetails");
-  //   await component.getUserFormDetails(emptyPayRate);
-  //   expect(component.auPairDetails).toEqual(expectedAuPairValue);
-  // })
+    jest.spyOn(component,"getUserDetails");
+    await component.getUserFormDetails(emptyPayRate);
+    expect(component.auPairDetails).toEqual(expectedAuPairValue);
+  })
 
-  // it('should, given a form with no bio, NOT poplate the userDetails or auPairDetails variable', async ()=>{
-  //   const expectedUserValue: User = {
-  //     id: "",
-  //     fname: "",
-  //     sname: "",
-  //     email: "",
-  //     address: "",
-  //     registered: false,
-  //     type: 0,
-  //     password: "",
-  //     number: "",
-  //     salt: "",
-  //     latitude: 0, 
-  //     longitude: 0, 
-  //     suburb: "", 
-  //     gender: "", 
-  //     fcmToken : "",
-  //     birth: "",
-  //     banned: "",
-  //     warnings: 0,
-  //   };
+  it('should, given a form with no bio, NOT poplate the userDetails or auPairDetails variable', async ()=>{
+    const expectedUserValue: any = {
+      id: undefined,
+      fname: undefined,
+      sname: undefined,
+      email: undefined,
+      address: undefined,
+      registered: undefined,
+      type: undefined,
+      password: undefined,
+      number: undefined,
+      salt: undefined,
+      latitude: undefined, 
+      longitude: undefined, 
+      suburb: undefined, 
+      gender: undefined,      
+      fcmToken : "",
+      birth: undefined,
+      banned: undefined,
+      warnings: undefined,
+    };
 
-  //   const expectedAuPairValue: auPair = {
-  //     id: "",
-  //     rating: [],
-  //     onShift: false,
-  //     employer: "",
-  //     costIncurred: 0,
-  //     distTraveled: 0,
-  //     payRate: 0,
-  //     bio: "",
-  //     experience: "",
-  //     currentLong: 0.0,
-  //     currentLat: 0.0,
-  //     terminateDate: ""
-  //   };
+    const expectedAuPairValue: any = {
+      id: undefined,
+      rating: undefined,
+      onShift: undefined,
+      employer: undefined,
+      costIncurred: undefined,
+      distTraveled: undefined,
+      payRate: undefined,
+      bio: undefined,
+      experience: undefined,
+      currentLong: undefined,
+      currentLat: undefined,
+      alreadyOutOfBounds: false,
+      terminateDate: undefined,
+    };
 
-  //   jest.spyOn(component,"getUserDetails");
-  //   await component.getUserFormDetails(emptyBio);
-  //   expect(component.userDetails).toEqual(expectedUserValue);
+    jest.spyOn(component,"getUserDetails");
+    await component.getUserFormDetails(emptyBio);
+    expect(component.userDetails).toEqual(expectedUserValue);
 
-  //   jest.spyOn(component,"getUserDetails");
-  //   await component.getUserFormDetails(emptyBio);
-  //   expect(component.auPairDetails).toEqual(expectedAuPairValue);
-  // })
+    jest.spyOn(component,"getUserDetails");
+    await component.getUserFormDetails(emptyBio);
+    expect(component.auPairDetails).toEqual(expectedAuPairValue);
+  })
 
-  // it('should, given a form with no experience, NOT poplate the userDetails or auPairDetails variable', async ()=>{
-  //   const expectedUserValue: User = {
-  //     id: "",
-  //     fname: "",
-  //     sname: "",
-  //     email: "",
-  //     address: "",
-  //     registered: false,
-  //     type: 0,
-  //     password: "",
-  //     number: "",
-  //     salt: "",
-  //     latitude: 0, 
-  //     longitude: 0, 
-  //     suburb: "", 
-  //     gender: "", 
-  //     fcmToken : "",
-  //     birth: "",
-  //     banned: "",
-  //     warnings: 0,
-  //   };
+  it('should, given a form with no experience, NOT poplate the userDetails or auPairDetails variable', async ()=>{
+    const expectedUserValue: any = {
+      id: undefined,
+      fname: undefined,
+      sname: undefined,
+      email: undefined,
+      address: undefined,
+      registered: undefined,
+      type: undefined,
+      password: undefined,
+      number: undefined,
+      salt: undefined,
+      latitude: undefined, 
+      longitude: undefined, 
+      suburb: undefined, 
+      gender: undefined,      
+      fcmToken : "",
+      birth: undefined,
+      banned: undefined,
+      warnings: undefined,
+    };
 
-  //   const expectedAuPairValue: auPair = {
-  //     id: "",
-  //     rating: [],
-  //     onShift: false,
-  //     employer: "",
-  //     costIncurred: 0,
-  //     distTraveled: 0,
-  //     payRate: 0,
-  //     bio: "",
-  //     experience: "",
-  //     currentLong: 0.0,
-  //     currentLat: 0.0,
-  //     terminateDate: ""
-  //   };
+    const expectedAuPairValue: any = {
+      id: undefined,
+      rating: undefined,
+      onShift: undefined,
+      employer: undefined,
+      costIncurred: undefined,
+      distTraveled: undefined,
+      payRate: undefined,
+      bio: undefined,
+      experience: undefined,
+      currentLong: undefined,
+      currentLat: undefined,
+      alreadyOutOfBounds: false,
+      terminateDate: undefined,
+    };
 
-  //   jest.spyOn(component,"getUserDetails");
-  //   await component.getUserFormDetails(emptyExperience);
-  //   expect(component.userDetails).toEqual(expectedUserValue);
+    jest.spyOn(component,"getUserDetails");
+    await component.getUserFormDetails(emptyExperience);
+    expect(component.userDetails).toEqual(expectedUserValue);
 
-  //   jest.spyOn(component,"getUserDetails");
-  //   await component.getUserFormDetails(emptyExperience);
-  //   expect(component.auPairDetails).toEqual(expectedAuPairValue);
-  // })
+    jest.spyOn(component,"getUserDetails");
+    await component.getUserFormDetails(emptyExperience);
+    expect(component.auPairDetails).toEqual(expectedAuPairValue);
+  })
   //------------------------------------------------------------------------------------------------------------------------------------------------------------------------
   
   it('should, return the users details from the api call', async () => {
@@ -480,6 +487,56 @@ describe('EditAuPairProfileComponent', () => {
 
     await component.ngOnInit();
     expect(component.aupairID).toEqual("0101015077086");
+  })
+
+  it('should, open a toast when openToast is called', async ()=>{
+    jest.spyOn(component,"openToast");
+    component.openToast();
+    expect(await component.openToast).toReturn();
+  });
+
+  it('should, call editUser function if the form contains valid details', async ()=>{
+    jest.spyOn(component,"editUser");
+
+    const UserValue: User = {
+      id: "",
+      fname: "",
+      sname: "",
+      email: "",
+      address: "",
+      registered: false,
+      type: 0,
+      password: "",
+      number: "",
+      salt: "",
+      latitude: 0,
+      longitude: 0,
+      suburb: "",
+      gender: "",
+      fcmToken : "",
+      birth: "",
+      banned: "",
+      warnings: 0,
+    };
+
+    const AuPairValue: auPair = {
+      id: "",
+      rating: [],
+      onShift: false,
+      employer: "",
+      costIncurred: 0,
+      distTraveled: 0,
+      payRate: 0,
+      bio: "",
+      experience: "",
+      currentLong: 0,
+      currentLat: 0,
+      alreadyOutOfBounds: false,
+      terminateDate: "",
+    };
+
+    await component.editDetails(UserValue, AuPairValue);
+    expect(component.editUser).toHaveBeenCalled();
   })
 });
 

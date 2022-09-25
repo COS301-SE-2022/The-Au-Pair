@@ -185,6 +185,11 @@ export class ExpandModalComponent implements OnInit {
 
   getAverage(ratings : number[])
   {
+    if(ratings.length == 0)
+    {
+      return 0;
+    }
+
     let total = 0;
     for(let i = 0; i < ratings.length; i++)
     {
@@ -192,6 +197,11 @@ export class ExpandModalComponent implements OnInit {
     }
 
     const avg = total/ratings.length;
+
+    if(avg < 1 || avg > 5)
+    {
+      return 0;
+    }
 
     if((avg % 1) == 0)
     {
