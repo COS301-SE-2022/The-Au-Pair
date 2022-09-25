@@ -4,6 +4,8 @@ export interface Activity{
     description: string;
     location: string;
     boundary: number;
+    longitude: number;
+    latitude: number;
     timeStart: string;
     timeEnd: string;
     budget: number;
@@ -61,6 +63,7 @@ export interface Activity{
     experience: string;
     currentLong: number;
     currentLat: number;
+    alreadyOutOfBounds: boolean;
     terminateDate: string;
   }
 

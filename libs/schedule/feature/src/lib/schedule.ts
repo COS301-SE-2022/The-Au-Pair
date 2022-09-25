@@ -4,7 +4,6 @@ import { API } from '../../../../shared/api/api.service';
 import { Router } from '@angular/router';
 import { Store } from '@ngxs/store';
 import { Activity } from '../../../../shared/interfaces/interfaces';
-import { NgModel } from '@angular/forms';
 import { AlertController, ToastController } from '@ionic/angular';
 import { SetCurrentActivity } from '../../../../shared/ngxs/actions';
 
@@ -36,17 +35,27 @@ export class ScheduleComponent implements OnInit{
       this.getParentChildren();
   }
 
-  getSelectedChild(){
-    this.children.forEach(element => {
-      if(element.name == this.selectedChildName){
-        this.selectedChild.name = element.name;
-        this.selectedChild.id = element.id;
-      }
-    });
-    this.getActivities(this.selectedChild.id)
+  getSelectedChild()
+  { 
+    if(this.selectedChildName == "All Children")
+    {
+      this.getAllActivities();
+    }
+    else
+    {
+      this.children.forEach(element => {
+        if(element.name == this.selectedChildName){
+          this.selectedChild.name = element.name;
+          this.selectedChild.id = element.id;
+        }
+      });
+      this.getActivities(this.selectedChild.id)
+    }
   }
 
-  getParentChildren(){
+  getParentChildren()
+  {
+    //Push an option for view of all children
     this.serv.getChildren(this.parentID).toPromise().then(
       res => {
       res.forEach((element: any) => {
@@ -77,6 +86,48 @@ export class ScheduleComponent implements OnInit{
       },
       error=>{console.log("Error has occured with API: " + error);}
     )
+  }
+
+  async getAllActivities()
+  {
+    //clear all existing activities
+    this.activities.splice(0);
+
+    //Get activities for all children
+    for (let i = 0; i < this.children.length; i++)
+     {
+      const child = this.children[i];
+      await this.serv.getSchedule(child.id).toPromise().then(
+        res=>{
+          res.forEach(( act : Activity) => {
+            this.activities.push(act);  
+          });
+        }).catch(
+          error=>
+          {
+            console.log("Error has occured with API: " + error);
+          }
+        );
+    }
+    this.orderActivities()
+  }
+
+  //Order activities by time
+  async orderActivities()
+  {    
+    //Filter
+    for (let i = 0; i < this.activities.length-1; i++) 
+    {
+      for (let j = 1; j < this.activities.length; j++) 
+      { 
+        if(this.activities[i].timeStart> this.activities[j].timeStart)  
+        {
+          const temp = this.activities[i];
+          this.activities[i] = this.activities[j];
+          this.activities[j] = temp;
+        }
+      }
+    }
   }
 
   //Clear schedule for child
@@ -116,7 +167,6 @@ export class ScheduleComponent implements OnInit{
       }
     )
   }
-
 
   //Navigation methods
 

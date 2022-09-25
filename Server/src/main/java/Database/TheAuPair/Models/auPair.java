@@ -32,8 +32,10 @@ public class auPair
   private double currentLat;
   @Field("terminateDate")
   private String terminateDate;
+  @Field("alreadyOutOfBounds")
+  private boolean alreadyOutOfBounds;
 
-  public auPair(String id, double[] rating, double payRate, double distTraveled, double costIncurred, boolean onShift, String employer, String bio, String experience, double currentLong, double currentLat, String terminateDate )
+  public auPair(String id, double[] rating, double payRate, double distTraveled, double costIncurred, boolean onShift, String employer, String bio, String experience, double currentLong, double currentLat, String terminateDate, boolean alreadyOutOfBounds )
   {
     this.id = id;
     this.rating = Arrays.copyOf(rating, rating.length);
@@ -47,6 +49,7 @@ public class auPair
     this.currentLong = currentLong;
     this.currentLat = currentLat;
     this.terminateDate = terminateDate;
+    this.alreadyOutOfBounds = alreadyOutOfBounds;
   }
 
   public String getId()
@@ -159,6 +162,16 @@ public class auPair
     this.currentLat = newLat;
   }
 
+  public boolean getAlreadyOutOfBounds()
+  {
+    return this.alreadyOutOfBounds;
+  }
+
+  public void setAlreadyOutOfBounds(boolean alreadyOutOfBounds)
+  {
+    this.alreadyOutOfBounds = alreadyOutOfBounds;
+  }
+
   public String getTerminateDate()
   {
     return this.terminateDate;
@@ -181,6 +194,9 @@ public class auPair
       ", onShift=" + onShift +
       ", employer='" + employer +
       ", bio='" + bio +
+      ", currentLong='" + currentLong +
+      ", currentLat='" + currentLat +
+      ", currentLat='" + currentLat +
       ", experience='" + experience +
       '\'' +
       '}';

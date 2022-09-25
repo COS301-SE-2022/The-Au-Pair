@@ -82,6 +82,7 @@ export class RegisterComponent {
     experience: '',
     currentLong: 0.0,
     currentLat : 0.0,
+    alreadyOutOfBounds: false,
     terminateDate: "",
   }
 
