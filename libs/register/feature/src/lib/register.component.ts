@@ -16,7 +16,6 @@ export class RegisterComponent {
   public submitAttempt: boolean;
   public notSamePasswords: boolean;
   public locationError: boolean;
-  public medError: boolean;
   public bioError: boolean;
   public experienceError: boolean;
   public registering: boolean;
@@ -106,14 +105,8 @@ export class RegisterComponent {
     this.parentRegisterDetailsForm.valueChanges.subscribe(() => {
       this.formValid = this.parentRegisterDetailsForm.valid;
 
-      if(this.parentChosen)
+      if(!this.parentChosen)
       {
-        if(this.parentRegisterDetailsForm.value.medAid === '')
-        {
-          this.formValid = false;
-        }
-      }
-      else {
         if(this.parentRegisterDetailsForm.value.experience === '')
         {
           this.formValid = false;
@@ -147,7 +140,6 @@ export class RegisterComponent {
     this.submitAttempt = false;
     this.notSamePasswords = false;
     this.locationError = false;
-    this.medError = false;
     this.bioError = false;
     this.experienceError = false;
     this.maleChosen = true;
@@ -158,7 +150,6 @@ export class RegisterComponent {
   {
     //setting registering flag to true to disable button
     this.registering = true;
-    this.medError = false;
     this.locationError = false;
     this.submitAttempt = true;
     this.notSamePasswords = false;
@@ -166,15 +157,8 @@ export class RegisterComponent {
     this.experienceError = false;
     let formError = false;
 
-    if(this.parentChosen)
+    if(!this.parentChosen)
     {
-      if(this.parentRegisterDetailsForm.value.medAid === '')
-      {
-        this.medError = true;
-        formError = true;
-      }
-    }
-    else {
       if(this.parentRegisterDetailsForm.value.experience === '')
       {
         this.experienceError = true;
@@ -239,6 +223,7 @@ export class RegisterComponent {
       else
       {
         this.userDetails.type = 2;
+        this.userDetails.registered = false;
       }
 
       await this.serv.register(this.userDetails)
@@ -278,6 +263,7 @@ export class RegisterComponent {
           else
           {
             this.userDetails.type = 2;
+            this.userDetails.registered = false;
           }
 
           await this.serv.addParent(this.parentDetails)
