@@ -54,6 +54,18 @@ public class UserController
     this.us.resolveApplication(decision.get("id"), decision.get("resolution"));
   }
 
+  @PostMapping("/getFCMToken")
+  public String getFCMToken(@RequestBody String id)
+  {
+    return this.us.getFCMToken(id);
+  }
+
+  @PostMapping("/setFCMToken")
+  public void setFCMToken(@RequestBody Map<String, String> details)
+  {
+    this.us.setFCMToken(details.get("id"), details.get("token"));
+  }
+
   //add a ping endpoint for testing
   @GetMapping("/ping")
   public String ping()
