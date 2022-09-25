@@ -361,7 +361,8 @@ export class AppComponent implements OnInit {
 
   async updateCoordinates() 
   { 
-    let flag = true; //CHANGE THIS BACK TO FALSEEEEEEEEEEEEEEEEEEEEEEEE
+    //Keep this as false unless testing live tracking features
+    let flag = false;
     await this.geolocation.getCurrentPosition().then((resp: { coords: { longitude: number; latitude: number; }; }) => {
       //Check if auPair has actually moved
       if (this.auPairDetails.currentLong != resp.coords.longitude || this.auPairDetails.currentLat != resp.coords.latitude)
