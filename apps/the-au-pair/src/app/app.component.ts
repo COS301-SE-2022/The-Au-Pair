@@ -467,7 +467,6 @@ export class AppComponent implements OnInit {
         const latAct = act.latitude;
         const longCoord = aupair.currentLong;
         const latCoord = aupair.currentLat;
-
         
         const distance = this.calculateEucDistance(latAct, longAct, latCoord, longCoord);
         if(distance>boundary  && !this.alreadyOutOfBounds)
@@ -483,7 +482,7 @@ export class AppComponent implements OnInit {
           this.outOfBoundsNotification.date = today;
           this.outOfBoundsNotification.time = currentTime;
           this.outOfBoundsNotification.title = "Au pair out of bounds!";
-          this.outOfBoundsNotification.body = "Your au pair has left the boundary of " +act.boundary + "km for the activity '" + act.name + "' at " + act.location;
+          this.outOfBoundsNotification.body = "Your au pair has left the boundary of " +act.boundary + "km for the activity '" + act.name + "' at " + act.location + ".  You au pair is currently " + distance + "km away.";
           await this.serv.logNotification(this.outOfBoundsNotification).toPromise().then(res => 
           {
             console.log(res);
