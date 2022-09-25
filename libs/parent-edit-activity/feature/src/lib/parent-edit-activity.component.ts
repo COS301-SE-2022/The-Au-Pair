@@ -16,8 +16,10 @@ export class ParentEditActivityComponent implements OnInit {
   /**Variables**/
   //Possible locations searched for
   location = "";
-  potentialLocations : string[] = [];
+  potentialLocations: any = [];
   originalLocation = "";
+  longitude = 0.0;
+  latitude = 0.0;
 
   //Activity Model
   activityDetails: Activity = {
@@ -27,6 +29,8 @@ export class ParentEditActivityComponent implements OnInit {
   location: "",
   timeStart: "",
   boundary: 0.0,
+  longitude: 0.0,
+  latitude: 0.0,
   timeEnd: "",
   budget: 0.0,
   comment: "",
@@ -65,8 +69,10 @@ export class ParentEditActivityComponent implements OnInit {
   }
 
   //From HTML Form
-  getActivityValues(val : any)
+  async getActivityValues(val : any)
   {  
+    console.log(val);
+    
     //FORM ERROR CHECKING
     let emptyInput = false;
 
@@ -107,7 +113,7 @@ export class ParentEditActivityComponent implements OnInit {
         dom.style.display = "none";
       }
     }
-
+    
     //Location
     dom = document.getElementById("locError");
     if(val.location === "")
@@ -127,8 +133,21 @@ export class ParentEditActivityComponent implements OnInit {
         if(dom != null)
         {
           //Check that the selected location is from the API
-          this.getLocations()
-          if (this.potentialLocations.indexOf(this.location) == -1)
+          await this.getLocations()
+          let found = false;
+          //Get the selected location and its coords
+          this.potentialLocations.forEach((loc : any) => 
+          { 
+            if(loc.display_name === this.location)
+            {
+              found = true;
+              this.longitude = loc.lon;
+              this.latitude = loc.lat;
+            }
+            
+          });
+  
+          if(!found)
           {
             dom.innerHTML = "Please select a valid location from the suggested below.";
             dom.style.display = "block";
@@ -139,6 +158,7 @@ export class ParentEditActivityComponent implements OnInit {
         }
       }
     }
+    
 
     //Boundary
     dom = document.getElementById("boundaryError");
@@ -246,6 +266,8 @@ export class ParentEditActivityComponent implements OnInit {
       this.activityDetails.description = val.description;
       this.activityDetails.location = val.location;
       this.activityDetails.boundary = bound;
+      this.activityDetails.latitude = this.latitude;
+      this.activityDetails.longitude = this.longitude;
       this.activityDetails.day = val.dayOfWeek;
       this.activityDetails.timeStart = val.timeSlot.substring(0,5);
       this.activityDetails.timeEnd = val.timeSlot.substring(6,11);
@@ -284,8 +306,8 @@ export class ParentEditActivityComponent implements OnInit {
       const len = res.length;
       for (let j = 0; j < len && j<5; j++) 
       { 
-        if (this.potentialLocations.includes(res[j].display_name) === false){
-          this.potentialLocations.push(res[j].display_name); 
+        if (this.potentialLocations.includes(res[j]) === false){
+          this.potentialLocations.push(res[j]); 
         }
       }
     })

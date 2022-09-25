@@ -16,22 +16,11 @@
                 <textarea id="descriptionText" type="text"  value="{{this.activityDetails.description}}" readonly name="description"></textarea>    
             </div>
 
-            <!-- Comment -->
-            <div>
-                <label id="commentLabel" for="comment">Comment</label>
-                <textarea id="commentText" type="text" value="{{this.activityDetails.comment}}" readonly name="comment"></textarea>    
-            </div>
-   
-            <!-- Behaviour -->
-            <div>
-                <label id="behaviourLabel" for="behavoiurText">Behaviour</label>
-                <input id="behaviourText" type="text" value="{{this.activityDetails.behavior}}" readonly name="behaviour">    
-            </div>
-
             <!-- Location -->
-            <div>
+            <div class="location-wrapper">
                 <label id="locationLabel" for="location">Location</label>
-                <input id="locationText" type="text" value="{{this.activityDetails.location}}" name="location" readonly placeholder="Location">     
+                <input id="locationText" type="text" value="{{this.activityDetails.location}}" name="location" readonly placeholder="Location">   
+                <!-- <ion-icon class="icon edit" name="location-outline"></ion-icon>   -->
             </div>
 
             <!-- Boundary -->
@@ -58,10 +47,30 @@
                 <input id="budgetText" type="text" value="{{this.activityDetails.budget}}" name="budget" readonly placeholder="Budget">     
             </div>
 
-            <!-- Selected a child -->
+            <!-- Selected child -->
             <div>
-                <label id="childLabel" for="Child" >Select a child</label>
-                <input id="childText" type="text" value="{{this.activityDetails.child}}" name="child" readonly placeholder="Child">     
+                <label id="childLabel" for="Child" >Child</label>
+                <input id="childText" type="text" value="{{this.selectedChild}}" name="child" readonly placeholder="Child">     
+            </div>
+
+            <!-- Comment -->
+            <div>
+                <label id="commentLabel" for="comment">Comment</label>
+                <textarea id="commentText" type="text" value="{{this.activityDetails.comment}}" readonly name="comment"></textarea>    
+            </div>
+
+             <!-- Behaviour -->
+            <div>
+                <label id="behaviourLabel" for="behavoiurText">Behaviour</label>
+                <input id="behaviourText" type="text" value="{{this.activityDetails.behavior}}" readonly name="behaviour">    
+            </div>
+
+            <!-- Images of the children -->
+            <div>
+                <p>Image of activity</p>
+                <div class="activity-image">
+                    <img id="activity-image-container" src="assets/images/no-image.png">
+                </div>
             </div>
 
             <!-- Submit -->

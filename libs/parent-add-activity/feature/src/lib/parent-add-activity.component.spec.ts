@@ -19,14 +19,14 @@ describe('ParentAddActivityComponent', () => {
   // const populatedForm = {activityName: "AI", description: "AI Lesson", location: "UP", dayOfWeek: "Wednesday", timeSlot: "13:00-14:00", budget: "0", childId:"8675945310542"};
 
   //Inavlid forms
-  const emptyActName = {activityName: "", description: "AI Lesson", location: "UP", boundary: 0.0, dayOfWeek: "Wednesday", timeSlot: "13:00-14:00", budget: "0", childId:"8675945310542"};
-  const emptyDescription = {activityName: "AI", description: "", location: "UP", boundary: 0.0, dayOfWeek: "Wednesday", timeSlot: "13:00-14:00", budget: "0", childId:"8675945310542"};
-  const emptyLocation = {activityName: "AI", description: "AI Lesson", location: "", boundary: 0.0, dayOfWeek: "Wednesday", timeSlot: "13:00-14:00", budget: "0", childId:"8675945310542"};
-  const emptyBoundary = {activityName: "AI", description: "AI Lesson", location: "", boundary: "", dayOfWeek: "Wednesday", timeSlot: "13:00-14:00", budget: "0", childId:"8675945310542"};
-  const emptyDay = {activityName: "AI", description: "AI Lesson", location: "UP", boundary: 0.0, dayOfWeek: "", timeSlot: "13:00-14:00", budget: "0", childId:"8675945310542"};
-  const emptyTime = {activityName: "AI", description: "AI Lesson", location: "UP", boundary: 0.0, dayOfWeek: "Wednesday", timeSlot: "", budget: "0", childId:"8675945310542"};
-  const emptyBudget = {activityName: "AI", description: "AI Lesson", location: "UP", boundary: 0.0, dayOfWeek: "Wednesday", timeSlot: "13:00-14:00", budget: "", childId:"8675945310542"};
-  const emptyChild = {activityName: "AI", description: "AI Lesson", location: "UP", boundary: 0.0, dayOfWeek: "Wednesday", timeSlot: "13:00-14:00", budget: "0", childId:""};
+  const emptyActName = {activityName: "", description: "AI Lesson", location: "UP", boundary: 0.0, longitude: 0.0, latitude: 0.0, dayOfWeek: "Wednesday", timeSlot: "13:00-14:00", budget: "0", childId:"8675945310542"};
+  const emptyDescription = {activityName: "AI", description: "", location: "UP", boundary: 0.0, longitude: 0.0, latitude: 0.0, dayOfWeek: "Wednesday", timeSlot: "13:00-14:00", budget: "0", childId:"8675945310542"};
+  const emptyLocation = {activityName: "AI", description: "AI Lesson", location: "", boundary: 0.0, longitude: 0.0, latitude: 0.0, dayOfWeek: "Wednesday", timeSlot: "13:00-14:00", budget: "0", childId:"8675945310542"};
+  const emptyBoundary = {activityName: "AI", description: "AI Lesson", location: "", boundary: "", longitude: 0.0, latitude: 0.0, dayOfWeek: "Wednesday", timeSlot: "13:00-14:00", budget: "0", childId:"8675945310542"};
+  const emptyDay = {activityName: "AI", description: "AI Lesson", location: "UP", boundary: 0.0, longitude: 0.0, latitude: 0.0, dayOfWeek: "", timeSlot: "13:00-14:00", budget: "0", childId:"8675945310542"};
+  const emptyTime = {activityName: "AI", description: "AI Lesson", location: "UP", boundary: 0.0, longitude: 0.0, latitude: 0.0, dayOfWeek: "Wednesday", timeSlot: "", budget: "0", childId:"8675945310542"};
+  const emptyBudget = {activityName: "AI", description: "AI Lesson", location: "UP", boundary: 0.0, longitude: 0.0, latitude: 0.0, dayOfWeek: "Wednesday", timeSlot: "13:00-14:00", budget: "", childId:"8675945310542"};
+  const emptyChild = {activityName: "AI", description: "AI Lesson", location: "UP", boundary: 0.0, longitude: 0.0, latitude: 0.0, dayOfWeek: "Wednesday", timeSlot: "13:00-14:00", budget: "0", childId:""};
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
@@ -61,6 +61,8 @@ describe('ParentAddActivityComponent', () => {
       description: "",
       location: "",
       boundary: 0.0,
+      longitude: 0.0,
+      latitude: 0.0,
       timeStart: "",
       timeEnd: "",
       budget: 0.0,
@@ -84,6 +86,8 @@ describe('ParentAddActivityComponent', () => {
       description: "",
       location: "",
       boundary: 0.0,
+      longitude: 0.0,
+      latitude: 0.0,
       timeStart: "",
       timeEnd: "",
       budget: 0.0,
@@ -107,6 +111,8 @@ describe('ParentAddActivityComponent', () => {
       description: "",
       location: "",
       boundary: 0.0,
+      longitude: 0.0,
+      latitude: 0.0,
       timeStart: "",
       timeEnd: "",
       budget: 0.0,
@@ -130,6 +136,8 @@ describe('ParentAddActivityComponent', () => {
       description: "",
       location: "",
       boundary: 0.0,
+      longitude: 0.0,
+      latitude: 0.0,
       timeStart: "",
       timeEnd: "",
       budget: 0.0,
@@ -153,6 +161,8 @@ describe('ParentAddActivityComponent', () => {
       description: "",
       location: "",
       boundary: 0.0,
+      longitude: 0.0,
+      latitude: 0.0,
       timeStart: "",
       timeEnd: "",
       budget: 0.0,
@@ -176,6 +186,8 @@ describe('ParentAddActivityComponent', () => {
       description: "",
       location: "",
       boundary: 0.0,
+      longitude: 0.0,
+      latitude: 0.0,
       timeStart: "",
       timeEnd: "",
       budget: 0.0,
@@ -199,6 +211,8 @@ describe('ParentAddActivityComponent', () => {
       description: "",
       location: "",
       boundary: 0.0,
+      longitude: 0.0,
+      latitude: 0.0,
       timeStart: "",
       timeEnd: "",
       budget: 0.0,
@@ -222,6 +236,8 @@ describe('ParentAddActivityComponent', () => {
       description: "",
       location: "",
       boundary: 0.0,
+      longitude: 0.0,
+      latitude: 0.0,
       timeStart: "",
       timeEnd: "",
       budget: 0.0,
