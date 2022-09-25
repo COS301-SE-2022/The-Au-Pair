@@ -175,7 +175,7 @@ export class AppComponent implements OnInit {
           console.log(err);
         });
 
-        if (this.userFcmToken) {
+        if (this.userFcmToken != "") {
           console.log(this.userFcmToken);
           const requestHeaders = new HttpHeaders().set('Authorization', 'key=AAAAlhtqIdQ:APA91bFlcYmdaqt5D_jodyiVQG8B1mkca2xGh6XKeMuTGtxQ6XKhSY0rdLnc0WrXDsV99grFamp3k0EVHRUJmUG9ULcxf-VSITFgwwaeNvrUq48q0Hn1GLxmZ3GBAYdCBzPFIRdbMxi9');
           const postData = {
@@ -367,10 +367,17 @@ export class AppComponent implements OnInit {
   async getCurrentAuPairDetails() {
     const res = await this.serv.getAuPair(this.userID).toPromise()
     this.auPairDetails.id = res.id;
+    this.auPairDetails.rating = res.rating;
     this.auPairDetails.onShift = res.onShift;
     this.auPairDetails.employer = res.employer;
+    this.auPairDetails.costIncurred = res.costIncurred;
+    this.auPairDetails.distTraveled = res.distTraveled;
+    this.auPairDetails.payRate = res.payRate;
+    this.auPairDetails.bio = res.bio;
+    this.auPairDetails.experience = res.experience;
     this.auPairDetails.currentLong = res.currentLong;
     this.auPairDetails.currentLat = res.currentLat;
+    this.auPairDetails.terminateDate = res.terminateDate;
   };
 
   async updateCoordinates() 

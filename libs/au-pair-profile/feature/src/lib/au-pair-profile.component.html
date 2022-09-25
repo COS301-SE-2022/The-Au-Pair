@@ -29,8 +29,8 @@
                 </div>
                 <div class="parent-info-small">
                     <div class="parent-text">Rating: </div>
-                    <p *ngIf="this.auPairDetails.rating !== []" class="parent-text-info">{{this.getAverage(this.auPairDetails.rating)}}/5</p>
-                    <p *ngIf="this.auPairDetails.rating === []" class="parent-text-info">Not yet rated</p>
+                    <p *ngIf="this.getAverage(this.auPairDetails.rating) !== 0" class="parent-text-info">{{this.getAverage(this.auPairDetails.rating)}}/5</p>
+                    <p *ngIf="this.getAverage(this.auPairDetails.rating) === 0" class="parent-text-info">Not yet rated</p>
                   </div>
             </div>
             <div class = 'large-profile-details-div'>

@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { ModalController, NavParams, ToastController } from '@ionic/angular';
-import { auPair, Child, Email, Parent, User } from '../../../../../shared/interfaces/interfaces';
+import { auPair, Child, Email, Parent, User, Notification } from '../../../../../shared/interfaces/interfaces';
 import { API } from '../../../../../shared/api/api.service';
 import { Store } from '@ngxs/store';
 import { Router } from '@angular/router';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 @Component({
   selector: 'the-au-pair-job-summary-modal',
@@ -15,11 +16,16 @@ export class JobSummaryModalComponent implements OnInit {
   parentID: string = this.navParams.get('parentID');
   contractID: string = this.navParams.get('contractID');
   auPairID = "";
+  userFcmToken = "";
+
   childrenArr: Child[] = [];
 
   days = [
     "Mon","Tue","Wed","Thu","Fri","Sat","Sun"
   ];
+
+  children : any;
+  childActivities : any[] = [];
 
   shiftHours: number[] = [];
   shiftRangeMin: string[] = [];
@@ -41,6 +47,16 @@ export class JobSummaryModalComponent implements OnInit {
     currentLat: 0.0,
     alreadyOutOfBounds: false,
     terminateDate: "",
+  }
+
+  notificationToSend: Notification = {
+    id: "",
+    auPairId: "",
+    parentId: "",
+    title: "",
+    body: "",
+    date: "",
+    time: "",
   }
 
   childDetails: Child ={
@@ -91,7 +107,7 @@ export class JobSummaryModalComponent implements OnInit {
     body: "",
   }
 
-  constructor(private serv: API, private modalCtrl : ModalController, private store: Store, private router: Router, public toastCtrl: ToastController) {}
+  constructor(private serv: API, private modalCtrl : ModalController, private store: Store, private router: Router, public toastCtrl: ToastController, private httpClient: HttpClient) {}
 
   async ngOnInit(): Promise<void> {
     this.auPairID = this.store.snapshot().user.id;
@@ -99,8 +115,77 @@ export class JobSummaryModalComponent implements OnInit {
     await this.getParentDetails(this.parentID);
     await this.getUserDetails();
     await this.getChildrenDetails();
+    await this.getActivities();
+  }
 
-    this.populateGraph();
+  async getActivities(){
+    await this.serv.getChildren(this.parentID).subscribe(
+      res => {
+          this.children = res;
+          this.children.forEach((element: { id: string; }) => {
+          this.auPairChildren.push(element.id);
+        });
+        this.serv.getAuPairSchedule(this.auPairChildren).subscribe(
+          res=>{
+            this.activities = res;
+            this.setChildActivity();
+          }
+        );
+      },
+      error => { console.log("Error has occured with API: " + error); },
+    );
+  }
+
+  setChildActivity(){    
+    this.children.forEach((child: { id: any; fname: any; }) => {
+      this.activities.forEach((act: { childId: any; child: any; name: any; id: any; timeStart: any; day: any; }) => {
+        if(child.id === act.child){
+          const childActivity = {
+            childName : child.fname,
+            childId : act.child,
+            activityName : act.name,
+            activityId : act.id,
+            time : act.timeStart,
+            dayofweek : act.day,
+          }
+          this.childActivities.push(childActivity);
+        }
+      });
+    });
+
+    let actCount = 0;
+    let minTime = "23:59";
+    let maxTime = "00:00";
+
+    const actDays = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"];
+
+    for(let i = 0; i < actDays.length; i++)
+    {
+      actCount = 0;
+      minTime = "23:59";
+      maxTime = "00:00";
+
+      this.activities.forEach((act: {timeStart: any; day: any; timeEnd: any;}) => 
+      {
+        if(act.day === actDays[i])
+        {
+          actCount++;
+          
+          if(act.timeStart <= minTime)
+          {
+            minTime = act.timeStart;
+          }
+
+          if(act.timeEnd >= maxTime)
+          {
+            maxTime = act.timeEnd;
+          }
+        }
+      });
+      this.shiftHours[i] = actCount;
+      this.shiftRangeMin[i] = minTime;
+      this.shiftRangeMax[i] = maxTime;
+    }  
   }
 
   async getUserDetails()
@@ -186,6 +271,47 @@ export class JobSummaryModalComponent implements OnInit {
         this.router.navigate(['/au-pair-dashboard']).then(()=>{
         location.reload();
         });
+
+        await this.serv.getFCMToken(this.parentID).toPromise().then(res => {
+          this.userFcmToken = res;
+        }).catch(err => {
+          console.log(err);
+        });
+
+        if (this.userFcmToken != "") {
+          console.log(this.userFcmToken);
+          const requestHeaders = new HttpHeaders().set('Authorization', 'key=AAAAlhtqIdQ:APA91bFlcYmdaqt5D_jodyiVQG8B1mkca2xGh6XKeMuTGtxQ6XKhSY0rdLnc0WrXDsV99grFamp3k0EVHRUJmUG9ULcxf-VSITFgwwaeNvrUq48q0Hn1GLxmZ3GBAYdCBzPFIRdbMxi9');
+          const postData = {
+            "to": this.userFcmToken,
+            "notification": {
+              "title": "Hire Request Accepted",
+              "body": this.store.snapshot().user.name + " has accepted your hire request.",
+            }
+          }
+
+          this.httpClient.post('https://fcm.googleapis.com/fcm/send', postData, { headers: requestHeaders }).subscribe(data => {
+            console.log("data receieved: " + data);
+          }, error => {
+            console.log(error);
+          });
+        }
+      console.log(res);
+
+      const current = new Date();
+      const minutes = String(current.getMinutes()).padStart(2, '0');
+
+      this.notificationToSend.auPairId = "";
+      this.notificationToSend.parentId = this.parentID;
+      this.notificationToSend.title = "Hire Request Accepted";
+      this.notificationToSend.body = this.store.snapshot().user.name + " has accepted your hire request.";
+      this.notificationToSend.date = current.getFullYear() + "-" + (current.getMonth() + 1) + "-" + current.getDate();
+      this.notificationToSend.time = current.getHours() + ":" + minutes;
+
+      this.serv.logNotification(this.notificationToSend).toPromise().then(res => {
+        console.log(res);
+      }, err => {
+        console.log(err);
+      });
       },
       error=>{console.log("Error has occured with API: " + error);}
     )
@@ -326,53 +452,6 @@ export class JobSummaryModalComponent implements OnInit {
     )
   }
 
-  async populateGraph()
-  {   
-    let actCount = 0;
-    let minTime = "23:59";
-    let maxTime = "00:00";
-
-    const actDays = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"];
-
-    await this.serv.getAuPairSchedule(this.parentDetails.children).toPromise()
-    .then(
-      res=>{
-        this.activities = res;      
-      },
-      error=>{
-        console.log("Error has occured with API: " + error);
-      }
-    )
-
-    for(let i = 0; i < actDays.length; i++)
-    {
-      actCount = 0;
-      minTime = "23:59";
-      maxTime = "00:00";
-
-      this.activities.forEach((act: {timeStart: any; day: any; timeEnd: any;}) => 
-      {
-        if(act.day === actDays[i])
-        {
-          actCount++;
-          
-          if(act.timeStart <= minTime)
-          {
-            minTime = act.timeStart;
-          }
-
-          if(act.timeEnd >= maxTime)
-          {
-            maxTime = act.timeEnd;
-          }
-        }
-      });
-      this.shiftHours[i] = actCount;
-      this.shiftRangeMin[i] = minTime;
-      this.shiftRangeMax[i] = maxTime;
-    }    
-  }
-
   closeModal()
   {
     this.modalCtrl.dismiss();
@@ -380,6 +459,11 @@ export class JobSummaryModalComponent implements OnInit {
 
   getAverage(ratings : number[])
   {
+    if(ratings.length == 0)
+    {
+      return 0;
+    }
+
     let total = 0;
     for(let i = 0; i < ratings.length; i++)
     {
