@@ -4,12 +4,12 @@
   "license": "MIT",
   "scripts": {
     "start:client": "nx serve",
-    "build": "nx build --prod --skip-nx-cache && node tools/scripts/clean-build.js",
+    "build": "nx build --skip-nx-cache && node tools/scripts/clean-build.js",
     "test": "nx test",
     "test-front-end": "npx nx run-many --target=test --all",
     "postinstall": "ngcc --properties es2015 browser module main",
     "start:api": "cd Server && mvn spring-boot:run",
-    "open:android": "nx run the-au-pair:open:android -prod --livereload --consolelogs --serverlogs"
+    "open:android": "nx run the-au-pair:open:android --livereload --consolelogs --serverlogs"
   },
   "private": true,
   "devDependencies": {
