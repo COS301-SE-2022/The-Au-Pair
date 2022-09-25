@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { API } from '../../../../shared/api/api.service';
-import { auPair, Child, Email, Parent, User } from '../../../../shared/interfaces/interfaces';
+import { auPair, Child, Email, Parent, User, Notification } from '../../../../shared/interfaces/interfaces';
 import { AuPairRatingModalComponent } from './au-pair-rating-modal/au-pair-rating-modal.component';
 import { UserReportModalComponent } from './user-report-modal/user-report-modal.component';
 import { ModalController, ToastController } from '@ionic/angular';
@@ -8,6 +8,7 @@ import { Store } from '@ngxs/store';
 import { Router } from '@angular/router';
 import { AlertController } from '@ionic/angular';
 import { SetAuPair, SetChildren } from '../../../../shared/ngxs/actions';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 @Component({
   selector: 'the-au-pair-parent-dashboard',
@@ -18,6 +19,7 @@ export class ParentDashboardComponent implements OnInit{
   children: Child[] = [];
   parentID = "";
   umPoorID = "";
+  userFcmToken = "";
 
   handlerMessage!: boolean;
 
@@ -103,7 +105,17 @@ export class ParentDashboardComponent implements OnInit{
     terminateDate: "",
   }
 
-  constructor(private serv: API, private modalCtrl : ModalController, private store: Store, public toastCtrl: ToastController, public router: Router, private alertController: AlertController){}
+  notificationToSend: Notification = {
+    id: "",
+    auPairId: "",
+    parentId: "",
+    title: "",
+    body: "",
+    date: "",
+    time: "",
+  }
+
+  constructor(private serv: API, private modalCtrl : ModalController, private store: Store, public toastCtrl: ToastController, public router: Router, private alertController: AlertController, private httpClient: HttpClient){}
 
 
   async openReportModal() {
@@ -307,6 +319,70 @@ export class ParentDashboardComponent implements OnInit{
         console.log(error);
       }
     );
+
+    await this.serv.getFCMToken(this.umPoorID).toPromise().then(res => {
+      this.userFcmToken = res;
+    }).catch(err => {
+      console.log(err);
+    });
+
+    if (this.userFcmToken != "") {
+      console.log(this.userFcmToken);
+      const requestHeaders = new HttpHeaders().set('Authorization', 'key=AAAAlhtqIdQ:APA91bFlcYmdaqt5D_jodyiVQG8B1mkca2xGh6XKeMuTGtxQ6XKhSY0rdLnc0WrXDsV99grFamp3k0EVHRUJmUG9ULcxf-VSITFgwwaeNvrUq48q0Hn1GLxmZ3GBAYdCBzPFIRdbMxi9');
+      const postData = {
+        "to": this.userFcmToken,
+        "notification": {
+          "title": "Employment Terminated",
+          "body": "Employment with " + this.store.snapshot().user.name + " has been terminated.",
+        }
+      }
+
+      this.httpClient.post('https://fcm.googleapis.com/fcm/send', postData, { headers: requestHeaders }).subscribe(data => {
+        console.log("data receieved: " + data);
+      }, error => {
+        console.log(error);
+      });
+    }
+
+    await this.serv.getFCMToken(this.parentID).toPromise().then(res => {
+      this.userFcmToken = res;
+    }).catch(err => {
+      console.log(err);
+    });
+
+    if (this.userFcmToken != "") {
+      console.log(this.userFcmToken);
+      const requestHeaders = new HttpHeaders().set('Authorization', 'key=AAAAlhtqIdQ:APA91bFlcYmdaqt5D_jodyiVQG8B1mkca2xGh6XKeMuTGtxQ6XKhSY0rdLnc0WrXDsV99grFamp3k0EVHRUJmUG9ULcxf-VSITFgwwaeNvrUq48q0Hn1GLxmZ3GBAYdCBzPFIRdbMxi9');
+      const postData = {
+        "to": this.userFcmToken,
+        "notification": {
+          "title": "Employment Terminated",
+          "body": "Employment with " + this.auPairDetails.fname + " has been terminated.",
+        }
+      }
+
+      this.httpClient.post('https://fcm.googleapis.com/fcm/send', postData, { headers: requestHeaders }).subscribe(data => {
+        console.log("data receieved: " + data);
+      }, error => {
+        console.log(error);
+      });
+    }
+
+    const current = new Date();
+    const minutes = String(current.getMinutes()).padStart(2, '0');
+
+    this.notificationToSend.auPairId = this.umPoorID;
+    this.notificationToSend.parentId = this.parentID;
+    this.notificationToSend.title = "Employment Terminated";
+    this.notificationToSend.body = "Employment has been terminated.";
+    this.notificationToSend.date = current.getFullYear() + "-" + (current.getMonth() + 1) + "-" + current.getDate();
+    this.notificationToSend.time = current.getHours() + ":" + minutes;
+
+    this.serv.logNotification(this.notificationToSend).toPromise().then(res => {
+      console.log(res);
+    }, err => {
+      console.log(err);
+    });
   }
 
   async getAuPairDetails()

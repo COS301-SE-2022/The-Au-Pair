@@ -1,12 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngxs/store';
 import { API } from '../../../../shared/api/api.service'
-import { auPair, Child, Email, HoursLogged, Parent } from '../../../../shared/interfaces/interfaces';
+import { auPair, Child, Email, HoursLogged, Parent, Notification } from '../../../../shared/interfaces/interfaces';
 import { Router } from '@angular/router';
 import { ModalController, ToastController } from '@ionic/angular';
 import { AlertController } from '@ionic/angular';
 import { UserReportModalComponent } from './user-report-modal/user-report-modal.component';
 import { ParentRatingModalComponent } from './parent-rating-modal/parent-rating-modal.component';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 @Component({
   selector: 'the-au-pair-au-pair-dashboard',
@@ -18,6 +19,7 @@ export class AuPairDashboardComponent implements OnInit {
   
   aupairID = "";
   aupairName = "";
+  userFcmToken = "";
 
   employer = "";
   employerName!: string;
@@ -37,6 +39,16 @@ export class AuPairDashboardComponent implements OnInit {
     timeStart: "",
     timeEnd: ""
   };
+
+  notificationToSend: Notification = {
+    id: "",
+    auPairId: "",
+    parentId: "",
+    title: "",
+    body: "",
+    date: "",
+    time: "",
+  }
 
   currentAuPair: auPair = {
     id: "",
@@ -78,7 +90,7 @@ export class AuPairDashboardComponent implements OnInit {
     body: "",
   }
   
-  constructor(private serv: API, private modalCtrl : ModalController, private store: Store, public router: Router, public toastCtrl: ToastController, private alertController: AlertController) {}
+  constructor(private serv: API, private modalCtrl : ModalController, private store: Store, public router: Router, public toastCtrl: ToastController, private alertController: AlertController, private httpClient: HttpClient) {}
 
   async openReportModal() {
     const modal = await this.modalCtrl.create({
@@ -309,6 +321,46 @@ export class AuPairDashboardComponent implements OnInit {
         console.log("Error has occured with API: " + error);
       }
     );
+
+    await this.serv.getFCMToken(this.employerId).toPromise().then(res => {
+      this.userFcmToken = res;
+    }).catch(err => {
+      console.log(err);
+    });
+
+    if (this.userFcmToken != "") {
+      console.log(this.userFcmToken);
+      const requestHeaders = new HttpHeaders().set('Authorization', 'key=AAAAlhtqIdQ:APA91bFlcYmdaqt5D_jodyiVQG8B1mkca2xGh6XKeMuTGtxQ6XKhSY0rdLnc0WrXDsV99grFamp3k0EVHRUJmUG9ULcxf-VSITFgwwaeNvrUq48q0Hn1GLxmZ3GBAYdCBzPFIRdbMxi9');
+      const postData = {
+        "to": this.userFcmToken,
+        "notification": {
+          "title": "Au Pair Resigned",
+          "body": this.store.snapshot().user.name + " has resigned.",
+        }
+      }
+
+      this.httpClient.post('https://fcm.googleapis.com/fcm/send', postData, { headers: requestHeaders }).subscribe(data => {
+        console.log("data receieved: " + data);
+      }, error => {
+        console.log(error);
+      });
+    }
+
+    const current = new Date();
+    const minutes = String(current.getMinutes()).padStart(2, '0');
+
+    this.notificationToSend.auPairId = "";
+    this.notificationToSend.parentId = this.employerId;
+    this.notificationToSend.title = "Au Pair Resigned";
+    this.notificationToSend.body = this.store.snapshot().user.name + " has resigned.";
+    this.notificationToSend.date = current.getFullYear() + "-" + (current.getMonth() + 1) + "-" + current.getDate();
+    this.notificationToSend.time = current.getHours() + ":" + minutes;
+
+    this.serv.logNotification(this.notificationToSend).toPromise().then(res => {
+      console.log(res);
+    }, err => {
+      console.log(err);
+    });
   }
 
   async getAuPairDetails()
@@ -393,6 +445,70 @@ export class AuPairDashboardComponent implements OnInit {
         console.log("Error has occured with API: " + error);
       }
     );
+
+    await this.serv.getFCMToken(this.employerId).toPromise().then(res => {
+      this.userFcmToken = res;
+    }).catch(err => {
+      console.log(err);
+    });
+
+    if (this.userFcmToken != "") {
+      console.log(this.userFcmToken);
+      const requestHeaders = new HttpHeaders().set('Authorization', 'key=AAAAlhtqIdQ:APA91bFlcYmdaqt5D_jodyiVQG8B1mkca2xGh6XKeMuTGtxQ6XKhSY0rdLnc0WrXDsV99grFamp3k0EVHRUJmUG9ULcxf-VSITFgwwaeNvrUq48q0Hn1GLxmZ3GBAYdCBzPFIRdbMxi9');
+      const postData = {
+        "to": this.userFcmToken,
+        "notification": {
+          "title": "Employment Terminated",
+          "body": "Employment with " + this.store.snapshot().user.name + " has been terminated.",
+        }
+      }
+
+      this.httpClient.post('https://fcm.googleapis.com/fcm/send', postData, { headers: requestHeaders }).subscribe(data => {
+        console.log("data receieved: " + data);
+      }, error => {
+        console.log(error);
+      });
+    }
+
+    await this.serv.getFCMToken(this.aupairID).toPromise().then(res => {
+      this.userFcmToken = res;
+    }).catch(err => {
+      console.log(err);
+    });
+
+    if (this.userFcmToken != "") {
+      console.log(this.userFcmToken);
+      const requestHeaders = new HttpHeaders().set('Authorization', 'key=AAAAlhtqIdQ:APA91bFlcYmdaqt5D_jodyiVQG8B1mkca2xGh6XKeMuTGtxQ6XKhSY0rdLnc0WrXDsV99grFamp3k0EVHRUJmUG9ULcxf-VSITFgwwaeNvrUq48q0Hn1GLxmZ3GBAYdCBzPFIRdbMxi9');
+      const postData = {
+        "to": this.userFcmToken,
+        "notification": {
+          "title": "Employment Terminated",
+          "body": "Employment with " + this.employerName + " has been terminated.",
+        }
+      }
+
+      this.httpClient.post('https://fcm.googleapis.com/fcm/send', postData, { headers: requestHeaders }).subscribe(data => {
+        console.log("data receieved: " + data);
+      }, error => {
+        console.log(error);
+      });
+    }
+
+    const current = new Date();
+    const minutes = String(current.getMinutes()).padStart(2, '0');
+
+    this.notificationToSend.auPairId = this.aupairID;
+    this.notificationToSend.parentId = this.employerId;
+    this.notificationToSend.title = "Employment Terminated";
+    this.notificationToSend.body = "Employment has been terminated.";
+    this.notificationToSend.date = current.getFullYear() + "-" + (current.getMonth() + 1) + "-" + current.getDate();
+    this.notificationToSend.time = current.getHours() + ":" + minutes;
+
+    this.serv.logNotification(this.notificationToSend).toPromise().then(res => {
+      console.log(res);
+    }, err => {
+      console.log(err);
+    });
 
     location.reload();
   }

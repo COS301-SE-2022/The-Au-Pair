@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { ModalController, NavParams, ToastController } from '@ionic/angular';
-import { auPair, Child, Email, Parent, User } from '../../../../../shared/interfaces/interfaces';
+import { auPair, Child, Email, Parent, User, Notification } from '../../../../../shared/interfaces/interfaces';
 import { API } from '../../../../../shared/api/api.service';
 import { Store } from '@ngxs/store';
 import { Router } from '@angular/router';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 @Component({
   selector: 'the-au-pair-job-summary-modal',
@@ -15,6 +16,8 @@ export class JobSummaryModalComponent implements OnInit {
   parentID: string = this.navParams.get('parentID');
   contractID: string = this.navParams.get('contractID');
   auPairID = "";
+  userFcmToken = "";
+
   childrenArr: Child[] = [];
 
   days = [
@@ -43,6 +46,16 @@ export class JobSummaryModalComponent implements OnInit {
     currentLong: 0.0,
     currentLat: 0.0,
     terminateDate: "",
+  }
+
+  notificationToSend: Notification = {
+    id: "",
+    auPairId: "",
+    parentId: "",
+    title: "",
+    body: "",
+    date: "",
+    time: "",
   }
 
   childDetails: Child ={
@@ -93,7 +106,7 @@ export class JobSummaryModalComponent implements OnInit {
     body: "",
   }
 
-  constructor(private serv: API, private modalCtrl : ModalController, private store: Store, private router: Router, public toastCtrl: ToastController) {}
+  constructor(private serv: API, private modalCtrl : ModalController, private store: Store, private router: Router, public toastCtrl: ToastController, private httpClient: HttpClient) {}
 
   async ngOnInit(): Promise<void> {
     this.auPairID = this.store.snapshot().user.id;
@@ -257,6 +270,47 @@ export class JobSummaryModalComponent implements OnInit {
         this.router.navigate(['/au-pair-dashboard']).then(()=>{
         location.reload();
         });
+
+        await this.serv.getFCMToken(this.parentID).toPromise().then(res => {
+          this.userFcmToken = res;
+        }).catch(err => {
+          console.log(err);
+        });
+
+        if (this.userFcmToken != "") {
+          console.log(this.userFcmToken);
+          const requestHeaders = new HttpHeaders().set('Authorization', 'key=AAAAlhtqIdQ:APA91bFlcYmdaqt5D_jodyiVQG8B1mkca2xGh6XKeMuTGtxQ6XKhSY0rdLnc0WrXDsV99grFamp3k0EVHRUJmUG9ULcxf-VSITFgwwaeNvrUq48q0Hn1GLxmZ3GBAYdCBzPFIRdbMxi9');
+          const postData = {
+            "to": this.userFcmToken,
+            "notification": {
+              "title": "Hire Request Accepted",
+              "body": this.store.snapshot().user.name + " has accepted your hire request.",
+            }
+          }
+
+          this.httpClient.post('https://fcm.googleapis.com/fcm/send', postData, { headers: requestHeaders }).subscribe(data => {
+            console.log("data receieved: " + data);
+          }, error => {
+            console.log(error);
+          });
+        }
+      console.log(res);
+
+      const current = new Date();
+      const minutes = String(current.getMinutes()).padStart(2, '0');
+
+      this.notificationToSend.auPairId = "";
+      this.notificationToSend.parentId = this.parentID;
+      this.notificationToSend.title = "Hire Request Accepted";
+      this.notificationToSend.body = this.store.snapshot().user.name + " has accepted your hire request.";
+      this.notificationToSend.date = current.getFullYear() + "-" + (current.getMonth() + 1) + "-" + current.getDate();
+      this.notificationToSend.time = current.getHours() + ":" + minutes;
+
+      this.serv.logNotification(this.notificationToSend).toPromise().then(res => {
+        console.log(res);
+      }, err => {
+        console.log(err);
+      });
       },
       error=>{console.log("Error has occured with API: " + error);}
     )

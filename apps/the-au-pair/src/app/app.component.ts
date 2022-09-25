@@ -152,7 +152,7 @@ export class AppComponent implements OnInit {
           console.log(err);
         });
 
-        if (this.userFcmToken) {
+        if (this.userFcmToken != "") {
           console.log(this.userFcmToken);
           const requestHeaders = new HttpHeaders().set('Authorization', 'key=AAAAlhtqIdQ:APA91bFlcYmdaqt5D_jodyiVQG8B1mkca2xGh6XKeMuTGtxQ6XKhSY0rdLnc0WrXDsV99grFamp3k0EVHRUJmUG9ULcxf-VSITFgwwaeNvrUq48q0Hn1GLxmZ3GBAYdCBzPFIRdbMxi9');
           const postData = {
