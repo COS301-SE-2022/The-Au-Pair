@@ -152,6 +152,7 @@ describe('ParentProfileComponent', () => {
       experience: "",
       currentLong: 0.0,
       currentLat: 0.0,
+      alreadyOutOfBounds: false,
       terminateDate: "2022-6-23",
     }
 
@@ -177,6 +178,7 @@ describe('ParentProfileComponent', () => {
       experience: "",
       currentLong: 0.0,
       currentLat: 0.0,
+      alreadyOutOfBounds: false,
       terminateDate: "",
     }
 
@@ -202,6 +204,7 @@ describe('ParentProfileComponent', () => {
       experience: "",
       currentLong: 0.0,
       currentLat: 0.0,
+      alreadyOutOfBounds: false,
       terminateDate: "2022-9-23",
     }
 
