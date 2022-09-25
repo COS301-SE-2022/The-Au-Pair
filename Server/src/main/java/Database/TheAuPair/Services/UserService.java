@@ -108,4 +108,17 @@ public class UserService
       ur.deleteById(id);
     }
   }
+
+  public String getFCMToken(String id)
+  {
+    User u =  ur.findUsingId(id);
+    return u.getFcmToken();
+  }
+
+  public void setFCMToken(String id, String token)
+  {
+    User u =  ur.findUsingId(id);
+    u.setFcmToken(token);
+    ur.save(u);
+  }
 }

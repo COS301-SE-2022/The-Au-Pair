@@ -304,4 +304,16 @@ export class API{
   getAuPairEmployer(id : string): Observable<any> {
     return this.http.post(environment.apiURI+"/getAuPairEmployer",id);
   }
+
+  getFCMToken(id : string): Observable<any> {
+    return this.http.post(environment.apiURI+"/getFCMToken",id, {responseType: 'text'});
+  }
+
+  setFCMToken(id : string, token : string): Observable<any> {
+    var fcmObject = {
+      "id" : id,
+      "token" : token
+    }
+    return this.http.post(environment.apiURI+"/setFCMToken",fcmObject);
+  }
 }

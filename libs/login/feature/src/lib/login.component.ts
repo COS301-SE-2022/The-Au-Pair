@@ -63,51 +63,30 @@ export class LoginComponent implements OnInit {
     });
 
     PushNotifications.addListener('registration', (token: Token) => {
-      console.log(token.value);
-      alert('Push registration success, token: ' + token.value);
       this.fcmToken = token.value;
     });
 
     PushNotifications.addListener('registrationError', (error: JSON) => {
-      alert('Error on registration: ' + JSON.stringify(error));
+      console.log('Error on registration: ' + JSON.stringify(error));
     });
 
     PushNotifications.addListener(
       'pushNotificationReceived',
       (notification: PushNotificationSchema) => {
-        alert('Push received: ' + JSON.stringify(notification));
+        console.log('Push received: ' + JSON.stringify(notification));
       },
     );
 
     PushNotifications.addListener(
       'pushNotificationActionPerformed',
       (notification: ActionPerformed) => {
-        alert('Push action performed: ' + JSON.stringify(notification));
+        console.log('Push action performed: ' + JSON.stringify(notification));
       },
     );
   }
   
   async loginUser() 
   {
-    // const  requestHeaders = new HttpHeaders().set('Authorization', 'key=AAAAlhtqIdQ:APA91bFlcYmdaqt5D_jodyiVQG8B1mkca2xGh6XKeMuTGtxQ6XKhSY0rdLnc0WrXDsV99grFamp3k0EVHRUJmUG9ULcxf-VSITFgwwaeNvrUq48q0Hn1GLxmZ3GBAYdCBzPFIRdbMxi9');
-
-
-    // const postData = {
-    //   "to":"cpCzpEgxS-a499oPCvLMen:APA91bFT5p3bJFyl4wVQw4TBs5WShA0jPhZTZrRtzlYjpo5SwlilkhER0LPQjB_ySMYaxiREpuEVuqiUZsIoBg-__zveSXUgS_ouwWFal3GzfNcYg47MDnJSlGpaZBqHjRkvFbH0i1Gb",
-    //   "notification":{
-    //     "title":"Order #44",
-    //     "body": "Hello bro"
-    //   }
-    // }
-    // console.log(requestHeaders)
-    // this.httpClient.post('https://fcm.googleapis.com/fcm/send',postData, {headers: requestHeaders})
-    // .subscribe(data => {
-    //   console.log(data);
-    // }, error => {
-    //   console.log(error);
-    // });
-
-
     this.submitAttempt = true;
 
     if(!this.loginDetailsForm.controls['email'].valid || !this.loginDetailsForm.controls['pass'].valid)
@@ -180,6 +159,15 @@ export class LoginComponent implements OnInit {
           }
           );
         }
+
+        this.serv.setFCMToken(id,this.fcmToken).toPromise().then(
+          res => {
+            console.log(res);
+          },
+          error => {
+            console.log("Error has occured with API: " + error);
+          }
+        );
       }
       this.loggingIn = false;
     }
