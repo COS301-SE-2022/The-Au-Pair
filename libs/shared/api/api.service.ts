@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpEvent, HttpRequest } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { Activity , Child , medAid , Parent  , User, HoursLogged, auPair, Notification, Report, Contract, Email} from '../interfaces/interfaces';
+import { Activity , Child , medAid , Parent  , User, HoursLogged, auPair, Notification, Report, Contract, Email, UserCosts} from '../interfaces/interfaces';
 import { environment } from '../../../apps/the-au-pair/src/environments/environment';
 @Injectable()
 export class API{
@@ -253,6 +253,38 @@ export class API{
 
   sendEmail(email : Email): Observable<any> {
     return this.http.post(environment.apiURI+"/sendEmail",email);
+  }
+
+  getCurrentFuelPrices(): Observable<any> {
+    return this.http.get(environment.apiURI+"/getCurrentFuelPrices");
+  }
+
+  getCostById(id : string): Observable<any> {
+    return this.http.post(environment.apiURI+"/getCostById",id);
+  }
+
+  getAllCosts(): Observable<any> {
+    return this.http.get(environment.apiURI+"/getAllCosts");
+  }
+
+  getCostsForUser(userId : string): Observable<any> {
+    return this.http.post(environment.apiURI+"/getCostsForUser",userId);
+  }
+
+  getCurrentMonthCostsForJob(contributerId : string, otherPartyId : string): Observable<any> {
+    var details = {
+      "contributerId" : contributerId,
+      "otherPartyId" : otherPartyId
+    } 
+    return this.http.post(environment.apiURI+"/getCurrentMonthCostsForJob",details);
+  }
+
+  addUserCost(userCost: UserCosts): Observable<any> {
+    return this.http.post(environment.apiURI+"/addUserCost",userCost);
+  }
+
+  removeUserCost(id : string): Observable<any> {  
+    return this.http.post(environment.apiURI+"/removeUserCost",id);
   }
 
   storeFile(file : File, filename : string): Observable<any> {

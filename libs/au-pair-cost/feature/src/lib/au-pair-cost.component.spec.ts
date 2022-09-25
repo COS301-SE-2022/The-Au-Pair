@@ -2,11 +2,50 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { AuPairCostComponent } from './au-pair-cost.component';
 import { API } from '../../../../shared/api/api.service';
 import { HttpClientTestingModule } from "@angular/common/http/testing";
-import { IonicModule } from '@ionic/angular';
+import { IonicModule, ModalController, ToastController } from '@ionic/angular';
 import { NavbarModule } from '@the-au-pair/shared/components/navbar';
 import { RouterTestingModule} from '@angular/router/testing';
-import { NgxsModule } from '@ngxs/store';
+import { NgxsModule, Store } from '@ngxs/store';
 import { AppState } from '../../../../shared/ngxs/state';
+import { ExtraCostsModalComponent } from './extra-costs-modal/extra-costs-modal.component';
+import { EditRateModalComponent } from './edit-rate-modal/edit-rate-modal.component';
+import { CommonModule } from '@angular/common';
+import { SetId, SetType } from '../../../../../libs/shared/ngxs/actions';
+import { ReactiveFormsModule, FormsModule, FormBuilder } from '@angular/forms';
+import { of } from 'rxjs';
+
+const apiMock = {
+  getUser() {
+    return of({})
+  },
+  getParent() {
+    return of({})
+  },
+  getAuPair() {
+    return of({})
+  },
+  addUserCost() {
+    return of({})
+  },
+  editAuPair() {
+    return of({})
+  },
+  getMonthMinutes() {
+    return of({})
+  },
+  getCurrentMonthCostsForJob() {
+    return of({})
+  },
+  getDateMinutes() {
+    return of({})
+  },
+  removeUserCost() {
+    return of({})
+  },
+  getCurrentFuelPrices(){
+    return of({})
+  },
+}
 
 
 describe('AuPairCostComponent', () => {
@@ -68,3 +107,353 @@ describe('AuPairCostComponent', () => {
     expect(str).toMatch(/^((0[1-9])|([1|2][0-9])|(3[0-1]))\s([A-z][a-z]*)\s-\s((0[1-9])|([1|2][0-9])|(3[0-1]))\s([A-z][a-z]*)/);
   });
 });
+
+describe('ExtraCostsModalComponent', () => {
+  let component: ExtraCostsModalComponent;
+  let fixture: ComponentFixture<ExtraCostsModalComponent>;
+  let store: Store;
+
+  beforeEach(async () => {
+    await TestBed.configureTestingModule({
+      declarations: [ExtraCostsModalComponent],
+      imports: [
+        IonicModule, 
+        CommonModule,
+        HttpClientTestingModule,
+        NavbarModule,
+        ReactiveFormsModule,
+        RouterTestingModule, 
+        FormsModule,
+        NgxsModule.forRoot([AppState])
+      ],
+      providers: [{
+        provide:API, useValue:apiMock
+      }, 
+      ModalController, 
+      ToastController,
+      FormBuilder
+    ]
+    }).compileComponents();
+
+    store = TestBed.inject(Store);
+  });
+
+  beforeEach(() => {
+    fixture = TestBed.createComponent(ExtraCostsModalComponent);
+    component = fixture.componentInstance;
+    fixture.detectChanges();
+  });
+
+  it('should create', () => {
+    expect(component).toBeTruthy();
+  });
+
+  it('should, open a toast when openToast is called', async ()=>{
+    jest.spyOn(component,"openToast");
+    component.openToast("test");
+    expect(await component.openToast).toReturn();
+  });
+
+  it('should,close the modal when closeModal is called', async ()=>{
+    jest.spyOn(component,"closeModal");
+    component.closeModal();
+    expect(await component.closeModal).toReturn();
+  });
+
+  it('should set the auPairId to userID on init', async () => {
+    store.dispatch(new SetId("123"));
+    store.dispatch(new SetType(2));
+
+    await component.ngOnInit();
+    expect(component.auPairId).toEqual("123");
+  });
+
+  it('should set the parentId to userID', async () => {
+    store.dispatch(new SetId("123"));
+    store.dispatch(new SetType(1));
+    jest.spyOn(apiMock, 'getParent').mockImplementation(()=>of(
+      {
+        auPair : "321",
+      }
+    ));
+
+    await component.ngOnInit();
+    expect(component.auPairId).toEqual("321");
+  });
+
+  it('should get the au pairs details', async () => {
+    store.dispatch(new SetId("123"));
+    store.dispatch(new SetType(2));
+    jest.spyOn(apiMock, 'getAuPair').mockImplementation(()=>of(
+      {
+        employer : "213",
+        payRate : "200"
+      }
+    ));
+
+    await component.ngOnInit();
+    expect(component.auPairId).toEqual("123");
+    expect(component.parentID).toEqual("213");
+    expect(component.payRate).toEqual("200");
+  });
+
+  it('should call getCurrentFuelPrice', async () => {
+    const spy = jest.spyOn(component, 'getCurrentFuelPrice');
+
+    await component.ngOnInit();
+    expect(spy).toHaveBeenCalled();
+  });
+
+  it('should set the fuel prices', async () => {
+    jest.spyOn(apiMock, 'getCurrentFuelPrices').mockImplementation(()=>of(
+      {
+        diesel : [
+          {
+            value: "100"
+          }
+        ],
+        petrol : [
+          {
+            value: "200"
+          },
+          {
+            value: "300"
+          },
+        ]
+      }
+    ));
+
+    await component.getCurrentFuelPrice();
+
+    const fuelPrices = {
+      "diesel": 1,
+      "petrol-95": 2,
+      "petrol-93": 3, 
+    };
+    expect(component.fuelPrices).toEqual(fuelPrices);
+  });
+
+  it('should set amount editable to false', async () => {
+    component.costsForm.controls['type'].setValue('Overtime');
+    expect(component.amountEditable).toBeFalsy();
+
+    component.costsForm.controls['type'].setValue('Fuel');
+    expect(component.amountEditable).toBeFalsy();
+  });
+
+  it('should set amount field based off fuel prices', async () => {
+    jest.spyOn(apiMock, 'getCurrentFuelPrices').mockImplementation(()=>of(
+      {
+        diesel : [
+          {
+            value: "100"
+          }
+        ],
+        petrol : [
+          {
+            value: "200"
+          },
+          {
+            value: "300"
+          },
+        ]
+      }
+    ));
+
+    await component.getCurrentFuelPrice();
+
+    component.costsForm.controls['type'].setValue('Fuel');
+    component.costsForm.controls['distance'].setValue('20');
+    component.costsForm.controls['kml'].setValue('12');
+    component.costsForm.controls['fuelType'].setValue('Diesel');
+
+    const num = (5/3).toFixed(2);
+
+    expect(component.costsForm.controls['amount'].value).toEqual(num);
+  });
+
+  it('should set amount field based off overtime', async () => {
+    jest.spyOn(apiMock, 'getAuPair').mockImplementation(()=>of(
+      {
+        employer : "213",
+        payRate : "200"
+      }
+    ));
+
+    await component.ngOnInit();
+
+    component.costsForm.controls['type'].setValue('Overtime');
+    component.costsForm.controls['hours'].setValue('2');
+
+    const num = 400;
+
+    expect(component.costsForm.controls['amount'].value).toEqual(num);
+  });
+
+  it('should pad a number with 0 if not 2 digits', async () => {
+    const test1 = component.padDateTo2Digits(1);
+    const test2 = component.padDateTo2Digits(10);
+
+    expect(test1).toEqual("01");
+    expect(test2).toEqual("10");
+  });
+
+  it('should send cost data to the API', async () => {
+    const spy = jest.spyOn(apiMock, 'addUserCost');
+
+    component.sendCostData("test", "test", 0, 0);
+
+    expect(spy).toHaveBeenCalled();
+  });
+
+  it('should give an error for description', async () => {
+    const spy = jest.spyOn(component, 'sendCostData');
+
+    component.costsForm.controls['type'].setValue('Other');
+    component.costsForm.controls['desc'].setValue('');
+
+    component.addCost();
+
+    expect(spy).not.toHaveBeenCalled();
+  });
+
+  it('should give an error for fuel', async () => {
+    const spy = jest.spyOn(component, 'sendCostData');
+
+    component.costsForm.controls['type'].setValue('Fuel');
+    component.costsForm.controls['distance'].setValue('');
+
+    component.addCost();
+
+    expect(spy).not.toHaveBeenCalled();
+  });
+
+  it('should give an error for kml', async () => {
+    const spy = jest.spyOn(component, 'sendCostData');
+
+    component.costsForm.controls['type'].setValue('Fuel');
+    component.costsForm.controls['distance'].setValue('20');
+    component.costsForm.controls['kml'].setValue('test');
+
+    component.addCost();
+
+    expect(spy).not.toHaveBeenCalled();
+  });
+
+  it('should give an error for overtime', async () => {
+    const spy = jest.spyOn(component, 'sendCostData');
+
+    component.costsForm.controls['type'].setValue('Overtime');
+    component.costsForm.controls['hours'].setValue('test');
+
+    component.addCost();
+
+    expect(spy).not.toHaveBeenCalled();
+  });
+
+  it('should send cost data for fuel', async () => {
+    const spy = jest.spyOn(component, 'sendCostData');
+    jest.spyOn(apiMock, 'getCurrentFuelPrices').mockImplementation(()=>of(
+      {
+        diesel : [
+          {
+            value: "100"
+          }
+        ],
+        petrol : [
+          {
+            value: "200"
+          },
+          {
+            value: "300"
+          },
+        ]
+      }
+    ));
+
+    await component.getCurrentFuelPrice();
+
+    component.costsForm.controls['type'].setValue('Fuel');
+    component.costsForm.controls['distance'].setValue('20');
+    component.costsForm.controls['kml'].setValue('12');
+    component.costsForm.controls['fuelType'].setValue('Diesel')
+    const num = (5/3).toFixed(2);
+
+    component.addCost()
+
+    expect(spy).toHaveBeenCalledWith('Fuel', "Travelled 20kms with fuel costing R1 per litre", 20, parseFloat(num));
+  });
+
+  it('should send cost data for overtime', async () => {
+    const spy = jest.spyOn(component, 'sendCostData');
+    jest.spyOn(apiMock, 'getAuPair').mockImplementation(()=>of(
+      {
+        employer : "213",
+        payRate : "200"
+      }
+    ));
+
+    await component.ngOnInit();
+
+    component.costsForm.controls['type'].setValue('Overtime');
+    component.costsForm.controls['desc'].setValue('test');
+    component.costsForm.controls['hours'].setValue('2');
+
+    component.addCost()
+
+    expect(spy).toHaveBeenCalledWith('Overtime', "test", 2, 400);
+  });
+
+  it('should send cost data for other', async () => {
+    const spy = jest.spyOn(component, 'sendCostData');
+
+    component.costsForm.controls['type'].setValue('Other');
+    component.costsForm.controls['desc'].setValue('test');
+    component.costsForm.controls['amount'].setValue('20');
+
+    component.addCost()
+
+    expect(spy).toHaveBeenCalledWith('Other', "test", 0, 20);
+  });
+
+});
+
+describe('EditRateModalComponent', () => {
+  let component: EditRateModalComponent;
+  let fixture: ComponentFixture<EditRateModalComponent>;
+
+  beforeEach(async () => {
+    await TestBed.configureTestingModule({
+      declarations: [EditRateModalComponent],
+      imports: [
+        IonicModule, 
+        CommonModule,
+        HttpClientTestingModule,
+        NavbarModule,
+        ReactiveFormsModule,
+        RouterTestingModule, 
+        FormsModule,
+        NgxsModule.forRoot([AppState])
+      ],
+      providers: [{
+        provide:API, useValue:apiMock
+      }, 
+      ModalController, 
+      ToastController,
+      FormBuilder
+    ]
+    }).compileComponents();
+  });
+
+  beforeEach(() => {
+    fixture = TestBed.createComponent(EditRateModalComponent);
+    component = fixture.componentInstance;
+    fixture.detectChanges();
+  });
+
+  it('should create', () => {
+    expect(component).toBeTruthy();
+  });
+
+});
+
