@@ -524,6 +524,7 @@ describe('EditAuPairProfileComponent', () => {
       experience: "",
       currentLong: 0,
       currentLat: 0,
+      alreadyOutOfBounds: false,
       terminateDate: "",
     };
 
