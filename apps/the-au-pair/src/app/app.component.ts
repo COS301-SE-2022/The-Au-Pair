@@ -7,6 +7,7 @@ import { Store } from '@ngxs/store';
 import { Router } from '@angular/router';
 import { MenuController, ToastController } from '@ionic/angular';
 import { Reset } from '../../../../libs/shared/ngxs/actions';
+import { DatePipe } from '@angular/common';
 
 @Component({
   selector: 'the-au-pair-root',
@@ -19,6 +20,8 @@ export class AppComponent implements OnInit {
   userType = 0;
   userFcmToken = "";
   activitydays: number[] = [];
+  previousActivityID = "";
+  currentActivityID = "";
 
   //navbar variables
   isHome = (this.router.url == "/parent-dashboard" || this.router.url == "/au-pair-dashboard");
@@ -33,6 +36,8 @@ export class AppComponent implements OnInit {
     description: '',
     location: '',
     boundary: 0,
+    longitude: 0.0,
+    latitude: 0.0,
     timeStart: '',
     timeEnd: '',
     budget: 0,
@@ -43,6 +48,7 @@ export class AppComponent implements OnInit {
   }
 
   activities: Activity[] = [];
+  currentActivities: Activity[] = [];
 
   parentDetails: Parent = {
     id: "",
@@ -51,7 +57,6 @@ export class AppComponent implements OnInit {
     auPair: "",
     rating: []
   }
-
 
   //Au Pair object to update their current position
   auPairDetails: auPair = {
@@ -66,6 +71,7 @@ export class AppComponent implements OnInit {
     experience: "",
     currentLong: 0.0,
     currentLat: 0.0,
+    alreadyOutOfBounds: false,
     terminateDate: "",
   }
 
@@ -79,6 +85,15 @@ export class AppComponent implements OnInit {
     time: "",
   }
 
+  outOfBoundsNotification: Notification = {
+    id: "",
+    auPairId: "",
+    parentId: "",
+    title: "",
+    body: "",
+    date: "",
+    time: "",
+  }  
 
   constructor(private menController : MenuController,
     public toastCtrl: ToastController,
@@ -94,24 +109,29 @@ export class AppComponent implements OnInit {
     if (this.userType == 2 && this.userID != '') {
       this.getCurrentAuPairDetails();
     }
-
   }
 
-  ngOnInit(): void {
+  ngOnInit(): void 
+  {
     this.menController.swipeGesture(false);
-    //Only update coordinates if you are an au pair
-    setInterval(() => {
+    /**
+     * Updating au pair coordinates when on shift
+     */
+
+    setInterval(() => 
+    {
       this.userID = this.store.snapshot().user.id;
       this.userType = this.store.snapshot().user.type;
       if (this.userType == 2 && this.userID != '') {
-        if (this.auPairDetails.onShift == true) {
+        if (this.auPairDetails.employer != "") {          
           this.getCurrentAuPairDetails();
           this.updateCoordinates();
         }
       }
-    }, 10000);
+    }, 6000);
 
-    const monInt = setInterval(() => {
+     // Monitoring for upcoming activities
+      const monInt = setInterval(() => {
       this.userID = this.store.snapshot().user.id;
       this.userType = this.store.snapshot().user.type;
       if (this.userType == 2 || this.userType == 1) {
@@ -121,6 +141,9 @@ export class AppComponent implements OnInit {
     }, 6000);
   }
 
+  /**
+   * Notifications funtionality
+   */
   monitorActivities() {
     //if parent, get childrens id's
     if (this.userType == 1) {
@@ -128,7 +151,7 @@ export class AppComponent implements OnInit {
     }
 
     //if au pair, get parent id
-    if (this.userType == 2) {      
+    if (this.userType == 2 && this.auPairDetails.employer != "") {
       this.serv.getAuPair(this.userID).toPromise().then(res => {
         this.getAcitivities(res.employer);
       }).catch(err => {
@@ -331,6 +354,15 @@ export class AppComponent implements OnInit {
       }
     return hasPassed;
   }
+  
+  notifications(){
+    this.router.navigate(['/notifications']);
+    this.menuClose();
+  }
+
+  /**
+   * Live location tracking functionality
+   */
 
   async getCurrentAuPairDetails() {
     const res = await this.serv.getAuPair(this.userID).toPromise()
@@ -341,7 +373,9 @@ export class AppComponent implements OnInit {
     this.auPairDetails.currentLat = res.currentLat;
   };
 
-  async updateCoordinates() {
+  async updateCoordinates() 
+  { 
+    //Keep this as false unless testing live tracking features
     let flag = false;
     await this.geolocation.getCurrentPosition().then((resp: { coords: { longitude: number; latitude: number; }; }) => {
       //Check if auPair has actually moved
@@ -354,7 +388,7 @@ export class AppComponent implements OnInit {
       
       //Only update if coordinates have changed
       if(flag)
-      this.updateAuPair(this.auPairDetails);
+        this.updateAuPair(this.auPairDetails);
     }).catch((error) => 
     {
       console.log('Error getting location', error);
@@ -362,8 +396,166 @@ export class AppComponent implements OnInit {
 
   }
 
-  updateAuPair(aupair: auPair) {
-    //Save new auPair object in the database
+  async updateAuPair(aupair: auPair) 
+  { 
+    /**
+     * Check if au pair is out of boundary
+     */
+
+    //Get all children for the au pair
+    let allChildren: Child[] = [];
+    await this.serv.getChildren(aupair.employer).toPromise().then(
+    res => 
+    {
+      allChildren = res;
+    }).catch(err => {console.log(err);});
+    
+    //Get all activities for the children
+    this.currentActivities.splice(0);
+    for (let i = 0; i < allChildren.length; i++) 
+    {
+      const child = allChildren[i];
+      await this.serv.getSchedule(child.id).toPromise().then(
+        res=>
+        {
+          res.forEach(( act : Activity) => 
+          {
+            this.currentActivities.push(act);  
+          });
+        }).catch(
+          error=>
+          {
+            console.log("Error has occured with API: " + error);
+          }
+        );
+    }
+
+    /**
+     * Find activities that are happening now
+     * Loop thorugh all activities and find if the current time is in the timeslot, 
+     * and check that the au pair is still within that activities boundary.
+     * 
+     * ** ALso Check if the au pair should still be on shift
+     */
+
+    const daysActivities: Activity[] = [];
+
+    //Getting the current Time
+    const time = new Date();
+    const pipe = new DatePipe('en-US');
+    const currentDay = pipe.transform(Date.now(),'EEEE');
+    let currentHour = time.toLocaleString('en-US', { hour: 'numeric', hour12: false });
+    let currentMinutes = time.toLocaleString('en-US', { minute: 'numeric', hour12: false });
+
+    //Making hour and minutes correct format 
+    if(currentHour.length == 1)
+      currentHour = "0"+currentHour;
+    if(currentMinutes.length == 1)
+      currentMinutes = "0"+currentMinutes;
+
+    for (let j = 0; j < this.currentActivities.length; j++)
+    {
+      //Getting the activities start time
+      const act = this.currentActivities[j];
+      const actTime = act.timeStart.substring(0,2);
+
+      //Getting all the activities for the current day
+      if(act.day.toLowerCase() == currentDay?.toLowerCase())
+      {
+        daysActivities.push(act);
+      }
+
+      //If the activity is currently happening, monitor the boundary and they are not already out of bounds
+      if(actTime === currentHour && act.day.toLowerCase() == currentDay?.toLowerCase())
+      {
+        //Set the current activity
+        this.currentActivityID = act.id;
+
+        //Initially setting alreadyoutOfbounds to false for each new activity that starts (to avoid spam notifications for the same reason)
+        if(this.previousActivityID != this.currentActivityID)
+        {
+          aupair.alreadyOutOfBounds = false;
+        }
+
+        const boundary = act.boundary;
+        const longAct = act.longitude;
+        const latAct = act.latitude;
+        const longCoord = aupair.currentLong;
+        const latCoord = aupair.currentLat;
+        
+        const distance = this.calculateEucDistance(latAct, longAct, latCoord, longCoord);
+        if(distance>boundary  && !aupair.alreadyOutOfBounds)
+        {
+          console.log("Notifying parent");
+          
+          //Notify parent
+          const current = new Date();
+          const today = current.getFullYear() + "-" + (current.getMonth() + 1) + "-" + current.getDate();
+          const currentTime = currentHour + ":" + currentMinutes;
+          this.outOfBoundsNotification.parentId = aupair.employer;
+          this.outOfBoundsNotification.auPairId = "";
+          this.outOfBoundsNotification.date = today;
+          this.outOfBoundsNotification.time = currentTime;
+          this.outOfBoundsNotification.title = "Au pair out of bounds!";
+          this.outOfBoundsNotification.body = "Your au pair has left the boundary of " +act.boundary + "km for the activity '" + act.name + "' at " + act.location + ".  You au pair is currently " + distance + "km away.";
+          await this.serv.logNotification(this.outOfBoundsNotification).toPromise().then(res => 
+          {
+            console.log(res);
+          }, err => {
+            console.log(err);
+          });
+
+          //Notify au pair
+          this.outOfBoundsNotification.parentId = "";
+          this.outOfBoundsNotification.auPairId = aupair.id;
+          this.outOfBoundsNotification.date = today;
+          this.outOfBoundsNotification.time = currentTime;
+          this.outOfBoundsNotification.title = "Out of bounds for activity!";
+          this.outOfBoundsNotification.body = "You have left the boundary of " +act.boundary + "km for the activity '" + act.name + "' at " + act.location 
+          + ".  You employer has also been notified of this activity";
+          await this.serv.logNotification(this.outOfBoundsNotification).toPromise().then(res => 
+          {
+            console.log(res);
+          }, err => {
+            console.log(err);
+          });
+
+          //Setting already out of bounds so that it doesnt spam notifications
+          aupair.alreadyOutOfBounds = true;
+        }
+        this.previousActivityID = act.id;
+      }
+    }
+
+    //Checking if the au pair should be on shift or not
+    let startTime = 24;
+    let endTime = 0;
+    for (let k = 0; k < daysActivities.length; k++) 
+    {
+      const act = daysActivities[k];
+      const actStartTime = parseInt(act.timeStart.substring(0,2));
+      const actEndTime = parseInt(act.timeEnd.substring(0,2));
+
+      //Finding the earliest activity's start
+      if(actStartTime < startTime)
+        startTime = actStartTime
+
+      //Finding the latest activity end
+      if(actEndTime > endTime)
+        endTime = actEndTime
+    }
+    
+    if(!isNaN(parseInt(currentHour)) && parseInt(currentHour)>=endTime)
+    {
+      aupair.onShift = false;
+      aupair.alreadyOutOfBounds = false; //Cant be out of bounds if not working
+    }
+    else if(!isNaN(parseInt(currentHour)) && parseInt(currentHour)>=startTime && parseInt(currentHour)<endTime)
+    {
+      aupair.onShift = true;
+    }
+
+    //Save new auPair object in the database with updated coordinates
     this.serv.editAuPair(aupair).subscribe(
       res => {
         return res;
@@ -375,7 +567,26 @@ export class AppComponent implements OnInit {
     )
   }
 
-  //Navbar functions
+  calculateEucDistance(actX : number, actY : number, aupairX : number, aupairY : number)
+  {
+    const x1 = (actX * Math.PI) / 180;
+    const y1 = (actY * Math.PI) / 180;
+    const x2 = (aupairX * Math.PI) / 180;
+    const y2 = (aupairY * Math.PI) / 180;
+
+    const dlong = y1 - y2;
+    const dlat = x1 - x2;
+
+    let distanceKM = Math.pow(Math.sin(dlat / 2), 2) + Math.cos(x2) * Math.cos(x1) * Math.pow(Math.sin(dlong / 2), 2);
+    distanceKM = 2 * Math.asin(Math.sqrt(distanceKM));
+    distanceKM = distanceKM * 6371;
+    return distanceKM;
+  }
+
+  /**
+   * Navbar functionality
+   */
+
   dash(type=this.store.snapshot().user.type)
   {
     if(type == 0)
@@ -393,11 +604,6 @@ export class AppComponent implements OnInit {
       this.router.navigate(['/au-pair-dashboard']);
       this.menuClose();
     }
-  }
-
-  notifications(){
-    this.router.navigate(['/notifications']);
-    this.menuClose();
   }
 
   profile(type=this.store.snapshot().user.type )

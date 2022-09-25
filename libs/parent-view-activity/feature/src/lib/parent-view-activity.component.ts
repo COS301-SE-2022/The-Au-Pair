@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Store } from '@ngxs/store';
 import { API } from '../../../../shared/api/api.service';
-import { Activity } from '../../../../shared/interfaces/interfaces';
+import { Activity, Child } from '../../../../shared/interfaces/interfaces';
 
 @Component({
   selector: 'the-au-pair-parent-view-activity',
@@ -21,6 +21,8 @@ export class ParentViewActivityComponent implements OnInit
     description: "",
     location: "",
     boundary: 0.0,
+    longitude: 0.0,
+    latitude: 0.0,
     timeStart: "",
     timeEnd: "",
     budget: 0.0,
@@ -29,22 +31,26 @@ export class ParentViewActivityComponent implements OnInit
     day: "",
     child: "",
   };
+
+  //Child name associated with ID
+  selectedChild="";
+
   timeslot = "";
   constructor(private serv: API, private router: Router, private store: Store)
   {
     this.activityDetails.id=this.store.snapshot().user.currentActivity;
   }
 
-  ngOnInit(): void
+  async ngOnInit(): Promise<void>
   {
     this.getActivityDetails();
   }
 
   //------------------------------------------------------------------------------------------------------------------------------------------------------------------------
   /**Service calls**/
-  getActivityDetails()
+  async getActivityDetails()
   { 
-    this.serv.getActivity(this.activityDetails.id).subscribe(
+    await this.serv.getActivity(this.activityDetails.id).toPromise().then(
       res=>{
         console.log("The response is:" + res); 
         this.activityDetails.id = res.id;
@@ -60,9 +66,21 @@ export class ParentViewActivityComponent implements OnInit
         this.activityDetails.budget = res.budget;
         this.activityDetails.child = res.child;
         this.timeslot = res.timeStart + "-" + res.timeEnd
-      },
+      }).catch(
       error=>{console.log("Error has occured with API: " + error);}
-    )
+    );
+
+    await this.serv.getChildren(this.store.snapshot().user.id).toPromise().then(
+      async res=>{
+          await res.forEach((c : Child) => {
+            if(c.id == this.activityDetails.child)
+              this.selectedChild = c.fname;
+          });
+      }).catch(
+      error=>{
+        console.log("Error has occured with API: " + error);
+      }
+    );
   };
 
   //------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -70,6 +88,14 @@ export class ParentViewActivityComponent implements OnInit
 
   returnToSchedule()
   {
-    this.router.navigate(['/schedule']);
+    //Route depending on logged in user
+    if(this.store.snapshot().user.type == 1)
+    {
+      this.router.navigate(['/schedule']);
+    }
+    else if(this.store.snapshot().user.type == 2)
+    {
+      this.router.navigate(['/au-pair-schedule']);
+    }
   }
 }

@@ -18,6 +18,10 @@ public class Activity
   private String location;
   @Field ("boundary")
   private double boundary;
+  @Field("longitude")
+  private double longitude;
+  @Field("latitude")
+  private double latitude;
   @Field ("timeStart")
   private String timeStart;
   @Field ("timeEnd")
@@ -33,13 +37,15 @@ public class Activity
   @Field ("child")
   private String child;
 
-  public Activity(String id, String name, String description, String location, double boundary, String timeStart, String timeEnd, double budget, String comment, int behavior, String day, String child)
+  public Activity(String id, String name, String description, String location, double boundary, double longitude, double latitude, String timeStart, String timeEnd, double budget, String comment, int behavior, String day, String child)
   {
     this.id = id;
     this.name = name;
     this.description = description;
     this.location = location;
     this.boundary = boundary;
+    this.longitude = longitude;
+    this.latitude = latitude;
     this.timeStart = timeStart;
     this.timeEnd = timeEnd;
     this.budget = budget;
@@ -102,6 +108,26 @@ public class Activity
   public void setBoundary(double boundary)
   {
     this.boundary = boundary;
+  }
+
+  public double getLongitude()
+  {
+    return this.longitude;
+  }
+
+  public void setLongitude(double longitude)
+  {
+    this.longitude = longitude;
+  }
+
+  public double getLatitude()
+  {
+    return this.latitude;
+  }
+
+  public void setLatitude(double latitude)
+  {
+    this.latitude = latitude;
   }
 
   public void setTimeStart(String timeStart)
