@@ -3,6 +3,7 @@ package Database.TheAuPair.Controllers;
 import Database.TheAuPair.Models.User;
 import Database.TheAuPair.Repositories.UserRepository;
 import Database.TheAuPair.Services.UserService;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import java.util.List;
 import java.util.Map;
@@ -67,9 +68,16 @@ public class UserController
   }
 
   //add a ping endpoint for testing
-  @GetMapping("/ping")
-  public String ping()
+  @RequestMapping(value = "/",method = RequestMethod.GET)
+  public ResponseEntity<?> health() throws Exception
   {
-    return "pong";
+    try
+    {
+      return ResponseEntity.status(200).body("Ok");
+    }
+    catch (Exception e)
+    {
+      return (ResponseEntity<?>) ResponseEntity.internalServerError().body(e.getMessage());
+    }
   }
 }
