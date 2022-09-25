@@ -79,7 +79,11 @@ label{
     font-size: 16px;
     line-height: 20px;
     top:35px;
-    left:-132px !important;
+    text-align: left;
+}
+
+#dateOfBirth{
+    margin-left: 6px;
 }
 
 input[type=text], select{
@@ -94,6 +98,25 @@ input[type=text], select{
     color: black;
 }
 
+input[type=date]{
+    width: 411px;
+    height: 62px;
+    background: var(--ion-color-light-white);
+    box-shadow: 1px 2px 5px rgba(0, 0, 0, 0.13);
+    border-style: none;
+    border-radius: 10px;
+    margin-top: 40px;
+    padding-left: 20px;
+    color: black;
+    opacity: 0.6;
+}
+
+input[type=date]::-webkit-calendar-picker-indicator {
+    filter: invert(1);
+    opacity: 0.6;
+    cursor: pointer;
+    margin-right: 10px;
+}
 
 input[type=text]::placeholder{
     color:transparent;

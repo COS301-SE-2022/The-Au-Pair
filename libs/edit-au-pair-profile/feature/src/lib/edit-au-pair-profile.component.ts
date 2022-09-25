@@ -4,6 +4,7 @@ import { User, auPair } from '../../../../shared/interfaces/interfaces';
 import { ToastController } from '@ionic/angular';
 import { Store } from '@ngxs/store';
 import { HttpClient } from '@angular/common/http';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'the-au-pair-edit-au-pair-profile',
@@ -47,7 +48,7 @@ export class EditAuPairProfileComponent implements OnInit {
 
   auPairDetails: auPair = {
     id: "",
-    rating: 0,
+    rating: [],
     onShift: false,
     employer: "",
     costIncurred: 0,
@@ -57,10 +58,11 @@ export class EditAuPairProfileComponent implements OnInit {
     experience: "",
     currentLong: 0.0,
     currentLat: 0.0,
+    alreadyOutOfBounds: false,
     terminateDate: "",
   }
 
-  constructor(private serv: API, private http: HttpClient, public toastCtrl: ToastController, private store: Store){}
+  constructor(private serv: API, private http: HttpClient, public toastCtrl: ToastController, private store: Store, public router: Router){}
 
   ngOnInit(): void
   {
@@ -252,7 +254,7 @@ export class EditAuPairProfileComponent implements OnInit {
     
     if(emptyInput == true)
     {
-      console.log("You cannot have any empty fields.");
+      this.errToast("You cannot have any empty fields.");
     }
     else
     {     
@@ -300,6 +302,7 @@ export class EditAuPairProfileComponent implements OnInit {
       this.openToast();
     }
     
+    this.router.navigate(['/au-pair-dashboard']);
   }
 
   editUser(user:User){    
@@ -374,17 +377,25 @@ export class EditAuPairProfileComponent implements OnInit {
       {
         return;
       }
-  
+      
+      this.potentialLocations.splice(0);
+
       //Add returned data to the array
       const len = res.length;
       for (let j = 0; j < len && j<4; j++) 
       {      
-        this.potentialLocations.push(res[j]);
+        if (this.potentialLocations.includes(res[j].display_name) === false){
+          this.potentialLocations.push(res[j]); 
+        }  
       }
       
     })
     .catch(error=>{ // Failure
       console.log(error);
     });
+  }
+
+  radioChecked(event: any){
+    this.location = event.target.value;
   }
 }

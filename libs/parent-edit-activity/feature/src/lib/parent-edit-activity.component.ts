@@ -16,8 +16,10 @@ export class ParentEditActivityComponent implements OnInit {
   /**Variables**/
   //Possible locations searched for
   location = "";
-  potentialLocations : string[] = [];
+  potentialLocations: any = [];
   originalLocation = "";
+  longitude = 0.0;
+  latitude = 0.0;
 
   //Activity Model
   activityDetails: Activity = {
@@ -27,6 +29,8 @@ export class ParentEditActivityComponent implements OnInit {
   location: "",
   timeStart: "",
   boundary: 0.0,
+  longitude: 0.0,
+  latitude: 0.0,
   timeEnd: "",
   budget: 0.0,
   comment: "",
@@ -36,13 +40,14 @@ export class ParentEditActivityComponent implements OnInit {
   };
 
   currentChild : Child = {
-    id:"",
-    fname :"",
-    sname:"",
-    allergies:"",
-    diet : "",
-    parent:"",
-    aupair:""
+    id: "",
+    fname: "",
+    sname: "",
+    dob: "",
+    allergies: "",
+    diet: "",
+    parent: "",
+    aupair: ''
   };
 
   timeslot = "";
@@ -55,23 +60,19 @@ export class ParentEditActivityComponent implements OnInit {
   //Constructor
   constructor(private serv: API, private router: Router, public toastCtrl: ToastController, private http : HttpClient, private store: Store, private alertController: AlertController) 
   {
-    const navigation = this.router.getCurrentNavigation();
-    if(navigation !== null)
-      if(navigation.extras !== null)
-      { 
-        this.activityDetails.id = navigation.extras.state?.['id'];
-      }
+    this.activityDetails.id=this.store.snapshot().user.currentActivity;
   }
 
   ngOnInit(): void
   {    
     this.getActivityDetails();
-    this.getChildrenDetails();
   }
 
   //From HTML Form
-  getActivityValues(val : any)
+  async getActivityValues(val : any)
   {  
+    console.log(val);
+    
     //FORM ERROR CHECKING
     let emptyInput = false;
 
@@ -112,7 +113,7 @@ export class ParentEditActivityComponent implements OnInit {
         dom.style.display = "none";
       }
     }
-
+    
     //Location
     dom = document.getElementById("locError");
     if(val.location === "")
@@ -132,8 +133,21 @@ export class ParentEditActivityComponent implements OnInit {
         if(dom != null)
         {
           //Check that the selected location is from the API
-          this.getLocations()
-          if (this.potentialLocations.indexOf(this.location) == -1)
+          await this.getLocations()
+          let found = false;
+          //Get the selected location and its coords
+          this.potentialLocations.forEach((loc : any) => 
+          { 
+            if(loc.display_name === this.location)
+            {
+              found = true;
+              this.longitude = loc.lon;
+              this.latitude = loc.lat;
+            }
+            
+          });
+  
+          if(!found)
           {
             dom.innerHTML = "Please select a valid location from the suggested below.";
             dom.style.display = "block";
@@ -144,6 +158,7 @@ export class ParentEditActivityComponent implements OnInit {
         }
       }
     }
+    
 
     //Boundary
     dom = document.getElementById("boundaryError");
@@ -251,6 +266,8 @@ export class ParentEditActivityComponent implements OnInit {
       this.activityDetails.description = val.description;
       this.activityDetails.location = val.location;
       this.activityDetails.boundary = bound;
+      this.activityDetails.latitude = this.latitude;
+      this.activityDetails.longitude = this.longitude;
       this.activityDetails.day = val.dayOfWeek;
       this.activityDetails.timeStart = val.timeSlot.substring(0,5);
       this.activityDetails.timeEnd = val.timeSlot.substring(6,11);
@@ -267,7 +284,7 @@ export class ParentEditActivityComponent implements OnInit {
     
     //Building the API query according to what is in the location input field
     const locationParam = loc.replace(' ', '+');
-    const params = locationParam + '&limit=4&format=json&polygon_geojson=1&addressdetails=1';
+    const params = locationParam + '&limit=5&format=json&polygon_geojson=1&addressdetails=1';
 
     //Make the API call
     await this.http.get('https://nominatim.openstreetmap.org/search?q='+params)
@@ -282,12 +299,16 @@ export class ParentEditActivityComponent implements OnInit {
       {
         return;
       }
-  
+
+      this.potentialLocations.splice(0);
+
       //Add returned data to the array
       const len = res.length;
-      for (let j = 0; j < len && j<4; j++) 
+      for (let j = 0; j < len && j<5; j++) 
       { 
-        this.potentialLocations.push(res[j].display_name);
+        if (this.potentialLocations.includes(res[j]) === false){
+          this.potentialLocations.push(res[j]); 
+        }
       }
     })
     .catch(error=>{ // Failure
@@ -297,14 +318,7 @@ export class ParentEditActivityComponent implements OnInit {
 
   returnToSchedule()
   {
-    this.router.navigate(['/schedule']).then(()=>{
-      window.location.reload();
-    });
-  }
-
-  sayHi()
-  {
-    console.log("Hi");
+    this.router.navigate(['/schedule']);
   }
 
   //Pop-up if activity is successfully updates
@@ -345,7 +359,7 @@ export class ParentEditActivityComponent implements OnInit {
   getActivityDetails()
   { 
     this.serv.getActivity(this.activityDetails.id).subscribe(
-      res=>{
+      async res=>{
         console.log("The response is:" + res); 
         
         this.activityDetails.id = res.id;
@@ -361,6 +375,7 @@ export class ParentEditActivityComponent implements OnInit {
         this.activityDetails.budget = res.budget;
         this.activityDetails.child = res.child;
         this.timeslot = res.timeStart + "-" + res.timeEnd
+        await this.getChildrenDetails();
       },
       error=>{console.log("Error has occured with API: " + error);}
     )
@@ -381,7 +396,7 @@ export class ParentEditActivityComponent implements OnInit {
     )
   };
 
-  getChildrenDetails()
+  async getChildrenDetails()
   {
     this.serv.getChildren(this.store.snapshot().user.id).toPromise().then(
       res=>{
@@ -415,6 +430,10 @@ export class ParentEditActivityComponent implements OnInit {
         return error;
       }
     ); 
+  }
+
+  radioChecked(event: any){
+    this.location = event.target.value;
   }
   //------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 }

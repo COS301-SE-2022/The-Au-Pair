@@ -25,12 +25,14 @@ export class ExploreComponent implements OnInit {
   minDistance! : number;
   maxDistance! : number;
 
+  maxAge! : number;
+
   eucDistance! : number;
 
   auPairs : any;
   auPairDetails : any = {
     id: "",
-    rating: 0,
+    rating: [],
     payRate: 0,
     fname: "",
     sname: "",
@@ -73,9 +75,7 @@ export class ExploreComponent implements OnInit {
   async getAuPairs()
   {
     await this.serv.getAllAuPairs().subscribe(
-      res=>{
-        console.log(res);
-        
+      res=>{        
         this.auPairs = res;
         this.setAuPairArray();
       },
@@ -92,7 +92,7 @@ export class ExploreComponent implements OnInit {
           
           const auPairDetails = {
             id: ap.id,
-            rating: ap.rating,
+            rating: this.getAverage(ap.rating),
             payRate: ap.payRate,
             fname: res.fname,
             sname: res.sname,
@@ -127,21 +127,20 @@ export class ExploreComponent implements OnInit {
 
   openMenu()
   {
-    this.menuController.toggle('start');
+    this.menuController.toggle('end');
   }
 
   closeMenu()
   {
-    this.menuController.close('start');
+    this.menuController.close('end');
   }
 
   async payRateFilter(formData: any)
   {
     this.AuPairArray.splice(0);
     this.restoredAuPairArray.forEach(val => this.AuPairArray.push(Object.assign({}, val)));
-    
 
-    if(formData.min_payrate === undefined)
+    if(formData.min_payrate === undefined || formData.min_payrate === '')
     {
       this.minPayrate = 10;
     }
@@ -150,7 +149,7 @@ export class ExploreComponent implements OnInit {
       this.minPayrate = formData.min_payrate;
     }
     
-    if(formData.max_payrate === undefined)
+    if(formData.max_payrate === undefined || formData.max_payrate === '')
     {
       this.maxPayrate = 10;
     }
@@ -181,10 +180,46 @@ export class ExploreComponent implements OnInit {
       });
   
       this.AuPairArray = this.AuPairArray.filter((element) => {
-        return element.payRate > this.minPayrate && element.payRate < this.maxPayrate;
+        return element.payRate >= this.minPayrate && element.payRate <= this.maxPayrate;
       });
     }
     
+    this.closeMenu();
+  }
+
+  ageFilter(formData : any)
+  {
+    this.AuPairArray.splice(0);
+    this.restoredAuPairArray.forEach(val => this.AuPairArray.push(Object.assign({}, val)));
+
+    if(formData.max_age === undefined || formData.max_age === '')
+    {
+      this.maxAge = 18;
+    }
+    else
+    {
+      this.maxAge = formData.max_age;
+    }
+
+    this.AuPairArray.sort((obj1, obj2) => {
+    
+      if(this.getAge(obj1.birth) > this.getAge(obj2.birth))
+      {
+        return 1;
+      }
+
+      if(this.getAge(obj1.birth) < this.getAge(obj2.birth))
+      {
+        return -1;
+      }
+
+      return 0;
+    });
+
+    this.AuPairArray = this.AuPairArray.filter((element) => {
+      return this.getAge(element.birth) <= this.maxAge;
+    });
+
     this.closeMenu();
   }
 
@@ -193,7 +228,7 @@ export class ExploreComponent implements OnInit {
     this.AuPairArray.splice(0);
     this.restoredAuPairArray.forEach(val => this.AuPairArray.push(Object.assign({}, val)));
     
-    if(formData.max_distance === undefined)
+    if(formData.max_distance === undefined || formData.max_distance === '')
     {
       this.maxDistance = 10;
     }
@@ -300,5 +335,43 @@ export class ExploreComponent implements OnInit {
     }
 
     return age;
+  }
+
+  resetFilters()
+  {
+    this.AuPairArray.splice(0);
+    this.restoredAuPairArray.forEach(val => this.AuPairArray.push(Object.assign({}, val)));
+
+    this.closeMenu();
+  }
+
+  getAverage(ratings : number[])
+  {
+    if(ratings.length == 0)
+    {
+      return 0;
+    }
+
+    let total = 0;
+    for(let i = 0; i < ratings.length; i++)
+    {
+      total += ratings[i];
+    }
+
+    const avg = total/ratings.length;
+
+    if(avg < 1 || avg > 5)
+    {
+      return 0;
+    }
+
+    if((avg % 1) == 0)
+    {
+      return avg;
+    }
+
+    const ret = (Math.round(avg * 100) / 100).toFixed(1);
+
+    return ret;
   }
 }

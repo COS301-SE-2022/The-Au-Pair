@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpEvent, HttpRequest } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { Activity , Child , medAid , Parent  , User, HoursLogged, auPair, Notification, Report, Contract} from '../interfaces/interfaces';
+import { Activity , Child , medAid , Parent  , User, HoursLogged, auPair, Notification, Report, Contract, Email} from '../interfaces/interfaces';
 import { environment } from '../../../apps/the-au-pair/src/environments/environment';
 @Injectable()
 export class API{
@@ -73,7 +73,7 @@ export class API{
   }
 
   addChild(child : Child): Observable<any> {
-    return this.http.post(environment.apiURI+"/addChild",child);
+    return this.http.post(environment.apiURI+"/addChild",child, {responseType: "text"});
   }
 
   updateChild(child : Child) :Observable<any> {
@@ -239,8 +239,8 @@ export class API{
     return this.http.get(environment.apiURI+"/getAllReports");
   }
   
-  getReportsForAuPair(id : string): Observable<any> {
-    return this.http.post(environment.apiURI+"/getReportsForAuPair", id);
+  getReportsForUser(id : string): Observable<any> {
+    return this.http.post(environment.apiURI+'/getReportsForUser', id);
   }
 
   deleteReport(id : string): Observable<any> {
@@ -250,5 +250,38 @@ export class API{
   addReport(report : Report): Observable<any> {
     return this.http.post(environment.apiURI+"/addReport",report);
   }
+
+  sendEmail(email : Email): Observable<any> {
+    return this.http.post(environment.apiURI+"/sendEmail",email);
+  }
+
+  storeFile(file : File, filename : string): Observable<any> {
+    const data: FormData = new FormData();
+    data.append('file', file, filename);
+    const newRequest = new HttpRequest('POST', environment.apiURI+"/uploadFile", data, {
+      reportProgress: true,
+      responseType: 'text'
+    });
+    return this.http.request(newRequest);
+  }
+
+  getFile(file : string): Observable<any> {
+    return this.http.post(environment.apiURI+"/getFile",file,{responseType: 'blob'});
+  }
   
+  getAuPairEmployer(id : string): Observable<any> {
+    return this.http.post(environment.apiURI+"/getAuPairEmployer",id);
+  }
+
+  getFCMToken(id : string): Observable<any> {
+    return this.http.post(environment.apiURI+"/getFCMToken",id, {responseType: 'text'});
+  }
+
+  setFCMToken(id : string, token : string): Observable<any> {
+    var fcmObject = {
+      "id" : id,
+      "token" : token
+    }
+    return this.http.post(environment.apiURI+"/setFCMToken",fcmObject);
+  }
 }

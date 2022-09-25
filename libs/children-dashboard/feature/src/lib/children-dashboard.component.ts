@@ -4,6 +4,7 @@ import { API } from '../../../../shared/api/api.service';
 import { Router } from '@angular/router';
 import { Store } from '@ngxs/store';
 import { ToastController, AlertController } from '@ionic/angular';
+import { SetCurrentChild } from '../../../../shared/ngxs/actions';
 
 @Component({
   selector: 'the-au-pair-children-dashboard',
@@ -20,6 +21,7 @@ export class ChildrenDashboardComponent implements OnInit
     children: [],
     medID: "",
     auPair: "",
+    rating: []
   }
   activities: Activity[] = [];
 
@@ -103,10 +105,10 @@ export class ChildrenDashboardComponent implements OnInit
     //Service call to delete child
     await this.serv.removeChild(child.id).toPromise().then(res => 
       {
-         // location.reload();
-         console.log("The response is:", res); 
-         this.openToast(child.fname + " removed successfully!", "primary");
-         return res;
+        this.openToast(child.fname + " removed successfully!", "primary");
+        location.reload();
+        console.log("The response is:", res); 
+        return res;
       }).catch(err => 
         {
           console.log(err);
@@ -178,6 +180,7 @@ export class ChildrenDashboardComponent implements OnInit
 
   navigateEdit(child : Child)
   { 
+    this.store.dispatch(new SetCurrentChild(child.id));
     //Route to the edit-activity page and parse the ActivityID of the selected Activity 
     this.router.navigate(['/edit-child'],{
       state: {child: child}

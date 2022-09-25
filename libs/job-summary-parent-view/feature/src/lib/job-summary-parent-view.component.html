@@ -1,0 +1,99 @@
+<the-au-pair-navbar></the-au-pair-navbar>
+<ion-content [fullscreen]="true">
+    <div class = "parent-profile-div">
+        <h1 class='job-summary-title'>Job Summary</h1>
+        <h3 class='children-name'>{{this.userDetails.fname}} {{this.userDetails.sname}}</h3>
+            <div class='profile-picture-wrapper'>
+                <img class="profile-picture" src="assets/images/placeholder-profile.jpg" alt="">
+            </div>
+        <div class = 'details-div'>
+            <div class = "small-profile-details-div">
+                <div class="parent-info-small">
+                    <div class="parent-text">Email: </div>
+                    <p class="parent-text-info">{{this.userDetails.email}}</p>
+                </div>
+                <div class="parent-info-small">
+                    <div class="parent-text">Phone: </div>
+                    <p class="parent-text-info">{{this.userDetails.number}}</p>
+                </div>
+            </div>
+            <div class = 'large-profile-details-div'>
+                <div class="parent-info-large">
+                    <div class="parent-text">Suburb: </div>
+                    <p class="parent-text-info">{{this.userDetails.suburb}}</p>
+                </div>
+                <div class="parent-info-large">
+                    <div class="parent-text">Gender: </div>
+                    <p class="parent-text-info" style="text-transform:capitalize">{{this.userDetails.gender}}</p>
+                </div>
+                <div class="parent-info-large">
+                    <div class="parent-text">Rating: </div>
+                    <p *ngIf="this.getAverage(this.parentDetails.rating) !== 0" class="parent-text-info">{{this.getAverage(this.parentDetails.rating)}}/5</p>
+                    <p *ngIf="this.getAverage(this.parentDetails.rating) === 0" class="parent-text-info">Not yet rated</p>
+                </div>
+            </div>
+            <button class="change-button" id="change" routerLink="/edit-parent-profile">CHANGE</button>
+        </div>
+        <h3 class='profile-name'>Children</h3>
+        <div class = 'details-div' *ngFor="let c of childrenArr; let last = last">
+            <h3 class='children-name'>{{c.fname}} {{c.sname}}</h3>
+            <div class = "small-profile-details-div">
+                <div class="parent-info-small">
+                    <div class="parent-text">Age: </div>
+                    <p class="parent-text-info">{{getAge(c.dob)}}</p>
+                </div>
+            </div>
+            <div class = 'large-profile-details-div'>
+                <div class="parent-info-large">
+                    <div class="parent-text">Allergies: </div>
+                    <p class="parent-text-info">{{c.allergies}}</p>
+                </div>
+                <div class="parent-info-large">
+                    <div class="parent-text">Dietary Requirements: </div>
+                    <p class="parent-text-info">{{c.diet}}</p>
+                </div>
+            </div>
+        </div>
+        <button class="change-button-children" id="change" routerLink="/children-dashboard">CHANGE</button>
+        <h3 class='profile-name'>Schedule</h3>      
+        <div class="mobile-container">
+            <ion-slides id="schedule-grid-mobile" [options]="{ slidesPerView: 'auto', zoom: false,loop: true, spaceBetween: 16 }">
+            <ion-slide *ngFor="let day of [0,1,2,3,4,5,6]" style="width: 98%; height: 81vh;">
+              <ion-col>
+                <div class="day ion-text-center">
+                  <h2 class="heading">{{ days[day] }}</h2>
+                  <ion-card class="day-card" id="{{ day }}">
+                    <div *ngFor="let item of childActivities; let l = count">
+                      <div class="card" *ngIf="item.dayofweek === days[day]" >
+                        <ion-row  class="ion-align-items-center .ion-justify-content-between">
+                            <ion-col  class="content">{{ item.childName }}</ion-col>
+                            <ion-col class="content">{{ item.activityName }}</ion-col>
+                            <ion-col class="content">{{ item.time }}</ion-col>
+                        </ion-row>
+                      </div>
+                    </div>
+                    <div *ngIf="shiftHours[day] === 0">THERE ARE NO SCHEDULED ACTIVITIES FOR THIS DAY</div>
+                  </ion-card> 
+                </div>
+              </ion-col>
+            </ion-slide>
+          </ion-slides>
+          <button class="change-button-schedule" id="change" routerLink="/schedule">CHANGE</button>
+        </div>
+        <h1 class='job-summary-title'>Terms Of Employment:</h1>
+        <div class="terms-container">
+            <ul>
+                <li>By sending the hire request you agree to letting the respective Au Pair viewing certain information about your profile, including: Your name, contact details, your childrens names, and the hours they will be required to be on shift.
+                <li>By sending the hire request you agree to the terms that an au pair may resign at any time. You will be notified when they resign and will have the ability to terminate the employment early, otherwise the employment will terminate after 14 days of the resignation.</li>
+                <li>By sending the hire request, you agree to the Au Pair's payrate and are willing to comply with the pay they request for the number of hours you request.</li>
+                <li>By sending the hire request, you agree that the respective Au Pair will only be required to work for the hours you have created on the schedule and any extra hours will need to be discussed with the Au Pair.</li>
+                <li>If you agree with all the above terms and have confirmed your details above, please press the "Hire" button bellow.</li>
+              </ul> 
+        </div>
+        <button class="hire-button" id="change" (click)="sendHireRequests()">HIRE</button>
+        <div class="spacer"></div>
+    </div>
+    <img id="active-2" src="assets/images/active.png">
+    <img id="active" src="assets/images/active-2.png">
+    <img id="lifestyles" src="assets/images/lifestyles.png">
+</ion-content>

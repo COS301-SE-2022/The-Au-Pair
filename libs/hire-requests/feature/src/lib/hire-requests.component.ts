@@ -4,6 +4,7 @@ import { API } from '../../../../shared/api/api.service';
 import { Store } from '@ngxs/store';
 import { Router } from '@angular/router';
 import { auPair, Child, Parent } from '../../../../shared/interfaces/interfaces';
+import { JobSummaryModalComponent } from './job-summary-modal/job-summary-modal.component';
 
 @Component({
   selector: 'the-au-pair-hire-requests',
@@ -18,10 +19,11 @@ export class HireRequestsComponent implements OnInit {
     id: "",
     fname: "",
     sname: "",
+    dob: "",
     allergies: "",
     diet: "",
     parent: "",
-    aupair: "",
+    aupair: ''
   }
   
   contractDetails : any = {
@@ -38,7 +40,7 @@ export class HireRequestsComponent implements OnInit {
 
   currentAuPair: auPair = {
     id: "",
-    rating: 0,
+    rating: [],
     onShift: false,
     employer: "",
     costIncurred: 0,
@@ -48,6 +50,7 @@ export class HireRequestsComponent implements OnInit {
     experience: "",
     currentLong: 0.0,
     currentLat: 0.0,
+    alreadyOutOfBounds: false,
     terminateDate: "",
   }
 
@@ -56,6 +59,7 @@ export class HireRequestsComponent implements OnInit {
     children: [],
     medID: "",
     auPair: "",
+    rating: []
   }
 
   constructor(private serv: API, private modalCtrl : ModalController, public toastCtrl: ToastController, private store: Store, private router: Router) {}
@@ -72,8 +76,7 @@ export class HireRequestsComponent implements OnInit {
       res=>{
         this.contracts = res;
         this.setContractArray()
-      },
-      error=>{console.log("Error has occured with API: " + error);}
+      }
     )
   }
 
@@ -105,189 +108,26 @@ export class HireRequestsComponent implements OnInit {
                       {
                         this.ContractArray.push(contractDetails);
                       }
-                    },
-                    error=>{console.log("Error has occured with API: " + error);}
+                    }
                   )
                 }
-                },
-                error=>{console.log("Error has occured with API: " + error);}
+              }
             )
           }
-        },
-        error=>{console.log("Error has occured with API: " + error);}
+        }
       )
     });
   }
-  
-  async errToast()
-  {
-    const toast = await this.toastCtrl.create({
-      message: 'Request has been rejected.',
-      duration: 1000,
-      position: 'top',
-      cssClass: 'toastPopUp'
+
+  async openModal(parentID : string, contractID : string) {
+    const modal = await this.modalCtrl.create({
+      component: JobSummaryModalComponent,
+      componentProps :{
+        parentID : parentID,
+        contractID : contractID
+      }
     });
-    await toast.present();
-  }
-
-  async sucToast()
-  {
-    const toast = await this.toastCtrl.create({
-      message: 'Request has been accepted!',
-      duration: 1000,
-      position: 'top',
-      color: 'primary',
-      cssClass: 'toastPopUp'
-    });
-    await toast.present();
-  }
-
-  closeModal()
-  {
-    this.modalCtrl.dismiss();
-  }
-
-  async acceptRequest(cID : string, parentID : string)
-  {
-    this.sucToast();    
-
-    await this.getAuPairDetails();
-    await this.getParentDetails(parentID);
-    await this.addChildrenAuPair(parentID);
-
-    this.currentAuPair.employer = parentID;
-    this.parentDetails.auPair = this.auPairID;    
-
-    await this.updateAuPair();
-    await this.updateParent();
-
-    this.serv.removeContract(cID).subscribe(
-      res=>{
-        console.log(res);
-        this.router.navigate(['/au-pair-dashboard']).then(()=>{
-        window.location.reload();
-        });
-      },
-      error=>{console.log("Error has occured with API: " + error);}
-    )
-  }
-
-  async rejectRequest(cID : string)
-  {
-    await this.serv.removeContract(cID).subscribe(
-      res=>{
-        console.log(res);
-        location.reload();
-      },
-      error=>{console.log("Error has occured with API: " + error);}
-    )
-  }
-
-  async getAuPairDetails()
-  {
-    await this.serv.getAuPair(this.auPairID)
-    .toPromise()
-      .then(
-      res=>{
-        this.currentAuPair.id = res.id;
-        this.currentAuPair.rating = res.rating;
-        this.currentAuPair.onShift = res.onShift;
-        this.currentAuPair.employer = res.employer;
-        this.currentAuPair.costIncurred = res.costIncurred;
-        this.currentAuPair.distTraveled = res.distTraveled;
-        this.currentAuPair.payRate = res.payRate;
-        this.currentAuPair.bio = res.bio;
-        this.currentAuPair.experience = res.experience;
-        this.currentAuPair.currentLong = res.currentLong;
-        this.currentAuPair.currentLat = res.currentLat;
-        this.currentAuPair.terminateDate = res.terminateDate;
-      },
-      error=>{console.log("Error has occured with API: " + error);}
-    )
-  }
-
-  async getParentDetails(parentID : string)
-  {
-    await this.serv.getParent(parentID)
-    .toPromise()
-      .then( 
-        res=>{
-          this.parentDetails.id = res.id;      
-          this.parentDetails.children = res.children;
-          this.parentDetails.medID = res.medID;
-          this.parentDetails.auPair = res.auPair;
-      },
-      error => {
-        console.log("Error has occured with API: " + error);
-      }
-    )
-  }
-
-  async addChildrenAuPair(parent : string)
-  {
-     await this.serv.getChildren(parent)
-     .toPromise()
-     .then(
-       res=>{        
-         for(let i = 0; i < res.length; i++)
-         {
-           this.childDetails.id = res[i].id;
-           this.childDetails.fname = res[i].fname;
-           this.childDetails.sname = res[i].sname;
-           this.childDetails.allergies = res[i].allergies;
-           this.childDetails.diet = res[i].diet;
-           this.childDetails.parent = res[i].parent;
-           this.childDetails.aupair = this.auPairID;
- 
-           this.updateChild(this.childDetails);
-         }
-       },
-       error => {
-         console.log("Error has occured with API: " + error);
-       }
-     ) 
-  }
-
-  async updateAuPair(){
-    await this.serv.editAuPair(this.currentAuPair).toPromise()
-    .then(
-      res=>{
-        console.log("The response is:" + res);
-        return res;
-      },
-      error=>{
-        console.log("Error has occured with API: " + error);
-        return error;
-      }
-    );
-  }
-
-  async updateParent(){
-    await this.serv.editParent(this.parentDetails).toPromise()
-    .then(
-      res=>{
-        console.log("The response is:" + res);
-        return res;
-      },
-      error=>{
-        console.log("Error has occured with API: " + error);
-        return error;
-      }
-    );
-  }
-
-  async updateChild(child : Child){
-    await this.serv.updateChild(child).toPromise()
-    .then(
-      res=>{
-        console.log("The response is:" + res);
-        return res;
-      },
-      error=>{
-        console.log("Error has occured with API: " + error);
-        return error;
-      }
-    )
+    await modal.present();
   }
 }
   

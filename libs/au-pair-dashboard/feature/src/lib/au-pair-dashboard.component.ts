@@ -1,10 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngxs/store';
 import { API } from '../../../../shared/api/api.service'
-import { auPair, Child, HoursLogged, Parent } from '../../../../shared/interfaces/interfaces';
+import { auPair, Child, Email, HoursLogged, Parent, Notification } from '../../../../shared/interfaces/interfaces';
 import { Router } from '@angular/router';
-import { ToastController } from '@ionic/angular';
+import { ModalController, ToastController } from '@ionic/angular';
 import { AlertController } from '@ionic/angular';
+import { UserReportModalComponent } from './user-report-modal/user-report-modal.component';
+import { ParentRatingModalComponent } from './parent-rating-modal/parent-rating-modal.component';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 @Component({
   selector: 'the-au-pair-au-pair-dashboard',
@@ -16,6 +19,7 @@ export class AuPairDashboardComponent implements OnInit {
   
   aupairID = "";
   aupairName = "";
+  userFcmToken = "";
 
   employer = "";
   employerName!: string;
@@ -23,6 +27,7 @@ export class AuPairDashboardComponent implements OnInit {
   employerId = '';
   employerPhone! : string;
   children: Child[] = [];
+  employerEmail= "";
 
   alreadyLogging = false;
   logID = "";
@@ -35,9 +40,19 @@ export class AuPairDashboardComponent implements OnInit {
     timeEnd: ""
   };
 
+  notificationToSend: Notification = {
+    id: "",
+    auPairId: "",
+    parentId: "",
+    title: "",
+    body: "",
+    date: "",
+    time: "",
+  }
+
   currentAuPair: auPair = {
     id: "",
-    rating: 0,
+    rating: [],
     onShift: false,
     employer: "",
     costIncurred: 0,
@@ -47,6 +62,7 @@ export class AuPairDashboardComponent implements OnInit {
     experience: "",
     currentLong: 0.0,
     currentLat: 0.0,
+    alreadyOutOfBounds: false,
     terminateDate: "",
   }
 
@@ -54,6 +70,7 @@ export class AuPairDashboardComponent implements OnInit {
     id: "",
     fname: "",
     sname: "",
+    dob: "",
     allergies: "",
     diet: "",
     parent: "",
@@ -65,9 +82,23 @@ export class AuPairDashboardComponent implements OnInit {
     children: [],
     medID: "",
     auPair: "",
+    rating: []
+  }
+
+  emailRequest : Email = {
+    to: "",
+    subject: "",
+    body: "",
   }
   
-  constructor(private serv: API, private store: Store, public router: Router, public toastCtrl: ToastController, private alertController: AlertController) {}
+  constructor(private serv: API, private modalCtrl : ModalController, private store: Store, public router: Router, public toastCtrl: ToastController, private alertController: AlertController, private httpClient: HttpClient) {}
+
+  async openReportModal() {
+    const modal = await this.modalCtrl.create({
+      component: UserReportModalComponent
+    });
+    await modal.present();
+  }
 
   async ngOnInit(): Promise<void> {
     this.aupairID = this.store.snapshot().user.id;
@@ -96,6 +127,16 @@ export class AuPairDashboardComponent implements OnInit {
         console.log("Error has occured with API: " + error);
       }
     )
+  }
+
+  async openModal(parentId : string) {
+    const modal = await this.modalCtrl.create({
+      component: ParentRatingModalComponent,
+      componentProps :{
+        parentId : parentId
+      }
+    });
+    await modal.present();
   }
 
   logSwitch() {
@@ -167,16 +208,21 @@ export class AuPairDashboardComponent implements OnInit {
       }
     )
 
-    this.serv.getUser(this.employer).subscribe(
+    if(this.employer != "")
+    {
+       this.serv.getUser(this.employer).subscribe(
       res=>{
           this.employerName = res.fname;
           this.employerSurname = res.sname;
           this.employerId = res.id;
           this.employerPhone = res.number;
+          this.employerEmail = res.email;
           this.getChildren();
       },
       error=>{console.log("Error has occured with API: " + error);}
-    )
+      )
+    }
+   
   }
 
   async getChildren(){
@@ -224,6 +270,16 @@ export class AuPairDashboardComponent implements OnInit {
     }
   }
 
+  async checkHasEmployerSummary(){
+    if (this.employerId !== ''){
+      this.router.navigate(['/job-summary-au-pair-view']);
+    }
+    else
+    {
+      this.openToast('You need to be employed to view your job summary');
+    }
+  }
+
   async presentAlert() {
     const alert = await this.alertController.create({
       header: 'Are you sure you want to resign? (You will still be employed for 2 weeks or until the parent terminates the contract)',
@@ -256,6 +312,60 @@ export class AuPairDashboardComponent implements OnInit {
     this.currentAuPair.terminateDate = td;
 
     await this.updateAuPair();
+
+    //send email to employer
+    this.emailRequest.to = this.employerEmail;
+    this.emailRequest.subject = "Au Pair Resignation";
+    this.emailRequest.body = "Your Au Pair has unfortunatley resigned.\nAccording to our terms and conditions, the au pair will still be employed to you for 2 more weeks." +
+                             "If you are fine with terminating the contract earlier, please speak to your au pair directly.\n\nKind Regards,\nThe Au Pair Team";
+    this.serv.sendEmail(this.emailRequest).toPromise().then(
+      res => {
+        console.log(res);
+      },
+      error => {
+        console.log("Error has occured with API: " + error);
+      }
+    );
+
+    await this.serv.getFCMToken(this.employerId).toPromise().then(res => {
+      this.userFcmToken = res;
+    }).catch(err => {
+      console.log(err);
+    });
+
+    if (this.userFcmToken != "") {
+      console.log(this.userFcmToken);
+      const requestHeaders = new HttpHeaders().set('Authorization', 'key=AAAAlhtqIdQ:APA91bFlcYmdaqt5D_jodyiVQG8B1mkca2xGh6XKeMuTGtxQ6XKhSY0rdLnc0WrXDsV99grFamp3k0EVHRUJmUG9ULcxf-VSITFgwwaeNvrUq48q0Hn1GLxmZ3GBAYdCBzPFIRdbMxi9');
+      const postData = {
+        "to": this.userFcmToken,
+        "notification": {
+          "title": "Au Pair Resigned",
+          "body": this.store.snapshot().user.name + " has resigned.",
+        }
+      }
+
+      this.httpClient.post('https://fcm.googleapis.com/fcm/send', postData, { headers: requestHeaders }).subscribe(data => {
+        console.log("data receieved: " + data);
+      }, error => {
+        console.log(error);
+      });
+    }
+
+    const current = new Date();
+    const minutes = String(current.getMinutes()).padStart(2, '0');
+
+    this.notificationToSend.auPairId = "";
+    this.notificationToSend.parentId = this.employerId;
+    this.notificationToSend.title = "Au Pair Resigned";
+    this.notificationToSend.body = this.store.snapshot().user.name + " has resigned.";
+    this.notificationToSend.date = current.getFullYear() + "-" + (current.getMonth() + 1) + "-" + current.getDate();
+    this.notificationToSend.time = current.getHours() + ":" + minutes;
+
+    this.serv.logNotification(this.notificationToSend).toPromise().then(res => {
+      console.log(res);
+    }, err => {
+      console.log(err);
+    });
   }
 
   async getAuPairDetails()
@@ -322,10 +432,88 @@ export class AuPairDashboardComponent implements OnInit {
 
     this.currentAuPair.terminateDate = "";
     this.currentAuPair.employer = "";
+    this.currentAuPair.onShift = false;
     this.parentDetails.auPair = "";
 
     await this.updateAuPair();
     await this.updateParent();
+
+    //send email to employer
+    this.emailRequest.to = this.employerEmail;
+    this.emailRequest.subject = "Au Pair Resignation";
+    this.emailRequest.body = "The 2 weeek period has passed and your au pair has been terminated.\n\nKind Regards,\nThe Au Pair Team";
+    this.serv.sendEmail(this.emailRequest).toPromise().then(
+      res => {
+        console.log(res);
+      },
+      error => {
+        console.log("Error has occured with API: " + error);
+      }
+    );
+
+    await this.serv.getFCMToken(this.employerId).toPromise().then(res => {
+      this.userFcmToken = res;
+    }).catch(err => {
+      console.log(err);
+    });
+
+    if (this.userFcmToken != "") {
+      console.log(this.userFcmToken);
+      const requestHeaders = new HttpHeaders().set('Authorization', 'key=AAAAlhtqIdQ:APA91bFlcYmdaqt5D_jodyiVQG8B1mkca2xGh6XKeMuTGtxQ6XKhSY0rdLnc0WrXDsV99grFamp3k0EVHRUJmUG9ULcxf-VSITFgwwaeNvrUq48q0Hn1GLxmZ3GBAYdCBzPFIRdbMxi9');
+      const postData = {
+        "to": this.userFcmToken,
+        "notification": {
+          "title": "Employment Terminated",
+          "body": "Employment with " + this.store.snapshot().user.name + " has been terminated.",
+        }
+      }
+
+      this.httpClient.post('https://fcm.googleapis.com/fcm/send', postData, { headers: requestHeaders }).subscribe(data => {
+        console.log("data receieved: " + data);
+      }, error => {
+        console.log(error);
+      });
+    }
+
+    await this.serv.getFCMToken(this.aupairID).toPromise().then(res => {
+      this.userFcmToken = res;
+    }).catch(err => {
+      console.log(err);
+    });
+
+    if (this.userFcmToken != "") {
+      console.log(this.userFcmToken);
+      const requestHeaders = new HttpHeaders().set('Authorization', 'key=AAAAlhtqIdQ:APA91bFlcYmdaqt5D_jodyiVQG8B1mkca2xGh6XKeMuTGtxQ6XKhSY0rdLnc0WrXDsV99grFamp3k0EVHRUJmUG9ULcxf-VSITFgwwaeNvrUq48q0Hn1GLxmZ3GBAYdCBzPFIRdbMxi9');
+      const postData = {
+        "to": this.userFcmToken,
+        "notification": {
+          "title": "Employment Terminated",
+          "body": "Employment with " + this.employerName + " has been terminated.",
+        }
+      }
+
+      this.httpClient.post('https://fcm.googleapis.com/fcm/send', postData, { headers: requestHeaders }).subscribe(data => {
+        console.log("data receieved: " + data);
+      }, error => {
+        console.log(error);
+      });
+    }
+
+    const current = new Date();
+    const minutes = String(current.getMinutes()).padStart(2, '0');
+
+    this.notificationToSend.auPairId = this.aupairID;
+    this.notificationToSend.parentId = this.employerId;
+    this.notificationToSend.title = "Employment Terminated";
+    this.notificationToSend.body = "Employment has been terminated.";
+    this.notificationToSend.date = current.getFullYear() + "-" + (current.getMonth() + 1) + "-" + current.getDate();
+    this.notificationToSend.time = current.getHours() + ":" + minutes;
+
+    this.serv.logNotification(this.notificationToSend).toPromise().then(res => {
+      console.log(res);
+    }, err => {
+      console.log(err);
+    });
 
     location.reload();
   }
@@ -340,6 +528,7 @@ export class AuPairDashboardComponent implements OnInit {
           this.parentDetails.children = res.children;
           this.parentDetails.medID = res.medID;
           this.parentDetails.auPair = res.auPair;
+          this.parentDetails.rating = res.rating;
       },
       error => {
         console.log("Error has occured with API: " + error);
@@ -361,6 +550,7 @@ export class AuPairDashboardComponent implements OnInit {
           this.childDetails.allergies = res[i].allergies;
           this.childDetails.diet = res[i].diet;
           this.childDetails.parent = res[i].parent;
+          this.childDetails.dob = res[i].dob;
           this.childDetails.aupair = "";
 
           this.updateChild(this.childDetails);

@@ -25,7 +25,7 @@
                 </div>
                 <div class="details-div">
                     <div class="details-title">Gender: </div>
-                    <p class="user-details">{{this.userDetails.gender}}</p>
+                    <p class="user-details" style="text-transform: capitalize;">{{this.userDetails.gender}}</p>
                 </div>
                 <div class="details-div">
                   <div class="details-title">Pay rate: </div>
@@ -33,8 +33,8 @@
                 </div>
                 <div class="details-div">
                     <div class="details-title">Rating: </div>
-                    <div *ngIf="this.auPairDetails.rating !== 0" class="user-details">{{this.auPairDetails.rating}} / 5</div>
-                    <div *ngIf="this.auPairDetails.rating === 0" class="user-details">Not yet rated</div>
+                    <div *ngIf="this.getAverage(this.auPairDetails.rating) !== 0" class="user-details">{{this.getAverage(this.auPairDetails.rating)}} / 5</div>
+                    <div *ngIf="this.getAverage(this.auPairDetails.rating) === 0" class="user-details">Not yet rated</div>
                   </div>
             </div>
                 <div>

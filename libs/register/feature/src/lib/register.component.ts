@@ -2,8 +2,9 @@ import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ToastController } from '@ionic/angular';
 import { HttpClient } from '@angular/common/http';
-import { User, auPair, Parent } from '../../../../shared/interfaces/interfaces';
+import { User, auPair, Parent, Email } from '../../../../shared/interfaces/interfaces';
 import { API } from '../../../../shared/api/api.service';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'the-au-pair-register',
@@ -20,8 +21,15 @@ export class RegisterComponent {
   public experienceError: boolean;
   public registering: boolean;
   public formValid = false;
-  
-  parentChosen = true;
+  public emailSent = false;
+  public parentChosen;
+
+  sub = this.route.queryParamMap.subscribe(
+    params => {
+      this.parentChosen = params.get('parentPressed') === 'true' || params.get('parentPressed') == null  ?  true : false;
+    }
+  );
+
   public maleChosen: boolean;
   long = 0;
   lat = 0;
@@ -48,16 +56,23 @@ export class RegisterComponent {
     banned: "",
   }
 
+  emailRequest: Email ={
+    to: '',
+    subject: '',
+    body: '',
+  }
+
   parentDetails: Parent ={
     id: '',
     children: [],
     medID: '',
-    auPair: ''
+    auPair: '',
+    rating: []
   }
 
   aupairDetails: auPair ={
     id: '',
-    rating: 0,
+    rating: [],
     onShift: false,
     employer: '',
     costIncurred: 0,
@@ -67,11 +82,11 @@ export class RegisterComponent {
     experience: '',
     currentLong: 0.0,
     currentLat : 0.0,
+    alreadyOutOfBounds: false,
     terminateDate: "",
   }
 
-
-  constructor(public formBuilder: FormBuilder, public toastCtrl: ToastController, private http: HttpClient, private serv: API) 
+  constructor(private route : ActivatedRoute, public router: Router, public formBuilder: FormBuilder, public toastCtrl: ToastController, private http: HttpClient, private serv: API) 
   {
     this.parentRegisterDetailsForm = formBuilder.group({
       name: ['', Validators.compose([Validators.maxLength(30), Validators.pattern('^[a-zA-Z ,\'-]+$'), Validators.required])],
@@ -86,6 +101,7 @@ export class RegisterComponent {
       pass : ['', Validators.compose([Validators.maxLength(20), Validators.pattern('^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$'), Validators.required])],
       confPass : ['', Validators.compose([Validators.maxLength(30), Validators.pattern('^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$'), Validators.required])],
     });
+    this.parentChosen = true;
 
     this.parentRegisterDetailsForm.valueChanges.subscribe(() => {
       this.formValid = this.parentRegisterDetailsForm.valid;
@@ -115,8 +131,6 @@ export class RegisterComponent {
       }
       else
       {
-          this.verifyLocation(this.parentRegisterDetailsForm.value.location);
-
           if (this.locationError)
           {
             this.formValid = false;
@@ -142,16 +156,14 @@ export class RegisterComponent {
 
   async registerUser() 
   {
+    //setting registering flag to true to disable button
+    this.registering = true;
     this.medError = false;
     this.locationError = false;
-
     this.submitAttempt = true;
     this.notSamePasswords = false;
     this.bioError = false;
     this.experienceError = false;
-
-    this.registering = true;
-
     let formError = false;
 
     if(this.parentChosen)
@@ -236,7 +248,7 @@ export class RegisterComponent {
           application = res;
         },
         error => {
-          console.log("Error has occured with API: " + error);
+          console.log(error);
         }
       )
 
@@ -271,7 +283,9 @@ export class RegisterComponent {
           await this.serv.addParent(this.parentDetails)
           .toPromise()
           .then(
-            res => {
+            async res => {
+              await this.sendParentEmail();
+              this.router.navigate(['/login-page']);
               console.log("The response is:" + res);
             },
             error => {
@@ -289,7 +303,10 @@ export class RegisterComponent {
           this.serv.addAuPair(this.aupairDetails)
           .toPromise()
           .then(
-            res => {
+            async res => {
+              await this.sendAuPairEmail();
+              await this.sendAdminEmail();
+              this.router.navigate(['/login-page']);
               console.log("The response is:" + res);
             },
             error => {
@@ -302,6 +319,9 @@ export class RegisterComponent {
       {
         this.openToast("Email or ID has been banned : " + application);
       }
+      else if (application == "ID"){
+        this.openToast("ID already in use!");
+      }
       else
       {
         this.openToast("Account already exists with email : " + application);
@@ -309,7 +329,7 @@ export class RegisterComponent {
     }
     this.registering = false;
   }
-
+ 
   async openToast(message: string)
   {
     const toast = await this.toastCtrl.create({
@@ -328,7 +348,7 @@ export class RegisterComponent {
 
     const locationParam = loc.replace(' ', '+');
     const params = locationParam + '&limit=4&format=json&polygon_geojson=1&addressdetails=1';
-
+    
     //Make the API call
     await this.http.get('https://nominatim.openstreetmap.org/search?q='+params)
     .toPromise()
@@ -387,6 +407,46 @@ export class RegisterComponent {
     {
       return month + "/" + day + "/20" + year;
     }
+  }
+
+  async sendParentEmail(){
+    this.emailRequest.to = this.userDetails.email;
+    this.emailRequest.subject = "Welcome to The Au Pair!";
+    this.emailRequest.body = "Thank you for registering with The Au Pair. We hope you find the perfect" + 
+                                " au pair for your child. Please take some time to add all the necessary" +
+                                " details of your children to ensure a great experience! \n\n" + "Regards, \n" + "The Au Pair Team";
+    await this.serv.sendEmail(this.emailRequest).toPromise().then(
+      res => {
+        console.log("Email sent " + res );
+        this.emailSent = true;
+      },
+      error => {
+        console.log("Email not sent, Error has occured with API: " + error);
+      });
+  }
+
+  async sendAuPairEmail(){
+    this.emailRequest.to = this.userDetails.email;
+    this.emailRequest.subject = "Welcome to The Au Pair!";
+    this.emailRequest.body = "Thank you for registering with The Au Pair.\n\n" +
+                              "Please note that your account as an Au Pair is being approved by our hard working admin team."+
+                              "You should receive an email soon confirming your application status!\n\n" + "Regards, \n" + "The Au Pair Team";
+    await this.serv.sendEmail(this.emailRequest).toPromise().then(
+      res => {
+        console.log("Email sent " + res );
+        this.emailSent = true;
+      },
+      error => {
+        console.log("Email not sent, Error has occured with API: " + error);
+      });
+  }
+
+  async sendAdminEmail(){
+    this.emailRequest.to = "cheemschaps@gmail.com";
+    this.emailRequest.subject = "New Au Pair Sign Up";
+    this.emailRequest.body = "A new Au Pair has signed up!\n\n Please log into the admin console to review their application."+
+                             " Remember to be thorough when applicants are rejected and give advice on what they an improve. \n\n" +
+                            "Regards,\n The Au Pair Team" 
   }
   
 }

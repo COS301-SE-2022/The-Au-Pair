@@ -34,7 +34,7 @@ export class AuPairProfileComponent implements OnInit {
 
   auPairDetails: auPair = {
     id: "",
-    rating: 0,
+    rating: [],
     onShift: false,
     employer: "",
     costIncurred: 0,
@@ -44,6 +44,7 @@ export class AuPairProfileComponent implements OnInit {
     experience: "",
     currentLong: 0.0,
     currentLat : 0.0,
+    alreadyOutOfBounds: false,
     terminateDate: "",
   }
 
@@ -101,4 +102,34 @@ export class AuPairProfileComponent implements OnInit {
       error=>{console.log("Error has occured with API: " + error);}
     )
   };
+
+  getAverage(ratings : number[])
+  {
+    if(ratings.length == 0)
+    {
+      return 0;
+    }
+    
+    let total = 0;
+    for(let i = 0; i < ratings.length; i++)
+    {
+      total += ratings[i];
+    }
+
+    const avg = total/ratings.length;
+
+    if(avg < 1 || avg > 5)
+    {
+      return 0;
+    }
+
+    if((avg % 1) == 0)
+    {
+      return avg;
+    }
+
+    const ret = (Math.round(avg * 100) / 100).toFixed(1);
+
+    return ret;
+  }
 }
