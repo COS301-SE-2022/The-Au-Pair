@@ -139,6 +139,7 @@ describe('EditAuPairProfileComponent', () => {
       experience: undefined,
       currentLong: undefined,
       currentLat: undefined,
+      alreadyOutOfBounds: false,
       terminateDate: undefined,
     };
 
@@ -187,6 +188,7 @@ describe('EditAuPairProfileComponent', () => {
       experience: undefined,
       currentLong: undefined,
       currentLat: undefined,
+      alreadyOutOfBounds: false,
       terminateDate: undefined,
     };
 
@@ -233,6 +235,7 @@ describe('EditAuPairProfileComponent', () => {
       experience: undefined,
       currentLong: undefined,
       currentLat: undefined,
+      alreadyOutOfBounds: false,
       terminateDate: undefined,
     };
 
@@ -279,6 +282,7 @@ describe('EditAuPairProfileComponent', () => {
       experience: undefined,
       currentLong: undefined,
       currentLat: undefined,
+      alreadyOutOfBounds: false,
       terminateDate: undefined,
     };
 
@@ -325,6 +329,7 @@ describe('EditAuPairProfileComponent', () => {
       experience: undefined,
       currentLong: undefined,
       currentLat: undefined,
+      alreadyOutOfBounds: false,
       terminateDate: undefined,
     };
 
@@ -371,6 +376,7 @@ describe('EditAuPairProfileComponent', () => {
       experience: undefined,
       currentLong: undefined,
       currentLat: undefined,
+      alreadyOutOfBounds: false,
       terminateDate: undefined,
     };
 
@@ -417,6 +423,7 @@ describe('EditAuPairProfileComponent', () => {
       experience: undefined,
       currentLong: undefined,
       currentLat: undefined,
+      alreadyOutOfBounds: false,
       terminateDate: undefined,
     };
 
