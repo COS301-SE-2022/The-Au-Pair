@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { API } from '../../../../shared/api/api.service';
 import { Store } from '@ngxs/store';
 import { DatePipe } from '@angular/common';
-import { Child, Contract, Parent, User } from '../../../../shared/interfaces/interfaces';
+import { Child, Contract, Parent, User, Notification } from '../../../../shared/interfaces/interfaces';
 import { Router } from '@angular/router';
 import { ToastController } from '@ionic/angular';
 
@@ -83,6 +83,16 @@ export class JobSummaryParentViewComponent implements OnInit {
     birth: "",
     warnings: 0,
     banned: "",
+  }
+
+  notificationToSend: Notification = {
+    id: "",
+    auPairId: "",
+    parentId: "",
+    title: "",
+    body: "",
+    date: "",
+    time: "",
   }
 
   constructor(private serv: API, private store: Store, private router: Router, public toastCtrl: ToastController)
