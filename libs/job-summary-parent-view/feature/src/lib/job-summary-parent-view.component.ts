@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { API } from '../../../../shared/api/api.service';
 import { Store } from '@ngxs/store';
 import { DatePipe } from '@angular/common';
-import { Child, Contract, Parent, User, Notification } from '../../../../shared/interfaces/interfaces';
+import { Child, Contract, Parent, User, Notification, Email } from '../../../../shared/interfaces/interfaces';
 import { Router } from '@angular/router';
 import { ToastController } from '@ionic/angular';
 
@@ -94,6 +94,14 @@ export class JobSummaryParentViewComponent implements OnInit {
     date: "",
     time: "",
   }
+
+  emailRequest: Email ={
+    to: "",
+    subject: "",
+    body: "",
+  }
+
+  auPairEmail = "";
 
   constructor(private serv: API, private store: Store, private router: Router, public toastCtrl: ToastController)
   {
@@ -269,7 +277,26 @@ export class JobSummaryParentViewComponent implements OnInit {
       .toPromise()
       .then(
         res => {
-          console.log("The response is:" + res);
+            //get au pair by id
+            this.serv.getUser(this.auPairID).toPromise().then(
+              res => {
+                this.auPairEmail = res.email;
+                this.emailRequest.to = this.auPairEmail;
+                this.emailRequest.subject = "New hire request received";
+                this.emailRequest.body = "You have received a new hire request from " + this.userDetails.fname + " " + this.userDetails.sname + ". Please log into the app to view the request." +
+                                         "\n\nRegards,\nThe Au Pair Team";
+                this.serv.sendEmail(this.emailRequest).toPromise().then(
+                  res => {
+                    console.log(res);
+                  },
+                  error => {
+                    console.log("Error has occured with API: " + error);
+                  });
+              },
+              error => {
+                console.log("Error has occured with API: " + error);
+              });
+          console.log(res);
         },
         error => {
           console.log("Error has occured with API: " + error);

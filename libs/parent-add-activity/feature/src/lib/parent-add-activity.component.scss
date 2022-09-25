@@ -222,6 +222,11 @@ input:focus{
         width: 90vw;
     }
 
+    ion-radio-group{
+        max-width: 90vw !important;
+        min-width: 90vw !important;
+    }
+
     .buttons{
         gap: 5px;
         width: 90vw;
@@ -235,4 +240,13 @@ input:focus{
         width: 44vw !important;
     }
 
+}
+
+.ionLabel{
+    color:var(--ion-color-dark)!important;
+}
+
+ion-radio-group{
+    max-width: 411px;
+    min-width: 411px;
 }

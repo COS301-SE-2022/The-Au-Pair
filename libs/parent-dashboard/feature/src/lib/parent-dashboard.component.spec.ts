@@ -32,7 +32,11 @@ const apiMock = {
   },
   getUser () {
     return of({})
-  }
+  },
+  sendEmail() {
+    return of({})
+  },
+  
 }
 
 describe('ParentProfileComponent', () => {

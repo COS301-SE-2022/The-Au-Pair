@@ -95,8 +95,6 @@ export class AppComponent implements OnInit {
       this.getCurrentAuPairDetails();
     }
 
-
-    this.monitorActivities();
   }
 
   ngOnInit(): void {
@@ -130,9 +128,9 @@ export class AppComponent implements OnInit {
     }
 
     //if au pair, get parent id
-    if (this.userType == 2) {
+    if (this.userType == 2) {      
       this.serv.getAuPair(this.userID).toPromise().then(res => {
-        this.getAcitivities(res.employer)
+        this.getAcitivities(res.employer);
       }).catch(err => {
         console.log(err);
       });
@@ -144,18 +142,24 @@ export class AppComponent implements OnInit {
     const mins = Number(this.notificationToSend.time.substring(3));
     const day = Number(this.upcomingActivity.day);
 
-    const intv = setInterval(() => {
+    const intv = setInterval(async () => {
       const current = new Date();
       if (current.getHours() == hour && current.getMinutes() == mins && current.getDay() == day) {
 
+        await this.serv.getFCMToken(this.store.snapshot().user.id).toPromise().then(res => {
+          this.userFcmToken = res;
+        }).catch(err => {
+          console.log(err);
+        });
 
         if (this.userFcmToken) {
+          console.log(this.userFcmToken);
           const requestHeaders = new HttpHeaders().set('Authorization', 'key=AAAAlhtqIdQ:APA91bFlcYmdaqt5D_jodyiVQG8B1mkca2xGh6XKeMuTGtxQ6XKhSY0rdLnc0WrXDsV99grFamp3k0EVHRUJmUG9ULcxf-VSITFgwwaeNvrUq48q0Hn1GLxmZ3GBAYdCBzPFIRdbMxi9');
           const postData = {
-            "to": "e7q50QKSR0I1_Wenw7Hdll:APA91bE2_LMf6MAfCmBAsSye4f9vLIvXWt5c4lKrKdamNsf5lyLoefH6_qbN-3psEh2EIQWcnzw0VbN6x8mfpC0cosQnOqC5-OdPEyg_8EeKJB6F0tBGNRIq5YNiGjem5AnZcV7xqm0Fg",
+            "to": this.userFcmToken,
             "notification": {
-              "title": "Order #44",
-              "body": "Hello bro"
+              "title": this.upcomingActivity.name,
+              "body": this.upcomingActivity.description
             }
           }
 
@@ -179,23 +183,23 @@ export class AppComponent implements OnInit {
   }
 
   async getAcitivities(id: string) {
-    await this.serv.getChildren(id).toPromise().then(res => {
-      res.forEach((element: Child) => {
-        this.serv.getSchedule(element.id).toPromise().then(res => {
-          res.forEach((element: Activity) => {
-            if (this.activities.find(x => x.id == element.id) == undefined) {
-              this.activities.push(element);
-            }
-          });
+    let allChildren : Child[] = [];
+    await this.serv.getChildren(id).toPromise().then(async res => {
+      allChildren = res;
+      for (let i = 0; i < allChildren.length; i++) {
+        await this.serv.getSchedule(allChildren[i].id).toPromise().then(res => {
+          const allActs : Activity[] = res;
+          for (let j = 0; j < allActs.length; j++) {
+            this.activities.push(allActs[j]);
+          }
         }).catch(err => {
           console.log(err);
         });
-      });
+      }
     }).catch(err => {
       console.log(err);
     });
-
-    //udpate day strings to numbers
+    
     this.activities.forEach(element => {
       const stringval = element.day;
       const intval = this.days.indexOf(stringval) + 1;
@@ -240,14 +244,17 @@ export class AppComponent implements OnInit {
       //check hour first
       const hasPassed = this.activityHasFinished(act as Activity);
 
-      if (!hasPassed) {
+      if (!hasPassed) {        
         this.upcomingActivity = act as Activity;
       }
       else {
+        //checking more than 1 activity on current day
         if (this.activities.filter(x => Number(x.day) == currentDay).length > 1){
+          //getting the activities on the current day
           const filteredActs = this.activities.filter(x => Number(x.day) == currentDay);
           let updated = false;
-          for(let i = 1; i < filteredActs.length; i++){
+          for(let i = 0; i < filteredActs.length; i++){
+            //checking if the activity has passed
             if(!this.activityHasFinished(filteredActs[i])){
               this.upcomingActivity = filteredActs[i];
               updated = true;
@@ -256,9 +263,16 @@ export class AppComponent implements OnInit {
             }
           }
 
+          //all activities on current day has passed
           if(!updated){
+            //check for activities later in the week
             const nextAct = this.activities.find(x => Number(x.day) > currentDay);
             this.upcomingActivity = nextAct as Activity;
+
+            if(!nextAct){
+              //no more activities in the week,set first activity of the week.
+              this.upcomingActivity = this.activities[0] as Activity;
+            }
           }
         }
         else {

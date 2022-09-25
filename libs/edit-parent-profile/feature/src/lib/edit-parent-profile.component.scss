@@ -76,7 +76,8 @@
     margin-bottom: auto;
     height: 95%;
     border-radius: 5px;
-    border-color: var(--ion-color-dark);
+    border-color: var(--ion-color-secondary);
+    border-style: solid;
 }
 
 .details-div-large{
@@ -109,7 +110,8 @@
     width: 45%;
     padding-left: 3px;
     margin-left: 14px;
-    border-color: var(--ion-color-dark);
+    border-color: var(--ion-color-secondary);
+    border-style: solid;
 }
 
 .submit-button{
@@ -271,4 +273,42 @@ input:focus{
         padding-top: 5px;
     }
 
+}
+
+.ionLabel{
+    color:var(--ion-color-dark)!important;
+}
+
+ion-radio-group{
+    max-width: 411px;
+    min-width: 411px;
+}
+
+.fl{
+    display: flex;
+    justify-content: space-between;
+    height: 45px;
+}
+
+.address-label{
+    margin-left: 10px;
+    margin-bottom: 10px;
+    margin-top: 10px;
+}
+
+.details-div.address-details{
+    display: block !important;
+    padding-bottom: 10px;
+    padding-right: 10px;
+}
+
+.address-field{
+    
+    margin-top: 10px;
+}
+
+input{
+    padding-left: 10px;
+    padding-top: 5px;
+    padding-bottom: 5px;
 }

@@ -18,6 +18,9 @@ import { AuPairDashboardFeatureModule } from '@the-au-pair/au-pair-dashboard/fea
 const apiMock = {
   login() {
     return of({})
+  },
+  setFCMToken() {
+    return of({})
   }
 }
 
