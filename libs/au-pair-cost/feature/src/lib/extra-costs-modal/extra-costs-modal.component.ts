@@ -308,7 +308,7 @@ export class ExtraCostsModalComponent implements OnInit {
           this.fuelPrices['petrol-95'] = (res.petrol[0].value)/100;
           this.fuelPrices['petrol-93'] = (res.petrol[1].value)/100;
       },
-      error => {
+      () => {
         // Default values
         this.fuelPrices = {
           "diesel": 24.15,

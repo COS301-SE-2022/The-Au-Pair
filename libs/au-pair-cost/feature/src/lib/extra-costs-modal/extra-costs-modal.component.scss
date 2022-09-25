@@ -32,7 +32,7 @@ ion-row {
 }
 
 .heading ion-row {
-    padding-top: 0;
+    padding-top: 0; 
 }
 
 select {
@@ -44,6 +44,10 @@ select {
     padding-left: 20px;
 }
 
+option {
+    font-family: sans-serif;
+}
+
 .metric {
     height: 100%;
     padding-top: 20px;
@@ -53,6 +57,25 @@ select {
     margin-top: 20px;
     font-size: 18px;
 }
+
+.image-upload>input {
+    display: none;
+  }
+
+.image-upload {
+    display: flex;
+    align-items: center;
+    justify-content: left;
+}
+
+.image-upload label {
+    cursor: pointer;
+}
+
+.selectImage {
+    width: 30px;
+    height: 30px;
+  }
 
 .submit{
     background-color: var(--ion-color-primary);

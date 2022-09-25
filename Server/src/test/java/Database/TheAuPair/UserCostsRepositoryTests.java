@@ -24,13 +24,13 @@ public class UserCostsRepositoryTests {
   public void setup()
   {
     expectedUserCosts = new UserCosts("", "", "", "", "", "", 0, 0);
-    id = "7542108615984";
+    id = "kd2ytdllp5oytnij6oh9jo0m";
   }
 
   @Test
   @DisplayName("Test if UserCosts object is returned")
   public void testGetUserCostById()
   {
-//    assertEquals(ucr.findUsingId(id).getClass(),expectedUserCosts.getClass());
+    assertEquals(ucr.findUsingId(id).getClass(),expectedUserCosts.getClass());
   }
 }

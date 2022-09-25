@@ -54,6 +54,12 @@ ion-card-header{
   font-size: 24px;
 }
 
+.edit-rate {
+  padding: 0;
+  margin: 0;
+  min-width: 24px;
+}
+
 .total-hours {
   color: white;
   margin: 0;
@@ -81,6 +87,11 @@ ion-card-header{
   border-right: none;
   border-top: none;
   border-bottom: none;
+}
+
+.row-edit-rate {
+  display: none;
+  color: white;
 }
 
 .edit-rate {
@@ -217,6 +228,7 @@ ion-card-header{
   max-height: 290px !important;
   border-radius: 50%;
   float: left;
+  background-color: grey;
 }
 
 .key {
@@ -267,12 +279,17 @@ ion-card-header{
   margin: 0 0 30px 20px;
 }
 
+.add-icon .add-cost {
+  width: 35px;
+  height: 35px;
+}
+
 .card-costs-list p {
   font-size: 16px;
 }
 
 .card-costs-list ion-grid {
-  padding: 60px 50px 0 50px;
+  padding: 70px 50px 60px 50px;
 }
 
 .card-costs-list {
@@ -320,6 +337,15 @@ ion-icon {
 @media (max-width : 768px) {
   .summary-div {
     grid-template-columns: repeat(1, 1fr);
+    height: 150px;
+  }
+
+  .edit-rate {
+    display: none;
+  }
+
+  .row-edit-rate {
+    display: block;
   }
 
   .card-bar-graph {
@@ -406,12 +432,6 @@ ion-icon {
     font-size: 16px;
   }
 }
-
-// @media (max-width: 1460px) {
-//   .graphs-grid{
-//     overflow-x: scroll;
-//   }
-// }
 
 ::-webkit-scrollbar {
   width: 10px;

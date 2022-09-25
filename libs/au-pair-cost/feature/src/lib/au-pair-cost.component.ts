@@ -55,7 +55,7 @@ export class AuPairCostComponent implements OnInit {
       component: ExtraCostsModalComponent
     });
 
-    modal.onDidDismiss().then((data) => {
+    modal.onDidDismiss().then(() => {
       this.api.getCurrentMonthCostsForJob(this.aupairID, this.parentID).subscribe(
         data => { 
           this.costList = data;
@@ -74,7 +74,7 @@ export class AuPairCostComponent implements OnInit {
       component: EditRateModalComponent
     });
 
-    modal.onDidDismiss().then((data) => {
+    modal.onDidDismiss().then(() => {
       this.api.getAuPair(this.aupairID).toPromise()
       .then(
       data => {

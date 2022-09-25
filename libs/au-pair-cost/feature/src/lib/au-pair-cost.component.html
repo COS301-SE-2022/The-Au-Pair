@@ -8,6 +8,7 @@
         <div class="hourly-rate">Hourly Rate: {{ hourlyRate }} Rands/Hour <ion-icon [hidden]="this.type!==2" class="edit-rate" name="create-outline" (click)="openEditRateModal()"></ion-icon></div>
         <div class="total-hours">Total Hours: {{ totalHours }}</div>
         <div class="total-remuneration">Total Remuneration: R{{ totalRemuneration }}</div>
+        <div class="row-edit-rate" [hidden]="this.type!==2"><ion-icon name="create-outline" (click)="openEditRateModal()"></ion-icon></div>
       </ion-card>
     </div>
 
@@ -73,7 +74,7 @@
 
       <ion-card color="light" class="card-costs-list">
         <ion-card-header style="float:left" class="title"> Monthly Expenses</ion-card-header>
-        <ion-card-header style="float:right"><ion-icon class="add-cost" name="add-circle-outline" (click)="openExtraCostsModal()"></ion-icon></ion-card-header>
+        <ion-card-header style="float:right" class="add-icon"><ion-icon class="add-cost" name="add-circle-outline" (click)="openExtraCostsModal()"></ion-icon></ion-card-header>
         <ion-grid>
           <ion-row class="headings">
             <ion-col size="2">

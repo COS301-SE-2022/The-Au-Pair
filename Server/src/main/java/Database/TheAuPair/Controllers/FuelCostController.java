@@ -19,12 +19,12 @@ public class FuelCostController {
   private String fuelSAApiKey;
 
   @GetMapping("/getCurrentFuelPrices")
-  public String getCurrentFuelPrices() throws URISyntaxException, IOException, InterruptedException {
+  public String getCurrentFuelPrices() throws Exception {
     HttpResponse<String> response = getCurrentFuel();
     return response.body();
   }
 
-  private HttpResponse<String> getCurrentFuel() throws URISyntaxException, IOException, InterruptedException {
+  private HttpResponse<String> getCurrentFuel() throws Exception{
 
     HttpRequest request = HttpRequest.newBuilder()
       .uri(new URI("https://api.fuelsa.co.za/exapi/fuel/current"))
