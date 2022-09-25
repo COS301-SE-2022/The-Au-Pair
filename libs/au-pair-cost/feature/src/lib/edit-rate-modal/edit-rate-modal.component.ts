@@ -35,6 +35,7 @@ export class EditRateModalComponent implements OnInit {
     currentLong: 0.0,
     currentLat: 0.0,
     terminateDate: "",
+    alreadyOutOfBounds: false,
   }
 
   public navParams = new NavParams;
@@ -63,6 +64,7 @@ export class EditRateModalComponent implements OnInit {
           this.AuPair.currentLong = res.currentLong;
           this.AuPair.currentLat = res.currentLat;
           this.AuPair.terminateDate = res.terminateDate;
+          this.AuPair.alreadyOutOfBounds = res.alreadyOutOfBounds;
 
           this.payRateInput.setValue(this.AuPair.payRate);
       },
