@@ -71,6 +71,8 @@ export class ParentEditActivityComponent implements OnInit {
   //From HTML Form
   async getActivityValues(val : any)
   {  
+    console.log(val);
+    
     //FORM ERROR CHECKING
     let emptyInput = false;
 
@@ -111,7 +113,7 @@ export class ParentEditActivityComponent implements OnInit {
         dom.style.display = "none";
       }
     }
-
+    
     //Location
     dom = document.getElementById("locError");
     if(val.location === "")
@@ -156,6 +158,7 @@ export class ParentEditActivityComponent implements OnInit {
         }
       }
     }
+    
 
     //Boundary
     dom = document.getElementById("boundaryError");

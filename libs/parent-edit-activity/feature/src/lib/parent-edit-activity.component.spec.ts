@@ -83,6 +83,8 @@ describe('ParentEditActivityComponent', () => {
 
     jest.spyOn(component,"getActivityValues");
 
+    component.originalLocation = "UP";
+
     await component.getActivityValues(emptyActName);
 
     expect(component.activityDetails).toEqual(expectedValue);
@@ -107,6 +109,8 @@ describe('ParentEditActivityComponent', () => {
     };
 
     jest.spyOn(component,"getActivityValues");
+
+    component.originalLocation = "UP";
 
     await component.getActivityValues(emptyDescription);
 
@@ -158,6 +162,8 @@ describe('ParentEditActivityComponent', () => {
 
     jest.spyOn(component,"getActivityValues");
 
+    component.originalLocation = "UP";
+
     await component.getActivityValues(emptyDay);
 
     expect(component.activityDetails).toEqual(expectedValue);
@@ -182,6 +188,8 @@ describe('ParentEditActivityComponent', () => {
     };
 
     jest.spyOn(component,"getActivityValues");
+
+    component.originalLocation = "UP";
 
     await component.getActivityValues(emptyTime);
 
@@ -208,6 +216,8 @@ describe('ParentEditActivityComponent', () => {
 
     jest.spyOn(component,"getActivityValues");
 
+    component.originalLocation = "UP";
+
     await component.getActivityValues(emptyBudget);
 
     expect(component.activityDetails).toEqual(expectedValue);
@@ -232,6 +242,8 @@ describe('ParentEditActivityComponent', () => {
     };
 
     jest.spyOn(component,"getActivityValues");
+
+    component.originalLocation = "UP";
 
     await component.getActivityValues(emptyChild);
 
