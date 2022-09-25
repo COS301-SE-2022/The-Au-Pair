@@ -63,6 +63,7 @@ export interface Activity{
     experience: string;
     currentLong: number;
     currentLat: number;
+    alreadyOutOfBounds: boolean;
     terminateDate: string;
   }
 

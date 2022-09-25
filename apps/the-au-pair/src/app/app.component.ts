@@ -20,7 +20,6 @@ export class AppComponent implements OnInit {
   userType = 0;
   userFcmToken = "";
   activitydays: number[] = [];
-  alreadyOutOfBounds = false;
   previousActivityID = "";
   currentActivityID = "";
 
@@ -72,6 +71,7 @@ export class AppComponent implements OnInit {
     experience: "",
     currentLong: 0.0,
     currentLat: 0.0,
+    alreadyOutOfBounds: false,
     terminateDate: "",
   }
 
@@ -459,7 +459,7 @@ export class AppComponent implements OnInit {
         //Initially setting alreadyoutOfbounds to false for each new activity that starts (to avoid spam notifications for the same reason)
         if(this.previousActivityID != this.currentActivityID)
         {
-          this.alreadyOutOfBounds = false;
+          aupair.alreadyOutOfBounds = false;
         }
 
         const boundary = act.boundary;
@@ -469,7 +469,7 @@ export class AppComponent implements OnInit {
         const latCoord = aupair.currentLat;
         
         const distance = this.calculateEucDistance(latAct, longAct, latCoord, longCoord);
-        if(distance>boundary  && !this.alreadyOutOfBounds)
+        if(distance>boundary  && !aupair.alreadyOutOfBounds)
         {
           console.log("Notifying parent");
           
@@ -506,7 +506,7 @@ export class AppComponent implements OnInit {
           });
 
           //Setting already out of bounds so that it doesnt spam notifications
-          this.alreadyOutOfBounds = true;
+          aupair.alreadyOutOfBounds = true;
         }
         this.previousActivityID = act.id;
       }
@@ -533,6 +533,7 @@ export class AppComponent implements OnInit {
     if(!isNaN(parseInt(currentHour)) && parseInt(currentHour)>=endTime)
     {
       aupair.onShift = false;
+      aupair.alreadyOutOfBounds = false; //Cant be out of bounds if not working
     }
     else if(!isNaN(parseInt(currentHour)) && parseInt(currentHour)>=startTime && parseInt(currentHour)<endTime)
     {
