@@ -142,18 +142,24 @@ export class AppComponent implements OnInit {
     const mins = Number(this.notificationToSend.time.substring(3));
     const day = Number(this.upcomingActivity.day);
 
-    const intv = setInterval(() => {
+    const intv = setInterval(async () => {
       const current = new Date();
       if (current.getHours() == hour && current.getMinutes() == mins && current.getDay() == day) {
 
+        await this.serv.getFCMToken(this.store.snapshot().user.id).toPromise().then(res => {
+          this.userFcmToken = res;
+        }).catch(err => {
+          console.log(err);
+        });
 
         if (this.userFcmToken) {
+          console.log(this.userFcmToken);
           const requestHeaders = new HttpHeaders().set('Authorization', 'key=AAAAlhtqIdQ:APA91bFlcYmdaqt5D_jodyiVQG8B1mkca2xGh6XKeMuTGtxQ6XKhSY0rdLnc0WrXDsV99grFamp3k0EVHRUJmUG9ULcxf-VSITFgwwaeNvrUq48q0Hn1GLxmZ3GBAYdCBzPFIRdbMxi9');
           const postData = {
-            "to": "e7q50QKSR0I1_Wenw7Hdll:APA91bE2_LMf6MAfCmBAsSye4f9vLIvXWt5c4lKrKdamNsf5lyLoefH6_qbN-3psEh2EIQWcnzw0VbN6x8mfpC0cosQnOqC5-OdPEyg_8EeKJB6F0tBGNRIq5YNiGjem5AnZcV7xqm0Fg",
+            "to": this.userFcmToken,
             "notification": {
-              "title": "Order #44",
-              "body": "Hello bro"
+              "title": this.upcomingActivity.name,
+              "body": this.upcomingActivity.description
             }
           }
 
