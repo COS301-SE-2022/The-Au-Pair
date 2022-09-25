@@ -24,8 +24,8 @@
             <input [(ngModel)]="location" autocomplete="off" (input)="getLocations()" list="locations" type="text" name="location" placeholder="Location"/>
             <ion-radio-group (ionChange)="radioChecked($event)" mode="md">
               <ion-item *ngFor="let location of potentialLocations" >
-                <ion-label class="ionLabel">{{location}}</ion-label>
-                <ion-radio class="ionRadio" slot="end" color="primary" value="{{location}}"></ion-radio>
+                <ion-label class="ionLabel">{{location.display_name}}</ion-label>
+                <ion-radio class="ionRadio" slot="end" color="primary" value="{{location.display_name}}"></ion-radio>
               </ion-item>
             </ion-radio-group>
             <p id="locError" class="error" style="display: none;">Error in field</p>

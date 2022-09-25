@@ -154,7 +154,6 @@ export class ParentAddActivityComponent implements OnInit{
           if(loc.display_name === this.location)
           {
             found = true;
-            console.log("Found");
             this.longitude = loc.lon;
             this.latitude = loc.lat;
           }
