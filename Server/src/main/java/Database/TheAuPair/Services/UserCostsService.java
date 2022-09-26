@@ -43,7 +43,7 @@ public class UserCostsService {
     if (month.length() == 1)
       month = "0" + month;
 
-    List<UserCosts> userCosts = costRepo.findAllByContributerAndOther(auPairId, parentId, Sort.by(Sort.Direction.DESC, "date"));
+    List<UserCosts> userCosts = costRepo.findAllByContributerAndOther(auPairId, parentId, Sort.by(Sort.Direction.ASC, "date"));
     List<UserCosts> foundCosts = new ArrayList<UserCosts>();
 
     for (UserCosts cost : userCosts)
@@ -58,6 +58,87 @@ public class UserCostsService {
       }
     }
     return foundCosts;
+  }
+
+  public int getTotalMonthCostsForFuel(String auPairId, String parentId)
+  {
+    Date date = new Date();
+    LocalDate localDate = date.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+    String month = "" + localDate.getMonthValue();
+    String year = "" + localDate.getYear();
+
+    if (month.length() == 1)
+      month = "0" + month;
+
+    List<UserCosts> userCosts = costRepo.findAllByType(auPairId, parentId, "Fuel", Sort.by(Sort.Direction.ASC, "date"));
+
+    int total = 0;
+    for (UserCosts cost : userCosts)
+    {
+      String [] dateString = cost.getDate().split("/");
+
+      if (dateString[1].equals(month) && dateString[2].equals(year)) {
+        total += cost.getAmount();
+      }
+      else {
+        break;
+      }
+    }
+    return total;
+  }
+
+  public int getTotalMonthCostsForOvertime(String auPairId, String parentId)
+  {
+    Date date = new Date();
+    LocalDate localDate = date.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+    String month = "" + localDate.getMonthValue();
+    String year = "" + localDate.getYear();
+
+    if (month.length() == 1)
+      month = "0" + month;
+
+    List<UserCosts> userCosts = costRepo.findAllByType(auPairId, parentId, "Overtime", Sort.by(Sort.Direction.ASC, "date"));
+
+    int total = 0;
+    for (UserCosts cost : userCosts)
+    {
+      String [] dateString = cost.getDate().split("/");
+
+      if (dateString[1].equals(month) && dateString[2].equals(year)) {
+        total += cost.getAmount();
+      }
+      else {
+        break;
+      }
+    }
+    return total;
+  }
+
+  public int getTotalMonthCostsForOther(String auPairId, String parentId)
+  {
+    Date date = new Date();
+    LocalDate localDate = date.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+    String month = "" + localDate.getMonthValue();
+    String year = "" + localDate.getYear();
+
+    if (month.length() == 1)
+      month = "0" + month;
+
+    List<UserCosts> userCosts = costRepo.findAllByType(auPairId, parentId, "Other", Sort.by(Sort.Direction.ASC, "date"));
+
+    int total = 0;
+    for (UserCosts cost : userCosts)
+    {
+      String [] dateString = cost.getDate().split("/");
+
+      if (dateString[1].equals(month) && dateString[2].equals(year)) {
+        total += cost.getAmount();
+      }
+      else {
+        break;
+      }
+    }
+    return total;
   }
 
   public void addUserCost(UserCosts userCosts) {

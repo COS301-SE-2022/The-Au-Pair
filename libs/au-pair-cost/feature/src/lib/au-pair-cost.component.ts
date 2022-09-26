@@ -38,7 +38,7 @@ export class AuPairCostComponent implements OnInit {
 
   travelCost = 0;
   activityCost = 0;
-  otherCost = 180;
+  otherCost = 0;
   totalCost = 0;
 
   otherDeg = 0;
@@ -123,7 +123,7 @@ export class AuPairCostComponent implements OnInit {
       }
     )
 
-    this.api.getMonthMinutes(this.aupairID, this.getStartDateOfWeek(0)).subscribe( 
+    await this.api.getMonthMinutes(this.aupairID, this.getStartDateOfWeek(0)).subscribe( 
       data => {
         this.totalHours = Number((data/60).toFixed(2));
       },
@@ -139,16 +139,9 @@ export class AuPairCostComponent implements OnInit {
         this.hourlyRate = data.payRate;
         this.travelCost = data.distTraveled;
         this.activityCost = data.costIncurred;
-        this.otherCost = 0;
-        this.totalCost = this.travelCost + this.activityCost + this.otherCost;
-        this.totalCost = Number(this.totalCost.toFixed(3));
-        this.totalRemuneration = (this.hourlyRate * this.totalHours) + this.totalCost;
-        this.totalRemuneration = Number(this.totalRemuneration.toFixed(3));
 
-        this.calculatePie(this.otherCost, this.activityCost, this.totalCost);
-        this.populateDaysCost();
+        this.populateDaysCost();        
         this.dateRange = this.dateRangeToString(7);
-        this.pieSplit = "conic-gradient(var(--ion-color-primary)" + this.otherDeg + "deg, var(--ion-color-secondary) 0 " + this.activityDeg + "deg, var(--ion-color-champagne) 0)";
       },
       error => {
         console.log("Error has occured with API: " + error);
@@ -173,6 +166,53 @@ export class AuPairCostComponent implements OnInit {
       },
       error => {
         console.log("Error has occured with API: " + error);
+      }
+    )
+
+    await this.api.getTotalMonthCostsForFuel(this.aupairID, this.parentID).subscribe(
+      data => { 
+        this.travelCost = data;
+        this.totalCost += this.travelCost;
+
+        this.calculatePie(this.otherCost, this.activityCost, this.totalCost);
+        this.pieSplit = "conic-gradient(var(--ion-color-primary)" + this.otherDeg + "deg, var(--ion-color-secondary) 0 " + this.activityDeg + "deg, var(--ion-color-champagne) 0)";
+      },
+      error => {
+        console.log("Error has occured with API: " + error);
+        this.travelCost = 0;
+      }
+    )
+
+    await this.api.getTotalMonthCostsForOvertime(this.aupairID, this.parentID).subscribe(
+      data => { 
+        this.activityCost = data;
+        this.totalCost += this.activityCost;
+
+        this.calculatePie(this.otherCost, this.activityCost, this.totalCost);
+        this.pieSplit = "conic-gradient(var(--ion-color-primary)" + this.otherDeg + "deg, var(--ion-color-secondary) 0 " + this.activityDeg + "deg, var(--ion-color-champagne) 0)";
+      },
+      error => {
+        console.log("Error has occured with API: " + error);
+        this.activityCost = 0;
+      }
+    )
+
+    await this.api.getTotalMonthCostsForOther(this.aupairID, this.parentID).subscribe(
+      data => { 
+        this.otherCost = data;
+        this.totalCost += this.otherCost;
+        this.totalRemuneration = (this.hourlyRate * this.totalHours) + this.totalCost;
+
+        this.totalCost = Number(this.totalCost.toFixed(3));
+        this.totalRemuneration = Number(this.totalRemuneration.toFixed(3));
+    
+        this.calculatePie(this.otherCost, this.activityCost, this.totalCost);
+        this.pieSplit = "conic-gradient(var(--ion-color-primary)" + this.otherDeg + "deg, var(--ion-color-secondary) 0 " + this.activityDeg + "deg, var(--ion-color-champagne) 0)";
+    
+      },
+      error => {
+        console.log("Error has occured with API: " + error);
+        this.otherCost = 0;
       }
     )
   }

@@ -28,6 +28,21 @@ public class UserCostsController {
     return this.ucs.getCurrentMonthCostsForJob(details.get("contributerId"), details.get("otherPartyId"));
   }
 
+  @PostMapping("/getTotalMonthCostsForFuel")
+  public int getTotalMonthCostsForFuel(@RequestBody Map<String, String> details) {
+    return this.ucs.getTotalMonthCostsForFuel(details.get("contributerId"), details.get("otherPartyId"));
+  }
+
+  @PostMapping("/getTotalMonthCostsForOvertime")
+  public int getTotalMonthCostsForOvertime(@RequestBody Map<String, String> details) {
+    return this.ucs.getTotalMonthCostsForOvertime(details.get("contributerId"), details.get("otherPartyId"));
+  }
+
+  @PostMapping("/getTotalMonthCostsForOther")
+  public int getTotalMonthCostsForOther(@RequestBody Map<String, String> details) {
+    return this.ucs.getTotalMonthCostsForOther(details.get("contributerId"), details.get("otherPartyId"));
+  }
+
   @PostMapping("/addUserCost")
   public void addUserCost(@RequestBody UserCosts userCosts) { this.ucs.addUserCost(userCosts); }
 
