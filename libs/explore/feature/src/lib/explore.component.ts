@@ -6,6 +6,7 @@ import { MenuController } from '@ionic/angular';
 import { NavController } from '@ionic/angular';
 import { ToastController } from '@ionic/angular';
 import { Store } from '@ngxs/store';
+import { SetImgString } from '../../../../shared/ngxs/actions';
 
 @Component({
   selector: 'the-au-pair-explore',
@@ -28,6 +29,9 @@ export class ExploreComponent implements OnInit {
   maxAge! : number;
 
   eucDistance! : number;
+
+  hasImage = false;
+  src = "";
 
   auPairs : any;
   auPairDetails : any = {
@@ -103,6 +107,8 @@ export class ExploreComponent implements OnInit {
             gender: res.gender,
             distance: eucdistance,
           }
+
+          this.setImage(ap.id);
           // Logic for explore that will only show Au Pairs whom are not yet employed
           if(ap.employer == "" && res.registered == true && res.banned == "")
           {
@@ -375,15 +381,15 @@ export class ExploreComponent implements OnInit {
     return ret;
   }
 
-  async setImage(){
-    await this.serv.getFile(this.store.snapshot().user.id  +  ".png").toPromise().then(
+  async setImage(id: string){
+    await this.serv.getFile(id +  ".png").toPromise().then(
       async res=>{
         const dataType = res.type;
         const binaryData = [];
         binaryData.push(res);
         const href = window.URL.createObjectURL(new Blob(binaryData, {type: dataType}));
         this.store.dispatch(new SetImgString(href));
-        const dom = document.getElementById("img1");
+        const dom = document.getElementById(id);
 
         if(dom != null)
         {
@@ -393,7 +399,7 @@ export class ExploreComponent implements OnInit {
         this.hasImage = true;
       },
       error=>{
-        const dom = document.getElementById("img1");
+        const dom = document.getElementById(id);
         if (dom != null) {
           dom.setAttribute("src","assets/images/placeholder-profile.jpg");
         }

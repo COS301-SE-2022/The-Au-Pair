@@ -4,6 +4,7 @@ import { auPair, Contract, User } from '../../../../../shared/interfaces/interfa
 import { API } from '../../../../../shared/api/api.service';
 import { Store } from '@ngxs/store';
 import { Router } from '@angular/router';
+import { SetImgString } from '../../../../../shared/ngxs/actions';
 
 
 @Component({
@@ -16,7 +17,8 @@ export class ExpandModalComponent implements OnInit {
   auPairId: string = this.navParams.get('auPairId');
 
   parentID = "";
-
+  hasImage = false;
+  src = "";
   flag!: boolean;
 
   auPairDetails: auPair = {
@@ -65,6 +67,7 @@ export class ExpandModalComponent implements OnInit {
   constructor(private serv: API, private modalCtrl : ModalController ,public toastCtrl: ToastController, private store: Store, private router: Router) {}
 
   ngOnInit(): void {
+    this.setImage();
     this.parentID = this.store.snapshot().user.id;
     this.getAuPairDetails(this.auPairId);
   }
@@ -211,5 +214,35 @@ export class ExpandModalComponent implements OnInit {
     const ret = (Math.round(avg * 100) / 100).toFixed(1);
 
     return ret;
+  }
+
+  async setImage(){
+    console.log(this.auPairId);
+    
+    await this.serv.getFile(this.auPairId +  ".png").toPromise().then(
+      async res=>{
+        const dataType = res.type;
+        const binaryData = [];
+        binaryData.push(res);
+        const href = window.URL.createObjectURL(new Blob(binaryData, {type: dataType}));
+        this.store.dispatch(new SetImgString(href));
+        const dom = document.getElementById(this.auPairId + "dash");
+
+        if(dom != null)
+        {
+          dom.setAttribute("src", this.store.snapshot().user.imgString);
+        }
+
+        this.hasImage = true;
+      },
+      error=>{
+        const dom = document.getElementById(this.auPairId + "dash");
+        if (dom != null) {
+          dom.setAttribute("src","assets/images/placeholder-profile.jpg");
+        }
+        this.hasImage = true;
+        return error;
+      }
+    );
   }
 }

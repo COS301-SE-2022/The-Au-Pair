@@ -6,6 +6,7 @@ import { Child, Contract, Parent, User, Notification, Email } from '../../../../
 import { Router } from '@angular/router';
 import { ToastController } from '@ionic/angular';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { SetImgString } from '../../../../shared/ngxs/actions';
 
 @Component({
   selector: 'the-au-pair-job-summary-parent-view',
@@ -413,6 +414,34 @@ export class JobSummaryParentViewComponent implements OnInit {
 
     return age;
   }
+  
+  async setImage(){
+    console.log(this.store.snapshot().user.id );
+    await this.serv.getFile(this.store.snapshot().user.id  +  ".png").toPromise().then(
+      async res=>{
+        const dataType = res.type;
+        const binaryData = [];
+        binaryData.push(res);
+        const href = window.URL.createObjectURL(new Blob(binaryData, {type: dataType}));
+        this.store.dispatch(new SetImgString(href));
+        const dom = document.getElementById("img3");
 
+        if(dom != null)
+        {
+          dom.setAttribute("src", this.store.snapshot().user.imgString);
+        }
+
+        this.hasImage = true;
+      },
+      error=>{
+        const dom = document.getElementById("img3");
+        if (dom != null) {
+          dom.setAttribute("src","assets/images/placeholder-profile.jpg");
+        }
+        this.hasImage = true;
+        return error;
+      }
+    );
+  }
 
 }
