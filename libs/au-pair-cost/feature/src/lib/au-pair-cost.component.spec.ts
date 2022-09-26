@@ -70,12 +70,12 @@ describe('AuPairCostComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  it('should populate degrees of a circle according to costs when calculatePie is called', () => {
+  it('should populate degrees of a circle according to costs when calculateTotals is called', () => {
     const expectedOtherDeg = 180;
     const expectedActivityDeg = 288;
 
-    jest.spyOn(component, "calculatePie");
-    component.calculatePie(50, 30, 100);
+    jest.spyOn(component, "calculateTotals");
+    component.calculateTotals(50, 30, 100);
 
     expect(component.otherDeg).toEqual(expectedOtherDeg);
     expect(component.activityDeg).toEqual(expectedActivityDeg);

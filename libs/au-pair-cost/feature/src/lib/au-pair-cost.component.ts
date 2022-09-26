@@ -64,6 +64,8 @@ export class AuPairCostComponent implements OnInit {
           console.log("Error has occured with API: " + error);
         }
       )
+
+      this.setCosts();
     });
 
     await modal.present();
@@ -169,13 +171,18 @@ export class AuPairCostComponent implements OnInit {
       }
     )
 
-    await this.api.getTotalMonthCostsForFuel(this.aupairID, this.parentID).subscribe(
+    this.setCosts();
+  }
+
+  setCosts() {
+    this.totalCost = 0;
+
+    this.api.getTotalMonthCostsForFuel(this.aupairID, this.parentID).subscribe(
       data => { 
         this.travelCost = data;
         this.totalCost += this.travelCost;
 
-        this.calculatePie(this.otherCost, this.activityCost, this.totalCost);
-        this.pieSplit = "conic-gradient(var(--ion-color-primary)" + this.otherDeg + "deg, var(--ion-color-secondary) 0 " + this.activityDeg + "deg, var(--ion-color-champagne) 0)";
+        this.calculateTotals(this.otherCost, this.activityCost, this.totalCost);
       },
       error => {
         console.log("Error has occured with API: " + error);
@@ -183,13 +190,12 @@ export class AuPairCostComponent implements OnInit {
       }
     )
 
-    await this.api.getTotalMonthCostsForOvertime(this.aupairID, this.parentID).subscribe(
+    this.api.getTotalMonthCostsForOvertime(this.aupairID, this.parentID).subscribe(
       data => { 
         this.activityCost = data;
         this.totalCost += this.activityCost;
 
-        this.calculatePie(this.otherCost, this.activityCost, this.totalCost);
-        this.pieSplit = "conic-gradient(var(--ion-color-primary)" + this.otherDeg + "deg, var(--ion-color-secondary) 0 " + this.activityDeg + "deg, var(--ion-color-champagne) 0)";
+        this.calculateTotals(this.otherCost, this.activityCost, this.totalCost);
       },
       error => {
         console.log("Error has occured with API: " + error);
@@ -197,18 +203,12 @@ export class AuPairCostComponent implements OnInit {
       }
     )
 
-    await this.api.getTotalMonthCostsForOther(this.aupairID, this.parentID).subscribe(
+    this.api.getTotalMonthCostsForOther(this.aupairID, this.parentID).subscribe(
       data => { 
         this.otherCost = data;
         this.totalCost += this.otherCost;
-        this.totalRemuneration = (this.hourlyRate * this.totalHours) + this.totalCost;
-
-        this.totalCost = Number(this.totalCost.toFixed(3));
-        this.totalRemuneration = Number(this.totalRemuneration.toFixed(3));
     
-        this.calculatePie(this.otherCost, this.activityCost, this.totalCost);
-        this.pieSplit = "conic-gradient(var(--ion-color-primary)" + this.otherDeg + "deg, var(--ion-color-secondary) 0 " + this.activityDeg + "deg, var(--ion-color-champagne) 0)";
-    
+        this.calculateTotals(this.otherCost, this.activityCost, this.totalCost);
       },
       error => {
         console.log("Error has occured with API: " + error);
@@ -217,9 +217,16 @@ export class AuPairCostComponent implements OnInit {
     )
   }
 
-  calculatePie(other:number, act:number, total:number) {
+  calculateTotals(other:number, act:number, total:number) {
     this.otherDeg = (360/total)*other;
     this.activityDeg = this.otherDeg + (360/total)*act;
+
+    this.totalRemuneration = (this.hourlyRate * this.totalHours) + this.totalCost;
+
+    this.totalCost = Number(this.totalCost.toFixed(3));
+    this.totalRemuneration = Number(this.totalRemuneration.toFixed(3));
+
+    this.pieSplit = "conic-gradient(var(--ion-color-primary)" + this.otherDeg + "deg, var(--ion-color-secondary) 0 " + this.activityDeg + "deg, var(--ion-color-champagne) 0)";
   }
 
   populateDaysCost() {
@@ -247,7 +254,14 @@ export class AuPairCostComponent implements OnInit {
       }
     )
 
-    location.reload();
+    this.api.getCurrentMonthCostsForJob(this.aupairID, this.parentID).subscribe(
+      data => { 
+        this.costList = data;
+      },
+      error => {
+        console.log("Error has occured with API: " + error);
+      }
+    )
   }
 
   getStartDateOfWeek(dow : number) {
@@ -289,7 +303,10 @@ export class AuPairCostComponent implements OnInit {
         {
           text: 'Yes',
           cssClass: 'alert-button-confirm',
-          handler: () => { this.deleteCost(id); }
+          handler: () => { 
+            this.deleteCost(id); 
+            this.setCosts();
+          }
         }
       ]
     });

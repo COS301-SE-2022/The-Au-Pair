@@ -51,7 +51,7 @@ public class UserCostsService {
       String [] dateString = cost.getDate().split("/");
 
       if (dateString[1].equals(month) && dateString[2].equals(year)) {
-        foundCosts.add(cost);
+        foundCosts.add(0, cost);
       }
       else {
         break;
