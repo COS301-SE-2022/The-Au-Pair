@@ -265,11 +265,20 @@ describe('ExtraCostsModalComponent', () => {
     component.costsForm.controls['type'].setValue('Fuel');
     component.costsForm.controls['distance'].setValue('20');
     component.costsForm.controls['kml'].setValue('12');
+    component.costsForm.controls['fuelType'].setValue('95-Unleaded');
+    expect(component.costsForm.controls['amount'].value).toEqual((10/3).toFixed(2));
+
+    component.costsForm.controls['type'].setValue('Fuel');
+    component.costsForm.controls['distance'].setValue('20');
+    component.costsForm.controls['kml'].setValue('12');
+    component.costsForm.controls['fuelType'].setValue('93-Unleaded');
+    expect(component.costsForm.controls['amount'].value).toEqual((5).toFixed(2));
+
+    component.costsForm.controls['type'].setValue('Fuel');
+    component.costsForm.controls['distance'].setValue('20');
+    component.costsForm.controls['kml'].setValue('12');
     component.costsForm.controls['fuelType'].setValue('Diesel');
-
-    const num = (5/3).toFixed(2);
-
-    expect(component.costsForm.controls['amount'].value).toEqual(num);
+    expect(component.costsForm.controls['amount'].value).toEqual((5/3).toFixed(2));
   });
 
   it('should set amount field based off overtime', async () => {
@@ -376,12 +385,23 @@ describe('ExtraCostsModalComponent', () => {
     component.costsForm.controls['type'].setValue('Fuel');
     component.costsForm.controls['distance'].setValue('20');
     component.costsForm.controls['kml'].setValue('12');
-    component.costsForm.controls['fuelType'].setValue('Diesel')
-    const num = (5/3).toFixed(2);
+    component.costsForm.controls['fuelType'].setValue('95-Unleaded');
+    component.addCost();
+    expect(spy).toHaveBeenCalledWith('Fuel', "Travelled 20kms with fuel costing R2 per litre", 20, parseFloat((10/3).toFixed(2)));
 
-    component.addCost()
+    component.costsForm.controls['type'].setValue('Fuel');
+    component.costsForm.controls['distance'].setValue('20');
+    component.costsForm.controls['kml'].setValue('12');
+    component.costsForm.controls['fuelType'].setValue('93-Unleaded');
+    component.addCost();
+    expect(spy).toHaveBeenCalledWith('Fuel', "Travelled 20kms with fuel costing R3 per litre", 20, parseFloat((5).toFixed(2)));
 
-    expect(spy).toHaveBeenCalledWith('Fuel', "Travelled 20kms with fuel costing R1 per litre", 20, parseFloat(num));
+    component.costsForm.controls['type'].setValue('Fuel');
+    component.costsForm.controls['distance'].setValue('20');
+    component.costsForm.controls['kml'].setValue('12');
+    component.costsForm.controls['fuelType'].setValue('Diesel');
+    component.addCost();
+    expect(spy).toHaveBeenCalledWith('Fuel', "Travelled 20kms with fuel costing R1 per litre", 20, parseFloat((5/3).toFixed(2)));
   });
 
   it('should send cost data for overtime', async () => {
@@ -421,6 +441,7 @@ describe('ExtraCostsModalComponent', () => {
 describe('EditRateModalComponent', () => {
   let component: EditRateModalComponent;
   let fixture: ComponentFixture<EditRateModalComponent>;
+  let store: Store;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
@@ -443,6 +464,8 @@ describe('EditRateModalComponent', () => {
       FormBuilder
     ]
     }).compileComponents();
+
+    store = TestBed.inject(Store);
   });
 
   beforeEach(() => {
@@ -454,6 +477,115 @@ describe('EditRateModalComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
+  it('should, open a toast when openToast is called', async ()=>{
+    jest.spyOn(component,"openToast");
+    component.openToast("test");
+    expect(await component.openToast).toReturn();
+  });
+
+  it('should,close the modal when closeModal is called', async ()=>{
+    jest.spyOn(component,"closeModal");
+    component.closeModal();
+    expect(await component.closeModal).toReturn();
+  });
+
+  it('should set the auPairId to userID on init', async () => {
+    store.dispatch(new SetId("123"));
+    store.dispatch(new SetType(2));
+
+    await component.ngOnInit();
+    expect(component.auPairId).toEqual("123");
+  });
+
+  it('should get the au pairs details', async () => {
+    store.dispatch(new SetId("123"));
+    jest.spyOn(apiMock, 'getAuPair').mockImplementation(()=>of(
+      {
+        id : "123",
+        rating : [5,5],
+        onShift : false,
+        employer : "213",
+        costIncurred : 0,
+        distTraveled: 0,        
+        payRate : "200",
+        bio : "",
+        experience : "",
+        currentLong : 0.0,
+        currentLat : 0.0,
+        terminateDate : "",
+        alreadyOutOfBounds: false,
+      }
+    ));
+
+    await component.ngOnInit();
+    expect(component.AuPair).toEqual({
+      id : "123",
+      rating : [5,5],
+      onShift : false,
+      employer : "213",
+      costIncurred : 0,
+      distTraveled: 0,        
+      payRate : "200",
+      bio : "",
+      experience : "",
+      currentLong : 0.0,
+      currentLat : 0.0,
+      terminateDate : "",
+      alreadyOutOfBounds: false,
+    });
+  });
+
+  it('should give an error when trying to update the au pairs pay rate', async () => {
+    const spy = jest.spyOn(apiMock, 'editAuPair');
+    component.payRateInput.setValue('Test');
+    
+    await component.updateRate();
+    expect(spy).not.toHaveBeenCalled();
+  });
+
+  it('should update the rate of an au pair', async () => {
+    const spy = jest.spyOn(apiMock, 'editAuPair');
+    component.payRateInput.setValue('200');
+    jest.spyOn(apiMock, 'getAuPair').mockImplementation(()=>of(
+      {
+        id : "123",
+        rating : [5,5],
+        onShift : false,
+        employer : "213",
+        costIncurred : 0,
+        distTraveled: 0,        
+        payRate : "200",
+        bio : "",
+        experience : "",
+        currentLong : 0.0,
+        currentLat : 0.0,
+        terminateDate : "",
+        alreadyOutOfBounds: false,
+      }
+    ));
+
+    await component.ngOnInit();
+    await component.updateRate();
+    expect(spy).toHaveBeenCalledWith({
+      id : "123",
+      rating : [5,5],
+      onShift : false,
+      employer : "213",
+      costIncurred : 0,
+      distTraveled: 0,        
+      payRate : "200",
+      bio : "",
+      experience : "",
+      currentLong : 0.0,
+      currentLat : 0.0,
+      terminateDate : "",
+      alreadyOutOfBounds: false,
+    });
+
+    expect(component.sending).toBeFalsy();
+  });
+
 
 });
 
