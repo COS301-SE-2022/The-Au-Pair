@@ -76,7 +76,7 @@ export class RegisterComponent {
     employer: '',
     costIncurred: 0,
     distTraveled: 0,
-    payRate: 0,
+    payRate: 100,
     bio: '',
     experience: '',
     currentLong: 0.0,

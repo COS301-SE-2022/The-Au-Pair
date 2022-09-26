@@ -1,0 +1,27 @@
+<div class="modal-body">
+    <div class="heading">
+        <ion-row>
+            <ion-col size="10" offset = "1" class="ion-text-center act">Edit Hourly Rate</ion-col>
+            <ion-col size="1" class="ion-text-center"><ion-icon class="icon close" name="close-circle-outline" (click)="closeModal()"></ion-icon></ion-col>
+        </ion-row>
+    </div>
+    <div class="content">
+        <form id="editPayRateForm" #editPayRateForm="ngForm" (ngSubmit)="updateRate()">
+            <ion-row>
+                <ion-col size="4" class="ion-text-center">
+                    Hourly Rate:
+                </ion-col>
+                <ion-col size="8" class="ion-text-start">
+                    <input type="text" name="payRateInput" [formControl]="payRateInput"> 
+                    <p id="payRateError" class="error" style="display: none;">Hourly Rate must be a number</p>
+                </ion-col>  
+            </ion-row>
+            
+            <ion-row class="submit-row">
+                <ion-col size="12" class="ion-text-center">
+                    <input type="submit" form="editPayRateForm" [ngClass]="(this.sending===false) ? 'submit' : 'disabled-submit' " [disabled]="sending" value="Update"/>                
+                </ion-col>
+            </ion-row> 
+        </form>    
+    </div>
+</div>

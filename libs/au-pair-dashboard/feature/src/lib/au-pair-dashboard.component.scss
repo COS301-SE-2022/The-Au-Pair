@@ -319,10 +319,16 @@ ion-card {
 }
 
 @media (max-width: 1240px) {
-    .children-div {
+   .action-tag {
+       font-size: 20px;
+   } 
+
+   .children-div {
         grid-template-columns: repeat(1, 1fr);
         height: 150px;
     }
+
+    
 
     .button-container {
         justify-content: center;
@@ -336,10 +342,4 @@ ion-card {
     .child-status {
         border-radius: 0px 0px 16px 16px;
     }
- }
-
-@media (max-width: 1240px) {
-   .action-tag{
-       font-size: 20px;
-   } 
 }
