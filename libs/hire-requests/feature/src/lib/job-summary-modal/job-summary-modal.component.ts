@@ -5,6 +5,7 @@ import { API } from '../../../../../shared/api/api.service';
 import { Store } from '@ngxs/store';
 import { Router } from '@angular/router';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { SetImgString } from '../../../../../shared/ngxs/actions';
 
 @Component({
   selector: 'the-au-pair-job-summary-modal',
@@ -48,6 +49,9 @@ export class JobSummaryModalComponent implements OnInit {
     alreadyOutOfBounds: false,
     terminateDate: "",
   }
+
+  hasImage = false;
+  src = "";
 
   notificationToSend: Notification = {
     id: "",
@@ -111,7 +115,7 @@ export class JobSummaryModalComponent implements OnInit {
 
   async ngOnInit(): Promise<void> {
     this.auPairID = this.store.snapshot().user.id;
-
+    this.setImage();
     await this.getParentDetails(this.parentID);
     await this.getUserDetails();
     await this.getChildrenDetails();
@@ -497,5 +501,33 @@ export class JobSummaryModalComponent implements OnInit {
     }
 
     return age;
+  }
+
+  async setImage(){
+    await this.serv.getFile(this.parentID  +  ".png").toPromise().then(
+      async res=>{
+        const dataType = res.type;
+        const binaryData = [];
+        binaryData.push(res);
+        const href = window.URL.createObjectURL(new Blob(binaryData, {type: dataType}));
+        this.store.dispatch(new SetImgString(href));
+        const dom = document.getElementById("img8");
+
+        if(dom != null)
+        {
+          dom.setAttribute("src", this.store.snapshot().user.imgString);
+        }
+
+        this.hasImage = true;
+      },
+      error=>{
+        const dom = document.getElementById("img8");
+        if (dom != null) {
+          dom.setAttribute("src","assets/images/placeholder-profile.jpg");
+        }
+        this.hasImage = true;
+        return error;
+      }
+    );
   }
 }
