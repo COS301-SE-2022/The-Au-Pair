@@ -22,7 +22,8 @@ export class JobSummaryParentViewComponent implements OnInit {
   childrenArr: Child[] = [];
   flag!: boolean;
 
-
+  hasImage = false;
+  src = "";
 
   days = [
     "Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"
@@ -120,7 +121,7 @@ export class JobSummaryParentViewComponent implements OnInit {
 
   async ngOnInit(): Promise<void> {    
     this.parentID = this.store.snapshot().user.id;
-
+    this.setImage();
     await this.getActivities();
     await this.getUserDetails();
     await this.getParentDetails();
@@ -416,7 +417,6 @@ export class JobSummaryParentViewComponent implements OnInit {
   }
   
   async setImage(){
-    console.log(this.store.snapshot().user.id );
     await this.serv.getFile(this.store.snapshot().user.id  +  ".png").toPromise().then(
       async res=>{
         const dataType = res.type;
@@ -424,7 +424,7 @@ export class JobSummaryParentViewComponent implements OnInit {
         binaryData.push(res);
         const href = window.URL.createObjectURL(new Blob(binaryData, {type: dataType}));
         this.store.dispatch(new SetImgString(href));
-        const dom = document.getElementById("img3");
+        const dom = document.getElementById("img7");
 
         if(dom != null)
         {
@@ -434,7 +434,7 @@ export class JobSummaryParentViewComponent implements OnInit {
         this.hasImage = true;
       },
       error=>{
-        const dom = document.getElementById("img3");
+        const dom = document.getElementById("img7");
         if (dom != null) {
           dom.setAttribute("src","assets/images/placeholder-profile.jpg");
         }
