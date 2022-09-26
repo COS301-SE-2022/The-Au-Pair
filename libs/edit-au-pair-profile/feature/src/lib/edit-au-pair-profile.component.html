@@ -3,7 +3,14 @@
     <div class = "edit-profile-div">
         <h1 class='profile-name'>{{this.userDetails.fname}} {{this.userDetails.sname}}</h1>
         <div class='profile-picture-wrapper'>
-            <img class="profile-picture" src="assets/images/placeholder-profile.jpg" alt="">
+            <img [hidden]="!this.hasImage" class="profile-picture" id="img4" src="" alt="">
+            <ion-spinner [hidden]="this.hasImage" name="circular"></ion-spinner>
+        </div>
+        <div class="ion-text-center upload-slot">
+            <label class="custom-file-upload ">
+                Upload 
+              <input type="file" id="customFile" (change)="selectFile($event)" placeholder="File to upload" accept=".JPEG,.PNG,.IMG">  
+            </label>
         </div>
         <form id = "profForm" #profileForm = "ngForm" (ngSubmit) = "getUserFormDetails(profileForm.value)">
             <div class = "profile-details-div">

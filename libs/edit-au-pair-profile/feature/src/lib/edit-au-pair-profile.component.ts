@@ -5,6 +5,7 @@ import { ToastController } from '@ionic/angular';
 import { Store } from '@ngxs/store';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
+import { SetImgString } from '../../../../shared/ngxs/actions';
 
 @Component({
   selector: 'the-au-pair-edit-au-pair-profile',
@@ -17,6 +18,10 @@ export class EditAuPairProfileComponent implements OnInit {
   hasErr = false;
   sameFlag = false;
   errFlag = true;
+
+  selectedFiles : any;
+  currentFileUpload: any;
+  hasImage = false;
 
   location = "";
   long = 0;
@@ -66,6 +71,7 @@ export class EditAuPairProfileComponent implements OnInit {
 
   ngOnInit(): void
   {
+    this.setImage();
     this.aupairID = this.store.snapshot().user.id;
     this.getUserDetails()
   }
@@ -300,6 +306,9 @@ export class EditAuPairProfileComponent implements OnInit {
     else
     {
       this.openToast();
+       if (this.selectedFiles != undefined) {
+      await this.upload();
+    }
     }
     
     this.router.navigate(['/au-pair-dashboard']);
@@ -397,5 +406,66 @@ export class EditAuPairProfileComponent implements OnInit {
 
   radioChecked(event: any){
     this.location = event.target.value;
+  }
+
+  selectFile(event: any) {
+    this.selectedFiles = event.target.files;
+    const fileReader = new FileReader();
+    fileReader.readAsDataURL(this.selectedFiles.item(0));
+    fileReader.onload = (event) => {
+      const dom = document.getElementById("img4");
+      if (dom != null) {
+        const ev = event.target;
+        if (ev != null) {
+          const res = ev.result as string;
+          if (res != null) {
+            dom.setAttribute("src",res);
+          }
+        }
+      }
+    }
+  }
+
+  async upload() {
+    this.currentFileUpload = this.selectedFiles.item(0);
+    await this.serv.storeFile(this.currentFileUpload,this.store.snapshot().user.id  +  ".png").toPromise().then(
+      res=>{
+        console.log("upload receieved");
+        console.log(res); 
+        return res;
+      },
+      error=>{
+        console.log(error);
+        return error;
+      }
+    );
+  }
+
+  async setImage(){
+    await this.serv.getFile(this.store.snapshot().user.id  +  ".png").toPromise().then(
+      async res=>{
+        const dataType = res.type;
+        const binaryData = [];
+        binaryData.push(res);
+        const href = window.URL.createObjectURL(new Blob(binaryData, {type: dataType}));
+        this.store.dispatch(new SetImgString(href));
+        const dom = document.getElementById("img4");
+
+        if(dom != null)
+        {
+          dom.setAttribute("src", this.store.snapshot().user.imgString);
+        }
+
+        this.hasImage = true;
+      },
+      error=>{
+        const dom = document.getElementById("img4");
+        if (dom != null) {
+          dom.setAttribute("src","assets/images/placeholder-profile.jpg");
+        }
+        this.hasImage = true;
+        return error;
+      }
+    );
   }
 }

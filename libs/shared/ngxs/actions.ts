@@ -50,3 +50,8 @@ export class SetEmail{
     static readonly type = '[User] set email';
     constructor(public payload: string) {}
 }
+
+export class SetImgString{
+    static readonly type = '[User] set imgString';
+    constructor(public payload: string) {}
+}
