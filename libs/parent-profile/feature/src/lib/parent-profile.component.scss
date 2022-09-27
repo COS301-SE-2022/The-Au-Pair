@@ -96,6 +96,7 @@
     line-height: 170%;
     margin-top: auto;
     margin-bottom: auto;
+    width: 65%;
 }
 
 .parent-text-info2{
@@ -146,6 +147,21 @@
     margin-top: 120px;
     opacity: 0.14;
     z-index: -10;
+}
+
+@media(max-width: 375px)
+{
+    .parent-text{
+        font-size: 12px !important;
+    }
+
+    .parent-text-info{
+        font-size: 12px !important;
+    }
+
+    .parent-text-info2{
+        font-size: 12px !important;
+    }
 }
 
 @media (max-width: 642px) {

@@ -3,6 +3,9 @@ export interface Activity{
     name: string;
     description: string;
     location: string;
+    boundary: number;
+    longitude: number;
+    latitude: number;
     timeStart: string;
     timeEnd: string;
     budget: number;
@@ -16,6 +19,7 @@ export interface Activity{
     id: string;
     fname: string;
     sname: string;
+    dob: string;
     allergies: string;
     diet: string;
     parent: string;
@@ -44,11 +48,12 @@ export interface Activity{
     children: string [];
     medID: string;
     auPair: string;
+    rating: number [];
   }
 
   export interface auPair{
     id: string;
-    rating: number;
+    rating: number [];
     onShift: boolean;
     employer: string;
     costIncurred: number;
@@ -58,6 +63,8 @@ export interface Activity{
     experience: string;
     currentLong: number;
     currentLat: number;
+    alreadyOutOfBounds: boolean;
+    terminateDate: string;
   }
 
   export interface User{
@@ -81,16 +88,6 @@ export interface Activity{
     banned: string;
   }
 
-  export interface auPair{
-    id: string;
-    rating: number;
-    payRate: number;
-    distTraveled: number;
-    costIncurred: number;
-    onShift: boolean;
-    employer: string;
-  }
-
   export interface Contract{
     parentID: string;
     auPairID: string;
@@ -109,8 +106,25 @@ export interface Activity{
   
   export interface Report{
     id: string;
-    issuerId: string;
-    auPairId: string;
+    reportIssuerId: string;
+    reportedUserId: string;
     desc: string;
+  }
+  
+  export interface Email{
+    to: string;
+    subject: string;
+    body: string;
+  }
+
+  export interface UserCosts{
+    id: string;
+    type: string;
+    description: string;
+    contributerId: string;
+    otherPartyId: string;
+    date: string;
+    metric: number;
+    amount: number;
   }
   

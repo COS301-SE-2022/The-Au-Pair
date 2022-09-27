@@ -19,8 +19,8 @@ export class AdminConsoleComponent implements OnInit{
     this.getSignUpRequests();    
   }
 
-  getSignUpRequests() {
-    this.serv.getApplicants().toPromise().then(res => {
+  async getSignUpRequests() {
+    await this.serv.getApplicants().toPromise().then(res => {
       this.auPairs = res;
 
       for(let i = 0; i < this.auPairs.length; i++) {
@@ -38,10 +38,10 @@ export class AdminConsoleComponent implements OnInit{
     });
   }
 
-  resolve(userId : string, choice : boolean) {
-    this.serv.resolveApplication(userId,choice).toPromise().then(res => {
+  async resolve(userId : string, choice : boolean) {
+    await this.serv.resolveApplication(userId,choice).toPromise().then(res => {
       console.log("The response is "+res);
-      window.location.reload();
+      location.reload();
       return choice;
     }).catch(err => {
       console.log(err);

@@ -7,12 +7,30 @@ import { HttpClientTestingModule } from "@angular/common/http/testing";
 import { NavbarModule } from '@the-au-pair/shared/components/navbar';
 import { RouterTestingModule } from "@angular/router/testing";
 import { EditAuPairProfileComponent } from './edit-au-pair-profile.component';
-import { NgxsModule } from '@ngxs/store';
+import { NgxsModule, Store } from '@ngxs/store';
 import { AppState } from '../../../../shared/ngxs/state';
+import { of } from 'rxjs';
+import { SetId } from '../../../../../libs/shared/ngxs/actions';
+
+const apiMock = {
+  getUser(){
+    return of({})
+  },
+  getAuPair() {
+    return of({})
+  },
+  editAuPair() {
+    return of({})
+  },
+  editUser() {
+    return of({})
+  }
+}
 
 describe('EditAuPairProfileComponent', () => {
   let component: EditAuPairProfileComponent;
   let fixture: ComponentFixture<EditAuPairProfileComponent>;
+  let store: Store;
 
   // A valid form of correct values
   const validForm = {email: "testemail@gmail.com", phone: "0832422323", address: "123 Valid Street", payRate: 50, bio: "test bio", experience: "test experience"}
@@ -29,7 +47,13 @@ describe('EditAuPairProfileComponent', () => {
   const invalidUser = {id: "invalidId", fname: "Kyle", sname: "Pottinger", email: "testemail@gmail.com", address: "123 Valid Street", registered: false, type: 0, password: "test", number: "0832422323", salt: "mrs", latitude: 20, longitude: 20, suburb: 'Midrand', gender: "male",fcmToken : "", birth: "01/01/2001", banned: "", warnings: 0}
 
   // Invalid Au Pair
-  const invalidAuPair = {id: "invalidId", rating: 5, onShift: false, employer: "David", costIncurred: 100, distTraveled: 300, payRate: 50, bio: "test bio", experience: "test experience", currentLong: 0.0,  currentLat: 0.0}
+  const invalidAuPair = {id: "invalidId", rating: [5], onShift: false, employer: "David", costIncurred: 100, distTraveled: 300, payRate: 50, bio: "test bio", experience: "test experience", currentLong: 0.0,  currentLat: 0.0, alreadyOutOfBounds: false, terminateDate: ""}
+
+  beforeEach(async () => {
+    await TestBed.configureTestingModule({
+      declarations: [EditAuPairProfileComponent],
+    }).compileComponents();
+  });
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
@@ -41,14 +65,14 @@ describe('EditAuPairProfileComponent', () => {
         RouterTestingModule,
         NgxsModule.forRoot([AppState])
     ],
-    providers: [API]
+    providers:[
+      {
+        provide:API, useValue:apiMock
+      }
+    ]
     }).compileComponents();
-  });
 
-  beforeEach(async () => {
-    await TestBed.configureTestingModule({
-      declarations: [EditAuPairProfileComponent],
-    }).compileComponents();
+    store = TestBed.inject(Store);
   });
 
   beforeEach(() => {
@@ -82,39 +106,41 @@ describe('EditAuPairProfileComponent', () => {
   //------------------------------------------------------------------------------------------------------------------------------------------------------------------------
   /**Populated form fields form testing**/
   it('should, given valid input from the form, update the userDetails and auPairDetails variable', async ()=>{
-    const expectedUserValue: User = {
-      id: "",
-      fname: "",
-      sname: "",
-      email: "testemail@gmail.com",
-      address: "123 Valid Street",
-      registered: false,
-      type: 0,
-      password: "",
-      number: "0832422323",
-      salt: "",
-      latitude: 0, 
-      longitude: 0, 
-      suburb: "", 
-      gender: "",      
+    const expectedUserValue: any = {
+      id: undefined,
+      fname: undefined,
+      sname: undefined,
+      email: undefined,
+      address: undefined,
+      registered: undefined,
+      type: undefined,
+      password: undefined,
+      number: undefined,
+      salt: undefined,
+      latitude: undefined, 
+      longitude: undefined, 
+      suburb: undefined, 
+      gender: undefined,      
       fcmToken : "",
-      birth: "",
-      banned: "",
-      warnings: 0,
+      birth: undefined,
+      banned: undefined,
+      warnings: undefined,
     };
 
-    const expectedAuPairValue: auPair = {
-      id: "",
-      rating: 0,
-      onShift: false,
-      employer: "",
-      costIncurred: 0,
-      distTraveled: 0,
-      payRate: 50,
-      bio: "test bio",
-      experience: "test experience",
-      currentLong: 0.0,
-      currentLat: 0.0
+    const expectedAuPairValue: any = {
+      id: undefined,
+      rating: undefined,
+      onShift: undefined,
+      employer: undefined,
+      costIncurred: undefined,
+      distTraveled: undefined,
+      payRate: undefined,
+      bio: undefined,
+      experience: undefined,
+      currentLong: undefined,
+      currentLat: undefined,
+      alreadyOutOfBounds: false,
+      terminateDate: undefined,
     };
 
     jest.spyOn(component,"getUserDetails");
@@ -129,39 +155,41 @@ describe('EditAuPairProfileComponent', () => {
   //------------------------------------------------------------------------------------------------------------------------------------------------------------------------
   /**Empty fields form testing**/
   it('should, given a form with no email, NOT poplate the userDetails or auPairDetails variable', async ()=>{
-    const expectedUserValue: User = {
-      id: "",
-      fname: "",
-      sname: "",
-      email: "",
-      address: "",
-      registered: false,
-      type: 0,
-      password: "",
-      number: "",
-      salt: "",
-      latitude: 0, 
-      longitude: 0, 
-      suburb: "", 
-      gender: "", 
+    const expectedUserValue: any = {
+      id: undefined,
+      fname: undefined,
+      sname: undefined,
+      email: undefined,
+      address: undefined,
+      registered: undefined,
+      type: undefined,
+      password: undefined,
+      number: undefined,
+      salt: undefined,
+      latitude: undefined, 
+      longitude: undefined, 
+      suburb: undefined, 
+      gender: undefined,      
       fcmToken : "",
-      birth: "",
-      banned: "",
-      warnings: 0,
+      birth: undefined,
+      banned: undefined,
+      warnings: undefined,
     };
 
-    const expectedAuPairValue: auPair = {
-      id: "",
-      rating: 0,
-      onShift: false,
-      employer: "",
-      costIncurred: 0,
-      distTraveled: 0,
-      payRate: 0,
-      bio: "",
-      experience: "",
-      currentLong: 0.0,
-      currentLat: 0.0
+    const expectedAuPairValue: any = {
+      id: undefined,
+      rating: undefined,
+      onShift: undefined,
+      employer: undefined,
+      costIncurred: undefined,
+      distTraveled: undefined,
+      payRate: undefined,
+      bio: undefined,
+      experience: undefined,
+      currentLong: undefined,
+      currentLat: undefined,
+      alreadyOutOfBounds: false,
+      terminateDate: undefined,
     };
 
     jest.spyOn(component,"getUserDetails");
@@ -174,39 +202,41 @@ describe('EditAuPairProfileComponent', () => {
   })
 
   it('should, given a form with no phone number, NOT poplate the userDetails or auPairDetails variable', async ()=>{
-    const expectedUserValue: User = {
-      id: "",
-      fname: "",
-      sname: "",
-      email: "",
-      address: "",
-      registered: false,
-      type: 0,
-      password: "",
-      number: "",
-      salt: "",
-      latitude: 0, 
-      longitude: 0, 
-      suburb: "", 
-      gender: "",       
+    const expectedUserValue: any = {
+      id: undefined,
+      fname: undefined,
+      sname: undefined,
+      email: undefined,
+      address: undefined,
+      registered: undefined,
+      type: undefined,
+      password: undefined,
+      number: undefined,
+      salt: undefined,
+      latitude: undefined, 
+      longitude: undefined, 
+      suburb: undefined, 
+      gender: undefined,      
       fcmToken : "",
-      birth: "",
-      banned: "",
-      warnings: 0,
+      birth: undefined,
+      banned: undefined,
+      warnings: undefined,
     };
 
-    const expectedAuPairValue: auPair = {
-      id: "",
-      rating: 0,
-      onShift: false,
-      employer: "",
-      costIncurred: 0,
-      distTraveled: 0,
-      payRate: 0,
-      bio: "",
-      experience: "",
-      currentLong: 0.0,
-      currentLat: 0.0
+    const expectedAuPairValue: any = {
+      id: undefined,
+      rating: undefined,
+      onShift: undefined,
+      employer: undefined,
+      costIncurred: undefined,
+      distTraveled: undefined,
+      payRate: undefined,
+      bio: undefined,
+      experience: undefined,
+      currentLong: undefined,
+      currentLat: undefined,
+      alreadyOutOfBounds: false,
+      terminateDate: undefined,
     };
 
     jest.spyOn(component,"getUserDetails");
@@ -219,39 +249,41 @@ describe('EditAuPairProfileComponent', () => {
   })
 
   it('should, given a form with no address, NOT poplate the userDetails or auPairDetails variable', async ()=>{
-    const expectedUserValue: User = {
-      id: "",
-      fname: "",
-      sname: "",
-      email: "",
-      address: "",
-      registered: false,
-      type: 0,
-      password: "",
-      number: "",
-      salt: "",
-      latitude: 0, 
-      longitude: 0, 
-      suburb: "", 
-      gender: "", 
+    const expectedUserValue: any = {
+      id: undefined,
+      fname: undefined,
+      sname: undefined,
+      email: undefined,
+      address: undefined,
+      registered: undefined,
+      type: undefined,
+      password: undefined,
+      number: undefined,
+      salt: undefined,
+      latitude: undefined, 
+      longitude: undefined, 
+      suburb: undefined, 
+      gender: undefined,      
       fcmToken : "",
-      birth: "",
-      banned: "",
-      warnings: 0,
+      birth: undefined,
+      banned: undefined,
+      warnings: undefined,
     };
 
-    const expectedAuPairValue: auPair = {
-      id: "",
-      rating: 0,
-      onShift: false,
-      employer: "",
-      costIncurred: 0,
-      distTraveled: 0,
-      payRate: 0,
-      bio: "",
-      experience: "",
-      currentLong: 0.0,
-      currentLat: 0.0
+    const expectedAuPairValue: any = {
+      id: undefined,
+      rating: undefined,
+      onShift: undefined,
+      employer: undefined,
+      costIncurred: undefined,
+      distTraveled: undefined,
+      payRate: undefined,
+      bio: undefined,
+      experience: undefined,
+      currentLong: undefined,
+      currentLat: undefined,
+      alreadyOutOfBounds: false,
+      terminateDate: undefined,
     };
 
     jest.spyOn(component,"getUserDetails");
@@ -264,39 +296,41 @@ describe('EditAuPairProfileComponent', () => {
   })
 
   it('should, given a form with no payRate, NOT poplate the userDetails or auPairDetails variable', async ()=>{
-    const expectedUserValue: User = {
-      id: "",
-      fname: "",
-      sname: "",
-      email: "",
-      address: "",
-      registered: false,
-      type: 0,
-      password: "",
-      number: "",
-      salt: "",
-      latitude: 0, 
-      longitude: 0, 
-      suburb: "", 
-      gender: "", 
+    const expectedUserValue: any = {
+      id: undefined,
+      fname: undefined,
+      sname: undefined,
+      email: undefined,
+      address: undefined,
+      registered: undefined,
+      type: undefined,
+      password: undefined,
+      number: undefined,
+      salt: undefined,
+      latitude: undefined, 
+      longitude: undefined, 
+      suburb: undefined, 
+      gender: undefined,      
       fcmToken : "",
-      birth: "",
-      banned: "",
-      warnings: 0,
+      birth: undefined,
+      banned: undefined,
+      warnings: undefined,
     };
 
-    const expectedAuPairValue: auPair = {
-      id: "",
-      rating: 0,
-      onShift: false,
-      employer: "",
-      costIncurred: 0,
-      distTraveled: 0,
-      payRate: 0,
-      bio: "",
-      experience: "",
-      currentLong: 0.0,
-      currentLat: 0.0
+    const expectedAuPairValue: any = {
+      id: undefined,
+      rating: undefined,
+      onShift: undefined,
+      employer: undefined,
+      costIncurred: undefined,
+      distTraveled: undefined,
+      payRate: undefined,
+      bio: undefined,
+      experience: undefined,
+      currentLong: undefined,
+      currentLat: undefined,
+      alreadyOutOfBounds: false,
+      terminateDate: undefined,
     };
 
     jest.spyOn(component,"getUserDetails");
@@ -309,39 +343,41 @@ describe('EditAuPairProfileComponent', () => {
   })
 
   it('should, given a form with no bio, NOT poplate the userDetails or auPairDetails variable', async ()=>{
-    const expectedUserValue: User = {
-      id: "",
-      fname: "",
-      sname: "",
-      email: "",
-      address: "",
-      registered: false,
-      type: 0,
-      password: "",
-      number: "",
-      salt: "",
-      latitude: 0, 
-      longitude: 0, 
-      suburb: "", 
-      gender: "", 
+    const expectedUserValue: any = {
+      id: undefined,
+      fname: undefined,
+      sname: undefined,
+      email: undefined,
+      address: undefined,
+      registered: undefined,
+      type: undefined,
+      password: undefined,
+      number: undefined,
+      salt: undefined,
+      latitude: undefined, 
+      longitude: undefined, 
+      suburb: undefined, 
+      gender: undefined,      
       fcmToken : "",
-      birth: "",
-      banned: "",
-      warnings: 0,
+      birth: undefined,
+      banned: undefined,
+      warnings: undefined,
     };
 
-    const expectedAuPairValue: auPair = {
-      id: "",
-      rating: 0,
-      onShift: false,
-      employer: "",
-      costIncurred: 0,
-      distTraveled: 0,
-      payRate: 0,
-      bio: "",
-      experience: "",
-      currentLong: 0.0,
-      currentLat: 0.0
+    const expectedAuPairValue: any = {
+      id: undefined,
+      rating: undefined,
+      onShift: undefined,
+      employer: undefined,
+      costIncurred: undefined,
+      distTraveled: undefined,
+      payRate: undefined,
+      bio: undefined,
+      experience: undefined,
+      currentLong: undefined,
+      currentLat: undefined,
+      alreadyOutOfBounds: false,
+      terminateDate: undefined,
     };
 
     jest.spyOn(component,"getUserDetails");
@@ -354,39 +390,41 @@ describe('EditAuPairProfileComponent', () => {
   })
 
   it('should, given a form with no experience, NOT poplate the userDetails or auPairDetails variable', async ()=>{
-    const expectedUserValue: User = {
-      id: "",
-      fname: "",
-      sname: "",
-      email: "",
-      address: "",
-      registered: false,
-      type: 0,
-      password: "",
-      number: "",
-      salt: "",
-      latitude: 0, 
-      longitude: 0, 
-      suburb: "", 
-      gender: "", 
+    const expectedUserValue: any = {
+      id: undefined,
+      fname: undefined,
+      sname: undefined,
+      email: undefined,
+      address: undefined,
+      registered: undefined,
+      type: undefined,
+      password: undefined,
+      number: undefined,
+      salt: undefined,
+      latitude: undefined, 
+      longitude: undefined, 
+      suburb: undefined, 
+      gender: undefined,      
       fcmToken : "",
-      birth: "",
-      banned: "",
-      warnings: 0,
+      birth: undefined,
+      banned: undefined,
+      warnings: undefined,
     };
 
-    const expectedAuPairValue: auPair = {
-      id: "",
-      rating: 0,
-      onShift: false,
-      employer: "",
-      costIncurred: 0,
-      distTraveled: 0,
-      payRate: 0,
-      bio: "",
-      experience: "",
-      currentLong: 0.0,
-      currentLat: 0.0
+    const expectedAuPairValue: any = {
+      id: undefined,
+      rating: undefined,
+      onShift: undefined,
+      employer: undefined,
+      costIncurred: undefined,
+      distTraveled: undefined,
+      payRate: undefined,
+      bio: undefined,
+      experience: undefined,
+      currentLong: undefined,
+      currentLat: undefined,
+      alreadyOutOfBounds: false,
+      terminateDate: undefined,
     };
 
     jest.spyOn(component,"getUserDetails");
@@ -398,5 +436,107 @@ describe('EditAuPairProfileComponent', () => {
     expect(component.auPairDetails).toEqual(expectedAuPairValue);
   })
   //------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+  
+  it('should, return the users details from the api call', async () => {
+    store.dispatch(new SetId("0101015077086"));
+    jest.spyOn(apiMock, 'getUser').mockImplementation(()=>of(
+      {
+        id: "0101015077086",
+        fname: "TestFN",
+        sname: "TestSN",
+        email: "test@gmail.com",
+        address: "Test 123",
+        registered: true,
+        type: 2,
+        password: "TestPassword",
+        number: "0833332222",
+        salt: "testsaltyes",
+        latitude: 30,
+        longitude: 30,
+        suburb: "Midrand",
+        gender: "male",
+        fcmToken : "testFCMtoken",
+        birth: "05/07/2004",
+        warnings: 0,
+        banned: "",
+      }
+    ));
+
+    await component.ngOnInit();
+    expect(component.aupairID).toEqual("0101015077086");
+  })
+
+  it('should, return the au pairs details from the api call', async () => {
+    store.dispatch(new SetId("0101015077086"));
+    jest.spyOn(apiMock, 'getAuPair').mockImplementation(()=>of(
+      {
+        id: "0101015077086",
+        rating: [5],
+        onShift: true,
+        employer: "",
+        costIncurred: 0,
+        distTraveled: 0,
+        payRate: 0,
+        bio: "Test Bio",
+        experience: "Test Experience",
+        currentLong: 0.0,
+        currentLat : 0.0,
+        terminateDate: "",
+      }
+    ));
+
+    await component.ngOnInit();
+    expect(component.aupairID).toEqual("0101015077086");
+  })
+
+  it('should, open a toast when openToast is called', async ()=>{
+    jest.spyOn(component,"openToast");
+    component.openToast();
+    expect(await component.openToast).toReturn();
+  });
+
+  it('should, call editUser function if the form contains valid details', async ()=>{
+    jest.spyOn(component,"editUser");
+
+    const UserValue: User = {
+      id: "",
+      fname: "",
+      sname: "",
+      email: "",
+      address: "",
+      registered: false,
+      type: 0,
+      password: "",
+      number: "",
+      salt: "",
+      latitude: 0,
+      longitude: 0,
+      suburb: "",
+      gender: "",
+      fcmToken : "",
+      birth: "",
+      banned: "",
+      warnings: 0,
+    };
+
+    const AuPairValue: auPair = {
+      id: "",
+      rating: [],
+      onShift: false,
+      employer: "",
+      costIncurred: 0,
+      distTraveled: 0,
+      payRate: 0,
+      bio: "",
+      experience: "",
+      currentLong: 0,
+      currentLat: 0,
+      alreadyOutOfBounds: false,
+      terminateDate: "",
+    };
+
+    await component.editDetails(UserValue, AuPairValue);
+    expect(component.editUser).toHaveBeenCalled();
+  })
 });
 

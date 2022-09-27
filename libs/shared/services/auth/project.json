@@ -1,0 +1,26 @@
+{
+  "projectType": "service",
+  "root": "libs/shared/services/auth",
+  "sourceRoot": "libs/shared/services/auth/src",
+  "prefix": "the-au-pair",
+  "targets": {
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["coverage/libs/shared/services/auth"],
+      "options": {
+        "jestConfig": "libs/shared/services/auth/jest.config.js",
+        "passWithNoTests": true
+      }
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "options": {
+        "lintFilePatterns": [
+          "libs/shared/services/auth/src/**/*.ts",
+          "libs/shared/services/auth/src/**/*.html"
+        ]
+      }
+    }
+  },
+  "tags": []
+}

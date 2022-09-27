@@ -23,7 +23,7 @@ public class ContractRepositoryTests
   public void setup()
   {
     expectedContract = new Contract("","","", "");
-    id = "sqtojoqh1xd9p2nnrbftz0on";
+    id = "j3brtsb5si26oeqfoeacv5qp";
   }
 
   @Test

@@ -95,15 +95,14 @@ public class hoursLoggedService
   public int getMonthMinutes(String id, String date)
   {
     List<hoursLogged> hl = hlr.findAllByUserId(id, Sort.by(Sort.Direction.DESC, "date"));
-
-    String monthIn = date.split("/")[1];
+    String[] inDateArray = date.split("/");
 
     int minuteSum = 0;
     for (hoursLogged hourLog : hl)
     {
       String [] dateString = hourLog.getDate().split("/");
 
-      if (dateString[1].equals(monthIn)) {
+      if (dateString[1].equals(inDateArray[1]) && dateString[2].equals(inDateArray[2])) {
         String [] timeStart = hourLog.getTimeStart().split(":");
         if (hourLog.getTimeEnd() == null || hourLog.getTimeEnd().equals(""))
           continue;

@@ -3,18 +3,18 @@
     <div class="page-wrapper">
         <div class='parent-dashboard-div'>
             <p class='welcome-heading'>Welcome {{this.userDetails.fname}}</p>
-
-            <div class="au-pair-div-wrapper">
-                <div class='au-pair-name' *ngIf='this.parentDetails.auPair !== ""; else noaupair'>Au Pair: {{this.auPairDetails.fname}} {{this.auPairDetails.sname}}
-                    <a href = 'tel:{{this.auPairDetails.number}}'><ion-icon name="call" class = 'call-icon'></ion-icon></a>
-                    <a href = 'sms:{{this.auPairDetails.number}}'><ion-icon name="chatbubble-ellipses" class = 'message-icon'></ion-icon></a>
-                    <ion-icon class="rating-icon" name="star" (click)="openModal(this.userDetails.id)"></ion-icon>
-                    <div *ngIf="this.parentDetails.auPair !== ''"><ion-icon class="terminate-contract" name="person-remove" (click)="presentAlert()"></ion-icon></div>
+            <div class="au-pair-div-wrapper" *ngIf='this.parentDetails.auPair !== ""'>
+                <div class='au-pair-name'>Au Pair: {{this.auPairDetails.fname}} {{this.auPairDetails.sname}}</div>
+                <div class="button-container">
+                    <a title="Call Au Pair" href = 'tel:{{this.auPairDetails.number}}'><ion-icon name="call" class = 'call-icon'></ion-icon></a>
+                    <a title="Message Au Pair" href = 'sms:{{this.auPairDetails.number}}'><ion-icon name="chatbubble-ellipses" class = 'message-icon'></ion-icon></a>
+                    <button title="Rate Au Pair" style="all: unset; cursor: pointer;" (click)="openModal(this.parentDetails.auPair)"><ion-icon class="rating-icon" name="star"></ion-icon></button>
+                    <button title="Report Au Pair" style="all: unset; cursor: pointer;" (click)="openReportModal()"><ion-icon class="report-icon" name="alert-circle"></ion-icon></button>
+                    <button title="Terminate Employment" style="all: unset; cursor: pointer;" *ngIf="this.parentDetails.auPair !== ''"  (click)="presentAlert()"><ion-icon class="terminate-contract" name="person-remove"></ion-icon></button>
                 </div>
-                <ng-template #noaupair>
-                    <div class='au-pair-name'>Au Pair: No Au Pair employed</div>
-                </ng-template>
             </div>
+
+            <div class="no-au-pair-wrapper" *ngIf='this.parentDetails.auPair === ""'>Au Pair: No Au Pair employed</div>
 
             <div class="children-div-wrapper">
 
@@ -65,11 +65,11 @@
                         <ion-icon name="compass" class='action-icon '></ion-icon>
                         <div class='action-tag '>Track Au Pair</div>
                     </div>
-                    <div *ngIf="this.parentDetails.auPair !== '' || this.parentDetails.children.length === 0" style="opacity : 0.4;" class='action' id="trackAuPair" (click)="checkHasChildrenExplore()">
+                    <div *ngIf="this.parentDetails.auPair !== '' || this.parentDetails.children.length === 0" style="opacity : 0.4;" class='action' id="exploreAuPairs" (click)="checkHasChildrenExplore()">
                         <ion-icon name="people-outline" class='action-icon '></ion-icon>
                         <div class='action-tag '>Explore</div>
                     </div>
-                    <div *ngIf="this.parentDetails.auPair === '' && this.parentDetails.children.length !== 0" class='action' id="trackAuPair" (click)="checkHasChildrenExplore()">
+                    <div *ngIf="this.parentDetails.auPair === '' && this.parentDetails.children.length !== 0" class='action' id="exploreAuPairs" (click)="checkHasChildrenExplore()">
                         <ion-icon name="people-outline" class='action-icon '></ion-icon>
                         <div class='action-tag '>Explore</div>
                     </div>

@@ -1,0 +1,61 @@
+<the-au-pair-navbar></the-au-pair-navbar>
+<ion-content [fullscreen]="true">
+    <div class = "parent-profile-div">
+        <h1 class='job-summary-title'>Job Summary</h1>
+        <h3 class='children-name'>{{this.userDetails.fname}} {{this.userDetails.sname}}</h3>
+            <div class='profile-picture-wrapper'>
+                <img class="profile-picture" src="assets/images/placeholder-profile.jpg" alt="">
+            </div>
+        <div class = 'details-div'>
+            <div class = "small-profile-details-div">
+                <div class="parent-info-small">
+                    <div class="parent-text">Email: </div>
+                    <p class="parent-text-info">{{this.userDetails.email}}</p>
+                </div>
+                <div class="parent-info-small">
+                    <div class="parent-text">Phone: </div>
+                    <p class="parent-text-info">{{this.userDetails.number}}</p>
+                </div>
+            </div>
+            <div class = 'large-profile-details-div'>
+                <div class="parent-info-large">
+                    <div class="parent-text">Suburb: </div>
+                    <p class="parent-text-info">{{this.userDetails.suburb}}</p>
+                </div>
+                <div class="parent-info-large">
+                    <div class="parent-text">Gender: </div>
+                    <p class="parent-text-info" style="text-transform:capitalize">{{this.userDetails.gender}}</p>
+                </div>
+                <div class="parent-info-large">
+                    <div class="parent-text">Rating: </div>
+                    <p *ngIf="this.getAverage(this.parentDetails.rating) !== 0" class="parent-text-info">{{this.getAverage(this.parentDetails.rating)}}/5</p>
+                    <p *ngIf="this.getAverage(this.parentDetails.rating) === 0" class="parent-text-info">Not yet rated</p>
+                </div>
+            </div>
+        </div>
+        <h3 class='profile-name'>Children</h3>
+        <div class = 'details-div' *ngFor="let c of childrenArr; let last = last">
+            <h3 class='children-name'>{{c.fname}} {{c.sname}}</h3>
+            <div class = "small-profile-details-div">
+                <div class="parent-info-small">
+                    <div class="parent-text">Age: </div>
+                    <p class="parent-text-info">{{getAge(c.dob)}}</p>
+                </div>
+            </div>
+            <div class = 'large-profile-details-div'>
+                <div class="parent-info-large">
+                    <div class="parent-text">Allergies: </div>
+                    <p class="parent-text-info">{{c.allergies}}</p>
+                </div>
+                <div class="parent-info-large">
+                    <div class="parent-text">Dietary Requirements: </div>
+                    <p class="parent-text-info">{{c.diet}}</p>
+                </div>
+            </div>
+        </div>
+        <div class="spacer"></div>
+    </div>
+    <img id="active-2" src="assets/images/active.png">
+    <img id="active" src="assets/images/active-2.png">
+    <img id="lifestyles" src="assets/images/lifestyles.png">
+</ion-content>

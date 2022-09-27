@@ -13,6 +13,16 @@ export class SetType{
     constructor(public payload: number) {}
 }
 
+export class SetCurrentActivity{
+    static readonly type = '[User] set currentActivity';
+    constructor(public payload: string) {}
+}
+
+export class SetCurrentChild{
+    static readonly type = '[User] set currentChild';
+    constructor(public payload: string) {}
+}
+
 export class SetFcmToken{
     static readonly type = '[User] set fcmToken';
     constructor(public payload: string) {}
@@ -20,4 +30,23 @@ export class SetFcmToken{
 
 export class Reset{
     static readonly type = '[AppState] Reset Store';
+}
+
+export class SetChildren{
+    static readonly type = '[Parent] set children';
+    constructor(public payload: []) {}
+}
+
+export class SetAuPair{
+    static readonly type = '[Parent] set auPair';
+    constructor(public payload: string) {}
+}
+export class SetLoggedIn{
+    static readonly type = '[User] set loggedIn';
+    constructor(public payload: boolean) {}
+}
+
+export class SetEmail{
+    static readonly type = '[User] set email';
+    constructor(public payload: string) {}
 }

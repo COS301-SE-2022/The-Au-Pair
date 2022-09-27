@@ -4,11 +4,11 @@ import Database.TheAuPair.Models.Contract;
 import Database.TheAuPair.Repositories.ContractRepository;
 import Database.TheAuPair.Services.ContractService;
 import org.springframework.web.bind.annotation.*;
-
 import java.util.List;
 import java.util.Map;
 
 @RestController
+@CrossOrigin(origins = "*")
 public class ContractController
 {
   private ContractService cts;
@@ -19,7 +19,6 @@ public class ContractController
   }
 
   @PostMapping("/getContract")
-  @CrossOrigin(origins = "http://localhost:4200/")
   public Contract getContract(@RequestBody String id)
   {
     Contract ct =  cts.getContract(id);
@@ -27,7 +26,6 @@ public class ContractController
   }
 
   @PostMapping("/getContractbyIDs")
-  @CrossOrigin(origins = "http://localhost:4200/")
   public Contract getContractbyIDs(@RequestBody Map<String, String> IDs)
   {
     Contract ct = cts.getContractbyIDs(IDs.get("parentID"), IDs.get("auPairID"));
@@ -35,28 +33,24 @@ public class ContractController
   }
 
   @PostMapping("/editContract")
-  @CrossOrigin(origins = "http://localhost:4200/")
   public void editContract(@RequestBody Contract c)
   {
     this.cts.updateContract(c);
   }
 
   @PostMapping("/removeContract")
-  @CrossOrigin(origins = "http://localhost:4200/")
   public void removeContract(@RequestBody String id)
   {
     this.cts.deleteContract(id);
   }
 
   @PostMapping("/addContract")
-  @CrossOrigin(origins = "http://localhost:4200/")
   public void addContract(@RequestBody Contract c)
   {
     this.cts.addContract(c);
   }
 
   @GetMapping("/getAllContracts")
-  @CrossOrigin(origins = "http://localhost:4200/")
   public List<Contract> getAllContracts()
   {
     return this.cts.getAllContracts();

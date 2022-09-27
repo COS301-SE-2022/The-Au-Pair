@@ -1,0 +1,354 @@
+.job-summary-title{
+    font-size: 46px;
+    padding-top: 2%;
+    margin-bottom: 2%;
+    color: white;
+    text-align: center;
+    font-family: TitanOne;
+    margin-top: 0px; 
+}
+
+.parent-name {
+    font-size: 38px;
+    padding-top: 2%;
+    margin-bottom: 2%;
+    color: black;
+    text-align: center;
+    font-family: Roboto;
+    margin-top: 0px;
+}
+
+.profile-name {
+    font-size: 34px;
+    padding-top: 2%;
+    margin-bottom: 2%;
+    color: white;
+    text-align: center;
+    font-family: Roboto;
+    margin-top: 0px;
+}
+
+.children-name{
+    font-size: 1.8vw;
+    margin-bottom: 2%;
+    color: black;
+    text-align: center;
+    font-family: Roboto;
+    margin-top: 0px;
+}
+
+.parent-profile-div{
+    width: 100%;
+    margin: auto;
+    background-color: #69A88DB2;
+    border-radius: 16px;
+}
+
+.profile-picture-div{
+    width: 33.3%;
+    height: 100%;
+    float: left;
+}
+
+.details-div{
+    width: 60%;
+    height: 100%;
+    margin-left: auto;
+    margin-right: auto;
+    padding-bottom: 25px;
+}
+
+.empty-div{
+    width: 33.3%;
+    height: 100%;
+    float: right;
+}
+
+.profile-picture-wrapper{
+    width: 166px;
+    height: 166px;
+    background-color: rgba($color: #032927BF, $alpha: 0.75);
+    border-radius: 50%;
+    margin: auto;
+    display: flex;
+    align-items: center;
+    text-align: center;
+    justify-content: center;
+    margin-top: 20px;
+    margin-bottom: 25px;
+}
+
+.profile-picture {
+    width: 140px;
+    height: 140px;
+    border-radius: 50%;
+}
+
+.parent-info-small{
+    height: 6%;
+    background-color: var(--ion-background-color);
+    display:flex;
+    font-family: Roboto;
+    align-items: center;
+    color: black;
+    margin-bottom: 12px;
+    box-shadow: 1px 2px 5px rgba(0, 0, 0, 0.13);
+    border-radius: 6px;
+}
+
+.parent-info-large{
+    height: 26%;
+    background-color: var(--ion-background-color);
+    display:flex;
+    margin-top: 10px;
+    font-family: Roboto;
+    color: black;
+    margin-bottom: 12px;
+    box-shadow: 1px 2px 5px rgba(0, 0, 0, 0.13);
+    border-radius: 6px;
+}
+
+.parent-text{
+    margin-left: 12px;
+    font-size: 100%;
+    width: 35%;
+    margin: 10px;
+}
+
+.parent-text-info{
+    color: var(--ion-color-dark);
+    font-size: 100%;
+    margin-right: auto;
+    line-height: 170%;
+    margin-top: auto;
+    margin-bottom: auto;
+}
+
+.parent-text-info2{
+    color: var(--ion-color-dark);
+    font-size: 100%;
+    margin-right: auto;
+    line-height: 170%;
+    margin-top: auto;
+    margin-bottom: auto;
+}
+
+.terms-container{
+    margin-left: 20px;
+    margin-right: 20px;
+    color: black;
+    font-size: 15px;
+}
+
+.action-buttons{
+    display: flex;
+}
+
+.accept-button{
+    padding: 10px 22px;
+    gap: 10px;
+    border: 2px solid var(--ion-background-color);
+    border-radius: 10px;
+    background-color: var(--ion-color-primary);
+    margin: auto;
+    display: block;
+    margin-bottom: 30px;
+}
+
+.reject-button{
+    padding: 10px 22px;
+    gap: 10px;
+    border: 2px solid var(--ion-background-color);
+    border-radius: 10px;
+    background-color: var(--ion-color-danger);
+    margin: auto;
+    display: block;
+    margin-bottom: 30px;
+}
+
+.spacer{
+    height: 20px;
+}
+
+.title{
+    font-weight: bold;
+    font-size: 24px;
+}
+
+.icon-close{
+    cursor: pointer;
+    float: right;
+    width: 30px;
+    height: 30px;
+}
+
+.num{
+    margin-top: 50px;
+}
+
+.card-bar-graph{
+    border-radius: 16px;
+    height: 500px;
+    background-color: white;
+    font-size: var(--heading-size);
+    margin: auto;
+    width: 85%;
+}
+
+.bar-graph {
+    width: 100%;
+    height: 450px;
+    position: relative;
+    display: grid;
+    grid-template-columns: 1fr repeat(7, 1fr);
+    align-items: center;
+    justify-items: center;
+    font-size: var(--heading-size);
+    bottom: 0px;
+    margin-left: 35px;
+}
+  
+.day-wrapper { 
+    height: 100%;
+    vertical-align: bottom;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+}
+  
+ion-icon {
+    pointer-events :none;
+}
+
+.day {
+    width: 10%;
+    background-color: var(--ion-color-secondary);
+    position: absolute;
+    bottom: 50px;
+    border-radius: 10px;
+    color: white;
+}
+
+.label {
+    position: absolute;
+    bottom: 0;
+    height: 50px;
+    font-size: 24px;
+    font-weight: bold;
+}
+
+.hour-ranges{
+    font-size: 15px;
+}
+
+@media(max-width: 375px)
+{
+    .parent-text{
+        width: 35% !important;
+        font-size: 12px !important;
+    }
+
+    .parent-text-info{
+        font-size: 12px !important;
+    }
+
+    .children-name{
+        font-size: 30px !important;
+    }
+
+    .card-bar-graph{
+        width: 95%;
+    }
+
+    .label{
+        font-size: 14px !important;
+    }
+
+    .day{
+        font-size: 18px !important;
+    }
+}
+
+@media (max-width: 642px) {
+    .bar-graph {
+        margin-left: 20px;
+    }
+
+    .job-summary-title{
+        font-size: 36px;
+        padding-top: 15px;
+        padding-bottom: 15px;
+    }
+
+    .profile-name{
+        font-size: 30px;
+        padding-top: 15px;
+        padding-bottom: 15px;
+    }
+
+    .children-name{
+        font-size: 30px;
+        padding-bottom: 15px;
+    }
+
+    .parent-text{
+        width: 30%;
+        font-size: 18px;
+    }
+
+    .parent-text-info{
+        font-size: 18px;
+    }
+
+    .parent-text-info2{
+        padding-top: 5px;
+    }
+
+    .details-div{
+        width: 95%;
+    }
+
+    .label{
+        font-size: 18px;
+    }
+
+    .hour-ranges{
+        font-size: 12px;
+    }
+}
+
+@media (max-width: 810px) {
+    .job-summary-title{
+        font-size: 36px;
+        padding-top: 15px;
+        padding-bottom: 15px;
+    }
+
+    .profile-name{
+        font-size: 30px;
+        padding-top: 15px;
+        padding-bottom: 15px;
+    }
+
+    .children-name{
+        font-size: 24px;
+        padding-bottom: 15px;
+    }
+
+    .parent-text{
+        width: 30%;
+        font-size: 18px;
+    }
+
+    .parent-text-info{
+        font-size: 18px;
+    }
+
+    .parent-text-info2{
+        padding-top: 5px;
+    }
+
+    .details-div{
+        width: 85%;
+    }
+}

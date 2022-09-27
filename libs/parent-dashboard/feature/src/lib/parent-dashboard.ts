@@ -1,30 +1,51 @@
 import { Component, OnInit } from '@angular/core';
 import { API } from '../../../../shared/api/api.service';
-import { auPair, Child, Parent, User } from '../../../../shared/interfaces/interfaces';
+import { auPair, Child, Email, Parent, User, Notification } from '../../../../shared/interfaces/interfaces';
 import { AuPairRatingModalComponent } from './au-pair-rating-modal/au-pair-rating-modal.component';
+import { UserReportModalComponent } from './user-report-modal/user-report-modal.component';
 import { ModalController, ToastController } from '@ionic/angular';
 import { Store } from '@ngxs/store';
 import { Router } from '@angular/router';
 import { AlertController } from '@ionic/angular';
-import { Handler } from 'leaflet';
+import { SetAuPair, SetChildren } from '../../../../shared/ngxs/actions';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 @Component({
   selector: 'the-au-pair-parent-dashboard',
   templateUrl: 'parent-dashboard.html',
   styleUrls: ['parent-dashboard.scss'],
 })
-export class ParentDashboardComponent implements OnInit{
-
+export class ParentDashboardComponent implements OnInit{ 
   children: Child[] = [];
   parentID = "";
+  umPoorID = "";
+  userFcmToken = "";
 
   handlerMessage!: boolean;
+
+  childDetails: Child ={
+    id: "",
+    fname: "",
+    sname: "",
+    dob: "",
+    allergies: "",
+    diet: "",
+    parent: "",
+    aupair: ''
+  }
+
+  emailRequest : Email = {
+    to: "",
+    subject: "",
+    body: "",
+  }
 
   parentDetails: Parent = {
     id: "",
     children: [],
     medID: "",
     auPair: "",
+    rating: []
   }
 
   userDetails: User = {
@@ -71,7 +92,7 @@ export class ParentDashboardComponent implements OnInit{
 
   currentAuPair: auPair = {
     id: "",
-    rating: 0,
+    rating: [],
     onShift: false,
     employer: "",
     costIncurred: 0,
@@ -80,17 +101,27 @@ export class ParentDashboardComponent implements OnInit{
     bio: "",
     experience: "",
     currentLong: 0.0,
-    currentLat: 0.0
+    currentLat: 0.0,
+    alreadyOutOfBounds: false,
+    terminateDate: "",
   }
 
-  constructor(private serv: API, private modalCtrl : ModalController, private store: Store, public toastCtrl: ToastController, public router: Router, private alertController: AlertController){}
+  notificationToSend: Notification = {
+    id: "",
+    auPairId: "",
+    parentId: "",
+    title: "",
+    body: "",
+    date: "",
+    time: "",
+  }
 
-  async openModal(actId : string) {
+  constructor(private serv: API, private modalCtrl : ModalController, private store: Store, public toastCtrl: ToastController, public router: Router, private alertController: AlertController, private httpClient: HttpClient){}
+
+
+  async openReportModal() {
     const modal = await this.modalCtrl.create({
-      component: AuPairRatingModalComponent,
-      componentProps :{
-        activityId : actId
-      }
+      component: UserReportModalComponent
     });
     await modal.present();
   }
@@ -99,38 +130,18 @@ export class ParentDashboardComponent implements OnInit{
   {
     this.parentID = this.store.snapshot().user.id;
 
-    await this.serv.getUser(this.parentID).toPromise()
-    .then( 
-      res=>{
-        this.userDetails.id = res.id;
-        this.userDetails.fname = res.fname;
-        this.userDetails.sname = res.sname;
-        this.userDetails.email = res.email;
-        this.userDetails.address = res.address;
-        this.userDetails.number = res.number;
-        this.userDetails.salt = res.salt;
-        this.userDetails.latitude = res.latitude;
-        this.userDetails.longitude = res.longitude;
-        this.userDetails.suburb = res.suburb;
-        this.userDetails.gender = res.gender;
-        this.userDetails.birth = res.birth;
-        this.userDetails.warnings = res.warnings;
-        this.userDetails.banned = res.banned;
-      },
-      error => {
-        console.log("Error has occured with API: " + error);
-      }
-    )
+    await this.getUserDetails(this.parentID);
     
     await this.serv.getParent(this.parentID)
     .toPromise()
       .then( 
-        res=>{
-          this.parentDetails.id = res.id;      
+        res=>{      
           this.parentID = res.id;
-          this.parentDetails.children = res.children;
-          this.parentDetails.medID = res.medID;
-          this.parentDetails.auPair = res.auPair;
+          this.parentDetails = res;
+
+          //setting the state
+          this.store.dispatch(new SetChildren(res.children));
+          this.store.dispatch(new SetAuPair(res.auPair));
       },
       error => {
         console.log("Error has occured with API: " + error);
@@ -143,19 +154,7 @@ export class ParentDashboardComponent implements OnInit{
       .toPromise()
       .then(
         res => {
-          this.auPairDetails.id = res.id;
-          this.auPairDetails.fname = res.fname;
-          this.auPairDetails.sname = res.sname;
-          this.auPairDetails.email = res.email;
-          this.auPairDetails.address = res.address;
-          this.auPairDetails.number = res.number;this.userDetails.salt = res.salt;
-          this.userDetails.latitude = res.latitude;
-          this.userDetails.longitude = res.longitude;
-          this.userDetails.suburb = res.suburb;
-          this.userDetails.gender = res.gender;
-          this.userDetails.birth = res.birth;
-          this.userDetails.warnings = res.warnings;
-          this.userDetails.banned = res.banned;
+          this.auPairDetails = res;
         },
         error => { 
           console.log("Error has occured with API: " + error);
@@ -163,7 +162,43 @@ export class ParentDashboardComponent implements OnInit{
       )
     }
 
-    this.getChildren();
+    await this.getChildren();
+
+    this.umPoorID = this.parentDetails.auPair;
+    
+
+    if(this.umPoorID != "")
+    {
+      await this.getAuPairDetails();
+
+      if(this.currentAuPair.terminateDate != '')
+      {
+        await this.checkResignation();
+      }
+    }
+  }
+
+  async getUserDetails(userID : string)
+  {
+    await this.serv.getUser(userID).toPromise()
+    .then( 
+      res=>{
+        this.userDetails = res;
+      },
+      error => {
+        console.log("Error has occured with API: " + error);
+      }
+    )
+  }
+
+  async openModal(auPairId : string) {
+    const modal = await this.modalCtrl.create({
+      component: AuPairRatingModalComponent,
+      componentProps :{
+        auPairId : auPairId
+      }
+    });
+    await modal.present();
   }
 
   async getChildren(){
@@ -243,37 +278,121 @@ export class ParentDashboardComponent implements OnInit{
     }
   }
 
+  async checkResignation()
+  {         
+    const then  = new Date(this.currentAuPair.terminateDate);
+    const now = new Date();
+
+    const msBetweenDates = Math.abs(then.getTime() - now.getTime());
+
+    let daysBetweenDates = msBetweenDates / (24 * 60 * 60 * 1000);
+
+    daysBetweenDates = Math.ceil(daysBetweenDates);    
+
+    if(daysBetweenDates >= 14)
+    {
+      this.terminateAuPair();
+    }
+  }
+
   async terminateAuPair()
   {
     await this.getAuPairDetails();
-    await this.getParentDetails();
 
+    this.currentAuPair.terminateDate = "";
     this.currentAuPair.employer = "";
+    this.currentAuPair.onShift = false;
     this.parentDetails.auPair = "";
 
     await this.updateAuPair();
     await this.updateParent();
+    await this.removeChildrenAuPair();
 
-    location.reload();
+    this.emailRequest.to = this.auPairDetails.email;
+    this.emailRequest.subject = "Au Pair Contract Termination";
+    this.emailRequest.body = "Unfortunately your employer has terminated your contract.\nYour profile will appear on our explore page again for new parent to make use of your services.\n\n" +
+                            "Regards,\nThe Au Pair Team";
+    this.serv.sendEmail(this.emailRequest).toPromise().then(
+      res => {
+        console.log(res);
+      },
+      error => {
+        console.log(error);
+      }
+    );
+
+    await this.serv.getFCMToken(this.umPoorID).toPromise().then(res => {
+      this.userFcmToken = res;
+    }).catch(err => {
+      console.log(err);
+    });
+
+    if (this.userFcmToken != "") {
+      console.log(this.userFcmToken);
+      const requestHeaders = new HttpHeaders().set('Authorization', 'key=AAAAlhtqIdQ:APA91bFlcYmdaqt5D_jodyiVQG8B1mkca2xGh6XKeMuTGtxQ6XKhSY0rdLnc0WrXDsV99grFamp3k0EVHRUJmUG9ULcxf-VSITFgwwaeNvrUq48q0Hn1GLxmZ3GBAYdCBzPFIRdbMxi9');
+      const postData = {
+        "to": this.userFcmToken,
+        "notification": {
+          "title": "Employment Terminated",
+          "body": "Employment with " + this.store.snapshot().user.name + " has been terminated.",
+        }
+      }
+
+      this.httpClient.post('https://fcm.googleapis.com/fcm/send', postData, { headers: requestHeaders }).subscribe(data => {
+        console.log("data receieved: " + data);
+      }, error => {
+        console.log(error);
+      });
+    }
+
+    await this.serv.getFCMToken(this.parentID).toPromise().then(res => {
+      this.userFcmToken = res;
+    }).catch(err => {
+      console.log(err);
+    });
+
+    if (this.userFcmToken != "") {
+      console.log(this.userFcmToken);
+      const requestHeaders = new HttpHeaders().set('Authorization', 'key=AAAAlhtqIdQ:APA91bFlcYmdaqt5D_jodyiVQG8B1mkca2xGh6XKeMuTGtxQ6XKhSY0rdLnc0WrXDsV99grFamp3k0EVHRUJmUG9ULcxf-VSITFgwwaeNvrUq48q0Hn1GLxmZ3GBAYdCBzPFIRdbMxi9');
+      const postData = {
+        "to": this.userFcmToken,
+        "notification": {
+          "title": "Employment Terminated",
+          "body": "Employment with " + this.auPairDetails.fname + " has been terminated.",
+        }
+      }
+
+      this.httpClient.post('https://fcm.googleapis.com/fcm/send', postData, { headers: requestHeaders }).subscribe(data => {
+        console.log("data receieved: " + data);
+      }, error => {
+        console.log(error);
+      });
+    }
+
+    const current = new Date();
+    const minutes = String(current.getMinutes()).padStart(2, '0');
+
+    this.notificationToSend.auPairId = this.umPoorID;
+    this.notificationToSend.parentId = this.parentID;
+    this.notificationToSend.title = "Employment Terminated";
+    this.notificationToSend.body = "Employment has been terminated.";
+    this.notificationToSend.date = current.getFullYear() + "-" + (current.getMonth() + 1) + "-" + current.getDate();
+    this.notificationToSend.time = current.getHours() + ":" + minutes;
+
+    this.serv.logNotification(this.notificationToSend).toPromise().then(res => {
+      console.log(res);
+    }, err => {
+      console.log(err);
+    });
   }
 
   async getAuPairDetails()
   {
-    await this.serv.getAuPair(this.parentDetails.auPair)
+    await this.serv.getAuPair(this.umPoorID)
     .toPromise()
       .then(
       res=>{
-        this.currentAuPair.id = res.id;
-        this.currentAuPair.rating = res.rating;
-        this.currentAuPair.onShift = res.onShift;
-        this.currentAuPair.employer = res.employer;
-        this.currentAuPair.costIncurred = res.costIncurred;
-        this.currentAuPair.distTraveled = res.distTraveled;
-        this.currentAuPair.payRate = res.payRate;
-        this.currentAuPair.bio = res.bio;
-        this.currentAuPair.experience = res.experience;
-        this.currentAuPair.currentLong = res.currentLong;
-        this.currentAuPair.currentLat = res.currentLat;
+        this.currentAuPair = res;
       },
       error=>{console.log("Error has occured with API: " + error);}
     )
@@ -285,16 +404,39 @@ export class ParentDashboardComponent implements OnInit{
     .toPromise()
       .then( 
         res=>{
-          this.parentDetails.id = res.id;      
-          this.parentDetails.children = res.children;
-          this.parentDetails.medID = res.medID;
-          this.parentDetails.auPair = res.auPair;
+          this.parentDetails = res;
       },
       error => {
         console.log("Error has occured with API: " + error);
       }
     )
   }
+
+ async removeChildrenAuPair()
+ {
+    await this.serv.getChildren(this.parentID)
+    .toPromise()
+    .then(
+      res=>{        
+        for(let i = 0; i < res.length; i++)
+        {
+          this.childDetails.id = res[i].id;
+          this.childDetails.fname = res[i].fname;
+          this.childDetails.sname = res[i].sname;
+          this.childDetails.allergies = res[i].allergies;
+          this.childDetails.diet = res[i].diet;
+          this.childDetails.parent = res[i].parent;
+          this.childDetails.dob = res[i].dob;
+          this.childDetails.aupair = "";
+
+          this.updateChild(this.childDetails);
+        }
+      },
+      error => {
+        console.log("Error has occured with API: " + error);
+      }
+    ) 
+ }
 
   async updateAuPair(){
     await this.serv.editAuPair(this.currentAuPair).toPromise()
@@ -324,6 +466,20 @@ export class ParentDashboardComponent implements OnInit{
     );
   }
 
+  async updateChild(child : Child){
+    await this.serv.updateChild(child).toPromise()
+    .then(
+      res=>{
+        console.log("The response is:" + res);
+        return res;
+      },
+      error=>{
+        console.log("Error has occured with API: " + error);
+        return error;
+      }
+    )
+  }
+
   async presentAlert() {
     const alert = await this.alertController.create({
       header: 'Terminate Contract?',
@@ -337,10 +493,7 @@ export class ParentDashboardComponent implements OnInit{
           text: 'Yes',
           cssClass: 'alert-button-confirm',
           handler: () => { this.terminateAuPair(); }
-        }
-      ]
-    });
-
+        }]});
     await alert.present();
   }
 }
