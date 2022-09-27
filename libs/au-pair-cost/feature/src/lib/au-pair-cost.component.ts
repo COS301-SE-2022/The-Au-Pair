@@ -173,7 +173,7 @@ export class AuPairCostComponent implements OnInit {
     this.setCosts();
   }
 
-  setCosts() {
+  async setCosts() {
     this.totalCost = 0;
 
     this.api.getTotalMonthCostsForFuel(this.aupairID, this.parentID).toPromise().then(
@@ -228,7 +228,7 @@ export class AuPairCostComponent implements OnInit {
     this.pieSplit = "conic-gradient(var(--ion-color-primary)" + this.otherDeg + "deg, var(--ion-color-secondary) 0 " + this.activityDeg + "deg, var(--ion-color-champagne) 0)";
   }
 
-  populateDaysCost() {
+  async populateDaysCost() {
     for (let i = 0; i < 7; i++) {
       
       const weekDay = this.getStartDateOfWeek(i);
@@ -243,7 +243,7 @@ export class AuPairCostComponent implements OnInit {
     }
   }
 
-  deleteCost(id: string) {
+  async deleteCost(id: string) {
     this.api.removeUserCost(id).toPromise().then(
       data => { 
         console.log(data);

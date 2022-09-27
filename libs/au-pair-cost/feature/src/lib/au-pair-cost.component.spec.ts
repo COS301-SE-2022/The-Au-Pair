@@ -97,13 +97,13 @@ describe('AuPairCostComponent', () => {
   it('should open the extra costs modal when called', async ()=>{
     jest.spyOn(component,"openExtraCostsModal");
     component.openExtraCostsModal();
-    expect(await component.openExtraCostsModal).toReturn();
+    expect(component.openExtraCostsModal).toReturn();
   });
 
   it('should open the edit rate modal when called', async ()=>{
     jest.spyOn(component,"openEditRateModal");
     component.openEditRateModal();
-    expect(await component.openEditRateModal).toReturn();
+    expect(component.openEditRateModal).toReturn();
   });
 
   it('should set the user type, auPairID and parentID if an au pair uses the page', async () => {
@@ -268,7 +268,7 @@ describe('AuPairCostComponent', () => {
   it('should, present the alert when called', async ()=>{
     jest.spyOn(component,"presentAlert");
     component.presentAlert("123");
-    expect(await component.presentAlert).toReturn();
+    expect(component.presentAlert).toReturn();
   });
 });
 
@@ -316,13 +316,13 @@ describe('ExtraCostsModalComponent', () => {
   it('should, open a toast when openToast is called', async ()=>{
     jest.spyOn(component,"openToast");
     component.openToast("test");
-    expect(await component.openToast).toReturn();
+    expect(component.openToast).toReturn();
   });
 
   it('should,close the modal when closeModal is called', async ()=>{
     jest.spyOn(component,"closeModal");
     component.closeModal();
-    expect(await component.closeModal).toReturn();
+    expect(component.closeModal).toReturn();
   });
 
   it('should set the auPairId to userID on init', async () => {
@@ -646,13 +646,13 @@ describe('EditRateModalComponent', () => {
   it('should, open a toast when openToast is called', async ()=>{
     jest.spyOn(component,"openToast");
     component.openToast("test");
-    expect(await component.openToast).toReturn();
+    expect(component.openToast).toReturn();
   });
 
   it('should,close the modal when closeModal is called', async ()=>{
     jest.spyOn(component,"closeModal");
     component.closeModal();
-    expect(await component.closeModal).toReturn();
+    expect(component.closeModal).toReturn();
   });
 
   it('should set the auPairId to userID on init', async () => {
