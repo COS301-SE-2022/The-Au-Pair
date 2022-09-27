@@ -20,12 +20,12 @@ public class EmailController{
 
     @Value("${sendgrid.api-key}")
     private String sendgridApiKey;
-    
+
     public EmailController(SendGridConfigProperties sendGridConfig) {
         this.sendGridConfig = sendGridConfig;
     }
 
-    @PostMapping("/sendEmail")
+    @PostMapping("/api/sendEmail")
     public ResponseEntity<String> sendEmail(@RequestBody EmailRequest emailRequest) throws IOException{
         Response response = send(emailRequest);
         if (response.getStatusCode() == 200 || response.getStatusCode() == 202) {
@@ -36,7 +36,7 @@ public class EmailController{
     }
 
     //Adding this endpoint to test if the env variable is being read
-    @GetMapping("/getEnv")
+    @GetMapping("/api/getEnv")
     public String getEnv() {
         try {
           return sendgridApiKey;
@@ -54,13 +54,13 @@ public class EmailController{
         String subject = emailRequest.getSubject();
         Email to = new Email(emailRequest.getTo());
         Content content = new Content("text/plain", emailRequest.getBody());
-    
+
         Mail mail = new Mail(from, subject, to, content);
         mail.setReplyTo(from);
-    
+
         Request request = new Request();
         Response response = null;
-    
+
         try {
           request.setMethod(Method.POST);
           request.setEndpoint("mail/send");
@@ -69,7 +69,7 @@ public class EmailController{
         } catch (IOException ex) {
           System.out.println(ex.getMessage());
         }
-    
+
         return response;
       }
 }

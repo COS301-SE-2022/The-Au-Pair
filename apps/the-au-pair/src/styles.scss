@@ -30,6 +30,8 @@
 @import '~swiper/scss/autoplay';
 @import '~@ionic/angular/css/ionic-swiper';
 
+@import '../../../libs/shared/assets/stylesheets/leaflet.scss';
+
 @font-face {
     font-family: "TitanOne";
     src: url('../../../libs/shared/assets/fonts/titan1.woff2');
