@@ -57,25 +57,19 @@ jobs:
           name: artifact
           path: Server/target/The-Au-Pair-0.0.1-SNAPSHOT.jar
   
-  deploy-api:
-    needs: package-api 
-    runs-on: ubuntu-latest
+  ec2-deploy:
+    name: Deploy to EC2
+    runs-on: self-hosted
+
     steps:
+    - uses: actions/checkout@v2
+    - name: Set up JDK 17
+      uses: actions/setup-java@v2
+      with:
+        java-version: '17'
+        distribution: 'temurin'
+        cache: maven
+    - name: Build with Maven
+      run: mvn -B package -DskipTests --file pom.xml
+    
 
-      - name: Get JAR
-        uses: actions/download-artifact@v2
-        with:
-          name: artifact
-
-      - name: Deploy to EB
-        uses: einaregilsson/beanstalk-deploy@v20
-        with:
-          aws_access_key: ${{ secrets.AWS_ACCESS_KEY_ID }}
-          aws_secret_key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          
-          use_existing_version_if_available: false
-          application_name: TheAuPair
-          environment_name: Theaupair-env
-          version_label: ${{github.SHA}}
-          region: us-east-1
-          deployment_package: The-Au-Pair-0.0.1-SNAPSHOT.jar 
