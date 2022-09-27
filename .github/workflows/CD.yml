@@ -59,7 +59,7 @@ jobs:
   
   ec2-deploy:
     name: Deploy to EC2
-     runs-on: self-hosted
+    runs-on: self-hosted
 
     steps:
     - uses: actions/checkout@v2
