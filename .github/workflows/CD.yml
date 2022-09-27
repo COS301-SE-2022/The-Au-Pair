@@ -57,6 +57,27 @@ jobs:
           name: artifact
           path: Server/target/The-Au-Pair-0.0.1-SNAPSHOT.jar
   
+  ec2-deploy:
+    name: Deploy to EC2
+    runs-on: ubuntu-latest
+    steps:
+        - name: Get JAR
+        uses: actions/download-artifact@v2
+        with:
+          name: artifact
+
+        - name: Checkout the files
+        uses: actions/checkout@v2
+
+        - name: Deploy to Server 1
+        uses: easingthemes/ssh-deploy@main
+        env:
+          SSH_PRIVATE_KEY: ${{ secrets.EC2_SSH_KEY }}
+          REMOTE_HOST: ${{ secrets.HOST_DNS }}
+          REMOTE_USER: ${{ secrets.USERNAME }}
+          TARGET: ${{ secrets.TARGET_DIR }}
+        
+  
   deploy-api:
     needs: package-api 
     runs-on: ubuntu-latest
