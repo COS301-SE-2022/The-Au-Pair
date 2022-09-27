@@ -10,7 +10,6 @@ import { AlertController } from '@ionic/angular';
   selector: 'the-au-pair-au-pair-cost',
   templateUrl: './au-pair-cost.component.html',
   styleUrls: ['./au-pair-cost.component.scss'],
-  providers: [API]
 })
 export class AuPairCostComponent implements OnInit {
 
@@ -56,7 +55,7 @@ export class AuPairCostComponent implements OnInit {
     });
 
     modal.onDidDismiss().then(() => {
-      this.api.getCurrentMonthCostsForJob(this.aupairID, this.parentID).subscribe(
+      this.api.getCurrentMonthCostsForJob(this.aupairID, this.parentID).toPromise().then(
         data => { 
           this.costList = data;
         },
@@ -116,7 +115,7 @@ export class AuPairCostComponent implements OnInit {
       )
     }
 
-    this.api.getUser(this.aupairID).subscribe( 
+    this.api.getUser(this.aupairID).toPromise().then( 
       data => { 
         this.auPairName = data.fname
       },
@@ -125,7 +124,7 @@ export class AuPairCostComponent implements OnInit {
       }
     )
 
-    await this.api.getMonthMinutes(this.aupairID, this.getStartDateOfWeek(0)).subscribe( 
+    await this.api.getMonthMinutes(this.aupairID, this.getStartDateOfWeek(0)).toPromise().then( 
       data => {
         this.totalHours = Number((data/60).toFixed(2));
       },
@@ -152,7 +151,7 @@ export class AuPairCostComponent implements OnInit {
 
     if(this.store.snapshot().user.type === 2) 
     {
-      this.api.getUser(this.parentID).subscribe( 
+      this.api.getUser(this.parentID).toPromise().then( 
         data => { 
           this.employerName = data.fname
         },
@@ -162,7 +161,7 @@ export class AuPairCostComponent implements OnInit {
       )
     }
 
-    this.api.getCurrentMonthCostsForJob(this.aupairID, this.parentID).subscribe(
+    this.api.getCurrentMonthCostsForJob(this.aupairID, this.parentID).toPromise().then(
       data => { 
         this.costList = data;
       },
@@ -177,7 +176,7 @@ export class AuPairCostComponent implements OnInit {
   setCosts() {
     this.totalCost = 0;
 
-    this.api.getTotalMonthCostsForFuel(this.aupairID, this.parentID).subscribe(
+    this.api.getTotalMonthCostsForFuel(this.aupairID, this.parentID).toPromise().then(
       data => { 
         this.travelCost = data;
         this.totalCost += this.travelCost;
@@ -190,7 +189,7 @@ export class AuPairCostComponent implements OnInit {
       }
     )
 
-    this.api.getTotalMonthCostsForOvertime(this.aupairID, this.parentID).subscribe(
+    this.api.getTotalMonthCostsForOvertime(this.aupairID, this.parentID).toPromise().then(
       data => { 
         this.activityCost = data;
         this.totalCost += this.activityCost;
@@ -203,7 +202,7 @@ export class AuPairCostComponent implements OnInit {
       }
     )
 
-    this.api.getTotalMonthCostsForOther(this.aupairID, this.parentID).subscribe(
+    this.api.getTotalMonthCostsForOther(this.aupairID, this.parentID).toPromise().then(
       data => { 
         this.otherCost = data;
         this.totalCost += this.otherCost;
@@ -233,7 +232,7 @@ export class AuPairCostComponent implements OnInit {
     for (let i = 0; i < 7; i++) {
       
       const weekDay = this.getStartDateOfWeek(i);
-      this.api.getDateMinutes(this.aupairID, weekDay).subscribe( 
+      this.api.getDateMinutes(this.aupairID, weekDay).toPromise().then( 
         data => {
           this.dayHoursWorked[i] = data/60;
         },
@@ -245,7 +244,7 @@ export class AuPairCostComponent implements OnInit {
   }
 
   deleteCost(id: string) {
-    this.api.removeUserCost(id).subscribe(
+    this.api.removeUserCost(id).toPromise().then(
       data => { 
         console.log(data);
       },
@@ -254,7 +253,7 @@ export class AuPairCostComponent implements OnInit {
       }
     )
 
-    this.api.getCurrentMonthCostsForJob(this.aupairID, this.parentID).subscribe(
+    this.api.getCurrentMonthCostsForJob(this.aupairID, this.parentID).toPromise().then(
       data => { 
         this.costList = data;
       },
