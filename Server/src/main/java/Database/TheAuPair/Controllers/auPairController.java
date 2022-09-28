@@ -17,31 +17,31 @@ public class auPairController
     this.aps = new auPairService(apr);
   }
 
-  @PostMapping("/getAuPair")
+  @PostMapping("/api/getAuPair")
   public auPair getAuPair(@RequestBody String id)
   {
     return this.aps.getAuPair(id);
   }
 
-  @PostMapping("/editAuPair")
+  @PostMapping("/api/editAuPair")
   public void editAuPair(@RequestBody auPair p)
   {
     this.aps.updateAuPair(p);
   }
 
-  @GetMapping("/getAllAuPairs")
+  @GetMapping("/api/getAllAuPairs")
   public List<auPair> getAllAuPairs()
   {
     return this.aps.getAllAuPairs();
   }
 
-  @PostMapping("/removeAuPair")
+  @PostMapping("/api/removeAuPair")
   public void removeAuPair(@RequestBody String id)
   {
     this.aps.deleteAuPair(id);
   }
 
-  @PostMapping("/addAuPair")
+  @PostMapping("/api/addAuPair")
   public void addAuPair(@RequestBody auPair a)
   {
     this.aps.addAuPair(a);

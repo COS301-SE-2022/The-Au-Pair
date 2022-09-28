@@ -18,39 +18,39 @@ public class ContractController
     this.cts = new ContractService(ctr);
   }
 
-  @PostMapping("/getContract")
+  @PostMapping("/api/getContract")
   public Contract getContract(@RequestBody String id)
   {
     Contract ct =  cts.getContract(id);
     return ct;
   }
 
-  @PostMapping("/getContractbyIDs")
+  @PostMapping("/api/getContractbyIDs")
   public Contract getContractbyIDs(@RequestBody Map<String, String> IDs)
   {
     Contract ct = cts.getContractbyIDs(IDs.get("parentID"), IDs.get("auPairID"));
     return ct;
   }
 
-  @PostMapping("/editContract")
+  @PostMapping("/api/editContract")
   public void editContract(@RequestBody Contract c)
   {
     this.cts.updateContract(c);
   }
 
-  @PostMapping("/removeContract")
+  @PostMapping("/api/removeContract")
   public void removeContract(@RequestBody String id)
   {
     this.cts.deleteContract(id);
   }
 
-  @PostMapping("/addContract")
+  @PostMapping("/api/addContract")
   public void addContract(@RequestBody Contract c)
   {
     this.cts.addContract(c);
   }
 
-  @GetMapping("/getAllContracts")
+  @GetMapping("/api/getAllContracts")
   public List<Contract> getAllContracts()
   {
     return this.cts.getAllContracts();

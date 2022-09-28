@@ -19,4 +19,7 @@ public interface UserCostsRepository extends MongoRepository<UserCosts, String> 
 
   @Query("{ $and:[{ 'contributerId': ?0 },{ 'otherPartyId': ?1 }] }")
   List<UserCosts> findAllByContributerAndOther(String contributerId, String otherPartyId, Sort sort);
+
+  @Query("{ $and:[{ 'contributerId': ?0 },{ 'otherPartyId': ?1 }, {'type':  ?2}] }")
+  List<UserCosts> findAllByType(String contributerId, String otherPartyId, String type, Sort sort);
 }
