@@ -22,6 +22,9 @@ export class ExtraCostsModalComponent implements OnInit {
     "petrol-93": 22.95, 
   };
 
+  selectedFiles : any;
+  currentFileUpload: any;
+
   costDetails: UserCosts ={
     id: '',
     type: '',
@@ -289,6 +292,10 @@ export class ExtraCostsModalComponent implements OnInit {
       break;
     }
 
+    if (this.selectedFiles != undefined){
+      this.upload();
+    }
+
     this.sending = false;
     this.closeModal();
   }
@@ -329,5 +336,30 @@ export class ExtraCostsModalComponent implements OnInit {
       cssClass: 'toastPopUp'
     });
     await toast.present();
+  }
+
+  selectFile(event: any) {
+    this.selectedFiles = event.target.files;
+    const fileReader = new FileReader();
+    fileReader.readAsDataURL(this.selectedFiles.item(0));
+    fileReader.onload = (event) => {
+      const dom = document.getElementById("uploadImage");
+      dom?.setAttribute("name", "checkmark-circle-outline");
+      dom?.setAttribute("style", "color: green");
+    }
+  }
+
+  async upload() {
+    this.currentFileUpload = this.selectedFiles.item(0);
+    await this.serv.storeFile(this.currentFileUpload,this.store.snapshot().user.id  +  ".png").toPromise().then(
+      res=>{
+        console.log(res); 
+        return res;
+      },
+      error=>{
+        console.log(error);
+        return error;
+      }
+    );
   }
 }

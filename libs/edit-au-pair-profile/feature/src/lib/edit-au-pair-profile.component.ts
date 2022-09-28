@@ -453,21 +453,6 @@ export class EditAuPairProfileComponent implements OnInit {
     }
   }
 
-  async upload() {
-    this.currentFileUpload = this.selectedFiles.item(0);
-    await this.serv.storeFile(this.currentFileUpload,this.store.snapshot().user.id  +  ".png").toPromise().then(
-      res=>{
-        console.log("upload receieved");
-        console.log(res); 
-        return res;
-      },
-      error=>{
-        console.log(error);
-        return error;
-      }
-    );
-  }
-
   async setImage(){
     await this.serv.getFile(this.store.snapshot().user.id  +  ".png").toPromise().then(
       async res=>{

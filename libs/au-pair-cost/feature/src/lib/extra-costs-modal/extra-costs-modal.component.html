@@ -74,15 +74,16 @@
                 <ion-col size="1" class="ion-text-end metric">
                     R
                 </ion-col>  
-                <ion-col size="4" class="ion-text-start">
+                <ion-col size="3" class="ion-text-start">
                     <input type="text" [ngClass]="{'disabled-amount' : !this.amountEditable}" [disabled]="!amountEditable" formControlName="amount"> 
                     <p id="amountError" class="error" style="display: none;">Amount must be a number</p>
                 </ion-col>  
-                <ion-col size="2" class="image-upload">
+                <ion-col size="3" class="image-upload">
+                    Proof:
                     <label for="customFile">
-                        <ion-icon name="image-outline" class="selectImage"></ion-icon>
+                        <ion-icon name="cloud-upload-outline" id="uploadImage" class="selectImage"></ion-icon>
                     </label>
-                    <input type="file" name="customFile" id="customFile">
+                    <input type="file"  (change)="selectFile($event)" name="customFile" id="customFile">
                 </ion-col>  
             </ion-row>
             <ion-row class="submit-row">
