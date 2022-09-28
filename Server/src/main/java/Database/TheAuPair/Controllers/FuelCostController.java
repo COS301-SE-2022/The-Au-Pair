@@ -18,7 +18,7 @@ public class FuelCostController {
   @Value("${fuelsa.api-key}")
   private String fuelSAApiKey;
 
-  @GetMapping("/getCurrentFuelPrices")
+  @GetMapping("/api/getCurrentFuelPrices")
   public String getCurrentFuelPrices() throws Exception {
     HttpResponse<String> response = getCurrentFuel();
     return response.body();

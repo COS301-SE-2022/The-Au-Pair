@@ -249,3 +249,7 @@ button:not(.backBtn, .nextBtn){
         width: 70vw;
     }
 }
+
+ion-title{
+    background-color: var(--ion-color-primary)  !important;
+}

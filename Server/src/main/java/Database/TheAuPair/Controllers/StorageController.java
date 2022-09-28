@@ -14,13 +14,13 @@ public class StorageController
   @Autowired
   private StorageService ss;
 
-  @PostMapping("/uploadFile")
+  @PostMapping("/api/uploadFile")
   public String upload(@RequestParam("file") MultipartFile file)
   {
     return ss.uploadFile(file);
   }
 
-  @PostMapping("/getFile")
+  @PostMapping("/api/getFile")
   public ResponseEntity<ByteArrayResource> downloadFile(@RequestBody String filename)
   {
     byte[] data = ss.downloadFile(filename);

@@ -17,43 +17,43 @@ public class ActivityController
     this.as = new ActivityService(ar);
   }
 
-  @PostMapping("/getActivity")
+  @PostMapping("/api/getActivity")
   public Activity getActivity(@RequestBody String id)
   {
     return this.as.getActivity(id);
   }
 
-  @PostMapping("/addActivity")
+  @PostMapping("/api/addActivity")
   public void addActivity(@RequestBody Activity a)
   {
     this.as.addActivity(a);
   }
 
-  @PostMapping("/editActivity")
+  @PostMapping("/api/editActivity")
   public void editActivity(@RequestBody Activity a)
   {
     this.as.updateActivity(a);
   }
 
-  @PostMapping("/removeActivity")
+  @PostMapping("/api/removeActivity")
   public void removeActivity(@RequestBody String id)
   {
     this.as.removeActivity(id);
   }
 
-  @PostMapping("/removeManyActivities")
+  @PostMapping("/api/removeManyActivities")
   public void removeManyActivities(@RequestBody Activity[] activities)
   {
     this.as.removeManyActivities(activities);
   }
 
-  @PostMapping("/getSchedule")
+  @PostMapping("/api/getSchedule")
   public List<Activity> getSchedule(@RequestBody String id)
   {
     return this.as.getSchedule(id);
   }
 
-  @PostMapping("/getAuPairSchedule")
+  @PostMapping("/api/getAuPairSchedule")
   public List<Activity> getAuPairSchedule(@RequestBody String [] children)
   {
     return this.as.getAuPairSchedule(children);

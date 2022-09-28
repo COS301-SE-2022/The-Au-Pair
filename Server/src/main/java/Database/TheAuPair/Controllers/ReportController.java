@@ -13,25 +13,25 @@ public class ReportController {
 
   public ReportController(ReportRepository repoRep) { this.repServ = new ReportService(repoRep); }
 
-  @GetMapping("/getAllReports")
+  @GetMapping("/api/getAllReports")
   public List<Report> getAllReports()
   {
     return this.repServ.getAllReports();
   }
 
-  @PostMapping("/getReportsForUser")
+  @PostMapping("/api/getReportsForUser")
   public List<Report> getReportsForUser(@RequestBody String id)
   {
       return this.repServ.getReportsForUser(id);
   }
 
-  @PostMapping("/deleteReport")
+  @PostMapping("/api/deleteReport")
   public void deleteReport(@RequestBody String id)
   {
       this.repServ.deleteReport(id);
   }
 
-  @PostMapping("/addReport")
+  @PostMapping("/api/addReport")
   public void addReport(@RequestBody Report rep)
   {
       this.repServ.addReport(rep);
