@@ -89,6 +89,42 @@ it('should allow a parent to route to "add a child" page', () => {
     });
 })
 
+it('should allow a parent to add a child', () => {
+    cy.get("#childDash").click({force:true}).then( () => {
+        cy.get('#addChild').click({force: true}).then( () => {
+            cy.get(`[ng-reflect-name="childName"]`).type("test"); 
+            cy.get(`[ng-reflect-name="surname"]`).type("child"); 
+            cy.get(`[ng-reflect-name="dateOfBirth"]`).type("2002-05-06"); 
+            cy.get(`[ng-reflect-name="Allergies"]`).type("none"); 
+            cy.get(`[ng-reflect-name="diet"]`).type("none");
+            cy.get('.addChild').click({multiple:true, force:true}).then( () => {
+                cy.get('.cancel').click({multiple:true, force:true})
+            });
+            cy.contains("Child Name: test child");
+        })
+    });
+})
+
+it('should allow a parent to update a childs details', () => {
+    cy.get("#childDash").click({force:true}).then( () => {
+        cy.get(".icon-edit").eq(2).click({force:true}).then( () => {
+            cy.get(`[ng-reflect-name="childName"]`).type("update"); 
+            cy.get('.updateChild').click({multiple:true, force:true}).then( () => {
+                cy.get('.cancel').click({multiple:true, force:true})
+                cy.contains("Child Name: testupdate child");
+            });
+        });
+    });
+})
+
+it('should allow a parent to delete a child', () => {
+    cy.get("#childDash").click({force:true}).then( () => {
+        cy.get(".remove-child").eq(2).click({force:true}).then( () => {
+            cy.get(".alert-button-confirm").click({force:true});
+        });
+    });
+})
+
 // Au Pair Cost Testing 
 it('should show the correct employed au pair when loading au pair cost', () => {
     cy.get("#auPairCost").click({force:true}).then( () => {
