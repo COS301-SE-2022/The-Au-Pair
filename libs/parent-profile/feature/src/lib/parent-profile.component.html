@@ -44,8 +44,8 @@
                 </div>
                 <div class="parent-info-large">
                     <div class="parent-text">Medical Aid: </div>
-                    <p *ngIf="this.medAidDetails.mID !== ''" class="parent-text-info2">{{this.medAidDetails.name}}<br>{{this.medAidDetails.sname}}<br>{{this.medAidDetails.mID}}<br>{{this.medAidDetails.provider}}<br>{{this.medAidDetails.plan}}</p>
-                    <p *ngIf="this.medAidDetails.mID === ''" class="parent-text-info2">There are no medical aid details to display</p>
+                    <p *ngIf="this.medAidDetails.mID !== ''" class="parent-text-info">{{this.medAidDetails.name}}<br>{{this.medAidDetails.sname}}<br>{{this.medAidDetails.mID}}<br>{{this.medAidDetails.provider}}<br>{{this.medAidDetails.plan}}</p>
+                    <p *ngIf="this.medAidDetails.mID === ''" class="parent-text-info">There are no medical aid details to display</p>
                 </div>
             </div>
             <button class="change-button" id="change" routerLink="/edit-parent-profile">CHANGE</button>

@@ -118,7 +118,7 @@ export class ScheduleComponent implements OnInit{
     //Filter
     for (let i = 0; i < this.activities.length-1; i++) 
     {
-      for (let j = 1; j < this.activities.length; j++) 
+      for (let j = i + 1; j < this.activities.length; j++) 
       { 
         if(this.activities[i].timeStart> this.activities[j].timeStart)  
         {

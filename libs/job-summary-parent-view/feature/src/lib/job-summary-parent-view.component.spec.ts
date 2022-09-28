@@ -27,6 +27,10 @@ const apiMock = {
   getContractbyIDs()
   {
     return of({})
+  },
+  getMedAid()
+  {
+    return of({})
   }
 }
 

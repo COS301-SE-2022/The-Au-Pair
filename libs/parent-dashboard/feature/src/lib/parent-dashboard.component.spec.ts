@@ -216,6 +216,12 @@ describe('ParentProfileComponent', () => {
 
     expect(component.terminateAuPair).toBeCalledTimes(0);
   })
+
+  it('should, return the age from a given date', async () =>{
+    const expectedAge = 18;
+    const age = await component.getAge('05/07/2004');
+    expect(age).toEqual(expectedAge);
+  })
 });
 
 describe('AuPairRatingModalComponent', () => {

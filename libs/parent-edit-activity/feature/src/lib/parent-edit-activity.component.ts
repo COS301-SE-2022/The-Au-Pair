@@ -70,9 +70,7 @@ export class ParentEditActivityComponent implements OnInit {
 
   //From HTML Form
   async getActivityValues(val : any)
-  {  
-    console.log(val);
-    
+  {      
     //FORM ERROR CHECKING
     let emptyInput = false;
 
