@@ -140,12 +140,6 @@ describe('RegisterComponent', () => {
   });
 
   it('should make the form invalid on specific parent and au pair inputs', () => {
-    component.parentChosen = true;
-
-    // Medical aid number empty for parent
-    inputRegistration(populatedForm.name, populatedForm.surname, populatedForm.email, populatedForm.phone, populatedForm.id, "", populatedForm.location, populatedForm.bio, populatedForm.experience, populatedForm.pass, populatedForm.confPass);
-    expect(component.formValid).toBeFalsy();
-
     component.parentChosen = false;
     // Bio empty for au pair
     inputRegistration(populatedForm.name, populatedForm.surname, populatedForm.email, populatedForm.phone, populatedForm.id, populatedForm.medAid, populatedForm.location, "", populatedForm.experience, populatedForm.pass, populatedForm.confPass);
@@ -278,15 +272,6 @@ describe('RegisterComponent', () => {
     component.maleChosen = false;
     await component.registerUser();
     expect(component.userDetails.gender).toEqual("female");
-  });
-
-  it('should have registration fail with invalid parent inputs', async () => {
-    component.parentChosen = true;
-
-    // Medical aid number empty for parent
-    inputRegistration(populatedForm.name, populatedForm.surname, populatedForm.email, populatedForm.phone, populatedForm.id, "", populatedForm.location, populatedForm.bio, populatedForm.experience, populatedForm.pass, populatedForm.confPass);
-    await component.registerUser();
-    expect(component.medError).toBeTruthy();
   });
 
   it('should have registration fail with invalid au pair inputs', async () => {
