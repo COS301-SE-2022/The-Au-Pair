@@ -138,31 +138,35 @@ export class HireRequestsComponent implements OnInit {
   async setImage(id : string){
     await this.serv.getFile(id  +  ".png").toPromise().then(
       async res=>{
-        const dataType = res.type;
-        const binaryData = [];
-        binaryData.push(res);
-        const href = window.URL.createObjectURL(new Blob(binaryData, {type: dataType}));
-        this.store.dispatch(new SetImgString(href));
-        const dom = document.getElementsByClassName(id);
+        if (res.size > 0){
+          const dataType = res.type;
+          const binaryData = [];
+          binaryData.push(res);
+          const href = window.URL.createObjectURL(new Blob(binaryData, {type: dataType}));
+          this.store.dispatch(new SetImgString(href));
+          const dom = document.getElementsByClassName(id);
 
-        if(dom != null)
-        {
-          for(let i = 0; i < dom.length; i++)
+          if(dom != null)
           {
-            dom[i].setAttribute('src', href);
+            for(let i = 0; i < dom.length; i++)
+            {
+              dom[i].setAttribute('src', href);
+            }
           }
-        }
 
-        this.hasImage = true;
+          this.hasImage = true;
+        }
+        else{
+          const dom = document.getElementsByClassName(id);
+          if (dom != null) {
+            for (let i = 0; i < dom.length; i++) {
+            dom[i].setAttribute("src","assets/images/placeholder-profile.jpg");
+            }
+          }
+          this.hasImage = true;
+        }
       },
       error=>{
-        const dom = document.getElementsByClassName(id);
-        if (dom != null) {
-          for (let i = 0; i < dom.length; i++) {
-          dom[i].setAttribute("src","assets/images/placeholder-profile.jpg");
-          }
-        }
-        this.hasImage = true;
         return error;
       }
     );

@@ -58,29 +58,33 @@ export class ParentNotificationsComponent implements OnInit {
   async setImage(){
     await this.api.getFile(this.store.snapshot().user.id  +  ".png").toPromise().then(
       async res=>{
-        const dataType = res.type;
-        const binaryData = [];
-        binaryData.push(res);
-        const href = window.URL.createObjectURL(new Blob(binaryData, {type: dataType}));
-        this.store.dispatch(new SetImgString(href));
-        const dom = document.getElementsByClassName(this.userId);
+        if (res.size > 0){
+          const dataType = res.type;
+          const binaryData = [];
+          binaryData.push(res);
+          const href = window.URL.createObjectURL(new Blob(binaryData, {type: dataType}));
+          this.store.dispatch(new SetImgString(href));
+          const dom = document.getElementsByClassName(this.userId);
 
-        if(dom != null)
-        {
-          for(let i = 0; i < dom.length; i++)
+          if(dom != null)
           {
-            dom[i].setAttribute("src", this.store.snapshot().user.imgString);
+            for(let i = 0; i < dom.length; i++)
+            {
+              dom[i].setAttribute("src", this.store.snapshot().user.imgString);
+            }
           }
-        }
 
-        this.hasImage = true;
+          this.hasImage = true;
+        }
+        else{
+          const dom = document.getElementById("img1");
+          if (dom != null) {
+            dom.setAttribute("src","assets/images/placeholder-profile.jpg");
+          }
+          this.hasImage = true;
+        }
       },
       error=>{
-        const dom = document.getElementById("img1");
-        if (dom != null) {
-          dom.setAttribute("src","assets/images/placeholder-profile.jpg");
-        }
-        this.hasImage = true;
         return error;
       }
     );

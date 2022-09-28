@@ -506,26 +506,30 @@ export class JobSummaryModalComponent implements OnInit {
   async setImage(){
     await this.serv.getFile(this.parentID  +  ".png").toPromise().then(
       async res=>{
-        const dataType = res.type;
-        const binaryData = [];
-        binaryData.push(res);
-        const href = window.URL.createObjectURL(new Blob(binaryData, {type: dataType}));
-        this.store.dispatch(new SetImgString(href));
-        const dom = document.getElementById("img8");
+        if (res.size > 0){
+          const dataType = res.type;
+          const binaryData = [];
+          binaryData.push(res);
+          const href = window.URL.createObjectURL(new Blob(binaryData, {type: dataType}));
+          this.store.dispatch(new SetImgString(href));
+          const dom = document.getElementById("img8");
 
-        if(dom != null)
-        {
-          dom.setAttribute("src", this.store.snapshot().user.imgString);
+          if(dom != null)
+          {
+            dom.setAttribute("src", this.store.snapshot().user.imgString);
+          }
+
+          this.hasImage = true;
         }
-
-        this.hasImage = true;
+        else{
+          const dom = document.getElementById("img8");
+          if (dom != null) {
+            dom.setAttribute("src","assets/images/placeholder-profile.jpg");
+          }
+          this.hasImage = true;
+        }
       },
       error=>{
-        const dom = document.getElementById("img8");
-        if (dom != null) {
-          dom.setAttribute("src","assets/images/placeholder-profile.jpg");
-        }
-        this.hasImage = true;
         return error;
       }
     );
