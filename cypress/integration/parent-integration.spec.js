@@ -53,18 +53,18 @@ it('should show the logged in users name on the parent profile page', () => {
     });
 });
 
-//FIX THIS TEST AFTER KYLES PR
-
-// it('should not update the parent profile with a location not returned by the API', () => {
-//     cy.get("#profile").click({force:true}).then( () => {
-//         cy.get('#change').click({force:true}).then( () => {
-//             cy.get('[ng-reflect-name="address"]').focus().clear().then( ()=> {
-//                 cy.get('[ng-reflect-name="address"]').type("invalid address");
-//                 cy.get(`[value="Update Details]`).click({force: true})
-//             });
-//         })
-//     });
-// });
+it('should not update the parent profile with a location not returned by the API', () => {
+    cy.get("#profile").click({force:true}).then( () => {
+        cy.get('#change').click({force:true}).then( () => {
+            cy.get('[ng-reflect-name="address"]').focus().clear().then( ()=> {
+                cy.get('[ng-reflect-name="address"]').type("invalid address");
+                cy.get(".submit-button").click({force: true}).then( () => {
+                    cy.contains('Please select a valid location from the suggested below');
+                });
+            });
+        })
+    });
+});
 
 // Schedule testing
 it('should populate the schedule with activities from the database', async () => {
@@ -96,13 +96,14 @@ it('should show the correct employed au pair when loading au pair cost', () => {
     });
 })
 
-//Explore testing
-it('should allow a parent who hasnt employed an au pair yet, to view/explore au pairs to potentially hire', {defaultCommandTimeout: 10000}, () => {
-    cy.visit("/login-page")
-    cy.get(`[ng-reflect-name="Email"]`).type("dylan@gmail.com"); 
-    cy.get(`[ng-reflect-name="Password"]`).type("Dylan@1234"); 
+// Explore testing
+it('should allow a parent who hasnt employed an au pair yet, to view/explore au pairs to potentially hire', () => {
+    cy.get('.log-in-out-button').click({multiple:true, force:true});
+    cy.get(`[ng-reflect-name="Email"]`).type("mockhire@gmail.com"); 
+    cy.get(`[ng-reflect-name="Password"]`).type("Hire@123"); 
     cy.get(".loginUser").click();
+    cy.wait(2000);
     cy.get("#exploreAuPairs").click({force:true}).then( () => {
-        cy.get(".au-pair-details-wrapper").contains("Ruben Brits");
+        cy.get(".au-pair-card-div-wrapper").contains("Ruben Brits");
     });
-})
+});
