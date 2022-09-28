@@ -13,7 +13,6 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
   selector: 'the-au-pair-au-pair-dashboard',
   templateUrl: './au-pair-dashboard.component.html',
   styleUrls: ['./au-pair-dashboard.component.scss'],
-  providers: [API]
 })
 export class AuPairDashboardComponent implements OnInit {
   
@@ -100,6 +99,16 @@ export class AuPairDashboardComponent implements OnInit {
     await modal.present();
   }
 
+  async openModal(parentId : string) {
+    const modal = await this.modalCtrl.create({
+      component: ParentRatingModalComponent,
+      componentProps :{
+        parentId : parentId
+      }
+    });
+    await modal.present();
+  }
+
   async ngOnInit(): Promise<void> {
     this.aupairID = this.store.snapshot().user.id;
     this.aupairName = this.store.snapshot().user.name;
@@ -129,20 +138,10 @@ export class AuPairDashboardComponent implements OnInit {
     )
   }
 
-  async openModal(parentId : string) {
-    const modal = await this.modalCtrl.create({
-      component: ParentRatingModalComponent,
-      componentProps :{
-        parentId : parentId
-      }
-    });
-    await modal.present();
-  }
-
-  logSwitch() {
+  async logSwitch() {
     if(this.alreadyLogging) {
       if(this.logID == null || this.logID == "") {
-        this.serv.getStartedLog(this.aupairID, this.getToday()).subscribe( 
+        this.serv.getStartedLog(this.aupairID, this.getToday()).toPromise().then( 
           data => {
             this.logID = data;
           },
@@ -152,7 +151,7 @@ export class AuPairDashboardComponent implements OnInit {
         )
       }
 
-      this.serv.addTimeEnd(this.logID, this.getCurrentTime()).subscribe( 
+      this.serv.addTimeEnd(this.logID, this.getCurrentTime()).toPromise().then( 
         data => {
           this.alreadyLogging = !this.alreadyLogging;
           console.log("The response is:" + data); 
@@ -166,7 +165,7 @@ export class AuPairDashboardComponent implements OnInit {
       this.hoursLogDetail.user = this.aupairID;
       this.hoursLogDetail.date = this.getToday();
       this.hoursLogDetail.timeStart = this.getCurrentTime();
-      this.serv.addHoursLog(this.hoursLogDetail).subscribe( 
+      this.serv.addHoursLog(this.hoursLogDetail).toPromise().then( 
         res=>{
           this.alreadyLogging = !this.alreadyLogging;
           console.log("The response is:" + res); 
@@ -344,7 +343,6 @@ export class AuPairDashboardComponent implements OnInit {
     });
 
     if (this.userFcmToken != "") {
-      console.log(this.userFcmToken);
       const requestHeaders = new HttpHeaders().set('Authorization', 'key=AAAAlhtqIdQ:APA91bFlcYmdaqt5D_jodyiVQG8B1mkca2xGh6XKeMuTGtxQ6XKhSY0rdLnc0WrXDsV99grFamp3k0EVHRUJmUG9ULcxf-VSITFgwwaeNvrUq48q0Hn1GLxmZ3GBAYdCBzPFIRdbMxi9');
       const postData = {
         "to": this.userFcmToken,
@@ -492,7 +490,6 @@ export class AuPairDashboardComponent implements OnInit {
     });
 
     if (this.userFcmToken != "") {
-      console.log(this.userFcmToken);
       const requestHeaders = new HttpHeaders().set('Authorization', 'key=AAAAlhtqIdQ:APA91bFlcYmdaqt5D_jodyiVQG8B1mkca2xGh6XKeMuTGtxQ6XKhSY0rdLnc0WrXDsV99grFamp3k0EVHRUJmUG9ULcxf-VSITFgwwaeNvrUq48q0Hn1GLxmZ3GBAYdCBzPFIRdbMxi9');
       const postData = {
         "to": this.userFcmToken,
