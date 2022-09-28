@@ -16,6 +16,8 @@ export class ExtraCostsModalComponent implements OnInit {
   payRate = 0;
   type = -1;
 
+  generatedUserID = "";
+
   fuelPrices = {
     "diesel": 24.15,
     "petrol-95": 23.38,
@@ -155,7 +157,10 @@ export class ExtraCostsModalComponent implements OnInit {
     .toPromise()
       .then( 
         res=>{
-          console.log(res);
+          this.generatedUserID  = res;
+          if (this.selectedFiles != undefined){
+            this.upload();
+          }
       },
       error => {
         console.log("Error has occured with API: " + error);
@@ -292,10 +297,6 @@ export class ExtraCostsModalComponent implements OnInit {
       break;
     }
 
-    if (this.selectedFiles != undefined){
-      this.upload();
-    }
-
     this.sending = false;
     this.closeModal();
   }
@@ -339,6 +340,7 @@ export class ExtraCostsModalComponent implements OnInit {
   }
 
   selectFile(event: any) {
+    console.log(this.costDetails)
     this.selectedFiles = event.target.files;
     const fileReader = new FileReader();
     fileReader.readAsDataURL(this.selectedFiles.item(0));
@@ -346,18 +348,19 @@ export class ExtraCostsModalComponent implements OnInit {
       const dom = document.getElementById("uploadImage");
       dom?.setAttribute("name", "checkmark-circle-outline");
       dom?.setAttribute("style", "color: green");
+      return event;
     }
   }
 
   async upload() {
+    console.log(this.generatedUserID)
     this.currentFileUpload = this.selectedFiles.item(0);
-    await this.serv.storeFile(this.currentFileUpload,this.store.snapshot().user.id  +  ".png").toPromise().then(
+    await this.serv.storeFile(this.currentFileUpload,this.generatedUserID  +  ".png").toPromise().then(
       res=>{
-        console.log(res); 
         return res;
       },
       error=>{
-        console.log(error);
+        this.openToast("Error uploading image");
         return error;
       }
     );

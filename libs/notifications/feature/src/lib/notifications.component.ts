@@ -77,9 +77,11 @@ export class ParentNotificationsComponent implements OnInit {
           this.hasImage = true;
         }
         else{
-          const dom = document.getElementById("img1");
+          const dom = document.getElementsByClassName(this.userId);
           if (dom != null) {
-            dom.setAttribute("src","assets/images/placeholder-profile.jpg");
+            for(let i = 0; i < dom.length; i++){
+            dom[i].setAttribute("src","assets/images/placeholder-profile.jpg");
+            }
           }
           this.hasImage = true;
         }

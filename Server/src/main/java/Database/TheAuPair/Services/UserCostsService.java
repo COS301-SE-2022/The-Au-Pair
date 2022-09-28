@@ -60,7 +60,7 @@ public class UserCostsService {
     return foundCosts;
   }
 
-  public void addUserCost(UserCosts userCosts) {
+  public String addUserCost(UserCosts userCosts) {
     String id = "";
     boolean valid = false;
     while (!valid)
@@ -77,6 +77,7 @@ public class UserCostsService {
     }
     userCosts.setId(id);
     costRepo.save(userCosts);
+    return id;
   }
 
   public void removeUserCost(String id) {

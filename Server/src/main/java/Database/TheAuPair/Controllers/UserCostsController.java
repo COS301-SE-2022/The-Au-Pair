@@ -29,7 +29,7 @@ public class UserCostsController {
   }
 
   @PostMapping("/api/addUserCost")
-  public void addUserCost(@RequestBody UserCosts userCosts) { this.ucs.addUserCost(userCosts); }
+  public String addUserCost(@RequestBody UserCosts userCosts) { return this.ucs.addUserCost(userCosts); }
 
   @PostMapping("/api/removeUserCost")
   public void removeUserCost(@RequestBody String uId) { this.ucs.removeUserCost(uId); }
