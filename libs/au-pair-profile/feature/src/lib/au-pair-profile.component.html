@@ -43,6 +43,10 @@
                     <div class="parent-text">Experience: </div>
                     <p class="parent-text-info">{{this.auPairDetails.experience}}</p>
                 </div>
+                <div class="parent-info-large">
+                    <div class="parent-text">CV: </div>
+                    <p class="parent-text-info"><ion-icon (click)="downloadCV()" class="downloadCV" slot="start" name="download"></ion-icon></p>
+                </div>
             </div>
             <button class="change-button" id="change" routerLink="/edit-au-pair-profile">CHANGE</button>
         </div>

@@ -100,6 +100,23 @@
                         </div>
                     </div>
                 </div>
+                <div class="details-div address-details">
+                    <div>
+                        <div class="fl">
+                            <div class="cvRow">
+                                <div class="address-label">
+                                    <div>{{ cvText }}: </div>
+                                </div>
+                                <div class="address-field"> 
+                                    <label class="custom-cv-upload ">
+                                        Upload 
+                                    <input type="file" id="customFile" (change)="selectCVFile($event)" placeholder="File to upload" accept=".PDF">  
+                                    </label> 
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
                 <input type = 'submit' class="submit-button" value = 'Update Details'>
             </div>
         </form>

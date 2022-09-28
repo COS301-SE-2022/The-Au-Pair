@@ -169,4 +169,26 @@ export class AuPairProfileComponent implements OnInit {
       }
     );
   }
+
+  async downloadCV(){
+    console.log("Downloading CV");
+    await this.serv.getFile(this.store.snapshot().user.id  +  ".pdf").toPromise().then(
+      async res=>{
+        if (res.size > 0){
+          const dataType = res.type;
+          const binaryData = [];
+          binaryData.push(res);
+          const downloadLink = document.createElement('a');
+          downloadLink.href = window.URL.createObjectURL(new Blob(binaryData, {type: dataType}));
+          this.store.dispatch(new SetImgString(downloadLink.href ));
+          downloadLink.setAttribute('download', "CV.pdf");
+          document.body.appendChild(downloadLink);
+          downloadLink.click();
+        }
+      },
+      error=>{
+        return error;
+      }
+    );
+  }
 }

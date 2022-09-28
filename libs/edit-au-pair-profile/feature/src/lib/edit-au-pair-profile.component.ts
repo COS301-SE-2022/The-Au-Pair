@@ -21,12 +21,17 @@ export class EditAuPairProfileComponent implements OnInit {
 
   selectedFiles : any;
   currentFileUpload: any;
+
+  selectedCV: any;
+  currentCvUpload: any;
+  
   hasImage = false;
 
   location = "";
   long = 0;
   lat = 0;
   suburb = "";
+  cvText = "CV";
 
   potentialLocations : any[] = [];
 
@@ -315,11 +320,29 @@ export class EditAuPairProfileComponent implements OnInit {
       res=>{
         console.log(res); 
         //only redirect on success
+        this.checkCVBeforeRedirect();
+      },
+      error=>{
+        this.openToast('Error uploading image!')
+        return error;
+      });
+    }
+    else{
+      this.checkCVBeforeRedirect();
+    }
+  }
+
+  async checkCVBeforeRedirect(){
+    if (this.selectedCV != undefined) {
+      this.currentCvUpload = this.selectedCV.item(0);
+      await this.serv.storeFile(this.currentCvUpload,this.userDetails.id  +  ".pdf").toPromise().then(
+      res=>{
+        console.log(res); 
         this.openToast('Profile successfully updated!');
         this.router.navigate(['/au-pair-dashboard']);
       },
       error=>{
-        this.openToast('Error uploading image!')
+        this.openToast("Error uploading CV!")
         return error;
       });
     }
@@ -477,4 +500,16 @@ export class EditAuPairProfileComponent implements OnInit {
       }
     );
   }
+
+  selectCVFile(event: any) {
+    this.selectedCV = event.target.files;
+    const fileReader = new FileReader();
+    fileReader.readAsDataURL(this.selectedCV.item(0));
+    fileReader.onload = (event) => {
+      console.log("CV file selected");
+      this.cvText = this.selectedCV.item(0).name;
+      return event;
+    }
+  }
+
 }

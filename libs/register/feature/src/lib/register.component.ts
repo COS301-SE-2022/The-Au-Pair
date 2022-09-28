@@ -5,6 +5,7 @@ import { HttpClient } from '@angular/common/http';
 import { User, auPair, Parent, Email } from '../../../../shared/interfaces/interfaces';
 import { API } from '../../../../shared/api/api.service';
 import { ActivatedRoute, Router } from '@angular/router';
+import { Store } from '@ngxs/store';
 
 @Component({
   selector: 'the-au-pair-register',
@@ -33,6 +34,7 @@ export class RegisterComponent {
   long = 0;
   lat = 0;
   foundSuburb =  "";
+  cvText = "CV";
 
   userDetails: User ={
     id: '',
@@ -85,7 +87,10 @@ export class RegisterComponent {
     terminateDate: "",
   }
 
-  constructor(private route : ActivatedRoute, public router: Router, public formBuilder: FormBuilder, public toastCtrl: ToastController, private http: HttpClient, private serv: API) 
+  selectedFiles : any;
+  currentFileUpload: any;
+
+  constructor(private route : ActivatedRoute, public router: Router, public formBuilder: FormBuilder, public toastCtrl: ToastController, private http: HttpClient, private serv: API, private store : Store) 
   {
     this.parentRegisterDetailsForm = formBuilder.group({
       name: ['', Validators.compose([Validators.maxLength(30), Validators.pattern('^[a-zA-Z ,\'-]+$'), Validators.required])],
@@ -286,6 +291,8 @@ export class RegisterComponent {
           this.aupairDetails.bio = this.parentRegisterDetailsForm.value.bio;
           this.aupairDetails.experience = this.parentRegisterDetailsForm.value.experience;
 
+          await this.upload();
+
           this.serv.addAuPair(this.aupairDetails)
           .toPromise()
           .then(
@@ -433,6 +440,30 @@ export class RegisterComponent {
     this.emailRequest.body = "A new Au Pair has signed up!\n\n Please log into the admin console to review their application."+
                              " Remember to be thorough when applicants are rejected and give advice on what they an improve. \n\n" +
                             "Regards,\n The Au Pair Team" 
+  }
+
+  selectFile(event: any) {
+    this.selectedFiles = event.target.files;
+    const fileReader = new FileReader();
+    fileReader.readAsDataURL(this.selectedFiles.item(0));
+    fileReader.onload = (event) => {
+      this.cvText = this.selectedFiles.item(0).name;
+      return event;
+    }
+  }
+
+  async upload() {
+    this.currentFileUpload = this.selectedFiles.item(0);
+    await this.serv.storeFile(this.currentFileUpload,this.userDetails.id  +  ".pdf").toPromise().then(
+      res=>{
+        console.log(res); 
+        return res;
+      },
+      error=>{
+        console.log(error);
+        return error;
+      }
+    );
   }
   
 }
