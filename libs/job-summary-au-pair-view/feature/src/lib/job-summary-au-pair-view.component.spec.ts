@@ -24,6 +24,9 @@ const apiMock = {
   },
   getChildren() {
     return of({})
+  },
+  getMedAid() {
+    return of({})
   }
 }
 describe('JobSummaryAuPairViewComponent', () => {

@@ -3,6 +3,7 @@
     <div class="ion-text-center">
         <h2 class="header">Your Hire Requests</h2>
         <div class="requests-wrapper">
+            <div *ngIf="ContractArray.length === 0" style="font-size: 22px; color: var(--ion-color-dark);">You currently have no hire requests</div>
             <ion-card class="request-item" *ngFor="let c of ContractArray; let last = last">
                 <div class="wrapper">
                     <ion-col size = "8" class="ion-content-end info">

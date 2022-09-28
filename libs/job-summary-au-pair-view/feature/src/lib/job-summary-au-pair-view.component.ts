@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { API } from '../../../../shared/api/api.service';
 import { Store } from '@ngxs/store';
-import { auPair, Child, Parent, User } from '../../../../shared/interfaces/interfaces';
 import { SetImgString } from '../../../../shared/ngxs/actions';
+import { auPair, Child, medAid, Parent, User } from '../../../../shared/interfaces/interfaces';
 
 @Component({
   selector: 'the-au-pair-job-summary-au-pair-view',
@@ -54,6 +54,15 @@ export class JobSummaryAuPairViewComponent implements OnInit {
     rating: []
   }
 
+  medAidDetails: medAid = {
+    id: "",
+    plan: "",
+    name: "",
+    sname: "",
+    mID: "",
+    provider: "",
+  }
+
   userDetails: User = {
     id: '',
     fname: '',
@@ -83,6 +92,7 @@ export class JobSummaryAuPairViewComponent implements OnInit {
     await this.getAuPairDetails();
     this.setImage();
     await this.getParentDetails();
+    await this.getMedAidDetails();
     await this.getUserDetails();
     await this.getChildrenDetails();
   }
@@ -105,6 +115,23 @@ export class JobSummaryAuPairViewComponent implements OnInit {
         this.currentAuPair.currentLong = res.currentLong;
         this.currentAuPair.currentLat = res.currentLat;
         this.currentAuPair.terminateDate = res.terminateDate;
+      },
+      error=>{console.log("Error has occured with API: " + error);}
+    )
+  }
+
+  async getMedAidDetails()
+  {
+    await this.serv.getMedAid(this.parentDetails.medID)
+    .toPromise()
+    .then(
+      res=>{
+        this.medAidDetails.id = res.id;
+        this.medAidDetails.plan = res.plan;
+        this.medAidDetails.name = res.name;
+        this.medAidDetails.sname = res.sname;
+        this.medAidDetails.mID = res.mID;
+        this.medAidDetails.provider = res.provider;
       },
       error=>{console.log("Error has occured with API: " + error);}
     )

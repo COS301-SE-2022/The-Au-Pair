@@ -20,8 +20,8 @@
             </div>
             <div class = 'large-profile-details-div'>
                 <div class="parent-info-large">
-                    <div class="parent-text">Suburb: </div>
-                    <p class="parent-text-info">{{this.userDetails.suburb}}</p>
+                    <div class="parent-text">Address: </div>
+                    <p class="parent-text-info">{{this.userDetails.address}}</p>
                 </div>
                 <div class="parent-info-large">
                     <div class="parent-text">Gender: </div>
@@ -31,6 +31,11 @@
                     <div class="parent-text">Rating: </div>
                     <p *ngIf="this.getAverage(this.parentDetails.rating) !== 0" class="parent-text-info">{{this.getAverage(this.parentDetails.rating)}}/5</p>
                     <p *ngIf="this.getAverage(this.parentDetails.rating) === 0" class="parent-text-info">Not yet rated</p>
+                </div>
+                <div class="parent-info-large">
+                    <div class="parent-text">Medical Aid: </div>
+                    <p *ngIf="this.medAidDetails.mID !== ''" class="parent-text-info">{{this.medAidDetails.name}}<br>{{this.medAidDetails.sname}}<br>{{this.medAidDetails.mID}}<br>{{this.medAidDetails.provider}}<br>{{this.medAidDetails.plan}}</p>
+                    <p *ngIf="this.medAidDetails.mID === ''" class="parent-text-info">There are no medical aid details to display</p>
                 </div>
             </div>
         </div>

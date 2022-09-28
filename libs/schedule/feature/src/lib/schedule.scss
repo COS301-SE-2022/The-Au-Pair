@@ -16,6 +16,7 @@
   cursor: pointer;
   color: var(--ion-color-danger-tint);
   font-size: 25px;
+  top: 200px;
 }
 
 ion-button{
@@ -148,23 +149,11 @@ ion-card{
   margin-bottom: 1.5rem;
 }
 
-.clear{
+#clear-button{
   cursor: pointer;
-  text-align: center;
-  justify-content: center;
   margin-left: 10px;
-
-  width: 195px !important;
-  height: 35px;
-  font-style: normal;
-  font-weight: 700;
-  font-size: 16px;
-  line-height: 19px;
-  color: var(--ion-color-primary);
   background-color: transparent !important;
-  border: 2px solid var(--ion-color-primary) !important;
-  border-radius: 10px;
-  margin-top: 20px;
+  margin-top: 40px;
 }
 
 input[type=text], select{

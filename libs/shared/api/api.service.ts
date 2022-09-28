@@ -279,6 +279,30 @@ export class API{
     return this.http.post(environment.apiURI+"/getCurrentMonthCostsForJob",details);
   }
 
+  getTotalMonthCostsForFuel(contributerId : string, otherPartyId : string): Observable<any> {
+    var details = {
+      "contributerId" : contributerId,
+      "otherPartyId" : otherPartyId
+    } 
+    return this.http.post(environment.apiURI+"/getTotalMonthCostsForFuel",details);
+  }
+
+  getTotalMonthCostsForOvertime(contributerId : string, otherPartyId : string): Observable<any> {
+    var details = {
+      "contributerId" : contributerId,
+      "otherPartyId" : otherPartyId
+    } 
+    return this.http.post(environment.apiURI+"/getTotalMonthCostsForOvertime",details);
+  }
+
+  getTotalMonthCostsForOther(contributerId : string, otherPartyId : string): Observable<any> {
+    var details = {
+      "contributerId" : contributerId,
+      "otherPartyId" : otherPartyId
+    } 
+    return this.http.post(environment.apiURI+"/getTotalMonthCostsForOther",details);
+  }
+
   addUserCost(userCost: UserCosts): Observable<any> {
     return this.http.post(environment.apiURI+"/addUserCost",userCost,{responseType: 'text'});
   }
