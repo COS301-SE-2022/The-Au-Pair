@@ -144,7 +144,7 @@ export class AppComponent implements OnInit {
   /**
    * Notifications funtionality
    */
-  monitorActivities() {
+  async monitorActivities() {
     //if parent, get childrens id's
     if (this.userType == 1) {
       this.getAcitivities(this.userID);
