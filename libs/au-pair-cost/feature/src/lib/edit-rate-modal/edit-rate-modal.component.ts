@@ -74,7 +74,7 @@ export class EditRateModalComponent implements OnInit {
     )
   }
 
-  updateRate(){
+  async updateRate(){
     this.sending = true;
 
     const payError = document.getElementById("payRateError");

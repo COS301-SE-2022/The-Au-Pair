@@ -94,7 +94,7 @@ public class hoursLoggedService
 
   public int getMonthMinutes(String id, String date)
   {
-    List<hoursLogged> hl = hlr.findAllByUserId(id, Sort.by(Sort.Direction.DESC, "date"));
+    List<hoursLogged> hl = hlr.findAllByUserId(id, Sort.by(Sort.Direction.ASC, "date"));
     String[] inDateArray = date.split("/");
 
     int minuteSum = 0;
