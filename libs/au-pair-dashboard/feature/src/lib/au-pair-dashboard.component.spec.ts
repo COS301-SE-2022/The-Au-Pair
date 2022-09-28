@@ -22,7 +22,6 @@ const httpMock = {
   }
 }
 
-
 const apiMock = {
   getAuPair() {
     return of({})
