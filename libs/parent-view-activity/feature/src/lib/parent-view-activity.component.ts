@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Store } from '@ngxs/store';
-import { SetImgString } from 'libs/shared/ngxs/actions';
+import { SetImgString } from '../../../../shared/ngxs/actions';
 import { API } from '../../../../shared/api/api.service';
 import { Activity, Child } from '../../../../shared/interfaces/interfaces';
 

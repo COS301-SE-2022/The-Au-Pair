@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { API } from "../../../../shared/api/api.service";
 import { Store } from "@ngxs/store";
-import { SetImgString } from 'libs/shared/ngxs/actions';
+import { SetImgString } from '../../../../shared/ngxs/actions';
 
 @Component({
   selector: 'the-au-pair-admin-console',
