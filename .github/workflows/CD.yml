@@ -36,39 +36,3 @@ jobs:
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           AWS_REGION: 'us-east-1'
           SOURCE_DIR: 'dist/apps/the-au-pair'
-
-  package-api:
-    needs: build-and-deploy-app
-    runs-on: ubuntu-latest
-    steps:
-
-      - uses: actions/checkout@v1
-      - name: Set up JDK
-        uses: actions/setup-java@v1
-        with:
-          java-version: '17'
-
-      - name: Build with Maven
-        run: mvn -B package -DskipTests --file Server/pom.xml
-
-      - name: Save JAR
-        uses: actions/upload-artifact@v2
-        with:
-          name: artifact
-          path: Server/target/The-Au-Pair-0.0.1-SNAPSHOT.jar
-  
-  ec2-deploy:
-    name: Deploy to EC2
-    runs-on: self-hosted
-
-    steps:
-    - uses: actions/checkout@v2
-    - name: Set up JDK 17
-      uses: actions/setup-java@v2
-      with:
-        java-version: '17'
-        distribution: 'temurin'
-        cache: maven
-    - name: Build with Maven
-      run: mvn -B package -DskipTests --file pom.xml
-    
