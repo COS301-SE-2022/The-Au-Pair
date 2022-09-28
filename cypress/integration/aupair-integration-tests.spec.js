@@ -60,7 +60,7 @@ it('should show activities for the children that the au pair is employed for', (
 it('should navigate to view activity page', () => {
     cy.get("#cal").click({force:true}).then( () => {
         cy.get(`[ng-reflect-name="eye"]`).eq(0).click({multiple:true, force:true}).then( () => {
-            y.url().should('include', '/view-activity')
+            cy.url().should('include', '/view-activity')
         }); 
     });
 });
