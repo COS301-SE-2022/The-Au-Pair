@@ -56,7 +56,11 @@
           <ion-icon name="document-text-outline" class='action-icon '></ion-icon>
           <div class='action-tag '>Job Summary</div>
         </div>
-        <div id="cost" class="action" routerLink="/au-pair-cost">
+        <div *ngIf="employerId !== ''" id="cost" class="action" (click)="checkHasEmployerCosts()">
+          <ion-icon name="cash-outline" class="action-icon"></ion-icon>
+          <div class="action-tag">Au Pair Cost</div>
+        </div>
+        <div *ngIf="employerId === ''" style="opacity : 0.4;" id="cost" class="action" (click)="checkHasEmployerCosts()">
           <ion-icon name="cash-outline" class="action-icon"></ion-icon>
           <div class="action-tag">Au Pair Cost</div>
         </div>
