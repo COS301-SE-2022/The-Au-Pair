@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Store } from '@ngxs/store';
+import { SetImgString } from 'libs/shared/ngxs/actions';
 import { API } from '../../../../shared/api/api.service';
 import { Activity, Child } from '../../../../shared/interfaces/interfaces';
 
@@ -32,6 +33,9 @@ export class ParentViewActivityComponent implements OnInit
     child: "",
   };
 
+  hasImage = false;
+  src="";
+
   //Child name associated with ID
   selectedChild="";
 
@@ -43,7 +47,8 @@ export class ParentViewActivityComponent implements OnInit
 
   async ngOnInit(): Promise<void>
   {
-    this.getActivityDetails();
+    await this.getActivityDetails();
+    await this.setImage();
   }
 
   //------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -97,5 +102,37 @@ export class ParentViewActivityComponent implements OnInit
     {
       this.router.navigate(['/au-pair-schedule']);
     }
+  }
+
+  async setImage(){
+    await this.serv.getFile(this.activityDetails.id  +  ".png").toPromise().then(
+      async res=>{
+        if (res.size > 0){
+          const dataType = res.type;
+          const binaryData = [];
+          binaryData.push(res);
+          const href = window.URL.createObjectURL(new Blob(binaryData, {type: dataType}));
+          this.store.dispatch(new SetImgString(href));
+          const dom = document.getElementById(this.activityDetails.id);
+
+          if(dom != null)
+          {
+            dom.setAttribute("src", this.store.snapshot().user.imgString);
+          }
+
+          this.hasImage = true;
+        }
+        else{
+          const dom = document.getElementById(this.activityDetails.id);
+          if (dom != null) {
+            dom.setAttribute("src","assets/images/no-image.png");
+          }
+          this.hasImage = true;
+        }
+      },
+      error=>{
+        return error;
+      }
+    );
   }
 }
