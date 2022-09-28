@@ -46,16 +46,29 @@ it('should show the employer you are an au pair for when loading the home page',
     cy.get('.employer-name').contains("Parent Mock");
 })
 
-// //Au Pair Calendar testing
-// it('should show activities for the children that the au pair is employed for', {defaultCommandTimeout: 10000} , () => {
-//     cy.visit("/login-page")
-//     cy.get(`[ng-reflect-name="Email"]`).type("deni@gmail.com"); 
-//     cy.get(`[ng-reflect-name="Password"]`).type("Deni@123"); 
-//     cy.get(".loginUser").click().then( () => {
-//     cy.get('#cal').click({force:true}).then( () => {
-//         cy.get(".card").contains("Peter");
-//         cy.get(".card").contains("Wally");
-//         cy.get(".card").contains("Sally");
-//     });
-//     });
-// });
+//Au Pair Calendar testing
+it('should show activities for the children that the au pair is employed for', () => {
+    cy.get("#cal").click({force:true}).then( () => {
+        cy.contains("Mock Activity 1");
+        cy.contains("Mock Activity 2");
+        cy.contains("Mock Activity 3");
+        cy.contains("Mock Activity 4");
+        cy.contains("Mock Activity 5");
+    });
+});
+
+it('should show activities for the children that the au pair is employed for', () => {
+    cy.get("#cal").click({force:true}).then( () => {
+        cy.get(`[ng-reflect-name="eye"]`).click({multiple:true, force:true}).then( () => {
+            y.url().should('include', '/view-activity')
+        }); 
+    });
+});
+
+it('should open activity feedback modal', () => {
+    cy.get("#cal").click({force:true}).then( () => {
+        cy.get(`[ng-reflect-name="chatbox-outline"]`).click({multiple:true, force:true}).then( () => {
+            cy.contains("Activity Feedback");
+        }); 
+    });
+});
