@@ -79,3 +79,10 @@ it('should navigate to job sumary page', () => {
         cy.url().should('include', '/job-summary-au-pair-view')
     }); 
 });
+
+it('should show the correct employed au pair when loading au pair cost', () => {
+    cy.get("#cash-outline").click({force:true}).then( () => {
+        cy.url().should('include', '/au-pair-cost')
+        cy.get(".au-pair-name").contains("Parent");
+    });
+})
