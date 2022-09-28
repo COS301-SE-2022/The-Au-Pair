@@ -14,23 +14,23 @@ public class UserCostsController {
 
   public UserCostsController(UserCostsRepository ucr) { this.ucs = new UserCostsService(ucr); }
 
-  @PostMapping("/getCostById")
+  @PostMapping("/api/getCostById")
   public UserCosts getCostById(@RequestBody String id) { return this.ucs.getCostById(id); }
 
-  @GetMapping("/getAllCosts")
+  @GetMapping("/api/getAllCosts")
   public List<UserCosts> getAllCosts() { return this.ucs.getAllCosts(); }
 
-  @PostMapping("/getCostsForUser")
+  @PostMapping("/api/getCostsForUser")
   public List<UserCosts> getCostsForUser(@RequestBody String uId) { return this.ucs.getCostsForUser(uId); }
 
-  @PostMapping("/getCurrentMonthCostsForJob")
+  @PostMapping("/api/getCurrentMonthCostsForJob")
   public List<UserCosts> getCurrentMonthCostsForJob(@RequestBody Map<String, String> details) {
     return this.ucs.getCurrentMonthCostsForJob(details.get("contributerId"), details.get("otherPartyId"));
   }
 
-  @PostMapping("/addUserCost")
+  @PostMapping("/api/addUserCost")
   public void addUserCost(@RequestBody UserCosts userCosts) { this.ucs.addUserCost(userCosts); }
 
-  @PostMapping("/removeUserCost")
+  @PostMapping("/api/removeUserCost")
   public void removeUserCost(@RequestBody String uId) { this.ucs.removeUserCost(uId); }
 }

@@ -17,19 +17,19 @@ public class NotificationsController
     this.ns = new NotificationsService(nr);
   }
 
-  @PostMapping("/getNotifcationsByAuPairId")
+  @PostMapping("/api/getNotifcationsByAuPairId")
   public List<Notification> getNotifcationsByAuPairId(@RequestBody String id)
   {
     return this.ns.getNotifcationsByAuPairId(id);
   }
 
-  @PostMapping("/getNotifcationsByParentId")
+  @PostMapping("/api/getNotifcationsByParentId")
   public List<Notification> getNotifcationsByParentId(@RequestBody String id)
   {
     return this.ns.getNotifcationsByParentId(id);
   }
 
-  @PostMapping("/logNotification")
+  @PostMapping("/api/logNotification")
   public void logNotification(@RequestBody Notification n)
   {
     this.ns.logNotification(n);
