@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { API } from '../../../../shared/api/api.service';
 import { Store } from '@ngxs/store';
 import { DatePipe } from '@angular/common';
-import { Child, Contract, Parent, User, Notification, Email } from '../../../../shared/interfaces/interfaces';
+import { Child, Contract, Parent, User, Notification, Email, medAid } from '../../../../shared/interfaces/interfaces';
 import { Router } from '@angular/router';
 import { ToastController } from '@ionic/angular';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
@@ -58,6 +58,15 @@ export class JobSummaryParentViewComponent implements OnInit {
     parentID: "",
     auPairID: "",
     timestamp: "",
+  }
+
+  medAidDetails: medAid = {
+    id: "",
+    plan: "",
+    name: "",
+    sname: "",
+    mID: "",
+    provider: "",
   }
 
   parentDetails: Parent = {
@@ -123,6 +132,7 @@ export class JobSummaryParentViewComponent implements OnInit {
     await this.getActivities();
     await this.getUserDetails();
     await this.getParentDetails();
+    await this.getMedAidDetails();
     await this.getChildrenDetails();
   }
 
@@ -186,6 +196,23 @@ export class JobSummaryParentViewComponent implements OnInit {
       error => {
         console.log("Error has occured with API: " + error);
       }
+    )
+  }
+
+  async getMedAidDetails()
+  {
+    await this.serv.getMedAid(this.parentDetails.medID)
+    .toPromise()
+    .then(
+      res=>{
+        this.medAidDetails.id = res.id;
+        this.medAidDetails.plan = res.plan;
+        this.medAidDetails.name = res.name;
+        this.medAidDetails.sname = res.sname;
+        this.medAidDetails.mID = res.mID;
+        this.medAidDetails.provider = res.provider;
+      },
+      error=>{console.log("Error has occured with API: " + error);}
     )
   }
 

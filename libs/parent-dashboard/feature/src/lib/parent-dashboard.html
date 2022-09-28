@@ -20,7 +20,7 @@
 
                 <ion-card class='children-div' *ngFor="let child of children; let last = last">
                     <div class='child-name'>Child: {{ child.fname }}</div>
-                    <div class='child-status'>ID Number: {{ child.id }}</div>
+                    <div class='child-status'>Child Age: {{ getAge(child.dob) }}</div>
                 </ion-card>
 
             </div>
