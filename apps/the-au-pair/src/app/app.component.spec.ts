@@ -8,11 +8,10 @@ import { API } from '../../../../libs/shared/api/api.service';
 import { HttpClientTestingModule } from "@angular/common/http/testing";
 import { NavbarModule } from '@the-au-pair/shared/components/navbar';
 import { RouterTestingModule} from '@angular/router/testing';
-import { NgxsModule, Store } from '@ngxs/store';
+import { NgxsModule } from '@ngxs/store';
 import { AppState } from '../../../../libs/shared/ngxs/state';
 import { Router } from '@angular/router';
 import { of } from 'rxjs';
-import { SetId, SetType } from 'libs/shared/ngxs/actions';
 
 const apiMock = {
   getAuPair() {
