@@ -15,7 +15,7 @@
 
   
   <p align="center">
-<!--     <a href="https://theaupair.life/"><strong>theaupair.life</strong></a> -->
+    <a href="https://theaupair.life/"><strong>theaupair.life</strong></a>
     <br />
     <br />
     <a href="https://drive.google.com/file/d/1NaXnfLn3lmfEGlzSfiJ8SzEfEWv57wFE/view?usp=sharing"><strong>CheemsChaps-Demo 3</strong></a> | 
@@ -115,13 +115,11 @@
 
 <a href="https://drive.google.com/file/d/1NaXnfLn3lmfEGlzSfiJ8SzEfEWv57wFE/view?usp=sharing">CheemsChaps-Demo Video 4</a>
     <br>
-    <a href="https://docs.google.com/document/d/1kCEYDX8cWRBNyEANp6VYXPSW7PHgUMOl1XVQNcb5Iss/edit?usp=sharing">SRS Document - Demo 4</a>
+    <a href="https://docs.google.com/document/d/1IdGO-9WVABvS56bSlV5UvK8dSdRHbSBDqQfw9_qe29w/edit?usp=sharing">SRS Document - Demo 4</a>
     <br>
-    <a href="https://docs.google.com/document/d/1GzIiPELmaIagSMcnFb9RooccPXrH13E6ebZnEgdgcAs/edit?usp=sharing">User Manual Document - Demo 4</a>
+    <a href="https://docs.google.com/document/d/1kcMxgZ2uLOIrSf-X9vVi1aFj7OjG22VwatjpdIBWUis/edit?usp=sharing">User Manual Document - Demo 4</a>
     <br>
-    <a href="https://docs.google.com/document/d/1exfQzlmPJN50VN70wiKA6kkd6IgsQrhrz8IkSIx71jA/edit?usp=sharing">Coding Standards - Demo 4</a>
-    <br>
-    <a href="https://docs.google.com/document/d/1BzV_dQf4nruvThbL45BrbIxXXQ2bb9X9ZtzenuAmqQg/edit?usp=sharing">Installation Manual - Demo 4</a>
+    <a href="https://docs.google.com/document/d/13WtKdjBQUHWTqZmD3oo0PBJEnbSq-JjK-zrDrm9eQCQ/edit?usp=sharing">Testing Policy - Demo 4</a>
     <br>
                                      
 <!-- ABOUT -->
