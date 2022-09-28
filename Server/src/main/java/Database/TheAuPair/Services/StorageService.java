@@ -52,7 +52,7 @@ public class StorageService
       }
       catch (IOException e)
       {
-        //e.printStackTrace();
+        e.printStackTrace();
       }
       return null;
     }

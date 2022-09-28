@@ -340,7 +340,6 @@ export class ExtraCostsModalComponent implements OnInit {
   }
 
   selectFile(event: any) {
-    console.log(this.costDetails)
     this.selectedFiles = event.target.files;
     const fileReader = new FileReader();
     fileReader.readAsDataURL(this.selectedFiles.item(0));
@@ -353,7 +352,6 @@ export class ExtraCostsModalComponent implements OnInit {
   }
 
   async upload() {
-    console.log(this.generatedUserID)
     this.currentFileUpload = this.selectedFiles.item(0);
     await this.serv.storeFile(this.currentFileUpload,this.generatedUserID  +  ".png").toPromise().then(
       res=>{

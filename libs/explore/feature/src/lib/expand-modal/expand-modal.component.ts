@@ -216,9 +216,7 @@ export class ExpandModalComponent implements OnInit {
     return ret;
   }
 
-  async setImage(){
-    console.log(this.auPairId);
-    
+  async setImage(){    
     await this.serv.getFile(this.auPairId +  ".png").toPromise().then(
       async res=>{
         if (res.size > 0) {
@@ -251,7 +249,6 @@ export class ExpandModalComponent implements OnInit {
   }
 
   async downloadCV(id : string){
-    console.log("Downloading CV");
     await this.serv.getFile(id +  ".pdf").toPromise().then(
       async res=>{
         if (res.size > 0){

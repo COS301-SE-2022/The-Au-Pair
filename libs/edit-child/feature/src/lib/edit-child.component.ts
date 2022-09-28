@@ -242,8 +242,6 @@ export class EditChildComponent implements OnInit {
       res => {
         console.log("The response is:" + res);
         this.parent = res;
-        console.log(this.parent);
-
       },
       error => { console.log("Error has occured with API: " + error); }
     )

@@ -491,7 +491,6 @@ export class EditAuPairProfileComponent implements OnInit {
     const fileReader = new FileReader();
     fileReader.readAsDataURL(this.selectedCV.item(0));
     fileReader.onload = (event) => {
-      console.log("CV file selected");
       this.cvText = this.selectedCV.item(0).name;
       return event;
     }

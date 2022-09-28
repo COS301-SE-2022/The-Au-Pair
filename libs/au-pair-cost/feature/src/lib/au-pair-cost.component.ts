@@ -315,7 +315,6 @@ export class AuPairCostComponent implements OnInit {
   }
 
   async downloadSlip(id : string){
-    console.log("downloading slip")
     await this.api.getFile(id +  ".png").toPromise().then(
       async res=>{
         if (res.size > 0){
