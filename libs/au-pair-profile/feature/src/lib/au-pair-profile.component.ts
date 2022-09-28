@@ -171,7 +171,6 @@ export class AuPairProfileComponent implements OnInit {
   }
 
   async downloadCV(){
-    console.log("Downloading CV");
     await this.serv.getFile(this.store.snapshot().user.id  +  ".pdf").toPromise().then(
       async res=>{
         if (res.size > 0){

@@ -47,6 +47,10 @@
                         <div class="details-title">Experience: </div>
                         <p class="user-details">{{this.auPairDetails.experience}}</p>
                     </div>
+                    <div class="details-div">
+                        <div class="details-title">CV: </div>
+                        <p class="parent-text-info"><ion-icon (click)="downloadCV(this.userDetails.id)" class="downloadCV" slot="start" name="download"></ion-icon></p>
+                      </div>
                 </div>
             <button class="hire-button" id="change" (click)="sendHireRequests(this.auPairDetails.id)">HIRE</button>
         </div>
