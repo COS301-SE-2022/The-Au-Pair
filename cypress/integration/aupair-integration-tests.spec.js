@@ -19,6 +19,7 @@ it('should show the logged in users name on the au pair profile page', () => {
 
 it('should show the logged in users email available to edit', () => {
     cy.get("#profile").click({force:true}).then( () => {
+        cy.wait(3000);
         cy.get("#change").click({force:true}).then( () => {
             cy.contains('mockaupair@gmail.com');
         })
