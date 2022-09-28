@@ -15,7 +15,7 @@
 
   
   <p align="center">
-    <a href="#demolinks"><strong>Demo Links»</strong></a>
+    <a href="https://theaupair.life/"><strong>theaupair.life</strong></a>
     <br />
     <br />
     <a href="https://drive.google.com/file/d/1NaXnfLn3lmfEGlzSfiJ8SzEfEWv57wFE/view?usp=sharing"><strong>CheemsChaps-Demo 3</strong></a> | 
@@ -34,6 +34,7 @@
 [![Issues closed][closedissues-shield]](https://github.com/COS301-SE-2022/The-Au-Pair/issues?q=is%3Aissue+is%3Aclosed) <br />
 [![Commits][commits-shield]](https://github.com/COS301-SE-2022/The-Au-Pair/issues)
 [![Last Commit][lastcommit-shield]](https://github.com/COS301-SE-2022/The-Au-Pair/pulls?q=is%3Apr+is%3Aclosed) 
+[![Lines of Code](https://sonarcloud.io/api/project_badges/measure?project=COS301-SE-2022_The-Au-Pair&metric=ncloc)](https://sonarcloud.io/summary/new_code?id=COS301-SE-2022_The-Au-Pair)
 <br />
 
   
@@ -61,7 +62,7 @@
         <li><a href="#demo-1">Demo 1</a></li>
         <li><a href="#demo-2">Demo 2</a></li>
         <li><a href="#demo-3">Demo 3</a></li>
-        <li><a href="#completion">Completion</a></li>
+        <li><a href="#demo-4">Demo 4</a></li>
       </ul>
     <li>
       <a href="#the-team">The Team</a>
@@ -110,13 +111,18 @@
     <a href="https://docs.google.com/document/d/1BzV_dQf4nruvThbL45BrbIxXXQ2bb9X9ZtzenuAmqQg/edit?usp=sharing">Installation Manual - Demo 3</a>
     <br>
     
-### Completion
-<div align="left">
+ ### Demo 4
 
-  <img src="https://user-images.githubusercontent.com/49924445/181740788-f427c0da-df80-48f6-9ab0-02885d6bb411.png#gh-dark-mode-only" height="500px"/>
-  <img src="https://user-images.githubusercontent.com/49924445/181740795-4baa42e9-7c14-4fb0-a82a-85e3c49ead13.png#gh-light-mode-only" height="500px"/>
-
-</div>
+<a href="https://drive.google.com/file/d/1NaXnfLn3lmfEGlzSfiJ8SzEfEWv57wFE/view?usp=sharing">CheemsChaps-Demo Video 4</a>
+    <br>
+    <a href="https://docs.google.com/document/d/1kCEYDX8cWRBNyEANp6VYXPSW7PHgUMOl1XVQNcb5Iss/edit?usp=sharing">SRS Document - Demo 4</a>
+    <br>
+    <a href="https://docs.google.com/document/d/1GzIiPELmaIagSMcnFb9RooccPXrH13E6ebZnEgdgcAs/edit?usp=sharing">User Manual Document - Demo 4</a>
+    <br>
+    <a href="https://docs.google.com/document/d/1exfQzlmPJN50VN70wiKA6kkd6IgsQrhrz8IkSIx71jA/edit?usp=sharing">Coding Standards - Demo 4</a>
+    <br>
+    <a href="https://docs.google.com/document/d/1BzV_dQf4nruvThbL45BrbIxXXQ2bb9X9ZtzenuAmqQg/edit?usp=sharing">Installation Manual - Demo 4</a>
+    <br>
                                      
 <!-- ABOUT -->
 # About
