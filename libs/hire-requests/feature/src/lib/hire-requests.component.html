@@ -6,7 +6,10 @@
             <ion-card class="request-item" *ngFor="let c of ContractArray; let last = last">
                 <div class="wrapper">
                     <ion-col size = "8" class="ion-content-end info">
-                        <img class="profile" src="assets/images/placeholder-profile.jpg" alt="">
+                        <div class='img'>
+                            <img [hidden]="!this.hasImage" class="profile {{ c.parentID }}" src="{{ src }}" alt="">
+                            <ion-spinner class="spinClass" [hidden]="this.hasImage" name="circular"></ion-spinner>
+                        </div>
                         <div class="request-content ion-text-start">
                             <div class="heading">{{c.parentName}} {{c.parentSurname}}</div>
                             <div class="details">has sent you a hire request</div>

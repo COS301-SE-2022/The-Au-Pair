@@ -260,13 +260,13 @@ export class EditAuPairProfileComponent implements OnInit {
     
     if(emptyInput == true)
     {
-      this.errToast("You cannot have any empty fields.");
+      this.openToast("You cannot have any empty fields.");
     }
     else
     {     
       if(this.errFlag === false)
       {
-        this.errToast("Please select a valid location from the suggested below.");
+        this.openToast("Please select a valid location from the suggested below.");
       }
       else if(this.sameFlag === true)
       {
@@ -294,25 +294,41 @@ export class EditAuPairProfileComponent implements OnInit {
     }
   }
 
-  async editDetails(user:User, aupair:auPair)
-  {
+  async editDetails(user:User, aupair:auPair){
     await this.editUser(user); 
     await this.editAuPair(aupair);    
 
-    if(this.hasErr)
-    {
-      this.errToast("Unable to update profile.");
+    if(this.hasErr){
+      this.openToast("Unable to update profile.");
+      this.router.navigate(['/au-pair-dashboard']);
     }
-    else
-    {
-      this.openToast();
-       if (this.selectedFiles != undefined) {
-      await this.upload();
+    else{
+      this.checkImageBeforeRedirect();
     }
-    }
-    
-    this.router.navigate(['/au-pair-dashboard']);
   }
+    
+  async checkImageBeforeRedirect(){
+    if (this.selectedFiles != undefined) {
+      //upload the images if file selected
+      this.currentFileUpload = this.selectedFiles.item(0);
+      await this.serv.storeFile(this.currentFileUpload,this.store.snapshot().user.id  +  ".png").toPromise().then(
+      res=>{
+        console.log(res); 
+        //only redirect on success
+        this.openToast('Profile successfully updated!');
+        this.router.navigate(['/au-pair-dashboard']);
+      },
+      error=>{
+        this.openToast('Error uploading image!')
+        return error;
+      });
+    }
+    else{
+      this.openToast('Profile successfully updated!');
+      this.router.navigate(['/au-pair-dashboard']);
+    }
+  }
+  
 
   editUser(user:User){    
     this.serv.editUser(user).subscribe(
@@ -342,19 +358,7 @@ export class EditAuPairProfileComponent implements OnInit {
     )
   };
 
-  async openToast()
-  {
-    const toast = await this.toastCtrl.create({
-      message: 'Profile successfully updated!',
-      duration: 4000,
-      position: 'top',
-      color: 'primary',
-      cssClass: 'toastPopUp'
-    });
-    await toast.present();
-  }
-
-  async errToast(mes : string)
+  async openToast(mes : string)
   {
     const toast = await this.toastCtrl.create({
       message: mes,

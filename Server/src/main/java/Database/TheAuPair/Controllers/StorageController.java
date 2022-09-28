@@ -24,12 +24,18 @@ public class StorageController
   public ResponseEntity<ByteArrayResource> downloadFile(@RequestBody String filename)
   {
     byte[] data = ss.downloadFile(filename);
-    ByteArrayResource resource = new ByteArrayResource(data);
-    return ResponseEntity
-      .ok()
-      .contentLength(data.length)
-      .header("Content-type", "application/octet-stream")
-      .header("Content-disposition", "attachment; filename=\"" + filename + "\"")
-      .body(resource);
+
+    if (data == null){
+      return ResponseEntity.ok().body(new ByteArrayResource(new byte[0]));
+    }
+    else{
+      ByteArrayResource resource = new ByteArrayResource(data);
+      return ResponseEntity
+        .ok()
+        .contentLength(data.length)
+        .header("Content-type", "application/octet-stream")
+        .header("Content-disposition", "attachment; filename=\"" + filename + "\"")
+        .body(resource);
+    }
   }
 }

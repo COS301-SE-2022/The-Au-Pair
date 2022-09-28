@@ -362,7 +362,7 @@ export class JobSummaryParentViewComponent implements OnInit {
       message: message,
       duration: 2000,
       position: 'top',
-      color: 'primary',
+      color: 'secondary',
       cssClass: 'toastPopUp'
     });
     await toast.present();

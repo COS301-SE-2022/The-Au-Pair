@@ -328,13 +328,29 @@ export class EditParentProfileComponent implements OnInit{
     await this.editUser(user);
     await this.editMedAid(medAid);    
     
+    this.checkImageBeforeRedirect();
+  }
+
+  async checkImageBeforeRedirect(){
     if (this.selectedFiles != undefined) {
-      await this.upload();
+      //upload the images if file selected
+      this.currentFileUpload = this.selectedFiles.item(0);
+      await this.serv.storeFile(this.currentFileUpload,this.store.snapshot().user.id  +  ".png").toPromise().then(
+      res=>{
+        console.log(res); 
+        //only redirect on success
+        this.openToast('Profile successfully updated!');
+        this.router.navigate(['/parent-dashboard']);
+      },
+      error=>{
+        this.openToast('Error uploading image!')
+        return error;
+      });
     }
-
-    this.openToast();
-
-    this.router.navigate(['/parent-dashboard']);
+    else{
+      this.openToast('Profile successfully updated!');
+      this.router.navigate(['/parent-dashboard']);
+    }
   }
 
   async editUser(user:User){    
@@ -370,10 +386,10 @@ export class EditParentProfileComponent implements OnInit{
     )
   };
 
-  async openToast()
+  async openToast(message : string)
   {
     const toast = await this.toastCtrl.create({
-      message: 'Profile successfully updated!',
+      message: message,
       duration: 4000,
       position: 'top',
       color: 'primary',
@@ -458,7 +474,6 @@ export class EditParentProfileComponent implements OnInit{
     this.currentFileUpload = this.selectedFiles.item(0);
     await this.serv.storeFile(this.currentFileUpload,this.store.snapshot().user.id  +  ".png").toPromise().then(
       res=>{
-        console.log("upload receieved");
         console.log(res); 
         return res;
       },

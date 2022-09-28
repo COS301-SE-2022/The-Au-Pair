@@ -34,7 +34,7 @@
                             </ion-row>
                         </div>
                         <div class='profile-picture-wrapper'>
-                            <img [hidden]="!this.hasImage" class="profile-picture" id="{{ this.ap.id }}" src="{{ src }}" alt="">
+                            <img [hidden]="!this.hasImage" class="profile-picture {{ this.ap.id }}" src="{{ src }}" alt="">
                             <ion-spinner [hidden]="this.hasImage" name="circular"></ion-spinner>
                         </div>
                         <div class="au-pair-details">

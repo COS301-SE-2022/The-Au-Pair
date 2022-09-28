@@ -139,7 +139,6 @@ export class AuPairProfileComponent implements OnInit {
   }
 
   async setImage(){
-    console.log(this.store.snapshot().user.id );
     await this.serv.getFile(this.store.snapshot().user.id  +  ".png").toPromise().then(
       async res=>{
         const dataType = res.type;

@@ -51,6 +51,7 @@
   align-items: center;
   justify-content: center;
   margin-left: 10px;
+  border-radius: 50%;
 }
 
 .notification-content {
@@ -107,4 +108,16 @@
   .details {
     font-size: 12px;
   }
+}
+
+.profile-picture {
+  width: 4vw;
+  height: 4vw;
+  border-radius: 50%;
+
+  max-width: 75px;
+  max-height: 75px;
+
+  min-width: 50px;
+  min-height: 50px;
 }

@@ -1,11 +1,9 @@
 package Database.TheAuPair.Controllers;
 
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
-import java.io.IOException;
 import java.net.URI;
-import java.net.URISyntaxException;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
@@ -19,9 +17,16 @@ public class FuelCostController {
   private String fuelSAApiKey;
 
   @GetMapping("/api/getCurrentFuelPrices")
-  public String getCurrentFuelPrices() throws Exception {
+  public ResponseEntity<?> getCurrentFuelPrices() throws Exception {
     HttpResponse<String> response = getCurrentFuel();
-    return response.body();
+    if (response.statusCode() == 200)
+    {
+      return ResponseEntity.ok(response.body());
+    }
+    else
+    {
+      return ResponseEntity.badRequest().body(response.body());
+    }
   }
 
   private HttpResponse<String> getCurrentFuel() throws Exception{
