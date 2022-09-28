@@ -304,7 +304,7 @@ export class API{
   }
 
   addUserCost(userCost: UserCosts): Observable<any> {
-    return this.http.post(environment.apiURI+"/addUserCost",userCost);
+    return this.http.post(environment.apiURI+"/addUserCost",userCost,{responseType: 'text'});
   }
 
   removeUserCost(id : string): Observable<any> {  

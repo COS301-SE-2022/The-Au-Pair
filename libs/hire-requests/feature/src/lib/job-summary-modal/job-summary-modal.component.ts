@@ -5,6 +5,7 @@ import { API } from '../../../../../shared/api/api.service';
 import { Store } from '@ngxs/store';
 import { Router } from '@angular/router';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { SetImgString } from '../../../../../shared/ngxs/actions';
 
 @Component({
   selector: 'the-au-pair-job-summary-modal',
@@ -48,6 +49,9 @@ export class JobSummaryModalComponent implements OnInit {
     alreadyOutOfBounds: false,
     terminateDate: "",
   }
+
+  hasImage = false;
+  src = "";
 
   notificationToSend: Notification = {
     id: "",
@@ -111,7 +115,7 @@ export class JobSummaryModalComponent implements OnInit {
 
   async ngOnInit(): Promise<void> {
     this.auPairID = this.store.snapshot().user.id;
-
+    this.setImage();
     await this.getParentDetails(this.parentID);
     await this.getUserDetails();
     await this.getChildrenDetails();
@@ -279,7 +283,6 @@ export class JobSummaryModalComponent implements OnInit {
         });
 
         if (this.userFcmToken != "") {
-          console.log(this.userFcmToken);
           const requestHeaders = new HttpHeaders().set('Authorization', 'key=AAAAlhtqIdQ:APA91bFlcYmdaqt5D_jodyiVQG8B1mkca2xGh6XKeMuTGtxQ6XKhSY0rdLnc0WrXDsV99grFamp3k0EVHRUJmUG9ULcxf-VSITFgwwaeNvrUq48q0Hn1GLxmZ3GBAYdCBzPFIRdbMxi9');
           const postData = {
             "to": this.userFcmToken,
@@ -497,5 +500,37 @@ export class JobSummaryModalComponent implements OnInit {
     }
 
     return age;
+  }
+
+  async setImage(){
+    await this.serv.getFile(this.parentID  +  ".png").toPromise().then(
+      async res=>{
+        if (res.size > 0){
+          const dataType = res.type;
+          const binaryData = [];
+          binaryData.push(res);
+          const href = window.URL.createObjectURL(new Blob(binaryData, {type: dataType}));
+          this.store.dispatch(new SetImgString(href));
+          const dom = document.getElementById("img8");
+
+          if(dom != null)
+          {
+            dom.setAttribute("src", this.store.snapshot().user.imgString);
+          }
+
+          this.hasImage = true;
+        }
+        else{
+          const dom = document.getElementById("img8");
+          if (dom != null) {
+            dom.setAttribute("src","assets/images/placeholder-profile.jpg");
+          }
+          this.hasImage = true;
+        }
+      },
+      error=>{
+        return error;
+      }
+    );
   }
 }

@@ -6,6 +6,7 @@ import { Child, Contract, Parent, User, Notification, Email, medAid } from '../.
 import { Router } from '@angular/router';
 import { ToastController } from '@ionic/angular';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { SetImgString } from '../../../../shared/ngxs/actions';
 
 @Component({
   selector: 'the-au-pair-job-summary-parent-view',
@@ -21,7 +22,8 @@ export class JobSummaryParentViewComponent implements OnInit {
   childrenArr: Child[] = [];
   flag!: boolean;
 
-
+  hasImage = false;
+  src = "";
 
   days = [
     "Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"
@@ -128,7 +130,7 @@ export class JobSummaryParentViewComponent implements OnInit {
 
   async ngOnInit(): Promise<void> {    
     this.parentID = this.store.snapshot().user.id;
-
+    this.setImage();
     await this.getActivities();
     await this.getUserDetails();
     await this.getParentDetails();
@@ -335,7 +337,6 @@ export class JobSummaryParentViewComponent implements OnInit {
             });
     
             if (this.userFcmToken != "") {
-              console.log(this.userFcmToken);
               const requestHeaders = new HttpHeaders().set('Authorization', 'key=AAAAlhtqIdQ:APA91bFlcYmdaqt5D_jodyiVQG8B1mkca2xGh6XKeMuTGtxQ6XKhSY0rdLnc0WrXDsV99grFamp3k0EVHRUJmUG9ULcxf-VSITFgwwaeNvrUq48q0Hn1GLxmZ3GBAYdCBzPFIRdbMxi9');
               const postData = {
                 "to": this.userFcmToken,
@@ -387,7 +388,7 @@ export class JobSummaryParentViewComponent implements OnInit {
       message: message,
       duration: 2000,
       position: 'top',
-      color: 'primary',
+      color: 'secondary',
       cssClass: 'toastPopUp'
     });
     await toast.present();
@@ -440,6 +441,37 @@ export class JobSummaryParentViewComponent implements OnInit {
 
     return age;
   }
+  
+  async setImage(){
+    await this.serv.getFile(this.store.snapshot().user.id  +  ".png").toPromise().then(
+      async res=>{
+        if (res.size > 0){
+          const dataType = res.type;
+          const binaryData = [];
+          binaryData.push(res);
+          const href = window.URL.createObjectURL(new Blob(binaryData, {type: dataType}));
+          this.store.dispatch(new SetImgString(href));
+          const dom = document.getElementById("img7");
 
+          if(dom != null)
+          {
+            dom.setAttribute("src", this.store.snapshot().user.imgString);
+          }
+
+          this.hasImage = true;
+        }
+        else{
+          const dom = document.getElementById("img7");
+          if (dom != null) {
+            dom.setAttribute("src","assets/images/placeholder-profile.jpg");
+          }
+          this.hasImage = true;
+        }
+      },
+      error=>{
+        return error;
+      }
+    );
+  }
 
 }

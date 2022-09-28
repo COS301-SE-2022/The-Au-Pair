@@ -274,3 +274,51 @@ textarea{
     border: 2px solid var(--ion-color-secondary) !important;
     padding-left: 12px;
 }
+
+.upload-slot{
+    margin-bottom: 10px;
+}
+
+input[type="file"] {
+    display: none;
+}
+
+.custom-file-upload {
+    border: 2px solid var(--ion-color-secondary);
+    background-color: var(--ion-color-primary);
+    color: var(--ion-color-light);
+    display: inline-block;
+    width: 8%;
+    border-radius: 10px;
+    height: 43px;
+    cursor: pointer;
+    padding-top: 10px;
+    min-width: 120px;
+}
+
+input[type="file"] {
+    display: none;
+}
+
+.custom-cv-upload {
+    background-color: var(--ion-color-primary);
+    color: var(--ion-color-light);
+    display: inline-block;
+    width: 8%;
+    border-radius: 10px;
+    height: 43px;
+    cursor: pointer;
+    padding-top: 12px;
+    min-width: 120px;
+    margin-left: auto;
+    margin-right: 15px;
+    text-align: center;
+}
+
+.cvRow{
+    display: flex;
+    justify-content: space-between;
+    vertical-align: middle;
+    align-items: center;
+    width: 100%;
+ }

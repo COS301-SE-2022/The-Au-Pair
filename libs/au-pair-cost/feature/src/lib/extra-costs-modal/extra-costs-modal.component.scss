@@ -25,6 +25,7 @@ input {
     border-style: none;
     border-radius: 10px;
     padding-left: 20px;
+    color: var(--ion-color-dark)
 }
 
 ion-row {
@@ -65,7 +66,7 @@ option {
 .image-upload {
     display: flex;
     align-items: center;
-    justify-content: left;
+    justify-content: space-evenly;
 }
 
 .image-upload label {
@@ -126,8 +127,9 @@ textarea{
 
 .disabled-amount {
     background: var(--ion-color-grey);
-    opacity: 0.5;
+    opacity: 0.9;
     cursor: default;
+    color : var(--ion-color-dark)
 }
 
 .error{

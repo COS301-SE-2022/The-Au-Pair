@@ -32,6 +32,16 @@
 
             <the-au-pair-long-field [hidden]="parentChosen" labelContent="Experience" errorContent="Invalid experience field" [showError]="submitAttempt && (!parentRegisterDetailsForm.controls['experience'].valid) || experienceError" formControlName="experience"></the-au-pair-long-field>
 
+            <div [hidden]="parentChosen" class="fld">
+                <div class="cvRow">
+                    {{ cvText }}
+                    <label class="custom-file-upload ">
+                        Upload 
+                    <input type="file" id="customFile" (change)="selectFile($event)" placeholder="File to upload" accept=".PDF">  
+                    </label>  
+                </div>
+            </div>
+
             <the-au-pair-password-field labelContent="Password" errorContent="Password should be at least 8 characters, and have uppercase, lowercase, special and number characters" [showError]="(submitAttempt && (!parentRegisterDetailsForm.controls['pass'].valid))" formControlName="pass"></the-au-pair-password-field>
 
             <the-au-pair-password-field labelContent="Confirm Password" errorContent="Passwords do not match" [showError]="notSamePasswords" formControlName="confPass"></the-au-pair-password-field>

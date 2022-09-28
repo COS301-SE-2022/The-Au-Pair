@@ -176,7 +176,6 @@ export class AppComponent implements OnInit {
         });
 
         if (this.userFcmToken != "") {
-          console.log(this.userFcmToken);
           const requestHeaders = new HttpHeaders().set('Authorization', 'key=AAAAlhtqIdQ:APA91bFlcYmdaqt5D_jodyiVQG8B1mkca2xGh6XKeMuTGtxQ6XKhSY0rdLnc0WrXDsV99grFamp3k0EVHRUJmUG9ULcxf-VSITFgwwaeNvrUq48q0Hn1GLxmZ3GBAYdCBzPFIRdbMxi9');
           const postData = {
             "to": this.userFcmToken,
@@ -492,9 +491,7 @@ export class AppComponent implements OnInit {
         
         const distance = this.calculateEucDistance(latAct, longAct, latCoord, longCoord);
         if(distance>boundary  && !aupair.alreadyOutOfBounds)
-        {
-          console.log("Notifying parent");
-          
+        {          
           //Notify parent
           const current = new Date();
           const today = current.getFullYear() + "-" + (current.getMonth() + 1) + "-" + current.getDate();
@@ -615,7 +612,6 @@ export class AppComponent implements OnInit {
 
   profile(type=this.store.snapshot().user.type )
   {
-    console.log("Coming into profile function")
     if(type == 0)
     {
       // this.router.navigate(['/admin-profile']);

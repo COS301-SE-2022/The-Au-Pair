@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { User, auPair } from '../../../../shared/interfaces/interfaces';
 import { API } from '../../../../shared/api/api.service';
 import { Store } from '@ngxs/store';
+import { SetImgString } from '../../../../shared/ngxs/actions';
 
 @Component({
   selector: 'the-au-pair-au-pair-profile',
@@ -48,10 +49,14 @@ export class AuPairProfileComponent implements OnInit {
     terminateDate: "",
   }
 
+  hasImage = false;
+  src = "";
+
   constructor(private serv: API, private store: Store){}
 
   ngOnInit(): void
   {
+    this.setImage();
     this.aupairID = this.store.snapshot().user.id;
     this.getUserDetails()
   }
@@ -131,5 +136,58 @@ export class AuPairProfileComponent implements OnInit {
     const ret = (Math.round(avg * 100) / 100).toFixed(1);
 
     return ret;
+  }
+
+  async setImage(){
+    await this.serv.getFile(this.store.snapshot().user.id  +  ".png").toPromise().then(
+      async res=>{
+        if (res.size > 0){
+          const dataType = res.type;
+          const binaryData = [];
+          binaryData.push(res);
+          const href = window.URL.createObjectURL(new Blob(binaryData, {type: dataType}));
+          this.store.dispatch(new SetImgString(href));
+          const dom = document.getElementById("img3");
+
+          if(dom != null)
+          {
+            dom.setAttribute("src", this.store.snapshot().user.imgString);
+          }
+
+          this.hasImage = true;
+        }
+        else{
+          const dom = document.getElementById("img3");
+          if (dom != null) {
+            dom.setAttribute("src","assets/images/placeholder-profile.jpg");
+          }
+          this.hasImage = true;
+        }
+      },
+      error=>{
+        return error;
+      }
+    );
+  }
+
+  async downloadCV(){
+    await this.serv.getFile(this.store.snapshot().user.id  +  ".pdf").toPromise().then(
+      async res=>{
+        if (res.size > 0){
+          const dataType = res.type;
+          const binaryData = [];
+          binaryData.push(res);
+          const downloadLink = document.createElement('a');
+          downloadLink.href = window.URL.createObjectURL(new Blob(binaryData, {type: dataType}));
+          this.store.dispatch(new SetImgString(downloadLink.href ));
+          downloadLink.setAttribute('download', "CV.pdf");
+          document.body.appendChild(downloadLink);
+          downloadLink.click();
+        }
+      },
+      error=>{
+        return error;
+      }
+    );
   }
 }

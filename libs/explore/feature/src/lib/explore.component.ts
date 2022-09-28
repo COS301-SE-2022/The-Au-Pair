@@ -6,6 +6,7 @@ import { MenuController } from '@ionic/angular';
 import { NavController } from '@ionic/angular';
 import { ToastController } from '@ionic/angular';
 import { Store } from '@ngxs/store';
+import { SetImgString } from '../../../../shared/ngxs/actions';
 
 @Component({
   selector: 'the-au-pair-explore',
@@ -28,6 +29,9 @@ export class ExploreComponent implements OnInit {
   maxAge! : number;
 
   eucDistance! : number;
+
+  hasImage = false;
+  src = "";
 
   auPairs : any;
   auPairDetails : any = {
@@ -88,26 +92,32 @@ export class ExploreComponent implements OnInit {
     this.auPairs.forEach((ap: { id: any; rating: any; payRate: any; fname: any; sname: any, suburb: any; employer: any; birth: any; gender: any; longitude: any; latitude: any; distance: any;}) => {
       this.serv.getUser(ap.id).subscribe(
         res=>{
-          const eucdistance = this.calculateEucDistance(res.latitude, res.longitude);
           
-          const auPairDetails = {
-            id: ap.id,
-            rating: this.getAverage(ap.rating),
-            payRate: ap.payRate,
-            fname: res.fname,
-            sname: res.sname,
-            suburb: res.suburb,
-            employer: ap.employer,
-            registered: res.registered,
-            birth: res.birth,
-            gender: res.gender,
-            distance: eucdistance,
-          }
-          // Logic for explore that will only show Au Pairs whom are not yet employed
-          if(ap.employer == "" && res.registered == true && res.banned == "")
-          {
-            this.AuPairArray.push(auPairDetails);
-            this.restoredAuPairArray.push(auPairDetails);
+          if(res != null){
+            const eucdistance = this.calculateEucDistance(res.latitude, res.longitude);
+
+            const auPairDetails = {
+              id: ap.id,
+              rating: this.getAverage(ap.rating),
+              payRate: ap.payRate,
+              fname: res.fname,
+              sname: res.sname,
+              suburb: res.suburb,
+              employer: ap.employer,
+              registered: res.registered,
+              birth: res.birth,
+              gender: res.gender,
+              distance: eucdistance,
+            }
+  
+            
+            // Logic for explore that will only show Au Pairs whom are not yet employed
+            if(ap.employer == "" && res.registered == true && res.banned == "")
+            {
+              this.AuPairArray.push(auPairDetails);
+              this.restoredAuPairArray.push(auPairDetails);
+              this.setImage(res.id);
+            }
           }
         },
         error=>{console.log("Error has occured with API: " + error);}
@@ -180,6 +190,7 @@ export class ExploreComponent implements OnInit {
       });
   
       this.AuPairArray = this.AuPairArray.filter((element) => {
+        this.setImage(element.id);
         return element.payRate >= this.minPayrate && element.payRate <= this.maxPayrate;
       });
     }
@@ -217,6 +228,7 @@ export class ExploreComponent implements OnInit {
     });
 
     this.AuPairArray = this.AuPairArray.filter((element) => {
+      this.setImage(element.id);
       return this.getAge(element.birth) <= this.maxAge;
     });
 
@@ -268,6 +280,7 @@ export class ExploreComponent implements OnInit {
     });
 
     this.AuPairArray = this.AuPairArray.filter((element) => {
+      this.setImage(element.id);
       return element.distance <= this.maxDistance;
     });
 
@@ -282,6 +295,7 @@ export class ExploreComponent implements OnInit {
     this.restoredAuPairArray.forEach(val => this.AuPairArray.push(Object.assign({}, val)));
 
     this.AuPairArray = this.AuPairArray.filter((element) => {
+      this.setImage(element.id);
       if(this.isOnline)
       {
         return element.gender === 'male';
@@ -340,7 +354,10 @@ export class ExploreComponent implements OnInit {
   resetFilters()
   {
     this.AuPairArray.splice(0);
-    this.restoredAuPairArray.forEach(val => this.AuPairArray.push(Object.assign({}, val)));
+    this.restoredAuPairArray.forEach(val =>this.AuPairArray.push(Object.assign({}, val)));
+    for(let i = 0; i < this.AuPairArray.length; i++){
+      this.setImage(this.AuPairArray[i].id);
+    }
 
     this.closeMenu();
   }
@@ -373,5 +390,43 @@ export class ExploreComponent implements OnInit {
     const ret = (Math.round(avg * 100) / 100).toFixed(1);
 
     return ret;
+  }
+
+  async setImage(id: string){
+    this.hasImage = false;
+    await this.serv.getFile(id +  ".png").toPromise().then(
+      async res=>{
+        if (res.size > 0){
+          const dataType = res.type;
+        const binaryData = [];
+        binaryData.push(res);
+        const href = window.URL.createObjectURL(new Blob(binaryData, {type: dataType}));
+        this.store.dispatch(new SetImgString(href));
+        const dom = document.getElementsByClassName(id);
+        if(dom != null)
+        {
+          for(let i = 0; i < dom.length; i++)
+          {
+            dom[i].setAttribute('src', href);
+          }
+        }
+
+        this.hasImage = true;
+        }
+        else{
+          const dom = document.getElementsByClassName(id);
+          if (dom != null) {
+            for (let i = 0; i < dom.length; i++) {
+              dom[i].setAttribute("src","assets/images/placeholder-profile.jpg");
+            }
+          }
+          this.hasImage = true;
+        }
+        
+      },
+      error=>{
+        return error;
+      }
+    );
   }
 }

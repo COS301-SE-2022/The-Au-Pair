@@ -5,6 +5,7 @@ import { ModalController } from '@ionic/angular';
 import { ExtraCostsModalComponent } from './extra-costs-modal/extra-costs-modal.component';
 import { EditRateModalComponent } from './edit-rate-modal/edit-rate-modal.component';
 import { AlertController } from '@ionic/angular';
+import { SetImgString } from '../../../../shared/ngxs/actions';
 
 @Component({
   selector: 'the-au-pair-au-pair-cost',
@@ -311,5 +312,26 @@ export class AuPairCostComponent implements OnInit {
     });
 
     await alert.present();
+  }
+
+  async downloadSlip(id : string){
+    await this.api.getFile(id +  ".png").toPromise().then(
+      async res=>{
+        if (res.size > 0){
+          const dataType = res.type;
+          const binaryData = [];
+          binaryData.push(res);
+          const downloadLink = document.createElement('a');
+          downloadLink.href = window.URL.createObjectURL(new Blob(binaryData, {type: dataType}));
+          this.store.dispatch(new SetImgString(downloadLink.href ));
+          downloadLink.setAttribute('download', "slip.png");
+          document.body.appendChild(downloadLink);
+          downloadLink.click();
+        }
+      },
+      error=>{
+        return error;
+      }
+    );
   }
 }

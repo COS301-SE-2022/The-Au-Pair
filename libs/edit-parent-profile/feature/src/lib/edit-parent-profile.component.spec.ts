@@ -518,7 +518,7 @@ describe('EditParentProfileComponent', () => {
 
   it('should, open a toast when openToast is called', async ()=>{
     jest.spyOn(component,"openToast");
-    component.openToast();
+    component.openToast('Testing');
     expect(await component.openToast).toReturn();
   });
 

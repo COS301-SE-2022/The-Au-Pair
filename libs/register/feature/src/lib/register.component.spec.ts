@@ -11,6 +11,8 @@ import { API } from '../../../../shared/api/api.service';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { HttpClient } from '@angular/common/http';
 import { of } from 'rxjs';
+import { NgxsModule } from '@ngxs/store';
+import { AppState } from '../../../../shared/ngxs/state';
 
 const httpMock = {
   get() {
@@ -29,6 +31,9 @@ const apiMock = {
     return of({})
   },
   sendEmail() {
+    return of({})
+  },
+  storeFIle() {
     return of({})
   }
 }
@@ -63,6 +68,7 @@ describe('RegisterComponent', () => {
         RouterTestingModule,
         HttpClientTestingModule,
         FormsModule,
+        NgxsModule.forRoot([AppState])
       ],
       providers:[
         {
@@ -207,31 +213,6 @@ describe('RegisterComponent', () => {
 
     await component.registerUser();
     expect(toastSpy).toHaveBeenCalledWith("Account already exists with email : " + usedEmail);
-  });
-
-
-  it('should register an au pair based off of valid inputs', async () => {
-    component.parentChosen = false;
-    inputRegistration(populatedForm.name, populatedForm.surname, populatedForm.email, populatedForm.phone, populatedForm.id, populatedForm.medAid, populatedForm.location, populatedForm.bio, populatedForm.experience, populatedForm.pass, populatedForm.confPass);
-    const toastSpy = jest.spyOn(component, 'openToast');
-
-    jest.spyOn(httpMock, 'get').mockImplementation(()=>of(
-      [{
-        "address": {
-          "suburb": "Midrand",
-        },
-        "display_name": "Midrand, City of Johannesburg Metropolitan Municipality, Gauteng, 1685, South Africa",
-        "lat" : -25.999262,
-        "lon" : 28.125912
-      }]
-    ));
-
-    jest.spyOn(apiMock, 'register').mockImplementation(()=>of(
-      "pending"
-    ));
-
-    await component.registerUser();
-    expect(toastSpy).toHaveBeenCalledWith("Registration succesfull pending approval");
   });
 
   it('should have registration fail with general invalid inputs', async () => {

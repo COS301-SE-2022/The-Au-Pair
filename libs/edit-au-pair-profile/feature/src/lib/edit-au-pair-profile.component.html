@@ -3,7 +3,14 @@
     <div class = "edit-profile-div">
         <h1 class='profile-name'>{{this.userDetails.fname}} {{this.userDetails.sname}}</h1>
         <div class='profile-picture-wrapper'>
-            <img class="profile-picture" src="assets/images/placeholder-profile.jpg" alt="">
+            <img [hidden]="!this.hasImage" class="profile-picture" id="img4" src="" alt="">
+            <ion-spinner [hidden]="this.hasImage" name="circular"></ion-spinner>
+        </div>
+        <div class="ion-text-center upload-slot">
+            <label class="custom-file-upload ">
+                Upload 
+              <input type="file" id="customFile" (change)="selectFile($event)" placeholder="File to upload" accept=".JPEG,.PNG,.IMG">  
+            </label>
         </div>
         <form id = "profForm" #profileForm = "ngForm" (ngSubmit) = "getUserFormDetails(profileForm.value)">
             <div class = "profile-details-div">
@@ -89,6 +96,23 @@
                             <div class="address-field"> 
                                 <textarea name = "experience" class="user-details" ngModel = '{{this.auPairDetails.experience}}' placeholder="Experience"></textarea>
                                 <p id="experienceError" class="error" style="display: none;">Error in field</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="details-div address-details">
+                    <div>
+                        <div class="fl">
+                            <div class="cvRow">
+                                <div class="address-label">
+                                    <div>{{ cvText }}: </div>
+                                </div>
+                                <div class="address-field"> 
+                                    <label class="custom-cv-upload ">
+                                        Upload 
+                                    <input type="file" id="customFile" (change)="selectCVFile($event)" placeholder="File to upload" accept=".PDF">  
+                                    </label> 
+                                </div>
                             </div>
                         </div>
                     </div>

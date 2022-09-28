@@ -5,6 +5,7 @@ import { Store } from '@ngxs/store';
 import { Router } from '@angular/router';
 import { auPair, Child, Parent } from '../../../../shared/interfaces/interfaces';
 import { JobSummaryModalComponent } from './job-summary-modal/job-summary-modal.component';
+import { SetImgString } from '../../../../shared/ngxs/actions';
 
 @Component({
   selector: 'the-au-pair-hire-requests',
@@ -14,6 +15,9 @@ import { JobSummaryModalComponent } from './job-summary-modal/job-summary-modal.
 export class HireRequestsComponent implements OnInit {
   auPairID = "";
   contracts : any;
+
+  hasImage = false;
+  src = "";
   
   childDetails: Child ={
     id: "",
@@ -108,6 +112,7 @@ export class HireRequestsComponent implements OnInit {
                       {
                         this.ContractArray.push(contractDetails);
                       }
+                      this.setImage(contractDetails.parentID);
                     }
                   )
                 }
@@ -128,6 +133,43 @@ export class HireRequestsComponent implements OnInit {
       }
     });
     await modal.present();
+  }
+
+  async setImage(id : string){
+    await this.serv.getFile(id  +  ".png").toPromise().then(
+      async res=>{
+        if (res.size > 0){
+          const dataType = res.type;
+          const binaryData = [];
+          binaryData.push(res);
+          const href = window.URL.createObjectURL(new Blob(binaryData, {type: dataType}));
+          this.store.dispatch(new SetImgString(href));
+          const dom = document.getElementsByClassName(id);
+
+          if(dom != null)
+          {
+            for(let i = 0; i < dom.length; i++)
+            {
+              dom[i].setAttribute('src', href);
+            }
+          }
+
+          this.hasImage = true;
+        }
+        else{
+          const dom = document.getElementsByClassName(id);
+          if (dom != null) {
+            for (let i = 0; i < dom.length; i++) {
+            dom[i].setAttribute("src","assets/images/placeholder-profile.jpg");
+            }
+          }
+          this.hasImage = true;
+        }
+      },
+      error=>{
+        return error;
+      }
+    );
   }
 }
   

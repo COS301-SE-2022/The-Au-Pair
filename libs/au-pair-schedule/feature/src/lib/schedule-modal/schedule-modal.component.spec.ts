@@ -7,6 +7,8 @@ import { ScheduleModalComponent } from './schedule-modal.component';
 import { CommonModule } from '@angular/common';
 import { NavbarModule } from '@the-au-pair/shared/components/navbar';
 import { FormsModule } from '@angular/forms';
+import { NgxsModule } from '@ngxs/store';
+import { AppState } from '../../../../../shared/ngxs/state';
 
 describe('ScheduleModalComponent', () => {
   let component: ScheduleModalComponent;
@@ -17,7 +19,7 @@ describe('ScheduleModalComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [ScheduleModalComponent],
-      imports: [IonicModule, CommonModule,HttpClientTestingModule,NavbarModule, RouterTestingModule, FormsModule,],
+      imports: [IonicModule, CommonModule,HttpClientTestingModule,NavbarModule, RouterTestingModule, FormsModule,NgxsModule.forRoot([AppState])],
       providers: [API,ModalController]
     }).compileComponents();
   });

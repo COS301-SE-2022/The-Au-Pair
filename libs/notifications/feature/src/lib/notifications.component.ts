@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngxs/store';
+import { SetImgString } from '../../../../shared/ngxs/actions';
 import { API } from '../../../../shared/api/api.service';
 import { Notification } from '../../../../shared/interfaces/interfaces';
 
@@ -12,11 +13,16 @@ export class ParentNotificationsComponent implements OnInit {
   notifications: Notification[] = [];
   userType = -1;
   userId = "";
+
+  hasImage = false;
+  src = "";
+
   constructor(private api: API, private store : Store) {}
 
   ngOnInit() {
     this.userType = this.store.snapshot().user.type;
     this.userId = this.store.snapshot().user.id;
+    this.setImage();
 
     if(this.userType == 1)
     {
@@ -47,5 +53,42 @@ export class ParentNotificationsComponent implements OnInit {
         console.log(err);
       });
     }
+  }
+
+  async setImage(){
+    await this.api.getFile(this.store.snapshot().user.id  +  ".png").toPromise().then(
+      async res=>{
+        if (res.size > 0){
+          const dataType = res.type;
+          const binaryData = [];
+          binaryData.push(res);
+          const href = window.URL.createObjectURL(new Blob(binaryData, {type: dataType}));
+          this.store.dispatch(new SetImgString(href));
+          const dom = document.getElementsByClassName(this.userId);
+
+          if(dom != null)
+          {
+            for(let i = 0; i < dom.length; i++)
+            {
+              dom[i].setAttribute("src", this.store.snapshot().user.imgString);
+            }
+          }
+
+          this.hasImage = true;
+        }
+        else{
+          const dom = document.getElementsByClassName(this.userId);
+          if (dom != null) {
+            for(let i = 0; i < dom.length; i++){
+            dom[i].setAttribute("src","assets/images/placeholder-profile.jpg");
+            }
+          }
+          this.hasImage = true;
+        }
+      },
+      error=>{
+        return error;
+      }
+    );
   }
 }

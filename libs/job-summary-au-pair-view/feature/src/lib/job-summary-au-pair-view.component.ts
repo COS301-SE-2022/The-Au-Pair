@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { API } from '../../../../shared/api/api.service';
 import { Store } from '@ngxs/store';
+import { SetImgString } from '../../../../shared/ngxs/actions';
 import { auPair, Child, medAid, Parent, User } from '../../../../shared/interfaces/interfaces';
 
 @Component({
@@ -12,6 +13,9 @@ export class JobSummaryAuPairViewComponent implements OnInit {
   
   auPairID = "";
   childrenArr: Child[] = [];
+
+  hasImage = false;
+  src = "";
 
   auPairChildren: string[] = [];
 
@@ -86,6 +90,7 @@ export class JobSummaryAuPairViewComponent implements OnInit {
     this.auPairID = this.store.snapshot().user.id;
     
     await this.getAuPairDetails();
+    this.setImage();
     await this.getParentDetails();
     await this.getMedAidDetails();
     await this.getUserDetails();
@@ -229,6 +234,38 @@ export class JobSummaryAuPairViewComponent implements OnInit {
     }
 
     return age;
+  }
+
+  async setImage(){
+    await this.serv.getFile(this.currentAuPair.employer +  ".png").toPromise().then(
+      async res=>{
+        if (res.size > 0) {
+          const dataType = res.type;
+          const binaryData = [];
+          binaryData.push(res);
+          const href = window.URL.createObjectURL(new Blob(binaryData, {type: dataType}));
+          this.store.dispatch(new SetImgString(href));
+          const dom = document.getElementById("img9");
+
+          if(dom != null)
+          {
+            dom.setAttribute("src", this.store.snapshot().user.imgString);
+          }
+
+          this.hasImage = true;
+        }
+        else{
+          const dom = document.getElementById("img9");
+          if (dom != null) {
+            dom.setAttribute("src","assets/images/placeholder-profile.jpg");
+          }
+          this.hasImage = true;
+        }
+      },
+      error=>{
+        return error;
+      }
+    );
   }
 }
 

@@ -5,6 +5,7 @@ import { ToastController } from '@ionic/angular';
 import { Store } from '@ngxs/store';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
+import { SetImgString } from '../../../../shared/ngxs/actions';
 
 @Component({
   selector: 'the-au-pair-edit-au-pair-profile',
@@ -18,10 +19,19 @@ export class EditAuPairProfileComponent implements OnInit {
   sameFlag = false;
   errFlag = true;
 
+  selectedFiles : any;
+  currentFileUpload: any;
+
+  selectedCV: any;
+  currentCvUpload: any;
+  
+  hasImage = false;
+
   location = "";
   long = 0;
   lat = 0;
   suburb = "";
+  cvText = "CV";
 
   potentialLocations : any[] = [];
 
@@ -66,6 +76,7 @@ export class EditAuPairProfileComponent implements OnInit {
 
   ngOnInit(): void
   {
+    this.setImage();
     this.aupairID = this.store.snapshot().user.id;
     this.getUserDetails()
   }
@@ -254,13 +265,13 @@ export class EditAuPairProfileComponent implements OnInit {
     
     if(emptyInput == true)
     {
-      this.errToast("You cannot have any empty fields.");
+      this.openToast("You cannot have any empty fields.");
     }
     else
     {     
       if(this.errFlag === false)
       {
-        this.errToast("Please select a valid location from the suggested below.");
+        this.openToast("Please select a valid location from the suggested below.");
       }
       else if(this.sameFlag === true)
       {
@@ -288,22 +299,59 @@ export class EditAuPairProfileComponent implements OnInit {
     }
   }
 
-  async editDetails(user:User, aupair:auPair)
-  {
+  async editDetails(user:User, aupair:auPair){
     await this.editUser(user); 
     await this.editAuPair(aupair);    
 
-    if(this.hasErr)
-    {
-      this.errToast("Unable to update profile.");
+    if(this.hasErr){
+      this.openToast("Unable to update profile.");
+      this.router.navigate(['/au-pair-dashboard']);
     }
-    else
-    {
-      this.openToast();
+    else{
+      this.checkImageBeforeRedirect();
     }
-    
-    this.router.navigate(['/au-pair-dashboard']);
   }
+    
+  async checkImageBeforeRedirect(){
+    if (this.selectedFiles != undefined) {
+      //upload the images if file selected
+      this.currentFileUpload = this.selectedFiles.item(0);
+      await this.serv.storeFile(this.currentFileUpload,this.store.snapshot().user.id  +  ".png").toPromise().then(
+      res=>{
+        console.log(res); 
+        //only redirect on success
+        this.checkCVBeforeRedirect();
+      },
+      error=>{
+        this.openToast('Error uploading image!')
+        return error;
+      });
+    }
+    else{
+      this.checkCVBeforeRedirect();
+    }
+  }
+
+  async checkCVBeforeRedirect(){
+    if (this.selectedCV != undefined) {
+      this.currentCvUpload = this.selectedCV.item(0);
+      await this.serv.storeFile(this.currentCvUpload,this.userDetails.id  +  ".pdf").toPromise().then(
+      res=>{
+        console.log(res); 
+        this.openToast('Profile successfully updated!');
+        this.router.navigate(['/au-pair-dashboard']);
+      },
+      error=>{
+        this.openToast("Error uploading CV!")
+        return error;
+      });
+    }
+    else{
+      this.openToast('Profile successfully updated!');
+      this.router.navigate(['/au-pair-dashboard']);
+    }
+  }
+  
 
   editUser(user:User){    
     this.serv.editUser(user).subscribe(
@@ -333,19 +381,7 @@ export class EditAuPairProfileComponent implements OnInit {
     )
   };
 
-  async openToast()
-  {
-    const toast = await this.toastCtrl.create({
-      message: 'Profile successfully updated!',
-      duration: 4000,
-      position: 'top',
-      color: 'primary',
-      cssClass: 'toastPopUp'
-    });
-    await toast.present();
-  }
-
-  async errToast(mes : string)
+  async openToast(mes : string)
   {
     const toast = await this.toastCtrl.create({
       message: mes,
@@ -398,4 +434,66 @@ export class EditAuPairProfileComponent implements OnInit {
   radioChecked(event: any){
     this.location = event.target.value;
   }
+
+  selectFile(event: any) {
+    this.selectedFiles = event.target.files;
+    const fileReader = new FileReader();
+    fileReader.readAsDataURL(this.selectedFiles.item(0));
+    fileReader.onload = (event) => {
+      const dom = document.getElementById("img4");
+      if (dom != null) {
+        const ev = event.target;
+        if (ev != null) {
+          const res = ev.result as string;
+          if (res != null) {
+            dom.setAttribute("src",res);
+          }
+        }
+      }
+    }
+  }
+
+  async setImage(){
+    await this.serv.getFile(this.store.snapshot().user.id  +  ".png").toPromise().then(
+      async res=>{
+        if (res.size > 0) {
+
+          const dataType = res.type;
+          const binaryData = [];
+          binaryData.push(res);
+          const href = window.URL.createObjectURL(new Blob(binaryData, {type: dataType}));
+          this.store.dispatch(new SetImgString(href));
+          const dom = document.getElementById("img4");
+
+          if(dom != null)
+          {
+            dom.setAttribute("src", this.store.snapshot().user.imgString);
+          }
+
+          this.hasImage = true;
+        }
+        else{
+          const dom = document.getElementById("img4");
+          if (dom != null) {
+            dom.setAttribute("src","assets/images/placeholder-profile.jpg");
+          }
+          this.hasImage = true;
+        }
+      },
+      error=>{
+        return error;
+      }
+    );
+  }
+
+  selectCVFile(event: any) {
+    this.selectedCV = event.target.files;
+    const fileReader = new FileReader();
+    fileReader.readAsDataURL(this.selectedCV.item(0));
+    fileReader.onload = (event) => {
+      this.cvText = this.selectedCV.item(0).name;
+      return event;
+    }
+  }
+
 }

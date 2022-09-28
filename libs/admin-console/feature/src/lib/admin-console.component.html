@@ -17,7 +17,7 @@
                         </div>
                         <div class="info">
                             <div class="desc label">Address:</div>
-                            <div class="cont">{{auPair.address}}</div>
+                            <div class="address-content">{{auPair.address}}</div>
                         </div>
                         <div class="info">
                             <div class="desc label">Email:</div>
@@ -25,11 +25,15 @@
                         </div>
                         <div class="long-info">
                             <div class="desc label">Experience:</div>
-                            <div class="cont">{{auPair.experience}}</div>
+                            <div class="info-fields">{{auPair.experience}}</div>
                         </div>
                         <div class="long-info">
                             <div class="desc label">Bio:</div>
-                            <div class="cont">{{auPair.bio}}</div>
+                            <div class="info-fields">{{auPair.bio}}</div>
+                        </div>
+                        <div class="info">
+                            <div class="desc label">CV:</div>
+                            <div class="cont"><ion-icon (click)="downloadCV(auPair.id)" class="downloadCV" slot="start" name="download"></ion-icon></div>
                         </div>
                     </div>
     

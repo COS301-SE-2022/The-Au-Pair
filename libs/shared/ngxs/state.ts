@@ -1,5 +1,5 @@
 import { Action, Selector, State, StateContext } from '@ngxs/store';
-import { SetId , SetType, SetFcmToken, SetName, Reset, SetChildren, SetAuPair, SetLoggedIn, SetCurrentActivity, SetCurrentChild, SetEmail } from './actions';
+import { SetId , SetType, SetFcmToken, SetName, Reset, SetChildren, SetAuPair, SetLoggedIn, SetCurrentActivity, SetCurrentChild, SetEmail, SetImgString } from './actions';
 import { Injectable } from '@angular/core';
 import { map, Observable, of } from 'rxjs';
 export interface AppStateModel{
@@ -13,6 +13,7 @@ export interface AppStateModel{
     currentActivity: string;
     currentChild: string;
     email: string;
+    imgString: string;
 }
 
 @State<AppStateModel>({
@@ -28,6 +29,7 @@ export interface AppStateModel{
         currentActivity : '', /* For editing activities */
         currentChild: '', /* For editing children details */
         email: '', /* For sending emails to logged in user */
+        imgString: '',
     },
 })
 
@@ -154,5 +156,15 @@ export class AppState{
     @Selector()
     static getEmail(state : AppStateModel) {
         return state.email;
+    }
+
+    @Action(SetImgString)
+    setImgString({ patchState }: StateContext<AppStateModel>, { payload }: SetImgString) {
+        patchState({imgString: payload});
+    }
+
+    @Selector()
+    static getImgString(state : AppStateModel) {
+        return state.imgString;
     }
 }

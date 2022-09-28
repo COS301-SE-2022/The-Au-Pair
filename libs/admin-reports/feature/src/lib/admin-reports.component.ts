@@ -173,7 +173,6 @@ export class AdminReportsComponent implements OnInit {
     });
 
     //email matching au pair employer that au pair has been banned
-    console.log(this.userDetails.id)
     this.serv.getAuPairEmployer(this.userDetails.id).toPromise().then(res => { 
       this.auPairEmployer = res;
       

@@ -16,11 +16,16 @@ export class ExtraCostsModalComponent implements OnInit {
   payRate = 0;
   type = -1;
 
+  generatedUserID = "";
+
   fuelPrices = {
     "diesel": 24.15,
     "petrol-95": 23.38,
     "petrol-93": 22.95, 
   };
+
+  selectedFiles : any;
+  currentFileUpload: any;
 
   costDetails: UserCosts ={
     id: '',
@@ -152,7 +157,10 @@ export class ExtraCostsModalComponent implements OnInit {
     .toPromise()
       .then( 
         res=>{
-          console.log(res);
+          this.generatedUserID  = res;
+          if (this.selectedFiles != undefined){
+            this.upload();
+          }
       },
       error => {
         console.log("Error has occured with API: " + error);
@@ -329,5 +337,30 @@ export class ExtraCostsModalComponent implements OnInit {
       cssClass: 'toastPopUp'
     });
     await toast.present();
+  }
+
+  selectFile(event: any) {
+    this.selectedFiles = event.target.files;
+    const fileReader = new FileReader();
+    fileReader.readAsDataURL(this.selectedFiles.item(0));
+    fileReader.onload = (event) => {
+      const dom = document.getElementById("uploadImage");
+      dom?.setAttribute("name", "checkmark-circle-outline");
+      dom?.setAttribute("style", "color: green");
+      return event;
+    }
+  }
+
+  async upload() {
+    this.currentFileUpload = this.selectedFiles.item(0);
+    await this.serv.storeFile(this.currentFileUpload,this.generatedUserID  +  ".png").toPromise().then(
+      res=>{
+        return res;
+      },
+      error=>{
+        this.openToast("Error uploading image");
+        return error;
+      }
+    );
   }
 }

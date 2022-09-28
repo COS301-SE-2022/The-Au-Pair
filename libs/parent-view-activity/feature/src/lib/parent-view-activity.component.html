@@ -68,8 +68,9 @@
             <!-- Images of the children -->
             <div>
                 <p>Image of activity</p>
-                <div class="activity-image">
-                    <img id="activity-image-container" src="assets/images/no-image.png">
+                <div class='activity-image'>
+                    <img [hidden]="!this.hasImage" class="activity-image-container" id="{{ this.activityDetails.id }}" src="{{ src }}" alt="">
+                    <ion-spinner [hidden]="this.hasImage" name="circular"></ion-spinner>
                 </div>
             </div>
 

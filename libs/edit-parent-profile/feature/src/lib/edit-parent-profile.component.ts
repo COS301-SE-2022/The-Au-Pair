@@ -5,6 +5,7 @@ import { ToastController } from '@ionic/angular';
 import { Store } from '@ngxs/store';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
+import { SetImgString } from '../../../../shared/ngxs/actions';
 
 @Component({
   selector: 'the-au-pair-edit-parent-profile',
@@ -27,6 +28,10 @@ export class EditParentProfileComponent implements OnInit{
   isEmpty = false;
 
   potentialLocations : any[] = [];
+
+  selectedFiles : any;
+  currentFileUpload: any;
+  hasImage = false;
 
   userDetails: User = {
     id: "",
@@ -70,6 +75,7 @@ export class EditParentProfileComponent implements OnInit{
 
   ngOnInit(): void
   {
+    this.setImage();
     this.parentID = this.store.snapshot().user.id;
     this.getUserDetails()
   }
@@ -321,10 +327,30 @@ export class EditParentProfileComponent implements OnInit{
   {    
     await this.editUser(user);
     await this.editMedAid(medAid);    
+    
+    this.checkImageBeforeRedirect();
+  }
 
-    this.openToast();
-
-    this.router.navigate(['/parent-dashboard']);
+  async checkImageBeforeRedirect(){
+    if (this.selectedFiles != undefined) {
+      //upload the images if file selected
+      this.currentFileUpload = this.selectedFiles.item(0);
+      await this.serv.storeFile(this.currentFileUpload,this.store.snapshot().user.id  +  ".png").toPromise().then(
+      res=>{
+        console.log(res); 
+        //only redirect on success
+        this.openToast('Profile successfully updated!');
+        this.router.navigate(['/parent-dashboard']);
+      },
+      error=>{
+        this.openToast('Error uploading image!')
+        return error;
+      });
+    }
+    else{
+      this.openToast('Profile successfully updated!');
+      this.router.navigate(['/parent-dashboard']);
+    }
   }
 
   async editUser(user:User){    
@@ -360,10 +386,10 @@ export class EditParentProfileComponent implements OnInit{
     )
   };
 
-  async openToast()
+  async openToast(message : string)
   {
     const toast = await this.toastCtrl.create({
-      message: 'Profile successfully updated!',
+      message: message,
       duration: 4000,
       position: 'top',
       color: 'primary',
@@ -424,5 +450,55 @@ export class EditParentProfileComponent implements OnInit{
 
   radioChecked(event: any){
     this.location = event.target.value;
+  }
+
+  selectFile(event: any) {
+    this.selectedFiles = event.target.files;
+    const fileReader = new FileReader();
+    fileReader.readAsDataURL(this.selectedFiles.item(0));
+    fileReader.onload = (event) => {
+      const dom = document.getElementById("img2");
+      if (dom != null) {
+        const ev = event.target;
+        if (ev != null) {
+          const res = ev.result as string;
+          if (res != null) {
+            dom.setAttribute("src",res);
+          }
+        }
+      }
+    }
+  }
+
+  async setImage(){
+    await this.serv.getFile(this.store.snapshot().user.id  +  ".png").toPromise().then(
+      async res=>{
+        if (res.size > 0) {
+          const dataType = res.type;
+          const binaryData = [];
+          binaryData.push(res);
+          const href = window.URL.createObjectURL(new Blob(binaryData, {type: dataType}));
+          this.store.dispatch(new SetImgString(href));
+          const dom = document.getElementById("img2");
+
+          if(dom != null)
+          {
+            dom.setAttribute("src", this.store.snapshot().user.imgString);
+          }
+
+          this.hasImage = true;
+        }
+        else{
+          const dom = document.getElementById("img2");
+          if (dom != null) {
+            dom.setAttribute("src","assets/images/placeholder-profile.jpg");
+          }
+          this.hasImage = true;
+        }
+      },
+      error=>{
+        return error;
+      }
+    );
   }
 }
