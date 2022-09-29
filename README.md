@@ -121,6 +121,8 @@
     <br>
     <a href="https://docs.google.com/document/d/13WtKdjBQUHWTqZmD3oo0PBJEnbSq-JjK-zrDrm9eQCQ/edit?usp=sharing">Testing Policy - Demo 4</a>
     <br>
+    <a href="https://docs.google.com/document/d/1exfQzlmPJN50VN70wiKA6kkd6IgsQrhrz8IkSIx71jA/edit?usp=sharing">Coding Standards - Demo 4</a>
+    <br>
                                      
 <!-- ABOUT -->
 # About
