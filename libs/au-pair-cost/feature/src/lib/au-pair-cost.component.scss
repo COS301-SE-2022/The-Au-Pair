@@ -129,6 +129,11 @@ ion-card-header{
 
 .card-costs-list {
   grid-column: 1 / -1;
+  overflow-x: scroll;
+}
+
+ion-grid{
+  min-width: 800px;
 }
 
 .au-pair-name{
@@ -335,7 +340,7 @@ ion-icon {
 }
 
 
-@media (max-width : 768px) {
+@media (max-width : 1450px) {
   .summary-div {
     grid-template-columns: repeat(1, 1fr);
     height: 150px;

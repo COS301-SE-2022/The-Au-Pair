@@ -7,7 +7,7 @@
         <ion-button (click)="login()" class="log-in-out-button" [hidden]="this.loggedIn">Login</ion-button>
       </ion-buttons>
       <ion-buttons slot="start" class="start-buttons">
-        <ion-button (click)="dash()" [hidden]="!this.loggedIn">Dashboard</ion-button>
+        <ion-button (click)="dash()" [hidden]="!this.loggedIn">Home</ion-button>
         <ion-button (click)="reports()" class="reports-button" [hidden]="this.type!==0 || !this.loggedIn">Reports</ion-button>
         <ion-button class="git-button" href="https://github.com/COS301-SE-2022/The-Au-Pair">GitHub</ion-button>
       </ion-buttons>

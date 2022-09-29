@@ -85,25 +85,29 @@ export class ScheduleModalComponent implements OnInit {
     const fileReader = new FileReader();
     fileReader.readAsDataURL(this.selectedFiles.item(0));
     fileReader.onload = (event) => {
-      this.updateText = "Uploaded";
+      this.updateText = "Uploaded!";
       const dom = document.getElementById("uploadLabel");
-      dom?.setAttribute("style","border: 2px solid var(--ion-color-secondary);");
+      dom?.setAttribute("style","border: 2px solid var(--ion-color-success);");
       return event;
     }
   }
 
   async upload() {
-    this.currentFileUpload = this.selectedFiles.item(0);
-    await this.serv.storeFile(this.currentFileUpload,this.activityId +  ".png").toPromise().then(
-      res=>{
-        console.log(res); 
-        return res;
-      },
-      error=>{
-        console.log(error);
-        return error;
-      }
-    );
+    //Only set image if uploaded
+    if(this.updateText === "Uploaded!")
+    {
+      this.currentFileUpload = this.selectedFiles.item(0);
+      await this.serv.storeFile(this.currentFileUpload,this.activityId +  ".png").toPromise().then(
+        res=>{
+          console.log(res); 
+          return res;
+        },
+        error=>{
+          console.log(error);
+          return error;
+        }
+      );
+    }
   }
 
 }
