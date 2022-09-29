@@ -123,7 +123,9 @@
     <br>
     <a href="https://docs.google.com/document/d/1exfQzlmPJN50VN70wiKA6kkd6IgsQrhrz8IkSIx71jA/edit?usp=sharing">Coding Standards - Demo 4</a>
     <br>
-                                     
+    <a href="https://docs.google.com/document/d/1khrh-88B3aYJHdaWEotmFPCH9qDDUI7NuV502ymINbI/edit?usp=sharing">Installation Manual - Demo 4</a>
+    <br>
+ 
 <!-- ABOUT -->
 # About
 
