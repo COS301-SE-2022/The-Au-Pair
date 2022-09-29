@@ -12,14 +12,17 @@
           <p id="descripError" class="error" style="display: none;">Error in field</p>
 
           <!-- Location -->
-          <input [(ngModel)]="location" (input)="getLocations()" list="locations" type="text" name="location" placeholder="Location"/>
-          <datalist id="locations">
-            <option *ngFor="let location of potentialLocations" value="{{location}}">
-          </datalist>
+          <input [(ngModel)]="location" autocomplete="off"  (input)="getLocations()" list="locations" type="text" name="location" placeholder="Location"/>
+          <ion-radio-group (ionChange)="radioChecked($event)" mode="md">
+            <ion-item *ngFor="let location of potentialLocations" >
+              <ion-label class="ionLabel">{{location.display_name}}</ion-label>
+              <ion-radio class="ionRadio" slot="end" color="primary" value="{{location.display_name}}"></ion-radio>
+            </ion-item>
+          </ion-radio-group>
           <p id="locError" class="error" style="display: none;">Error in field</p>
 
           <!-- Activity boundary radius -->
-          <input type="text" ngModel name="boundary" placeholder="Distance allowed away from location (km)"> 
+          <input type="text" ngModel name="boundary" placeholder="Max distance from location (km)"> 
           <p id="boundaryError" class="error" style="display: none;">Please ensure this is a number e.g. 5.2</p>
 
           <!-- Day -->
@@ -41,22 +44,7 @@
           <div>
             <label id="timeslotLabel" for="times">Choose a timeslot</label>
             <select ngModel name="timeSlot" id="selectedTime">
-              <option value="05:00-06:00">05:00-06:00</option>
-              <option value="06:00-07:00">06:00-07:00</option>
-              <option value="07:00-08:00">07:00-08:00</option>
-              <option value="08:00-09:00">08:00-09:00</option>
-              <option value="09:00-10:00">09:00-10:00</option>
-              <option value="10:00-11:00">10:00-11:00</option>
-              <option value="11:00-12:00">11:00-12:00</option>
-              <option value="12:00-13:00">12:00-13:00</option>
-              <option value="13:00-14:00">13:00-14:00</option>
-              <option value="14:00-15:00">14:00-15:00</option>
-              <option value="15:00-16:00">15:00-16:00</option>
-              <option value="16:00-17:00">16:00-17:00</option>
-              <option value="17:00-18:00">17:00-18:00</option>
-              <option value="18:00-19:00">18:00-19:00</option>
-              <option value="19:00-20:00">19:00-20:00</option>
-              <option value="20:00-21:00">20:00-21:00</option>
+              <option *ngFor="let time of availableTimes" value="{{time}}">{{time}}</option>
             </select>
           <p id="timeError" class="error" style="display: none;">Error in field</p>
           </div>
@@ -69,6 +57,7 @@
           <div>
             <label id="childLabel" for="Child">Select a child</label>
             <select ngModel name="childId" id="childId">
+              <option disabled selected value>Select a child</option>
               <option *ngFor="let child of allChildren" value="{{child.id}}">{{child.fname}}</option>
             </select>
             <p id="childError" class="error" style="display: none;">Error in field</p>
@@ -81,12 +70,6 @@
           </div>
         </form>
     </div>
-
-    <!-- <ejs-maps id='rn-container' [layers]='layers'>
-      <e-layers id="mapLayers">
-        <e-layer [urlTemplate]= 'urlTemplate'></e-layer>
-      </e-layers>
-    </ejs-maps> -->
     <img id="active-2" src="assets/images/active.png">
     <img id="active" src="assets/images/active-2.png">
     <img id="lifestyles" src="assets/images/lifestyles.png">

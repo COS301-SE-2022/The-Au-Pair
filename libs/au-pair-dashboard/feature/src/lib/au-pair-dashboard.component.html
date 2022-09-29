@@ -4,10 +4,13 @@
     <p class="welcome-heading">Welcome {{this.aupairName}}</p>
     <div *ngIf="employerId !== ''" class="children-div-wrapper">
       <ion-card class="children-div">
-        <div class="employer-name"><span class="bold-text">Employer:</span> {{ employerName }} {{ employerSurname }}
-          <a href = 'tel:{{ employerPhone }}'><ion-icon name="call" class = 'call-icon'></ion-icon></a>
-          <a href = 'sms:{{ employerPhone }}'><ion-icon name="chatbubble-ellipses" class = 'message-icon'></ion-icon></a>
-          <div *ngIf="this.employerId !== ''"><ion-icon class="terminate-contract" name="person-remove" (click)="presentAlert()"></ion-icon></div>
+        <div class="employer-name"><span class="bold-text">Employer:</span> {{ employerName }} {{ employerSurname }} </div>
+        <div class="button-container" >
+            <a title="Call Parent" href = 'tel:{{ employerPhone }}'><ion-icon name="call" class = 'call-icon'></ion-icon></a>
+            <a title="Message Parent" href = 'sms:{{ employerPhone }}'><ion-icon name="chatbubble-ellipses" class = 'message-icon'></ion-icon></a>
+            <button title="Rate Parent" style="all: unset; cursor: pointer;" (click)="openModal(this.currentAuPair.employer)"><ion-icon class="rating-icon" name="star"></ion-icon></button>
+            <button title="Report Parent" style="all: unset; cursor: pointer;" (click)="openReportModal()"><ion-icon class="report-icon" name="alert-circle"></ion-icon></button>
+            <button title="Resign" style="all: unset; cursor: pointer;" *ngIf="this.employerId !== '' && this.currentAuPair.terminateDate === ''" (click)="presentAlert()"><ion-icon class="terminate-contract" name="person-remove"></ion-icon></button>
         </div>
         <div class="child-status">
           <span class="bold-text">Children: </span>
@@ -45,7 +48,19 @@
           <ion-icon name="mail-outline" class="action-icon"></ion-icon>
           <div class="action-tag">Hire Requests</div>
         </div>
-        <div id="cost" class="action" routerLink="/au-pair-cost">
+        <div *ngIf="employerId !== ''" class='action' id="childDash" (click)="checkHasEmployerSummary()">
+          <ion-icon name="document-text-outline" class='action-icon '></ion-icon>
+          <div class='action-tag '>Job Summary</div>
+        </div>
+        <div *ngIf="employerId === ''" style="opacity : 0.4;" class='action' id="childDash" (click)="checkHasEmployerSummary()">
+          <ion-icon name="document-text-outline" class='action-icon '></ion-icon>
+          <div class='action-tag '>Job Summary</div>
+        </div>
+        <div *ngIf="employerId !== ''" id="cost" class="action" (click)="checkHasEmployerCosts()">
+          <ion-icon name="cash-outline" class="action-icon"></ion-icon>
+          <div class="action-tag">Au Pair Cost</div>
+        </div>
+        <div *ngIf="employerId === ''" style="opacity : 0.4;" id="cost" class="action" (click)="checkHasEmployerCosts()">
           <ion-icon name="cash-outline" class="action-icon"></ion-icon>
           <div class="action-tag">Au Pair Cost</div>
         </div>

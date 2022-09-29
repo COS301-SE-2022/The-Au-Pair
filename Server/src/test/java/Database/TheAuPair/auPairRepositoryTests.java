@@ -22,7 +22,8 @@ public class auPairRepositoryTests
   @BeforeEach
   public void setup()
   {
-    expectedAuPair = new auPair("",0,0,0,0,true,"","","", 43.0,43.0,"");
+    double [] r = new double[2];
+    expectedAuPair = new auPair("",r,0,0,0,true,"","","", 43.0,43.0,"", false);
     id = "7542108615984";
   }
 
@@ -30,9 +31,6 @@ public class auPairRepositoryTests
   @DisplayName("Test if an auPair object is returned")
   public void testGetAuPairById()
   {
-    System.out.println("\n \n \n Au pair in repo: " + apr.findUsingId(id).getCurrentLat());
-    System.out.println("Test au pair: " + expectedAuPair.getCurrentLat());
-
     assertEquals(apr.findUsingId(id).getClass(), expectedAuPair.getClass());
   }
 }

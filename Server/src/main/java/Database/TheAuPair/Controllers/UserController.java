@@ -3,6 +3,7 @@ package Database.TheAuPair.Controllers;
 import Database.TheAuPair.Models.User;
 import Database.TheAuPair.Repositories.UserRepository;
 import Database.TheAuPair.Services.UserService;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import java.util.List;
 import java.util.Map;
@@ -18,39 +19,65 @@ public class UserController
     this.us = new UserService(ur);
   }
 
-  @PostMapping("/getUser")
+  @PostMapping("/api/getUser")
   public User getUser(@RequestBody String id)
   {
     return this.us.getUser(id);
   }
 
-  @PostMapping("/editUser")
+  @PostMapping("/api/editUser")
   public void editUser(@RequestBody User u)
   {
     this.us.updateUser(u);
   }
 
-  @PostMapping("/register")
+  @PostMapping("/api/register")
   public String register(@RequestBody User u)
   {
     return this.us.register(u);
   }
 
-  @PostMapping("/login")
+  @PostMapping("/api/login")
   public User login(@RequestBody Map<String, String> details)
   {
     return this.us.login(details.get("email"), details.get("password"));
   }
 
-  @GetMapping("/getApplicants")
+  @GetMapping("/api/getApplicants")
   public List<User> getApplicants()
   {
       return this.us.getApplicants();
   }
 
-  @PostMapping("/resolveApplication")
+  @PostMapping("/api/resolveApplication")
   public void resolveApplication(@RequestBody Map<String, String> decision)
   {
     this.us.resolveApplication(decision.get("id"), decision.get("resolution"));
+  }
+
+  @PostMapping("/api/getFCMToken")
+  public String getFCMToken(@RequestBody String id)
+  {
+    return this.us.getFCMToken(id);
+  }
+
+  @PostMapping("/api/setFCMToken")
+  public void setFCMToken(@RequestBody Map<String, String> details)
+  {
+    this.us.setFCMToken(details.get("id"), details.get("token"));
+  }
+
+  //add a ping endpoint for testing
+  @RequestMapping(value = "/",method = RequestMethod.GET)
+  public ResponseEntity<?> health() throws Exception
+  {
+    try
+    {
+      return ResponseEntity.status(200).body("Ok");
+    }
+    catch (Exception e)
+    {
+      return (ResponseEntity<?>) ResponseEntity.internalServerError().body(e.getMessage());
+    }
   }
 }

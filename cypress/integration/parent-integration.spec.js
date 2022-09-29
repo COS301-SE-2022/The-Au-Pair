@@ -4,8 +4,8 @@ describe('Parent integration tests', () => {});
 
 beforeEach( () => {
     cy.visit("/login-page")
-    cy.get(`[ng-reflect-name="Email"]`).type("bob@gmail.com"); 
-    cy.get(`[ng-reflect-name="Password"]`).type("Bob@1234"); 
+    cy.get(`[ng-reflect-name="Email"]`).type("mockparent@gmail.com"); 
+    cy.get(`[ng-reflect-name="Password"]`).type("Parent@123"); 
     cy.get(".loginUser").click();
 });
 
@@ -18,7 +18,7 @@ it('should not add an activity with a location not returned by the API', () => {
         cy.get('[ng-reflect-name="dayOfWeek"]').select("Monday");
         cy.get('[ng-reflect-name="timeSlot"]').select("05:00-06:00");
         cy.get('[ng-reflect-name="budget"]').type("0");
-        cy.get('[ng-reflect-name="childId"]').select("Peter");
+        cy.get('[ng-reflect-name="childId"]').select("Child 1");
         cy.get('.addActivity').click({force:true}).then( () => {
             cy.contains('Please select a valid location from the suggested below.');
         });
@@ -35,14 +35,13 @@ it('should load a map when attempting to track your au pairs live location', () 
 
 //Parent dashboard testing 
 it('should populate the parent dashboard with your registered children from the database', () => {
-    cy.contains("Peter");
-    cy.contains("Wally");
-    cy.contains("Sally");
+    cy.contains("Child 1");
+    cy.contains("Child 2");
 })
 
 it('should allow a parent to logout', () =>
 {
-    cy.get('.logout-button').click({force:true}).then( () => {
+    cy.get('.log-in-out-button').click({multiple:true, force:true}).then( () => {
         cy.contains("Login");
     });
 });
@@ -50,61 +49,97 @@ it('should allow a parent to logout', () =>
 // Parent Profile testing
 it('should show the logged in users name on the parent profile page', () => {
     cy.get("#profile").click({force:true}).then( () => {
-        cy.get('.profile-name').contains("Bob Stone");
+        cy.get('.profile-name').contains("Parent");
     });
 });
 
-//FIX THIS TEST AFTER KYLES PR
-
-// it('should not update the parent profile with a location not returned by the API', () => {
-//     cy.get("#profile").click({force:true}).then( () => {
-//         cy.get('#change').click({force:true}).then( () => {
-//             cy.get('[ng-reflect-name="address"]').focus().clear().then( ()=> {
-//                 cy.get('[ng-reflect-name="address"]').type("invalid address");
-//                 cy.get(`[value="Update Details]`).click({force: true})
-//             });
-//         })
-//     });
-// });
+it('should not update the parent profile with a location not returned by the API', () => {
+    cy.get("#profile").click({force:true}).then( () => {
+        cy.get('#change').click({force:true}).then( () => {
+            cy.get('[ng-reflect-name="address"]').focus().clear().then( ()=> {
+                cy.get('[ng-reflect-name="address"]').type("invalid address");
+                cy.get(".submit-button").click({force: true}).then( () => {
+                    cy.contains('Please select a valid location from the suggested below');
+                });
+            });
+        })
+    });
+});
 
 // Schedule testing
 it('should populate the schedule with activities from the database', async () => {
     await cy.get("#schedule").click({force:true}).then( () => {
-        cy.get('.card').contains("AI Lesson");
+        cy.get('.card').contains("Mock Activity 3");
     });
 });
 
 // Children Testing 
 it('should populate the Children dashboard page with your registered children from the database', () => {
     cy.get("#childDash").click({force:true}).then( () => {
-        cy.contains("Peter Griffin");
-        cy.contains("Wally West");
-        cy.contains("Sally Siver");
+        cy.contains("Child 1 Mock");
+        cy.contains("Child 2 Mock");
     });
 })
 
 it('should allow a parent to route to "add a child" page', () => {
     cy.get("#childDash").click({force:true}).then( () => {
         cy.get('#addChild').click({force: true}).then( () => {
-            cy.contains("Add A Child");
+            cy.url().should('include', '/add-child') // => t
         })
+    });
+})
+
+it('should allow a parent to add a child', () => {
+    cy.get("#childDash").click({force:true}).then( () => {
+        cy.get('#addChild').click({force: true}).then( () => {
+            cy.get(`[ng-reflect-name="childName"]`).type("test"); 
+            cy.get(`[ng-reflect-name="surname"]`).type("child"); 
+            cy.get(`[ng-reflect-name="dateOfBirth"]`).type("2002-05-06"); 
+            cy.get(`[ng-reflect-name="Allergies"]`).type("none"); 
+            cy.get(`[ng-reflect-name="diet"]`).type("none");
+            cy.get('.addChild').click({multiple:true, force:true}).then( () => {
+                cy.get('.cancel').click({multiple:true, force:true})
+            });
+            cy.contains("Child Name: test child");
+        })
+    });
+})
+
+it('should allow a parent to update a childs details', () => {
+    cy.get("#childDash").click({force:true}).then( () => {
+        cy.get(".icon-edit").eq(2).click({force:true}).then( () => {
+            cy.get(`[ng-reflect-name="childName"]`).type("update"); 
+            cy.get('.updateChild').click({multiple:true, force:true}).then( () => {
+                cy.get('.cancel').click({multiple:true, force:true})
+                cy.contains("Child Name: testupdate child");
+            });
+        });
+    });
+})
+
+it('should allow a parent to delete a child', () => {
+    cy.get("#childDash").click({force:true}).then( () => {
+        cy.get(".remove-child").eq(2).click({force:true}).then( () => {
+            cy.get(".alert-button-confirm").click({force:true});
+        });
     });
 })
 
 // Au Pair Cost Testing 
 it('should show the correct employed au pair when loading au pair cost', () => {
     cy.get("#auPairCost").click({force:true}).then( () => {
-        cy.get(".au-pair-name").contains("Denny");
+        cy.get(".au-pair-name").contains("Aupair");
     });
 })
 
-//Explore testing
-it('should allow a parent who hasnt employed an au pair yet, to view/explore au pairs to potentially hire', {defaultCommandTimeout: 10000}, () => {
-    cy.visit("/login-page")
-    cy.get(`[ng-reflect-name="Email"]`).type("dylan@gmail.com"); 
-    cy.get(`[ng-reflect-name="Password"]`).type("Dylan@1234"); 
+// Explore testing
+it('should allow a parent who hasnt employed an au pair yet, to view/explore au pairs to potentially hire', () => {
+    cy.get('.log-in-out-button').click({multiple:true, force:true});
+    cy.get(`[ng-reflect-name="Email"]`).type("mockhire@gmail.com"); 
+    cy.get(`[ng-reflect-name="Password"]`).type("Hire@123"); 
     cy.get(".loginUser").click();
+    cy.wait(2000);
     cy.get("#exploreAuPairs").click({force:true}).then( () => {
-        cy.get(".au-pair-details-wrapper").contains("Ruben Brits");
+        cy.get(".au-pair-card-div-wrapper").contains("Ruben Brits");
     });
-})
+});

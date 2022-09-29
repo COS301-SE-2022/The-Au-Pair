@@ -11,6 +11,8 @@ import { API } from '../../../../shared/api/api.service';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { HttpClient } from '@angular/common/http';
 import { of } from 'rxjs';
+import { NgxsModule } from '@ngxs/store';
+import { AppState } from '../../../../shared/ngxs/state';
 
 const httpMock = {
   get() {
@@ -26,6 +28,12 @@ const apiMock = {
     return of({})
   },
   addAuPair() {
+    return of({})
+  },
+  sendEmail() {
+    return of({})
+  },
+  storeFIle() {
     return of({})
   }
 }
@@ -60,6 +68,7 @@ describe('RegisterComponent', () => {
         RouterTestingModule,
         HttpClientTestingModule,
         FormsModule,
+        NgxsModule.forRoot([AppState])
       ],
       providers:[
         {
@@ -137,12 +146,6 @@ describe('RegisterComponent', () => {
   });
 
   it('should make the form invalid on specific parent and au pair inputs', () => {
-    component.parentChosen = true;
-
-    // Medical aid number empty for parent
-    inputRegistration(populatedForm.name, populatedForm.surname, populatedForm.email, populatedForm.phone, populatedForm.id, "", populatedForm.location, populatedForm.bio, populatedForm.experience, populatedForm.pass, populatedForm.confPass);
-    expect(component.formValid).toBeFalsy();
-
     component.parentChosen = false;
     // Bio empty for au pair
     inputRegistration(populatedForm.name, populatedForm.surname, populatedForm.email, populatedForm.phone, populatedForm.id, populatedForm.medAid, populatedForm.location, "", populatedForm.experience, populatedForm.pass, populatedForm.confPass);
@@ -212,31 +215,6 @@ describe('RegisterComponent', () => {
     expect(toastSpy).toHaveBeenCalledWith("Account already exists with email : " + usedEmail);
   });
 
-
-  it('should register an au pair based off of valid inputs', async () => {
-    component.parentChosen = false;
-    inputRegistration(populatedForm.name, populatedForm.surname, populatedForm.email, populatedForm.phone, populatedForm.id, populatedForm.medAid, populatedForm.location, populatedForm.bio, populatedForm.experience, populatedForm.pass, populatedForm.confPass);
-    const toastSpy = jest.spyOn(component, 'openToast');
-
-    jest.spyOn(httpMock, 'get').mockImplementation(()=>of(
-      [{
-        "address": {
-          "suburb": "Midrand",
-        },
-        "display_name": "Midrand, City of Johannesburg Metropolitan Municipality, Gauteng, 1685, South Africa",
-        "lat" : -25.999262,
-        "lon" : 28.125912
-      }]
-    ));
-
-    jest.spyOn(apiMock, 'register').mockImplementation(()=>of(
-      "pending"
-    ));
-
-    await component.registerUser();
-    expect(toastSpy).toHaveBeenCalledWith("Registration succesfull pending approval");
-  });
-
   it('should have registration fail with general invalid inputs', async () => {
     const toastSpy = jest.spyOn(component, 'openToast');
 
@@ -275,15 +253,6 @@ describe('RegisterComponent', () => {
     component.maleChosen = false;
     await component.registerUser();
     expect(component.userDetails.gender).toEqual("female");
-  });
-
-  it('should have registration fail with invalid parent inputs', async () => {
-    component.parentChosen = true;
-
-    // Medical aid number empty for parent
-    inputRegistration(populatedForm.name, populatedForm.surname, populatedForm.email, populatedForm.phone, populatedForm.id, "", populatedForm.location, populatedForm.bio, populatedForm.experience, populatedForm.pass, populatedForm.confPass);
-    await component.registerUser();
-    expect(component.medError).toBeTruthy();
   });
 
   it('should have registration fail with invalid au pair inputs', async () => {

@@ -2,9 +2,10 @@
 <ion-content [fullscreen]="true">
     <div class = "parent-profile-div">
         <h1 class='profile-name'>{{this.userDetails.fname}} {{this.userDetails.sname}}</h1>
-            <div class='profile-picture-wrapper'>
-                <img class="profile-picture" src="assets/images/placeholder-profile.jpg" alt="">
-            </div>
+        <div class='profile-picture-wrapper'>
+            <img [hidden]="!this.hasImage" class="profile-picture" id="img1" src="{{ src }}" alt="">
+            <ion-spinner [hidden]="this.hasImage" name="circular"></ion-spinner>
+        </div>
         <div class = 'details-div'>
             <div class = "small-profile-details-div">
                 <div class="parent-info-small">
@@ -31,15 +32,21 @@
                 </div>
                 <div class="parent-info-large">
                     <div class="parent-text">Gender: </div>
-                    <p class="parent-text-info">{{this.userDetails.gender}}</p>
+                    <p class="parent-text-info" style="text-transform: capitalize;">{{this.userDetails.gender}}</p>
                 </div>
                 <div class="parent-info-large">
                     <div class="parent-text">Birth Date: </div>
                     <p class="parent-text-info">{{this.userDetails.birth}}</p>
                 </div>
                 <div class="parent-info-large">
+                    <div class="parent-text">Rating: </div>
+                    <p *ngIf="this.getAverage(this.parentDetails.rating) !== 0" class="parent-text-info">{{this.getAverage(this.parentDetails.rating)}}/5</p>
+                    <p *ngIf="this.getAverage(this.parentDetails.rating) === 0" class="parent-text-info">Not yet rated</p>
+                </div>
+                <div class="parent-info-large">
                     <div class="parent-text">Medical Aid: </div>
-                    <p class="parent-text-info2">{{this.medAidDetails.name}}<br>{{this.medAidDetails.sname}}<br>{{this.medAidDetails.id}}<br>{{this.medAidDetails.provider}}<br>{{this.medAidDetails.plan}}</p>
+                    <p *ngIf="this.medAidDetails.mID !== ''" class="parent-text-info">{{this.medAidDetails.name}}<br>{{this.medAidDetails.sname}}<br>{{this.medAidDetails.mID}}<br>{{this.medAidDetails.provider}}<br>{{this.medAidDetails.plan}}</p>
+                    <p *ngIf="this.medAidDetails.mID === ''" class="parent-text-info">There are no medical aid details to display</p>
                 </div>
             </div>
             <button class="change-button" id="change" routerLink="/edit-parent-profile">CHANGE</button>

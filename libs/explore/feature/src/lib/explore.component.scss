@@ -1,7 +1,14 @@
 ion-menu{
-    --min-width: 50%;
+    --min-width: 30%;
+    --max-width: 30%;
     background-color: transparent;
     --max-height: 150%;
+    backdrop-filter: blur(5px);
+}
+
+#page-wrapper{
+    --background: var(--ion-color-primary);
+    padding-top: 20px;
 }
 
 ion-toggle {
@@ -13,8 +20,17 @@ ion-menu::part(backdrop) {
     display: none;
 }
 
+.filter-card{
+    background-color: var(--ion-color-secondary);
+    width: 90%;
+    margin: auto;
+    border-radius: 16px;
+    padding: 5px 5px;
+    margin-bottom: 20px;
+}
+
 .male-female{
-    color: var(--ion-color-dark);
+    color: var(--ion-color-light);
     padding-bottom: 5px;
 }
 
@@ -30,17 +46,17 @@ ion-menu::part(backdrop) {
 }
 
 .menu-gap{
-    margin-top: 58px;
+    margin-top: 70px;
 }
 
 .slider-headings{
-    color: black;
+    color: var(--ion-color-light);
     font-family: 'Roboto';
     margin-left: 15px;
 }
 
 .slider-icons{
-    color: black;
+    color: var(--ion-color-light);
     font-size: 15px;
 }
 
@@ -67,16 +83,28 @@ ion-menu::part(backdrop) {
     cursor: pointer;
 }
 
+.reset-button{
+    padding: 10px 22px;
+    gap: 10px;
+    border: 2px solid var(--ion-color-coral-tint);
+    border-radius: 10px;
+    background-color: var(--ion-color-coral-tint);
+    margin: auto;
+    display: block;
+    margin-top: 25px;
+    width: 90%;
+}
+
 ion-range::part(pin) {
     transform: translate3d(0px, -25px, 0px) scale(1);
   }
 
 .icon-close{
-    height: 32px;
-    width: 28px;
-    color: black;
+    color: var(--ion-color-light);
     cursor: pointer;
-    float: right;
+    margin-left: 5px;
+    height: 25px;
+    width: 25px;
 }
 
 .filter-icon-desktop{
@@ -112,10 +140,6 @@ ion-range::part(pin) {
     background-color: #69A88DB2;
     margin-top: 8px;
     margin-bottom: 8px;
-}
-
-.payrate-sliders{
-    margin-right: 20px;
 }
 
 .au-pair-card-div-wrapper {
@@ -247,9 +271,29 @@ ion-card {
     height: 20px;
 }
 
+@media (max-width: 330px) {
+    .explore-heading{
+        font-size: 22px !important;
+    }
+}
+
 @media (max-width: 400px) {
     .explore-heading{
         font-size: 26px;
+    }
+}
+
+@media (max-width: 1115px) {
+    ion-menu{
+        --max-width: 60%;
+        --min-width: 60%;
+    }
+}
+
+@media (max-width:700px) {
+    ion-menu{
+        --max-width: 80%;
+        --min-width: 80%;
     }
 }
 
@@ -272,5 +316,10 @@ ion-card {
     .name{
         font-size: 20px;
         margin-top: 8px;
+    }
+
+    .expand-arrow{
+        width: 15px;
+        height: 15px;
     }
 }

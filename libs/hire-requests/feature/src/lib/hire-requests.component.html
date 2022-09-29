@@ -3,19 +3,22 @@
     <div class="ion-text-center">
         <h2 class="header">Your Hire Requests</h2>
         <div class="requests-wrapper">
+            <div *ngIf="ContractArray.length === 0" style="font-size: 22px; color: var(--ion-color-dark);">You currently have no hire requests</div>
             <ion-card class="request-item" *ngFor="let c of ContractArray; let last = last">
                 <div class="wrapper">
-                    <ion-col size = "5" class="ion-content-end info">
-                        <img class="profile" src="assets/images/placeholder-profile.jpg" alt="">
+                    <ion-col size = "8" class="ion-content-end info">
+                        <div class='img'>
+                            <img [hidden]="!this.hasImage" class="profile {{ c.parentID }}" src="{{ src }}" alt="">
+                            <ion-spinner class="spinClass" [hidden]="this.hasImage" name="circular"></ion-spinner>
+                        </div>
                         <div class="request-content ion-text-start">
                             <div class="heading">{{c.parentName}} {{c.parentSurname}}</div>
                             <div class="details">has sent you a hire request</div>
                         </div>
                     </ion-col>
-                    <ion-col size="5">                    
+                    <ion-col size="2">                    
                         <div class="action-buttons">
-                            <button class="accept-button" (click)="acceptRequest(c.id, c.parentID)">Accept</button>
-                            <button class="reject-button" (click)="rejectRequest(c.id)">Reject</button>
+                            <button class="view-button" (click)="openModal(c.parentID, c.id)">View</button>
                         </div>
                     </ion-col> 
                     <ion-col size="2">

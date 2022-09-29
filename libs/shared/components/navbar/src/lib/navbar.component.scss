@@ -7,7 +7,7 @@ h1{
     margin-top: 10px !important;
 }
 
-.logout-button{
+.log-in-out-button{
     border: 2px solid white;
     background-color: transparent;
     color: var(--ion-color-primary);
@@ -22,6 +22,10 @@ h1{
     margin-bottom: 7px;
 }
 
+.login-landing {
+    display: none;
+}
+
 .end-buttons{
     margin-right: 0.3vw;
 }
@@ -31,12 +35,23 @@ h1{
 }
 
 @media (max-width: 1010px) {
-    .end-buttons, .start-buttons{
+    .end-buttons , .start-buttons{
         display: none;
     }
 
     .back-button{
         display: flex !important;
+    }
+
+    .login-landing {
+        display: flex;
+    }
+
+    .log-in-out-button {
+        width: 60px;
+        height: 30px;
+        padding: 0;
+        font-size: 10px !important;
     }
 }
 
@@ -65,4 +80,62 @@ h1{
 .back-button{
     background-color: transparent;
     display: none;
+}
+ //=====================================================================================================================
+ ion-menu{
+    --min-width: 60%;
+    --max-width: 60%;
+    backdrop-filter: blur(5px);
+    --max-height: 100%;
+}
+
+ion-title{
+    font-size: 20px;
+    font-weight: 500;
+    color: var(--ion-color-light);
+    font-family: TitanOne;
+    padding: 0px;
+}
+
+.menu-item{
+    padding: 10px;
+    background-color: var(--ion-color-secondary);
+    border-radius: 20px;
+    font-size: 14px;
+    font-family: Roboto;
+    z-index: 1000;
+}
+
+.menu-item.greyed{
+    opacity: 0.4;
+}
+
+.menu-item:hover{
+    cursor: pointer;
+}
+
+ion-col, ion-text{
+    display: flex;
+    vertical-align: middle;
+    padding-top: 4px ;
+}
+
+.menu-item-icon{
+    color : var(--ion-color-light);
+    height: 25px;
+    width: 25px;
+}
+
+ion-content{
+    --background: var(--ion-color-primary);
+}
+
+ion-menu::part(backdrop) {
+    background-color: transparent;
+    display: none;
+    
+}
+
+.menu-wrapper{
+    margin-bottom: 40px;
 }

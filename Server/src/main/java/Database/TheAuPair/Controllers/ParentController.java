@@ -16,21 +16,27 @@ public class ParentController
     this.ps = new ParentService(pr);
   }
 
-  @PostMapping("/getParent")
+  @PostMapping("/api/getParent")
   public Parent getParent(@RequestBody String id)
   {
-      return this.ps.getParent(id);
+    return this.ps.getParent(id);
   }
 
-  @PostMapping("/editParent")
+  @PostMapping("/api/editParent")
   public void editParent(@RequestBody Parent p)
   {
-      this.ps.updateParent(p);
+    this.ps.updateParent(p);
   }
 
-  @PostMapping("/addParent")
+  @PostMapping("/api/addParent")
   public void addParent(@RequestBody Parent p)
   {
-      this.ps.addParent(p);
+    this.ps.addParent(p);
+  }
+
+  @PostMapping("/api/getAuPairEmployer")
+  public Parent getAuPairEmployer(@RequestBody String id)
+  {
+    return this.ps.getAuPairEmployer(id);
   }
 }

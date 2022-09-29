@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { API } from "../../../../shared/api/api.service";
 import { Store } from "@ngxs/store";
+import { SetImgString } from '../../../../shared/ngxs/actions';
 
 @Component({
   selector: 'the-au-pair-admin-console',
@@ -19,8 +20,8 @@ export class AdminConsoleComponent implements OnInit{
     this.getSignUpRequests();    
   }
 
-  getSignUpRequests() {
-    this.serv.getApplicants().toPromise().then(res => {
+  async getSignUpRequests() {
+    await this.serv.getApplicants().toPromise().then(res => {
       this.auPairs = res;
 
       for(let i = 0; i < this.auPairs.length; i++) {
@@ -38,13 +39,34 @@ export class AdminConsoleComponent implements OnInit{
     });
   }
 
-  resolve(userId : string, choice : boolean) {
-    this.serv.resolveApplication(userId,choice).toPromise().then(res => {
+  async resolve(userId : string, choice : boolean) {
+    await this.serv.resolveApplication(userId,choice).toPromise().then(res => {
       console.log("The response is "+res);
-      window.location.reload();
+      location.reload();
       return choice;
     }).catch(err => {
       console.log(err);
     });
+  }
+
+  async downloadCV(id :string){
+    await this.serv.getFile(id  +  ".pdf").toPromise().then(
+      async res=>{
+        if (res.size > 0){
+          const dataType = res.type;
+          const binaryData = [];
+          binaryData.push(res);
+          const downloadLink = document.createElement('a');
+          downloadLink.href = window.URL.createObjectURL(new Blob(binaryData, {type: dataType}));
+          this.store.dispatch(new SetImgString(downloadLink.href ));
+          downloadLink.setAttribute('download', "CV.pdf");
+          document.body.appendChild(downloadLink);
+          downloadLink.click();
+        }
+      },
+      error=>{
+        return error;
+      }
+    );
   }
 }

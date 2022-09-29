@@ -1,6 +1,6 @@
 import { Component, OnInit} from '@angular/core';
 import { API } from '../../../../shared/api/api.service';
-import { Activity, Child } from '../../../../shared/interfaces/interfaces';
+import { Activity, Child, Email } from '../../../../shared/interfaces/interfaces';
 import { HttpClient } from '@angular/common/http';
 import { Store } from '@ngxs/store';
 import { ToastController } from '@ionic/angular';
@@ -12,6 +12,8 @@ import { ToastController } from '@ionic/angular';
 })
 export class ParentAddActivityComponent implements OnInit{
   parentID = "";
+  childName = "";
+
   //Activity Model
   activityDetails: Activity = {
     id: "",
@@ -19,6 +21,8 @@ export class ParentAddActivityComponent implements OnInit{
     description: "",
     location: "",
     boundary: 0.0,
+    longitude: 0.0,
+    latitude: 0.0,
     timeStart: "",
     timeEnd: "",
     budget: 0.0,
@@ -30,10 +34,48 @@ export class ParentAddActivityComponent implements OnInit{
 
   //Possible locations searched for
   location = "";
-  potentialLocations : string[] = [];
+  potentialLocations : any = [];
+  longitude = 0.0;
+  latitude = 0.0;
 
   //Children of logged in user
   allChildren: Child[] = [];
+
+  //Time-slots available for selection
+  availableTimes: string[] = 
+  [
+    "00:00-01:00",
+    "01:00-02:00",
+    "02:00-03:00",
+    "03:00-04:00",
+    "04:00-05:00",
+    "05:00-06:00",
+    "06:00-07:00",
+    "07:00-08:00",
+    "08:00-09:00",
+    "09:00-10:00",
+    "10:00-11:00",
+    "11:00-12:00",
+    "12:00-13:00",
+    "13:00-14:00",
+    "14:00-15:00",
+    "15:00-16:00",
+    "16:00-17:00",
+    "17:00-18:00",
+    "18:00-19:00",
+    "19:00-20:00",
+    "20:00-21:00",
+    "21:00-22:00",
+    "22:00-23:00",
+    "23:00-24:00",
+    "24:00-00:00",
+  ];
+
+  emailRequest : Email = {
+    to: "",
+    subject: "",
+    body: "",
+  }
 
   //Constructor
   constructor(private serv: API, private http: HttpClient, private store: Store, public toastCtrl: ToastController) {}
@@ -47,7 +89,7 @@ export class ParentAddActivityComponent implements OnInit{
 
   //Populate the activityDetails object from form input
   async getActivityValues(val : any)
-  {  
+  {      
     //FORM ERROR CHECKING
     let emptyInput = false;
     let dom = document.getElementById("actNameError");
@@ -105,7 +147,20 @@ export class ParentAddActivityComponent implements OnInit{
       {
         //Check that the selected location is from the API
         this.getLocations()
-        if (this.potentialLocations.indexOf(this.location) == -1)
+        let found = false;
+        //Get the selected location and its coords
+        this.potentialLocations.forEach((loc : any) => 
+        {
+          if(loc.display_name === this.location)
+          {
+            found = true;
+            this.longitude = loc.lon;
+            this.latitude = loc.lat;
+          }
+          
+        });
+
+        if(!found)
         {
           dom.innerHTML = "Please select a valid location from the suggested below.";
           dom.style.display = "block";
@@ -238,6 +293,8 @@ export class ParentAddActivityComponent implements OnInit{
       this.activityDetails.description = val.description;
       this.activityDetails.location = val.location;
       this.activityDetails.boundary = bound;
+      this.activityDetails.longitude = this.longitude;
+      this.activityDetails.latitude = this.latitude;
       this.activityDetails.day = val.dayOfWeek;
       this.activityDetails.timeStart = val.timeSlot.substring(0,5);
       this.activityDetails.timeEnd = val.timeSlot.substring(6,11);
@@ -274,9 +331,11 @@ export class ParentAddActivityComponent implements OnInit{
   
       //Add returned data to the array
       const len = res.length;
-      for (let j = 0; j < len && j<10; j++) 
+      for (let j = 0; j < len && j<5; j++) 
       { 
-        this.potentialLocations.push(res[j].display_name);
+        if (this.potentialLocations.includes(res[j]) === false){
+          this.potentialLocations.push(res[j]); 
+        }
       }
     })
     .catch(error=>{ // Failure
@@ -299,9 +358,30 @@ export class ParentAddActivityComponent implements OnInit{
 
   //Service calls
   addActivity(act:Activity){
+    this.allChildren.forEach(child => {
+      if(child.id == act.child){
+        this.childName = child.fname;
+      }
+    });
+
     this.serv.addActivity(act).toPromise().then(
       res=>{
         console.log("The response is:" + res); 
+        //send email to parent about newly added activity
+        this.emailRequest.to = this.store.snapshot().user.email;
+        this.emailRequest.subject = "New Activity Added";
+        this.emailRequest.body = "You have succesfully added a new activity for " + this.childName + ". The activity will apear on your child's schedule that can be viewed on the app." + 
+                                 "If any changes need to be made to the activity, you can edit the activity on the schedule page as well!\n\nKind Regards,\nThe Au Pair Team";
+        this.serv.sendEmail(this.emailRequest).toPromise().then(
+          res=>{
+            console.log(res);
+          }
+        ).catch(
+          err=>{
+            console.log(err);
+          }
+        );
+
         this.openToast();
       },
       error=>{
@@ -320,5 +400,9 @@ export class ParentAddActivityComponent implements OnInit{
         console.log("Error has occured with API: " + error);
       }
     )
+  }
+
+  radioChecked(event: any){
+    this.location = event.target.value;
   }
 }

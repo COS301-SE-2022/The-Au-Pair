@@ -4,7 +4,8 @@
         <h1 class='profile-name'>{{this.userDetails.fname}} {{this.userDetails.sname}}</h1>
         <div class='expand-div'>
             <div class='profile-picture-wrapper'>
-                <img class="profile-picture" src="assets/images/placeholder-profile.jpg" alt="">
+                <img [hidden]="!this.hasImage" class="profile-picture" id="{{this.auPairId}}dash" src="{{ src }}" alt="">
+                <ion-spinner [hidden]="this.hasImage" name="circular"></ion-spinner>
             </div>
             <div>
                 <div class="details-div">
@@ -25,7 +26,7 @@
                 </div>
                 <div class="details-div">
                     <div class="details-title">Gender: </div>
-                    <p class="user-details">{{this.userDetails.gender}}</p>
+                    <p class="user-details" style="text-transform: capitalize;">{{this.userDetails.gender}}</p>
                 </div>
                 <div class="details-div">
                   <div class="details-title">Pay rate: </div>
@@ -33,8 +34,8 @@
                 </div>
                 <div class="details-div">
                     <div class="details-title">Rating: </div>
-                    <div *ngIf="this.auPairDetails.rating !== 0" class="user-details">{{this.auPairDetails.rating}} / 5</div>
-                    <div *ngIf="this.auPairDetails.rating === 0" class="user-details">Not yet rated</div>
+                    <div *ngIf="this.getAverage(this.auPairDetails.rating) !== 0" class="user-details">{{this.getAverage(this.auPairDetails.rating)}} / 5</div>
+                    <div *ngIf="this.getAverage(this.auPairDetails.rating) === 0" class="user-details">Not yet rated</div>
                   </div>
             </div>
                 <div>
@@ -46,6 +47,10 @@
                         <div class="details-title">Experience: </div>
                         <p class="user-details">{{this.auPairDetails.experience}}</p>
                     </div>
+                    <div class="details-div">
+                        <div class="details-title">CV: </div>
+                        <p class="parent-text-info"><ion-icon (click)="downloadCV(this.userDetails.id)" class="downloadCV" slot="start" name="download"></ion-icon></p>
+                      </div>
                 </div>
             <button class="hire-button" id="change" (click)="sendHireRequests(this.auPairDetails.id)">HIRE</button>
         </div>

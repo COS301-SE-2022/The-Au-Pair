@@ -2,7 +2,7 @@
     background-color: var(--ion-color-primary-contrast);
     height: 100%;
     width: 100%;
-    color: black;
+    color: black !important;
 }
 
 .heading{
@@ -13,14 +13,30 @@
     color: var(--ion-color-primary-contrast);
 }
 
+form{
+    color: var(--ion-color-dark)
+}
+
+.imageUploadIcon{
+    color: var(--ion-color-dark);
+}
+
 .close{
     cursor: pointer;
 }
 
 .descInp{
-    width: 80%;
+    width: 89%;
     height: 15vh;
     right:-50px !important;
+}
+
+.decAlign{
+    flex:  1 1 !important;
+}
+
+.desc{
+    margin-left: 30px;
 }
 
 .content{
@@ -30,8 +46,7 @@
 
 .behaviour{
     display: flex;
-    text-align: center;
-    justify-content: center;
+    margin-left: 30px;
     align-items: center;
 }
 
@@ -53,13 +68,7 @@
 }
 
 .submit-row{
-    margin-top: 10vh;
-}
-
-@media (max-width: 768px){
-    .submit-row{
-        margin-top: 55vh;
-    }
+    margin-top: 50px;
 }
 
 .slider-row{
@@ -85,4 +94,23 @@ textarea{
     resize: none;
     border: none;
     padding: 15px;
+}
+
+.custom-file-upload {
+    background-color: var(--ion-color-primary);
+    color: var(--ion-color-light);
+    display: inline-block;
+    width: 8%;
+    border-radius: 10px;
+    height: 43px;
+    cursor: pointer;
+    padding-top: 10px;
+    min-width: 120px;
+    margin-left: auto;
+    margin-right: 15px;
+    text-align: center;
+}
+
+input[type="file"] {
+    display: none;
 }

@@ -16,13 +16,13 @@ public class medAidController
     this.ms = new medAidService(mr);
   }
 
-  @PostMapping("/getMedAid")
+  @PostMapping("/api/getMedAid")
   public medAid getMedAid(@RequestBody String id)
   {
     return this.ms.getMedAid(id);
   }
 
-  @PostMapping("/editMedAid")
+  @PostMapping("/api/editMedAid")
   public void editMedAid(@RequestBody medAid m)
   {
     this.ms.updateMedAid(m);

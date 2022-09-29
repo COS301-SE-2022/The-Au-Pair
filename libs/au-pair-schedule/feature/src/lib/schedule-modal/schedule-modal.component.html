@@ -8,10 +8,10 @@
     <div class="content">
         <form id="ratingForm" #ratingForm="ngForm"  (ngSubmit)="getDescription(ratingForm.value)">
         <ion-row>
-            <ion-col size="4" class="ion-text-center">
+            <ion-col size="4" class="ion-text-start desc">
                 Description:
             </ion-col>
-            <ion-col size="8" class="ion-text-start">
+            <ion-col size="8" class="ion-text-start decAlign">
                 <textarea name="desc" class="descInp" ngModel></textarea>
             </ion-col>  
         </ion-row> 
@@ -25,6 +25,18 @@
                         <ion-icon slot="start" name="sad-outline"></ion-icon>
                         <ion-icon slot="end" name="happy-outline"></ion-icon>
                     </ion-range>
+            </ion-col>
+            <ion-col size="1"></ion-col>
+        </ion-row>
+        <ion-row class="slider-row">
+            <ion-col size="4" class="ion-text-start behaviour">
+                Activity Image:
+            </ion-col>
+            <ion-col size="7" class="ion-text-end slider">
+                <label id="uploadLabel" class="custom-file-upload ">
+                    {{ updateText }} 
+                <input type="file" id="customFile" (change)="selectFile($event)" placeholder="File to upload" accept=".PNG,.JPG,.JPEG">  
+                </label> 
             </ion-col>
             <ion-col size="1"></ion-col>
         </ion-row>
