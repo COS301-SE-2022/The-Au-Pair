@@ -18,7 +18,6 @@
     <a href="https://theaupair.life/"><strong>🌐: theaupair.life</strong></a>
     <br />
     <br />
-    <a href="https://drive.google.com/file/d/1NaXnfLn3lmfEGlzSfiJ8SzEfEWv57wFE/view?usp=sharing"><strong>CheemsChaps-Demo 3</strong></a> | 
     <a href="https://docs.google.com/document/d/1IdGO-9WVABvS56bSlV5UvK8dSdRHbSBDqQfw9_qe29w/edit?usp=sharing"><strong>SRS Document 4</strong></a> |
     <a href="https://github.com/COS301-SE-2022/The-Au-Pair/projects/1"><strong>Project Board</strong></a> 
   </p>
