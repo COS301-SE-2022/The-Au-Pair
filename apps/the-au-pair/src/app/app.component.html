@@ -1,3 +1,79 @@
 <ion-app>
     <ion-router-outlet></ion-router-outlet>
+    <!--Ion menu for navigation-->
+    <ion-menu menuId="user" content-id="menu-wrapper" class="menu">
+        <ion-header class="menu-header">
+                <ion-toolbar translucent>
+                    <ion-title class="ion-text-center">The Au Pair</ion-title>
+                </ion-toolbar>
+            </ion-header>
+        <ion-content id="menu-wrapper">
+      
+          <ion-card (click)="dash()" class="menu-item clickable ion-activatable" >
+            <ion-row>
+              <ion-col size="2">
+                <ion-icon class="menu-item-icon" name="home-outline"></ion-icon>
+              </ion-col>
+              <ion-col  class="menu-item-text" size="10">
+                <ion-text color="light">
+                  Home
+                </ion-text>
+              </ion-col>
+            </ion-row>
+          </ion-card>
+      
+          <ion-card [ngClass]="{'greyed' : store.snapshot().user.auPair !== ''}" [hidden]="store.snapshot().user.type !== 1" (click)="explore()"  class="menu-item clickable ion-activatable">
+            <ion-row>
+              <ion-col size="2">
+                <ion-icon class="menu-item-icon" name="people-outline"></ion-icon>
+              </ion-col>
+              <ion-col  class="menu-item-text" size="10">
+                <ion-text color="light">
+                  Explore Au Pairs
+                </ion-text>
+              </ion-col>
+            </ion-row>
+          </ion-card>
+      
+          <ion-card (click)="profile()" class="menu-item clickable ion-activatable">
+            <ion-row>
+              <ion-col size="2">
+                <ion-icon class="menu-item-icon" name="happy-outline"></ion-icon>
+              </ion-col>
+              <ion-col  class="menu-item-text" size="10">
+                <ion-text color="light">
+                  My Profile
+                </ion-text>
+              </ion-col>
+            </ion-row>
+          </ion-card>
+      
+          <ion-card (click)="notifications()" class="menu-item clickable ion-activatable">
+            <ion-row>
+              <ion-col size="2">
+                <ion-icon class="menu-item-icon" name="notifications-outline"></ion-icon>
+              </ion-col>
+              <ion-col  class="menu-item-text" size="10">
+                <ion-text color="light">
+                  Notifications
+                </ion-text>
+              </ion-col>
+            </ion-row>
+          </ion-card>
+      
+          <ion-card (click)="logout()" class="menu-item clickable ion-activatable">
+            <ion-row>
+              <ion-col size="2">
+                <ion-icon class="menu-item-icon" name="exit-outline"></ion-icon>
+              </ion-col>
+              <ion-col  class="menu-item-text" size="10">
+                <ion-text color="light">
+                  Logout
+                </ion-text>
+              </ion-col>
+            </ion-row>
+          </ion-card>
+      
+        </ion-content>
+      </ion-menu>
 </ion-app>

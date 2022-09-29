@@ -24,7 +24,7 @@
     margin-inline: 0px;
     margin-bottom: 15px;
     border-radius: 10px;
-    background-color: #F9F9F9;
+    background-color: var(--ion-color-light-white);
 }
 
 .profile{
@@ -54,8 +54,14 @@
     margin-left: 10px;
 }
 
+.spinClass{
+    margin-left: 10px;
+    display: flex;
+    align-items: center;
+}
+
 .request-content{
-    margin-left: 25px;
+    margin-left: 15px;
     margin-top: 10px;
 }
 
@@ -82,48 +88,34 @@
     float: right;
 }
 
-.accept-button{
+.view-button{
     padding: 10px 22px;
     gap: 10px;
-    border: 2px solid var(--ion-color-primary);
+    border: 2px solid var(--ion-color-dark);
     border-radius: 10px;
-    background-color: var(--ion-color-primary);
-}
-
-.reject-button{
-    padding: 10px 22px;
-    gap: 10px;
-    border: 2px solid var(--ion-color-danger);
-    border-radius: 10px;
-    background-color: var(--ion-color-danger);
-    margin-left: 15px;
+    background-color: var(--ion-color-dark);
 }
 
 @media (max-width:560px) {
     .heading{
-        font-size: 12px;
+        font-size: 15px;
     }
 
     .time{
-        font-size: 7px;
+        font-size: 10px;
     }
 
     .details{
-        font-size: 12px;
+        font-size: 13px !important;
     }
 
-    .accept-button{
-        padding: 7px 7px;
-
-    }
-    
-    .reject-button{
+    .view-button{
         padding: 7px 7px;
     }
 
     .profile{
-        height: 50px;
-        width: 50px;
+        height: 40px;
+        width: 40px;
         margin-left: 0px;
         margin-right: 0px;
     }
@@ -134,5 +126,9 @@
 
     .details{
         font-size: 10px;
+    }
+
+    .header{
+        font-size: 32px !important;
     }
 }

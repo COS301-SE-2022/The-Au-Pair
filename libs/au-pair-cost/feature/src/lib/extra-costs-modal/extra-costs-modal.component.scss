@@ -1,0 +1,143 @@
+.modal-body{
+    background-color: var(--ion-color-primary-contrast);
+    height: 100%;
+    width: 100%;
+    color: black;
+}
+
+.heading{
+    font-size: 26px;
+    font-family: Roboto;
+    padding: 15px 0px;
+    background-color: var(--ion-color-primary);
+    color: var(--ion-color-primary-contrast);
+}
+
+.close{
+    cursor: pointer;
+}
+
+input {
+    width: 80%;
+    height: 50px;
+    background: var(--ion-color-light-white);
+    box-shadow: 1px 2px 5px rgba(0, 0, 0, 0.13);
+    border-style: none;
+    border-radius: 10px;
+    padding-left: 20px;
+    color: var(--ion-color-dark)
+}
+
+ion-row {
+    padding-top: 10px;
+}
+
+.heading ion-row {
+    padding-top: 0; 
+}
+
+select {
+    width: 80%;
+    height: 50px;
+    box-shadow: 1px 2px 5px rgba(0, 0, 0, 0.13);
+    border-style: none;
+    border-radius: 10px;
+    padding-left: 20px;
+}
+
+option {
+    font-family: sans-serif;
+}
+
+.metric {
+    height: 100%;
+    padding-top: 20px;
+}
+
+.content{
+    margin-top: 20px;
+    font-size: 18px;
+}
+
+.image-upload>input {
+    display: none;
+  }
+
+.image-upload {
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+}
+
+.image-upload label {
+    cursor: pointer;
+}
+
+.selectImage {
+    width: 30px;
+    height: 30px;
+  }
+
+.submit{
+    background-color: var(--ion-color-primary);
+    height: 50px;
+    width: 85%;
+    margin:auto;
+    border-radius: 16px;
+    border : none !important;
+    color : white;
+}
+
+.disabled-submit{ 
+    background-color: var(--ion-color-grey) !important;
+    height: 50px;
+    width: 85%;
+    margin:auto;
+    border-radius: 16px;
+    border : none !important;
+    color : white;
+}
+
+.submit-row{
+    position: absolute;
+    width: 100%;
+    bottom: 40px;
+}
+
+ion-range{
+    padding-top: 8px !important;
+}
+
+input:focus{
+    outline:none;
+}
+
+textarea:focus{
+    outline:none;
+}
+
+textarea{
+    background-color: white;
+    border-radius: 16px;
+    color:black;
+    resize: none;
+    border: none;
+    padding: 15px;
+}
+
+.disabled-amount {
+    background: var(--ion-color-grey);
+    opacity: 0.9;
+    cursor: default;
+    color : var(--ion-color-dark)
+}
+
+.error{
+    padding-top: 5px;
+    display: none;
+    position: relative;
+    display: block;
+    text-align: left;
+    margin: 0;
+    color: red;
+}

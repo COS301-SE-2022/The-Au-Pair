@@ -4,6 +4,8 @@ import { User, medAid, Parent } from '../../../../shared/interfaces/interfaces';
 import { ToastController } from '@ionic/angular';
 import { Store } from '@ngxs/store';
 import { HttpClient } from '@angular/common/http';
+import { Router } from '@angular/router';
+import { SetImgString } from '../../../../shared/ngxs/actions';
 
 @Component({
   selector: 'the-au-pair-edit-parent-profile',
@@ -14,13 +16,22 @@ export class EditParentProfileComponent implements OnInit{
   
   parentID = "";
   hasErr = false;
+  sameFlag = false;
+  errFlag = true;
 
   location = "";
   long = 0;
   lat = 0;
   suburb = "";
 
+  isInput = false;
+  isEmpty = false;
+
   potentialLocations : any[] = [];
+
+  selectedFiles : any;
+  currentFileUpload: any;
+  hasImage = false;
 
   userDetails: User = {
     id: "",
@@ -57,12 +68,14 @@ export class EditParentProfileComponent implements OnInit{
     children: [],
     medID: "",
     auPair: "",
+    rating: []
   }
 
-  constructor(private serv: API, private http: HttpClient, public toastCtrl: ToastController, private store: Store){}
+  constructor(private serv: API, private http: HttpClient, public toastCtrl: ToastController, private store: Store, public router: Router){}
 
   ngOnInit(): void
   {
+    this.setImage();
     this.parentID = this.store.snapshot().user.id;
     this.getUserDetails()
   }
@@ -105,6 +118,7 @@ export class EditParentProfileComponent implements OnInit{
         this.parent.children = res.children;
         this.parent.medID = res.medID;
         this.parent.auPair = res.auPair;
+        this.parent.rating = res.rating;
       },
       error => {
         console.log("Error has occured with API: " + error);
@@ -132,6 +146,8 @@ export class EditParentProfileComponent implements OnInit{
   {  
     //FORM ERROR CHECKING
     let emptyInput = false;
+    this.isInput = false;
+    this.isEmpty = false;
     let dom = document.getElementById("emailError");
     if(val.email === "")
     {
@@ -191,11 +207,17 @@ export class EditParentProfileComponent implements OnInit{
             }
           }
         })
-        if(!flag)
+        if(val.address === this.userDetails.address)
+        {
+          dom.style.display = "none";
+          this.sameFlag = true;
+        }
+        else if(!flag)
         {
           dom.innerHTML = "Please select a valid location from the suggested below.";
           dom.style.display = "block";
           flag = false;
+          this.errFlag = false;
         }
         else
         {
@@ -214,102 +236,90 @@ export class EditParentProfileComponent implements OnInit{
     dom = document.getElementById("medAidMMError");
     if(val.medicalAidMM === "")
     {
-      emptyInput = true;
-      if(dom != null)
-      {
-        dom.innerHTML = "Main Member Name is empty";
-        dom.style.display = "block";
-      }
-    }else
+      this.isEmpty = true;
+    }
+    else
     {
-      if(dom != null)
-      {
-        dom.style.display = "none";
-      }
+      this.isInput = true
     }
     dom = document.getElementById("medAidMSError");
     if(val.medicalAidMS === "")
     {
-      emptyInput = true;
-      if(dom != null)
-      {
-        dom.innerHTML = "Main Member Surname is empty";
-        dom.style.display = "block";
-      }
-    }else
+      this.isEmpty = true;
+    }
+    else
     {
-      if(dom != null)
-      {
-        dom.style.display = "none";
-      }
+      this.isInput = true
     }
     dom = document.getElementById("medAidNoError");
     if(val.medicalAidNo === "")
     {
-      emptyInput = true;
-      if(dom != null)
-      {
-        dom.innerHTML = "Medical Aid Number is empty";
-        dom.style.display = "block";
-      }
-    }else
+      this.isEmpty = true;
+    }
+    else
     {
-      if(dom != null)
-      {
-        dom.style.display = "none";
-      }
+      this.isInput = true
     }
     dom = document.getElementById("medAidProviderError");
     if(val.medicalAidProvider === "")
     {
-      emptyInput = true;
-      if(dom != null)
-      {
-        dom.innerHTML = "Medical Aid Provider is empty";
-        dom.style.display = "block";
-      }
-    }else
+      this.isEmpty = true;
+    }
+    else
     {
-      if(dom != null)
-      {
-        dom.style.display = "none";
-      }
+      this.isInput = true
     }
     dom = document.getElementById("medAidPlanError");
     if(val.medicalAidPlan === "")
     {
-      emptyInput = true;
-      if(dom != null)
-      {
-        dom.innerHTML = "Medical Aid Plan is empty";
-        dom.style.display = "block";
-      }
-    }else
+      this.isEmpty = true;
+    }
+    else
     {
-      if(dom != null)
-      {
-        dom.style.display = "none";
-      }
+      this.isInput = true
     }
     
     if(emptyInput == true)
     {
-      console.log("You cannot have any empty fields.");
+      this.errToast("You cannot have any empty fields.");
+    }
+    else if(this.isEmpty == true && this.isInput == true)
+    {
+      this.errToast("There are missing fields for your medical aid details.");
     }
     else
     {
-      this.userDetails.email = val.email;
-      this.userDetails.number = val.phone;
-      this.userDetails.address = val.address;
-      this.userDetails.latitude = this.lat;
-      this.userDetails.longitude = this.long;
-      this.userDetails.suburb = this.suburb;
-      this.medAidDetails.name = val.medicalAidMM;
-      this.medAidDetails.plan = val.medicalAidPlan;
-      this.medAidDetails.provider = val.medicalAidProvider;
-      this.medAidDetails.mID = val.medicalAidNo;
-      this.medAidDetails.sname = val.medicalAidMS;
-      this.editDetails(this.userDetails, this.medAidDetails);
+      if(this.errFlag === false)
+      {
+        this.errToast("Please select a valid location from the suggested below.");
+      }
+      else if(this.sameFlag === true)
+      {
+        this.userDetails.email = val.email;
+        this.userDetails.number = val.phone;
+        this.userDetails.address = val.address;
+        this.medAidDetails.name = val.medicalAidMM;
+        this.medAidDetails.plan = val.medicalAidPlan;
+        this.medAidDetails.provider = val.medicalAidProvider;
+        this.medAidDetails.mID = val.medicalAidNo;
+        this.medAidDetails.sname = val.medicalAidMS;
+        this.editDetails(this.userDetails, this.medAidDetails);
+      }
+      else
+      {
+        this.userDetails.email = val.email;
+        this.userDetails.number = val.phone;
+        this.userDetails.address = val.address;
+        this.userDetails.latitude = this.lat;
+        this.userDetails.longitude = this.long;
+        this.userDetails.suburb = this.suburb;
+        this.medAidDetails.name = val.medicalAidMM;
+        this.medAidDetails.plan = val.medicalAidPlan;
+        this.medAidDetails.provider = val.medicalAidProvider;
+        this.medAidDetails.mID = val.medicalAidNo;
+        this.medAidDetails.sname = val.medicalAidMS;
+        this.editDetails(this.userDetails, this.medAidDetails);
+      }
     }
   }
 
@@ -317,8 +327,30 @@ export class EditParentProfileComponent implements OnInit{
   {    
     await this.editUser(user);
     await this.editMedAid(medAid);    
+    
+    this.checkImageBeforeRedirect();
+  }
 
-    this.openToast();
+  async checkImageBeforeRedirect(){
+    if (this.selectedFiles != undefined) {
+      //upload the images if file selected
+      this.currentFileUpload = this.selectedFiles.item(0);
+      await this.serv.storeFile(this.currentFileUpload,this.store.snapshot().user.id  +  ".png").toPromise().then(
+      res=>{
+        console.log(res); 
+        //only redirect on success
+        this.openToast('Profile successfully updated!');
+        this.router.navigate(['/parent-dashboard']);
+      },
+      error=>{
+        this.openToast('Error uploading image!')
+        return error;
+      });
+    }
+    else{
+      this.openToast('Profile successfully updated!');
+      this.router.navigate(['/parent-dashboard']);
+    }
   }
 
   async editUser(user:User){    
@@ -339,18 +371,6 @@ export class EditParentProfileComponent implements OnInit{
 
   async editMedAid(medAid:medAid)
   {
-    this.parent.medID = medAid.mID;
-    await this.serv.editParent(this.parent)
-    .toPromise()
-    .then(
-      res => {
-        console.log("The response is:" + res); 
-      },
-      error=>{
-        console.log("Error has occured with API: " + error);
-      }
-    )
-
     await this.serv.editMedAid(medAid)
     .toPromise()
     .then(
@@ -366,10 +386,10 @@ export class EditParentProfileComponent implements OnInit{
     )
   };
 
-  async openToast()
+  async openToast(message : string)
   {
     const toast = await this.toastCtrl.create({
-      message: 'Profile successfully updated!',
+      message: message,
       duration: 4000,
       position: 'top',
       color: 'primary',
@@ -378,10 +398,10 @@ export class EditParentProfileComponent implements OnInit{
     await toast.present();
   }
 
-  async errToast()
+  async errToast(mes : string)
   {
     const toast = await this.toastCtrl.create({
-      message: 'Unable to update profile!',
+      message: mes,
       duration: 4000,
       position: 'top',
       cssClass: 'toastPopUp'
@@ -395,7 +415,7 @@ export class EditParentProfileComponent implements OnInit{
     
     //Building the API query according to what is in the location input field
     const locationParam = loc.replace(' ', '+');
-    const params = locationParam + '&limit=4&format=json&polygon_geojson=1&addressdetails=1';
+    const params = locationParam + '&limit=5&format=json&polygon_geojson=1&addressdetails=1';
 
     //Make the API call
     await this.http.get('https://nominatim.openstreetmap.org/search?q='+params)
@@ -410,17 +430,75 @@ export class EditParentProfileComponent implements OnInit{
       {
         return;
       }
-  
+
+      this.potentialLocations.splice(0);
+      
       //Add returned data to the array
       const len = res.length;
-      for (let j = 0; j < len && j<4; j++) 
-      {      
-        this.potentialLocations.push(res[j]);
+      for (let j = 0; j < len && j<5; j++) 
+      {  
+        if (this.potentialLocations.includes(res[j].display_name) === false){
+          this.potentialLocations.push(res[j]); 
+        }   
       }
       
     })
     .catch(error=>{ // Failure
       console.log(error);
     });
+  }
+
+  radioChecked(event: any){
+    this.location = event.target.value;
+  }
+
+  selectFile(event: any) {
+    this.selectedFiles = event.target.files;
+    const fileReader = new FileReader();
+    fileReader.readAsDataURL(this.selectedFiles.item(0));
+    fileReader.onload = (event) => {
+      const dom = document.getElementById("img2");
+      if (dom != null) {
+        const ev = event.target;
+        if (ev != null) {
+          const res = ev.result as string;
+          if (res != null) {
+            dom.setAttribute("src",res);
+          }
+        }
+      }
+    }
+  }
+
+  async setImage(){
+    await this.serv.getFile(this.store.snapshot().user.id  +  ".png").toPromise().then(
+      async res=>{
+        if (res.size > 0) {
+          const dataType = res.type;
+          const binaryData = [];
+          binaryData.push(res);
+          const href = window.URL.createObjectURL(new Blob(binaryData, {type: dataType}));
+          this.store.dispatch(new SetImgString(href));
+          const dom = document.getElementById("img2");
+
+          if(dom != null)
+          {
+            dom.setAttribute("src", this.store.snapshot().user.imgString);
+          }
+
+          this.hasImage = true;
+        }
+        else{
+          const dom = document.getElementById("img2");
+          if (dom != null) {
+            dom.setAttribute("src","assets/images/placeholder-profile.jpg");
+          }
+          this.hasImage = true;
+        }
+      },
+      error=>{
+        return error;
+      }
+    );
   }
 }

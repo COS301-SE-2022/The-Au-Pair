@@ -14,6 +14,8 @@ public class Child
   private String fname;
   @Field ("surname")
   private String sname;
+  @Field ("dob")
+  private String dob;
   @Field ("allergies")
   private String allergies;
   @Field ("diet")
@@ -23,11 +25,12 @@ public class Child
   @Field ("aupair")
   private String aupair;
 
-  public Child(String id, String fname, String sname, String allergies, String diet, String parent, String aupair)
+  public Child(String id, String fname, String sname, String dob, String allergies, String diet, String parent, String aupair)
   {
     this.id = id;
     this.fname = fname;
     this.sname = sname;
+    this.dob = dob;
     this.allergies = allergies;
     this.diet = diet;
     this.parent = parent;
@@ -62,6 +65,16 @@ public class Child
   public void setSname(String sname)
   {
     this.sname = sname;
+  }
+
+  public String getDob()
+  {
+    return dob;
+  }
+
+  public void setDob(String dob)
+  {
+    this.dob = dob;
   }
 
   public String getAllergies()
@@ -111,6 +124,7 @@ public class Child
       "id='" + id + '\'' +
       ", fname='" + fname + '\'' +
       ", sname='" + sname + '\'' +
+      ", dob='" + dob + '\'' +
       ", allergies=" + allergies + '\'' +
       ", diet='" + diet + '\'' +
       ", parent='" + parent + '\'' +

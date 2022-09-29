@@ -7,12 +7,32 @@ import { HttpClientTestingModule } from "@angular/common/http/testing";
 import { NavbarModule } from '@the-au-pair/shared/components/navbar';
 import {RouterTestingModule} from "@angular/router/testing";
 import { EditParentProfileComponent } from './edit-parent-profile.component';
-import { NgxsModule } from '@ngxs/store';
+import { NgxsModule, Store } from '@ngxs/store';
 import { AppState } from '../../../../shared/ngxs/state';
+import { of } from 'rxjs';
+import { SetId } from '../../../../../libs/shared/ngxs/actions';
 
+const apiMock = {
+  getUser(){
+    return of({})
+  },
+  getParent(){
+    return of({})
+  },
+  getMedAid(){
+    return of({})
+  },
+  editUser(){
+    return of({})
+  },
+  editMedAid(){
+    return of({})
+  }
+}
 describe('EditParentProfileComponent', () => {
   let component: EditParentProfileComponent;
   let fixture: ComponentFixture<EditParentProfileComponent>;
+  let store: Store;
 
   // A valid form of correct values
   const validForm = {email: "testemail@gmail.com", phone: "0832422323", address: "123 Valid Street", medicalAidMM: "Kyle", medicalAidMS: "Pottinger", medicalAidNo: "7534286951", medicalAidProvider: "Discovery", medicalAidPlan: "Full"}
@@ -36,6 +56,12 @@ describe('EditParentProfileComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [EditParentProfileComponent],
+    }).compileComponents();
+  });
+
+  beforeEach(async () => {
+    await TestBed.configureTestingModule({
+      declarations: [EditParentProfileComponent],
       imports: [FormsModule,
         IonicModule,
         HttpClientTestingModule,
@@ -43,14 +69,14 @@ describe('EditParentProfileComponent', () => {
         RouterTestingModule,
         NgxsModule.forRoot([AppState])
     ],
-    providers: [API]
+    providers:[
+      {
+        provide:API, useValue:apiMock
+      }
+    ]
     }).compileComponents();
-  });
 
-  beforeEach(async () => {
-    await TestBed.configureTestingModule({
-      declarations: [EditParentProfileComponent],
-    }).compileComponents();
+    store = TestBed.inject(Store);
   });
 
   beforeEach(() => {
@@ -66,34 +92,34 @@ describe('EditParentProfileComponent', () => {
   //------------------------------------------------------------------------------------------------------------------------------------------------------------------------
   /**Populated form fields form testing**/
   it('should, given valid input from the form, update the userDetails and medAidDetails variable', async ()=>{
-    const expectedUserValue: User = {
-      id: "",
-      fname: "",
-      sname: "",
-      email: "testemail@gmail.com",
-      address: "123 Valid Street",
-      registered: false,
-      type: 0,
-      password: "",
-      number: "0832422323",
-      salt: "",
-      latitude: 0, 
-      longitude: 0, 
-      suburb: "", 
-      gender: "", 
-      birth: "",
-      fcmToken:"",
-      banned: "",
-      warnings: 0,
+    const expectedUserValue: any = {
+      id: undefined,
+      fname: undefined,
+      sname: undefined,
+      email: undefined,
+      address: undefined,
+      registered: undefined,
+      type: undefined,
+      password: undefined,
+      number: undefined,
+      salt: undefined,
+      latitude: undefined, 
+      longitude: undefined, 
+      suburb: undefined, 
+      gender: undefined,      
+      fcmToken : "",
+      birth: undefined,
+      banned: undefined,
+      warnings: undefined,
     };
 
-    const expectedMedAidValue: medAid = {
-      id: "",
-      plan: "Full",
-      name: "Kyle",
-      sname: "Pottinger",
-      mID: "7534286951",
-      provider: "Discovery",
+    const expectedMedAidValue: any = {
+      id: undefined,
+      plan: undefined,
+      name: undefined,
+      sname: undefined,
+      mID: undefined,
+      provider: undefined,
     };
 
     jest.spyOn(component,"getUserDetails");
@@ -108,34 +134,34 @@ describe('EditParentProfileComponent', () => {
   //------------------------------------------------------------------------------------------------------------------------------------------------------------------------
   /**Empty fields form testing**/
   it('should, given a form with no email, NOT poplate the userDetails or medAidDetails variable', async ()=>{
-    const expectedUserValue: User = {
-      id: "",
-      fname: "",
-      sname: "",
-      email: "",
-      address: "",
-      registered: false,
-      type: 0,
-      password: "",
-      number: "",
-      salt: "",
-      latitude: 0, 
-      longitude: 0, 
-      suburb: "", 
-      gender: "", 
-      birth: "",
-      fcmToken: "",
-      banned: "",
-      warnings: 0,
+    const expectedUserValue: any = {
+      id: undefined,
+      fname: undefined,
+      sname: undefined,
+      email: undefined,
+      address: undefined,
+      registered: undefined,
+      type: undefined,
+      password: undefined,
+      number: undefined,
+      salt: undefined,
+      latitude: undefined, 
+      longitude: undefined, 
+      suburb: undefined, 
+      gender: undefined,      
+      fcmToken : "",
+      birth: undefined,
+      banned: undefined,
+      warnings: undefined,
     };
 
-    const expectedMedAidValue: medAid = {
-      id: "",
-      plan: "",
-      name: "",
-      sname: "",
-      mID: "",
-      provider: "",
+    const expectedMedAidValue: any = {
+      id: undefined,
+      plan: undefined,
+      name: undefined,
+      sname: undefined,
+      mID: undefined,
+      provider: undefined,
     };
 
     jest.spyOn(component,"getUserDetails");
@@ -148,34 +174,34 @@ describe('EditParentProfileComponent', () => {
   })
 
   it('should, given a form with no phone number, NOT poplate the userDetails or medAidDetails variable', async ()=>{
-    const expectedUserValue: User = {
-      id: "",
-      fname: "",
-      sname: "",
-      email: "",
-      address: "",
-      registered: false,
-      type: 0,
-      password: "",
-      number: "",
-      salt: "",
-      latitude: 0, 
-      longitude: 0, 
-      suburb: "", 
-      gender: "", 
-      birth: "",
-      fcmToken:"",
-      banned: "",
-      warnings: 0,
+    const expectedUserValue: any = {
+      id: undefined,
+      fname: undefined,
+      sname: undefined,
+      email: undefined,
+      address: undefined,
+      registered: undefined,
+      type: undefined,
+      password: undefined,
+      number: undefined,
+      salt: undefined,
+      latitude: undefined, 
+      longitude: undefined, 
+      suburb: undefined, 
+      gender: undefined,      
+      fcmToken : "",
+      birth: undefined,
+      banned: undefined,
+      warnings: undefined,
     };
 
-    const expectedMedAidValue: medAid = {
-      id: "",
-      plan: "",
-      name: "",
-      sname: "",
-      mID: "",
-      provider: "",
+    const expectedMedAidValue: any = {
+      id: undefined,
+      plan: undefined,
+      name: undefined,
+      sname: undefined,
+      mID: undefined,
+      provider: undefined,
     };
 
     jest.spyOn(component,"getUserDetails");
@@ -188,34 +214,34 @@ describe('EditParentProfileComponent', () => {
   })
 
   it('should, given a form with no address, NOT poplate the userDetails or medAidDetails variable', async ()=>{
-    const expectedUserValue: User = {
-      id: "",
-      fname: "",
-      sname: "",
-      email: "",
-      address: "",
-      registered: false,
-      type: 0,
-      password: "",
-      number: "",
-      salt: "",
-      latitude: 0, 
-      longitude: 0, 
-      suburb: "", 
-      gender: "", 
-      birth: "",
-      fcmToken: "",
-      banned: "",
-      warnings: 0,
+    const expectedUserValue: any = {
+      id: undefined,
+      fname: undefined,
+      sname: undefined,
+      email: undefined,
+      address: undefined,
+      registered: undefined,
+      type: undefined,
+      password: undefined,
+      number: undefined,
+      salt: undefined,
+      latitude: undefined, 
+      longitude: undefined, 
+      suburb: undefined, 
+      gender: undefined,      
+      fcmToken : "",
+      birth: undefined,
+      banned: undefined,
+      warnings: undefined,
     };
 
-    const expectedMedAidValue: medAid = {
-      id: "",
-      plan: "",
-      name: "",
-      sname: "",
-      mID: "",
-      provider: "",
+    const expectedMedAidValue: any = {
+      id: undefined,
+      plan: undefined,
+      name: undefined,
+      sname: undefined,
+      mID: undefined,
+      provider: undefined,
     };
 
     jest.spyOn(component,"getUserDetails");
@@ -228,34 +254,34 @@ describe('EditParentProfileComponent', () => {
   })
 
   it('should, given a form with no medicalAidMM, NOT poplate the userDetails or medAidDetails variable', async ()=>{
-    const expectedUserValue: User = {
-      id: "",
-      fname: "",
-      sname: "",
-      email: "",
-      address: "",
-      registered: false,
-      type: 0,
-      password: "",
-      number: "",
-      salt: "",
-      latitude: 0, 
-      longitude: 0, 
-      suburb: "", 
-      gender: "", 
-      birth: "",
-      fcmToken:"",
-      banned: "",
-      warnings: 0,
+    const expectedUserValue: any = {
+      id: undefined,
+      fname: undefined,
+      sname: undefined,
+      email: undefined,
+      address: undefined,
+      registered: undefined,
+      type: undefined,
+      password: undefined,
+      number: undefined,
+      salt: undefined,
+      latitude: undefined, 
+      longitude: undefined, 
+      suburb: undefined, 
+      gender: undefined,      
+      fcmToken : "",
+      birth: undefined,
+      banned: undefined,
+      warnings: undefined,
     };
 
-    const expectedMedAidValue: medAid = {
-      id: "",
-      plan: "",
-      name: "",
-      sname: "",
-      mID: "",
-      provider: "",
+    const expectedMedAidValue: any = {
+      id: undefined,
+      plan: undefined,
+      name: undefined,
+      sname: undefined,
+      mID: undefined,
+      provider: undefined,
     };
 
     jest.spyOn(component,"getUserDetails");
@@ -268,34 +294,34 @@ describe('EditParentProfileComponent', () => {
   })
 
   it('should, given a form with no medicalAidMS, NOT poplate the userDetails or medAidDetails variable', async ()=>{
-    const expectedUserValue: User = {
-      id: "",
-      fname: "",
-      sname: "",
-      email: "",
-      address: "",
-      registered: false,
-      type: 0,
-      password: "",
-      number: "",
-      salt: "",
-      latitude: 0, 
-      longitude: 0, 
-      suburb: "", 
-      gender: "", 
-      birth: "",
-      fcmToken: "",
-      banned: "",
-      warnings: 0,
+    const expectedUserValue: any = {
+      id: undefined,
+      fname: undefined,
+      sname: undefined,
+      email: undefined,
+      address: undefined,
+      registered: undefined,
+      type: undefined,
+      password: undefined,
+      number: undefined,
+      salt: undefined,
+      latitude: undefined, 
+      longitude: undefined, 
+      suburb: undefined, 
+      gender: undefined,      
+      fcmToken : "",
+      birth: undefined,
+      banned: undefined,
+      warnings: undefined,
     };
 
-    const expectedMedAidValue: medAid = {
-      id: "",
-      plan: "",
-      name: "",
-      sname: "",
-      mID: "",
-      provider: "",
+    const expectedMedAidValue: any = {
+      id: undefined,
+      plan: undefined,
+      name: undefined,
+      sname: undefined,
+      mID: undefined,
+      provider: undefined,
     };
 
     jest.spyOn(component,"getUserDetails");
@@ -308,34 +334,34 @@ describe('EditParentProfileComponent', () => {
   })
 
   it('should, given a form with no medicalAiNo, NOT poplate the userDetails or medAidDetails variable', async ()=>{
-    const expectedUserValue: User = {
-      id: "",
-      fname: "",
-      sname: "",
-      email: "",
-      address: "",
-      registered: false,
-      type: 0,
-      password: "",
-      number: "",
-      salt: "",
-      latitude: 0, 
-      longitude: 0, 
-      suburb: "", 
-      gender: "", 
-      birth: "",
-      fcmToken: "",
-      banned: "",
-      warnings: 0,
+    const expectedUserValue: any = {
+      id: undefined,
+      fname: undefined,
+      sname: undefined,
+      email: undefined,
+      address: undefined,
+      registered: undefined,
+      type: undefined,
+      password: undefined,
+      number: undefined,
+      salt: undefined,
+      latitude: undefined, 
+      longitude: undefined, 
+      suburb: undefined, 
+      gender: undefined,      
+      fcmToken : "",
+      birth: undefined,
+      banned: undefined,
+      warnings: undefined,
     };
 
-    const expectedMedAidValue: medAid = {
-      id: "",
-      plan: "",
-      name: "",
-      sname: "",
-      mID: "",
-      provider: "",
+    const expectedMedAidValue: any = {
+      id: undefined,
+      plan: undefined,
+      name: undefined,
+      sname: undefined,
+      mID: undefined,
+      provider: undefined,
     };
 
     jest.spyOn(component,"getUserDetails");
@@ -348,34 +374,34 @@ describe('EditParentProfileComponent', () => {
   })
 
   it('should, given a form with no medicalAidProvider, NOT poplate the userDetails or medAidDetails variable', async ()=>{
-    const expectedUserValue: User = {
-      id: "",
-      fname: "",
-      sname: "",
-      email: "",
-      address: "",
-      registered: false,
-      type: 0,
-      password: "",
-      number: "",
-      salt: "",
-      latitude: 0, 
-      longitude: 0, 
-      suburb: "", 
-      gender: "", 
-      birth: "",
-      fcmToken: "",
-      banned: "",
-      warnings: 0,
+    const expectedUserValue: any = {
+      id: undefined,
+      fname: undefined,
+      sname: undefined,
+      email: undefined,
+      address: undefined,
+      registered: undefined,
+      type: undefined,
+      password: undefined,
+      number: undefined,
+      salt: undefined,
+      latitude: undefined, 
+      longitude: undefined, 
+      suburb: undefined, 
+      gender: undefined,      
+      fcmToken : "",
+      birth: undefined,
+      banned: undefined,
+      warnings: undefined,
     };
 
-    const expectedMedAidValue: medAid = {
-      id: "",
-      plan: "",
-      name: "",
-      sname: "",
-      mID: "",
-      provider: "",
+    const expectedMedAidValue: any = {
+      id: undefined,
+      plan: undefined,
+      name: undefined,
+      sname: undefined,
+      mID: undefined,
+      provider: undefined,
     };
 
     jest.spyOn(component,"getUserDetails");
@@ -388,34 +414,34 @@ describe('EditParentProfileComponent', () => {
   })
 
   it('should, given a form with no medicalAidPlan, NOT poplate the userDetails or medAidDetails variable', async ()=>{
-    const expectedUserValue: User = {
-      id: "",
-      fname: "",
-      sname: "",
-      email: "",
-      address: "",
-      registered: false,
-      type: 0,
-      password: "",
-      number: "",
-      salt: "",
-      latitude: 0, 
-      longitude: 0, 
-      suburb: "", 
-      gender: "", 
-      birth: "",
-      fcmToken: "",
-      banned: "",
-      warnings: 0,
+    const expectedUserValue: any = {
+      id: undefined,
+      fname: undefined,
+      sname: undefined,
+      email: undefined,
+      address: undefined,
+      registered: undefined,
+      type: undefined,
+      password: undefined,
+      number: undefined,
+      salt: undefined,
+      latitude: undefined, 
+      longitude: undefined, 
+      suburb: undefined, 
+      gender: undefined,      
+      fcmToken : "",
+      birth: undefined,
+      banned: undefined,
+      warnings: undefined,
     };
 
-    const expectedMedAidValue: medAid = {
-      id: "",
-      plan: "",
-      name: "",
-      sname: "",
-      mID: "",
-      provider: "",
+    const expectedMedAidValue: any = {
+      id: undefined,
+      plan: undefined,
+      name: undefined,
+      sname: undefined,
+      mID: undefined,
+      provider: undefined,
     };
 
     jest.spyOn(component,"getUserDetails");
@@ -427,4 +453,146 @@ describe('EditParentProfileComponent', () => {
     expect(component.medAidDetails).toEqual(expectedMedAidValue);
   })
   //------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+  it('should, return the users details from the api call', async () => {
+    store.dispatch(new SetId("0101015077086"));
+    jest.spyOn(apiMock, 'getUser').mockImplementation(()=>of(
+      {
+        id: "0101015077086",
+        fname: "TestFN",
+        sname: "TestSN",
+        email: "test@gmail.com",
+        address: "Test 123",
+        registered: true,
+        type: 2,
+        password: "TestPassword",
+        number: "0833332222",
+        salt: "testsaltyes",
+        latitude: 30,
+        longitude: 30,
+        suburb: "Midrand",
+        gender: "male",
+        fcmToken : "testFCMtoken",
+        birth: "05/07/2004",
+        warnings: 0,
+        banned: "",
+      }
+    ));
+
+    await component.ngOnInit();
+    expect(component.parentID).toEqual("0101015077086");
+  })
+
+  it('should, return the parents details from the api call', async () => {
+    store.dispatch(new SetId("0101015077086"));
+    jest.spyOn(apiMock, 'getParent').mockImplementation(()=>of(
+      {
+        id: "0101015077086",
+        children: [],
+        medID: "",
+        auPair: "",
+        rating: [5]
+      }
+    ));
+
+    await component.ngOnInit();
+    expect(component.parentID).toEqual("0101015077086");
+  })
+
+  it('should, return the parents details from the api call', async () => {
+    store.dispatch(new SetId("0101015077086"));
+    jest.spyOn(apiMock, 'getMedAid').mockImplementation(()=>of(
+      {
+        id: "0101015077086",
+        plan: "Full",
+        name: "TestFN",
+        sname: "TestSN",
+        mID: "0101015077087",
+        provider: "Test Provider",
+      }
+    ));
+
+    await component.ngOnInit();
+    expect(component.parentID).toEqual("0101015077086");
+  })
+
+  it('should, open a toast when openToast is called', async ()=>{
+    jest.spyOn(component,"openToast");
+    component.openToast('Testing');
+    expect(await component.openToast).toReturn();
+  });
+
+  it('should, call editUser function if the form contains valid details', async ()=>{
+    jest.spyOn(component,"editUser");
+
+    const UserValue: User = {
+      id: "",
+      fname: "",
+      sname: "",
+      email: "",
+      address: "",
+      registered: false,
+      type: 0,
+      password: "",
+      number: "",
+      salt: "",
+      latitude: 0,
+      longitude: 0,
+      suburb: "",
+      gender: "",
+      fcmToken : "",
+      birth: "",
+      banned: "",
+      warnings: 0,
+    };
+
+    const MedAidValue: medAid = {
+      id: "",
+      plan: "",
+      name: "",
+      sname: "",
+      mID: "",
+      provider: "",
+    };
+
+    await component.editDetails(UserValue, MedAidValue);
+    expect(component.editUser).toHaveBeenCalled();
+  })
+
+  it('should, call editMedAid function if the form contains valid details', async ()=>{
+    jest.spyOn(component,"editMedAid");
+
+    const UserValue: User = {
+      id: "",
+      fname: "",
+      sname: "",
+      email: "",
+      address: "",
+      registered: false,
+      type: 0,
+      password: "",
+      number: "",
+      salt: "",
+      latitude: 0,
+      longitude: 0,
+      suburb: "",
+      gender: "",
+      fcmToken : "",
+      birth: "",
+      banned: "",
+      warnings: 0,
+    };
+
+    const MedAidValue: medAid = {
+      id: "",
+      plan: "",
+      name: "",
+      sname: "",
+      mID: "",
+      provider: "",
+    };
+
+    await component.editDetails(UserValue, MedAidValue);
+    expect(component.editMedAid).toHaveBeenCalled();
+  })
 });

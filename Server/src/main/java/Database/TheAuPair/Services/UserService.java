@@ -29,8 +29,18 @@ public class UserService
   {
     for (User registered : ur.findAll())
     {
-      if (registered.getId().equals(u.getId()) || registered.getEmail().equals(u.getEmail()))
+      if (registered.getId().equals(u.getId()))
       {
+        if(registered.getBanned().equals(""))
+        {
+          return "ID";
+        }
+        else
+        {
+          return "Banned " + registered.getBanned();
+        }
+      }
+      else if (registered.getEmail().equals(u.getEmail())){
         if(registered.getBanned().equals(""))
         {
           return registered.getEmail();
@@ -97,5 +107,18 @@ public class UserService
     {
       ur.deleteById(id);
     }
+  }
+
+  public String getFCMToken(String id)
+  {
+    User u =  ur.findUsingId(id);
+    return u.getFcmToken();
+  }
+
+  public void setFCMToken(String id, String token)
+  {
+    User u =  ur.findUsingId(id);
+    u.setFcmToken(token);
+    ur.save(u);
   }
 }

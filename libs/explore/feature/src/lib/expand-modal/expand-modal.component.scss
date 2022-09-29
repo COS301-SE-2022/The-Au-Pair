@@ -29,7 +29,7 @@
 }
 
 .profile-name {
-    font-size: 3.6vw;
+    font-size: 36px;
     padding-top: 2%;
     margin-bottom: 2%;
     color: var(--ion-color-dark);
@@ -85,6 +85,7 @@
     margin-top: auto;
     margin-bottom: auto;
     padding-right: 15px;
+    width: 65%;
 }
 
 .user-details-large{
@@ -108,4 +109,22 @@
     margin: auto;
     display: block;
     margin-top: 25px;
+}
+
+@media(max-width: 375px)
+{
+    .details-title{
+        font-size: 12px !important;
+    }
+
+    .user-details{
+        font-size: 12px !important;
+    }
+}
+
+.downloadCV{
+    height: 20px;
+    width: 20px;
+    margin: 0px;
+    cursor: pointer;
 }

@@ -24,13 +24,48 @@ public class ChildService
     return c;
   }
 
-  public void addChild(Child c)
+  public Child addChild(Child c)
   {
+    String id = "";
+    boolean valid = false;
+    while (!valid)
+    {
+      id = generateID();
+      valid = true;
+      for (Child child : cr.findAll())
+      {
+        if (child.getId().equals(id))
+        {
+          valid = false;
+        }
+      }
+    }
+    c.setId(id);
     cr.save(c);
+    
+    return c;
   }
 
   public void updateChild(Child c)
   {
     cr.save(c);
+  }
+
+  public void removeChild(String id)
+  {
+    cr.deleteById(id);
+  }
+
+  public String generateID()
+  {
+    String AlphaNumericString = "0123456789"+"abcdefghijklmnopqrstuvxyz";
+    StringBuilder sb = new StringBuilder(13);
+
+    for (int i = 0; i < 13; i++)
+    {
+      int index = (int)(AlphaNumericString.length() * Math.random());
+      sb.append(AlphaNumericString.charAt(index));
+    }
+    return sb.toString();
   }
 }

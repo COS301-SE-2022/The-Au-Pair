@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { API } from '../../../../shared/api/api.service';
 import { User, Parent, medAid } from '../../../../shared/interfaces/interfaces';
 import { Store } from '@ngxs/store';
+import { SetImgString } from '../../../../shared/ngxs/actions';
+import { DomSanitizer } from '@angular/platform-browser';
 @Component({
   selector: 'the-au-pair-parent-profile',
   templateUrl: './parent-profile.component.html',
@@ -10,6 +12,9 @@ import { Store } from '@ngxs/store';
 export class ParentProfileComponent implements OnInit {
 
   parentID = "";
+
+  hasImage = false;
+  src = "";
 
   userDetails: User = {
     id: "",
@@ -37,6 +42,7 @@ export class ParentProfileComponent implements OnInit {
     children: [],
     medID: "",
     auPair: "",
+    rating: []
   }
 
   medAidDetails: medAid = {
@@ -49,10 +55,11 @@ export class ParentProfileComponent implements OnInit {
   }
 
 
-  constructor(private serv: API, private store: Store){}
+  constructor(private serv: API, private store: Store,private sanatizer : DomSanitizer){}
 
   ngOnInit(): void
   {
+    this.setImage();
     this.parentID = this.store.snapshot().user.id;
     this.getUserDetails()
   }
@@ -92,6 +99,7 @@ export class ParentProfileComponent implements OnInit {
         this.parentDetails.children = res.children;
         this.parentDetails.medID = res.medID;
         this.parentDetails.auPair = res.auPair;
+        this.parentDetails.rating = res.rating;
       },
       error=>{console.log("Error has occured with API: " + error);}
     )
@@ -110,4 +118,67 @@ export class ParentProfileComponent implements OnInit {
       error=>{console.log("Error has occured with API: " + error);}
     )
   };
+
+  getAverage(ratings : number[])
+  {
+    if(ratings.length == 0)
+    {
+      return 0;
+    }
+    
+    let total = 0;
+    for(let i = 0; i < ratings.length; i++)
+    {
+      total += ratings[i];
+    }
+
+    const avg = total/ratings.length;
+
+    if(avg < 1 || avg > 5)
+    {
+      return 0;
+    }
+
+    if((avg % 1) == 0)
+    {
+      return avg;
+    }
+    
+    const ret = (Math.round(avg * 100) / 100).toFixed(1);
+
+    return ret;
+  }
+
+  async setImage(){
+    await this.serv.getFile(this.store.snapshot().user.id  +  ".png").toPromise().then(
+      async res=>{
+        if (res.size > 0) {
+          const dataType = res.type;
+          const binaryData = [];
+          binaryData.push(res);
+          const href = window.URL.createObjectURL(new Blob(binaryData, {type: dataType}));
+          this.store.dispatch(new SetImgString(href));
+          const dom = document.getElementById("img1");
+
+          if(dom != null)
+          {
+            dom.setAttribute("src", this.store.snapshot().user.imgString);
+          }
+
+          this.hasImage = true;
+        }
+        else{
+          const dom = document.getElementById("img1");
+          if (dom != null) {
+            dom.setAttribute("src","assets/images/placeholder-profile.jpg");
+          }
+          this.hasImage = true;
+        }
+      },
+      error=>{
+        return error;
+      }
+    );
+  }
+
 }

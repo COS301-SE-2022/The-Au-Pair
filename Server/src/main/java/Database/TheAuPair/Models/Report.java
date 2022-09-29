@@ -9,17 +9,17 @@ public class Report {
   @Id
   private String id;
 
-  @Field ("issuerId")
-  private String issuerId;
-  @Field ("auPairId")
-  private String auPairId;
+  @Field ("reportIssuerId")
+  private String reportIssuerId;
+  @Field ("reportedUserId")
+  private String reportedUserId;
   @Field ("description")
   private String desc;
 
-  public Report(String id, String issuerId, String auPairId, String desc) {
+  public Report(String id, String reportIssuerId, String reportedUserId, String desc) {
     this.id = id;
-    this.issuerId = issuerId;
-    this.auPairId = auPairId;
+    this.reportIssuerId = reportIssuerId;
+    this.reportedUserId = reportedUserId;
     this.desc = desc;
   }
 
@@ -32,19 +32,19 @@ public class Report {
   }
 
   public String getIssuerId() {
-    return issuerId;
+    return reportIssuerId;
   }
 
-  public void setIssuerId(String issuerId) {
-    this.issuerId = issuerId;
+  public void setIssuerId(String reportIssuerId) {
+    this.reportIssuerId = reportIssuerId;
   }
 
-  public String getAuPairId() {
-    return auPairId;
+  public String getReportedUserId() {
+    return reportedUserId;
   }
 
-  public void setAuPairId(String auPairId) {
-    this.auPairId = auPairId;
+  public void setReportedUserId(String reportedUserId) {
+    this.reportedUserId = reportedUserId;
   }
 
   public String getDesc() {
@@ -59,8 +59,8 @@ public class Report {
   public String toString() {
     return "Report{" +
       "id='" + id + '\'' +
-      ", issuerId='" + issuerId + '\'' +
-      ", auPairId='" + auPairId + '\'' +
+      ", reportIssuerId='" + reportIssuerId + '\'' +
+      ", reportedUserId='" + reportedUserId + '\'' +
       ", desc='" + desc + '\'' +
       '}';
   }

@@ -13,12 +13,12 @@
 }
 
 .notification-item {
-  height: 70px;
+  height: 100px;
   width: 100%;
   margin-inline: 0px !important;
   margin-bottom: 2em;
   border-radius: 10px;
-  background-color: #f9f9f9;
+  background-color: var(--ion-color-light-white);
 }
 
 .notification-item.activity {
@@ -35,7 +35,7 @@
 
 .profile {
   border-radius: 50%;
-  height: 60px;
+  height: 50px;
   width: 60px;
 }
 
@@ -51,10 +51,11 @@
   align-items: center;
   justify-content: center;
   margin-left: 10px;
+  border-radius: 50%;
 }
 
 .notification-content {
-  width: 80%;
+  width: 100%;
   height: 100%;
   display: table-cell;
   margin-left: 1em;
@@ -107,4 +108,16 @@
   .details {
     font-size: 12px;
   }
+}
+
+.profile-picture {
+  width: 4vw;
+  height: 4vw;
+  border-radius: 50%;
+
+  max-width: 75px;
+  max-height: 75px;
+
+  min-width: 50px;
+  min-height: 50px;
 }

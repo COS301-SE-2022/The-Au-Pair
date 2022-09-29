@@ -4,38 +4,34 @@ import Database.TheAuPair.Models.Report;
 import Database.TheAuPair.Repositories.ReportRepository;
 import Database.TheAuPair.Services.ReportService;
 import org.springframework.web.bind.annotation.*;
-
 import java.util.List;
 
 @RestController
+@CrossOrigin(origins = "*")
 public class ReportController {
   private ReportService repServ;
 
   public ReportController(ReportRepository repoRep) { this.repServ = new ReportService(repoRep); }
 
-  @GetMapping("/getAllReports")
-  @CrossOrigin(origins = "http://localhost:4200")
+  @GetMapping("/api/getAllReports")
   public List<Report> getAllReports()
   {
     return this.repServ.getAllReports();
   }
 
-  @PostMapping("/getReportsForAuPair")
-  @CrossOrigin(origins = "http://localhost:4200")
-  public List<Report> getReportsForAuPair(@RequestBody String id)
+  @PostMapping("/api/getReportsForUser")
+  public List<Report> getReportsForUser(@RequestBody String id)
   {
-      return this.repServ.getReportsForAuPair(id);
+      return this.repServ.getReportsForUser(id);
   }
 
-  @PostMapping("/deleteReport")
-  @CrossOrigin(origins = "http://localhost:4200")
+  @PostMapping("/api/deleteReport")
   public void deleteReport(@RequestBody String id)
   {
       this.repServ.deleteReport(id);
   }
 
-  @PostMapping("/addReport")
-  @CrossOrigin(origins = "http://localhost:4200")
+  @PostMapping("/api/addReport")
   public void addReport(@RequestBody Report rep)
   {
       this.repServ.addReport(rep);

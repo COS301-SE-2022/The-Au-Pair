@@ -18,16 +18,16 @@ describe('ParentEditActivityComponent', () => {
   const populatedForm = {activityName: "AI", description: "AI Lesson", location: "UP", dayOfWeek: "Wednesday", timeSlot: "13:00-14:00", budget: "0", childId:"8675945310542"};
 
   //Inavlid forms
-  const emptyActName = {activityName: "", description: "AI Lesson", location: "UP", dayOfWeek: "Wednesday", timeSlot: "13:00-14:00", budget: "0", childId:"8675945310542"};
-  const emptyDescription = {activityName: "AI", description: "", location: "UP", dayOfWeek: "Wednesday", timeSlot: "13:00-14:00", budget: "0", childId:"8675945310542"};
-  const emptyLocation = {activityName: "AI", description: "AI Lesson", location: "", dayOfWeek: "Wednesday", timeSlot: "13:00-14:00", budget: "0", childId:"8675945310542"};
-  const emptyDay = {activityName: "AI", description: "AI Lesson", location: "UP", dayOfWeek: "", timeSlot: "13:00-14:00", budget: "0", childId:"8675945310542"};
-  const emptyTime = {activityName: "AI", description: "AI Lesson", location: "UP", dayOfWeek: "Wednesday", timeSlot: "", budget: "0", childId:"8675945310542"};
-  const emptyBudget = {activityName: "AI", description: "AI Lesson", location: "UP", dayOfWeek: "Wednesday", timeSlot: "13:00-14:00", budget: "", childId:"8675945310542"};
-  const emptyChild = {activityName: "AI", description: "AI Lesson", location: "UP", dayOfWeek: "Wednesday", timeSlot: "13:00-14:00", budget: "0", childId:""};
+  const emptyActName = {activityName: "", description: "AI Lesson", location: "UP", boundary: 5, dayOfWeek: "Wednesday", timeSlot: "13:00-14:00", budget: "0", childId:"8675945310542"};
+  const emptyDescription = {activityName: "AI", description: "", location: "UP", boundary: 5,  dayOfWeek: "Wednesday", timeSlot: "13:00-14:00", budget: "0", childId:"8675945310542"};
+  const emptyLocation = {activityName: "AI", description: "AI Lesson", location: "", boundary: 5 , dayOfWeek: "Wednesday", timeSlot: "13:00-14:00", budget: "0", childId:"8675945310542"};
+  const emptyDay = {activityName: "AI", description: "AI Lesson", location: "UP", boundary: 5,  dayOfWeek: "", timeSlot: "13:00-14:00", budget: "0", childId:"8675945310542"};
+  const emptyTime = {activityName: "AI", description: "AI Lesson", location: "UP", boundary: 5,  dayOfWeek: "Wednesday", timeSlot: "", budget: "0", childId:"8675945310542"};
+  const emptyBudget = {activityName: "AI", description: "AI Lesson", location: "UP", boundary: 5,  dayOfWeek: "Wednesday", timeSlot: "13:00-14:00", budget: "", childId:"8675945310542"};
+  const emptyChild = {activityName: "AI", description: "AI Lesson", location: "UP", boundary: 5,  dayOfWeek: "Wednesday", timeSlot: "13:00-14:00", budget: "0", childId:""};
 
   //Invalid activity to be updated
-  const invalidActivity = {id: "invalidId", name: "AI", description: "AI Lesson", location: "UP", timeStart:"13:00", timeEnd: "14:00",  budget: 0.0 ,comment: "", behavior: 0, day: "Wednesday", child:"8675945310542"};
+  const invalidActivity = {id: "invalidId", name: "AI", description: "AI Lesson", location: "UP", boundary: 5, longitude: 0.0, latitude: 0.0, timeStart:"13:00", timeEnd: "14:00",  budget: 0.0 ,comment: "", behavior: 0, day: "Wednesday", child:"8675945310542"};
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
@@ -68,7 +68,10 @@ describe('ParentEditActivityComponent', () => {
       id: "",
       name: "",
       description: "",
-      location:"",
+      location: "",
+      boundary: 0.0,
+      longitude: 0.0,
+      latitude: 0.0,
       timeStart: "",
       timeEnd: "",
       budget: 0.0,
@@ -79,6 +82,8 @@ describe('ParentEditActivityComponent', () => {
     };
 
     jest.spyOn(component,"getActivityValues");
+
+    component.originalLocation = "UP";
 
     await component.getActivityValues(emptyActName);
 
@@ -90,7 +95,10 @@ describe('ParentEditActivityComponent', () => {
       id: "",
       name: "",
       description: "",
-      location:"",
+      location: "",
+      boundary: 0.0,
+      longitude: 0.0,
+      latitude: 0.0,
       timeStart: "",
       timeEnd: "",
       budget: 0.0,
@@ -102,6 +110,8 @@ describe('ParentEditActivityComponent', () => {
 
     jest.spyOn(component,"getActivityValues");
 
+    component.originalLocation = "UP";
+
     await component.getActivityValues(emptyDescription);
 
     expect(component.activityDetails).toEqual(expectedValue);
@@ -112,7 +122,10 @@ describe('ParentEditActivityComponent', () => {
       id: "",
       name: "",
       description: "",
-      location:"",
+      location: "",
+      boundary: 0.0,
+      longitude: 0.0,
+      latitude: 0.0,
       timeStart: "",
       timeEnd: "",
       budget: 0.0,
@@ -134,7 +147,10 @@ describe('ParentEditActivityComponent', () => {
       id: "",
       name: "",
       description: "",
-      location:"",
+      location: "",
+      boundary: 0.0,
+      longitude: 0.0,
+      latitude: 0.0,
       timeStart: "",
       timeEnd: "",
       budget: 0.0,
@@ -145,6 +161,8 @@ describe('ParentEditActivityComponent', () => {
     };
 
     jest.spyOn(component,"getActivityValues");
+
+    component.originalLocation = "UP";
 
     await component.getActivityValues(emptyDay);
 
@@ -156,7 +174,10 @@ describe('ParentEditActivityComponent', () => {
       id: "",
       name: "",
       description: "",
-      location:"",
+      location: "",
+      boundary: 0.0,
+      longitude: 0.0,
+      latitude: 0.0,
       timeStart: "",
       timeEnd: "",
       budget: 0.0,
@@ -167,6 +188,8 @@ describe('ParentEditActivityComponent', () => {
     };
 
     jest.spyOn(component,"getActivityValues");
+
+    component.originalLocation = "UP";
 
     await component.getActivityValues(emptyTime);
 
@@ -178,7 +201,10 @@ describe('ParentEditActivityComponent', () => {
       id: "",
       name: "",
       description: "",
-      location:"",
+      location: "",
+      boundary: 0.0,
+      longitude: 0.0,
+      latitude: 0.0,
       timeStart: "",
       timeEnd: "",
       budget: 0.0,
@@ -189,6 +215,8 @@ describe('ParentEditActivityComponent', () => {
     };
 
     jest.spyOn(component,"getActivityValues");
+
+    component.originalLocation = "UP";
 
     await component.getActivityValues(emptyBudget);
 
@@ -200,7 +228,10 @@ describe('ParentEditActivityComponent', () => {
       id: "",
       name: "",
       description: "",
-      location:"",
+      location: "",
+      boundary: 0.0,
+      longitude: 0.0,
+      latitude: 0.0,
       timeStart: "",
       timeEnd: "",
       budget: 0.0,
@@ -211,6 +242,8 @@ describe('ParentEditActivityComponent', () => {
     };
 
     jest.spyOn(component,"getActivityValues");
+
+    component.originalLocation = "UP";
 
     await component.getActivityValues(emptyChild);
 

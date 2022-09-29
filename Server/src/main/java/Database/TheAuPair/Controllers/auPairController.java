@@ -7,6 +7,7 @@ import java.util.List;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
+@CrossOrigin(origins = "*")
 public class auPairController
 {
   private auPairService aps;
@@ -16,36 +17,31 @@ public class auPairController
     this.aps = new auPairService(apr);
   }
 
-  @PostMapping("/getAuPair")
-  @CrossOrigin(origins = "http://localhost:4200")
+  @PostMapping("/api/getAuPair")
   public auPair getAuPair(@RequestBody String id)
   {
     return this.aps.getAuPair(id);
   }
 
-  @PostMapping("/editAuPair")
-  @CrossOrigin(origins = "http://localhost:4200")
+  @PostMapping("/api/editAuPair")
   public void editAuPair(@RequestBody auPair p)
   {
     this.aps.updateAuPair(p);
   }
 
-  @GetMapping("/getAllAuPairs")
-  @CrossOrigin(origins = "http://localhost:4200")
+  @GetMapping("/api/getAllAuPairs")
   public List<auPair> getAllAuPairs()
   {
     return this.aps.getAllAuPairs();
   }
 
-  @PostMapping("/removeAuPair")
-  @CrossOrigin(origins = "http://localhost:4200")
+  @PostMapping("/api/removeAuPair")
   public void removeAuPair(@RequestBody String id)
   {
     this.aps.deleteAuPair(id);
   }
 
-  @PostMapping("/addAuPair")
-  @CrossOrigin(origins = "http://localhost:4200")
+  @PostMapping("/api/addAuPair")
   public void addAuPair(@RequestBody auPair a)
   {
     this.aps.addAuPair(a);

@@ -15,15 +15,14 @@ describe('AddChildComponent', () => {
   let fixture: ComponentFixture<AddChildComponent>;
 
   //Valid form
-  const populatedForm = {childID: "0101011234098", childName: "name", surname: "surname", Allergies: "none", diet: "none"};
+  const populatedForm = {childName: "name", surname: "surname", dateOfBirth:"2015-10-10", Allergies: "none", diet: "none"};
 
   //Invalid forms
-  const invalidSA_ID = {childID: "99999911234098", childName: "name", surname: "surname", Allergies: "none", diet: "none"};
-  const emptyID = {childID: "", childName: "name", surname: "surname", Allergies: "none", diet: "none"};
-  const emptyFirstName = {childID: "0101011234098", childName: "", surname: "surname", Allergies: "none", diet: "none"};
-  const emptySurname = {childID: "0101011234098", childName: "name", surname: "", Allergies: "none", diet: "none"};
-  const emptyAllergies = {childID: "0101011234098", childName: "name", surname: "surname", Allergies: "", diet: "none"};
-  const emptyDiet = {childID: "0101011234098", childName: "name", surname: "surname", Allergies: "none", diet: ""};
+  const emptyFirstName = {childName: "", surname: "surname", dateOfBirth:"2015-10-10",  Allergies: "none", diet: "none"};
+  const emptySurname = {childName: "name", surname: "", dateOfBirth:"2015-10-10", Allergies: "none", diet: "none"};
+  const emptyAllergies = {childName: "name", surname: "surname", dateOfBirth:"2015-10-10",  Allergies: "", diet: "none"};
+  const emptyDiet = {childName: "name", surname: "surname", dateOfBirth:"2015-10-10",  Allergies: "none", diet: ""};
+  const emptyDob = {childName: "name", surname: "surname", dateOfBirth:"",  Allergies: "none", diet: ""};
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
@@ -52,16 +51,20 @@ describe('AddChildComponent', () => {
    //------------------------------------------------------------------------------------------------------------------------------------------------------------------------
   /**Populated form fields form testing**/
   it('should, given valid input from the form, update the activityDetails variable', async ()=>{
+    // childName: "name", surname: "surname", dob:"2015-10-10", Allergies: "none", diet: "none"
     const expectedValue: Child = {
-      id: "0101011234098",
+      id: "",
       fname: "name",
       sname: "surname",
+      dob: "2015-10-10",
       allergies: "none",
       diet: "none",
       parent: "",
-      aupair: ''
+      aupair: "",
     };
 
+    component.allChildren = [expectedValue];  
+    
     jest.spyOn(component,"getChildValues");
 
     await component.getChildValues(populatedForm);
@@ -70,61 +73,38 @@ describe('AddChildComponent', () => {
   })
 
   it('should call addChild function if the form contains valid details', async ()=>{
+    const tempChild: Child = {
+      id: "",
+      fname: "",
+      sname: "",
+      dob: "",
+      allergies: "",
+      diet: "",
+      parent: "",
+      aupair: "",
+    };
+
     jest.spyOn(component,"addChild");
+    component.allChildren = [tempChild];
     await component.getChildValues(populatedForm);
     expect(component.addChild).toHaveBeenCalled();
   })
 
   //------------------------------------------------------------------------------------------------------------------------------------------------------------------------
   /**Invalid fields form testing**/
-
-  it('should, given a form with invalid South African ID, NOT poplate the activityDetails variable', async ()=>{
-    const expectedValue: Child = {
-      id: "",
-      fname: "",
-      sname: "",
-      allergies: "",
-      diet: "",
-      parent: "",
-      aupair: ''
-    };
-
-    jest.spyOn(component,"getChildValues");
-
-    await component.getChildValues(invalidSA_ID);
-
-    expect(component.childDetails).toEqual(expectedValue);
-  })
-
-  it('should, given a form with no childID, NOT poplate the activityDetails variable', async ()=>{
-    const expectedValue: Child = {
-      id: "",
-      fname: "",
-      sname: "",
-      allergies: "",
-      diet: "",
-      parent: "",
-      aupair: ''
-    };
-
-    jest.spyOn(component,"getChildValues");
-
-    await component.getChildValues(emptyID);
-
-    expect(component.childDetails).toEqual(expectedValue);
-  })
-
-
   it('should, given a form with no first name, NOT poplate the activityDetails variable', async ()=>{
     const expectedValue: Child = {
       id: "",
       fname: "",
       sname: "",
+      dob: "",
       allergies: "",
       diet: "",
       parent: "",
-      aupair: ''
+      aupair: "",
     };
+
+    component.allChildren = [expectedValue];
 
     jest.spyOn(component,"getChildValues");
 
@@ -138,15 +118,39 @@ describe('AddChildComponent', () => {
       id: "",
       fname: "",
       sname: "",
+      dob: "",
       allergies: "",
       diet: "",
       parent: "",
-      aupair: ''
+      aupair: "",
     };
+
+    component.allChildren = [expectedValue];
 
     jest.spyOn(component,"getChildValues");
 
     await component.getChildValues(emptySurname);
+
+    expect(component.childDetails).toEqual(expectedValue);
+  })
+
+  it('should, given a form with no Date Of Birth, NOT poplate the activityDetails variable', async ()=>{
+    const expectedValue: Child = {
+      id: "",
+      fname: "",
+      sname: "",
+      dob: "",
+      allergies: "",
+      diet: "",
+      parent: "",
+      aupair: "",
+    };
+
+    component.allChildren = [expectedValue];
+
+    jest.spyOn(component,"getChildValues");
+
+    await component.getChildValues(emptyDob);
 
     expect(component.childDetails).toEqual(expectedValue);
   })
@@ -157,11 +161,14 @@ describe('AddChildComponent', () => {
       id: "",
       fname: "",
       sname: "",
+      dob: "",
       allergies: "",
       diet: "",
       parent: "",
-      aupair: ''
+      aupair: "",
     };
+
+    component.allChildren = [expectedValue];
 
     jest.spyOn(component,"getChildValues");
 
@@ -176,12 +183,14 @@ describe('AddChildComponent', () => {
       id: "",
       fname: "",
       sname: "",
+      dob: "",
       allergies: "",
       diet: "",
       parent: "",
-      aupair: ''
+      aupair: "",
     };
 
+    component.allChildren = [expectedValue];
     jest.spyOn(component,"getChildValues");
     await component.getChildValues(emptyDiet);
     expect(component.childDetails).toEqual(expectedValue);

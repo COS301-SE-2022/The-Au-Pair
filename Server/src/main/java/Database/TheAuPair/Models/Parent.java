@@ -17,13 +17,16 @@ public class Parent
     private String medID;
     @Field ("auPair")
     private String auPair;
+    @Field ("rating")
+    private double rating[];
 
-    public Parent(String id, String[] children, String medID, String auPair)
+    public Parent(String id, String[] children, String medID, String auPair, double[] rating)
     {
         this.id = id;
         this.children = Arrays.copyOf(children, children.length);
         this.medID = medID;
         this.auPair = auPair;
+        this.rating = Arrays.copyOf(rating, rating.length);
     }
 
     public String getId()
@@ -66,6 +69,16 @@ public class Parent
         this.auPair = auPair;
     }
 
+    public double[] getRating()
+    {
+        return rating;
+    }
+
+    public void setRating(double[] rating)
+    {
+        this.rating = rating;
+    }
+
     @Override
     public String toString()
     {
@@ -74,6 +87,7 @@ public class Parent
                 ", children=" + Arrays.toString(children) +
                 ", medID='" + medID + '\'' +
                 ", auPair='" + auPair + '\'' +
+                ", rating=" + Arrays.toString(rating) +
                 '}';
     }
 }

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ModalController, NavParams, ToastController } from '@ionic/angular';
 import { Activity } from '../../../../../shared/interfaces/interfaces';
 import { API } from '../../../../../shared/api/api.service';
+import { Store } from '@ngxs/store';
 
 
 @Component({
@@ -16,8 +17,13 @@ export class ScheduleModalComponent implements OnInit {
   activityComment!: string;
   activityBehaviour! : number;
   currentActivity!: Activity;
+
+  selectedFiles : any;
+  currentFileUpload: any;
+
+  updateText = "Upload";
   
-  constructor(private serv: API,private modalCtrl : ModalController ,public toastCtrl: ToastController) {}
+  constructor(private serv: API,private modalCtrl : ModalController ,public toastCtrl: ToastController, public store : Store) {}
 
   ngOnInit(): void {
     this.getActivity(this.activityId);
@@ -60,7 +66,8 @@ export class ScheduleModalComponent implements OnInit {
 
   submitActivityComments(){
     this.serv.editActivity(this.currentActivity).subscribe(
-      res=>{
+      async res=>{
+        await this.upload();
         console.log("The response is:" + res);
         this.closeModal();
         this.openToast();
@@ -73,5 +80,34 @@ export class ScheduleModalComponent implements OnInit {
     );
   }
 
+  selectFile(event: any) {
+    this.selectedFiles = event.target.files;
+    const fileReader = new FileReader();
+    fileReader.readAsDataURL(this.selectedFiles.item(0));
+    fileReader.onload = (event) => {
+      this.updateText = "Uploaded!";
+      const dom = document.getElementById("uploadLabel");
+      dom?.setAttribute("style","border: 2px solid var(--ion-color-success);");
+      return event;
+    }
+  }
+
+  async upload() {
+    //Only set image if uploaded
+    if(this.updateText === "Uploaded!")
+    {
+      this.currentFileUpload = this.selectedFiles.item(0);
+      await this.serv.storeFile(this.currentFileUpload,this.activityId +  ".png").toPromise().then(
+        res=>{
+          console.log(res); 
+          return res;
+        },
+        error=>{
+          console.log(error);
+          return error;
+        }
+      );
+    }
+  }
 
 }

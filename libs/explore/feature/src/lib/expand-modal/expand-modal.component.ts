@@ -3,7 +3,9 @@ import { ModalController, NavParams, ToastController } from '@ionic/angular';
 import { auPair, Contract, User } from '../../../../../shared/interfaces/interfaces';
 import { API } from '../../../../../shared/api/api.service';
 import { Store } from '@ngxs/store';
-import { min } from 'rxjs';
+import { Router } from '@angular/router';
+import { SetImgString } from '../../../../../shared/ngxs/actions';
+
 
 @Component({
   selector: 'the-au-pair-expand-modal',
@@ -15,12 +17,13 @@ export class ExpandModalComponent implements OnInit {
   auPairId: string = this.navParams.get('auPairId');
 
   parentID = "";
-
+  hasImage = false;
+  src = "";
   flag!: boolean;
 
   auPairDetails: auPair = {
     id: "",
-    rating: 0,
+    rating: [],
     onShift: false,
     employer: "",
     costIncurred: 0,
@@ -29,7 +32,9 @@ export class ExpandModalComponent implements OnInit {
     bio: "",
     experience: "",
     currentLong: 0.0,
-    currentLat: 0.0
+    currentLat: 0.0,
+    alreadyOutOfBounds: false,
+    terminateDate: "",
   }
 
   userDetails: User = {
@@ -59,9 +64,10 @@ export class ExpandModalComponent implements OnInit {
     timestamp: "",
   }
   
-  constructor(private serv: API, private modalCtrl : ModalController ,public toastCtrl: ToastController, private store: Store) {}
+  constructor(private serv: API, private modalCtrl : ModalController ,public toastCtrl: ToastController, private store: Store, private router: Router) {}
 
   ngOnInit(): void {
+    this.setImage();
     this.parentID = this.store.snapshot().user.id;
     this.getAuPairDetails(this.auPairId);
   }
@@ -128,6 +134,9 @@ export class ExpandModalComponent implements OnInit {
           this.auPairDetails.payRate = res.payRate;
           this.auPairDetails.bio = res.bio;
           this.auPairDetails.experience = res.experience;
+          this.auPairDetails.currentLat = res.currentLat;
+          this.auPairDetails.currentLong = res.currentLong;
+          this.auPairDetails.terminateDate = res.terminateDate;
         },
       error=>{console.log("Error has occured with API: " + error);}
     )
@@ -136,14 +145,9 @@ export class ExpandModalComponent implements OnInit {
   async sendHireRequests(auPairID : string)
   {
     this.flag = false;
-    const ts = new Date();
 
     this.contractDetails.parentID = this.parentID;
     this.contractDetails.auPairID = auPairID;
-
-    const minutes = String(ts.getMinutes()).padStart(2, '0');
-
-    this.contractDetails.timestamp = ts.getFullYear() + "/" + (ts.getMonth() + 1) + "/" + ts.getDate() + " - " + ts.getHours() + ":" + minutes;
 
     await this.serv.getContractbyIDs(this.contractDetails.parentID, this.contractDetails.auPairID)
     .toPromise()
@@ -153,36 +157,21 @@ export class ExpandModalComponent implements OnInit {
         
         if(res === null)
         {
-          this.flag = false;
+          this.router.navigate(['/job-summary-parent-view'],{
+            state: {id: auPairID}
+          });
         }
         else
         {
-          this.flag = true;
+          this.errToast();
         }
       },
       error => {
         console.log("Error has occured with API: " + error);
       }
     )
-    
-    if(this.flag === false)
-    {
-      this.sucToast();
-      this.serv.addContract(this.contractDetails)
-      .toPromise()
-      .then(
-        res => {
-          console.log("The response is:" + res);
-        },
-        error => {
-          console.log("Error has occured with API: " + error);
-        }
-      )
-    }
-    else
-    {
-      this.errToast();
-    }
+
+    this.closeModal();
   }
   
   getAge(dateString : string) {
@@ -195,5 +184,88 @@ export class ExpandModalComponent implements OnInit {
     }
 
     return age;
+  }
+
+  getAverage(ratings : number[])
+  {
+    if(ratings.length == 0)
+    {
+      return 0;
+    }
+
+    let total = 0;
+    for(let i = 0; i < ratings.length; i++)
+    {
+      total += ratings[i];
+    }
+
+    const avg = total/ratings.length;
+
+    if(avg < 1 || avg > 5)
+    {
+      return 0;
+    }
+
+    if((avg % 1) == 0)
+    {
+      return avg;
+    }
+
+    const ret = (Math.round(avg * 100) / 100).toFixed(1);
+
+    return ret;
+  }
+
+  async setImage(){    
+    await this.serv.getFile(this.auPairId +  ".png").toPromise().then(
+      async res=>{
+        if (res.size > 0) {
+          const dataType = res.type;
+          const binaryData = [];
+          binaryData.push(res);
+          const href = window.URL.createObjectURL(new Blob(binaryData, {type: dataType}));
+          this.store.dispatch(new SetImgString(href));
+          const dom = document.getElementById(this.auPairId + "dash");
+
+          if(dom != null)
+          {
+            dom.setAttribute("src", this.store.snapshot().user.imgString);
+          }
+
+          this.hasImage = true;
+        }
+        else{
+          const dom = document.getElementById(this.auPairId + "dash");
+          if (dom != null) {
+            dom.setAttribute("src","assets/images/placeholder-profile.jpg");
+          }
+          this.hasImage = true;
+        }
+      },
+      error=>{
+        return error;
+      }
+    );
+  }
+
+  async downloadCV(id : string){
+    await this.serv.getFile(id +  ".pdf").toPromise().then(
+      async res=>{
+        if (res.size > 0){
+          const dataType = res.type;
+          const binaryData = [];
+          binaryData.push(res);
+          const downloadLink = document.createElement('a');
+          downloadLink.href = window.URL.createObjectURL(new Blob(binaryData, {type: dataType}));
+          this.store.dispatch(new SetImgString(downloadLink.href ));
+          downloadLink.setAttribute('download', "CV.pdf");
+          document.body.appendChild(downloadLink);
+          downloadLink.click();
+        }
+      },
+      error=>{
+        return error;
+      }
+    );
   }
 }

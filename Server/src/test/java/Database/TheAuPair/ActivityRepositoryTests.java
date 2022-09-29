@@ -24,7 +24,7 @@ public class ActivityRepositoryTests
   @BeforeEach
   public void setUp()
   {
-    expectedActivity = new Activity("","","","","","",0,"",0,"","");
+    expectedActivity = new Activity("","","","",0,0.0,0.0,"","",0,"",0,"","");
     expectedList = new ArrayList<Activity>();
     cid = "8675945310542";
     aid = "jokslh64u1blmk3sdsry3y4e";

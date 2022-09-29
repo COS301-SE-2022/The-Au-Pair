@@ -6,6 +6,7 @@ import Database.TheAuPair.Services.ParentService;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
+@CrossOrigin(origins = "*")
 public class ParentController
 {
   private ParentService ps;
@@ -15,24 +16,27 @@ public class ParentController
     this.ps = new ParentService(pr);
   }
 
-  @PostMapping("/getParent")
-  @CrossOrigin(origins = "http://localhost:4200")
+  @PostMapping("/api/getParent")
   public Parent getParent(@RequestBody String id)
   {
-      return this.ps.getParent(id);
+    return this.ps.getParent(id);
   }
 
-  @PostMapping("/editParent")
-  @CrossOrigin(origins = "http://localhost:4200")
+  @PostMapping("/api/editParent")
   public void editParent(@RequestBody Parent p)
   {
-      this.ps.updateParent(p);
+    this.ps.updateParent(p);
   }
 
-  @PostMapping("/addParent")
-  @CrossOrigin(origins = "http://localhost:4200")
+  @PostMapping("/api/addParent")
   public void addParent(@RequestBody Parent p)
   {
-      this.ps.addParent(p);
+    this.ps.addParent(p);
+  }
+
+  @PostMapping("/api/getAuPairEmployer")
+  public Parent getAuPairEmployer(@RequestBody String id)
+  {
+    return this.ps.getAuPairEmployer(id);
   }
 }

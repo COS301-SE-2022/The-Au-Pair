@@ -1,75 +1,87 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpEvent, HttpRequest } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { Activity , Child , medAid , Parent  , User, HoursLogged, auPair, Notification, Report, Contract} from '../interfaces/interfaces';
-
+import { Activity , Child , medAid , Parent  , User, HoursLogged, auPair, Notification, Report, Contract, Email, UserCosts} from '../interfaces/interfaces';
+import { environment } from '../../../apps/the-au-pair/src/environments/environment';
 @Injectable()
 export class API{
 
   constructor(private http: HttpClient) {}
 
   getActivity(id : String): Observable<any> {
-    return this.http.post('http://localhost:8080/getActivity',id);
+    return this.http.post(environment.apiURI+"/getActivity",id);
   }
 
   editActivity(activity : Activity): Observable<any> {
-    return this.http.post('http://localhost:8080/editActivity',activity);
+    return this.http.post(environment.apiURI+"/editActivity",activity);
   }
   
   addActivity(activity : Activity): Observable<any> {
-    return this.http.post('http://localhost:8080/addActivity',activity);
+    return this.http.post(environment.apiURI+"/addActivity",activity);
+  }
+
+  removeActivity(id : String): Observable<any> {
+    return this.http.post(environment.apiURI+"/removeActivity", id);
+  }
+
+  removeManyActivities(activities : Activity[]): Observable<any> {
+    return this.http.post(environment.apiURI+"/removeManyActivities", activities);
   }
 
   getSchedule(id : string): Observable<any> {
-    return this.http.post('http://localhost:8080/getSchedule',id);
+    return this.http.post(environment.apiURI+"/getSchedule",id);
   }
 
   getAuPairSchedule(children : string []): Observable<any> {
-    return this.http.post('http://localhost:8080/getAuPairSchedule',children);
+    return this.http.post(environment.apiURI+"/getAuPairSchedule",children);
   }
 
   getUser(id : string): Observable<any> {
-    return this.http.post('http://localhost:8080/getUser',id);
+    return this.http.post(environment.apiURI+"/getUser",id);
   }
 
   editUser(user : User): Observable<any> {
-    return this.http.post('http://localhost:8080/editUser',user);
+    return this.http.post(environment.apiURI+"/editUser",user);
   }
 
   getParent(id : string): Observable<any> {
-    return this.http.post('http://localhost:8080/getParent',id);
+    return this.http.post(environment.apiURI+"/getParent",id);
   }
 
   editParent(parent : Parent): Observable<any> {
-    return this.http.post('http://localhost:8080/editParent',parent);
+    return this.http.post(environment.apiURI+"/editParent",parent);
   }
 
   getMedAid(id : string): Observable<any> {
-    return this.http.post('http://localhost:8080/getMedAid',id);
+    return this.http.post(environment.apiURI+"/getMedAid",id);
   }
 
   editMedAid(medAid : medAid): Observable<any> {
-    return this.http.post('http://localhost:8080/editMedAid',medAid);
+    return this.http.post(environment.apiURI+"/editMedAid",medAid);
   }
 
   getAuPair(id : string): Observable<any> {
-    return this.http.post('http://localhost:8080/getAuPair',id);
+    return this.http.post(environment.apiURI+"/getAuPair",id);
   }
 
   editAuPair(aupair : auPair): Observable<any> {
-    return this.http.post('http://localhost:8080/editAuPair',aupair);
+    return this.http.post(environment.apiURI+"/editAuPair",aupair);
   }
 
   getChildren(id : String): Observable<any> {
-    return this.http.post('http://localhost:8080/getChildren',id);
+    return this.http.post(environment.apiURI+"/getChildren",id);
   }
 
   addChild(child : Child): Observable<any> {
-    return this.http.post('http://localhost:8080/addChild',child);
+    return this.http.post(environment.apiURI+"/addChild",child, {responseType: "text"});
   }
 
   updateChild(child : Child) :Observable<any> {
-    return this.http.post('http://localhost:8080/updateChild',child);
+    return this.http.post(environment.apiURI+"/updateChild",child);
+  }
+
+  removeChild(id: String): Observable<any> {
+    return this.http.post(environment.apiURI+"/removeChild", id);
   }
 
   getDateMinutes(id : string, date : string): Observable<any> {
@@ -77,11 +89,11 @@ export class API{
       "id" : id,
       "date" : date
     }
-    return this.http.post("http://localhost:8080/getDateMinutes", out);
+    return this.http.post(environment.apiURI+"/getDateMinutes", out);
   }
 
   getAllMinutes(id : string): Observable<any> {
-    return this.http.post("http://localhost:8080/getAllMinutes", id);
+    return this.http.post(environment.apiURI+"/getAllMinutes", id);
   }
 
   getMonthMinutes(id : string, date : string): Observable<any> {
@@ -89,7 +101,7 @@ export class API{
       "id" : id,
       "date" : date
     }
-    return this.http.post("http://localhost:8080/getMonthMinutes", out);
+    return this.http.post(environment.apiURI+"/getMonthMinutes", out);
   }
 
   getDateTimes(id : string, date : string): Observable<any> {
@@ -97,11 +109,11 @@ export class API{
       "id" : id,
       "date" : date
     }
-    return this.http.post("http://localhost:8080/getDateTimes", out);
+    return this.http.post(environment.apiURI+"/getDateTimes", out);
   }
 
   getAllTimes(id : string): Observable<any> {
-    return this.http.post("http://localhost:8080/getAllTimes", id);
+    return this.http.post(environment.apiURI+"/getAllTimes", id);
   }
 
   getStartedLog(id : string, date : string): Observable<any> {
@@ -109,11 +121,11 @@ export class API{
       "id" : id,
       "date" : date
     }
-    return this.http.post("http://localhost:8080/getStartedLog", out, {responseType: 'text'});
+    return this.http.post(environment.apiURI+"/getStartedLog", out, {responseType: 'text'});
   }
 
   addHoursLog(hl : HoursLogged): Observable<any> {
-    return this.http.post("http://localhost:8080/addHoursLog", hl);
+    return this.http.post(environment.apiURI+"/addHoursLog", hl);
   }
 
   addTimeEnd(id : string, endTime : string): Observable<any> {
@@ -121,35 +133,35 @@ export class API{
       "id" : id,
       "endTime" : endTime
     }
-    return this.http.post("http://localhost:8080/addTimeEnd", out);
+    return this.http.post(environment.apiURI+"/addTimeEnd", out);
   }
 
   updateHoursLog(hl : HoursLogged): Observable<any> {
-    return this.http.post("http://localhost:8080/updateHoursLog", hl);
+    return this.http.post(environment.apiURI+"/updateHoursLog", hl);
   }
 
   register(user : User): Observable<any>  {
-    return this.http.post('http://localhost:8080/register',user, {responseType: 'text'})
+    return this.http.post(environment.apiURI+"/register",user, {responseType: 'text'})
   }
 
   addParent(parent : Parent): Observable<any> {
-    return this.http.post('http://localhost:8080/addParent',parent);
+    return this.http.post(environment.apiURI+"/addParent",parent);
   }
 
   addAuPair(aupair : auPair): Observable<any> {
-    return this.http.post('http://localhost:8080/addAuPair',aupair);
+    return this.http.post(environment.apiURI+"/addAuPair",aupair);
   }
 
   addContract(contract : Contract): Observable<any> {
-    return this.http.post('http://localhost:8080/addContract',contract);
+    return this.http.post(environment.apiURI+"/addContract",contract);
   }
 
   getContract(id : String): Observable<any> {
-    return this.http.post('http://localhost:8080/getContract',id);
+    return this.http.post(environment.apiURI+"/getContract",id);
   }
 
   removeContract(id : string): Observable<any> {
-    return this.http.post('http://localhost:8080/removeContract',id);
+    return this.http.post(environment.apiURI+"/removeContract",id);
   }
 
   getContractbyIDs(parentID : String, auPairID : String): Observable<any> {
@@ -157,7 +169,7 @@ export class API{
       "parentID" : parentID,
       "auPairID" : auPairID
     }
-    return this.http.post('http://localhost:8080/getContractbyIDs', ids);
+    return this.http.post(environment.apiURI+"/getContractbyIDs", ids);
   }
 
   login(email : string, password : string): Observable<any> {
@@ -165,25 +177,25 @@ export class API{
       "email" : email,
       "password" : password
     } 
-    return this.http.post('http://localhost:8080/login',details);
+    return this.http.post(environment.apiURI+"/login",details);
   }
 
   getAllAuPairs()
   {
-    return this.http.get('http://localhost:8080/getAllAuPairs');
+    return this.http.get(environment.apiURI+"/getAllAuPairs");
   }
 
   getAllContracts()
   {
-    return this.http.get('http://localhost:8080/getAllContracts');
+    return this.http.get(environment.apiURI+"/getAllContracts");
   }
   
   getApplicants(): Observable<any> {
-    return this.http.get('http://localhost:8080/getApplicants');
+    return this.http.get(environment.apiURI+"/getApplicants");
   }
 
   removeAuPair(id : string): Observable<any> {
-    return this.http.post('http://localhost:8080/removeAuPair',id);
+    return this.http.post(environment.apiURI+"/removeAuPair",id);
   }
 
   resolveApplication(id : string, resolution : boolean): Observable<any> {
@@ -207,36 +219,125 @@ export class API{
         }
       );
     }
-    return this.http.post('http://localhost:8080/resolveApplication',decision);
+    return this.http.post(environment.apiURI+"/resolveApplication",decision);
   }
 
   getNotificationsByParentId(id : string): Observable<any> {
-    return this.http.post('http://localhost:8080/getNotifcationsByParentId',id);
+    return this.http.post(environment.apiURI+"/getNotifcationsByParentId",id);
   }
 
   getNotificationsByAuPairId(id : string): Observable<any> {
-    return this.http.post('http://localhost:8080/getNotifcationsByAuPairId',id);
+    return this.http.post(environment.apiURI+"/getNotifcationsByAuPairId",id);
   }
 
   logNotification(notification : Notification): Observable<any> {
-    return this.http.post('http://localhost:8080/logNotification',notification);
+    return this.http.post(environment.apiURI+"/logNotification",notification);
   }
 
   getAllReports(): Observable<any> 
   {
-    return this.http.get('http://localhost:8080/getAllReports');
+    return this.http.get(environment.apiURI+"/getAllReports");
   }
   
-  getReportsForAuPair(id : string): Observable<any> {
-    return this.http.post('http://localhost:8080/getReportsForAuPair', id);
+  getReportsForUser(id : string): Observable<any> {
+    return this.http.post(environment.apiURI+'/getReportsForUser', id);
   }
 
   deleteReport(id : string): Observable<any> {
-    return this.http.post('http://localhost:8080/deleteReport',id);
+    return this.http.post(environment.apiURI+"/deleteReport",id);
   }
 
   addReport(report : Report): Observable<any> {
-    return this.http.post('http://localhost:8080/addReport',report);
+    return this.http.post(environment.apiURI+"/addReport",report);
+  }
+
+  sendEmail(email : Email): Observable<any> {
+    return this.http.post(environment.apiURI+"/sendEmail",email);
+  }
+
+  getCurrentFuelPrices(): Observable<any> {
+    return this.http.get(environment.apiURI+"/getCurrentFuelPrices");
+  }
+
+  getCostById(id : string): Observable<any> {
+    return this.http.post(environment.apiURI+"/getCostById",id);
+  }
+
+  getAllCosts(): Observable<any> {
+    return this.http.get(environment.apiURI+"/getAllCosts");
+  }
+
+  getCostsForUser(userId : string): Observable<any> {
+    return this.http.post(environment.apiURI+"/getCostsForUser",userId);
+  }
+
+  getCurrentMonthCostsForJob(contributerId : string, otherPartyId : string): Observable<any> {
+    var details = {
+      "contributerId" : contributerId,
+      "otherPartyId" : otherPartyId
+    } 
+    return this.http.post(environment.apiURI+"/getCurrentMonthCostsForJob",details);
+  }
+
+  getTotalMonthCostsForFuel(contributerId : string, otherPartyId : string): Observable<any> {
+    var details = {
+      "contributerId" : contributerId,
+      "otherPartyId" : otherPartyId
+    } 
+    return this.http.post(environment.apiURI+"/getTotalMonthCostsForFuel",details);
+  }
+
+  getTotalMonthCostsForOvertime(contributerId : string, otherPartyId : string): Observable<any> {
+    var details = {
+      "contributerId" : contributerId,
+      "otherPartyId" : otherPartyId
+    } 
+    return this.http.post(environment.apiURI+"/getTotalMonthCostsForOvertime",details);
+  }
+
+  getTotalMonthCostsForOther(contributerId : string, otherPartyId : string): Observable<any> {
+    var details = {
+      "contributerId" : contributerId,
+      "otherPartyId" : otherPartyId
+    } 
+    return this.http.post(environment.apiURI+"/getTotalMonthCostsForOther",details);
+  }
+
+  addUserCost(userCost: UserCosts): Observable<any> {
+    return this.http.post(environment.apiURI+"/addUserCost",userCost,{responseType: 'text'});
+  }
+
+  removeUserCost(id : string): Observable<any> {  
+    return this.http.post(environment.apiURI+"/removeUserCost",id);
+  }
+
+  storeFile(file : File, filename : string): Observable<any> {
+    const data: FormData = new FormData();
+    data.append('file', file, filename);
+    const newRequest = new HttpRequest('POST', environment.apiURI+"/uploadFile", data, {
+      reportProgress: true,
+      responseType: 'text'
+    });
+    return this.http.request(newRequest);
+  }
+
+  getFile(file : string): Observable<any> {
+    return this.http.post(environment.apiURI+"/getFile",file,{responseType: 'blob'});
   }
   
+  getAuPairEmployer(id : string): Observable<any> {
+    return this.http.post(environment.apiURI+"/getAuPairEmployer",id);
+  }
+
+  getFCMToken(id : string): Observable<any> {
+    return this.http.post(environment.apiURI+"/getFCMToken",id, {responseType: 'text'});
+  }
+
+  setFCMToken(id : string, token : string): Observable<any> {
+    var fcmObject = {
+      "id" : id,
+      "token" : token
+    }
+    return this.http.post(environment.apiURI+"/setFCMToken",fcmObject);
+  }
 }

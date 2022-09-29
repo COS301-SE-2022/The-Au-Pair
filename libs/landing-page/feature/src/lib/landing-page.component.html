@@ -1,0 +1,112 @@
+<the-au-pair-navbar></the-au-pair-navbar>
+<ion-content [fullscreen]="true">
+    <section id="section-welcome">
+        <img id="logo" src="assets/images/logo.svg" alt="the-au-pair-logo">
+        <p class='heading'>Need an Au Pair?</p>
+        <p>The Au Pair is a cross-platform application that serves as an all in one management System for parents and au pairs. coordinate how au pairs and parents interact with each other.</p>
+        
+        <div class="image-buttons">
+            <div class="buttons">
+                <button id="parentSelect" (click)="scrollToParent()">I am a parent</button>
+                <button id="auPairSelect" (click)="scrollToAuPair()">I am an Au Pair</button>
+            </div>
+            <img id="happy-family" src="assets/images/happy-people.svg" alt="child-running">
+        </div>
+
+        <div class="welcome-wave">
+            <svg data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120" preserveAspectRatio="none">
+                <path d="M321.39,56.44c58-10.79,114.16-30.13,172-41.86,82.39-16.72,168.19-17.73,250.45-.39C823.78,31,906.67,72,985.66,92.83c70.05,18.48,146.53,26.09,214.34,3V0H0V27.35A600.21,600.21,0,0,0,321.39,56.44Z" class="shape-fill"></path>
+            </svg>
+        </div>
+    </section>
+
+    <section id="section-parent">
+        <p class='heading'>The Au Pair is the Management Tool You Need</p>
+        <p>Employ Au Pairs, manage schedules, view financial information, and see live locations. We have everything you need for Au Pairs to take care of your children.</p>
+        
+        <div class="carousel">
+            <button class="backBtn" (click)="previousParentSlide()"> 
+                <ion-icon name="chevron-back-outline"></ion-icon> 
+            </button>
+
+            <swiper #parentSwiper (swiper)="setSwiperInstance($event)" [config]="slideOpts">
+                <ng-template swiperSlide>
+                    <img class="desktop" src="assets/images/Desktop-screenshots/Parent/parent-dashboard.png" alt="screenshot-1"/>
+                    <img class="mobile" src="assets/images/Mobile-screenshots/Parent/parent-dashboard.png" alt="screenshot-1"/>
+                </ng-template>
+
+                <ng-template swiperSlide>
+                    <img class="desktop" src="assets/images/Desktop-screenshots/Parent/parent-costs.png" alt="screenshot-4"/>
+                    <img class="mobile" src="assets/images/Mobile-screenshots/Parent/parent-costs.png" alt="screenshot-4"/>
+                </ng-template>
+
+                <ng-template swiperSlide>
+                    <img class="desktop" src="assets/images/Desktop-screenshots/Parent/parent-tracking.png" alt="screenshot-5"/>
+                    <img class="mobile" src="assets/images/Mobile-screenshots/Parent/parent-tracking.png" alt="screenshot-5"/>
+                </ng-template>
+                
+                <ng-template swiperSlide>
+                    <img class="desktop" src="assets/images/Desktop-screenshots/Parent/parent-add-children.png" alt="screenshot-2"/>
+                    <img class="mobile" src="assets/images/Mobile-screenshots/Parent/parent-children.png" alt="screenshot-2"/>
+                </ng-template>
+
+                <ng-template swiperSlide>
+                    <img class="desktop" src="assets/images/Desktop-screenshots/Parent/parent-calendar.png" alt="screenshot-3"/>
+                    <img class="mobile" src="assets/images/Mobile-screenshots/Parent/parent-schedule.png" alt="screenshot-3"/>
+                </ng-template>
+
+            </swiper>
+
+            <button class="nextBtn" (click)="nextParentSlide()"> 
+                <ion-icon name="chevron-forward-outline"></ion-icon>
+            </button>
+        </div>
+        
+        <button class="signUp" routerLink="/register-page" [queryParams]="{ parentPressed : 'true' }">Sign Me Up!</button>
+
+        <div class="au-pair-wave">
+            <svg data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120" preserveAspectRatio="none">
+                <path d="M985.66,92.83C906.67,72,823.78,31,743.84,14.19c-82.26-17.34-168.06-16.33-250.45.39-57.84,11.73-114,31.07-172,41.86A600.21,600.21,0,0,1,0,27.35V120H1200V95.8C1132.19,118.92,1055.71,111.31,985.66,92.83Z" class="shape-fill"></path>
+            </svg>
+        </div>
+    </section>
+
+    <section id="section-au-pair">
+        <p class='heading'>The Au Pair Helps You Manage Your Time</p>
+        <p>Create a digital resume, view schedules, view financial information and show parents your live location. We have the best tools to help you on your au pairing journey.</p>
+        
+        <div class="carousel">
+            <button class="backBtn" (click)="previousAuPairSlide()"> 
+                <ion-icon name="chevron-back-outline"></ion-icon> 
+            </button>
+
+            <swiper #auPairSwiper (swiper)="setSwiperInstance($event)" [config]="slideOpts">
+                <ng-template swiperSlide>
+                    <img class="desktop" src="assets/images/Desktop-screenshots/Aupair/au-pair-dashboard-screenshot.png" alt="screenshot-1"/>
+                    <img class="mobile" src="assets/images/Mobile-screenshots/Aupair/au-pair-dashboard-mobile.png" alt="screenshot-1"/>
+                </ng-template>
+
+                <ng-template swiperSlide>
+                    <img class="desktop" src="assets/images/Desktop-screenshots/Aupair/au-pair-calendar-screenshot.png" alt="screenshot-2"/>
+                    <img class="mobile" src="assets/images/Mobile-screenshots/Aupair/au-pair-calendar-mobile.png" alt="screenshot-2"/>
+                </ng-template>
+
+                <ng-template swiperSlide>
+                    <img class="desktop" src="assets/images/Desktop-screenshots/Aupair/au-pair-job-summary.png" alt="screenshot-3"/>
+                    <img class="mobile" src="assets/images/Mobile-screenshots/Aupair/au-pair-job-summary-mobile.png" alt="screenshot-3"/>
+                </ng-template>
+
+                <ng-template swiperSlide>
+                    <img class="desktop" src="assets/images/Desktop-screenshots/Aupair/au-pair-costs.png" alt="screenshot-4"/>
+                    <img class="mobile" src="assets/images/Mobile-screenshots/Aupair/au-pair-costs-mobile.png" alt="screenshot-4"/>
+                </ng-template>
+            </swiper>
+
+            <button class="nextBtn" (click)="nextAuPairSlide()"> 
+                <ion-icon name="chevron-forward-outline"></ion-icon>
+            </button>
+        </div>
+
+        <button class="signUp"  routerLink="/register-page" [queryParams]="{ parentPressed : 'false' }">Sign Me Up!</button>
+    </section>
+</ion-content>

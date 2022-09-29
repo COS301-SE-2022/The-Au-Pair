@@ -12,6 +12,19 @@
   background-color: #d2e2db !important;
 }
 
+.trash-bin{
+  cursor: pointer;
+  color: var(--ion-color-danger-tint);
+  font-size: 25px;
+  top: 200px;
+}
+
+ion-button{
+  --background: transparent !important;
+  margin-top: -7px;
+  --box-shadow: none;
+}
+
 @media (min-width: 480px) {
     .heading{
     font-size: 24px;
@@ -44,7 +57,7 @@
 #schedule-grid-desktop{
   display: grid;
   gap: 2px;
-  grid-template-columns: repeat(7,minmax(198px,1fr));
+  grid-template-columns: repeat(7,minmax(250px,1fr));
   width: 95%;
   margin-inline: auto;
   margin-bottom: 20px;
@@ -100,6 +113,9 @@ ion-card{
   margin-bottom: 6px;
   align-items: center;
   padding-top: 4px;
+  flex-wrap: nowrap !important;
+  overflow-y: hidden !important;
+  overflow-x: hidden !important;
 }
 
 .icon{
@@ -133,10 +149,17 @@ ion-card{
   margin-bottom: 1.5rem;
 }
 
+#clear-button{
+  cursor: pointer;
+  margin-left: 10px;
+  background-color: transparent !important;
+  margin-top: 40px;
+}
+
 input[type=text], select{
   width: max(10vw,135px);
   height: 35px;
-  background: #F9F9F9;
+  background: var(--ion-color-light-white);
   box-shadow: 1px 2px 5px rgba(0, 0, 0, 0.13);
   border-style: none;
   border-radius: 4px;

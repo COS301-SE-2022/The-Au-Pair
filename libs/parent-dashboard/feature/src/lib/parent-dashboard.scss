@@ -12,6 +12,10 @@ a{
     color: white;
 }
 
+ion-icon{
+    color: white;
+}
+
 .actions-heading {
     font-size: 36px;
     margin-top: 95px;
@@ -21,12 +25,33 @@ a{
 }
 
 .au-pair-div-wrapper{
-    width: 56%;
+    width: 90%;
     height: 94px;
     margin: auto;
+    display: grid;
+    align-items: center;
     font-size: 24px;
     margin-bottom: 59px;
     margin-top: 59px;
+    grid-template-columns: 0.52fr 0.48fr;
+}
+
+.no-au-pair-wrapper{
+    background-color: var(--ion-color-secondary);
+    color: white;
+    margin: auto;
+    height: 94px;
+    display: flex;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+    width: 90%;
+    font-size: 24px;
+    border-radius: 16px;
+    padding-left: 10px;
+    padding-right: 10px;
+    flex-wrap: wrap;
+    margin-bottom: 59px;
 }
 
 .children-div-wrapper {
@@ -39,6 +64,10 @@ a{
 ion-card {
     background-color: transparent;
     box-shadow: none;
+}
+
+ion-icon {
+    pointer-events: none;
 }
 
 .children-div {
@@ -54,23 +83,23 @@ ion-card {
 }
 
 .au-pair-name {
-    background-color: #176560;
+    background-color: var(--ion-color-secondary);
     color: white;
     margin: 0;
     height: 100%;
     display: flex;
     text-align: center;
-    justify-content: center;
+    justify-content: flex-end;
     align-items: center;
     width: 100%;
     font-size: 24px;
-    border-radius: 16px;
-    padding-left: 10px;
+    border-radius: 16px 0 0 16px;
+    padding-left: 100px;
     padding-right: 10px;
 }
 
 .child-name {
-    background-color: #69A88D;
+    background-color: var(--ion-color-primary);
     color: white;
     margin: 0;
     height: 100%;
@@ -132,7 +161,6 @@ ion-card {
     text-align: center;
     justify-content: center;
     align-items: center;
-    // width: 314px;
     width: 100%;
     font-size: 24px;
     border-radius: 16px;
@@ -147,7 +175,7 @@ ion-card {
     align-items: center;
     justify-content: center;
     display: flex;
-    background-color: #69A88D;
+    background-color: var(--ion-color-primary);
     border-radius: 0px 0px 16px 16px;
 }
 
@@ -157,19 +185,34 @@ ion-card {
     border-radius: 16px;
 }
 
+.button-container {
+    height: 100%;
+    border-radius: 0px 16px 16px 0px;
+    background-color: var(--ion-color-secondary);
+    width: 200px;
+    flex-basis: 200px;
+    height: 100%;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    width: 100%;
+    font-size: 24px;
+}
+
 .call-icon{
     padding-right: 10px;
-    padding-top: 11px;
+    float: left;
     width: 35px;
     height: 35px;
     -webkit-transform: scaleX(-1);
     transform: scaleX(-1);
     cursor: pointer;
+    color: white;
 }
 
 .message-icon{
     padding-left: 10px;
-    float: right;
+    float: left;
     width: 35px;
     height: 35px;
     cursor: pointer;    
@@ -177,7 +220,15 @@ ion-card {
 
 .rating-icon{
     padding-left: 10px;
-    float: right;
+    float: left;
+    width: 35px;
+    height: 35px;
+    cursor: pointer;    
+}
+
+.report-icon{
+    padding-left: 10px;
+    float: left;
     width: 35px;
     height: 35px;
     cursor: pointer;    
@@ -185,7 +236,7 @@ ion-card {
 
 .terminate-contract{
     padding-left: 10px;
-    float: right;
+    float: left;
     width: 35px;
     height: 35px;
     color: var(--ion-color-danger);
@@ -193,6 +244,29 @@ ion-card {
 }
 
 @media (max-width: 642px) {
+    .au-pair-div-wrapper{
+        grid-template-columns: repeat(1, 1fr);
+    }
+
+    .au-pair-name {
+        text-align: center;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+        font-size: 24px;
+        border-radius: 16px 16px 0 0;
+        padding-left: 10px;
+    }
+
+    .button-container {
+        text-align: center;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+        font-size: 24px;
+        border-radius: 0 0 16px 16px;
+    }
+    
     .children-div {
         grid-template-columns: repeat(1, 1fr);
     }
@@ -284,10 +358,6 @@ ion-card {
    .action-tag{
        font-size: 20px;
    } 
-
-   .au-pair-div-wrapper{
-    width: 90%;
-    }
 
     .actions-div-wrapper {
         height: 100%;

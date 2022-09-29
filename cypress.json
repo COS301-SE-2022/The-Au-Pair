@@ -5,5 +5,7 @@
     "videosFolder": "cypress/videos",
     "screenshotsFolder": "cypress/screenshots",
     "fixturesFolder": "cypress/fixtures",
-    "baseUrl": "http://localhost:4200"
+    "baseUrl": "http://localhost:4200",
+    "viewportWidth": 1920,
+    "viewportHeight": 1080
 }

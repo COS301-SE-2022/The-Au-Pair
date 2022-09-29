@@ -3,11 +3,12 @@
   <div class="ion-padding">
     <div class="summary-div-wrapper">
       <ion-card class='summary-div'>
-        <div [hidden]="this.type!==2" class="au-pair-name">Employer: {{ auPairName }}</div>
+        <div [hidden]="this.type!==2" class="au-pair-name">Employer: {{ employerName }}</div>
         <div [hidden]="this.type!==1" class="au-pair-name">Au Pair: {{ auPairName }}</div>
-        <div class="hourly-rate">Hourly Rate: {{ hourlyRate }} Rands/Hour</div>
+        <div class="hourly-rate">Hourly Rate: {{ hourlyRate }} Rands/Hour <ion-icon [hidden]="this.type!==2" class="edit-rate" name="create-outline" (click)="openEditRateModal()"></ion-icon></div>
         <div class="total-hours">Total Hours: {{ totalHours }}</div>
         <div class="total-remuneration">Total Remuneration: R{{ totalRemuneration }}</div>
+        <div class="row-edit-rate" [hidden]="this.type!==2"><ion-icon name="create-outline" (click)="openEditRateModal()"></ion-icon></div>
       </ion-card>
     </div>
 
@@ -57,7 +58,7 @@
 
               <div class="activity-key">
                 <div class="block"></div>
-                <div class="keyname">Activity: R{{ activityCost }}</div>
+                <div class="keyname">Overtime: R{{ activityCost }}</div>
               </div>
 
               <div class="other-key">
@@ -69,6 +70,73 @@
             <div class="total-label">Expenses Total: R{{ totalCost }}</div>
           </div>
         </ion-card-content>
+      </ion-card>
+
+      <ion-card color="light" class="card-costs-list">
+        <ion-card-header style="float:left" class="title"> Monthly Expenses</ion-card-header>
+        <ion-card-header style="float:right" class="add-icon"><ion-icon class="add-cost" name="add-circle-outline" (click)="openExtraCostsModal()"></ion-icon></ion-card-header>
+        <ion-grid>
+          <ion-row class="headings">
+            <ion-col size="2">
+              <p>
+                Type
+              </p>
+            </ion-col>
+
+            <ion-col size="4">
+              <p>
+                Description
+              </p>
+            </ion-col>
+
+            <ion-col size="3">
+              <p>
+                Date
+              </p>
+            </ion-col>
+
+            <ion-col size="3">
+              <p>
+                Total
+              </p>
+            </ion-col>
+          </ion-row>
+
+          <ion-row  *ngFor="let cost of costList" class="row">
+            <ion-col size="2" class="col">
+              <p>
+                {{cost.type}}
+              </p>
+            </ion-col>
+
+            <ion-col size="4" class="col">
+              <p>
+                {{cost.description}}
+              </p>
+            </ion-col>
+
+            <ion-col size="3" class="col">
+              <p>
+                {{cost.date}}
+              </p>
+            </ion-col>
+
+            <ion-col size="2" class="col">
+              <p>
+                R{{cost.amount}}
+              </p>
+            </ion-col>
+
+            <ion-col size="0.5" class="ico">
+              <ion-icon (click)="downloadSlip(cost.id)" name="download-outline"></ion-icon>            
+            </ion-col>
+
+            <ion-col size="0.5" class="ico">
+              <ion-icon name="remove-circle-outline" color="danger" (click)="presentAlert(cost.id)"></ion-icon>
+            </ion-col>
+          </ion-row>
+
+        </ion-grid>
       </ion-card>
     </div>
   </div>

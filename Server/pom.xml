@@ -10,7 +10,7 @@
 	</parent>
 	<groupId>Database</groupId>
 	<artifactId>The-Au-Pair</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<version>V1.0.0</version>
 	<name>The-Au-Pair</name>
 	<description>backend for The Au Pair project</description>
 	<properties>
@@ -49,10 +49,27 @@
 			<version>1.2</version>
 		</dependency>
 		<dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-configuration-processor</artifactId>
+            <optional>true</optional>
+        </dependency>
+		<dependency>
 			<groupId>org.bouncycastle</groupId>
 			<artifactId>bcpkix-jdk15on</artifactId>
 			<version>1.65</version>
 		</dependency>
+		<!-- https://mvnrepository.com/artifact/com.sendgrid/sendgrid-java -->
+		<dependency>
+			<groupId>com.sendgrid</groupId>
+			<artifactId>sendgrid-java</artifactId>
+			<version>4.9.3</version>
+		</dependency>
+
+    <dependency>
+      <groupId>com.amazonaws</groupId>
+      <artifactId>aws-java-sdk</artifactId>
+      <version>1.11.931</version>
+    </dependency>
 	</dependencies>
 
 	<build>

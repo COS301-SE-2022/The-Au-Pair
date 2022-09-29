@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { API } from '../../../../shared/api/api.service';
-import { ToastController } from '@ionic/angular';
-import { Activity } from '../../../../shared/interfaces/interfaces';
+import { ToastController, AlertController } from '@ionic/angular';
+import { Activity, Child } from '../../../../shared/interfaces/interfaces';
 import { HttpClient } from '@angular/common/http';
+import { Store } from '@ngxs/store';
 
 @Component({
   selector: 'the-au-pair-parent-edit-activity',
@@ -15,7 +16,10 @@ export class ParentEditActivityComponent implements OnInit {
   /**Variables**/
   //Possible locations searched for
   location = "";
-  potentialLocations : string[] = [];
+  potentialLocations: any = [];
+  originalLocation = "";
+  longitude = 0.0;
+  latitude = 0.0;
 
   //Activity Model
   activityDetails: Activity = {
@@ -24,6 +28,9 @@ export class ParentEditActivityComponent implements OnInit {
   description: "",
   location: "",
   timeStart: "",
+  boundary: 0.0,
+  longitude: 0.0,
+  latitude: 0.0,
   timeEnd: "",
   budget: 0.0,
   comment: "",
@@ -31,6 +38,18 @@ export class ParentEditActivityComponent implements OnInit {
   day: "",
   child: "",
   };
+
+  currentChild : Child = {
+    id: "",
+    fname: "",
+    sname: "",
+    dob: "",
+    allergies: "",
+    diet: "",
+    parent: "",
+    aupair: ''
+  };
+
   timeslot = "";
   //Children of logged in user
   allChildren: any;
@@ -39,27 +58,23 @@ export class ParentEditActivityComponent implements OnInit {
   /**Functions*/
 
   //Constructor
-  constructor(private serv: API, private router: Router, public toastCtrl: ToastController, private http : HttpClient) 
+  constructor(private serv: API, private router: Router, public toastCtrl: ToastController, private http : HttpClient, private store: Store, private alertController: AlertController) 
   {
-    const navigation = this.router.getCurrentNavigation();
-    if(navigation !== null)
-      if(navigation.extras !== null)
-      { 
-        this.activityDetails.id = navigation.extras.state?.['id'];
-      }
+    this.activityDetails.id=this.store.snapshot().user.currentActivity;
   }
 
-  ngOnInit(): void 
+  ngOnInit(): void
   {    
-    this.getChildren();
     this.getActivityDetails();
   }
 
   //From HTML Form
-  getActivityValues(val : any)
-  {  
+  async getActivityValues(val : any)
+  {      
     //FORM ERROR CHECKING
     let emptyInput = false;
+
+    //Activity Name
     let dom = document.getElementById("actNameError");
     if(val.activityName === "")
     {
@@ -77,6 +92,8 @@ export class ParentEditActivityComponent implements OnInit {
         dom.style.display = "none";
       }
     }
+
+  //Description
     dom = document.getElementById("descripError");
     if(val.description === "")
     { 
@@ -86,13 +103,16 @@ export class ParentEditActivityComponent implements OnInit {
         dom.innerHTML = "Description is empty";
         dom.style.display = "block";
       }
-    }else
+    }
+    else
     {
       if(dom != null)
       {
         dom.style.display = "none";
       }
     }
+    
+    //Location
     dom = document.getElementById("locError");
     if(val.location === "")
     {
@@ -102,22 +122,70 @@ export class ParentEditActivityComponent implements OnInit {
         dom.innerHTML = "Location is empty";
         dom.style.display = "block";
       }
+    }
+    else
+    {
+      //Only check for valid location if its not empty and different from the original
+      if(this.originalLocation !== val.location)
+      {
+        if(dom != null)
+        {
+          //Check that the selected location is from the API
+          await this.getLocations()
+          let found = false;
+          //Get the selected location and its coords
+          this.potentialLocations.forEach((loc : any) => 
+          { 
+            if(loc.display_name === this.location)
+            {
+              found = true;
+              this.longitude = loc.lon;
+              this.latitude = loc.lat;
+            }
+            
+          });
+  
+          if(!found)
+          {
+            dom.innerHTML = "Please select a valid location from the suggested below.";
+            dom.style.display = "block";
+            return;
+          }
+          else
+            dom.style.display = "none";
+        }
+      }
+    }
+    
+
+    //Boundary
+    dom = document.getElementById("boundaryError");
+    if(val.boundary === "")
+    {
+      emptyInput = true;
+      if(dom != null)
+      {
+        dom.innerHTML = "Boundary is empty";
+        dom.style.display = "block";
+      }
     }else
     {
       if(dom != null)
-      {
-        //Check that the selected location is from the API
-        this.getLocations()
-        if (this.potentialLocations.indexOf(this.location) == -1)
+      { 
+        if(isNaN(parseFloat(val.boundary)))
         {
-          dom.innerHTML = "Please select a valid location from the suggested below.";
+          dom.innerHTML = "Please ensure this is a number e.g. 5.2";
           dom.style.display = "block";
           return;
         }
         else
+        {
           dom.style.display = "none";
+        }
       }
     }
+
+    //Day
     dom = document.getElementById("dayError");
     if(val.dayOfWeek === "")
     {
@@ -191,9 +259,13 @@ export class ParentEditActivityComponent implements OnInit {
     else
     {
       const budget = parseInt(val.budget);
+      const bound = parseFloat(val.boundary);
       this.activityDetails.name = val.activityName;
       this.activityDetails.description = val.description;
       this.activityDetails.location = val.location;
+      this.activityDetails.boundary = bound;
+      this.activityDetails.latitude = this.latitude;
+      this.activityDetails.longitude = this.longitude;
       this.activityDetails.day = val.dayOfWeek;
       this.activityDetails.timeStart = val.timeSlot.substring(0,5);
       this.activityDetails.timeEnd = val.timeSlot.substring(6,11);
@@ -210,7 +282,7 @@ export class ParentEditActivityComponent implements OnInit {
     
     //Building the API query according to what is in the location input field
     const locationParam = loc.replace(' ', '+');
-    const params = locationParam + '&limit=4&format=json&polygon_geojson=1&addressdetails=1';
+    const params = locationParam + '&limit=5&format=json&polygon_geojson=1&addressdetails=1';
 
     //Make the API call
     await this.http.get('https://nominatim.openstreetmap.org/search?q='+params)
@@ -225,12 +297,16 @@ export class ParentEditActivityComponent implements OnInit {
       {
         return;
       }
-  
+
+      this.potentialLocations.splice(0);
+
       //Add returned data to the array
       const len = res.length;
-      for (let j = 0; j < len && j<4; j++) 
+      for (let j = 0; j < len && j<5; j++) 
       { 
-        this.potentialLocations.push(res[j].display_name);
+        if (this.potentialLocations.includes(res[j]) === false){
+          this.potentialLocations.push(res[j]); 
+        }
       }
     })
     .catch(error=>{ // Failure
@@ -240,9 +316,7 @@ export class ParentEditActivityComponent implements OnInit {
 
   returnToSchedule()
   {
-    this.router.navigate(['/schedule']).then(()=>{
-      window.location.reload();
-    });
+    this.router.navigate(['/schedule']);
   }
 
   //Pop-up if activity is successfully updates
@@ -258,24 +332,48 @@ export class ParentEditActivityComponent implements OnInit {
     await toast.present();
   }
 
+  async presentAlert() {
+    const alert = await this.alertController.create({
+      header: 'Are you sure you want to delete this activity?',
+      cssClass: 'custom-alert',
+      buttons: [
+        {
+          text: 'No',
+          cssClass: 'alert-button-cancel',
+        },
+        {
+          text: 'Yes',
+          cssClass: 'alert-button-confirm',
+          handler: () => { this.removeActivity(); }
+        }
+      ]
+    });
+
+    await alert.present();
+  }
+
   //------------------------------------------------------------------------------------------------------------------------------------------------------------------------
   /**Service calls**/
   getActivityDetails()
   { 
     this.serv.getActivity(this.activityDetails.id).subscribe(
-      res=>{
+      async res=>{
         console.log("The response is:" + res); 
+        
         this.activityDetails.id = res.id;
         this.activityDetails.name = res.name;
         this.activityDetails.description = res.description;
         this.activityDetails.location = res.location;
         this.location = res.location;
+        this.activityDetails.boundary = res.boundary;
+        this.originalLocation = res.location;
         this.activityDetails.day = res.day;
         this.activityDetails.timeStart = res.timeStart;
         this.activityDetails.timeEnd = res.timeEnd;
         this.activityDetails.budget = res.budget;
         this.activityDetails.child = res.child;
         this.timeslot = res.timeStart + "-" + res.timeEnd
+        await this.getChildrenDetails();
       },
       error=>{console.log("Error has occured with API: " + error);}
     )
@@ -296,15 +394,44 @@ export class ParentEditActivityComponent implements OnInit {
     )
   };
 
-  getChildren()
+  async getChildrenDetails()
   {
-    this.serv.getParent("4561237814867").subscribe(
+    this.serv.getChildren(this.store.snapshot().user.id).toPromise().then(
       res=>{
-        console.log("The response is:" + res); 
-          this.allChildren = res.children;
+          this.allChildren = res;
+          //Removing the child that is already set from getActivity ( to remove duplicates )
+          for (let i = 0; i < this.allChildren.length; i++) 
+          {
+            if(this.allChildren[i].id === this.activityDetails.child)
+            { 
+              this.currentChild = this.allChildren[i];
+              //Remove
+              this.allChildren.splice(i, 1);
+            }
+          }
       },
-      error=>{console.log("Error has occured with API: " + error);}
+      error=>{
+        console.log("Error has occured with API: " + error);
+      }
     )
+  }
+
+  removeActivity()
+  {
+    this.serv.removeActivity(this.activityDetails.id).toPromise().then(
+      res=>{
+        console.log("The response is:", res);
+        this.returnToSchedule();
+      },
+      error=>{
+        console.log("Error has occured with API: ", error);
+        return error;
+      }
+    ); 
+  }
+
+  radioChecked(event: any){
+    this.location = event.target.value;
   }
   //------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 }

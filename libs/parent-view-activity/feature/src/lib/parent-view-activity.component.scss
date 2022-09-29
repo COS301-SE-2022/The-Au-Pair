@@ -1,5 +1,5 @@
 ion-content{
-    --ion-background-color:var(--ion-color-medium);
+    --ion-background-color: var(--ion-background-color) !important;
 }
 
 #nav{
@@ -10,14 +10,17 @@ ion-content{
 }
 
 .activity-wrapper{
-    height: fit-content;
+    height: 2250px;
+    max-width: 500px;
+    min-width: 500px;
     width: 40%;
     margin-top: 60px;
     margin-left: auto;
     margin-right: auto;
+    margin-bottom: 100px;
     background-color: #69A88DB2;
     border-radius: 16px;
-    padding-bottom: 3%;
+    padding-bottom: 7%;
 }
 
 h2{
@@ -54,14 +57,13 @@ h2{
     display:flex;
     align-items: center;
     flex-direction: column;
-    text-align: right;
 }
 
-// Button styling
+// Form input stylings
 .activity-details input{
     width: 411px;
     height: 62px;
-    background: var(--ion-background-color);
+    background: var(--ion-color-light-white);
     box-shadow: 1px 2px 5px rgba(0, 0, 0, 0.13);
     border-style: none;
     border-radius: 10px;
@@ -72,7 +74,7 @@ h2{
     resize: none;
     width: 411px;
     height: 169px;
-    background: var(--ion-background-color);
+    background: var(--ion-color-light-white);
     box-shadow: 1px 2px 5px rgba(0, 0, 0, 0.13);
     border-style: none;
     border-radius: 10px;
@@ -85,17 +87,26 @@ h2{
 label{
     position:relative;
     color: white;
-    display: block;
+    display: flex;
     font-style: normal;
     font-weight: 600;
     font-size: 16px;
     line-height: 20px;
     top:35px;
-    left:-132px !important;
+    text-align: left !important;
+    justify-content: left;
+    left:0px !important;
+}
+
+p{
+    font-style: normal;
+    font-weight: 600;
+    font-size: 16px;
+    line-height: 20px;
+    margin-left: 3px;
 }
 
 input[type=text], select{
-    width: 411px;
     height: 62px;
     background: var(--ion-background-color);
     box-shadow: 1px 2px 5px rgba(0, 0, 0, 0.13);
@@ -120,6 +131,30 @@ textarea:focus{
     outline:none;
 }
 
+// Activity image comment styling
+.activity-image{
+    text-align: center;
+    width: 411px;
+    height: fit-content;
+    max-height: 470px;
+    overflow: scroll !important;
+    // background-size: cover;
+}
+
+.activity-image::-webkit-scrollbar{
+    display: none;
+}
+
+#activity-image-container{
+    width: 411px;
+    min-width: 300px;
+    border-radius: 6px;
+}
+
+#label-image{
+    margin-top: 0;
+}
+
 .buttons{
     display: grid;
     grid-template-columns: repeat(2, 1fr);
@@ -127,7 +162,6 @@ textarea:focus{
     width: 411px;
     height: auto;
     text-align: center;
-    margin-bottom: 100px;
 }
 
 .cancel{
@@ -152,6 +186,97 @@ textarea:focus{
     border: 2px solid var(--ion-color-secondary) !important;
     border-radius: 10px;
     margin-top: 20px;
+}
+
+//Labelling styles
+#activityLabel{
+    position: inherit;
+    text-align: left;
+    align-self: left;
+    margin-left: 5px;
+    margin-bottom: -30px;
+    margin-top: 30px;
+}
+
+#descriptionLabel{
+    position: inherit;
+    text-align: left;
+    align-self: left;
+    margin-left: 5px;
+    margin-bottom: -30px;
+    margin-top: 30px;
+}
+
+#commentLabel{
+    position: inherit;
+    text-align: left;
+    align-self: left;
+    margin-left: 5px;
+    margin-bottom: -30px;
+    margin-top: 30px;
+}
+
+#behaviourLabel{
+    position: inherit;
+    text-align: left;
+    align-self: left;
+    margin-left: 5px;
+    margin-bottom: -30px;
+    margin-top: 30px;
+}
+
+#locationLabel{
+    position: inherit;
+    text-align: left;
+    align-self: left;
+    margin-left: 5px;
+    margin-bottom: -30px;
+    margin-top: 30px;
+}
+
+#boundaryLabel{
+    position: inherit;
+    text-align: left;
+    align-self: left;
+    margin-left: 5px;
+    margin-bottom: -30px;
+    margin-top: 30px;
+}
+
+#dayLabel{
+    position: inherit;
+    text-align: left;
+    align-self: left;
+    margin-left: 5px;
+    margin-bottom: -30px;
+    margin-top: 30px;
+}
+
+#timeslotLabel{
+    position: inherit;
+    text-align: left;
+    align-self: left;
+    margin-left: 5px;
+    margin-bottom: -30px;
+    margin-top: 30px;
+}
+
+#budgetLabel{
+    position: inherit;
+    text-align: left;
+    align-self: left;
+    margin-left: 5px;
+    margin-bottom: -30px;
+    margin-top: 30px;
+}
+
+#childLabel{
+    position: inherit;
+    text-align: left;
+    align-self: left;
+    margin-left: 5px;
+    margin-bottom: -30px;
+    margin-top: 30px;
 }
 
 //Images
@@ -185,19 +310,57 @@ textarea:focus{
     z-index: -10;
 }
 
-@media (max-width: 642px) {
+@media (max-width: 500px) {
+
     .activity-wrapper{
-        height: 100%;
-        width: 100%;
+        height: fit-content;
+        min-width: 0px;
         margin-top: 60px;
         margin-left: auto;
         margin-right: auto;
-        background-color: transparent !important;
+        background-color: transparent;
         border-radius: 16px;
     }
 
+    .activity-details input{
+        width: 95vw;
+    }
+    .activity-details textarea{
+        width: 95vw;
+    }
+
+    .buttons{
+        width: 95vw;
+        grid-template-columns: repeat(1, 1fr);
+    }
+
+    // Activity image comment styling
+    .activity-image{
+        width: 95vw;
+        height:fit-content
+    }
+
+    #activity-image-container{
+        width: 95vw;
+    }
+
+    .cancel{
+        color: var(--ion-color-primary);
+        background-color: transparent !important;
+        border: 2px solid var(--ion-color-primary) !important;
+        margin-left: auto;
+        margin-right: auto;
+        margin-bottom: 20px;
+        width: 100% !important;
+    }
+
     h2{
+        margin-top: -40px;
         color:var(--ion-color-dark);
+    }
+    
+    p{
+        color: var(--ion-color-dark);
     }
 
     label{
