@@ -10,7 +10,7 @@
 	</parent>
 	<groupId>Database</groupId>
 	<artifactId>The-Au-Pair</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<version>V1.0.0</version>
 	<name>The-Au-Pair</name>
 	<description>backend for The Au Pair project</description>
 	<properties>
