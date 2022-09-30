@@ -15,11 +15,12 @@
 
   
   <p align="center">
-    <a href="https://theaupair.life/"><strong>🌐: theaupair.life</strong></a>
+    <a href="https://theaupair.life/"><strong>🌐 theaupair.life</strong></a>
     <br />
     <br />
+    <a href="https://drive.google.com/file/d/1UpuSrlKf8Xhl0jmQCrMddQ1kIloSAvZ8/view?usp=drivesdk"><strong>Demo Video 4</strong> |
     <a href="https://docs.google.com/document/d/1IdGO-9WVABvS56bSlV5UvK8dSdRHbSBDqQfw9_qe29w/edit?usp=sharing"><strong>SRS Document 4</strong></a> |
-    <a href="https://github.com/COS301-SE-2022/The-Au-Pair/projects/1"><strong>Project Board</strong></a> 
+    <a href="https://docs.google.com/document/d/13WtKdjBQUHWTqZmD3oo0PBJEnbSq-JjK-zrDrm9eQCQ/edit?usp=sharing"><strong>Testing Document</strong></a>
   </p>
   
   <br />
@@ -112,7 +113,7 @@
     
  ### Demo 4
 
-<a href="https://drive.google.com/file/d/1NaXnfLn3lmfEGlzSfiJ8SzEfEWv57wFE/view?usp=sharing">CheemsChaps-Demo Video 4</a>
+<a href="https://drive.google.com/file/d/1UpuSrlKf8Xhl0jmQCrMddQ1kIloSAvZ8/view?usp=drivesdk">CheemsChaps - Demo Video 4</a>
     <br>
     <a href="https://docs.google.com/document/d/1IdGO-9WVABvS56bSlV5UvK8dSdRHbSBDqQfw9_qe29w/edit?usp=sharing">SRS Document - Demo 4</a>
     <br>
