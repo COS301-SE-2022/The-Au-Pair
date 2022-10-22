@@ -1,5 +1,20 @@
 <div id="top"></div>
 
+  <!-- PROJECT SHIELDS -->
+<div align="center">
+ 
+[![Code coverage][codecov-shield]](https://codecov.io/gh/COS301-SE-2022/The-Au-Pair)
+[![CI Tests][build-status-shield]](https://github.com/COS301-SE-2022/The-Au-Pair/actions/workflows/index.yml)
+[![Requirements Status](https://requires.io/github/COS301-SE-2022/The-Au-Pair/requirements.svg?branch=develop&style=for-the-badge)](https://requires.io/github/COS301-SE-2022/The-Au-Pair/requirements/?branch=develop)
+[![Issues closed][closedissues-shield]](https://github.com/COS301-SE-2022/The-Au-Pair/issues?q=is%3Aissue+is%3Aclosed) <br />
+[![Commits][commits-shield]](https://github.com/COS301-SE-2022/The-Au-Pair/issues)
+[![Last Commit][lastcommit-shield]](https://github.com/COS301-SE-2022/The-Au-Pair/pulls?q=is%3Apr+is%3Aclosed) 
+[![Lines of Code](https://sonarcloud.io/api/project_badges/measure?project=COS301-SE-2022_The-Au-Pair&metric=ncloc)](https://sonarcloud.io/summary/new_code?id=COS301-SE-2022_The-Au-Pair)
+<br />
+
+  
+</div>
+
 <!-- PROJECT LOGO -->
 <br />
 <div align="center">
@@ -20,82 +35,25 @@
     <br />
     <a href="https://docs.google.com/document/d/1IdGO-9WVABvS56bSlV5UvK8dSdRHbSBDqQfw9_qe29w/edit?usp=sharing"><strong>SRS Document</strong> |
     <a href="https://docs.google.com/document/d/1exfQzlmPJN50VN70wiKA6kkd6IgsQrhrz8IkSIx71jA/edit?usp=sharing"><strong>Coding Standards</strong></a> |
-    <a href="https://docs.google.com/document/d/13WtKdjBQUHWTqZmD3oo0PBJEnbSq-JjK-zrDrm9eQCQ/edit?usp=sharing"><strong>Testing Policy</strong></a>
+    <a href="https://docs.google.com/document/d/13WtKdjBQUHWTqZmD3oo0PBJEnbSq-JjK-zrDrm9eQCQ/edit?usp=sharing"><strong>Testing Policy</strong></a> |
+    <a href="https://docs.google.com/document/d/1kcMxgZ2uLOIrSf-X9vVi1aFj7OjG22VwatjpdIBWUis/edit?usp=sharing"><strong>User Manual</strong></a> |
+    <a href="https://docs.google.com/document/d/1kcMxgZ2uLOIrSf-X9vVi1aFj7OjG22VwatjpdIBWUis/edit?usp=sharing"><strong>Demo Video</strong></a>
   </p>
   
   <br />
   
-  <!-- PROJECT SHIELDS -->
-<div align="center">
- 
-[![Code coverage][codecov-shield]](https://codecov.io/gh/COS301-SE-2022/The-Au-Pair)
-[![CI Tests][build-status-shield]](https://github.com/COS301-SE-2022/The-Au-Pair/actions/workflows/index.yml)
-[![Requirements Status](https://requires.io/github/COS301-SE-2022/The-Au-Pair/requirements.svg?branch=develop&style=for-the-badge)](https://requires.io/github/COS301-SE-2022/The-Au-Pair/requirements/?branch=develop)
-[![Issues closed][closedissues-shield]](https://github.com/COS301-SE-2022/The-Au-Pair/issues?q=is%3Aissue+is%3Aclosed) <br />
-[![Commits][commits-shield]](https://github.com/COS301-SE-2022/The-Au-Pair/issues)
-[![Last Commit][lastcommit-shield]](https://github.com/COS301-SE-2022/The-Au-Pair/pulls?q=is%3Apr+is%3Aclosed) 
-[![Lines of Code](https://sonarcloud.io/api/project_badges/measure?project=COS301-SE-2022_The-Au-Pair&metric=ncloc)](https://sonarcloud.io/summary/new_code?id=COS301-SE-2022_The-Au-Pair)
+</div>
+
+<p align="center">
+  <img src="https://user-images.githubusercontent.com/49924445/197358472-2fbb4aa2-a52b-4a14-b391-0eee63137cfc.gif" width="60%" align="centre"/>
+</p>
+
+### Get Started
+Go to <a href="https://theaupair.life/"><strong>theaupair.life</strong></a> and sign up!
+
 <br />
 
-  
-</div>
-  
-</div>
-
-
-
-<!-- TABLE OF CONTENTS -->
-<details open>
-  <summary><h2>Table of Contents</h2></summary>
-  <ol>
-    <li>
-      <a href="#about">About</a>
-      <ul>
-        <li><a href="#built-with">Built With</a></li>
-        <li><a href="#installation">Installation</a></li>
-        <li><a href="#usage">Usage</a></li>
-      </ul>
-    </li>
-    <li>
-      <a href="#the-team">The Team</a>
-      <ul>
-        <li><a href="#daniel-azmanov">Daniel Azmanov</a></li>
-        <li><a href="#ruben-brits">Ruben Brits</a></li>
-        <li><a href="#kyle-pottinger">Kyle Pottinger</a></li>
-        <li><a href="#reece-stephenson">Reece Stephenson</a></li>
-        <li><a href="#seyuran-pillay">Seyuran Pillay</a></li>
-      </ul>
-    </li>
-  </ol>
-</details>
- 
-<!-- ABOUT -->
-# About
-
-<!-- TODO: Insert pics of our project here -->
-
-### Cheems Chaps - The Au Pair
-
-The Au Pair is an Ionic cross-platform application that serves as an all in one management platform whereby parents and suitable au pairs can find each other, set-up employment, manage, and coordinate how the au pairs and parents interact, to keep track of children’s needs, schedules, financials, and live locations. 
-
-The Au Pair is a project created for the University of Pretoria's COS301 module. It was created by the Cheems Chaps team with members <a href="#daniel-azmanov">Daniel Azmanov</a>, <a href="#ruben-brits">Ruben Brits</a>, <a href="#kyle-pottinger">Kyle Pottinger</a>, <a href="#reece-stephenson">Reece Stephenson</a> and <a href="#seyuran-pillay">Seyuran Pillay</a>
-<p align="right">(<a href="#top">back to top</a>)</p>
-
-### Built With
-
-| Technology  | Use Case | Version | Repository |
-| ------- | ------- | ------- | :-----:|
-| [![Angular][angular-shield]](https://angular.io/) | Frontend | ![angular-ver] | [@angular](https://github.com/angular/angular) |
-| [![Ionic][ionic-shield]](https://github.com/ionic-team/ionic-framework) | Frontend | ![ionic-ver] | [@ionic](https://github.com/ionic-team/ionic-framework) |
-| [![Springboot (Java)][spring-shield]](https://spring.io/projects/spring-boot) | Backend | ![spring-ver] | [@spring-boot](https://github.com/spring-projects/spring-boot) |
-| [![MongoDB (NoSQL)][mongo-shield]](https://www.mongodb.com/) | Database | ![mongo-ver] | [@mongo](https://github.com/mongodb/mongo) |
-| [![AWS][aws-shield]](https://aws.amazon.com/) | Hosting | - | - |
-
-
-<p align="right">(<a href="#top">back to top</a>)</p>
-
-
-### Installation
+### To Contribute
 
 ```sh
 
@@ -114,7 +72,8 @@ npm run start:client
 ```
 For more detailed information on installation and usage see the <a href="https://docs.google.com/document/d/1BzV_dQf4nruvThbL45BrbIxXXQ2bb9X9ZtzenuAmqQg/edit?usp=sharing">installation manual</a>
 
-<p align="right">(<a href="#top">back to top</a>)</p>
+<br />
+
 
 <!-- Contributors -->
 
@@ -173,19 +132,6 @@ I have learnt and used many programming languages and frameworks throughout my s
 During the 7 years of my coding experience, I have learned a large variety of languages and technologies. I am proficient in JAVA, Python, C++, and JavaScript. This has enabled me to pick up new languages quickly and has exposed me to Frameworks like Angular and React and alternates to a relational database such as MongoDB. I love creating hobby projects, which has introduced me to hosting with AWS and Bash scripting along with web development in HTML, CSS, and PHP. I also have worked as technical support for an ISP. I believe it also gave me a strong work ethic for everything I do.
 
 <br clear="left"/>
-
-<p align="right">(<a href="#top">back to top</a>)</p>
-
-
-
-<!-- ACKNOWLEDGMENTS -->
-<!-- ## Acknowledgments -->
-
-<!-- TODO: Add that this is a project for the University of Pretoria COS301 module, and any other acknowledgements -->
-
-<!-- <p align="right">(<a href="#top">back to top</a>)</p> -->
-
-
 
 <!-- LINKS & IMAGES -->
 [contributors-shield]: https://img.shields.io/github/contributors/COS301-SE-2022/The-Au-Pair?color=green
