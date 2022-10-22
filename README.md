@@ -18,9 +18,9 @@
     <a href="https://theaupair.life/"><strong>🌐 theaupair.life</strong></a>
     <br />
     <br />
-    <a href="https://drive.google.com/file/d/1UpuSrlKf8Xhl0jmQCrMddQ1kIloSAvZ8/view?usp=drivesdk"><strong>Demo Video 4</strong> |
-    <a href="https://docs.google.com/document/d/1IdGO-9WVABvS56bSlV5UvK8dSdRHbSBDqQfw9_qe29w/edit?usp=sharing"><strong>SRS Document 4</strong></a> |
-    <a href="https://docs.google.com/document/d/13WtKdjBQUHWTqZmD3oo0PBJEnbSq-JjK-zrDrm9eQCQ/edit?usp=sharing"><strong>Testing Document</strong></a>
+    <a href="https://docs.google.com/document/d/1IdGO-9WVABvS56bSlV5UvK8dSdRHbSBDqQfw9_qe29w/edit?usp=sharing"><strong>SRS Document</strong> |
+    <a href="https://docs.google.com/document/d/1exfQzlmPJN50VN70wiKA6kkd6IgsQrhrz8IkSIx71jA/edit?usp=sharing"><strong>Coding Standards</strong></a> |
+    <a href="https://docs.google.com/document/d/13WtKdjBQUHWTqZmD3oo0PBJEnbSq-JjK-zrDrm9eQCQ/edit?usp=sharing"><strong>Testing Policy</strong></a>
   </p>
   
   <br />
@@ -57,14 +57,6 @@
       </ul>
     </li>
     <li>
-      <a href="#demolinks">Demo Links</a>
-      <ul>
-        <li><a href="#demo-1">Demo 1</a></li>
-        <li><a href="#demo-2">Demo 2</a></li>
-        <li><a href="#demo-3">Demo 3</a></li>
-        <li><a href="#demo-4">Demo 4</a></li>
-      </ul>
-    <li>
       <a href="#the-team">The Team</a>
       <ul>
         <li><a href="#daniel-azmanov">Daniel Azmanov</a></li>
@@ -76,55 +68,6 @@
     </li>
   </ol>
 </details>
-                            
-# Demolinks
-
-<!-- All demo information -->
-### Demo 1
-
-<a href="https://drive.google.com/file/d/1iBMNdAej-kbDxPGT9k8_Q5t6aJUk0UNE/view?usp=sharing">CheemsChaps-Demo Video 1</a>
-    <br>
-    <a href="https://docs.google.com/document/d/18CSPDD1SnMIpAknKGA97uaO6s_-WgM7UnW_6i9DhmC4/edit?usp=sharing">SRS Document - Demo 1</a>
-    <br>
-
-### Demo 2
-
-<a href="https://drive.google.com/file/d/1bbkz5DlxMrSKnEIY9LDXKkoflCZH3Lga/view?usp=sharing">CheemsChaps-Demo Video 2</a>
-    <br>
-    <a href="https://docs.google.com/document/d/18vKESVoNjol4EZzjzmbdzlKqipAGSXseNxcDelAnqaQ/edit?usp=sharing">SRS Document - Demo 2</a>
-    <br>
-    <a href="https://docs.google.com/document/d/1ihLufRX8ceP3pRIZUOesw-P-wXx4HSN_RTviKj5u1_o/edit?usp=sharing">User Manual Document - Demo 2</a>
-    <br>
-    <a href="https://docs.google.com/document/d/1exfQzlmPJN50VN70wiKA6kkd6IgsQrhrz8IkSIx71jA/edit?usp=sharing">Coding Standards - Demo 2</a>
-    <br>
-    
-### Demo 3
-
-<a href="https://drive.google.com/file/d/1NaXnfLn3lmfEGlzSfiJ8SzEfEWv57wFE/view?usp=sharing">CheemsChaps-Demo Video 3</a>
-    <br>
-    <a href="https://docs.google.com/document/d/1kCEYDX8cWRBNyEANp6VYXPSW7PHgUMOl1XVQNcb5Iss/edit?usp=sharing">SRS Document - Demo 3</a>
-    <br>
-    <a href="https://docs.google.com/document/d/1GzIiPELmaIagSMcnFb9RooccPXrH13E6ebZnEgdgcAs/edit?usp=sharing">User Manual Document - Demo 3</a>
-    <br>
-    <a href="https://docs.google.com/document/d/1exfQzlmPJN50VN70wiKA6kkd6IgsQrhrz8IkSIx71jA/edit?usp=sharing">Coding Standards - Demo 3</a>
-    <br>
-    <a href="https://docs.google.com/document/d/1BzV_dQf4nruvThbL45BrbIxXXQ2bb9X9ZtzenuAmqQg/edit?usp=sharing">Installation Manual - Demo 3</a>
-    <br>
-    
- ### Demo 4
-
-<a href="https://drive.google.com/file/d/1UpuSrlKf8Xhl0jmQCrMddQ1kIloSAvZ8/view?usp=drivesdk">CheemsChaps - Demo Video 4</a>
-    <br>
-    <a href="https://docs.google.com/document/d/1IdGO-9WVABvS56bSlV5UvK8dSdRHbSBDqQfw9_qe29w/edit?usp=sharing">SRS Document - Demo 4</a>
-    <br>
-    <a href="https://docs.google.com/document/d/1kcMxgZ2uLOIrSf-X9vVi1aFj7OjG22VwatjpdIBWUis/edit?usp=sharing">User Manual Document - Demo 4</a>
-    <br>
-    <a href="https://docs.google.com/document/d/13WtKdjBQUHWTqZmD3oo0PBJEnbSq-JjK-zrDrm9eQCQ/edit?usp=sharing">Testing Policy - Demo 4</a>
-    <br>
-    <a href="https://docs.google.com/document/d/1exfQzlmPJN50VN70wiKA6kkd6IgsQrhrz8IkSIx71jA/edit?usp=sharing">Coding Standards - Demo 4</a>
-    <br>
-    <a href="https://docs.google.com/document/d/1khrh-88B3aYJHdaWEotmFPCH9qDDUI7NuV502ymINbI/edit?usp=sharing">Installation Manual - Demo 4</a>
-    <br>
  
 <!-- ABOUT -->
 # About
