@@ -31,17 +31,19 @@
 
 ### Quick Links
  <ul>
-    <li><a href="https://docs.google.com/document/d/1IdGO-9WVABvS56bSlV5UvK8dSdRHbSBDqQfw9_qe29w/edit?usp=sharing"><strong>SRS Document</strong></li>
-    <li><a href="https://docs.google.com/document/d/1exfQzlmPJN50VN70wiKA6kkd6IgsQrhrz8IkSIx71jA/edit?usp=sharing"><strong>Coding Standards</strong></a></li>
-    <li><a href="https://docs.google.com/document/d/13WtKdjBQUHWTqZmD3oo0PBJEnbSq-JjK-zrDrm9eQCQ/edit?usp=sharing"><strong>Testing Policy</strong></a></li>
-    <li><a href=""><strong>Tools Used</strong></a></li>
-    <li><a href="https://docs.google.com/document/d/1kcMxgZ2uLOIrSf-X9vVi1aFj7OjG22VwatjpdIBWUis/edit?usp=sharing"><strong>User Manual</strong></a></li>
-    <li><a href="https://github.com/COS301-SE-2022/The-Au-Pair/wiki/About-The-Team"><strong>The Team</strong></a></li>
-    <li><a href="https://drive.google.com/file/d/15-BXIMD69kJblbz9sj8BxK7w93bU_rIQ/view?usp=sharing"><strong>Demo Video</strong></a> - The full demo with technicalities can be found on our Wiki</li>
-    <li><a href="https://github.com/COS301-SE-2022/The-Au-Pair/wiki/Research"><strong>Research</strong></a></li>
-    <li><a href="https://github.com/COS301-SE-2022/The-Au-Pair/wiki/Get-Started"><strong>Get Started/Contribute</strong></a></li>
+    <li><a href="https://docs.google.com/document/d/1IdGO-9WVABvS56bSlV5UvK8dSdRHbSBDqQfw9_qe29w/edit?usp=sharing"><strong>SRS Document</strong>📄</li>
+    <li><a href="https://docs.google.com/document/d/1exfQzlmPJN50VN70wiKA6kkd6IgsQrhrz8IkSIx71jA/edit?usp=sharing"><strong>Coding Standards</strong></a>🛠️</li>
+    <li><a href="https://docs.google.com/document/d/13WtKdjBQUHWTqZmD3oo0PBJEnbSq-JjK-zrDrm9eQCQ/edit?usp=sharing"><strong>Testing Policy</strong></a>🧪</li>
+    <li><a href="https://github.com/COS301-SE-2022/The-Au-Pair/wiki/Tools-Used"><strong>Project Management Tools</strong></a>👩‍💼</li>
+    <li><a href="https://docs.google.com/document/d/1kcMxgZ2uLOIrSf-X9vVi1aFj7OjG22VwatjpdIBWUis/edit?usp=sharing"><strong>User Manual</strong></a>🙆</li>
+    <li><a href="https://github.com/COS301-SE-2022/The-Au-Pair/wiki/About-The-Team"><strong>The Team</strong></a>🤝</li>
+    <li><a href="https://drive.google.com/file/d/15-BXIMD69kJblbz9sj8BxK7w93bU_rIQ/view?usp=sharing"><strong>Demo Video</strong></a>📽️ - The full demo with technicalities can be found on our Wiki</li>
+  <li><a href="https://www.canva.com/design/DAFPyjOVdSM/XsTXWzHNAFNUscYRQtSXgg/view?utm_content=DAFPyjOVdSM&utm_campaign=designshare&utm_medium=link2&utm_source=sharebutton"><strong>Slideshow</strong></a>🗞️</li>
+    <li><a href="https://github.com/COS301-SE-2022/The-Au-Pair/wiki/Research"><strong>Research</strong></a>📂</li>
+    <li><a href="https://github.com/COS301-SE-2022/The-Au-Pair/wiki/Get-Started"><strong>Get Started/Contribute</strong></a>🆘</li>
  </ul>
 
+<br/>
 
 <p align="center">
   <img src="https://user-images.githubusercontent.com/49924445/197358472-2fbb4aa2-a52b-4a14-b391-0eee63137cfc.gif" width="60%" align="centre"/>
