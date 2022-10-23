@@ -37,7 +37,7 @@
     <li><a href=""><strong>Tools Used</strong></a></li>
     <li><a href="https://docs.google.com/document/d/1kcMxgZ2uLOIrSf-X9vVi1aFj7OjG22VwatjpdIBWUis/edit?usp=sharing"><strong>User Manual</strong></a></li>
     <li><a href="https://github.com/COS301-SE-2022/The-Au-Pair/wiki/About-The-Team"><strong>The Team</strong></a></li>
-    <li><a href="https://drive.google.com/file/d/1UpuSrlKf8Xhl0jmQCrMddQ1kIloSAvZ8/view?usp=drivesdk"><strong>Demo Video</strong></a><p> (The full demo with technicalities can be found on our Wiki)</p></li>
+    <li><a href="https://drive.google.com/file/d/1UpuSrlKf8Xhl0jmQCrMddQ1kIloSAvZ8/view?usp=drivesdk"><strong>Demo Video</strong></a> - The full demo with technicalities can be found on our Wiki</li>
     <li><a href="https://github.com/COS301-SE-2022/The-Au-Pair/wiki/Research"><strong>Research</strong></a></li>
     <li><a href="https://github.com/COS301-SE-2022/The-Au-Pair/wiki/Get-Started"><strong>Get Started/Contribute</strong></a></li>
  </ul>
