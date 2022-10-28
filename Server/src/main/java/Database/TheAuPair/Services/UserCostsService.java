@@ -43,7 +43,7 @@ public class UserCostsService {
     if (month.length() == 1)
       month = "0" + month;
 
-    List<UserCosts> userCosts = costRepo.findAllByContributerAndOther(auPairId, parentId, Sort.by(Sort.Direction.ASC, "date"));
+    List<UserCosts> userCosts = costRepo.findAllByContributerAndOther(auPairId, parentId, Sort.by(Sort.Direction.DESC, "date"));
     List<UserCosts> foundCosts = new ArrayList<UserCosts>();
 
     for (UserCosts cost : userCosts)
@@ -70,7 +70,7 @@ public class UserCostsService {
     if (month.length() == 1)
       month = "0" + month;
 
-    List<UserCosts> userCosts = costRepo.findAllByType(auPairId, parentId, "Fuel", Sort.by(Sort.Direction.ASC, "date"));
+    List<UserCosts> userCosts = costRepo.findAllByType(auPairId, parentId, "Fuel", Sort.by(Sort.Direction.DESC, "date"));
 
     int total = 0;
     for (UserCosts cost : userCosts)
@@ -97,7 +97,7 @@ public class UserCostsService {
     if (month.length() == 1)
       month = "0" + month;
 
-    List<UserCosts> userCosts = costRepo.findAllByType(auPairId, parentId, "Overtime", Sort.by(Sort.Direction.ASC, "date"));
+    List<UserCosts> userCosts = costRepo.findAllByType(auPairId, parentId, "Overtime", Sort.by(Sort.Direction.DESC, "date"));
 
     int total = 0;
     for (UserCosts cost : userCosts)
@@ -124,7 +124,7 @@ public class UserCostsService {
     if (month.length() == 1)
       month = "0" + month;
 
-    List<UserCosts> userCosts = costRepo.findAllByType(auPairId, parentId, "Other", Sort.by(Sort.Direction.ASC, "date"));
+    List<UserCosts> userCosts = costRepo.findAllByType(auPairId, parentId, "Other", Sort.by(Sort.Direction.DESC, "date"));
 
     int total = 0;
     for (UserCosts cost : userCosts)
